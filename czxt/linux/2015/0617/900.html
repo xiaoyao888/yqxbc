@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>linux释放内存命令_电脑知识与网络技术学习_鹏鹏电脑知识网</title>
+<meta name="keywords" content="linux,释放,内存,命令,、,首先,查看,linux,内" />
+<meta name="description" content="1、首先查看linux内存使用 #free -m 2、把内存数据同步到硬盘 #sync 3、修改 /proc/sys/vm/drop_caches文件 #echo 3 /proc/sys/vm/drop_caches 删除内存缓存。 #cat /proc/sys/vm/drop_caches 查看文件内容 3 以上2、" />
+<link href="/templets/default/style/home.css" rel="stylesheet" type="text/css" />
+<script src="/templets/default/js/jquery.min.js"></script>
+</head>
+
+<body>
+<LINK rel=stylesheet type=text/css href="/templets/default/style/home.css">
+<div class="head_t">
+  <div>学习电脑知识上鹏鹏电脑知识网，网址是www.flypeng.com！<a href="javascript:void(0)" onclick="alert('按Ctrl+D收藏本站')" title="win10系统">收藏本站</a></div>
+</div>
+<div class="head_top">
+<div class="home">
+<ul class="logo">
+  <a href="/index.html"><img src="/templets/default/images/logo.png" alt="Windows10系统下载,Win10激活,Win10教程" /></a>
+</ul>
+<ul class="gg">
+<form class="search" method="post" name="search" action="/plus/search.php">
+<input type="text" class="search_txt" value="" name="keyword"class="swap_value" />
+<input type="image" src="/templets/default/images/so.gif" width="71" height="35" class="go" alt="windows10系统之家" title="search">
+</form>
+</ul>
+</div>
+<div class="dh_parent">
+<div class="dh">
+    <ul class="dhz">
+        <li><a href='/' title="鹏鹏电脑知识网，电脑学习">首页</a></li> 
+        <li><a href='/sjzs' target="_blank" title="手机故障，手机知识，手机频道">手机知识</a></li>
+	<li><a href='/dnzs' target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识</a></li>
+	<li><a href='/dngz' target="_blank" title="电脑故障大全，计算机故障大全">故障大全</a></li>
+	<li><a href='/wlzs' target="_blank" title="网络知识大全">网络知识</a></li>
+	<li><a href='/czxt' target="_blank" title="操作系统知识">操作系统</a></li>
+	<li><a href='/bgrj' target="_blank" title="excel,word,办公软件,excel教程,word教程">办公软件</a></li>
+	<li><a href='/bcsj' target="_blank" title="编程文章代码，编程设计，编程学习，java编程，网页基础知识">编程设计</a></li>
+	<li><a href='/shujuku' target="_blank" title="sql server数据库，MySQL数据库，Oracle数据库">数据库</a></li>
+	<li><a href='http://www.win10os.com' target="_blank" title="win10系统下载">win10下载</a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class="zwqu">
+<div class="dqian">当前位置：<ul><a href='http://www.flypeng.com/'>主页</a> > <a href='/czxt/'>操作系统</a> > <a href='/czxt/linux/'>linux</a> > </ul>
+</div>
+<div class="list" style="width:785px;">
+<ul class="lisbt" style="width:785px;">
+  <li><span>linux释放内存命令</span></li>
+  <li><a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-06-17 15:48 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>
+次</li>
+  </ul>
+
+<ul><li style="margin-left:180px"><!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare" style="width:650px;height:50px;padding-top:10px;" >
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END --></center></li></ul>
+  <ul class="lisnr">
+  <li><h3>
+	1、首先查看linux内存使用</h3>
+<div>
+	#free -m</div>
+<p>
+	<a href="http://img1.51cto.com/attachment/201104/131346216.jpg" target="_blank"><img alt="" border="0" src="http://img1.51cto.com/attachment/201104/131346216.jpg" /></a></p>
+<h3>
+	2、把内存数据同步到硬盘</h3>
+<p>
+	#sync</p>
+<h3>
+	3、修改 /proc/sys/vm/drop_caches文件</h3>
+<div>
+	#echo 3 &gt; /proc/sys/vm/drop_caches 删除内存缓存。<br />
+	#cat /proc/sys/vm/drop_caches 查看文件内容<br />
+	3</div>
+<p>
+	<br />
+	以上2、3已释放内存。</p>
+<h3>
+	4、查看内存</h3>
+<p>
+	#free -m</p>
+<p>
+	<a href="http://img1.51cto.com/attachment/201104/131912290.jpg" target="_blank"><img alt="" border="0" src="http://img1.51cto.com/attachment/201104/131912290.jpg" /></a></p>
+<p>
+	可以看到空闲内存已经回来了</p>
+</li>
+<li><div style="margin:0 auto;width:400px;height:80px;padding-left:250px;">
+<!-- 将此标记放在您希望显示like按钮的位置 -->
+<div class="bdlikebutton"></div>
+
+<!-- 将此代码放在适当的位置，建议在body结束前 -->
+<script id="bdlike_shell"></script>
+<script>
+var bdShare_config = {
+	"type":"large",
+	"color":"blue",
+	"likeText":"内容很精彩",
+	"likedText":"您已顶过，谢谢！"
+};
+document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+</script>
+</div>
+
+</li>
+  </ul>
+<div class="pnum">
+<div class="pages mypagelist">
+<div></div>
+</div>
+</div>
+<div class="pre_next">
+<ul>
+<li>上一篇：<a href='/czxt/linux/2015/0523/870.html'>5个经典有趣的 Linux 命令行技巧</a> </li>
+<li>下一篇：<a href='/czxt/linux/2015/0618/904.html'>linux下挂载（mount）光盘镜像文件、移动硬盘、U盘</a> </li>
+</ul>
+</div>
+<div id="lianxi">
+如果你有好的<a href="/win10zixun" title="win10资讯">win10资讯</a>或者<a href="/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="/win10xitong" title="win10系统">win10系统</a>的关注与报道。<br/>
+欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+</div>
+<div class="art_ad">
+<script type="text/javascript">
+var cpro_id="u1997042";
+(window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id]={at:"3",rsi0:"750",rsi1:"250",pat:"6",tn:"baiduCustNativeAD",rss1:"#FFFFFF",conBW:"1",adp:"1",ptt:"0",titFF:"%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91",titFS:"14",rss2:"#000000",titSU:"0",ptbg:"90",piw:"0",pih:"0",ptp:"0"}
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+<div class="neiart">
+<ul class="neituzs_article">
+<li><a href='/czxt/linux/2015/0913/1275.html'><img src='/uploads/allimg/150913/1-150913210Z3-lp.png' border='0' width='120' height='120' alt='怎么才能访问到另外一台主机上的虚拟机？'></a><br /><a href='/czxt/linux/2015/0913/1275.html'>怎么才能访问到另</a></li>
+<li><a href='/czxt/linux/2015/0823/914.html'><img src='/uploads/allimg/150823/104624M91-0-lp.jpg' border='0' width='120' height='120' alt='Linux安装与配置JDK7'></a><br /><a href='/czxt/linux/2015/0823/914.html'>Linux安装与配置J</a></li>
+<li><a href='/czxt/linux/2015/0726/907.html'><img src='/uploads/allimg/150726/1645212916-0-lp.png' border='0' width='120' height='120' alt='CentOs 设置静态IP 方法'></a><br /><a href='/czxt/linux/2015/0726/907.html'>CentOs 设置静态IP</a></li>
+<li><a href='/czxt/linux/2015/0523/870.html'><img src='/uploads/allimg/150523/1212295M4-0-lp.JPG' border='0' width='120' height='120' alt='5个经典有趣的 Linux 命令行技巧'></a><br /><a href='/czxt/linux/2015/0523/870.html'>5个经典有趣的 L</a></li>
+<li><a href='/czxt/linux/2015/0318/243.html'><img src='/uploads/allimg/150318/1330262153-0-lp.PNG' border='0' width='120' height='120' alt='Linux下实现Web数据同步的四种方式'></a><br /><a href='/czxt/linux/2015/0318/243.html'>Linux下实现Web数据</a></li>
+<li><a href='/czxt/linux/2015/0310/200.html'><img src='/uploads/allimg/150310/23325N000-0-lp.jpg' border='0' width='120' height='120' alt='linux（centos）搭建SVN服务器'></a><br /><a href='/czxt/linux/2015/0310/200.html'>linux（centos）搭建</a></li>
+<li><a href='/czxt/linux/2015/0305/151.html'><img src='/uploads/allimg/150305/1536454062-0-lp.png' border='0' width='120' height='120' alt='Linux中如何开启8080端口供外界访问'></a><br /><a href='/czxt/linux/2015/0305/151.html'>Linux中如何开启8</a></li>
+<li><a href='/czxt/linux/2015/0208/58.html'><img src='/uploads/allimg/150208/16140512Q-0-lp.jpg' border='0' width='120' height='120' alt='Linux下如何修复Lubuntu中的Docky混合错误'></a><br /><a href='/czxt/linux/2015/0208/58.html'>Linux下如何修复L</a></li>
+<li><a href='/czxt/linux/2015/0205/3.html'><img src='/uploads/allimg/150205/1-150205102242-lp.jpg' border='0' width='120' height='120' alt='WIN7系统优化之页面文件pagefile.sys转移'></a><br /><a href='/czxt/linux/2015/0205/3.html'>WIN7系统优化之页面</a></li>
+
+</ul>
+</div>
+</div>
+
+<div class="listy">
+<script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+<div class="xguanrm" style="color:#FFF">最新文章>>></div>
+<div class="renei_new">
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="linux 安装rpm包时遇到error:Failed dependencies解法方法"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1019/1305.html'>linux 安装rpm包时遇到error:Failed dependencies解法方法</a><br/><span>2015-10-19 17:05:28 </span><span style="padding-left:8px;color:#26AAF5">9次</span></div>
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="Linux centos下安装、配置、启动Apache"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1019/1304.html'>Linux centos下安装、配置、启动Apache</a><br/><span>2015-10-19 14:17:26 </span><span style="padding-left:8px;color:#26AAF5">4次</span></div>
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="阿里云配置mysql远程连接"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1018/1302.html'>阿里云配置mysql远程连接</a><br/><span>2015-10-18 09:53:27 </span><span style="padding-left:8px;color:#26AAF5">10次</span></div>
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="linux 怎么完全卸载mysql数据库"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1017/1301.html'>linux 怎么完全卸载mysql数据库</a><br/><span>2015-10-17 16:11:53 </span><span style="padding-left:8px;color:#26AAF5">1次</span></div>
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="CentOS安装软件：/lib/ld-linux.so.2: bad ELF interpreter解决"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1017/1300.html'>CentOS安装软件：/lib/ld-linux.so.2: bad ELF interpreter解决</a><br/><span>2015-10-17 12:14:04 </span><span style="padding-left:8px;color:#26AAF5">7次</span></div>
+<div class="renei_new_pic" ><img src="/images/defaultpic.gif" alt="CentOS下安装JDK1.7"/></div><div class="renei_new_tit"><a href='/czxt/linux/2015/1017/1299.html'>CentOS下安装JDK1.7</a><br/><span>2015-10-17 12:09:36 </span><span style="padding-left:8px;color:#26AAF5">2次</span></div>
+
+</div>
+<script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+<div id="scr_cont" class="scr_ad">
+<div class="xguanrm" style="color:#FFF">相关热门>>></div>
+<ul class="renei">
+<li><span>452</span><a href='/czxt/linux/2015/0318/243.html'>Linux下实现Web数据同步的四种方式</a> </li>
+<li><span>354</span><a href='/czxt/linux/2015/0726/907.html'>CentOs 设置静态IP 方法</a> </li>
+<li><span>66</span><a href='/czxt/linux/2015/0617/900.html'>linux释放内存命令</a> </li>
+<li><span>57</span><a href='/czxt/linux/2015/0815/910.html'>XShell连接不上虚拟机CentOS</a> </li>
+<li><span>53</span><a href='/czxt/linux/2015/0310/200.html'>linux（centos）搭建SVN服务器</a> </li>
+<li><span>41</span><a href='/czxt/linux/2015/0305/151.html'>Linux中如何开启8080端口供外界访问</a> </li>
+<li><span>36</span><a href='/czxt/linux/2015/0322/246.html'> linux下让tomcat以service方式运行</a> </li>
+<li><span>35</span><a href='/czxt/linux/2015/0310/201.html'>CentOS6.3安装JDK和环境配置</a> </li>
+<li><span>32</span><a href='/czxt/linux/2015/0321/244.html'>Linux常用命令大全</a> </li>
+
+</ul>
+</div>
+</div>
+<script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+</div>
+﻿<div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏电脑知识网是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏电脑知识网站所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/submenu.html">网站地图</a> | <a href="/copyright.html">版权声明</a> | <a href="/changwei.html">长尾关键词</a> <br/>
+            Copyright &copy; 2002-2011 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> <br/>
+			
+	</div>
+</div>
+<!-- win10os.com Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbce4dc52284dbf2e383040a6fdf40ed8' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<span id="count_data" style="display:none"><script src="/plus/count.php?view=yes&aid=900&mid=1" type='text/javascript' language="javascript"></script></span>
+<script type="text/javascript">
+document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+</script>
+<script src="/templets/default/js/right_ad.js"></script>
+<!-- win10os.com Baidu tongji analytics -->
+<!-- flypeng.com Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F01a1ff7b6ab0650920aa64bf8bfad7e2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbce4dc52284dbf2e383040a6fdf40ed8' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+/*120*270，创建于2013-11-1*/
+var cpro_id = "u1400962";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MySQL Cluster 7.2.4集群配置_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL集群配置,MySQL Cluster" />
+  <meta name="description" content="MySQL Cluster 7.2.4集群配置 准备 32位和64位版本 3台服务器 202.38.128.153 dbs2 64位 202.122.32.68 dbs1 64位 192.168.32.22 erpdbtest 32位 管理节点(ndb_mgmd) 192.168.32.22 erpdbtest 32位 数据节点(ndbd) 202.122.32.68" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/mysql/'>MySql</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL Cluster 7.2.4集群配置</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-06-29 16:47 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1513" class="art_content"><span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; background-color: rgb(249, 249, 249);">MySQL Cluster 7.2.4集群配置</span>
+<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none; color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; background-color: rgb(249, 249, 249);">
+	&nbsp;
+	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+		准备 32位和64位版本 &nbsp;3台服务器&nbsp;
+		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+			202.38.128.153 dbs2 64位
+			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+				202.122.32.68 dbs1 64位
+				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+					192.168.32.22 erpdbtest 32位
+					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+						管理节点(ndb_mgmd) 192.168.32.22 erpdbtest 32位
+						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+							数据节点(ndbd) &nbsp; &nbsp;202.122.32.68 dbs1 64位 &nbsp; 202.38.128.153 dbs2 64位
+							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+								SQL节点(mysqld) 202.122.32.68 &nbsp;dbs1 64位 &nbsp;202.38.128.153 dbs2 64位
+								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+									wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.2/mysql-cluster-gpl-7.2.4-linux2.6-i686.tar.gz/from/http://gd.tuwien.ac.at/db/mysql/
+									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+										<br />
+										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+											卸载Mysql&nbsp;
+											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+												rpm &ndash;qa | grep SQL
+												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+													rpm &ndash;e mysql...
+													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+														删除/etc/my.cnf &nbsp; /var/lib/mysql<br />
+														&nbsp;
+														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+															关闭防火墙
+															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																Iptables是一个包含在绝大多数Linux发行版中的防火墙。在默认安装的RHEL中，防火墙是打开的，且随机启动，如果要关闭防火墙，可以使用以下命令：
+																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																	service iptables stop
+																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																		以上命令执行完毕之后效果只能保持到下次重启。重启后的配置就还原了，如果希望能够在重启之后还能够保持防火墙的关闭状态，可以使用以下命令：
+																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																			chkconfig &ndash;level 35 iptables off<br />
+																			&nbsp;
+																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																				关闭SELinux
+																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																					SELinux的全称是Security-EnhancedLinux，是由美国国家安全局NSA开发的访问控制体制。SELinux可以最大限度地保证Linux系统的安全。
+																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																						在默认安装的Linux系统中，SELinux默认是开启的，配置文件是/etc/selinux/config，一般测试过程中使用&ldquo;permissive&rdquo;模式，这样仅会在违反SELinux规则时发出警告，然后修改规则，最后由用户觉得是否执行严格&ldquo;enforcing&rdquo;的策略，禁止违反规则策略的行为。规则决定SELinux的工作行为和方式，策略决定具体的安全细节如文件系统，文件一致性。在安装过程中，可以选择&ldquo;激活&rdquo;、&ldquo;警告&rdquo;或者&ldquo;关闭&rdquo;SELinux。默认设置为&ldquo;激活&rdquo;。<br />
+																						&nbsp;
+																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																							为了避免SELinux影响到群集功能，需要关闭SELinux系统的功能
+																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																								1、 &nbsp; &nbsp;安装管理节点（192.168.32.22）&nbsp;
+																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																									解压文件 &nbsp; &nbsp;
+																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																										tar -zvxf mysql-cluster-gpl-7.2.4-linux2.6-i686.tar.gz
+																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																											创建安装目录&nbsp;
+																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																												mkdir -p /usr/local/mysql/bin&nbsp;
+																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																													mkdir -p /usr/local/mysql/ndbdata&nbsp;
+																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																														添加执行文件路径&nbsp;
+																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																															vi ~/.bash_profile&nbsp;
+																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																PATH=$PATH:$HOME/bin:/usr/local/mysql/bin&nbsp;
+																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																	拷贝执行文件&nbsp;
+																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																		cd mysql-cluster-gpl-7.2.4-linux2.6-i686
+																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																			cp bin/ndb_mgmd /usr/local/mysql/bin
+																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																				cp bin/ndb_mgm /usr/local/mysql/bin
+																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																					创建日志文件存储目录&nbsp;
+																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																						mkdir /var/lib/mysql-cluster&nbsp;
+																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																							创建配置文件目录及文件&nbsp;
+																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																								mkdir /usr/local/mysql/cluster-conf&nbsp;
+																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																									vi /usr/local/mysql/cluster-conf/config.ini&nbsp;
+																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																										编辑配置文件：&nbsp;
+																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																											########################以下为配置文件内容#################&nbsp;
+																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																												&nbsp;
+																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																													[ndbd default]&nbsp;
+																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																														NoOfReplicas=2 #复制成员个数
+																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																															DataMemory=80M &nbsp;#数据存储可以分配的内存
+																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																IndexMemory=18M #索引存储可以分配的内存&nbsp;
+																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																	&nbsp;
+																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																		[ndb_mgmd] #定义管理节点的IP地址或主机名
+																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																			id=1
+																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																				hostname=192.168.32.22&nbsp;
+																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																					DataDir=/var/lib/mysql-cluster&nbsp;
+																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																						&nbsp;
+																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																							[ndbd] &nbsp;#定义数据节点
+																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																								id=11&nbsp;
+																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																									HostName=202.122.32.68&nbsp;
+																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																										DataDir=/usr/local/mysql/ndbdata &nbsp;
+																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																											[ndbd] &nbsp; &nbsp;
+																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																												id=12&nbsp;
+																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																													HostName=202.38.128.153
+																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																														DataDir=/usr/local/mysql/ndbdata&nbsp;
+																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																															&nbsp;
+																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																[mysqld]#定义SQL节点
+																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																	id=21&nbsp;
+																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																		HostName=202.122.32.68&nbsp;
+																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																			[mysqld]
+																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																				id=22&nbsp;
+																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																					HostName=202.38.128.153
+																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																						&nbsp;
+																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																							[mysqld]
+																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																								id=23
+																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																									&nbsp;
+																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																										########################以上为配置文件内容#################
+																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																											2、 &nbsp; &nbsp;安装数据节点 （ 202.122.32.68 dbs1 &nbsp;202.38.128.153 dbs2 ）
+																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																												&nbsp;
+																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																													解压文件
+																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																														&nbsp;tar -zxvf mysql-cluster-gpl-7.2.4-linux2.6-x86_64.tar.gz&nbsp;
+																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																															创建安装目录
+																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																mkdir -p /usr/local/mysql/bin
+																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																	mkdir -p /usr/local/mysql/ndbdata
+																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																		拷贝执行文件
+																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																			cp mysql-cluster-gpl-7.2.4-linux2.6-x86_64/bin/ndbd /usr/local/mysql/bin
+																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																				添加执行文件路径
+																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																					vi ~/.bash_profile
+																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																						PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																							创建配置文件：
+																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																								vi /etc/my.cnf
+																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																									分别在主机添加如下内容：
+																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																										[mysql_cluster] #配置数据节点连接管理节点
+																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																											ndb-connectstring=192.168.32.22
+																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																												3、安装SQL节点（202.122.32.68 dbs1 &nbsp;202.38.128.153 dbs2）：
+																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																													&nbsp; &nbsp;
+																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																														解压文件
+																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																															&nbsp;tar -zxvf mysql-cluster-gpl-7.2.4-linux2.6-x86_64.tar.gz&nbsp;
+																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																拷贝安装文件
+																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																	mv mysql-cluster-gpl-7.2.4-linux2.6-x86_64 /usr/local/mysql
+																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																		添加mysql用户
+																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																			groupadd mysql
+																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																				useradd -g mysql mysql
+																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																					添加权限
+																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																						chown -R mysql:mysql /usr/local/mysql
+																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																							拷贝配置文件
+																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																								cp /usr/local/mysql/support-files/my-large.cnf /etc/my.cnf
+																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																									初始化<a class="keylink" href="http://www.2cto.com/database/" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">数据库</a>
+																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																										cd /usr/local/<a class="keylink" href="http://www.2cto.com/database/MySQL/" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">mysql</a>
+																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																											scripts/mysql_install_db --user=mysql
+																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																												拷贝守护进程所需文件
+																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																													cp /usr/local/mysql/support-files/mysql.server /etc/rc.d/init.d/mysqld
+																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																														配置守护进程
+																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																															chkconfig &ndash;add mysqld
+																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																chkconfig &ndash;level 35 mysqld on
+																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																	添加执行文件路径
+																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																		vi ~/.bash_profile
+																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																			PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																				更改配置文件
+																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																					vi /etc/my.cnf
+																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																						分别编辑如下信息：
+																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																							[mysqld] &nbsp;#配置SQL节点与管理节点连接
+																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																								port &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= 3306
+																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																									socket &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= /tmp/mysql.sock
+																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																										ndbcluster
+																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																											ndb-connectstring=192.168.32.22
+																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																												4、启动及关闭mysql cluster
+																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																													&nbsp; &nbsp;
+																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																														启动顺序：管理服务器-&gt;存储节点-&gt;SQL节点
+																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																															a、启动管理节点
+																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																rm mysql/mysql-cluster/ndb_1_config.bin.1 #不是必须的，如果config.ini有改动则要加上
+																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																	ndb_mgmd -f /usr/local/mysql/cluster-conf/config.ini
+																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																		b、启动存储节点
+																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																			ndbd &ndash;initial #(第一次启动必须添加选项，另外备份/恢复，修改配置文件也需要执行)
+																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																				ndbd &nbsp; &nbsp;#不是第一次启动需要执行的命令
+																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																					c、启动SQL节点
+																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																						/etc/rc.d/init.d/mysqld start 或service mysqld start
+																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																							启动后可以用mysql -uroot -p 验证mysql服务状态
+																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																								关闭顺序：SQL节点-&gt;管理节点
+																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																									a、关闭SQL节点
+																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																										/etc/rc.d/init.d/mysqld stop 或service mysqld stop
+																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																											b、关闭管理节点
+																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																												ndb_mgm〉 shutdown
+																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																													&nbsp;
+																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																														5、验证配置的正确性
+																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																															要先启动管理节点 再启动数据节点 等启动完后 再起sql节点 否则会出错
+																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																1、在管理节点执行：ndb_mgm -&gt; show
+																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																	&nbsp;
+																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																		ndb_mgm&gt; show
+																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																			Cluster Configuration
+																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																				---------------------
+																																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																					[ndbd(NDB)] &nbsp; &nbsp; 2 node(s)
+																																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																						id=11 &nbsp; @202.122.32.68 &nbsp;(mysql-5.5.19 ndb-7.2.4, Nodegroup: 0, Master) &nbsp; 启动完
+																																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																							id=12 &nbsp; @202.38.128.153 &nbsp;(mysql-5.5.19 ndb-7.2.4, starting, Nodegroup: 0) &nbsp;正在起
+																																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																								&nbsp;
+																																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																									[ndb_mgmd(MGM)] 1 node(s)
+																																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																										id=1 &nbsp; &nbsp;@192.168.32.22 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																											&nbsp;
+																																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																												[mysqld(API)] &nbsp; 3 node(s)
+																																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																													id=21 &nbsp; @202.122.32.68 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																														id=22 &nbsp; @202.38.128.153 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																															id=23 (not connected, accepting connect from any host)
+																																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																&nbsp; &nbsp;
+																																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																	正常状态
+																																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																		&nbsp;
+																																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																			ndb_mgm&gt; show
+																																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																				Cluster Configuration
+																																																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																					---------------------
+																																																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																						[ndbd(NDB)] &nbsp; &nbsp; 2 node(s)
+																																																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																							id=11 &nbsp; @202.122.32.68 &nbsp;(mysql-5.5.19 ndb-7.2.4, Nodegroup: 0, Master)
+																																																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																								id=12 &nbsp; @202.38.128.153 &nbsp;(mysql-5.5.19 ndb-7.2.4, Nodegroup: 0)
+																																																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																									&nbsp;
+																																																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																										[ndb_mgmd(MGM)] 1 node(s)
+																																																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																											id=1 &nbsp; &nbsp;@192.168.32.22 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																												&nbsp;
+																																																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																													[mysqld(API)] &nbsp; 3 node(s)
+																																																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																														id=21 &nbsp; @202.122.32.68 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																															id=22 &nbsp; @202.38.128.153 &nbsp;(mysql-5.5.19 ndb-7.2.4)
+																																																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																id=23 (not connected, accepting connect from any host)
+																																																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																	&nbsp;
+																																																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																		2、在其中一个SQL节点创建数据库，添加数据。要等启动完再操作。
+																																																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																			&nbsp;
+																																																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																				mysql -uroot -p
+																																																																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																					create database ndbtest;
+																																																																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																						use ndbtest;
+																																																																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																							CREATE TABLE `t1` (
+																																																																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																								&nbsp; `id` int(11) NOT NULL AUTO_INCREMENT,
+																																																																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																									&nbsp; PRIMARY KEY (`id`)
+																																																																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																										) ENGINE=ndbcluster &nbsp;DEFAULT CHARSET=gbk;
+																																																																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																											&nbsp;
+																																																																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																												NDB: Could not acquire global schema lock (266)Time-out in NDB, &nbsp;
+																																																																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																													启动完成前 如果在一个节点执行添加数据库的操作，不能同步到其他节点。<br />
+																																																																																																																																																																																													&nbsp;
+																																																																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																														3、在另一个SQL节点，如果能够存在添加的数据库和数据，则说明配置成功
+																																																																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																															进入sql节点，在test数据库创建表
+																																																																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																CREATE TABLE `t1` ( &nbsp; &nbsp;
+																																																																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																	&nbsp; `id` int(11) NOT NULL AUTO_INCREMENT,
+																																																																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																		&nbsp; PRIMARY KEY (`id`)
+																																																																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																			) ENGINE=ndbcluster &nbsp;DEFAULT CHARSET=gbk
+																																																																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																				切换到2台数据节点服务器~/mysql/data/ndb_2_fs和~/mysql/data/ndb_3_fs看看，
+																																																																																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																					或者直接去数据库查，数据已经同步了！
+																																																																																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																						&nbsp;关闭集群服务
+																																																																																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																							关闭sql节点等同于停止mysql服务，此时外界数据不将再进来。然后关闭管理节点
+																																																																																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																								~/mysql/bin/ndb_mgm -e shutdown
+																																																																																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																									rm ~/mysql/mysql-cluster/ndb_1_config.bin.1 #不是必须的，如果config.ini有改动则要加上
+																																																																																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																										这样操作后，管理节点和数据节点都将停止服务
+																																																																																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																											Notes:
+																																																																																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																												1:如果发现关闭一台机器的ndbd进程，另一台机器的ndbd的进程也关闭，则需要修改参数NoOfReplicas。
+																																																																																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																													2:./ndbd --initial 不能同时在所有数据节点机器上执行，如执行，会删除所有数据
+																																																																																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																														3:可以像操作非簇类型的数据库那样，操作mysqld节点
+																																																																																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																															4:每次修改config.ini文件，重启ndb_mgmd时，需要删除mysql-cluster文件下的ndb_1_config.bin.1文件，
+																																																																																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																因为他默认调用此文件&nbsp;<br />
+																																																																																																																																																																																																																&nbsp;
+																																																																																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																	5:NDB 簇不支持自动发现数据库的功能，这点很重要,一旦在一个数据节点上创建了世界（world）数据库和它的表，在簇中的每个SQL节点上还需要发出命令 CREATE DATABASE world,后跟FLUSH TABLES。这样，节点就能识别数据库并读取其表定义。（在本版本MySQL Cluster 7.1.5下数据库也会自动同步的）
+																																																																																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																		6:如果在相关节点服务器启动时,注意查看~/mysql/mysql-cluster目录内的相关日志文件以获取错误信息.
+																																																																																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																			7:在管理节点的配置文件里各[mysqld],[ndbd]和[ndb_mgmd]配置的选项值顺序应该如下:
+																																																																																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																				[mysqld]
+																																																																																																																																																																																																																				<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																					Id=4
+																																																																																																																																																																																																																					<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																						HostName=192.168.208.3
+																																																																																																																																																																																																																						<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																							Id在顶端紧跟其后的是HostName,如果顺序错了,当SQL或数据节点连接管理节点时,管理节点无法正确的定位
+																																																																																																																																																																																																																							<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																								到其对应的节点配置上.
+																																																																																																																																																																																																																								<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																									因为无法定位到对应的节点配置,当没有剩余的[空节点]时,客户端节点启动时(./mysqld or ./ndbd)
+																																																																																																																																																																																																																									<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																										还会报:
+																																																																																																																																																																																																																										<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																											Configuration error: Error : Could not alloc node id at 192.168.0.231 port 1186: No free &nbsp; &nbsp;
+																																																																																																																																																																																																																											<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																												node id found for mysqld&nbsp;
+																																																																																																																																																																																																																												<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																													(API).Failed to initialize consumers&nbsp;
+																																																																																																																																																																																																																													<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																														8:[空节点]是没有指定HostName选项的节点配置均为空节点,空节点可以用来动态配置一些动态IP的节点,
+																																																																																																																																																																																																																														<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																															一般管理节点的 配置文件要预留3个以上的空节点,因为备份时需要连接一个节点,如下:
+																																																																																																																																																																																																																															<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																																[mysqld]
+																																																																																																																																																																																																																																<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																																	Id=6
+																																																																																																																																																																																																																																	<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																																		# ps -ef|grep mysql
+																																																																																																																																																																																																																																		<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																																			root &nbsp; &nbsp; 13882 &nbsp; &nbsp; 1 &nbsp;0 15:25 pts/5 &nbsp; &nbsp;00:00:00 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir=/usr/local/mysql/data --pid-file=/usr/local/mysql/data/dbs1.pid
+																																																																																																																																																																																																																																			<div style="border-width: 0px; padding: 0px; margin: 0px; list-style: none;">
+																																																																																																																																																																																																																																				mysql &nbsp; &nbsp;14185 13882 &nbsp;0 15:25 pts/5 &nbsp; &nbsp;00:00:00 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=/usr/local/mysql/data/dbs1.err --pid-file=/usr/local/mysql/data/dbs1.pid --socket=/tmp/mysql.sock --port=3306</div>
+																																																																																																																																																																																																																																		</div>
+																																																																																																																																																																																																																																	</div>
+																																																																																																																																																																																																																																</div>
+																																																																																																																																																																																																																															</div>
+																																																																																																																																																																																																																														</div>
+																																																																																																																																																																																																																													</div>
+																																																																																																																																																																																																																												</div>
+																																																																																																																																																																																																																											</div>
+																																																																																																																																																																																																																										</div>
+																																																																																																																																																																																																																									</div>
+																																																																																																																																																																																																																								</div>
+																																																																																																																																																																																																																							</div>
+																																																																																																																																																																																																																						</div>
+																																																																																																																																																																																																																					</div>
+																																																																																																																																																																																																																				</div>
+																																																																																																																																																																																																																			</div>
+																																																																																																																																																																																																																		</div>
+																																																																																																																																																																																																																	</div>
+																																																																																																																																																																																																																</div>
+																																																																																																																																																																																																															</div>
+																																																																																																																																																																																																														</div>
+																																																																																																																																																																																																													</div>
+																																																																																																																																																																																																												</div>
+																																																																																																																																																																																																											</div>
+																																																																																																																																																																																																										</div>
+																																																																																																																																																																																																									</div>
+																																																																																																																																																																																																								</div>
+																																																																																																																																																																																																							</div>
+																																																																																																																																																																																																						</div>
+																																																																																																																																																																																																					</div>
+																																																																																																																																																																																																				</div>
+																																																																																																																																																																																																			</div>
+																																																																																																																																																																																																		</div>
+																																																																																																																																																																																																	</div>
+																																																																																																																																																																																																</div>
+																																																																																																																																																																																															</div>
+																																																																																																																																																																																														</div>
+																																																																																																																																																																																													</div>
+																																																																																																																																																																																												</div>
+																																																																																																																																																																																											</div>
+																																																																																																																																																																																										</div>
+																																																																																																																																																																																									</div>
+																																																																																																																																																																																								</div>
+																																																																																																																																																																																							</div>
+																																																																																																																																																																																						</div>
+																																																																																																																																																																																					</div>
+																																																																																																																																																																																				</div>
+																																																																																																																																																																																			</div>
+																																																																																																																																																																																		</div>
+																																																																																																																																																																																	</div>
+																																																																																																																																																																																</div>
+																																																																																																																																																																															</div>
+																																																																																																																																																																														</div>
+																																																																																																																																																																													</div>
+																																																																																																																																																																												</div>
+																																																																																																																																																																											</div>
+																																																																																																																																																																										</div>
+																																																																																																																																																																									</div>
+																																																																																																																																																																								</div>
+																																																																																																																																																																							</div>
+																																																																																																																																																																						</div>
+																																																																																																																																																																					</div>
+																																																																																																																																																																				</div>
+																																																																																																																																																																			</div>
+																																																																																																																																																																		</div>
+																																																																																																																																																																	</div>
+																																																																																																																																																																</div>
+																																																																																																																																																															</div>
+																																																																																																																																																														</div>
+																																																																																																																																																													</div>
+																																																																																																																																																												</div>
+																																																																																																																																																											</div>
+																																																																																																																																																										</div>
+																																																																																																																																																									</div>
+																																																																																																																																																								</div>
+																																																																																																																																																							</div>
+																																																																																																																																																						</div>
+																																																																																																																																																					</div>
+																																																																																																																																																				</div>
+																																																																																																																																																			</div>
+																																																																																																																																																		</div>
+																																																																																																																																																	</div>
+																																																																																																																																																</div>
+																																																																																																																																															</div>
+																																																																																																																																														</div>
+																																																																																																																																													</div>
+																																																																																																																																												</div>
+																																																																																																																																											</div>
+																																																																																																																																										</div>
+																																																																																																																																									</div>
+																																																																																																																																								</div>
+																																																																																																																																							</div>
+																																																																																																																																						</div>
+																																																																																																																																					</div>
+																																																																																																																																				</div>
+																																																																																																																																			</div>
+																																																																																																																																		</div>
+																																																																																																																																	</div>
+																																																																																																																																</div>
+																																																																																																																															</div>
+																																																																																																																														</div>
+																																																																																																																													</div>
+																																																																																																																												</div>
+																																																																																																																											</div>
+																																																																																																																										</div>
+																																																																																																																									</div>
+																																																																																																																								</div>
+																																																																																																																							</div>
+																																																																																																																						</div>
+																																																																																																																					</div>
+																																																																																																																				</div>
+																																																																																																																			</div>
+																																																																																																																		</div>
+																																																																																																																	</div>
+																																																																																																																</div>
+																																																																																																															</div>
+																																																																																																														</div>
+																																																																																																													</div>
+																																																																																																												</div>
+																																																																																																											</div>
+																																																																																																										</div>
+																																																																																																									</div>
+																																																																																																								</div>
+																																																																																																							</div>
+																																																																																																						</div>
+																																																																																																					</div>
+																																																																																																				</div>
+																																																																																																			</div>
+																																																																																																		</div>
+																																																																																																	</div>
+																																																																																																</div>
+																																																																																															</div>
+																																																																																														</div>
+																																																																																													</div>
+																																																																																												</div>
+																																																																																											</div>
+																																																																																										</div>
+																																																																																									</div>
+																																																																																								</div>
+																																																																																							</div>
+																																																																																						</div>
+																																																																																					</div>
+																																																																																				</div>
+																																																																																			</div>
+																																																																																		</div>
+																																																																																	</div>
+																																																																																</div>
+																																																																															</div>
+																																																																														</div>
+																																																																													</div>
+																																																																												</div>
+																																																																											</div>
+																																																																										</div>
+																																																																									</div>
+																																																																								</div>
+																																																																							</div>
+																																																																						</div>
+																																																																					</div>
+																																																																				</div>
+																																																																			</div>
+																																																																		</div>
+																																																																	</div>
+																																																																</div>
+																																																															</div>
+																																																														</div>
+																																																													</div>
+																																																												</div>
+																																																											</div>
+																																																										</div>
+																																																									</div>
+																																																								</div>
+																																																							</div>
+																																																						</div>
+																																																					</div>
+																																																				</div>
+																																																			</div>
+																																																		</div>
+																																																	</div>
+																																																</div>
+																																															</div>
+																																														</div>
+																																													</div>
+																																												</div>
+																																											</div>
+																																										</div>
+																																									</div>
+																																								</div>
+																																							</div>
+																																						</div>
+																																					</div>
+																																				</div>
+																																			</div>
+																																		</div>
+																																	</div>
+																																</div>
+																															</div>
+																														</div>
+																													</div>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/mysql/2016/0506/1489.html'>MySQL报错如下message from server: ＂Can't get hostname for your a</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/mysql/2016/0927/1523.html'>MySQL force Index 强制索引概述</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2015/1020/1309.html" >MySQL 5.7 GA 版本发布，支持在生产</a><span>10.20</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0618/903.html" >LINUX下MYSQL的启动及相关配置</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/902.html" >Linux开放MySQL的3306端口</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/901.html" >Linux下重启mysql数据库的方法</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0605/881.html" >mysqldump参数介绍教程%mysqldump 参数</a><span>06.05</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>05.07</span></li>
+<li><a href="/shujuku/mysql/2015/0405/602.html" >四种数据库随机获取10条数据的方</a><span>04.05</span></li>
+<li><a href="/shujuku/mysql/2015/0401/422.html" >MySQL CPU占用100%的解决过程和经验</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集群解决方案）</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂Can't get hostname for your a</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2015/0316/222.html" >mysql安装图解 mysql图文安装教程</a><span>504</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>459</span></li>
+<li><a href="/shujuku/mysql/2015/0316/228.html" >phpmyadmin简明安装教程</a><span>303</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>119</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>113</span></li>
+<li><a href="/shujuku/mysql/2015/0316/216.html" >python之mysql连接 MySQLdb</a><span>95</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>94</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>91</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>64</span></li>
+<li><a href="/shujuku/mysql/2015/0316/223.html" >mysql文件太大导入出错的解决方法</a><span>63</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1513&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

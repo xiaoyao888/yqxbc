@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CAS单点登录学习笔记四之HTTPS 单向认证方式 服务端和客户端配置_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CAS,单点,登录,学习,笔记,四之,HTTPS,单向,认证" />
+  <meta name="description" content="一、生成服务端密钥文件 二、生成服务端证书 三、导入证书文件到cacerts密钥库文件 四、服务端Tomcat配置 五、生成客户端密钥库文件 六、客户端应用配置 七、补充说明 八、常见配置" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CAS单点登录学习笔记四之HTTPS 单向认证方式 服务端和客户端配置</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-01-05 10:00 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1425" class="art_content"><p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><span style="font-family: Arial;">一、生成服务端密钥文件<br />
+	二、生成服务端证书<br />
+	三、导入证书文件到cacerts密钥库文件<br />
+	四、服务端Tomcat配置<br />
+	五、生成客户端密钥库文件<br />
+	六、客户端应用配置<br />
+	七、补充说明<br />
+	八、常见配置错误</span></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>配置说明</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>一、&nbsp;&nbsp;&nbsp;&nbsp; 生成服务端密钥文件</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	登录服务器打开一个CMD窗口（开始菜单 -&gt; 运行输入cmd后回车）并切换到tomcat安装目录下（如：c:\tomcat-cas），执行如下命令：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	keytool -genkey -alias casserver -keypass demosso -keyalg RSA&nbsp; -keystore casserver.keystore&nbsp; -validity 365</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001114J0-0.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	执行后，可以看到tomcat安装目录下生成了一个casserver.keystore文件。如下图：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001113a8-1.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>说明：</strong>-alias指定别名为casserver；-keyalg指定RSA算法；-keypass指定私钥密码；-keystore指定密钥文件名称为casserver.keystore；-validity指定有效期为365天。另外提示的输入keystore密码应与-keypass指定的相同；您的名字与姓氏是CAS服务器使用的域名（不能是IP，也不能是localhost），其它项随意填。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>注意：</strong>服务器上如果有多个JDK，请确认环境变量中的JDK路径为tomcat所使用的JDK，如果不在环境变量中，也可切换到指定JDK的bin目录下执行命令；提示的输入keystore密码应与-keypass必须与指定的相同，否则后面tomcat启动会报IO异常（Cannot recover key）。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>&nbsp;</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>二、&nbsp;&nbsp;&nbsp;&nbsp; 生成服务端证书</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	根据以上生成的服务端的密钥文件可以导出服务端证书，执行以下命令：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	keytool -export -alias casserver -storepass demosso -file casserver.cer -keystore casserver.keystore</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001111437-2.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	执行后，可以看到tomcat安装目录下生成了一个casserver.cer文件。如下图：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001114028-3.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>说明：</strong>-alias指定别名为casserver；-storepass指定私钥为demosso；-file指定导出证书的文件名为casserver.cer；-keystore指定之前生成的密钥文件的文件名。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>注意：</strong>-alias和-storepass必须为生成casserver.keystore密钥文件时所指定的别名和密码，否则证书导出失败，报如下错误：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001112554-4.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>&nbsp;</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>三、&nbsp;&nbsp;&nbsp;&nbsp; 导入证书文件到cacerts 密钥库文件</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	导入以上生成的服务端的证书文件到一个cacerts密钥库文件，执行以下命令：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	keytool -import -trustcacerts -alias casserver -storepass demosso&nbsp; -file casserver.cer &ndash;keystore cacerts</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001113A7-5.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	执行后，可以看到tomcat安装目录下生成了一个cacerts文件。如下图：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001115300-6.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>&nbsp;</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>四、&nbsp;&nbsp;&nbsp;&nbsp; 服务端Tomcat配置</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	在制作完成密钥文件、证书文件、密钥库文件后即可进行服务端Tomcat的配置。打开$CATALINA_HOME/conf/server.xml文件，注释掉如下代码段：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&lt;Connector port=&quot;80&quot;protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot;/&gt;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	并取消注释&lt;Connectorport=&quot;8443&quot; protocol=&quot;HTTP/1.1&quot; SSLEnabled=&quot;true&quot;&hellip;/&gt;代码段，修改后如下：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(233, 101, 14); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/160105/10011121U-7.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;Connector&nbsp;SSLEnabled=<span class="string" style="color: blue;">&quot;true&quot;</span>&nbsp;clientAuth=<span class="string" style="color: blue;">&quot;false&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;keystoreFile=<span class="string" style="color: blue;">&quot;D:/Java/apache/apache-tomcat-cas/casserver.keystore&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;keystorePass=<span class="string" style="color: blue;">&quot;demosso&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;maxThreads=<span class="string" style="color: blue;">&quot;150&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;port=<span class="string" style="color: blue;">&quot;443&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;protocol=<span class="string" style="color: blue;">&quot;org.apache.coyote.http11.Http11Protocol&quot;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;scheme=<span class="string" style="color: blue;">&quot;https&quot;</span>&nbsp;secure=<span class="string" style="color: blue;">&quot;true&quot;</span>&nbsp;sslProtocol=<span class="string" style="color: blue;">&quot;TLS&quot;</span>/&gt;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!--keystoreFile&nbsp;生成的安全证书的位置&nbsp;--&gt;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!--keystorePass设置安全证书的密码--&gt;&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>说明：</strong>port一般为8443或443，最常用的是443端口（https默认端口），这样https方式访问的时候可以不加端口号（如：<a href="https://sso.jandar.com/cas/login" style="color: rgb(202, 0, 0); text-decoration: none;">https://sso.demo.com/cas/login</a>）；keystoreFile为tomcat目录下的密钥文件；keystorePass为私钥密码；truststoreFile为生成的信任文件，如果此处不指定则默认为$JAVA_HOME/jre/lib/security/cacerts文件；其它属性默认即可。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>&nbsp;</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>五、&nbsp;&nbsp;&nbsp;&nbsp; 生成客户端密钥库文件</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	单向认证的客户端配置只需生成客户端信任文件caserts即可。首先将服务端生成的证书文件（之前生成的casserver.cer文件）复制到$JAVA_HOME/jre/lib/security下，然后打开CMD窗口切换到$JAVA_HOME/jre/lib/security下并执行命令：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	keytool -import -trustcacerts -alias casclient -storepass changeit -file casserver.cer -keystore cacerts</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/1001115A0-8.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	执行后，可以看到$JAVA_HOME/jre/lib/security目录下生成了一个cacerts文件。如下图：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/160105/10011119D-9.jpg" style="border: 0px;" /></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	备注：JDK JRE security&nbsp; storepass 默认密码 changeit</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>六、&nbsp;&nbsp;&nbsp;&nbsp; 客户端应用配置</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	1、应用程序WEB-INF\lib目录下加入cas-client-core-3.2.1.jar包并添加到buildpath中；</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	2、编辑应用程序中的web.xml文件在最末端加入如下内容：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(233, 101, 14); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/160105/10011121U-7.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!--&nbsp;用于单点退出，该过滤器用于实现单点登出功能，可选配置&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;listener&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;listener-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.session.SingleSignOutHttpSessionListener&lt;/listener-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/listener&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;该过滤器用于实现单点登出功能，可选配置。&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Single&nbsp;Sign&nbsp;Out&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.session.SingleSignOutFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Single&nbsp;Sign&nbsp;Out&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;该过滤器负责用户的认证工作，必须启用它&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Authentication&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.authentication.AuthenticationFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;casServerLoginUrl&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;https:<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//sso.demo.com/cas/login&lt;/param-value&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;renew&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">false</span>&lt;/param-value&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;gateway&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">false</span>&lt;/param-value&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;serverName&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;http:<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//localhost:8082&lt;/param-value&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Authentication&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/login-page.html&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;该过滤器负责对Ticket的校验工作，必须启用它&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Validation&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;casServerUrlPrefix&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;https:<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//sso.demo.com/cas&lt;/param-value&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;serverName&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;http:<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//localhost:8082&lt;/param-value&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;useSession&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">true</span>&lt;/param-value&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;redirectAfterValidation&lt;/param-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">true</span>&lt;/param-value&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/init-param&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Validation&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;该过滤器负责实现HttpServletRequest请求的包裹，&nbsp;比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;HttpServletRequest&nbsp;WrapperFilter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.util.HttpServletRequestWrapperFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;HttpServletRequest&nbsp;WrapperFilter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。&nbsp;比如AssertionHolder.getAssertion().getPrincipal().getName()。&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Assertion&nbsp;Thread&nbsp;Local&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;org.jasig.cas.client.util.AssertionThreadLocalFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;CAS&nbsp;Assertion&nbsp;Thread&nbsp;Local&nbsp;Filter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;自定义的filter,在用户登录成功之后进行处理&nbsp;--&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;AuthenticationFilter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;com.filter.AuthenticationFilter&lt;/filter-<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-mapping&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter-name&gt;AuthenticationFilter&lt;/filter-name&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/filter-mapping&gt;&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(233, 101, 14); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/160105/10011121U-7.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;java.io.IOException;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.Filter;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.FilterChain;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.FilterConfig;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.ServletException;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.ServletRequest;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.ServletResponse;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;javax.servlet.http.HttpServletRequest;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.jasig.cas.client.validation.Assertion;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&nbsp;AuthenticationFilter&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">implements</span>&nbsp;Filter&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color: rgb(100, 100, 100);">@Override</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;destroy()&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color: rgb(100, 100, 100);">@Override</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;doFilter(ServletRequest&nbsp;request,&nbsp;ServletResponse&nbsp;response,&nbsp;FilterChain&nbsp;filterChain)&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">throws</span>&nbsp;IOException,&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServletException&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServletRequest&nbsp;httpRequest&nbsp;=&nbsp;(HttpServletRequest)&nbsp;request;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//&nbsp;_const_cas_assertion_是CAS中存放登录用户名的session标志</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;object&nbsp;=&nbsp;httpRequest.getSession().getAttribute(<span class="string" style="color: blue;">&quot;_const_cas_assertion_&quot;</span>);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">if</span>&nbsp;(object&nbsp;!=&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">null</span>)&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertion&nbsp;assertion&nbsp;=&nbsp;(Assertion)&nbsp;object;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;loginName&nbsp;=&nbsp;assertion.getPrincipal().getName();&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;user&nbsp;=&nbsp;session&nbsp;中获取user对象&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//&nbsp;第一次登录系统</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">if</span>&nbsp;(user&nbsp;==&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">null</span>)&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自行实现获User对象的方法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//User&nbsp;_user&nbsp;=&nbsp;userService.getUserByName(loginName);</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//&nbsp;保存用户信息到Session</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//setCurrentUser(httpRequest,&nbsp;_user);</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string" style="color: blue;">&quot;current&nbsp;user&nbsp;:&quot;</span>&nbsp;+&nbsp;_user);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterChain.doFilter(request,&nbsp;response);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color: rgb(100, 100, 100);">@Override</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;init(FilterConfig&nbsp;arg0)&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">throws</span>&nbsp;ServletException&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>说明：</strong>LoginFilter内容一般为获取用户基本信息、菜单信息然后保存到session中；sso.demo.com为CAS服务器的域名，也就是之前使用keytool &ndash;genkey命令指定的&ldquo;名字与姓氏&rdquo;。若未申请域名，也可以本地模拟实现域名解析，编辑C:\WINDOWS\system32\drivers\etc\hosts文件添加：CAS服务器IP &nbsp;sso.demo.com&nbsp;即可），如下图：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong><img alt="" src="/uploads/allimg/160105/100111I64-12.jpg" style="border: 0px; max-width: 100%;" /></strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>注意：</strong>serverName属性值为客户端实际IP地址，可以为域名但绝不能为localhost！</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	1、&nbsp;&nbsp;&nbsp;客户端程序单点退出功能，需要访问<a href="https://sso.jandar.com:8443/cas/logout" style="color: rgb(202, 0, 0); text-decoration: none;">https://sso.demo.com/cas/logout</a>，下面提供了一个示例，当点击退出按钮（或超链接）时，调用javascript方法ssoLogout()。ssoLogout()定义如下（可根据实际需求自行修改）：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div class="dp-highlighter bg_javascript" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2px;">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; margin: 0px; color: silver; font-weight: bold; border-left-color: rgb(153, 153, 153); border-left-width: 3px; border-left-style: solid; background-color: rgb(248, 248, 248);">
+			<strong>[javascript]</strong>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wqmain/article/details/8562602" style="color: rgb(160, 160, 160); text-decoration: none; margin: 0px 10px 0px 0px; font-size: 9px; padding: 0px; background-image: none;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wqmain/article/details/8562602" style="color: rgb(160, 160, 160); text-decoration: none; margin: 0px 10px 0px 0px; font-size: 9px; padding: 0px; background-image: none;" title="copy">copy</a><a class="PrintSource" href="http://blog.csdn.net/wqmain/article/details/8562602" style="color: rgb(160, 160, 160); text-decoration: none; margin: 0px 10px 0px 0px; font-size: 9px; padding: 0px; background-image: none;" title="print">print</a><a class="About" href="http://blog.csdn.net/wqmain/article/details/8562602" style="color: rgb(160, 160, 160); text-decoration: none; margin: 0px 10px 0px 0px; font-size: 9px; padding: 0px; background-image: none;" title="?">?</a>
+			<div style="width: 29px; height: 14px;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-c" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px 45px; padding-right: 0px; padding-left: 0px; border: 1px solid rgb(209, 215, 220); color: rgb(92, 92, 92);">
+		<li class="alt" style="font-size: 1em; margin: 0px; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; padding: 0px 3px 0px 10px !important;">
+			<span style="color: black; margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px;">&lt;scripttype=</span><span class="string" style="color: rgb(255, 153, 0); margin: 0px; padding: 0px;">&quot;text/javascript&quot;</span><span style="margin: 0px; padding: 0px;">&gt;&nbsp;&nbsp;</span></span></li>
+		<li style="font-size: 1em; margin: 0px; padding: 0px 3px 0px 10px !important; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; color: rgb(119, 119, 119); background-color: rgb(249, 249, 249);">
+			<span style="color: black; margin: 0px; padding: 0px;"><span class="keyword" style="color: green; font-weight: bold; margin: 0px; padding: 0px;">function</span><span style="margin: 0px; padding: 0px;">&nbsp;ssoLogout(){&nbsp;&nbsp;</span></span></li>
+		<li class="alt" style="font-size: 1em; margin: 0px; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; padding: 0px 3px 0px 10px !important;">
+			<span style="color: black; margin: 0px; padding: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: green; font-weight: bold; margin: 0px; padding: 0px;">if</span><span style="margin: 0px; padding: 0px;">(confirm(</span><span class="string" style="color: rgb(255, 153, 0); margin: 0px; padding: 0px;">&#39;确定要退出系统吗?&#39;</span><span style="margin: 0px; padding: 0px;">)){&nbsp;&nbsp;</span></span></li>
+		<li style="font-size: 1em; margin: 0px; padding: 0px 3px 0px 10px !important; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; color: rgb(119, 119, 119); background-color: rgb(249, 249, 249);">
+			<span style="color: black; margin: 0px; padding: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top.location.href&nbsp;=<span class="string" style="color: rgb(255, 153, 0); margin: 0px; padding: 0px;">&#39;https://sso.demo.com/cas/logout?service=&#39;</span><span style="margin: 0px; padding: 0px;">+location.protocol+</span><span class="string" style="color: rgb(255, 153, 0); margin: 0px; padding: 0px;">&#39;//&#39;</span><span style="margin: 0px; padding: 0px;">+location.host+location.pathname;&nbsp;&nbsp;</span></span></li>
+		<li class="alt" style="font-size: 1em; margin: 0px; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; padding: 0px 3px 0px 10px !important;">
+			<span style="color: black; margin: 0px; padding: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px; padding: 0px 3px 0px 10px !important; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; color: rgb(119, 119, 119); background-color: rgb(249, 249, 249);">
+			<span style="color: black; margin: 0px; padding: 0px;">}&nbsp;&nbsp;</span></li>
+		<li class="alt" style="font-size: 1em; margin: 0px; border-left-width: 3px; border-style: none none none solid; border-left-color: rgb(153, 153, 153); line-height: 18px; padding: 0px 3px 0px 10px !important;">
+			<span style="color: black; margin: 0px; padding: 0px;">&lt;/script&gt;&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>七、&nbsp;&nbsp;&nbsp;&nbsp; 补充说明</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	上面讲的是CAS单独部署的情况，也就是与其它应用分开部署。但有些情况是CAS与其它应用部署到同一台机器同一个Tomcat（关键问题是使用同一个JDK），这种情况下，服务端Tomcat配置中的&lt;Connector truststoreFile属性就要指定为jdk下的cacerts文件路径或者直接注释掉（默认会找$JAVAHOME\jre\lib\security\下的cacerts文件）。这样服务端和客户端是同一个，也就不必再根据服务端证书生成客户端密钥库文件了。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<strong>八、&nbsp;&nbsp;&nbsp;&nbsp; 常见配置错误</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	1、&nbsp; CAS服务端Tomcat启动后报错：Error initializing endpoint java.io.IOException: Cannot recover key</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	是由于生成服务端密钥文件时所指定的keypass与提示输入的&ldquo;keystore密码&rdquo;不一致。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	2、&nbsp; javax.servlet.ServletException: org.jasig.cas.client.validation.TicketValidationException:绁ㄦ牴&#39;ST-2-hozuLnLtIVGeaD5yju0Y-cas&#39;涓嶇鍚堢洰鏍囨湇鍔?</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	一般是由于客户端应用web.xml中配置的serverName属性值为localhost或CAS服务端cas-servlet.xml配置文件中的&lt;bean logoutController/&gt;没加p:followServiceRedirects=&quot;true&quot;退出后重定向属性。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	3、&nbsp; SSLHandshakeException: java.security.cert.CertificateException: Nosubject alternative names present</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	是由于客户端应用web.xml配置中的casServerLoginUrl和casServerUrlPrefix两个URL属性的域名与证书中定义的不一致。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="color: rgb(255, 0, 0);">注意：</span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="color: rgb(255, 0, 0);">1、keytool 生成安全证书不能使用IP地址 一律使用域名</span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="color: rgb(255, 0, 0);">2、务必确认客户端程序使用JDK 路径正确 分清楚JDK、JRE</span></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2016/0105/1424.html'>CAS单点登录学习笔记三之配置Tomcat启用Https 协议</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2016/0105/1426.html'>CAS单点登录学习笔记五之CAS服务器数据源</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1425&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

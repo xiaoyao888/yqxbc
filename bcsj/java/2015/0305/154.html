@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>提高JSP执行效率的七种方法_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="提高,JSP,执行,效率,的,七种,方法,你时,常被," />
+  <meta name="description" content="你时常被客户抱怨JSP页面响应速度很慢吗？你想过当客户访问次数剧增时，你的WEB应用能承受日益增加的访问量吗？本文讲述了调整JSP和servlet的一些非常实用的方法，它可使你的servl" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>提高JSP执行效率的七种方法</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-05 15:42 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="154" class="art_content"><p>
+	你时常被客户抱怨JSP页面响应速度很慢吗？你想过当客户访问次数剧增时，你的WEB应用能承受日益增加的访问量吗？本文讲述了调整JSP和servlet的一些非常实用的方法，它可使你的servlet和JSP页面响应更快，扩展性更强。而且在用户数增加的情况下，系统负载会呈现出平滑上长的趋势。在本文中，我将通过一些实际例子和配置方法使得你的应用程序的性能有出人意料的提升。&nbsp;<br />
+	　　其中，某些调优技术是在你的编程工作中实现的。而另一些技术是与应用服务器的配置相关的。在本文中，我们将详细地描述怎样通过调整servlet和JSP页面，来提高你的应用程序的总体性能。在阅读本文之前，假设你有基本的servlet和JSP的知识。&nbsp;<br />
+	<br />
+	　　方法一：在servlet的init()方法中缓存数据&nbsp;<br />
+	<br />
+	　　当应用服务器初始化servlet实例之后，为客户端请求提供服务之前，它会调用这个servlet的init()方法。在一个servlet的生命周期中，init()方法只会被调用一次。通过在init()方法中缓存一些静态的数据或完成一些只需要执行一次的、耗时的操作，就可大大地提高系统性能。&nbsp;<br />
+	<br />
+	　　例如，通过在init()方法中建立一个JDBC连接池是一个最佳例子，假设我们是用jdbc2.0的DataSource接口来取得数据库连接，在通常的情况下，我们需要通过JNDI来取得具体的数据源。我们可以想象在一个具体的应用中，如果每次SQL请求都要执行一次JNDI查询的话，那系统性能将会急剧下降。解决方法是如下代码，它通过缓存DataSource，使得下一次SQL调用时仍然可以继续利用它：&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				public&nbsp;class&nbsp;ControllerServlet&nbsp;extends&nbsp;HttpServlet&nbsp;<br />
+				{&nbsp;<br />
+				　private&nbsp;javax.sql.DataSource&nbsp;testDS&nbsp;=&nbsp;null;&nbsp;<br />
+				　public&nbsp;void&nbsp;init(ServletConfig&nbsp;config)&nbsp;throws&nbsp;ServletException&nbsp;<br />
+				　{&nbsp;<br />
+				　　super.init(config);&nbsp;<br />
+				　　Context&nbsp;ctx&nbsp;=&nbsp;null;&nbsp;<br />
+				　　try&nbsp;<br />
+				　　{&nbsp;<br />
+				　　　ctx&nbsp;=&nbsp;new&nbsp;InitialContext();&nbsp;<br />
+				　　　testDS&nbsp;=&nbsp;(javax.sql.DataSource)ctx.lookup(&quot;jdbc/testDS&quot;);&nbsp;<br />
+				　　}&nbsp;<br />
+				　　catch(NamingException&nbsp;ne)&nbsp;<br />
+				　　{&nbsp;<br />
+				　　　ne.printStackTrace();&nbsp;<br />
+				　　}&nbsp;<br />
+				　　catch(Exception&nbsp;e)&nbsp;<br />
+				　　{&nbsp;<br />
+				　　　e.printStackTrace();&nbsp;<br />
+				　　}&nbsp;<br />
+				　}&nbsp;<br />
+				<br />
+				　public&nbsp;javax.sql.DataSource&nbsp;getTestDS()&nbsp;<br />
+				　{&nbsp;<br />
+				　　return&nbsp;testDS;&nbsp;<br />
+				　}&nbsp;<br />
+				　...&nbsp;<br />
+				　...&nbsp;<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	　　方法&nbsp;2:禁止servlet和JSP&nbsp;自动重载(auto-reloading)&nbsp;<br />
+	<br />
+	　　Servlet/JSP提供了一个实用的技术，即自动重载技术，它为开发人员提供了一个好的开发环境，当你改变servlet和JSP页面后而不必重启应用服务器。然而，这种技术在产品运行阶段对系统的资源是一个极大的损耗，因为它会给JSP引擎的类装载器(classloader)带来极大的负担。因此关闭自动重载功能对系统性能的提升是一个极大的帮助。&nbsp;<br />
+	<br />
+	　　方法&nbsp;3:&nbsp;不要滥用HttpSession&nbsp;<br />
+	<br />
+	　　在很多应用中，我们的程序需要保持客户端的状态，以便页面之间可以相互联系。但不幸的是由于HTTP具有天生无状态性，从而无法保存客户端的状态。因此一般的应用服务器都提供了session来保存客户的状态。在JSP应用服务器中，是通过HttpSession对像来实现session的功能的，但在方便的同时，它也给系统带来了不小的负担。因为每当你获得或更新session时，系统者要对它进行费时的序列化操作。你可以通过对HttpSession的以下几种处理方式来提升系统的性能。&nbsp;<br />
+	<br />
+	　　如果没有必要，就应该关闭JSP页面中对HttpSession的缺省设置。&nbsp;如果你没有明确指定的话，每个JSP页面都会缺省地创建一个HttpSession。如果你的JSP中不需要使用session的话，那可以通过如下的JSP页面指示符来禁止它：&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				＜%@&nbsp;page&nbsp;session=&quot;false&quot;%＞</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	<br />
+	　　不要在HttpSession中存放大的数据对像：如果你在HttpSession中存放大的数据对像的话，每当对它进行读写时，应用服务器都将对其进行序列化，从而增加了系统的额外负担。你在HttpSession中存放的数据对像越大，那系统的性能就下降得越快。&nbsp;<br />
+	<br />
+	　　当你不需要HttpSession时，尽快地释放它：当你不再需要session时，你可以通过调用HttpSession.invalidate()方法来释放它。尽量将session的超时时间设得短一点：在JSP应用服务器中，有一个缺省的session的超时时间。当客户在这个时间之后没有进行任何操作的话，系统会将相关的session自动从内存中释放。超时时间设得越大，系统的性能就会越低，因此最好的方法就是尽量使得它的值保持在一个较低的水平。&nbsp;<br />
+	<br />
+	　　方法&nbsp;4:&nbsp;将页面输出进行压缩&nbsp;<br />
+	<br />
+	　　压缩是解决数据冗余的一个好的方法，特别是在网络带宽不够发达的今天。有的浏览器支持gzip(GNU&nbsp;zip)进行来对HTML文件进行压缩，这种方法可以戏剧性地减少HTML文件的下载时间。因此，如果你将servlet或JSP页面生成的HTML页面进行压缩的话，那用户就会觉得页面浏览速度会非常快。但不幸的是，不是所有的浏览器都支持gzip压缩，但你可以通过在你的程序中检查客户的浏览器是否支持它。下面就是关于这种方法实现的一个代码片段：&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				public&nbsp;void&nbsp;doGet(HttpServletRequest&nbsp;request,&nbsp;<br />
+				HttpServletResponse&nbsp;response)&nbsp;<br />
+				throws&nbsp;IOException,&nbsp;ServletException&nbsp;<br />
+				{&nbsp;<br />
+				　OutputStream&nbsp;out&nbsp;=&nbsp;null&nbsp;<br />
+				　String&nbsp;encoding&nbsp;=&nbsp;request.getHeader(&quot;Accept-Encoding&quot;);&nbsp;<br />
+				　if&nbsp;(encoding&nbsp;!=&nbsp;null&nbsp;&amp;&amp;&nbsp;encoding.indexOf(&quot;gzip&quot;)&nbsp;!=&nbsp;-1)&nbsp;<br />
+				　{&nbsp;<br />
+				　　request.setHeader(&quot;Content-Encoding&quot;&nbsp;,&nbsp;&quot;gzip&quot;);&nbsp;<br />
+				　　out&nbsp;=&nbsp;new&nbsp;GZIPOutputStream(request.getOutputStream());&nbsp;<br />
+				　}&nbsp;<br />
+				　else&nbsp;if&nbsp;(encoding&nbsp;!=&nbsp;null&nbsp;&amp;&amp;&nbsp;encoding.indexOf(&quot;compress&quot;)&nbsp;!=&nbsp;-1)&nbsp;<br />
+				　{&nbsp;<br />
+				　　request.setHeader(&quot;Content-Encoding&quot;&nbsp;,&nbsp;&quot;compress&quot;);&nbsp;<br />
+				　　out&nbsp;=&nbsp;new&nbsp;ZIPOutputStream(request.getOutputStream());&nbsp;<br />
+				　}&nbsp;<br />
+				　else&nbsp;<br />
+				　{&nbsp;<br />
+				　　out&nbsp;=&nbsp;request.getOutputStream();&nbsp;<br />
+				　}&nbsp;<br />
+				　...&nbsp;<br />
+				　...&nbsp;<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	　　方法&nbsp;5:&nbsp;使用线程池&nbsp;<br />
+	<br />
+	　　应用服务器缺省地为每个不同的客户端请求创建一个线程进行处理，并为它们分派service()方法，当service()方法调用完成后，与之相应的线程也随之撤消。由于创建和撤消线程会耗费一定的系统资源，这种缺省模式降低了系统的性能。但所幸的是我们可以通过创建一个线程池来改变这种状况。&nbsp;<br />
+	<br />
+	　　另外，我们还要为这个线程池设置一个最小线程数和一个最大线程数。在应用服务器启动时，它会创建数量等于最小线程数的一个线程池，当客户有请求时，相应地从池从取出一个线程来进行处理，当处理完成后，再将线程重新放入到池中。如果池中的线程不够地话，系统会自动地增加池中线程的数量，但总量不能超过最大线程数。通过使用线程池，当客户端请求急剧增加时，系统的负载就会呈现的平滑的上升曲线，从而提高的系统的可伸缩性。<br />
+	<br />
+	　　方法&nbsp;6:&nbsp;选择正确的页面包含机制&nbsp;<br />
+	<br />
+	　　在JSP中有两种方法可以用来包含另一个页面：&nbsp;<br />
+	<br />
+	1、使用include指示符&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				＜%@&nbsp;includee&nbsp;file=&rdquo;test.jsp&rdquo;&nbsp;%＞</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	<br />
+	2、使用jsp指示符&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				＜jsp:includee&nbsp;page=&rdquo;test.jsp&rdquo;&nbsp;flush=&rdquo;true&rdquo;/＞</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	<br />
+	　　在实际中发现，如果使用第一种方法的话，可以使得系统性能更高。&nbsp;<br />
+	<br />
+	　　方法&nbsp;7:正确地确定javabean的生命周期&nbsp;<br />
+	<br />
+	　　JSP的一个强大的地方就是对javabean的支持。通过在JSP页面中使用＜jsp:useBean＞标签，可以将javabean直接插入到一个JSP页面中。它的使用方法如下：&nbsp;<br />
+	&nbsp;</p>
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				＜jsp:useBean&nbsp;id=&quot;name&quot;&nbsp;scope=&quot;page|request|session|application&quot;&nbsp;class=&nbsp;<br />
+				&quot;package.className&quot;&nbsp;type=&quot;typeName&quot;＞&nbsp;<br />
+				＜/jsp:useBean＞</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+	　　其中scope属性指出了这个bean的生命周期。缺省的生命周期为page。如果你没有正确地选择bean的生命周期的话，它将影响系统的性能。&nbsp;<br />
+	<br />
+	　　举例来说，如果你只想在一次请求中使用某个bean，但你却将这个bean的生命周期设置成了session，那当这次请求结束后，这个bean将仍然保留在内存中，除非session超时或用户关闭浏览器。这样会耗费一定的内存，并无谓的增加了JVM垃圾收集器的工作量。因此为bean设置正确的生命周期，并在bean的使命结束后尽快地清理它们，会使用系统性能有一个提高。&nbsp;<br />
+	<br />
+	　　其它一些有用的方法&nbsp;<br />
+	<br />
+	　　1、在字符串连接操作中尽量不使用&ldquo;＋&rdquo;操作符：在java编程中，我们常常使用&ldquo;＋&rdquo;操作符来将几个字符串连接起来，但你或许从来没有想到过它居然会对系统性能造成影响吧？由于字符串是常量，因此JVM会产生一些临时的对像。你使用的&ldquo;＋&rdquo;越多，生成的临时对像就越多，这样也会给系统性能带来一些影响。解决的方法是用StringBuffer对像来代替&ldquo;＋&rdquo;操作符。&nbsp;<br />
+	<br />
+	　　2、避免使用System.out.println()方法：由于System.out.println()是一种同步调用，即在调用它时，磁盘I/O操作必须等待它的完成，因此我们要尽量避免对它的调用。但我们在调试程序时它又是一个必不可少的方便工具，为了解决这个矛盾，我建议你最好使用Log4j工具(http://Jakarta.apache.org&nbsp;)，它既可以方便调试，而不会产生System.out.println()这样的方法。&nbsp;<br />
+	<br />
+	　　3、ServletOutputStream&nbsp;与&nbsp;PrintWriter的权衡：使用PrintWriter可能会带来一些小的开销，因为它将所有的原始输出都转换为字符流来输出，因此如果使用它来作为页面输出的话，系统要负担一个转换过程。而使用ServletOutputStream作为页面输出的话就不存在一个问题，但它是以二进制进行输出的。因此在实际应用中要权衡两者的利弊。&nbsp;<br />
+	<br />
+	　　总结&nbsp;<br />
+	<br />
+	　　本文的目的是通过对servlet和JSP的一些调优技术来极大地提高你的应用程序的性能，并因此提升整个J2EE应用的性能。通过这些调优技术，你可以发现其实并不是某种技术平台（比如J2EE和.NET之争）决定了你的应用程序的性能，重要是你要对这种平台有一个较为深入的了解，这样你才能从根本上对自己的应用程序做一个优化。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0305/153.html'>jsp内置对象有哪些？jsp九大隐含内置对象详解</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0305/155.html'>JSP程序员必备的技巧</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=154&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

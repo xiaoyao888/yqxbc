@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CentOS6.5下安装Memcached完整示例_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Centos6.5,Memcached" />
+  <meta name="description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/memcache/'>Memcache</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CentOS6.5下安装Memcached完整示例</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-07-07 18:05 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1514" class="art_content"><span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。&nbsp;<br />
+Memcache是一个高性能的分布式的内存对象缓存系统,通过在内存里维护一个统一的巨大的hash表,它能够用来存储各种格式的数据.简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。&nbsp;<br />
+工作原理:&nbsp;<br />
+①客户端第一次访问应用程序时，会到数据库（RDBMS）中取出数据，返回给客户端；同时也将取出的数据保存到memcached中。&nbsp;<br />
+② 第二次访问时，因为数据已经缓存，不不用去数据库查询了，直接从memcached取。&nbsp;<br />
+那么memcached的快速和高效率是如何体现出来的呢？我们都清楚，RDBMS是文件型的数据库，最终还是以文件的形式保存在磁盘上。而memcached则不一样，它是key:value关系型的数据库，是保存在内存中的。那么就不用我再做说明了，内存的读写速度要比磁盘的读写速度快得多，前者是后者的10的6次方倍。http://blog.rekfan.com/?p=172&nbsp;<br />
+Memcached支持Linux系统，也支持Windows系统，分别需要不同的安装包，鉴于在Windows使用比较少，所以散仙今天就总结一下，在Centos下安装Memcached的整个流程，一方面是为了记录一下，防止日后生疏，另一方面也为刚刚使用Memcached的朋友们，提供一份入门的教程。&nbsp;<br />
+下面进入正题：&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">首先，memcached是基于libevent的，所以确保你的系统已经装了libevent，libevent是个程序库，它将Linux的epoll、BSD类操作系统的kqueue等事件处理功能封装成统一的接口。即使对服务器的连接数增加，也能发挥O(1)的性能。 memcached使用这个libevent库，因此能在Linux、BSD、Solaris等操作系统上发挥其高性能。&nbsp;<br />
+由于memcached和libevent是由C编写的，所以首先确保你的系统安装了gcc，如果&nbsp;<br />
+没有安装，使用yum安装即可&nbsp;<br />
+命令：&nbsp;&nbsp;<br />
+yum -y install gcc&nbsp;<br />
+yum -y install gcc-c++&nbsp;<br />
+然后下载&nbsp;<a href="http://libevent.org/" rel="nofollow,noindex" style="color: rgb(148, 148, 148); text-decoration: none; transition: 0.25s; outline: none 0px; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(148, 148, 148); font-style: italic; font-weight: bold;" target="_blank">libevent</a>&nbsp;<br />
+然后上传centos，进行给予权限，然后解压&nbsp;<br />
+# tar xzvf libevent-2.0.21-stable.tar.gz ##解压&nbsp;<br />
+# cd libevent-2.0.21-stable&nbsp;<br />
+# ./configure --prefix=/usr&nbsp;<br />
+# make&nbsp;<br />
+# make install&nbsp;<br />
+安装完后可以查看下/usr/lib是否有libevent等文件(ls -al /usr/lib | grep libevent)&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">然后下载&nbsp;<a href="http://memcached.org/" rel="nofollow,noindex" style="color: rgb(148, 148, 148); text-decoration: none; transition: 0.25s; outline: none 0px; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(148, 148, 148); font-style: italic; font-weight: bold;" target="_blank">memcached</a>&nbsp;<br />
+# tar xzvf memcached-1.4.15.tar.gz&nbsp;<br />
+# cd memcached-1.4.15&nbsp;<br />
+# ./configure --with-libevent=/usr&nbsp;<br />
+# make&nbsp;<br />
+# make install&nbsp;<br />
+安装结果(ls -al /usr/local/bin/memcached)如图:&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<img src="/uploads/allimg/160706/110R35H6-0.jpg" style="max-width: 96%; vertical-align: middle; border: 0px none; margin: 0px auto; text-align: center; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; display: block; background-color: rgb(254, 254, 254);" /><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">关于memcache启动的一些参数说明：&nbsp;<br />
+memcached命令参数解释:&nbsp;<br />
+-p &lt;num&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 监听的端口&nbsp;<br />
+-l &lt;ip_addr&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 连接的IP地址, 默认是本机&nbsp;<br />
+-d start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 启动memcached 服务&nbsp;<br />
+-d restart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 重起memcached 服务&nbsp;<br />
+-d stop|shutdown&nbsp; 关闭正在运行的memcached 服务&nbsp;<br />
+-d install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 安装memcached 服务&nbsp;<br />
+-d uninstall&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 卸载memcached 服务&nbsp;<br />
+-u &lt;username&gt;&nbsp;&nbsp;&nbsp;&nbsp; 以&lt;username&gt;的身份运行 (仅在以root运行的时候有效)&nbsp;<br />
+-m &lt;num&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最大内存使用，单位MB。默认64MB&nbsp;<br />
+-M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 内存耗尽时返回错误，而不是删除项&nbsp;<br />
+-c &lt;num&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最大同时连接数，默认是1024&nbsp;<br />
+-f &lt;factor&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 块大小增长因子，默认是1.25&nbsp;<br />
+-n &lt;bytes&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最小分配空间，key+value+flags默认是48&nbsp;<br />
+-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 显示帮助&nbsp;<br />
+然后执行命令启动memcached&nbsp;<br />
+#/usr/local/bin/memcached -d -m 1024 -u root -p 11211 -P /tmp/memcached.pid&nbsp;<br />
+然后就可以使用telnet，来测试memcache的连接状态，&nbsp;<br />
+如果没有安装telnet服务，可以执行&nbsp;<br />
+yum install telnet-server&nbsp;<br />
+安装服务&nbsp;<br />
+yum install telnet&nbsp;<br />
+安装命令&nbsp;<br />
+然后编辑vi /etc/xinetd.d/telnet 文件，激活telnet，默认是禁用的，截图如下：&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<img src="/uploads/allimg/160706/110R34F0-1.jpg" style="max-width: 96%; vertical-align: middle; border: 0px none; margin: 0px auto; text-align: center; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; display: block; background-color: rgb(254, 254, 254);" /><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">然后重启服务，执行命令 service xinetd restart&nbsp;<br />
+然后就可以测试memcached的连接，执行命令&nbsp;<br />
+telnet 127.0.0.1 11211&nbsp;<br />
+输入stats，会输出memcache的一些连接信息，包括PID&nbsp;<br />
+如果需要退出，则执行quit命令即可，截图如下：&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<img src="/uploads/allimg/160706/110R31549-2.jpg" style="max-width: 96%; vertical-align: middle; border: 0px none; margin: 0px auto; text-align: center; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; display: block; background-color: rgb(254, 254, 254);" /><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">退出telnet，执行quit命令即可，上图所示的memcached进程ID，很重要，如果我们需要关闭memcached服务时，就可以执行命令，kill -9 进程号 即可。&nbsp;</span><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">最后，我们在来看下如何使用JAVA API，简单的来测试下memcached，注意如果memcached的端口号，需要对外开放，否则，将会出现连接不上的异常，测试环境我们可以把防火墙关闭测试：&nbsp;<br />
+用到的jar包，如下所示：&nbsp;</span><br />
+<br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<img src="/uploads/allimg/160706/110R33O6-3.jpg" style="max-width: 96%; vertical-align: middle; border: 0px none; margin: 0px auto; text-align: center; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; display: block; background-color: rgb(254, 254, 254);" /><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">测试，程序核心代码和运行结果如下：</span><span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">&nbsp;</span><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<pre class="prettyprint java" style="padding: 0.3em; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; color: rgb(51, 51, 51); border-radius: 4px; margin-top: 0px; margin-bottom: 1.5em; line-height: 1.5em; word-break: break-all; word-wrap: break-word; white-space: pre-wrap; border: 1px solid rgba(0, 0, 0, 0.14902); overflow-y: auto; background-color: rgb(246, 246, 246);">
+<span class="keyword" style="font-weight: bold;">package</span> com.test.client;
+
+<span class="keyword" style="font-weight: bold;">import</span> java.net.InetSocketAddress;
+
+<span class="keyword" style="font-weight: bold;">import</span> net.spy.memcached.MemcachedClient;
+<span class="javadoc" style="color: rgb(153, 153, 136); font-style: italic;">/**
+ * 测试memcached客户端连接
+ * 
+ * **/</span>
+<span class="keyword" style="font-weight: bold;">public</span> <span class="class" style="color: rgb(68, 85, 136); font-weight: bold;"><span class="keyword" style="color: rgb(51, 51, 51);">class</span> <span class="title">TestClient</span> {</span>
+<span class="indent">  </span>
+<span class="indent">  </span>
+<span class="indent">  </span>
+<span class="indent">  </span><span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">static</span> <span class="keyword" style="font-weight: bold;">void</span> main(String[] args) <span class="keyword" style="font-weight: bold;">throws</span> Exception{
+<span class="indent">  </span><span class="indent">  </span>
+<span class="indent">  </span><span class="indent">  </span>MemcachedClient client=<span class="keyword" style="font-weight: bold;">new</span> MemcachedClient(<span class="keyword" style="font-weight: bold;">new</span> InetSocketAddress(<span class="string" style="color: rgb(221, 17, 68);">&quot;192.168.75.130&quot;</span>, <span class="number" style="color: rgb(0, 153, 153);">11211</span>));
+<span class="indent">  </span><span class="indent">  </span>  <span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//60是超时数，默认以秒为单位</span>
+<span class="indent">  </span><span class="indent">  </span>  client.set(<span class="string" style="color: rgb(221, 17, 68);">&quot;test&quot;</span>, <span class="number" style="color: rgb(0, 153, 153);">60</span>, <span class="string" style="color: rgb(221, 17, 68);">&quot;1111测试memcache成功了吧&quot;</span>);
+<span class="indent">  </span> 
+<span class="indent">  </span><span class="indent">  </span>
+<span class="indent">  </span><span class="indent">  </span> System.out.println(client.get(<span class="string" style="color: rgb(221, 17, 68);">&quot;test&quot;</span>));
+<span class="indent">  </span><span class="indent">  </span>  client.shutdown();<span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//关闭连接</span>
+<span class="indent">  </span><span class="indent">  </span>
+<span class="indent">  </span><span class="indent">  </span>
+<span class="indent">  </span>}
+
+}</pre>
+<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">控制台打印内容如下所示：</span><span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">&nbsp;</span><br style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);" />
+<pre class="prettyprint java" style="padding: 0.3em; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; color: rgb(51, 51, 51); border-radius: 4px; margin-top: 0px; margin-bottom: 1.5em; line-height: 1.5em; word-break: break-all; word-wrap: break-word; white-space: pre-wrap; border: 1px solid rgba(0, 0, 0, 0.14902); overflow-y: auto; background-color: rgb(246, 246, 246);">
+<span class="number" style="color: rgb(0, 153, 153);">2014</span>-<span class="number" style="color: rgb(0, 153, 153);">03</span>-<span class="number" style="color: rgb(0, 153, 153);">18</span> <span class="number" style="color: rgb(0, 153, 153);">18</span>:<span class="number" style="color: rgb(0, 153, 153);">13</span>:<span class="number" style="color: rgb(0, 153, 153);">30.008</span> INFO net.spy.memcached.MemcachedConnection:  Added {QA sa=/<span class="number" style="color: rgb(0, 153, 153);">192.168</span><span class="number" style="color: rgb(0, 153, 153);">.75</span><span class="number" style="color: rgb(0, 153, 153);">.130</span>:<span class="number" style="color: rgb(0, 153, 153);">11211</span>, #Rops=<span class="number" style="color: rgb(0, 153, 153);">0</span>, #Wops=<span class="number" style="color: rgb(0, 153, 153);">0</span>, #iq=<span class="number" style="color: rgb(0, 153, 153);">0</span>, topRop=<span class="keyword" style="font-weight: bold;">null</span>, topWop=<span class="keyword" style="font-weight: bold;">null</span>, toWrite=<span class="number" style="color: rgb(0, 153, 153);">0</span>, interested=<span class="number" style="color: rgb(0, 153, 153);">0</span>} to connect queue
+<span class="number" style="color: rgb(0, 153, 153);">2014</span>-<span class="number" style="color: rgb(0, 153, 153);">03</span>-<span class="number" style="color: rgb(0, 153, 153);">18</span> <span class="number" style="color: rgb(0, 153, 153);">18</span>:<span class="number" style="color: rgb(0, 153, 153);">13</span>:<span class="number" style="color: rgb(0, 153, 153);">30.011</span> INFO net.spy.memcached.MemcachedConnection:  Connection state changed <span class="keyword" style="font-weight: bold;">for</span> sun.nio.ch.SelectionKeyImpl@<span class="number" style="color: rgb(0, 153, 153);">33</span>c3e6
+<span class="number" style="color: rgb(0, 153, 153);">1111</span>测试memcache成功了吧
+<span class="number" style="color: rgb(0, 153, 153);">2014</span>-<span class="number" style="color: rgb(0, 153, 153);">03</span>-<span class="number" style="color: rgb(0, 153, 153);">18</span> <span class="number" style="color: rgb(0, 153, 153);">18</span>:<span class="number" style="color: rgb(0, 153, 153);">13</span>:<span class="number" style="color: rgb(0, 153, 153);">30.020</span> INFO net.spy.memcached.MemcachedClient:  Shut down memcached client</pre>
+<p>
+	<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">至此，我们已经安装测试成功了，最后把memcached的JAVA API所用到的jar上传上来，方便大家测试。&nbsp;</span></p>
+<p>
+	<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, STXihei, &quot;Microsoft YaHei&quot;, 微软雅黑, sans-serif; font-size: 16px; line-height: 27.2px; background-color: rgb(254, 254, 254);">Memcache jar包下载地址:&nbsp;</span><a href="http://www.java2s.com/Code/Jar/m/Downloadmemcached25jar.htm">http://www.java2s.com/Code/Jar/m/Downloadmemcached25jar.htm</a></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：没有了 </li>
+            <li class="next">下一篇：<a href='/shujuku/memcache/2016/0708/1517.html'>MemCache是什么</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/memcache/2017/0111/1584.html" >Spring整合Memcached完整示例,经测无</a><span>01.11</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1520.html" >Memcache使用场景，应用场景</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1519.html" >Memcache接口介绍以及协议分析</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1518.html" >MemCache的特性和限制</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1517.html" >MemCache是什么</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0706/1514.html" >CentOS6.5下安装Memcached完整示例</a><span>07.07</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/memcache/2017/0111/1584.html" >Spring整合Memcached完整示例,经测无误。</a><span>01.11</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1520.html" >Memcache使用场景，应用场景</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1519.html" >Memcache接口介绍以及协议分析</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1518.html" >MemCache的特性和限制</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1517.html" >MemCache是什么</a><span>07.08</span></li>
+<li><a href="/shujuku/memcache/2016/0706/1514.html" >CentOS6.5下安装Memcached完整示例</a><span>07.07</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/memcache/2017/0111/1584.html" >Spring整合Memcached完整示例,经测无</a><span>63</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1517.html" >MemCache是什么</a><span>36</span></li>
+<li><a href="/shujuku/memcache/2016/0706/1514.html" >CentOS6.5下安装Memcached完整示例</a><span>31</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1518.html" >MemCache的特性和限制</a><span>21</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1520.html" >Memcache使用场景，应用场景</a><span>19</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1519.html" >Memcache接口介绍以及协议分析</a><span>18</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1514&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

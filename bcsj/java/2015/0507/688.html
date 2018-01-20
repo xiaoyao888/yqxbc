@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>什么是REST？以及RESTful的实现_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="REST" />
+  <meta name="description" content=" 什么是REST？ REST (REpresentation State Transfer) 描述了一个架构样式的网络系统，比如 web 应用程序。它首次出现在 2000 年 Roy Fielding 的博士论文中，他是 HTTP 规范的主要编写者之一。 REST 指的" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>什么是REST？以及RESTful的实现</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-07 09:33 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="688" class="art_content"><p>
+	<strong>什么是REST？</strong></p>
+<p>
+	REST (REpresentation State Transfer) 描述了一个架构样式的网络系统，比如 web 应用程序。它首次出现在 2000 年 Roy Fielding 的博士论文中，他是 HTTP 规范的主要编写者之一。<strong>REST 指的是一组架构约束条件和原则。</strong>满足这些约束条件和原则的应用程序或设计就是 RESTful。</p>
+<p>
+	Web 应用程序最重要的 REST 原则是，客户端和服务器之间的交互在请求之间是无状态的。从客户端到服务器的每个请求都必须包含理解请求所必需的信息。如果服务器在请求之间的任何时间点重启，客户端不会得到通知。此外，无状态请求可以由任何可用服务器回答，这十分适合云计算之类的环境。客户端可以缓存数据以改进性能。</p>
+<p>
+	在服务器端，应用程序状态和功能可以分为各种资源。资源是一个有趣的概念实体，它向客户端公开。资源的例子有：应用程序对象、数据库记录、算法等等。每个资源都使用 URI (Universal Resource Identifier) 得到一个惟一的地址。所有资源都共享统一的界面，以便在客户端和服务器之间传输状态。使用的是标准的 HTTP 方法，比如 GET、PUT、POST 和 DELETE。Hypermedia 是应用程序状态的引擎，资源表示通过超链接互联。</p>
+<p>
+	<strong>另一个重要的 REST 原则是分层系统</strong>，这表示组件无法了解它与之交互的中间层以外的组件。通过将系统知识限制在单个层，可以限制整个系统的复杂性，促进了底层的独立性。</p>
+<p>
+	当 REST 架构的约束条件作为一个整体应用时，将生成一个可以扩展到大量客户端的应用程序。它还降低了客户端和服务器之间的交互延迟。统一界面简化了整个系统架构，改进了子系统之间交互的可见性。<strong>REST 简化了客户端和服务器的实现。</strong></p>
+<p>
+	<strong>RESTful的实现：RESTful Web 服务与 RPC 样式的 Web 服务</strong></p>
+<p>
+	了解了什么是什么是REST，我们再看看RESTful的实现。最近，使用 RPC 样式架构构建的基于 SOAP 的 Web 服务成为实现 SOA 最常用的方法。RPC 样式的 Web 服务客户端将一个装满数据的信封（包括方法和参数信息）通过 HTTP 发送到服务器。服务器打开信封并使用传入参数执行指定的方法。方法的结果打包到一个信封并作为响应发回客户端。客户端收到响应并打开信封。每个对象都有自己独特的方法以及仅公开一个 URI 的 RPC 样式 Web 服务，URI 表示单个端点。它忽略 HTTP 的大部分特性且仅支持 POST 方法。</p>
+<p>
+	由于轻量级以及通过 HTTP 直接传输数据的特性，Web 服务的 RESTful 方法已经成为最常见的替代方法。可以使用各种语言（比如 Java 程序、Perl、Ruby、Python、PHP 和 Javascript[包括 Ajax]）实现客户端。RESTful Web 服务通常可以通过自动客户端或代表用户的应用程序访问。但是，这种服务的简便性让用户能够与之直接交互，使用它们的 Web 浏览器构建一个 GET URL 并读取返回的内容。</p>
+<p>
+	在 REST 样式的 Web 服务中，每个资源都有一个地址。资源本身都是方法调用的目标，方法列表对所有资源都是一样的。这些方法都是标准方法，包括 HTTP GET、POST、PUT、DELETE，还可能包括 HEADER 和 OPTIONS。</p>
+<p>
+	在 RPC 样式的架构中，关注点在于方法，而在 REST 样式的架构中，关注点在于资源 &mdash;&mdash; 将使用标准方法检索并操作信息片段（使用表示的形式）。资源表示形式在表示形式中使用超链接互联。</p>
+<p>
+	Leonard Richardson 和 Sam Ruby 在他们的著作 RESTful Web Services 中引入了术语 REST-RPC 混合架构。REST-RPC 混合 Web 服务不使用信封包装方法、参数和数据，而是直接通过 HTTP 传输数据，这与 REST 样式的 Web 服务是类似的。但是它不使用标准的 HTTP 方法操作资源。它在 HTTP 请求的 URI 部分存储方法信息。好几个知名的 Web 服务，比如 Yahoo 的 Flickr API 和 del.icio.us API 都使用这种混合架构。</p>
+<p>
+	<strong>RESTful的实现：RESTful Web 服务的 Java 框架</strong></p>
+<p>
+	有两个 Java 框架可以帮助构建 RESTful Web 服务。erome Louvel 和 Dave Pawson 开发的 Restlet（见 参考资料）是轻量级的。它实现针对各种 RESTful 系统的资源、表示、连接器和媒体类型之类的概念，包括 Web 服务。在 Restlet 框架中，客户端和服务器都是组件。组件通过连接器互相通信。该框架最重要的类是抽象类 Uniform 及其具体的子类 Restlet，该类的子类是专用类，比如 Application、Filter、Finder、Router 和 Route。这些子类能够一起处理验证、过滤、安全、数据转换以及将传入请求路由到相应资源等操作。Resource 类生成客户端的表示形式。</p>
+<p>
+	JSR-311是 Sun Microsystems 的规范，可以为开发 RESTful Web 服务定义一组 Java API。Jersey是对 JSR-311 的参考实现。</p>
+<p>
+	JSR-311 提供一组注释，相关类和接口都可以用来将 Java 对象作为 Web 资源展示。该规范假定 HTTP 是底层网络协议。它使用注释提供 URI 和相应资源类之间的清晰映射，以及 HTTP 方法与 Java 对象方法之间的映射。API 支持广泛的 HTTP 实体内容类型，包括 HTML、XML、JSON、GIF、JPG 等。它还将提供所需的插件功能，以允许使用标准方法通过应用程序添加其他类型。</p>
+<p>
+	<strong>RESTful的实现：构建 RESTful Web 服务的多层架构</strong></p>
+<p>
+	RESTful Web 服务和动态 Web 应用程序在许多方面都是类似的。有时它们提供相同或非常类似的数据和函数，尽管客户端的种类不同。例如，在线电子商务分类网站为用户提供一个浏览器界面，用于搜索、查看和订购产品。如果还提供 Web 服务供公司、零售商甚至个人能够自动订购产品，它将非常有用。与大部分动态 Web 应用程序一样，Web 服务可以从多层架构的关注点分离中受益。业务逻辑和数据可以由自动客户端和 GUI 客户端共享。惟一的不同点在于客户端的本质和中间层的表示层。此外，从数据访问中分离业务逻辑可实现数据库独立性，并为各种类型的数据存储提供插件能力。</p>
+<p>
+	图 1 展示了自动化客户端，包括 Java 和各种语言编写的脚本，这些语言包括 Python、Perl、Ruby、PHP 或命令行工具，比如 curl。在浏览器中运行且作为 RESTful Web 服务消费者运行的 Ajax、Flash、JavaFX、GWT、博客和 wiki 都属于此列，因为它们都代表用户以自动化样式运行。自动化 Web 服务客户端在 Web 层向 Resource Request Handler 发送 HTTP 响应。客户端的无状态请求在头部包含方法信息，即 POST、GET、PUT 和 DELETE，这又将映射到 Resource Request Handler 中资源的相应操作。每个请求都包含所有必需的信息，包括 Resource Request Handler 用来处理请求的凭据。</p>
+<p>
+	从 Web 服务客户端收到请求之后，Resource Request Handler 从业务逻辑层请求服务。Resource Request Handler 确定所有概念性的实体，系统将这些实体作为资源公开，并为每个资源分配一个惟一的 URI。但是，概念性的实体在该层是不存在的。它们存在于业务逻辑层。可以使用 Jersey 或其他框架（比如 Restlet）实现 Resource Request Handler，它应该是轻量级的，将大量职责工作委托给业务层。</p>
+<p>
+	Ajax 和 RESTful Web 服务本质上是互为补充的。它们都可以利用大量 Web 技术和标准，比如 HTML、JavaScript、浏览器对象、XML/JSON 和 HTTP。当然也不需要购买、安装或配置任何主要组件来支持 Ajax 前端和 RESTful Web 服务之间的交互。RESTful Web 服务为 Ajax 提供了非常简单的 API 来处理服务器上资源之间的交互。</p>
+<p>
+	图 1 中的 Web 浏览器客户端作为 GUI 的前端，使用表示层中的 Browser Request Handler 生成的 HTML 提供显示功能。Browser Requester Handler 可以使用 MVC 模型（JSF、Struts 或 Spring 都是 Java 的例子）。它从浏览器接受请求，从业务逻辑层请求服务，生成表示并对浏览器做出响应。表示供用户在浏览器中显示使用。表示不仅包含内容，还包含显示的属性，比如 HTML 和 CSS。</p>
+<p>
+	<a href="http://images.51cto.com/files/uploadimg/20090805/1546390.jpg" target="_blank"><img alt="多层 Web 应用程序环境图" border="0" class="fit-image" onload="javascript:if(this.width&gt;498)this.width=498;" onmousewheel="javascript:return big(this)" src="http://images.51cto.com/files/uploadimg/20090805/1546390.jpg" width="498" /></a></p>
+<p>
+	业务规则可以集中到业务逻辑层，该层充当表示层和数据访问层之间的数据交换的中间层。数据以域对象或值对象的形式提供给表示层。从业务逻辑层中解耦 Browser Request Handler 和 Resource Request Handler 有助于促进代码重用，并能实现灵活和可扩展的架构。此外，由于将来可以使用新的 REST 和 MVC 框架，实现它们变得更加容易，无需重写业务逻辑层。</p>
+<p>
+	数据访问层提供与数据存储层的交互，可以使用 DAO 设计模式或者对象-关系映射解决方案（如 Hibernate、OJB 或 iBATIS）实现。作为替代方案，业务层和数据访问层中的组件可以实现为 EJB 组件，并取得 EJB 容器的支持，该容器可以为组件生命周期提供便利，管理持久性、事务和资源配置。但是，这需要一个遵从 Java EE 的应用服务器（比如 JBoss），并且可能无法处理 Tomcat。该层的作用在于针对不同的数据存储技术，从业务逻辑中分离数据访问代码。数据访问层还可以作为连接其他系统的集成点，可以成为其他 Web 服务的客户端。</p>
+<p>
+	数据存储层包括数据库系统、LDAP 服务器、文件系统和企业信息系统（包括遗留系统、事务处理系统和企业资源规划系统）。使用该架构，您可以开始看到 RESTful Web 服务的力量，它可以灵活地成为任何企业数据存储的统一 API，从而向以用户为中心的 Web 应用程序公开垂直数据，并自动化批量报告脚本。</p>
+<p>
+	<strong>什么是REST：结束语</strong></p>
+<p>
+	REST 描述了一个架构样式的互联系统（如 Web 应用程序）。REST 约束条件作为一个整体应用时，将生成一个简单、可扩展、有效、安全、可靠的架构。由于它简便、轻量级以及通过 HTTP 直接传输数据的特性，RESTful Web 服务成为基于 SOAP 服务的一个最有前途的替代方案。用于 web 服务和动态 Web 应用程序的多层架构可以实现可重用性、简单性、可扩展性和组件可响应性的清晰分离。Ajax 和 RESTful Web 服务本质上是互为补充的。开发人员可以轻松使用 Ajax 和 RESTful Web 服务一起创建丰富的界面。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0507/687.html'>如何用Java语言向串口读写数据</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0507/689.html'>在Java 7 里如何对文件进行操作</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=688&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

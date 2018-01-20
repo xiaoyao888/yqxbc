@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SQL注入漏洞全接触－入门篇_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="SQL注入漏洞全接触－入门" />
+  <meta name="description" content="随着B/S模式应用开发的发展，使用这种模式编写应用程序的程序员也越来越多。但是由于这个行业的入门门槛不高，程序员的水平及经验也参差不齐，相当大一部分程序员在编写代码的" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/sqlserver/'>SQL Server</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>SQL注入漏洞全接触－入门篇</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-01 08:49 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="383" class="art_content">　　随着B/S模式应用开发的发展，使用这种模式编写应用程序的程序员也越来越多。但是由于这个行业的入门门槛不高，程序员的水平及经验也参差不齐，相当大一部分程序员在编写代码的时候，没有对用户输入数据的合法性进行判断，使应用程序存在安全隐患。用户可以提交一段数据库查询代码，根据程序返回的结果，获得某些他想得知的数据，这就是所谓的SQL&nbsp;Injection，即SQL注入。<br />
+<br />
+　　SQL注入是从正常的WWW端口访问，而且表面看起来跟一般的Web页面访问没什么区别，所以目前市面的防火墙都不会对SQL注入发出警报，如果管理员没查看IIS日志的习惯，可能被入侵很长时间都不会发觉。　&nbsp;<br />
+<br />
+　　但是，SQL注入的手法相当灵活，在注入的时候会碰到很多意外的情况。能不能根据具体情况进行分析，构造巧妙的SQL语句，从而成功获取想要的数据，是高手与&ldquo;菜鸟&rdquo;的根本区别。　&nbsp;<br />
+<br />
+　　根据国情，国内的网站用ASP+Access或SQLServer的占70%以上，PHP+MySQ占L20%，其他的不足10%。在本文，我们从分入门、进阶至高级讲解一下ASP注入的方法及技巧，PHP注入的文章由NB联盟的另一位朋友zwell撰写，希望对安全工作者和程序员都有用处。了解ASP注入的朋友也请不要跳过入门篇，因为部分人对注入的基本判断方法还存在误区。大家准备好了吗？Let&#39;s&nbsp;Go...　　&nbsp;<br />
+<br />
+　　&nbsp;入门篇　　&nbsp;<br />
+<br />
+　　&nbsp;如果你以前没试过SQL注入的话，那么第一步先把IE菜单=&gt;工具=&gt;Internet选项=&gt;高级=&gt;显示友好&nbsp;HTTP&nbsp;错误信息前面的勾去掉。否则，不论服务器返回什么错误，IE都只显示为HTTP&nbsp;500服务器错误，不能获得更多的提示信息。&nbsp;　　&nbsp;<br />
+<br />
+　　第一节、SQL注入原理　　&nbsp;<br />
+<br />
+　　以下我们从一个网站Site开始。　　&nbsp;<br />
+<br />
+　　在网站首页上，有名为&ldquo;IE不能打开新窗口的多种解决方法&rdquo;的链接，地址为：http://Site/url.asp?id=49，我们在这个地址后面加上单引号&rsquo;，服务器会返回下面的错误提示：　　&nbsp;<br />
+<br />
+　　Microsoft&nbsp;JET&nbsp;Database&nbsp;Engine&nbsp;错误&nbsp;&#39;80040e14&#39;&nbsp;<br />
+<br />
+　　字符串的语法错误&nbsp;在查询表达式&nbsp;&#39;ID=49&#39;&#39;&nbsp;中。&nbsp;<br />
+<br />
+　　/showdetail.asp，行8　　&nbsp;<br />
+<br />
+　　从这个错误提示我们能看出下面几点：　　&nbsp;<br />
+<br />
+　　1.网站使用的是Access数据库，通过JET引擎连接数据库，而不是通过ODBC。&nbsp;<br />
+<br />
+　　2.程序没有判断客户端提交的数据是否符合程序要求。&nbsp;<br />
+<br />
+　　3.该SQL语句所查询的表中有一名为ID的字段。　　&nbsp;<br />
+<br />
+　　从上面的例子我们可以知道，SQL注入的原理，就是从客户端提交特殊的代码，从而收集程序及服务器的信息，从而获取你想到得到的资料。　　&nbsp;<br />
+<br />
+　　第二节、判断能否进行SQL注入　　&nbsp;<br />
+<br />
+　　看完第一节，有一些人会觉得：我也是经常这样测试能否注入的，这不是很简单吗？其实，这并不是最好的方法，为什么呢？　　&nbsp;<br />
+<br />
+　　首先，不一定每台服务器的IIS都返回具体错误提示给客户端，如果程序中加了cint(参数)之类语句的话，SQL注入是不会成功的，但服务器同样会报错，具体提示信息为处理&nbsp;URL&nbsp;时服务器上出错。请和系统管理员联络。　　&nbsp;<br />
+<br />
+　　其次，部分对SQL注入有一点了解的程序员，认为只要把单引号过滤掉就安全了，这种情况不为少数，如果你用单引号测试，是测不到注入点的.&nbsp;<br />
+<br />
+　　那么，什么样的测试方法才是比较准确呢？答案如下：　&nbsp;<br />
+<br />
+　　①&nbsp;http://Site/url.asp?id=49&nbsp;<br />
+　　②&nbsp;http://Site/url.asp?id=49&nbsp;and&nbsp;1=1&nbsp;<br />
+　　③&nbsp;http://Site/url.asp?id=49&nbsp;and&nbsp;1=2　　&nbsp;<br />
+<br />
+　　这就是经典的1=1、1=2测试法了，怎么判断呢？看看上面三个网址返回的结果就知道了：　　&nbsp;<br />
+<br />
+　　可以注入的表现：　　&nbsp;<br />
+<br />
+　　①&nbsp;正常显示（这是必然的，不然就是程序有错误了）&nbsp;<br />
+　　②&nbsp;正常显示，内容基本与①相同&nbsp;<br />
+　　③&nbsp;提示BOF或EOF（程序没做任何判断时）、或提示找不到记录（判断了rs.eof时）、或显示内容为空（程序加了on&nbsp;error&nbsp;resume&nbsp;next）　&nbsp;<br />
+<br />
+　　不可以注入就比较容易判断了，①同样正常显示，②和③一般都会有程序定义的错误提示，或提示类型转换时出错。　　&nbsp;<br />
+<br />
+　　当然，这只是传入参数是数字型的时候用的判断方法，实际应用的时候会有字符型和搜索型参数，我将在中级篇的&ldquo;SQL注入一般步骤&rdquo;再做分析。&nbsp;　　&nbsp;<br />
+<br />
+　　第三节、判断数据库类型及注入方法　　&nbsp;<br />
+<br />
+　　不同的数据库的函数、注入方法都是有差异的，所以在注入之前，我们还要判断一下数据库的类型。一般ASP最常搭配的数据库是Access和SQLServer，网上超过99%的网站都是其中之一。　　&nbsp;<br />
+<br />
+　　怎么让程序告诉你它使用的什么数据库呢？来看看：　　&nbsp;<br />
+<br />
+　　SQLServer有一些系统变量，如果服务器IIS提示没关闭，并且SQLServer返回错误提示的话，那可以直接从出错信息获取，方法如下：　　&nbsp;<br />
+<br />
+　　http://Site/url.asp?id=49&nbsp;and&nbsp;user&gt;0　　&nbsp;<br />
+<br />
+　　这句语句很简单，但却包含了SQLServer特有注入方法的精髓，我自己也是在一次无意的测试中发现这种效率极高的猜解方法。让我看来看看它的含义：首先，前面的语句是正常的，重点在and&nbsp;user&gt;0，我们知道，user是SQLServer的一个内置变量，它的值是当前连接的用户名，类型为nvarchar。拿一个nvarchar的值跟int的数0比较，系统会先试图将nvarchar的值转成int型，当然，转的过程中肯定会出错，SQLServer的出错提示是：将nvarchar值&nbsp;&rdquo;abc&rdquo;&nbsp;转换数据类型为&nbsp;int&nbsp;的列时发生语法错误，呵呵，abc正是变量user的值，这样，不废吹灰之力就拿到了数据库的用户名。在以后的篇幅里，大家会看到很多用这种方法的语句。　　&nbsp;<br />
+<br />
+　　&nbsp;顺便说几句，众所周知，SQLServer的用户sa是个等同Adminstrators权限的角色，拿到了sa权限，几乎肯定可以拿到主机的Administrator了。上面的方法可以很方便的测试出是否是用sa登录，要注意的是：如果是sa登录，提示是将&rdquo;dbo&rdquo;转换成int的列发生错误，而不是&rdquo;sa&rdquo;。&nbsp;　　&nbsp;<br />
+<br />
+　　如果服务器IIS不允许返回错误提示，那怎么判断数据库类型呢？我们可以从Access和SQLServer和区别入手，Access和SQLServer都有自己的系统表，比如存放数据库中所有对象的表，Access是在系统表[msysobjects]中，但在Web环境下读该表会提示&ldquo;没有权限&rdquo;，SQLServer是在表[sysobjects]中，在Web环境下可正常读取。　　&nbsp;<br />
+<br />
+　　在确认可以注入的情况下，使用下面的语句：　　&nbsp;<br />
+<br />
+　　http://Site/url.asp?id=49&nbsp;and&nbsp;(select&nbsp;count(*)&nbsp;from&nbsp;sysobjects)&gt;0&nbsp;<br />
+　　http://Site/url.asp?id=49&nbsp;and&nbsp;(select&nbsp;count(*)&nbsp;from&nbsp;msysobjects)&gt;0　　&nbsp;<br />
+<br />
+　　如果数据库是SQLServer，那么第一个网址的页面与原页面http://Site/url.asp?id=49是大致相同的；而第二个网址，由于找不到表msysobjects，会提示出错，就算程序有容错处理，页面也与原页面完全不同。　　&nbsp;<br />
+<br />
+　　如果数据库用的是Access，那么情况就有所不同，第一个网址的页面与原页面完全不同；第二个网址，则视乎数据库设置是否允许读该系统表，一般来说是不允许的，所以与原网址也是完全不同。大多数情况下，用第一个网址就可以得知系统所用的数据库类型，第二个网址只作为开启IIS错误提示时的验证。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/sqlserver/2015/0401/382.html'>SQL注入漏洞全接触－进阶篇</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/sqlserver/2015/0401/384.html'>Sql Server数据备份及恢复措施</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/sqlserver/2015/1103/1324.html" >sql server临时表怎么删除？正确删</a><span>11.03</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/604.html" >MSSQL增加列、修改列、增加主键、</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/393.html" >MSSQL的索引类型、属性及建立方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/389.html" >“因为文件组'PRIMARY'已满”的原因</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/385.html" >取得插入记录后自动产生的ID</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/384.html" >Sql Server数据备份及恢复措施</a><span>04.01</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/sqlserver/2015/0401/383.html" >SQL注入漏洞全接触－入门篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/382.html" >SQL注入漏洞全接触－进阶篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/381.html" >SQL注入漏洞全接触－高级篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/380.html" >SQL查询语句基础知识</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/379.html" >MS SQL-SERVER空口令入侵漏洞</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/378.html" >SQL Server数据库死锁分析</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/377.html" >检测SQL Server 2000是否优化</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/376.html" >将SQL Server表变成txt文件</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/375.html" >读取SQL中text和ntext类型字段内容的</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/374.html" >SQL语句判断已知表是否存在</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/sqlserver/2015/1103/1324.html" >sql server临时表怎么删除？正确删除sql临时表的方法</a><span>11.03</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/604.html" >MSSQL增加列、修改列、增加主键、重设标识列</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/393.html" >MSSQL的索引类型、属性及建立方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/389.html" >“因为文件组'PRIMARY'已满”的原因和解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要求的问题</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/385.html" >取得插入记录后自动产生的ID</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/384.html" >Sql Server数据备份及恢复措施</a><span>04.01</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方</a><span>53</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要</a><span>52</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/370.html" >SQL Server安装时COM+目录要求问题的</a><span>42</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/366.html" >同服务器安装SQL2000和SQL2005冲突的</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/381.html" >SQL注入漏洞全接触－高级篇</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/367.html" >sqlserver2005（Express版）的配置</a><span>36</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/383.html" >SQL注入漏洞全接触－入门篇</a><span>32</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/375.html" >读取SQL中text和ntext类型字段内容的</a><span>31</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=383&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

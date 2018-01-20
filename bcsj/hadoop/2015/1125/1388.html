@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hadoop集群（第5期副刊）_JDK和SSH无密码配置_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Hadoop集群,JDK,SSH无密码配置" />
+  <meta name="description" content="1、Linux配置java环境变量 1.1 原文出处 地址： http://blog.csdn.net/jiedushi/article/details/6672894 1.2 解压安装jdk 在shell终端下进入jdk-6u14-linux-i586.bin文件所在目录，执行命令 ./jdk-6u14-linux-i586.bin 这" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Hadoop/'>Hadoop</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Hadoop集群（第5期副刊）_JDK和SSH无密码配置</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-11-25 13:29 来源：虾皮工作室 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1388" class="art_content"><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	1、Linux配置java环境变量</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.1 原文出处</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; 地址：<a href="http://blog.csdn.net/jiedushi/article/details/6672894" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);">http://blog.csdn.net/jiedushi/article/details/6672894</a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.2 解压安装jdk</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在shell终端下进入jdk-6u14-linux-i586.bin文件所在目录，执行命令 ./jdk-6u14-linux-i586.bin 这时会出现一段协议，连继敲回车，当询问是否同意的时候，输入yes，回车。之后会在当前目录下生成一个jdk1.6.0_14目录，你可以将它复制到 任何一个目录下。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.3 需要配置的环境变量</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）PATH环境变量</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　作用是指定命令搜索路径，在shell下面执行命令时，它会到PATH变量所指定的路径中查找看是否能找到相应的命令程序。我们需要把 jdk安装目录下的bin目录增加到现有的PATH变量中，bin目录中包含经常要用到的可执行文件如javac/java/javadoc等待，设置好 PATH变量后，就可以在任何目录下执行javac/java等工具了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）CLASSPATH环境变量</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　作用是指定类搜索路径，要使用已经编写好的类，前提当然是能够找到它们了，JVM就是通过CLASSPTH来寻找类的。我们 需要把jdk安装目录下的lib子目录中的dt.jar和tools.jar设置到CLASSPATH中，当然，当前目录&quot;.&quot;也必须加入到该变量中。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）JAVA_HOME环境变量</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　它指向jdk的安装目录，Eclipse/NetBeans/Tomcat等软件就是通过搜索JAVA_HOME变量来找到并使用安装好的jdk。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.4 三种配置环境变量的方法</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）修改/etc/profile文件</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如果你的计算机仅仅作为开发使用时推荐使用这种方法，因为所有用户的shell都有权使用这些环境变量，可能会给系统带来安全性问题。</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			用文本编辑器打开/etc/profile</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			在profile文件末尾加入：</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		export JAVA_HOME=/usr/share/jdk1.6.0_14</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export PATH=$JAVA_HOME/bin:$PATH</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			重新登录</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			注解</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		a. 你要将 /usr/share/jdk1.6.0_14改为你的jdk安装目录</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		b. linux下用冒号&quot;:&quot;来分隔路径</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		c. $PATH / $CLASSPATH / $JAVA_HOME 是用来引用原来的环境变量的值</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		在设置环境变量时特别要注意不能把原来的值给覆盖掉了，这是一种</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		常见的错误。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		d. CLASSPATH中当前目录&quot;.&quot;不能丢,把当前目录丢掉也是常见的错误。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		e. export是把这三个变量导出为全局变量。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		f. 大小写必须严格区分。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）修改.bash_profile文件</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　这种方法更为安全，它可以把使用这些环境变量的权限控制到用户级别，如果你需要给某个用户权限使用这些环境变量，你只需要修改其个人用户主目录下的.bash_profile文件就可以了。</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			用文本编辑器打开用户目录下的.bash_profile文件</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			在.bash_profile文件末尾加入：</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		export JAVA_HOME=/usr/share/jdk1.6.0_14</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export PATH=$JAVA_HOME/bin:$PATH</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			重新登录</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）直接在shell下设置变量</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　不赞成使用这种方法，因为换个shell，你的设置就无效了，因此这种方法仅仅是临时使用，以后要使用的时候又要重新设置，比较麻烦。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　只需在shell终端执行下列命令：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		export JAVA_HOME=/usr/share/jdk1.6.0_14</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export PATH=$JAVA_HOME/bin:$PATH</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	　　1.5 测试jdk</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）用文本编辑器新建一个Test.java文件，在其中输入以下代码并保存：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public class test {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; public static void main(String args[]) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;A new jdk test !&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; }</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）编译：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在shell终端执行命令 javac Test.java</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）运行：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在shell终端执行命令 java Test</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;　　当shell下出现&quot;A new jdk test !&quot;字样则jdk运行正常。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.6 卸载jdk</h3>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			找到jdk安装目录的_uninst子目录</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			在shell终端执行命令./uninstall.sh即可卸载jdk。</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	2、配置OpenSSH无密码登陆</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.1 原文出处</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; 地址：<a href="http://www.iteye.com/topic/421608" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);">http://www.iteye.com/topic/421608</a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.2 文章序言</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　最近在搭建Hadoop环境需要设置无密码登陆，所谓无密码登陆其实是指通过证书认证的方式登陆，使用一种被称为&quot;公私钥&quot;认证的方式来进行ssh登录。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;　　在linux系统中,ssh是远程登录的默认工具,因为该工具的协议使用了RSA/DSA的加密算法.该工具做linux系统的远程管理是非常安全的。telnet,因为其不安全性,在linux系统中被搁置使用了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;">　　&quot; 公私钥&quot;认证方式简单的解释:首先在客户端上创建一对公私钥 （公钥文件：~/.ssh/id_rsa.pub； 私钥文件：~/.ssh/id_rsa）。然后把公钥放到服务器上（~/.ssh/authorized_keys）, 自己保留好私钥.在使用ssh登录时,ssh程序会发送私钥去和服务器上的公钥做匹配.如果匹配成功就可以登录了。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在Ubuntu和Cygwin 配置都很顺利，而在Centos系统中配置时遇到了很多问题。故此文以Centos（Centos5 ） 为例详细讲解如何配置证书验证登陆，具体操作步骤如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.3 确认系统已经安装好OpenSSH的server 和client</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　安装步骤这里不再讲述，不是本文的重点。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.4 确认本机sshd的配置文件（root）</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ vi /etc/ssh/sshd_config</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　找到以下内容，并去掉注释符&quot;#&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		RSAAuthentication yes</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		PubkeyAuthentication yes</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		AuthorizedKeysFile .ssh/authorized_keys</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.5 如果修改了配置文件需要重启sshd服务（root）</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ vi /sbin/service sshd restart</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.6 ssh登陆系统 后执行测试命令</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ssh localhost</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　回车会提示你输入密码，因为此时我们还没有生成证书。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.7 生成证书公私钥的步骤</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ssh-keygen -t dsa -P &#39;&#39; -f ~/.ssh/id_dsa</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		$ cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.8 测试登陆 ssh localhost</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ssh localhost</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　正常情况下会登陆成功，显示一些成功登陆信息，如果失败请看下面的&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">一般调试步骤</span>&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.9 一般调试步骤</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　本人在配置时就失败了，按照以上步骤依旧提示要输入密码。于是用ssh -v 显示详细的登陆信息查找原因：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ssh -v localhost</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　回车显示了详细的登陆信息如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		。。。。。。省略</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Authentications that can continue: publickey,gssapi-with-mic,password</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Next authentication method: gssapi-with-mic</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">debug1: Unspecified GSS failure. Minor code may provide more information</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Unknown code krb5 195</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">debug1: Unspecified GSS failure. Minor code may provide more information</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Unknown code krb5 195</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">debug1: Unspecified GSS failure. Minor code may provide more information</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Unknown code krb5 195</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Next authentication method: publickey</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Trying private key: /home/huaxia/.ssh/identity</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Trying private key: /home/huaxia/.ssh/id_rsa</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Offering public key: /home/huaxia/.ssh/id_dsa</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Authentications that can continue: publickey,gssapi-with-mic,password</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		debug1: Next authentication method: password</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		huaxia@localhost&#39;s password:</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　同时用root用户登陆查看系统的日志文件：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$tail /var/log/secure -n 20</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		。。。。。。省略</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:21:05 shnap sshd[3955]: Accepted password for huaxia from 192.168.8.253 port 51837 ssh2</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:21:05 shnap sshd[3955]: pam_unix(sshd:session): session opened for user huaxia by (uid=0)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:21:47 shnap sshd[4024]: Connection closed by 127.0.0.1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:25:28 shnap sshd[4150]:&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Authentication refused: bad ownership or modes for file /home/huaxia/.ssh/authorized_keys</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:25:28 shnap sshd[4150]:&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Authentication refused: bad ownership or modes for file /home/huaxia/.ssh/authorized_keys</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Jul 13 11:26:30 shnap sshd[4151]: Connection closed by 127.0.0.1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		。。。。。。省略</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　从上面的日志信息中可知文件<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">/home/huaxia/.ssh/authorized_keys</span>&nbsp;的权限有问题。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　查看<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">/home/huaxia/.ssh/&nbsp;</span>下文件的详细信息如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ls -lh ~/.ssh/</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		总计 16K</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-rw-rw-r-- 1 huaxia huaxia 602 07-13 11:22 authorized_keys</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-rw------- 1 huaxia huaxia 672 07-13 11:22 id_dsa</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-rw-r--r-- 1 huaxia huaxia 602 07-13 11:22 id_dsa.pub</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-rw-r--r-- 1 huaxia huaxia 391 07-13 11:21 known_hosts</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　修改文件authorized_keys的权限（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">权限的设置非常重要,因为不安全的设置安全设置,会让你不能使用RSA功能&nbsp;</span>）：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ chmod 600 ~/.ssh/authorized_keys</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　再次测试登陆如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ ssh localhost</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Last login: Wed Jul 13 14:04:06 2011 from 192.168.8.253</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　看到这样的信息表示已经成功实现了本机的无密码登陆。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.10 认证登陆远程服务器</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注：</strong></span>远程服务器OpenSSH的服务当然要启动。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　拷贝本地生产的key到远程服务器端（两种方法）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）方法一：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$cat ~/.ssh/id_rsa.pub | ssh 远程用户名@远程服务器ip &#39;cat - &gt;&gt; ~/.ssh/authorized_keys&#39;</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）方法二：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在本机上执行：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ scp ~/.ssh/id_dsa.pub michael@192.168.8.148:/home/michael/</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　登陆远程服务器michael@192.168.8.148 后执行：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ cat id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　本机远程登陆192.168.8.148的测试：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ssh michael@192.168.8.148</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Linux michael-VirtualBox 2.6.35-22-generic #33-Ubuntu SMP Sun Sep 19 20:34:50 UTC 2010 i686 GNU/Linux</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Ubuntu 10.10</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Welcome to Ubuntu!</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		* Documentation: https://help.ubuntu.com/</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		216 packages can be updated.</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		71 updates are security updates.</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		New release &#39;natty&#39; available.</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Run &#39;do-release-upgrade&#39; to upgrade to it.</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Last login: Wed Jul 13 14:46:37 2011 from michael-virtualbox</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		michael@michael-VirtualBox:~$</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　可见已经成功登陆。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如果登陆测试不成功，需要修改远程服务器192.168.8.148上的文件authorized_keys的权限（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">权限的设置非常重要，因为不安全的设置安全设置,会让你不能使用RSA功能</strong></span>&nbsp;）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chmod&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">600</strong></span>&nbsp;~/.ssh/authorized_keys</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	原文链接http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504132.html</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Hadoop/2015/1124/1384.html'>Hadoop集群（第5期）_Hadoop安装配置</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Hadoop/2015/1125/1389.html'>Hadoop集群（第6期）_WordCount运行详解</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>11.06</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>06.18</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>06.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案例</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详解</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境设置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无密码配置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布表</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>951</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>554</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>218</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>59</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>48</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>47</span></li>
+<li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>39</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>37</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>32</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>29</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1388&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

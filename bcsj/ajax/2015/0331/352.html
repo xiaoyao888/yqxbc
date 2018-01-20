@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AJAX编写用户注册实例小结_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="AJAX编写用户注册实例小结" />
+  <meta name="description" content="我所举的这个例子是一个企业用户注册时的一个应用，当用户注册时检查用户名和企业名是否可用，以前的做法是在旁边加一个按钮，点击“检查”，就向服务器发出请求，然后等待…" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Ajax/'>Ajax</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>AJAX编写用户注册实例小结</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-31 09:38 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="352" class="art_content"><p>
+	我所举的这个例子是一个企业用户注册时的一个应用，当用户注册时检查用户名和企业名是否可用，以前的做法是在旁边加一个按钮，点击&ldquo;检查&rdquo;，就向服务器发出请求，然后等待&hellip;&hellip;服务器返回信息，继续操作。如果我们用Ajax技术来实现以上的操作则不必等待服务器返回信息，用户输入用户名或企业名称的时候，当输入文本框失去焦点的时候，则会自动向服务器发出请求，用户继续做下面的操作，不必点击&ldquo;检查&rdquo;，也不必等待服务器返回信息，检查与用户操作是异步的，可同时进行。当服务器信息返回的时候，会自动在面页相应位置显示返回信息，不必刷新页面，相当于局部刷新的效果。&nbsp;</p>
+<p>
+	下面我们来看代码吧。</p>
+<p>
+	HTML页面的完整代码如下：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				1＜%@page&nbsp;language=&quot;java&quot;&nbsp;contentType=&quot;text/html;charset=GBK&quot;%＞<br />
+				2＜script&nbsp;language=&quot;javascript&quot;&nbsp;type=&quot;text/javascript&quot;＞<br />
+				3＜!--<br />
+				4/**//**Ajax&nbsp;开始&nbsp;by&nbsp;Alpha&nbsp;2005-12-31*/<br />
+				5<br />
+				6&nbsp;var&nbsp;http&nbsp;=&nbsp;getHTTPObject();<br />
+				7<br />
+				8&nbsp;function&nbsp;handleHttpResponse(){<br />
+				9&nbsp;　if(http.readyState&nbsp;==&nbsp;4){<br />
+				10&nbsp;　if(http.status&nbsp;==&nbsp;200){<br />
+				11&nbsp;　　var&nbsp;xmlDocument&nbsp;=&nbsp;http.responseXML;<br />
+				12&nbsp;　　　if(http.responseText!=&quot;&quot;){<br />
+				13&nbsp;　　　　document.getElementById(&quot;showStr&quot;).style.display&nbsp;=&nbsp;&quot;&quot;;<br />
+				14&nbsp;　　　　　document.getElementById(&quot;userName&quot;).style.background=&nbsp;&quot;#FF0000&quot;;<br />
+				15&nbsp;　　　　　document.getElementById(&quot;showStr&quot;).innerText&nbsp;=&nbsp;http.responseText;<br />
+				16&nbsp;　　　}else{<br />
+				17&nbsp;　　　　document.getElementById(&quot;userName&quot;).style.background=&nbsp;&quot;#FFFFFF&quot;;<br />
+				18&nbsp;　　　　document.getElementById(&quot;showStr&quot;).style.display&nbsp;=&nbsp;&quot;none&quot;;<br />
+				19&nbsp;　　　}<br />
+				20&nbsp;<br />
+				21&nbsp;　　}<br />
+				22&nbsp;　　else{<br />
+				23&nbsp;　　　alert(&quot;你所请求的页面发生异常，可能会影响你浏览该页的信息！&quot;);<br />
+				24&nbsp;　　　alert(http.status);<br />
+				25&nbsp;　　}<br />
+				26&nbsp;　}<br />
+				27&nbsp;}<br />
+				28<br />
+				29&nbsp;function&nbsp;handleHttpResponse1(){<br />
+				30&nbsp;　if(http.readyState&nbsp;==&nbsp;4){<br />
+				31&nbsp;　　if(http.status&nbsp;==&nbsp;200){<br />
+				32&nbsp;　　　var&nbsp;xmlDocument&nbsp;=&nbsp;http.responseXML;<br />
+				33&nbsp;　　　if(http.responseText!=&quot;&quot;){<br />
+				34&nbsp;　　　　document.getElementById(&quot;comNmStr&quot;).style.display&nbsp;=&nbsp;&quot;&quot;;<br />
+				35&nbsp;　　　　document.getElementById(&quot;comNm&quot;).style.background=&nbsp;&quot;#FF0000&quot;;<br />
+				36&nbsp;　　　　document.getElementById(&quot;comNmStr&quot;).innerText&nbsp;=&nbsp;http.responseText;<br />
+				37&nbsp;　　　}else{<br />
+				38&nbsp;　　　　document.getElementById(&quot;comNm&quot;).style.background=&nbsp;&quot;#FFFFFF&quot;;<br />
+				39&nbsp;　　　　document.getElementById(&quot;comNmStr&quot;).style.display&nbsp;=&nbsp;&quot;none&quot;;<br />
+				40&nbsp;　　　}<br />
+				41&nbsp;<br />
+				42&nbsp;　　}<br />
+				43&nbsp;　　else{<br />
+				44&nbsp;　　　alert(&quot;你所请求的页面发生异常，可能会影响你浏览该页的信息！&quot;);<br />
+				45&nbsp;　　　alert(http.status);<br />
+				46&nbsp;　　}<br />
+				47&nbsp;　}<br />
+				48&nbsp;}<br />
+				49<br />
+				50&nbsp;function&nbsp;chkUser(){<br />
+				51&nbsp;　var&nbsp;url&nbsp;=&nbsp;&quot;/chkUserAndCom&quot;;<br />
+				52&nbsp;　var&nbsp;name&nbsp;=&nbsp;document.getElementById(&quot;userName&quot;).value;<br />
+				53&nbsp;　url&nbsp;+=&nbsp;(&quot;&amp;userName=&quot;+name+&quot;&amp;oprate=chkUser&quot;);<br />
+				54&nbsp;　http.open(&quot;GET&quot;,url,true);<br />
+				55&nbsp;　http.onreadystatechange&nbsp;=&nbsp;handleHttpResponse;<br />
+				56&nbsp;　http.send(null);<br />
+				57&nbsp;　return&nbsp;;<br />
+				58&nbsp;}<br />
+				59&nbsp;function&nbsp;chkComNm(){<br />
+				60&nbsp;　var&nbsp;url&nbsp;=&nbsp;&quot;/chkUserAndCom&quot;;<br />
+				61&nbsp;　var&nbsp;name&nbsp;=&nbsp;document.getElementById(&quot;comNm&quot;).value;<br />
+				62&nbsp;　url&nbsp;+=&nbsp;(&quot;&amp;comName=&quot;+name+&quot;&amp;oprate=chkCom&quot;);<br />
+				63&nbsp;　http.open(&quot;GET&quot;,url,true);<br />
+				64&nbsp;　http.onreadystatechange&nbsp;=&nbsp;handleHttpResponse1;<br />
+				65&nbsp;　http.send(null);<br />
+				66&nbsp;　return&nbsp;;<br />
+				67&nbsp;}<br />
+				68&nbsp;<br />
+				69&nbsp;//该函数可以创建我们需要的XMLHttpRequest对象<br />
+				70&nbsp;function&nbsp;getHTTPObject(){<br />
+				71&nbsp;　var&nbsp;xmlhttp&nbsp;=&nbsp;false;<br />
+				72&nbsp;　if(window.XMLHttpRequest){<br />
+				73&nbsp;　　xmlhttp&nbsp;=&nbsp;new&nbsp;XMLHttpRequest();<br />
+				74&nbsp;　　if(xmlhttp.overrideMimeType){<br />
+				75&nbsp;　　　xmlhttp.overrideMimeType(&#39;text/xml&#39;);<br />
+				76&nbsp;　　}<br />
+				77&nbsp;　}<br />
+				78&nbsp;　else{<br />
+				79&nbsp;　　try{<br />
+				80&nbsp;　　　xmlhttp&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);<br />
+				81&nbsp;　　}catch(e){<br />
+				82&nbsp;　　　try{<br />
+				83&nbsp;　　　　xmlhttp&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br />
+				84&nbsp;　　　}catch(E){<br />
+				85&nbsp;　　　　xmlhttp&nbsp;=&nbsp;false;<br />
+				86&nbsp;　　　}<br />
+				87&nbsp;　　}<br />
+				88&nbsp;　}<br />
+				89&nbsp;　return&nbsp;xmlhttp;<br />
+				90&nbsp;}<br />
+				91/**//**Ajax&nbsp;结束*/<br />
+				92<br />
+				93//检测表单<br />
+				94function&nbsp;chkpassword()<br />
+				95{<br />
+				96&nbsp;var&nbsp;m=document.form1;<br />
+				97&nbsp;if(len(m.password.value)&nbsp;＞&nbsp;20&nbsp;||&nbsp;len(m.password.value)&nbsp;＜&nbsp;5&nbsp;||&nbsp;!isStr(m.password.value))<br />
+				98&nbsp;{<br />
+				99&nbsp;　document.getElementById(&quot;passwordStr&quot;).style.display&nbsp;=&nbsp;&quot;&quot;;<br />
+				100　&nbsp;document.getElementById(&quot;password&quot;).style.background=&nbsp;&quot;#FF0000&quot;;<br />
+				101　&nbsp;document.getElementById(&quot;passwordStr&quot;).innerText&nbsp;=&nbsp;&quot;对不起,密码必须为英文字母、数字或下划线，长度为5~20!&quot;;<br />
+				102&nbsp;}<br />
+				103&nbsp;else<br />
+				104&nbsp;{<br />
+				105　&nbsp;document.getElementById(&quot;password&quot;).style.background=&nbsp;&quot;#FFFFFF&quot;;<br />
+				106　&nbsp;document.getElementById(&quot;passwordStr&quot;).style.display&nbsp;=&nbsp;&quot;none&quot;;<br />
+				107&nbsp;}<br />
+				108}<br />
+				109<br />
+				110function&nbsp;chkconfirmPassword()<br />
+				111{<br />
+				112　&nbsp;var&nbsp;m=document.form1;<br />
+				113　&nbsp;if&nbsp;(m.password.value&nbsp;!=&nbsp;m.confirmPassword.value)<br />
+				114　&nbsp;{<br />
+				115　　&nbsp;document.getElementById(&quot;confirmPasswordStr&quot;).style.display&nbsp;=&nbsp;&quot;&quot;;<br />
+				116　　&nbsp;document.getElementById(&quot;confirmPassword&quot;).style.background=&nbsp;&quot;#FF0000&quot;;<br />
+				117　　&nbsp;document.getElementById(&quot;confirmPasswordStr&quot;).innerText&nbsp;=&nbsp;&quot;对不起,密码与重复密码不一致!&quot;;<br />
+				118　&nbsp;}<br />
+				119　&nbsp;else<br />
+				120　&nbsp;{<br />
+				121　　&nbsp;document.getElementById(&quot;confirmPassword&quot;).style.background=&nbsp;&quot;#FFFFFF&quot;;<br />
+				122　　&nbsp;document.getElementById(&quot;confirmPasswordStr&quot;).style.display&nbsp;=&nbsp;&quot;none&quot;;<br />
+				123　&nbsp;}<br />
+				124}<br />
+				125<br />
+				126function&nbsp;checkfield()<br />
+				127{<br />
+				128&nbsp;var&nbsp;m=document.form1;&nbsp;<br />
+				129&nbsp;if(m.userName.value.length==0)<br />
+				130&nbsp;{<br />
+				131　&nbsp;alert(&quot;对不起,用户名必须为英文字母、数字或下划线，长度为5~20。&quot;);<br />
+				132　&nbsp;m.userName.focus();<br />
+				133　&nbsp;return&nbsp;false;<br />
+				134&nbsp;}<br />
+				135&nbsp;if(m.password.value.length==0)<br />
+				136&nbsp;{<br />
+				137　&nbsp;alert(&quot;对不起,密码必须为英文字母、数字或下划线，长度为5~20。&quot;);<br />
+				138　&nbsp;m.password.focus();<br />
+				139　&nbsp;return&nbsp;false;<br />
+				140&nbsp;}<br />
+				141&nbsp;if&nbsp;(m.password.value&nbsp;!=&nbsp;m.confirmPassword.value)<br />
+				142&nbsp;{<br />
+				143　&nbsp;alert(&quot;对不起,密码与重复密码不一致!&quot;);<br />
+				144　&nbsp;m.confirmPassword.focus();<br />
+				145　&nbsp;return&nbsp;false;<br />
+				146&nbsp;}&nbsp;<br />
+				147&nbsp;if(m.comNm.value.length==0)<br />
+				148&nbsp;{<br />
+				149　&nbsp;alert(&quot;对不起,企业名称不能为空！！&quot;);<br />
+				150　&nbsp;m.comNm.focus();<br />
+				151　&nbsp;return&nbsp;false;&nbsp;<br />
+				152&nbsp;}<br />
+				153&nbsp;m.submit();<br />
+				154}<br />
+				155<br />
+				156//--＞&nbsp;<br />
+				157＜/script＞<br />
+				158＜body&nbsp;topmargin=&quot;0&quot;＞<br />
+				159＜form&nbsp;name=&quot;form1&quot;&nbsp;method=&quot;post&quot;&nbsp;action=&quot;/Control?act=Register&quot;＞<br />
+				160＜table&nbsp;width=&quot;100%&quot;＞<br />
+				161&nbsp;＜tr＞＜td&nbsp;align=&quot;center&quot;＞&nbsp;＜H2＞Ajax&nbsp;演示程序＜/H1＞＜/td＞＜/tr＞<br />
+				162&nbsp;＜tr＞＜td&nbsp;align=&quot;center&quot;＞&nbsp;&nbsp;&nbsp;&nbsp;------&nbsp;企业注册&nbsp;By&nbsp;Alpha＜/td＞＜/tr＞<br />
+				163＜/table＞<br />
+				164<br />
+				165＜HR＞<br />
+				166&nbsp;＜table&nbsp;width=&quot;400&quot;&nbsp;border=&quot;0&quot;&nbsp;cellpadding=&quot;1&quot;&nbsp;cellspacing=&quot;1&quot;&nbsp;align=&quot;center&quot;&nbsp;＞<br />
+				167&nbsp;＜tr＞<br />
+				168　&nbsp;＜td＞＜font&nbsp;color=&quot;red&quot;＞*＜/font＞＜/td＞<br />
+				169　&nbsp;＜td＞用户帐号:＜/td＞<br />
+				170　&nbsp;＜td＞<br />
+				171　　&nbsp;＜input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;userName&quot;&nbsp;maxlength=&quot;20&quot;&nbsp;style=&quot;background:#FFFFFF&quot;&nbsp;onBlur=&quot;chkUser()&quot;&nbsp;value=&quot;&quot;/＞<br />
+				172　　&nbsp;＜p&nbsp;id=&quot;showStr&quot;&nbsp;style=&quot;background-color:#FF9900;display:none&quot;＞＜/p＞<br />
+				173　&nbsp;＜/td＞&nbsp;<br />
+				174&nbsp;＜/tr＞<br />
+				175&nbsp;＜tr＞<br />
+				176　&nbsp;＜td＞＜font&nbsp;color=&quot;red&quot;＞*＜/font＞＜/td＞<br />
+				177　&nbsp;＜td＞企业名称:＜/td＞<br />
+				178　&nbsp;＜td＞<br />
+				179　　&nbsp;＜input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;comNm&quot;&nbsp;maxlength=&quot;100&quot;&nbsp;style=&quot;background:#FFFFFF&quot;&nbsp;onBlur=&quot;chkComNm()&quot;&nbsp;value=&quot;&quot;/＞<br />
+				180　　&nbsp;＜p&nbsp;id=&quot;comNmStr&quot;&nbsp;style=&quot;background-color:#FF9900;display:none&quot;＞＜/p＞<br />
+				181&nbsp;<br />
+				182　&nbsp;＜/td＞&nbsp;<br />
+				183&nbsp;＜/tr＞&nbsp;<br />
+				184&nbsp;＜tr＞<br />
+				185　&nbsp;＜td＞＜font&nbsp;color=&quot;red&quot;＞*＜/font＞＜/td＞<br />
+				186　&nbsp;＜td＞用户密码:＜/td＞<br />
+				187　&nbsp;＜td＞＜input&nbsp;type=&quot;password&quot;&nbsp;name=&quot;password&quot;&nbsp;maxlength=&quot;20&quot;&nbsp;style=&quot;background:#FFFFFF&quot;&nbsp;onBlur=&quot;chkpassword()&quot;/＞<br />
+				188　　&nbsp;＜p&nbsp;id=&quot;passwordStr&quot;&nbsp;style=&quot;background-color:#FF9900;display:none&quot;＞＜/p＞<br />
+				189　&nbsp;＜/td＞<br />
+				190&nbsp;＜/tr＞<br />
+				191&nbsp;＜tr＞<br />
+				192　&nbsp;＜td＞＜font&nbsp;color=&quot;red&quot;＞*＜/font＞＜/td＞<br />
+				193　&nbsp;＜td＞确认密码:＜/td＞<br />
+				194　&nbsp;＜td＞＜input&nbsp;type=&quot;password&quot;&nbsp;name=&quot;confirmPassword&quot;&nbsp;maxlength=&quot;20&quot;&nbsp;style=&quot;background:#FFFFFF&quot;&nbsp;onBlur=&quot;chkconfirmPassword()&quot;/＞<br />
+				195　　&nbsp;＜p&nbsp;id=&quot;confirmPasswordStr&quot;&nbsp;style=&quot;background-color:#FF9900;display:none&quot;＞＜/p＞<br />
+				196　&nbsp;＜/td＞&nbsp;<br />
+				197&nbsp;＜/tr＞<br />
+				198&nbsp;＜/table＞&nbsp;<br />
+				199<br />
+				200&nbsp;＜p&nbsp;align=&quot;center&quot;＞&nbsp;<br />
+				201　&nbsp;＜input&nbsp;type=&quot;button&quot;&nbsp;name=&quot;ok&quot;&nbsp;value=&quot;&nbsp;确&nbsp;定&nbsp;&quot;&nbsp;onclick=&quot;checkfield()&quot;＞<br />
+				202&nbsp;&nbsp;&nbsp;<br />
+				203　&nbsp;＜input&nbsp;type=&quot;reset&quot;&nbsp;name=&quot;reset&quot;&nbsp;value=&quot;&nbsp;取&nbsp;消&nbsp;&quot;＞<br />
+				204&nbsp;＜/p＞<br />
+				205<br />
+				206＜/form＞<br />
+				207＜/body＞<br />
+				208＜/html＞</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	用JavaScript来创建XMLHttpRequest&nbsp;类向服务器发送一个HTTP请求后，接下来要决定当收到服务器的响应后，需要做什么。这需要告诉HTTP请求对象用哪一个JavaScript函数处理这个响应。可以将对象的onreadystatechange属性设置为要使用的JavaScript的函数名，如下所示:xmlhttp_request.onreadystatechange&nbsp;=FunctionName;</p>
+<p>
+	FunctionName是用JavaScript创建的函数名，注意不要写成FunctionName()，当然我们也可以直接将JavaScript代码创建在onreadystatechange之后。</p>
+<p>
+	我们调用request.open()-它用服务器打开套接字频道，使用一个HTTP动词(GET或POST)作为第一个参数并且以数据提供者的URL作为第二个参数。request.open()的最后一个参数被设置为true-它指示该请求的异步特性。注意，该请求还没有被提交。</p>
+<p>
+	随着对request.send()的调用，开始提交-这可以为POST提供任何必要的有效载荷。在使用异步请求时，我们必须使用request.onreadystatechanged属性来分配请求的回调函数。(如果请求是同步的话，我们应该能够在调用request.send之后立即处理结果，但是我们也有可能阻断用户，直到该请求完成为止。)</p>
+<p>
+	我看再看看数据提供者的URL，url&nbsp;=&nbsp;&quot;/chkUserAndCom&quot;，servlet如下：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				1/**//*<br />
+				2&nbsp;*&nbsp;Created&nbsp;on&nbsp;2005-12-31<br />
+				3&nbsp;*<br />
+				4&nbsp;*&nbsp;TODO&nbsp;To&nbsp;change&nbsp;the&nbsp;template&nbsp;for&nbsp;this&nbsp;generated&nbsp;file&nbsp;go&nbsp;to<br />
+				5&nbsp;*&nbsp;Window&nbsp;-&nbsp;Preferences&nbsp;-&nbsp;Java&nbsp;-&nbsp;Code&nbsp;Style&nbsp;-&nbsp;Code&nbsp;Templates<br />
+				6&nbsp;*/<br />
+				7package&nbsp;com.event;<br />
+				8<br />
+				9import&nbsp;javax.servlet.ServletException;<br />
+				10import&nbsp;javax.servlet.http.HttpServletRequest;<br />
+				11import&nbsp;javax.servlet.http.HttpServletResponse;<br />
+				12<br />
+				13import&nbsp;com.beans.EBaseInfo;<br />
+				14<br />
+				15/**&nbsp;*//**<br />
+				16&nbsp;*&nbsp;@author&nbsp;Alpha&nbsp;2005-12-31<br />
+				17&nbsp;*&nbsp;<br />
+				18&nbsp;*&nbsp;＜P＞Ajax&nbsp;演示---企业注册时检查企业用户名和企业名称＜/P＞<br />
+				19&nbsp;*<br />
+				20&nbsp;*&nbsp;TODO&nbsp;To&nbsp;change&nbsp;the&nbsp;template&nbsp;for&nbsp;this&nbsp;generated&nbsp;type&nbsp;comment&nbsp;go&nbsp;to<br />
+				21&nbsp;*&nbsp;Window&nbsp;-&nbsp;Preferences&nbsp;-&nbsp;Java&nbsp;-&nbsp;Code&nbsp;Style&nbsp;-&nbsp;Code&nbsp;Templates<br />
+				22&nbsp;*/<br />
+				23public&nbsp;class&nbsp;CheckUserAndComNm&nbsp;{<br />
+				24&nbsp;private&nbsp;String&nbsp;msgStr&nbsp;=&nbsp;&quot;&quot;;<br />
+				25&nbsp;protected&nbsp;void&nbsp;doGet(HttpServletRequest&nbsp;request,HttpServletResponse&nbsp;response)&nbsp;<br />
+				26&nbsp;throws&nbsp;ServletException&nbsp;<br />
+				27&nbsp;{&nbsp;<br />
+				28<br />
+				29&nbsp;　EComBaseInfo&nbsp;info=new&nbsp;EComBaseInfo();<br />
+				30&nbsp;　String&nbsp;oprate=request.getParameter(&quot;oprate&quot;)).trim();&nbsp;<br />
+				31&nbsp;　String&nbsp;userName=request.getParameter(&quot;userName&quot;);<br />
+				32&nbsp;　String&nbsp;passWord=request.getParameter(&quot;password&quot;);<br />
+				33&nbsp;　String&nbsp;comName=request.getParameter(&quot;comName&quot;);<br />
+				34&nbsp;<br />
+				35&nbsp;　try<br />
+				36&nbsp;　{<br />
+				37&nbsp;　　if(oprate.equals(&quot;chkUser&quot;))<br />
+				38&nbsp;　　{<br />
+				39&nbsp;　　　response.setContentType(&quot;text/html;charset=GB2312&quot;);<br />
+				40&nbsp;　　　if(userName.length()＜5||userName.length()＞20)<br />
+				41&nbsp;　　　{<br />
+				42&nbsp;　　　　msgStr&nbsp;=&nbsp;&quot;对不起,用户名必须为字母、数字或下划线，长度为5-20个字符!&quot;;<br />
+				43&nbsp;　　　}<br />
+				44&nbsp;　　　else<br />
+				45&nbsp;　　　{<br />
+				46&nbsp;　　　　boolean&nbsp;bTmp=info.findUser(userName);&nbsp;//找查数据库中有无该用户名<br />
+				47&nbsp;　　　　if(bTmp)&nbsp;<br />
+				48&nbsp;　　　　　msgStr&nbsp;=&quot;对不起,此用户名已经存在,请更换用户名注册!&quot;;<br />
+				49&nbsp;　　　　else<br />
+				50&nbsp;　　　　　msgStr&nbsp;=&quot;&quot;;<br />
+				51&nbsp;　　　}<br />
+				52&nbsp;　　　response.getWriter().write(msgStr);<br />
+				53&nbsp;　　}<br />
+				54&nbsp;　　else&nbsp;if(oprate.equals(&quot;chkCom&quot;))<br />
+				55&nbsp;　　{<br />
+				56&nbsp;　　　response.setContentType(&quot;text/html;charset=GB2312&quot;);<br />
+				57&nbsp;　　　if(comName.length()＜6||comName.length()＞100)<br />
+				58&nbsp;　　　{<br />
+				59&nbsp;　　　　msgStr&nbsp;=&nbsp;&quot;对不起,公司名称长度为6-100个字符(不包括字符内的空格)!&quot;;<br />
+				60&nbsp;　　　}<br />
+				61&nbsp;　　　else<br />
+				62&nbsp;　　　{<br />
+				63&nbsp;　　　　boolean&nbsp;bTmp=info.findCom(comName);&nbsp;//找查数据库中有无该企业名<br />
+				64&nbsp;　　　　if(bTmp)&nbsp;<br />
+				65&nbsp;　　　　　msgStr&nbsp;=&quot;对不起,此企业名称已经存在,请更换企业名称注册!&quot;;<br />
+				66&nbsp;　　　　else<br />
+				67&nbsp;　　　　　msgStr&nbsp;=&quot;&quot;;<br />
+				68&nbsp;　　　}<br />
+				69&nbsp;　　　response.getWriter().write(msgStr);<br />
+				70&nbsp;　　<br />
+				71&nbsp;　　}<br />
+				72&nbsp;　}<br />
+				73&nbsp;　catch(Exception&nbsp;ex)<br />
+				74&nbsp;　{<br />
+				75&nbsp;　}<br />
+				76&nbsp;　finally<br />
+				77&nbsp;　{<br />
+				78&nbsp;　　request.setAttribute(&quot;url&quot;,url);<br />
+				79&nbsp;　}<br />
+				80&nbsp;}<br />
+				81<br />
+				82&nbsp;protected&nbsp;void&nbsp;doPost(HttpServletRequest&nbsp;request,HttpServletResponse&nbsp;response)&nbsp;<br />
+				83&nbsp;throws&nbsp;ServletException&nbsp;<br />
+				84&nbsp;{<br />
+				85&nbsp;　doGet(request,response);<br />
+				86&nbsp;}<br />
+				87}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+	AJAX技术小结</p>
+<p>
+	1.&nbsp;Ajax（Asynchronous&nbsp;JavaScript&nbsp;and&nbsp;XML）是一个结合了Java技术、XML、以及JavaScript的编程技术，可以让你构建基于Java技术的Web应用，并打破了使用页面重载的惯例。&nbsp;</p>
+<p>
+	2.&nbsp;Ajax，异步JavaScript与XML，是使用客户端脚本与Web服务器交换数据的Web应用开发方法。这样，Web页面不用打断交互流程进行重新加裁，就可以动态地更新。使用Ajax，你可以创建接近本地桌面应用的，直接的、高可用的、更丰富的、更动态的Web用户接口界面。</p>
+<p>
+	3.&nbsp;对于Mozilla﹑Netscape﹑Safari、Firefox等浏览器，创建XMLHttpRequest&nbsp;方法如下:</p>
+<p>
+	xmlhttp_request&nbsp;=&nbsp;new&nbsp;XMLHttpRequest();</p>
+<p>
+	4.IE等创建XMLHttpRequest&nbsp;方法如下：</p>
+<p>
+	xmlhttp&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Msxml2.XMLHTTP&quot;)　或　xmlhttp&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</p>
+<p>
+	5.&nbsp;xmlhttp_request.open(&#39;GET&#39;,&nbsp;URL,&nbsp;true);&nbsp;xmlhttp_request.send(null);</p>
+<p>
+	6.&nbsp;open()的第一个参数是HTTP请求方式&mdash;GET，POST或任何服务器所支持的您想调用的方式。&nbsp;按照HTTP规范，该参数要大写;否则，某些浏览器(如Firefox)可能无法处理请求。第二个参数是请求页面的URL。第三个参数设置请求是否为异步模式。如果是TRUE，JavaScript函数将继续执行，而不等待服务器响应。这就是&quot;AJAX&quot;中的&quot;A&quot;。</p>
+<p>
+	Ajax技术运用的好的话，给我们的网页增添了许多友好的效果，给用户还来更好的感觉。Ajax是个好东西。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Ajax/2015/0331/351.html'>AJAX解决的一些常见问题</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Ajax/2015/0331/353.html'>Ajax忧虑与启发</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0331/356.html" >XMLHTTP为Donews Blog添加最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/355.html" >学习xhtml的教训</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/354.html" >XMLHttpRequest对象简介</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/353.html" >Ajax忧虑与启发</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/352.html" >AJAX编写用户注册实例小结</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/351.html" >AJAX解决的一些常见问题</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/350.html" >AJAX开发Back按钮</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/349.html" >AJAX基础教程</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/348.html" >XML在Web中的应用</a><span>03.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实例</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>70</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>66</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>64</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>63</span></li>
+<li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>50</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>42</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>41</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>35</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>33</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>33</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=352&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

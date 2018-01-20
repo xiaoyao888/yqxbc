@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>java如何生成二维码java生成二维码代码_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,二维码,java生成二维码,如何生成二维码" />
+  <meta name="description" content="import java.awt.AlphaComposite; import java.awt.Color; import java.awt.Graphics2D; import java.awt.Image; import java.awt.geom.AffineTransform; import java.awt.image.AffineTransformOp; import java.awt.image.BufferedImage; import java.io.Fil" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>java如何生成二维码java生成二维码代码</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-09-16 09:54 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1278" class="art_content"><p>
+	import java.awt.AlphaComposite;</p>
+<p>
+	import java.awt.Color;</p>
+<p>
+	import java.awt.Graphics2D;</p>
+<p>
+	import java.awt.Image;</p>
+<p>
+	import java.awt.geom.AffineTransform;</p>
+<p>
+	import java.awt.image.AffineTransformOp;</p>
+<p>
+	import java.awt.image.BufferedImage;</p>
+<p>
+	import java.io.File;</p>
+<p>
+	import java.io.IOException;</p>
+<p>
+	import java.text.SimpleDateFormat;</p>
+<p>
+	import java.util.Date;</p>
+<p>
+	import java.util.Hashtable; import javax.imageio.ImageIO;</p>
+<p>
+	import org.zywx.appdo.omm.service.util.MutipartUploadFile;</p>
+<p>
+	import com.google.zxing.BarcodeFormat;</p>
+<p>
+	import com.google.zxing.BinaryBitmap;</p>
+<p>
+	import com.google.zxing.DecodeHintType;</p>
+<p>
+	import com.google.zxing.EncodeHintType;</p>
+<p>
+	import com.google.zxing.LuminanceSource;</p>
+<p>
+	import com.google.zxing.MultiFormatReader;</p>
+<p>
+	import com.google.zxing.MultiFormatWriter;</p>
+<p>
+	import com.google.zxing.ReaderException;</p>
+<p>
+	import com.google.zxing.Result;</p>
+<p>
+	import com.google.zxing.WriterException;</p>
+<p>
+	import com.google.zxing.client.j2se.BufferedImageLuminanceSource;</p>
+<p>
+	import com.google.zxing.client.j2se.MatrixToImageWriter;</p>
+<p>
+	import com.google.zxing.common.BitMatrix;</p>
+<p>
+	import com.google.zxing.common.HybridBinarizer;</p>
+<p>
+	import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;</p>
+<p>
+	public class QRUtil {</p>
+<p>
+	&nbsp;</p>
+<p>
+	/**</p>
+<p>
+	* 编码（将文本生成二维码）</p>
+<p>
+	*&nbsp;</p>
+<p>
+	* @param content</p>
+<p>
+	* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;二维码中的内容</p>
+<p>
+	* @param width</p>
+<p>
+	* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;二维码图片宽度</p>
+<p>
+	* @param height</p>
+<p>
+	* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;二维码图片高度</p>
+<p>
+	* @param imagePath</p>
+<p>
+	* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;二维码图片存放位置</p>
+<p>
+	* @return 图片地址</p>
+<p>
+	*/ &nbsp;public static String encode(String content, int width, int height,</p>
+<p>
+	String imagePath) {</p>
+<p>
+	Hashtable&lt;EncodeHintType, Object&gt; hints = new Hashtable&lt;EncodeHintType, Object&gt;();</p>
+<p>
+	// 设置编码类型为utf-8</p>
+<p>
+	hints.put(EncodeHintType.CHARACTER_SET, &quot;UTF-8&quot;);</p>
+<p>
+	// 设置二维码纠错能力级别为H（最高）</p>
+<p>
+	hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);</p>
+<p>
+	hints.put(EncodeHintType.MARGIN, 0);//二维码边框 默认是4</p>
+<p>
+	BitMatrix byteMatrix = null;</p>
+<p>
+	try {</p>
+<p>
+	// 生成二维码</p>
+<p>
+	byteMatrix = new MultiFormatWriter().encode(content,</p>
+<p>
+	BarcodeFormat.QR_CODE, width, height, hints);</p>
+<p>
+	File file = new File(imagePath);</p>
+<p>
+	MatrixToImageWriter.writeToFile(byteMatrix, &quot;png&quot;, file);</p>
+<p>
+	} catch (IOException e) {</p>
+<p>
+	e.printStackTrace();</p>
+<p>
+	} catch (WriterException e) {</p>
+<p>
+	e.printStackTrace();</p>
+<div>
+	<p>
+		}</p>
+	<p>
+		return imagePath;</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		/**</p>
+	<p>
+		* 解码（读取二维码图片中的文本信息）</p>
+	<p>
+		*&nbsp;</p>
+	<p>
+		* @param imagePath</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;二维码图片路径</p>
+	<p>
+		* @return 文本信息</p>
+	<p>
+		*/</p>
+	<p>
+		public static String decode(String imagePath) {</p>
+	<p>
+		// 返回的文本信息</p>
+	<p>
+		String content = &quot;&quot;;</p>
+	<p>
+		try {</p>
+	<p>
+		// 创建图片文件</p>
+	<p>
+		File file = new File(imagePath);</p>
+	<p>
+		if (!file.exists()) {</p>
+	<p>
+		return content;</p>
+	<p>
+		}</p>
+	<p>
+		BufferedImage image = null;</p>
+	<p>
+		image = ImageIO.read(file);</p>
+	<p>
+		if (null == image) {</p>
+	<p>
+		return content;</p>
+	<p>
+		}</p>
+	<p>
+		// 解码</p>
+	<p>
+		LuminanceSource source = new BufferedImageLuminanceSource(image);</p>
+	<p>
+		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));</p>
+	<p>
+		Hashtable hints = new Hashtable();</p>
+	<p>
+		hints.put(DecodeHintType.CHARACTER_SET, &quot;UTF-8&quot;);</p>
+	<p>
+		Result rs = new MultiFormatReader().decode(bitmap, hints);</p>
+	<p>
+		content = rs.getText();</p>
+	<p>
+		} catch (IOException e) {</p>
+	<p>
+		e.printStackTrace();</p>
+	<p>
+		} catch (ReaderException e) {</p>
+	<p>
+		e.printStackTrace();</p>
+	<p>
+		}</p>
+	<p>
+		return content;</p>
+	<p>
+		}</p>
+	<p>
+		/**</p>
+	<p>
+		* 图片打水印</p>
+	<p>
+		*&nbsp;</p>
+	<p>
+		* @param bgImage</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;背景图</p>
+	<p>
+		* @param waterImg</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;水印图</p>
+	<p>
+		* @param uniqueFlag</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;生成的新图片名称中的唯一标识，用来保证生成的图片名称不重复，如果为空或为null,将使用当前时间作为标识</p>
+	<p>
+		* @return 新图片路径</p>
+	<p>
+		*/</p>
+	<p>
+		public static String addImageWater(String bgImage, String waterImg,</p>
+	<p>
+		String uniqueFlag) {</p>
+	<p>
+		int x = 0;</p>
+	<p>
+		int y = 0;</p>
+	<p>
+		String newImgPath = &quot;&quot;;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		if (null == uniqueFlag) {</p>
+	<p>
+		uniqueFlag = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;)</p>
+	<p>
+		.format(new Date());</p>
+	<p>
+		} else if (uniqueFlag.trim().length() &lt; 1) {</p>
+	<p>
+		uniqueFlag = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;)</p>
+	<p>
+		.format(new Date());</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		String fileName = &quot;&quot; ;</p>
+	<p>
+		&nbsp;try {</p>
+	<p>
+		File file = new File(bgImage);</p>
+	<p>
+		fileName = file.getName();</p>
+	<p>
+		Image image = ImageIO.read(file);</p>
+	<p>
+		int width = image.getWidth(null);</p>
+	<p>
+		int height = image.getHeight(null);</p>
+	<p>
+		BufferedImage bufferedImage = new BufferedImage(width, height,</p>
+	<p>
+		BufferedImage.TYPE_INT_RGB);</p>
+	<p>
+		Graphics2D g = bufferedImage.createGraphics();</p>
+	<p>
+		g.drawImage(image, 0, 0, width, height, null);</p>
+	<p>
+		Image waterImage = ImageIO.read(new File(waterImg)); // 水印文件</p>
+	<p>
+		int width_water = waterImage.getWidth(null);</p>
+	<p>
+		int height_water = waterImage.getHeight(null);</p>
+	<p>
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,</p>
+	<p>
+		1));</p>
+	<p>
+		int widthDiff = width - width_water;</p>
+	<p>
+		int heightDiff = height - height_water;</p>
+	<p>
+		x = widthDiff / 2;</p>
+	<p>
+		y = heightDiff / 2;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		g.drawImage(waterImage, x, y, width_water, height_water, null); // 水印文件结束</p>
+	<p>
+		g.dispose();</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		if (bgImage.contains(fileName)) {</p>
+	<p>
+		newImgPath = bgImage.replace(fileName, uniqueFlag + fileName);</p>
+	<p>
+		fileName = uniqueFlag + fileName ;</p>
+	<p>
+		}</p>
+	<p>
+		File newImg = new File(newImgPath);</p>
+	<p>
+		ImageIO.write(bufferedImage, &quot;png&quot;, newImg);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		File waterFile = new File(waterImg);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		if (file.exists()) {</p>
+	<p>
+		file.delete();</p>
+	<p>
+		}</p>
+	<p>
+		if (waterFile.exists()) {</p>
+	<p>
+		waterFile.delete();</p>
+	<p>
+		}</p>
+	<p>
+		} catch (IOException e) {</p>
+	<p>
+		e.printStackTrace();</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		return fileName ;</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		/**</p>
+	<p>
+		* 图片缩放</p>
+	<p>
+		*&nbsp;</p>
+	<p>
+		* @param filePath</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;图片路径</p>
+	<p>
+		* @param height</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;缩放到高度</p>
+	<p>
+		* @param width</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;缩放宽度</p>
+	<p>
+		* @param fill</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;比例足时是否填白 true为填白，二维码是黑白色，这里调用时建议设为true</p>
+	<p>
+		* @return 新图片路径</p>
+	<p>
+		*/</p>
+	<p>
+		public static String resizeImg(String filePath, int width, int height,</p>
+	<p>
+		boolean fill) {</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		String newImgPath = &quot;&quot;;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		try {</p>
+	<p>
+		double ratio = 0; // 缩放比例</p>
+	<p>
+		File f = new File(filePath);</p>
+	<p>
+		String fileName = f.getName();</p>
+	<p>
+		BufferedImage bi = ImageIO.read(f);</p>
+	<p>
+		Image itemp = bi.getScaledInstance(width, height,</p>
+	<p>
+		BufferedImage.SCALE_SMOOTH);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		if (height != 0 &amp;&amp; width != 0) {</p>
+	<p>
+		// 计算比例</p>
+	<p>
+		if ((bi.getHeight() &gt; height) || (bi.getWidth() &gt; width)) {</p>
+	<p>
+		if (bi.getHeight() &gt; bi.getWidth()) {</p>
+	<p>
+		ratio = (new Integer(height)).doubleValue()</p>
+	<p>
+		/ bi.getHeight();</p>
+	<p>
+		} else {</p>
+	<p>
+		ratio = (new Integer(width)).doubleValue()</p>
+	<p>
+		/ bi.getWidth();</p>
+	<p>
+		}</p>
+	<p>
+		AffineTransformOp op = new AffineTransformOp(</p>
+	<p>
+		AffineTransform.getScaleInstance(ratio, ratio),</p>
+	<p>
+		null);</p>
+	<p>
+		itemp = op.filter(bi, null);</p>
+	<p>
+		}</p>
+	<p>
+		}</p>
+	<p>
+		if (fill) {</p>
+	<p>
+		BufferedImage image = new BufferedImage(width, height,</p>
+	<p>
+		BufferedImage.TYPE_INT_RGB);</p>
+	<p>
+		Graphics2D g = image.createGraphics();</p>
+	<p>
+		g.setColor(Color.white);</p>
+	<p>
+		g.fillRect(0, 0, width, height);</p>
+	<p>
+		if (width == itemp.getWidth(null)) {</p>
+	<p>
+		g.drawImage(itemp, 0, (height - itemp.getHeight(null)) / 2,</p>
+	<p>
+		itemp.getWidth(null), itemp.getHeight(null),</p>
+	<p>
+		Color.white, null);</p>
+	<p>
+		} else {</p>
+	<p>
+		g.drawImage(itemp, (width - itemp.getWidth(null)) / 2, 0,</p>
+	<p>
+		itemp.getWidth(null), itemp.getHeight(null),</p>
+	<p>
+		Color.white, null);</p>
+	<p>
+		}</p>
+	<p>
+		g.dispose();</p>
+	<p>
+		itemp = image;</p>
+	<p>
+		}</p>
+	<p>
+		String now = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;)</p>
+	<p>
+		.format(new Date());</p>
+	<p>
+		if (filePath.contains(fileName)) {</p>
+	<p>
+		newImgPath = filePath.replace(fileName, now + fileName);</p>
+	<p>
+		}</p>
+	<p>
+		File newImg = new File(newImgPath);</p>
+	<p>
+		ImageIO.write((BufferedImage) itemp, &quot;png&quot;, newImg);</p>
+	<p>
+		} catch (IOException e) {</p>
+	<p>
+		e.printStackTrace();</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		return newImgPath;</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		/**</p>
+	<p>
+		* 图片添加边框</p>
+	<p>
+		*&nbsp;</p>
+	<p>
+		* @param mainImgPath</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;要加边框的图片</p>
+	<p>
+		* @param bgImgPath</p>
+	<p>
+		* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;背景图（实际上是将图片放在背景图上，只利用背景图的边框效果）</p>
+	<p>
+		* @return 制作完成的图片路径</p>
+	<p>
+		*/</p>
+	<p>
+		public static String addWaterBorder(String mainImgPath, String bgImgPath) {</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		String borderImgPath = &quot;&quot;;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		try {</p>
+	<p>
+		File f = new File(mainImgPath);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		BufferedImage bi;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		bi = ImageIO.read(f);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		// 背景图长宽都比主图多4像素，这是因为我画的背景图的边框效果的大小正好是4像素，</p>
+	<p>
+		// 主图周边比背景图少4像素正好能把背景图的边框效果完美显示出来</p>
+	<p>
+		int width = bi.getWidth();</p>
+	<p>
+		int height = bi.getHeight();</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		int bgWidth = width + 4;</p>
+	<p>
+		int bgHeight = height + 4;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		String now = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;)</p>
+	<p>
+		.format(new Date());</p>
+	<p>
+		borderImgPath = QRUtil.addImageWater(</p>
+	<p>
+		QRUtil.resizeImg(bgImgPath, bgHeight, bgWidth, true),</p>
+	<p>
+		mainImgPath, now);</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		if (f.exists()) {</p>
+	<p>
+		f.delete();</p>
+	<p>
+		}</p>
+	<p>
+		} catch (IOException e) {</p>
+	<p>
+		e.printStackTrace();</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		return borderImgPath;</p>
+	<p>
+		}</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		/**</p>
+	<p>
+		* 生成带有中间小图标的二维码</p>
+	<p>
+		*&nbsp;</p>
+	<p>
+		* @param imagePath 二维码保存地址</p>
+	<p>
+		* @param content &nbsp;二维码内容</p>
+	<p>
+		* @param nginxUrl&nbsp;</p>
+	<p>
+		* @param width</p>
+	<p>
+		* @param height</p>
+	<p>
+		* @return</p>
+	<p>
+		*/</p>
+	<p>
+		public static String &nbsp;createQR(String imagePath,String content,String nginxUrl,int width,int height){</p>
+	<p>
+		//二维码图片中间的logo</p>
+	<p>
+		String logoPath = imagePath + &quot;logo.png&quot;;</p>
+	<p>
+		&nbsp;</p>
+	<p>
+		imagePath += MutipartUploadFile.DEFAULT_FILE_NAME_GENERATOR.generate(&quot;jpg&quot;);</p>
+	<p>
+		// 二维码存放地址</p>
+	<p>
+		// 生成二维码,返回的是生成好的二维码图片的所在路径</p>
+	<p>
+		String qrImgPath = QRUtil.encode(content, width, height, imagePath);</p>
+	<p>
+		// 缩放水印图片,为保证二维码的读取正确，图片不超过二维码图片的五分之一，这里设为六分之一</p>
+	<p>
+		String waterImgPath = QRUtil.resizeImg(logoPath, width / 6, height / 6, true);</p>
+	<p>
+		// 生成带有图片的二维码，返回的是生成好的二维码图片的所在路径</p>
+	<p>
+		String fileName = QRUtil.addImageWater(qrImgPath, waterImgPath, &quot;a&quot;);</p>
+	<p>
+		String filePath = nginxUrl + &quot;appImages/&quot; + fileName;</p>
+	<p>
+		return filePath;</p>
+	<p>
+		}</p>
+	<p>
+		public static void main(String[] args) {</p>
+	<p>
+		String imagePath =&quot;e:/tmp/flypeng/&quot;;</p>
+	<p>
+		String content = &quot;http://www.flypeng.com&quot;;</p>
+	<p>
+		String nginxUrl= &quot;http://192.168.1.2:8888/&quot; ;</p>
+	<p>
+		int width = 300;</p>
+	<p>
+		int height = 300;</p>
+	<p>
+		System.out.println(createQR(imagePath,content,nginxUrl,width,height));</p>
+	<p>
+		}</p>
+	<p>
+		}</p>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0830/1232.html'>用java实现打印功能</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0916/1279.html'>java检测当前URL是否可连接或是否有效</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1278&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

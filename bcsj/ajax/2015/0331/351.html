@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AJAX解决的一些常见问题_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="AJAX解决的一些常见问题" />
+  <meta name="description" content="不可否认，我是非常看好AJAX技术的。我以为AJAX技术对于互联网，就像HTML对于互联网一样。但同时又要看到，AJAX技术不能完全取代我们常规的WEB开发技术。AJAX技术有它让人眼睛一亮的优" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Ajax/'>Ajax</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>AJAX解决的一些常见问题</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-31 09:36 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="351" class="art_content"><p>
+	不可否认，我是非常看好AJAX技术的。我以为AJAX技术对于互联网，就像HTML对于互联网一样。但同时又要看到，AJAX技术不能完全取代我们常规的WEB开发技术。AJAX技术有它让人眼睛一亮的优点，同时它也有很多弱点。我们作为开发人员，不能因为AJAX技术好，就在WEB开发中全部使用AJAX。</p>
+<p>
+	&nbsp;对了，不能为了AJAX而AJAX，就像钢要用到刀刃上一样，AJAX应该用在能充分发挥它的优点的地方。而大多数的时候，我们还需要和往常一样，使用MVC的实现STRUTS开发框架。</p>
+<p>
+	&nbsp;提到AJAX，不能不提到与它一起被强调的另一个词：用户体验。AJAX丰富了B/S模式的表现层，对于B/S模式的UI来说，它号称没有做不到、只有想不到。这里说来说去，都是一个用户体验的问题。AJAX号称无刷新，其实很多时候，用户需要有刷新才能知道有了页面提交，如在保存数据的时候，所以在这个时候使用AJAX却有害于用户体验的。</p>
+<p>
+	&nbsp;那么在什么时候可能使用到AJAX呢？第一、请求的提交是为了页面数据的显示，这时候用户一般不希望看到页面的刷新，是使用AJAX的一个最佳时候。第二、如果请求提交后，用户能从页面感觉到提交结果，这时候，也最好不要有页面刷新，推荐使用AJAX技术。第三、如果请求提交后，用户不能从页面感觉到提交动作，如绝大多数时候的数据的增加和修改，这时候则需要页面刷新，不能使用AJAX技术。第四、复杂的UI，以前对于复杂的C/S模式的UI，B/S模式一向采取逃避的方法，现在则可以放心大胆的使用AJAX来加以解决。</p>
+<p>
+	&nbsp;AJAX技术的实践，就像有了魔法一样，一旦你使用了一次，就会爱不释手。面对精彩的AJAX技术，还等什么？赶快看看您的WEB应用里，有没有下列问题之一，如果有的话，不妨用AJAX试试看！</p>
+<h3>
+	第一、输入值校验的问题。</h3>
+<p>
+	输入校验是我们经常遇到的问题，这种问题很多时候是可以在JS里解决。但有些时候却需要访问后台，如在申请用户的时候检查用户名是否重复等等问题。用AJAX吧，页面不会有刷新。</p>
+<h3>
+	第二、级联显示的问题。</h3>
+<p>
+	这种问题应该是我们遇到的最多的表现层的问题，常常让我们左右为难：你说访问后台吧，页面需要刷新，用户体验很不好；你说用JS解决吧，确实有点让JS勉为其难，强行用JS解决了，代码一大堆不说，数据量大的话还会有内存问题，而且数据也不安全。</p>
+<p>
+	这类的问题很多：最常见的是级联的两个或更多的选择框，还有选择框的变形，级联菜单，导航树等等。</p>
+<p>
+	遇到了这一类的问题，赶快行动吧！用AJAX访问后台，既不需要刷新页面，也没有过多的JS代码，一举两得。</p>
+<h3>
+	&nbsp;第三、请求结果只改变部分页面。</h3>
+<p>
+	&nbsp;这一类的问题我们也会时常碰到，如，论坛的回复帖子和帖子列表在一个页面上的时候。这两个UI在一个页面上，用户体验比回复帖子在另外一个页面好。但回复后要对整个页面进行刷新，这种感觉就不好了。你看，那么大一个帖子列表，只增加你的一个回复，却要对整个页面进行刷新，不管从哪个角度来看都不好。</p>
+<p>
+	&nbsp;这一类的问题不管是用户体验，还是从技术的角度来讲，都是使用AJAX最好不过。</p>
+<h3>
+	第四、由于技术原因而使用iframe的问题。</h3>
+<p>
+	Iframe的问题纯粹是由于技术的原因引起的。为了解决技术问题而引入iframe,却iframe的一再嵌套却又引入了其他的技术难题。有的想尽办法来勉强解决这个问题，有的却干脆不要使用iframe。不使用iframe，而使用JS的解决方法却是繁琐的。现在不用左右为难了，使用AJAX就是最好的解决方案。</p>
+<h3>
+	&nbsp;第五、数据录入和列表显示在同一个页面。</h3>
+<p>
+	C/S模式的UI中常常有数据录入和数据列表显示在同一个界面上，这样对于用户来说有很好的用户体验，用户录入的结果马上就能在同一界面显示。但是在B/S的UI上，由于需要提交刷新的问题，我们经常把数据的录入和数据显示分别放在两个不同的页面上。很显然，这样的用户体验肯定没有C/S模式来得好。像这样的问题还有很多，在B/S模式下，都因为技术的原因而选择其他的解决办法。现在我们可以自豪的使用AJAX来宣告可以做出和C/S模式一样复杂的UI了。</p>
+<h3>
+	&nbsp;第六、翻页问题。</h3>
+<p>
+	如果有技术可以使翻页不需要刷新，你愿不愿意尝试一下呢？有很多这样的数据显示的问题需要刷新哦，考虑一下AJAX！</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Ajax/2015/0331/350.html'>AJAX开发Back按钮</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Ajax/2015/0331/352.html'>AJAX编写用户注册实例小结</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0331/356.html" >XMLHTTP为Donews Blog添加最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/355.html" >学习xhtml的教训</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/354.html" >XMLHttpRequest对象简介</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/353.html" >Ajax忧虑与启发</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/352.html" >AJAX编写用户注册实例小结</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/351.html" >AJAX解决的一些常见问题</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/350.html" >AJAX开发Back按钮</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/349.html" >AJAX基础教程</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/348.html" >XML在Web中的应用</a><span>03.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实例</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>70</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>66</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>64</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>63</span></li>
+<li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>50</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>42</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>41</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>35</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>33</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>33</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=351&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

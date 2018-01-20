@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Spring @RequestMapping 注解使用技巧_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Spring,@RequestMapping,注解,使用技巧" />
+  <meta name="description" content="@RequestMapping 是 Spring Web 应用程序中最常被用到的注解之一。这个注解会将 HTTP 请求映射到 MVC 和 REST 控制器的处理方法上。 在这篇文章中，你将会看到 @RequestMapping 注解在被用来进行" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/SpringBoot/'>SpringBoot</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring @RequestMapping 注解使用技巧</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2017-10-12 09:52 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1630" class="art_content"><div id="translate_59341">
+	<div>
+		<p>
+			@RequestMapping 是 Spring Web 应用程序中最常被用到的注解之一。这个注解会将 HTTP 请求映射到 MVC 和 REST 控制器的处理方法上。</p>
+		<p>
+			在这篇文章中，你将会看到 @RequestMapping 注解在被用来进行 Spring MVC 控制器方法的映射可以如何发挥其多才多艺的功能的。</p>
+		<h2 id="content_h2_1_7">
+			Request Mapping 基础用法</h2>
+		<p>
+			在 Spring MVC 应用程序中，RequestDispatcher (在 Front Controller 之下) 这个 servlet 负责将进入的 HTTP 请求路由到控制器的处理方法。</p>
+		<p>
+			在对 Spring MVC 进行的配置的时候, 你需要指定请求与处理方法之间的映射关系。</p>
+		<p>
+			<a href="https://i2.wp.com/springframework.guru/wp-content/uploads/2017/09/mvc.png" rel="nofollow"><img src="https://static.oschina.net/uploads/space/2017/0913/113223_1ykr_2903254.png" /></a></p>
+		<p>
+			要配置 Web 请求的映射，就需要你用上 @RequestMapping 注解。</p>
+		<p>
+			@RequestMapping 注解可以在控制器类的级别和/或其中的方法的级别上使用。</p>
+		<p>
+			在类的级别上的注解会将一个特定请求或者请求模式映射到一个控制器之上。之后你还可以另外添加方法级别的注解来进一步指定到处理方法的映射关系。</p>
+	</div>
+	<div>
+		<div>
+			&nbsp;</div>
+	</div>
+</div>
+<div id="translate_59342">
+	<div>
+		<p>
+			下面是一个同时在类和方法上应用了 @RequestMapping 注解的示例：</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(&quot;/&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;get()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//mapped&nbsp;to&nbsp;hostname:port/home/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;get&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(&quot;/index&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;index()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//mapped&nbsp;to&nbsp;hostname:port/home/index/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;index&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			如上述代码所示，到 /home 的请求会由 get() 方法来处理，而到 /home/index 的请求会由 index() 来处理。</p>
+		<h2 id="content_h2_2_9">
+			@RequestMapping 来处理多个 URI</h2>
+		<p>
+			你可以将多个请求映射到一个方法上去，只需要添加一个带有请求路径值列表的&nbsp;@RequestMapping 注解就行了。</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;/page&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;page*&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;view/*,**/msg&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;indexMultipleMapping()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;index&nbsp;multiple&nbsp;mapping.&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			如你在这段代码中所看到的，@RequestMapping 支持统配符以及ANT风格的路径。前面这段代码中，如下的这些 URL 都会由&nbsp;indexMultipleMapping() 来处理：</p>
+		<ul>
+			<li>
+				<p>
+					localhost:8080/home</p>
+			</li>
+			<li>
+				<p>
+					localhost:8080/home/</p>
+			</li>
+			<li>
+				<p>
+					localhost:8080/home/page</p>
+			</li>
+			<li>
+				<p>
+					localhost:8080/home/pageabc</p>
+			</li>
+			<li>
+				<p>
+					localhost:8080/home/view/</p>
+			</li>
+			<li>
+				<p>
+					localhost:8080/home/view/view</p>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<div>
+			&nbsp;</div>
+	</div>
+</div>
+<div id="translate_59343">
+	<div>
+		<h2 id="content_h2_3_5">
+			带有 @RequestParam 的&nbsp;@RequestMapping</h2>
+		<p>
+			@RequestParam 注解配合 @RequestMapping 一起使用，可以将请求的参数同处理方法的参数绑定在一起。</p>
+		<p>
+			@RequestParam 注解使用的时候可以有一个值，也可以没有值。这个值指定了需要被映射到处理方法参数的请求参数, 代码如下所示：</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/id&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getIdByValue(@RequestParam(&quot;id&quot;)&nbsp;String&nbsp;personId)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;ID&nbsp;is&nbsp;&quot;&nbsp;+&nbsp;personId);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Get&nbsp;ID&nbsp;from&nbsp;query&nbsp;string&nbsp;of&nbsp;URL&nbsp;with&nbsp;value&nbsp;element&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/personId&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getId(@RequestParam&nbsp;String&nbsp;personId)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;ID&nbsp;is&nbsp;&quot;&nbsp;+&nbsp;personId);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Get&nbsp;ID&nbsp;from&nbsp;query&nbsp;string&nbsp;of&nbsp;URL&nbsp;without&nbsp;value&nbsp;element&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			在代码的第6行，id 这个请求参数被映射到了&nbsp;thegetIdByValue() 这个处理方法的参数 personId 上。</p>
+		<p>
+			如果请求参数和处理方法参数的名称一样的话，@RequestParam&nbsp;注解的 value 这个参数就可省掉了, 如代码的第11行所示。</p>
+		<p>
+			@RequestParam&nbsp;注解的 required 这个参数定义了参数值是否是必须要传的。</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/name&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getName(@RequestParam(value&nbsp;=&nbsp;&quot;person&quot;,&nbsp;required&nbsp;=&nbsp;false)&nbsp;String&nbsp;personName)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Required&nbsp;element&nbsp;of&nbsp;request&nbsp;param&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+	</div>
+</div>
+<div id="translate_59344">
+	<div>
+		<p>
+			在这段代码中，因为 required 被指定为 false，所以 getName() 处理方法对于如下两个 URL 都会进行处理：</p>
+		<ul>
+			<li>
+				<p>
+					/home/name?person=xyz</p>
+			</li>
+			<li>
+				<p>
+					/home/name</p>
+			</li>
+		</ul>
+		<p>
+			@RequestParam 的 defaultValue 取值就是用来给取值为空的请求参数提供一个默认值的。</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/name&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getName(@RequestParam(value&nbsp;=&nbsp;&quot;person&quot;,&nbsp;defaultValue&nbsp;=&nbsp;&quot;John&quot;)&nbsp;String&nbsp;personName)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Required&nbsp;element&nbsp;of&nbsp;request&nbsp;param&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			在这段代码中，如果 person 这个请求参数为空，那么 getName() 处理方法就会接收 John 这个默认值作为其参数。</p>
+	</div>
+</div>
+<div id="translate_59345">
+	<div>
+		<div>
+			<h2 id="content_h2_5_5">
+				用 @RequestMapping 处理 HTTP 的各种方法</h2>
+			<p>
+				Spring MVC 的 @RequestMapping 注解能够处理 HTTP 请求的方法, 比如&nbsp;GET, PUT, POST, DELETE 以及 PATCH。</p>
+			<p>
+				所有的请求默认都会是 HTTP GET 类型的。</p>
+			<p>
+				为了能降一个请求映射到一个特定的 HTTP 方法，你需要在 @RequestMapping 中使用 method 来声明 HTTP 请求所使用的方法类型，如下所示：</p>
+			<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;get()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;get&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(method&nbsp;=&nbsp;RequestMethod.DELETE)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;delete()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;delete&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(method&nbsp;=&nbsp;RequestMethod.POST)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;post()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;post&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(method&nbsp;=&nbsp;RequestMethod.PUT)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;put()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;put&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(method&nbsp;=&nbsp;RequestMethod.PATCH)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;patch()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Hello&nbsp;from&nbsp;patch&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+			<p>
+				在上述这段代码中， @RequestMapping 注解中的 method 元素声明了 HTTP 请求的 HTTP 方法的类型。</p>
+			<p>
+				所有的处理处理方法会处理从这同一个 URL( /home)进来的请求, 但要看指定的 HTTP 方法是什么来决定用哪个方法来处理。</p>
+			<p>
+				例如，一个 POST 类型的请求 /home 会交给 post() 方法来处理，而一个 DELETE 类型的请求 /home 则会由 delete() 方法来处理。</p>
+			<p>
+				你会看到 Spring MVC 将使用这样相同的逻辑来映射其它的方法。</p>
+		</div>
+	</div>
+</div>
+<div id="translate_59346">
+	<div>
+		<h2 id="content_h2_6_5">
+			用 @RequestMapping 来处理生产和消费对象</h2>
+		<p>
+			可以使用 @RequestMapping 注解的&nbsp;produces 和&nbsp;consumes 这两个元素来缩小请求映射类型的范围。</p>
+		<p>
+			为了能用请求的媒体类型来产生对象, 你要用到&nbsp;@RequestMapping 的 produces 元素再结合着 @ResponseBody 注解。</p>
+		<p>
+			你也可以利用 @RequestMapping 的 comsumes 元素再结合着&nbsp;@RequestBody 注解用请求的媒体类型来消费对象。</p>
+		<p>
+			下面这段代码就用到的 @RequestMapping 的生产和消费对象元素：</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/prod&quot;,&nbsp;produces&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;application/JSON&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;@ResponseBody
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getProduces()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Produces&nbsp;attribute&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/cons&quot;,&nbsp;consumes&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;application/JSON&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;application/XML&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getConsumes()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Consumes&nbsp;attribute&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			在这段代码中， getProduces() 处理方法会产生一个 JSON 响应， getConsumes() 处理方法可以同时处理请求中的 JSON 和 XML 内容。</p>
+	</div>
+</div>
+<div id="translate_59347">
+	<div>
+		<h2 id="content_h2_7_5">
+			使用 @RequestMapping 来处理消息头</h2>
+		<p>
+			@RequestMapping 注解提供了一个 header 元素来根据请求中的消息头内容缩小请求映射的范围。</p>
+		<p>
+			在可以指定 header 元素的值，用 myHeader = myValue 这样的格式：</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/head&quot;,&nbsp;headers&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;content-type=text/plain&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;post()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Mapping&nbsp;applied&nbsp;along&nbsp;with&nbsp;headers&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			在上面这段代码中， @RequestMapping 注解的&nbsp;headers 属性将映射范围缩小到了 post() 方法。有了这个，post() 方法就只会处理到 /home/head 并且 content-typeheader 被指定为 text/plain 这个值的请求。</p>
+		<p>
+			你也可以像下面这样指定多个消息头：</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/head&quot;,&nbsp;headers&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;content-type=text/plain&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;content-type=text/html&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})&nbsp;String&nbsp;post()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Mapping&nbsp;applied&nbsp;along&nbsp;with&nbsp;headers&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			这样， post() 方法就能同时接受&nbsp;text/plain 还有 text/html 的请求了。</p>
+	</div>
+	<div>
+		<div>
+			&nbsp;</div>
+	</div>
+</div>
+<div id="translate_59348">
+	<div>
+		<h2 id="content_h2_8_5">
+			使用 @RequestMapping 来处理请求参数</h2>
+		<p>
+			@RequestMapping 直接的 params 元素可以进一步帮助我们缩小请求映射的定位范围。使用&nbsp;params 元素，你可以让多个处理方法处理到同一个URL 的请求, 而这些请求的参数是不一样的。</p>
+		<p>
+			你可以用 myParams = myValue 这种格式来定义参数，也可以使用通配符来指定特定的参数值在请求中是不受支持的。</p>
+		<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/fetch&quot;,&nbsp;params&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;personId=10&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getParams(@RequestParam(&quot;personId&quot;)&nbsp;String&nbsp;id)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Fetched&nbsp;parameter&nbsp;using&nbsp;params&nbsp;attribute&nbsp;=&nbsp;&quot;&nbsp;+&nbsp;id;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/fetch&quot;,&nbsp;params&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;personId=20&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getParamsDifferent(@RequestParam(&quot;personId&quot;)&nbsp;String&nbsp;id)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Fetched&nbsp;parameter&nbsp;using&nbsp;params&nbsp;attribute&nbsp;=&nbsp;&quot;&nbsp;+&nbsp;id;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+		<p>
+			在这段代码中，getParams() 和 getParamsDifferent() 两个方法都能处理相同的一个 URL (/home/fetch) ，但是会根据 params 元素的配置不同而决定具体来执行哪一个方法。</p>
+		<p>
+			例如，当 URL 是 /home/fetch?id=10 的时候, getParams() 会执行，因为 id 的值是10,。对于 localhost:8080/home/fetch?personId=20 这个URL, getParamsDifferent() 处理方法会得到执行，因为 id 值是 20。</p>
+	</div>
+</div>
+<div id="translate_59349">
+	<div>
+		<div>
+			<h2 id="content_h2_9_5">
+				使用 @RequestMapping 处理动态 URI</h2>
+			<p>
+				@RequestMapping 注解可以同&nbsp;@PathVaraible 注解一起使用，用来处理动态的 URI，URI 的值可以作为控制器中处理方法的参数。你也可以使用正则表达式来只处理可以匹配到正则表达式的动态 URI。</p>
+			<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/fetch/{id}&quot;,&nbsp;method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getDynamicUriValue(@PathVariable&nbsp;String&nbsp;id)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;ID&nbsp;is&nbsp;&quot;&nbsp;+&nbsp;id);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Dynamic&nbsp;URI&nbsp;parameter&nbsp;fetched&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;&quot;/fetch/{id:[a-z]+}/{name}&quot;,&nbsp;method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getDynamicUriValueRegex(@PathVariable(&quot;name&quot;)&nbsp;String&nbsp;name)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;Name&nbsp;is&nbsp;&quot;&nbsp;+&nbsp;name);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;Dynamic&nbsp;URI&nbsp;parameter&nbsp;fetched&nbsp;using&nbsp;regex&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+			<p>
+				在这段代码中，方法 getDynamicUriValue() 会在发起到 localhost:8080/home/fetch/10 的请求时执行。这里&nbsp;getDynamicUriValue() 方法 id 参数也会动态地被填充为 10 这个值。</p>
+			<p>
+				方法 getDynamicUriValueRegex() 会在发起到 localhost:8080/home/fetch/category/shirt 的请求时执行。不过，如果发起的请求是 /home/fetch/10/shirt 的话，会抛出异常，因为这个URI并不能匹配正则表达式。</p>
+			<p>
+				@PathVariable 同 @RequestParam的运行方式不同。你使用 @PathVariable 是为了从 URI 里取到查询参数值。换言之，你使用&nbsp;@RequestParam 是为了从 URI 模板中获取参数值。</p>
+		</div>
+	</div>
+</div>
+<div id="translate_59350">
+	<div>
+		<div>
+			<h2 id="content_h2_10_5">
+				@RequestMapping 默认的处理方法</h2>
+			<p>
+				在控制器类中，你可以有一个默认的处理方法，它可以在有一个向默认 URI 发起的请求时被执行。</p>
+			<p>
+				下面是默认处理方法的示例：</p>
+			<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping()
+&nbsp;&nbsp;&nbsp;&nbsp;String
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&quot;This&nbsp;is&nbsp;a&nbsp;default&nbsp;method&nbsp;for&nbsp;the&nbsp;class&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+			<p>
+				在这段代码中，向 /home 发起的一个请求将会由 default() 来处理，因为注解并没有指定任何值。</p>
+		</div>
+	</div>
+</div>
+<div id="translate_59351">
+	<div>
+		<div>
+			<h2 id="content_h2_11_5">
+				@RequestMapping 快捷方式</h2>
+			<p>
+				Spring 4.3&nbsp;引入了方法级注解的变体，也被叫做 @RequestMapping 的组合注解。组合注解可以更好的表达被注解方法的语义。它们所扮演的角色就是针对&nbsp;@RequestMapping 的封装，而且成了定义端点的标准方法。</p>
+			<p>
+				例如，@GetMapping 是一个组合注解，它所扮演的是 @RequestMapping(method =RequestMethod.GET) 的一个快捷方式。<br />
+				方法级别的注解变体有如下几个：</p>
+			<ul>
+				<li>
+					<p>
+						@GetMapping</p>
+				</li>
+				<li>
+					<p>
+						@PostMapping</p>
+				</li>
+				<li>
+					<p>
+						@PutMapping</p>
+				</li>
+				<li>
+					<p>
+						@DeleteMapping</p>
+				</li>
+				<li>
+					<p>
+						@PatchMapping</p>
+				</li>
+			</ul>
+			<p>
+				如下代码展示了如何使用组合注解：</p>
+			<pre>
+@RestController
+@RequestMapping(&quot;/home&quot;)
+public&nbsp;class&nbsp;IndexController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping(&quot;/person&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;getPerson()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;GET&quot;,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping(&quot;/person/{id}&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;getPersonById(@PathVariable&nbsp;String&nbsp;id)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;GET&nbsp;with&nbsp;id&nbsp;&quot;&nbsp;+&nbsp;id,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping(&quot;/person&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;postPerson()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;POST&nbsp;method&quot;,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@PutMapping(&quot;/person&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;putPerson()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;PUT&nbsp;method&quot;,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@DeleteMapping(&quot;/person&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;deletePerson()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;DELETE&nbsp;method&quot;,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;@PatchMapping(&quot;/person&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;@ResponseBody&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;patchPerson()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ResponseEntity&nbsp;&lt;&nbsp;String&nbsp;&gt;&nbsp;(&quot;Response&nbsp;from&nbsp;PATCH&nbsp;method&quot;,&nbsp;HttpStatus.OK);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre>
+			<p>
+				在这段代码中，每一个处理方法都使用 @RequestMapping 的组合变体进行了注解。尽管每个变体都可以使用带有方法属性的 @RequestMapping 注解来互换实现, 但组合变体仍然是一种最佳的实践 &mdash; 这主要是因为组合注解减少了在应用程序上要配置的元数据，并且代码也更易读。</p>
+		</div>
+	</div>
+</div>
+<div id="translate_59352">
+	<div>
+		<div>
+			<h2 id="content_h2_12_5">
+				@RequestMapping 总结</h2>
+			<p>
+				如你在本文中所看到的，@RequestMapping 注解是非常灵活的。你可以使用该注解配置&nbsp;Spring MVC 来处理大量的场景用例。它可以被用来在 Spring MVC 中配置传统的网页请求，也可以是 REST 风格的 Web 服务。</p>
+		</div>
+	</div>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：没有了 </li>
+            <li class="next">下一篇：<a href='/SpringBoot/1631.html'>Spring Boot整合jpa,Shiro进行权限管理教程</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/SpringBoot/1632.html" > spring boot 使用spring AOP实现拦截器</a><span>10.19</span></li>
+<li><a href="/SpringBoot/1631.html" >Spring Boot整合jpa,Shiro进行权限管理</a><span>10.12</span></li>
+<li><a href="/SpringBoot/1630.html" >Spring @RequestMapping 注解使用技巧</a><span>10.12</span></li>
+<li><a href="/SpringBoot/1611.html" >springboot与mybatis如何整合实例详解</a><span>08.15</span></li>
+<li><a href="/SpringBoot/1610.html" >spring boot打包web项目需加入以下配</a><span>08.14</span></li>
+<li><a href="/SpringBoot/1607.html" >spring boot war启动和jar启动注意事项</a><span>08.09</span></li>
+<li><a href="/SpringBoot/1605.html" >SpringBoot入门系列：第一篇 Hello </a><span>07.31</span></li>
+<li><a href="/SpringBoot/1604.html" >SpringBoot入门——局部与全局的异</a><span>07.31</span></li>
+<li><a href="/SpringBoot/1594.html" >spring-boot 热加载实现替换Jrebel</a><span>07.05</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/SpringBoot/1632.html" > spring boot 使用spring AOP实现拦截器实现权限管理</a><span>10.19</span></li>
+<li><a href="/SpringBoot/1631.html" >Spring Boot整合jpa,Shiro进行权限管理教程</a><span>10.12</span></li>
+<li><a href="/SpringBoot/1630.html" >Spring @RequestMapping 注解使用技巧</a><span>10.12</span></li>
+<li><a href="/SpringBoot/1611.html" >springboot与mybatis如何整合实例详解</a><span>08.15</span></li>
+<li><a href="/SpringBoot/1610.html" >spring boot打包web项目需加入以下配置</a><span>08.14</span></li>
+<li><a href="/SpringBoot/1607.html" >spring boot war启动和jar启动注意事项</a><span>08.09</span></li>
+<li><a href="/SpringBoot/1605.html" >SpringBoot入门系列：第一篇 Hello World</a><span>07.31</span></li>
+<li><a href="/SpringBoot/1604.html" >SpringBoot入门——局部与全局的异常处理</a><span>07.31</span></li>
+<li><a href="/SpringBoot/1594.html" >spring-boot 热加载实现替换Jrebel</a><span>07.05</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/SpringBoot/1607.html" >spring boot war启动和jar启动注意事项</a><span>21</span></li>
+<li><a href="/SpringBoot/1594.html" >spring-boot 热加载实现替换Jrebel</a><span>16</span></li>
+<li><a href="/SpringBoot/1605.html" >SpringBoot入门系列：第一篇 Hello </a><span>12</span></li>
+<li><a href="/SpringBoot/1632.html" > spring boot 使用spring AOP实现拦截器</a><span>9</span></li>
+<li><a href="/SpringBoot/1631.html" >Spring Boot整合jpa,Shiro进行权限管理</a><span>8</span></li>
+<li><a href="/SpringBoot/1604.html" >SpringBoot入门——局部与全局的异</a><span>5</span></li>
+<li><a href="/SpringBoot/1610.html" >spring boot打包web项目需加入以下配</a><span>5</span></li>
+<li><a href="/SpringBoot/1611.html" >springboot与mybatis如何整合实例详解</a><span>2</span></li>
+<li><a href="/SpringBoot/1630.html" >Spring @RequestMapping 注解使用技巧</a><span>2</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1630&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

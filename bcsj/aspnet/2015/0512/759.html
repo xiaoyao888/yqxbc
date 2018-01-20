@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ASP实现数据库的建立与压缩_鹏鹏电脑知识网_为你而生的电脑知识网站_win10系统下载_鹏鹏网</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="ASP实现数据库的建立与压" />
+  <meta name="description" content="% #######以下是一个类文件，下面的注解是调用类的方法######################## #注意：如果系统不支持建立Scripting.FileSystemObject对象，那么数据库压缩功能将无法使用 #&nb" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+      <nav class="navbar navbar-default">
+
+      <div class="container" style="margin-top:0px;">
+
+        <div class="row" style="line-height:45px;">
+
+          学习电脑知识上鹏鹏电脑知识网，www.flypeng.com！<span class="hidden-xs"><a href="javascript:void(0)" class="pull-right" onclick="alert('按Ctrl+D收藏本站')" title="win10系统">收藏本站</a></span>
+
+        </div>
+
+      </div>      
+
+    </nav>
+
+    <div class="container" style="margin-top:0px;">
+      <div class="row" >
+
+        <div class="col-sm-8 col-md-8">
+
+            <a href="/index.html"><img src="http://www.flypeng.com/templets/default/images/logo.png" alt="Windows10系统下载,Win10激活,Win10教程" width="196" height="64"/></a>
+
+        </div>
+        <div class="col-sm-4 col-md-4">
+        <div style="height:45px;">
+        <form  method="post" id="searchFrm" role="search" action="/plus/search.php">
+            <div class="input-group">
+                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+                </span>
+            </div><!-- /input-group -->
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+
+      <div class="container">
+
+
+<!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav nav-custom">
+             <li class="dropdown">
+
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">电脑知识<span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+
+                <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+
+                <li><a href="/dngz" title="电脑故障大全，计算机故障大全">故障大全</a></li>
+
+                <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+
+              </ul>
+
+            </li>
+
+            <li><a href="/sjzs" title="手机故障，手机知识，手机频道">手机知识</a></li>            
+
+            <li class="dropdown">
+
+              <a href="/czxt" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">操作系统<span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+
+                <li><a href="/czxt/windows7" title="windows7系统">windows7</a></li>                
+
+                <li><a href="/czxt/windows8" title="windows8系统">windows8</a></li>                
+
+                <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>                
+
+                <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+
+              </ul>
+
+            </li>
+
+            
+            <li class="dropdown">
+
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+
+                <li><a href="/bcsj/css" title="css">css</a></li>
+
+                <li><a href="/bcsj/java" title="java">java</a></li>
+
+                <li><a href="/bcsj/php" title="php">php</a></li>
+
+                <li><a href="/bcsj/aspnet" title="aspnet">aspnet</a></li>
+
+                <li><a href="/bcsj/js" title="javascript">javascript</a></li>
+
+                <li><a href="/bcsj/ajax" title="ajax">ajax</a></li>
+
+                <li><a href="/bcsj/hadoop" title="hadoop">hadoop</a></li>                
+
+              </ul>
+
+            </li>     
+
+            <li class="dropdown">
+
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+
+                <li><a href="/shujuku/sqlserver" title="sql server数据库">SqlServer</a></li>
+
+                <li><a href="/shujuku/mysql" title="MySQL数据库">MySql</a></li>                
+
+                <li><a href="/shujuku/oracle" title="Oracle数据库">Oracle</a></li>                
+
+                <li><a href="/shujuku/mangodb" title="MangoDB数据库">MangoDB</a></li>                
+
+                <li><a href="/shujuku/hbase" title="HBase数据库">HBase</a></li>
+
+                <li><a href="/shujuku/db2" title="DB2数据库">DB2</a></li>
+
+                <li><a href="/shujuku/redis" title="Redis数据库">Redis</a></li>
+
+              </ul>
+
+            </li>
+            <li><a href='/yunjisuan' target="_blank" title="云计算">云计算</a></li>
+            <li><a href='/dashuju' target="_blank" title="大数据">大数据</a></li>
+            <li><a href='/wulianwang' target="_blank" title="物联网">物联网</a></li>
+            <li><a href='/main/website.html' target="_blank" title="好站推荐">好站推荐</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+
+          
+        </div><!-- /.navbar-collapse -->
+
+      </div><!-- /.container-fluid -->
+
+    </nav>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+       <div class="modal-dialog">
+
+          <div class="modal-content">
+
+             <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" 
+
+                   aria-hidden="true">×
+
+                </button>
+
+                <h4 class="modal-title" id="myModalLabel">
+
+                   搜索提示
+
+                </h4>
+
+             </div>
+
+             <div class="modal-body">
+
+                <div style="height:60px;line-height:60px;">
+
+                  关键字不能小于2个字！
+
+                </div>
+
+             </div>
+
+          </div><!-- /.modal-content -->
+
+       </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+<script type="text/javascript">
+  function searchKey(){
+    var keyword = $("#keyword").val();
+    if(keyword.length<2){
+      $('#myModal').modal('show');     
+      return;
+    }else{
+      $("#searchFrm").submit();
+    }
+
+  }
+</script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/aspnet/'>aspnet</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <h3>ASP实现数据库的建立与压缩</h3>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-12 09:19 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div id="759" class="art_content">&lt;%&nbsp;<br />
+&#39;#######以下是一个类文件，下面的注解是调用类的方法########################&nbsp;<br />
+&#39;#&nbsp;&nbsp;注意：如果系统不支持建立Scripting.FileSystemObject对象，那么数据库压缩功能将无法使用&nbsp;<br />
+&#39;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Access&nbsp;数据库类&nbsp;<br />
+&#39;#&nbsp;CreateDbFile&nbsp;建立一个Access&nbsp;数据库文件&nbsp;<br />
+&#39;#&nbsp;CompactDatabase&nbsp;压缩一个Access&nbsp;数据库文件&nbsp;<br />
+&#39;#&nbsp;建立对象方法:&nbsp;<br />
+&#39;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;a&nbsp;=&nbsp;New&nbsp;DatabaseTools&nbsp;<br />
+&#39;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;(萧寒雪)&nbsp;s.f.&nbsp;<br />
+&#39;#########################################################################&nbsp;<br />
+<br />
+Class&nbsp;DatabaseTools&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;CreateDBfile(byVal&nbsp;dbFileName,byVal&nbsp;DbVer,byVal&nbsp;SavePath)&nbsp;<br />
+&#39;建立数据库文件&nbsp;<br />
+&#39;If&nbsp;DbVer&nbsp;is&nbsp;0&nbsp;Then&nbsp;Create&nbsp;Access97&nbsp;dbFile&nbsp;<br />
+&#39;If&nbsp;DbVer&nbsp;is&nbsp;1&nbsp;Then&nbsp;Create&nbsp;Access2000&nbsp;dbFile&nbsp;<br />
+On&nbsp;error&nbsp;resume&nbsp;Next&nbsp;<br />
+If&nbsp;Right(SavePath,1)&lt;&gt;&quot;\\&quot;&nbsp;Or&nbsp;Right(SavePath,1)&lt;&gt;&quot;/&quot;&nbsp;Then&nbsp;SavePath&nbsp;=&nbsp;Trim(SavePath)&nbsp;&amp;&nbsp;&quot;\\&quot;&nbsp;<br />
+If&nbsp;Left(dbFileName,1)=&quot;\\&quot;&nbsp;Or&nbsp;Left(dbFileName,1)=&quot;/&quot;&nbsp;Then&nbsp;dbFileName&nbsp;=&nbsp;Trim(Mid(dbFileName,2,Len(dbFileName)))&nbsp;<br />
+If&nbsp;DbExists(SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;Then&nbsp;<br />
+Response.Write&nbsp;(&quot;对不起，该数据库已经存在!&quot;)&nbsp;<br />
+CreateDBfile&nbsp;=&nbsp;False&nbsp;<br />
+Else&nbsp;<br />
+Dim&nbsp;Ca&nbsp;<br />
+Set&nbsp;Ca&nbsp;=&nbsp;Server.CreateObject(&quot;ADOX.Catalog&quot;)&nbsp;<br />
+If&nbsp;Err.number&lt;&gt;0&nbsp;Then&nbsp;<br />
+Response.Write&nbsp;(&quot;无法建立，请检查错误信息&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.number&nbsp;&amp;&nbsp;&quot;&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.Description)&nbsp;<br />
+Err.Clear&nbsp;<br />
+Exit&nbsp;function&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+If&nbsp;DbVer=0&nbsp;Then&nbsp;<br />
+call&nbsp;Ca.Create(&quot;Provider=Microsoft.Jet.OLEDB.3.51;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;<br />
+Else&nbsp;<br />
+call&nbsp;Ca.Create(&quot;Provider=Microsoft.Jet.OLEDB.4.0;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+Set&nbsp;Ca&nbsp;=&nbsp;Nothing&nbsp;<br />
+CreateDBfile&nbsp;=&nbsp;True&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+End&nbsp;function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;CompactDatabase(byVal&nbsp;dbFileName,byVal&nbsp;DbVer,byVal&nbsp;SavePath)&nbsp;<br />
+&#39;压缩数据库文件&nbsp;<br />
+&#39;0&nbsp;为access&nbsp;97&nbsp;<br />
+&#39;1&nbsp;为access&nbsp;2000&nbsp;<br />
+On&nbsp;Error&nbsp;resume&nbsp;next&nbsp;<br />
+If&nbsp;Right(SavePath,1)&lt;&gt;&quot;\\&quot;&nbsp;Or&nbsp;Right(SavePath,1)&lt;&gt;&quot;/&quot;&nbsp;Then&nbsp;SavePath&nbsp;=&nbsp;Trim(SavePath)&nbsp;&amp;&nbsp;&quot;\\&quot;&nbsp;<br />
+If&nbsp;Left(dbFileName,1)=&quot;\\&quot;&nbsp;Or&nbsp;Left(dbFileName,1)=&quot;/&quot;&nbsp;Then&nbsp;dbFileName&nbsp;=&nbsp;Trim(Mid(dbFileName,2,Len(dbFileName)))&nbsp;<br />
+If&nbsp;DbExists(SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;Then&nbsp;<br />
+Response.Write&nbsp;(&quot;对不起，该数据库已经存在!&quot;)&nbsp;<br />
+CompactDatabase&nbsp;=&nbsp;False&nbsp;<br />
+Else&nbsp;<br />
+Dim&nbsp;Cd&nbsp;<br />
+Set&nbsp;Cd&nbsp;=Server.CreateObject(&quot;JRO.JetEngine&quot;)&nbsp;<br />
+If&nbsp;Err.number&lt;&gt;0&nbsp;Then&nbsp;<br />
+Response.Write&nbsp;(&quot;无法压缩，请检查错误信息&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.number&nbsp;&amp;&nbsp;&quot;&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.Description)&nbsp;<br />
+Err.Clear&nbsp;<br />
+Exit&nbsp;function&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+If&nbsp;DbVer=0&nbsp;Then&nbsp;<br />
+call&nbsp;Cd.CompactDatabase(&quot;Provider=Microsoft.Jet.OLEDB.3.51;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName,&quot;Provider=Microsoft.Jet.OLEDB.3.51;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName&nbsp;&amp;&nbsp;&quot;.bak.mdb;Jet&nbsp;OLEDB;Encrypt&nbsp;Database=True&quot;)&nbsp;<br />
+Else&nbsp;<br />
+call&nbsp;Cd.CompactDatabase(&quot;Provider=Microsoft.Jet.OLEDB.4.0;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName,&quot;Provider=Microsoft.Jet.OLEDB.4.0;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;SavePath&nbsp;&amp;&nbsp;dbFileName&nbsp;&amp;&nbsp;&quot;.bak.mdb;Jet&nbsp;OLEDB;Encrypt&nbsp;Database=True&quot;)&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+&#39;删除旧的数据库文件&nbsp;<br />
+call&nbsp;DeleteFile(SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;<br />
+&#39;将压缩后的数据库文件还原&nbsp;<br />
+call&nbsp;RenameFile(SavePath&nbsp;&amp;&nbsp;dbFileName&nbsp;&amp;&nbsp;&quot;.bak.mdb&quot;,SavePath&nbsp;&amp;&nbsp;dbFileName)&nbsp;<br />
+Set&nbsp;Cd&nbsp;=&nbsp;False&nbsp;<br />
+CompactDatabase&nbsp;=&nbsp;True&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+end&nbsp;function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;DbExists(byVal&nbsp;dbPath)&nbsp;<br />
+&#39;查找数据库文件是否存在&nbsp;<br />
+On&nbsp;Error&nbsp;resume&nbsp;Next&nbsp;<br />
+Dim&nbsp;c&nbsp;<br />
+Set&nbsp;c&nbsp;=&nbsp;Server.CreateObject(&quot;ADODB.Connection&quot;)&nbsp;<br />
+c.Open&nbsp;&quot;Provider=Microsoft.Jet.OLEDB.4.0;Data&nbsp;Source=&quot;&nbsp;&amp;&nbsp;dbPath&nbsp;<br />
+If&nbsp;Err.number&lt;&gt;0&nbsp;Then&nbsp;<br />
+Err.Clear&nbsp;<br />
+DbExists&nbsp;=&nbsp;false&nbsp;<br />
+else&nbsp;<br />
+DbExists&nbsp;=&nbsp;True&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+set&nbsp;c&nbsp;=&nbsp;nothing&nbsp;<br />
+End&nbsp;function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;AppPath()&nbsp;<br />
+&#39;取当前真实路径&nbsp;<br />
+AppPath&nbsp;=&nbsp;Server.MapPath(&quot;./&quot;)&nbsp;<br />
+End&nbsp;function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;AppName()&nbsp;<br />
+&#39;取当前程序名称&nbsp;<br />
+AppName&nbsp;=&nbsp;Mid(Request.ServerVariables(&quot;SCRIPT_NAME&quot;),(InStrRev(Request.ServerVariables(&quot;SCRIPT_NAME&quot;)&nbsp;,&quot;/&quot;,-1,1))+1,Len(Request.ServerVariables(&quot;SCRIPT_NAME&quot;)))&nbsp;<br />
+End&nbsp;Function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;DeleteFile(filespec)&nbsp;<br />
+&#39;删除一个文件&nbsp;<br />
+Dim&nbsp;fso&nbsp;<br />
+Set&nbsp;fso&nbsp;=&nbsp;CreateObject(&quot;Scripting.FileSystemObject&quot;)&nbsp;<br />
+If&nbsp;Err.number&lt;&gt;0&nbsp;Then&nbsp;<br />
+Response.Write(&quot;删除文件发生错误!请查看错误信息&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.number&nbsp;&amp;&nbsp;&quot;&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.Description)&nbsp;<br />
+Err.Clear&nbsp;<br />
+DeleteFile&nbsp;=&nbsp;False&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+call&nbsp;fso.DeleteFile(filespec)&nbsp;<br />
+Set&nbsp;fso&nbsp;=&nbsp;Nothing&nbsp;<br />
+DeleteFile&nbsp;=&nbsp;True&nbsp;<br />
+End&nbsp;function&nbsp;<br />
+<br />
+Public&nbsp;function&nbsp;RenameFile(filespec1,filespec2)&nbsp;<br />
+&#39;修改一个文件&nbsp;<br />
+Dim&nbsp;fso&nbsp;<br />
+Set&nbsp;fso&nbsp;=&nbsp;CreateObject(&quot;Scripting.FileSystemObject&quot;)&nbsp;<br />
+If&nbsp;Err.number&lt;&gt;0&nbsp;Then&nbsp;<br />
+Response.Write(&quot;修改文件名时发生错误!请查看错误信息&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.number&nbsp;&amp;&nbsp;&quot;&lt;br&gt;&quot;&nbsp;&amp;&nbsp;Err.Description)&nbsp;<br />
+Err.Clear&nbsp;<br />
+RenameFile&nbsp;=&nbsp;False&nbsp;<br />
+End&nbsp;If&nbsp;<br />
+call&nbsp;fso.CopyFile(filespec1,filespec2,True)&nbsp;<br />
+call&nbsp;fso.DeleteFile(filespec1)&nbsp;<br />
+Set&nbsp;fso&nbsp;=&nbsp;Nothing&nbsp;<br />
+RenameFile&nbsp;=&nbsp;True&nbsp;<br />
+End&nbsp;function&nbsp;<br />
+<br />
+End&nbsp;Class&nbsp;<br />
+%&gt;</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/aspnet/2015/0512/758.html'>提高ASP的SQL执行效率</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/aspnet/2015/0512/760.html'>ASP读取EXCEL2000数据</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row">
+        
+          
+        
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/aspnet/2015/0515/806.html" >ASP下实现多条件模糊查询SQL语句</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/805.html" >ASP网站漏洞及入侵防范方法</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/804.html" >如何动态创建网页的RSS内容摘要</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/803.html" >ASP动态网页开发中的WEB打印代码大全</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/802.html" >VS2010快捷键</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/801.html" >获得当前带参数的页面地址</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/800.html" >Global.asa文件用法详解</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/799.html" >替换DISTINCT查找重复记录的方法</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/798.html" >用XMLHTTP解析图片地址并保存</a><span>05.15</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/797.html" >ASP小偷中可控制删除文本html标签的函数</a><span>05.15</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/aspnet/2015/0515/802.html" >VS2010快捷键</a><span>70</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/804.html" >如何动态创建网页的RSS内容摘要</a><span>61</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/806.html" >ASP下实现多条件模糊查询SQL语句</a><span>54</span></li>
+<li><a href="/bcsj/aspnet/2015/0305/176.html" >ASP实现可显隐的树型菜单</a><span>49</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/801.html" >获得当前带参数的页面地址</a><span>49</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/799.html" >替换DISTINCT查找重复记录的方法</a><span>48</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/805.html" >ASP网站漏洞及入侵防范方法</a><span>47</span></li>
+<li><a href="/bcsj/aspnet/2015/0513/779.html" >实例演练ASP+XML编程</a><span>36</span></li>
+<li><a href="/bcsj/aspnet/2015/0513/789.html" >重新安装IIS的方法</a><span>36</span></li>
+<li><a href="/bcsj/aspnet/2015/0515/798.html" >用XMLHTTP解析图片地址并保存</a><span>36</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+  <div class="container">
+    <div class="foot">
+      <br/>
+                鹏鹏电脑知识网是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏电脑知识网站所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+               <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/submenu.html">网站地图</a> | <a href="/copyright.html">版权声明</a> | <a href="/changwei.html">长尾关键词</a> <br/>
+              Copyright ◎ 2011 - 2017 flypeng.com All Rights Reserved.<br/>flypeng.com 版权所有  <a href="http://www.miit.gov.cn/n11293472/index.html" target="_blank">京ICP备11048740号</a><br/>
+        
+    </div>
+  </div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=759&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+</body>
+</html>

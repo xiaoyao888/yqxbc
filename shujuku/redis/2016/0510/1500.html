@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>详解Redis与Memcached的区别_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="详解,Redis,与,Memcached,的,区别,Redi" />
+  <meta name="description" content="Redis与Memcached的区别 传统 MySQL + Memcached 架构 遇到的问题 实际MySQL是适合进行海量数据存储的，通过Memcached将热点数据加载到cache，加速访问，很多公司都曾经使用过这样的架构，但随着" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/redis/'>redis</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>详解Redis与Memcached的区别</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-05-10 09:37 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1500" class="art_content"><p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px; text-align: center;">
+	Redis与Memcached的区别</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-size: 14px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+	<span style="padding: 0px; margin: 0px; color: rgb(51, 51, 51); font-family: Arial; line-height: 26px;">传统<font color="#df3434"><b>MyS</b></font><font color="#df3434"><b>QL</b></font>+ Memcached<font color="#df3434"><b>架</b></font><font color="#df3434"><b>构</b></font>遇到的问题</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　实际MySQL是适合进行海量数据存储的，通过Memcached将热点数据加载到cache，加速访问，很多公司都曾经使用过这样的架构，但随着业务数据量的不断增加，和访问量的持续增长，我们遇到了很多问题：</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　1.MySQL需要不断进行拆库拆表，Memcached也需不断跟着扩容，扩容和维护工作占据大量开发时间。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　2.Memcached与MySQL<font color="#df3434"><b>数据</b></font><font color="#df3434"><b>库</b></font>数据一致性问题。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　3.Memcached数据命中率低或down机，大量访问直接穿透到DB，MySQL无法支撑。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　4.跨机房cache同步问题。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="padding: 0px; margin: 0px;">　　众多NoSQL百花齐放，如何选择</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　最近几年，业界不断涌现出很多各种各样的NoSQL产品，那么如何才能正确地使用好这些产品，最大化地发挥其长处，是我们需要深入研究和思考的问题，实际归根结底最重要的是了解这些产品的定位，并且了解到每款产品的tradeoffs，在实际应用中做到扬长避短，总体上这些NoSQL主要用于解决以下几种问题</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　1.少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　2.海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　3.这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写<a class="nounderline" href="http://product.it168.com/list/b/0205_1.shtml" style="color: rgb(51, 102, 153); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank" title="内存">内存</a>和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　4.Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　面对这些不同类型的NoSQL产品,我们需要根据我们的业务场景选择最合适的产品。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="padding: 0px; margin: 0px;">　　Redis适用场景，如何正确的使用</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　前面已经分析过，Redis最适合所有数据in-momory的场景，虽然Redis也提供持久化功能，但实际更多的是一个disk-backed的功能，跟传统意义上的持久化有比较大的差别，那么可能大家就会有疑问，似乎Redis更像一个加强版的Memcached，那么何时使用Memcached,何时使用Redis呢?</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-size: 14px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点：<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	1&nbsp; Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等<font color="#df3434"><b>数据</b></font><font color="#df3434"><b>结构</b></font>的存储。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	2&nbsp; Redis支持数据的备份，即master-slave模式的数据备份。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	3&nbsp; Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	抛开这些，可以深入到Redis内部构造去观察更加本质的区别，理解Redis的设计。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	在Redis中，并不是所有的数据都一直存储在内存中的。这是和Memcached相比一个最大的区别。Redis只会缓存所有的 key的信息，如果Redis发现内存的使用量超过了某一个阀值，将触发swap的操作，Redis根据&ldquo;swappability = age*log(size_in_memory)&rdquo;计 算出哪些key对应的value需要swap到磁盘。然后再将这些key对应的value持久化到磁盘中，同时在内存中清除。这种特性使得Redis可以 保持超过其机器本身内存大小的数据。当然，机器本身的内存必须要能够保持所有的key，毕竟这些数据是不会进行swap操作的。同时由于Redis将内存 中的数据swap到磁盘中的时候，提供服务的主线程和进行swap操作的子线程会共享这部分内存，所以如果更新需要swap的数据，Redis将阻塞这个 操作，直到子线程完成swap操作后才可以进行修改。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	使用Redis特有内存模型前后的情况对比：<br style="padding: 0px; margin: 0px;" />
+	VM off: 300k keys, 4096 bytes values: 1.3G used<br style="padding: 0px; margin: 0px;" />
+	VM on:&nbsp; 300k keys, 4096 bytes values: 73M used<br style="padding: 0px; margin: 0px;" />
+	VM off: 1 million keys, 256 bytes values: 430.12M used<br style="padding: 0px; margin: 0px;" />
+	VM on:&nbsp; 1 million keys, 256 bytes values: 160.09M used<br style="padding: 0px; margin: 0px;" />
+	VM on:&nbsp; 1 million keys, values as large as you want, still: 160.09M used<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	当 从Redis中读取数据的时候，如果读取的key对应的value不在内存中，那么Redis就需要从swap文件中加载相应数据，然后再返回给请求方。 这里就存在一个I/O线程池的问题。在默认的情况下，Redis会出现阻塞，即完成所有的swap文件加载后才会相应。这种策略在客户端的数量较小，进行 批量操作的时候比较合适。但是如果将Redis应用在一个大型的网站应用程序中，这显然是无法满足大并发的情况的。所以Redis运行我们设置I/O线程 池的大小，对需要从swap文件中加载相应数据的读取请求进行并发操作，减少阻塞的时间。<br style="padding: 0px; margin: 0px;" />
+	<br style="padding: 0px; margin: 0px;" />
+	如果希望在海量数据的环境中使用好Redis，我相信理解Redis的内存设计和阻塞的情况是不可缺少的。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="padding: 0px; margin: 0px;">补充的知识点：</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	memcached和redis的比较</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	1 网络IO模型</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Memcached是多线程，非阻塞IO复用的网络模型，分为监听主线程和worker子线程，监听线程监听网络连接，接受请求后，将连接描述字pipe 传递给worker线程，进行读写IO, 网络层使用libevent封装的事件库，多线程模型可以发挥多核作用，但是引入了cache coherency和锁的问题，比如，Memcached最常用的stats 命令，实际Memcached所有操作都要对这个全局变量加锁，进行计数等工作，带来了性能损耗。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51); text-align: center;">
+	<img alt="" border="1" src="/uploads/allimg/160510/093F52418-0.jpg" style="border: none; max-width: 100%; padding: 0px; margin: 0px; vertical-align: top;" /></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51); text-align: center;">
+	(Memcached网络IO模型)</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Redis使用单线程的IO复用模型，自己封装了一个简单的AeEvent事件处理框架，主要实现了epoll、kqueue和select，对于单纯只有IO操作来说，单线程可以将速度优势发挥到最大，但是Redis也提供了一些简单的计算功能，比如排序、聚合等，对于这些操作，单线程模型实际会严重影响整体吞吐量，<a class="nounderline" href="http://product.it168.com/list/b/0217_1.shtml" style="color: rgb(51, 102, 153); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank" title="CPU">CPU</a>计算过程中，整个IO调度都是被阻塞住的。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　2.<a class="nounderline" href="http://product.pcpop.com/Memory/10734_1.html" style="color: rgb(51, 102, 153); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank" title="内存">内存</a>管理方面</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Memcached使用预分配的内存池的方式，使用slab和大小不同的chunk来管理内存，Item根据大小选择合适的chunk存储，内存池的方式可以省去申请/释放内存的开销，并且能减小内存碎片产生，但这种方式也会带来一定程度上的空间浪费，并且在内存仍然有很大空间时，新的数据也可能会被剔除，原因可以参考Timyang的文章：http://timyang.net/data/Memcached-lru-evictions/</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Redis使用现场申请内存的方式来存储数据，并且很少使用free-list等方式来优化内存分配，会在一定程度上存在内存碎片，Redis跟据存储命令参数，会把带过期时间的数据单独存放在一起，并把它们称为临时数据，非临时数据是永远不会被剔除的，即便物理内存不够，导致swap也不会剔除任何非临时数据(但会尝试剔除部分临时数据)，这点上Redis更适合作为存储而不是cache。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　3.数据一致性问题</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Memcached提供了cas命令，可以保证多个并发访问操作同一份数据的一致性问题。 Redis没有提供cas 命令，并不能保证这点，不过Redis提供了事务的功能，可以保证一串 命令的原子性，中间不会被任何操作打断。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　4.存储方式及其它方面</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Memcached基本只支持简单的key-value存储，不支持枚举，不支持持久化和复制等功能</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Redis除key/value之外，还支持list,set,sorted set,hash等众多数据结构，提供了KEYS</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　进行枚举操作，但不能在线上使用，如果需要枚举线上数据，Redis提供了工具可以直接扫描其dump文件，枚举出所有数据，Redis还同时提供了持久化和复制等功能。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　5.关于不同语言的客户端支持</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　在不同语言的客户端方面，Memcached和Redis都有丰富的第三方客户端可供选择，不过因为Memcached发展的时间更久一些，目前看在客户端支持方面，Memcached的很多客户端更加成熟稳定，而Redis由于其协议本身就比Memcached复杂，加上作者不断增加新的功能等，对应第三方客户端跟进速度可能会赶不上，有时可能需要自己在第三方客户端基础上做些修改才能更好的使用。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　根据以上比较不难看出，当我们不希望数据被踢出，或者需要除key/value之外的更多数据类型时，或者需要落地功能时，使用Redis比使用Memcached更合适。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="padding: 0px; margin: 0px;">　　关于Redis的一些周边功能</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　Redis除了作为存储之外还提供了一些其它方面的功能，比如聚合计算、pubsub、scripting等，对于此类功能需要了解其实现原理，清楚地了解到它的局限性后，才能正确的使用，比如pubsub功能，这个实际是没有任何持久化支持的，消费方连接闪断或重连之间过来的消息是会全部丢失的，又比如聚合计算和scripting等功能受Redis单线程模型所限，是不可能达到很高的吞吐量的，需要谨慎使用。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　总的来说Redis作者是一位非常勤奋的开发者，可以经常看到作者在尝试着各种不同的新鲜想法和思路，针对这些方面的功能就要求我们需要深入了解后再使用。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="padding: 0px; margin: 0px;">　　总结：</span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　1.Redis使用最佳方式是全部数据in-memory。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　2.Redis更多场景是作为Memcached的替代者来使用。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　3.当需要除key/value之外的更多数据类型支持时，使用Redis更合适。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	　　4.当存储的数据不能被剔除时，使用Redis更合适。</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="text-align: center;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong>&nbsp; &nbsp;谈谈Memcached与Redis(一)</strong></span></p>
+<p style="margin: 0px; padding: 0px 0px 15px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-size: 14px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; font-weight: bold; line-height: 28px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px 0px 15px; font-size: 14px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+	<strong>&nbsp;</strong><span style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 28px;">1. Memcached简介</span></p>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	Memcached是以LiveJurnal旗下Danga Interactive公司的Bard Fitzpatric为首开发的高性能分布式内存缓存服务器。其本质上就是一个内存key-value数据库，但是不支持数据的持久化，服务器关闭之后数据全部丢失。Memcached使用C语言开发，在大多数像Linux、BSD和Solaris等POSIX系统上，只要安装了libevent即可使用。在Windows下，它也有一个可用的非官方版本(http://code.jellycan.com/memcached/)。Memcached的客户端软件实现非常多，包括C/C++, PHP, Java, Python, Ruby, Perl, Erlang, Lua等。当前Memcached使用广泛，除了LiveJournal以外还有Wikipedia、Flickr、Twitter、Youtube和WordPress等。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	在Window系统下，Memcached的安装非常方便，只需从以上给出的地址下载可执行软件然后运行memcached.exe &ndash;d install即可完成安装。在Linux等系统下，我们首先需要安装libevent，然后从获取源码，make &amp;&amp; make install即可。默认情况下，Memcached的服务器启动程序会安装到/usr/local/bin目录下。在启动Memcached时，我们可以为其配置不同的启动参数。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	<span style="padding: 0px; margin: 0px;">1.1 Memcache配置</span></div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	Memcached服务器在启动时需要对关键的参数进行配置，下面我们就看一看Memcached在启动时需要设定哪些关键参数以及这些参数的作用。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	1）-p &lt;num&gt; Memcached的TCP监听端口，缺省配置为11211；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	2）-U &lt;num&gt; Memcached的UDP监听端口，缺省配置为11211，为0时表示关闭UDP监听；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	3）-s &lt;file&gt; Memcached监听的UNIX套接字路径；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	4）-a &lt;mask&gt; 访问UNIX套接字的八进制掩码，缺省配置为0700；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	5）-l &lt;addr&gt; 监听的服务器IP地址，默认为所有网卡；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	6）-d 为Memcached服务器启动守护进程；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	7）-r 最大core文件大小；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	8）-u &lt;username&gt; 运行Memcached的用户，如果当前为root的话需要使用此参数指定用户；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	9）-m &lt;num&gt; 分配给Memcached使用的内存数量，单位是MB；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	10）-M 指示Memcached在内存用光的时候返回错误而不是使用LRU算法移除数据记录；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	11）-c &lt;num&gt; 最大并发连数，缺省配置为1024；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	12）-v &ndash;vv &ndash;vvv 设定服务器端打印的消息的详细程度，其中-v仅打印错误和警告信息，-vv在-v的基础上还会打印客户端的命令和相应，-vvv在-vv的基础上还会打印内存状态转换信息；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	13）-f &lt;factor&gt; 用于设置chunk大小的递增因子；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	14）-n &lt;bytes&gt; 最小的chunk大小，缺省配置为48个字节；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	15）-t &lt;num&gt; Memcached服务器使用的线程数，缺省配置为4个；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	16）-L 尝试使用大内存页；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	17）-R 每个事件的最大请求数，缺省配置为20个；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	18）-C 禁用CAS，CAS模式会带来8个字节的冗余；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	<span style="padding: 0px; margin: 0px;">2. Redis简介</span></div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	Redis是一个开源的key-value存储系统。与Memcached类似，Redis将大部分数据存储在内存中，支持的数据类型包括：字符串、哈希表、链表、集合、有序集合以及基于这些数据类型的相关操作。Redis使用C语言开发，在大多数像Linux、BSD和Solaris等POSIX系统上无需任何外部依赖就可以使用。Redis支持的客户端语言也非常丰富，常用的计算机语言如C、C#、C++、Object-C、PHP、Python、Java、Perl、Lua、Erlang等均有可用的客户端来访问Redis服务器。当前Redis的应用已经非常广泛，国内像新浪、淘宝，国外像Flickr、Github等均在使用Redis的缓存服务。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	Redis的安装非常方便，只需从http://redis.io/download获取源码，然后make &amp;&amp; make install即可。默认情况下，Redis的服务器启动程序和客户端程序会安装到/usr/local/bin目录下。在启动Redis服务器时，我们需要为其指定一个配置文件，缺省情况下配置文件在Redis的源码目录下，文件名为redis.conf。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	<span style="padding: 0px; margin: 0px;">2.1 Redis配置文件</span></div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	为了对Redis的系统实现有一个直接的认识，我们首先来看一下Redis的配置文件中定义了哪些主要参数以及这些参数的作用。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	1）daemonize no 默认情况下，redis不是在后台运行的。如果需要在后台运行，把该项的值更改为yes；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	2）pidfile /var/run/redis.pid当Redis在后台运行的时候，Redis默认会把pid文件放在/var/run/redis.pid，你可以配置到其他地址。当运行多个redis服务时，需要指定不同的pid文件和端口；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	3）port 6379指定redis运行的端口，默认是6379；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	4）bind 127.0.0.1 指定redis只接收来自于该IP地址的请求，如果不进行设置，那么将处理所有请求。在生产环境中最好设置该项；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	5）loglevel debug 指定日志记录级别，其中Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose。debug表示记录很多信息，用于开发和测试。verbose表示记录有用的信息，但不像debug会记录那么多。notice表示普通的verbose，常用于生产环境。warning 表示只有非常重要或者严重的信息会记录到日志；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	6）logfile /var/log/redis/redis.log 配置log文件地址，默认值为stdout。若后台模式会输出到/dev/null；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	7）databases 16 可用数据库数，默认值为16，默认数据库为0，数据库范围在0-（database-1）之间；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	8）save 900 1保存数据到磁盘，格式为save &lt;seconds&gt; &lt;changes&gt;，指出在多长时间内，有多少次更新操作，就将数据同步到数据文件rdb。相当于条件触发抓取快照，这个可以多个条件配合。save 900 1就表示900秒内至少有1个key被改变就保存数据到磁盘；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	9）rdbcompression yes 存储至本地数据库时（持久化到rdb文件）是否压缩数据，默认为yes；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	10）dbfilename dump.rdb本地持久化数据库文件名，默认值为dump.rdb；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	11）dir ./ 工作目录，数据库镜像备份的文件放置的路径。这里的路径跟文件名要分开配置是因为redis在进行备份时，先会将当前数据库的状态写入到一个临时文件中，等备份完成时，再把该临时文件替换为上面所指定的文件。而这里的临时文件和上面所配置的备份文件都会放在这个指定的路径当中，AOF文件也会存放在这个目录下面。注意这里必须指定一个目录而不是文件；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	12）slaveof &lt;masterip&gt; &lt;masterport&gt; 主从复制，设置该数据库为其他数据库的从数据库。设置当本机为slave服务时，设置master服务的IP地址及端口。在Redis启动时，它会自动从master进行数据同步；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	13）masterauth &lt;master-password&gt; 当master服务设置了密码保护时(用requirepass制定的密码)slave服务连接master的密码；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	14）slave-serve-stale-data yes 当从库同主机失去连接或者复制正在进行，从机库有两种运行方式：如果slave-serve-stale-data设置为yes(默认设置)，从库会继续相应客户端的请求。如果slave-serve-stale-data是指为no，除去INFO和SLAVOF命令之外的任何请求都会返回一个错误&quot;SYNC with master in progress&quot;；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	15）repl-ping-slave-period 10从库会按照一个时间间隔向主库发送PING，可以通过repl-ping-slave-period设置这个时间间隔，默认是10秒；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	16）repl-timeout 60 设置主库批量数据传输时间或者ping回复时间间隔，默认值是60秒，一定要确保repl-timeout大于repl-ping-slave-period；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	17）requirepass foobared 设置客户端连接后进行任何其他指定前需要使用的密码。因为redis速度相当快，所以在一台比较好的服务器下，一个外部的用户可以在一秒钟进行150K次的密码尝试，这意味着你需要指定非常强大的密码来防止暴力破解；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	18）rename-command CONFIG &quot;&quot; 命令重命名，在一个共享环境下可以重命名相对危险的命令，比如把CONFIG重名为一个不容易猜测的字符：# rename-command CONFIG b840fc02d524045429941cc1<wbr style="padding: 0px; margin: 0px;" />5f59e41cb7be6c52。如果想删除一个命令，直接把它重命名为一个空字符&quot;&quot;即可：rename-command CONFIG &quot;&quot;；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	19）maxclients 128设置同一时间最大客户端连接数，默认无限制。Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数。如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	20）maxmemory &lt;bytes&gt; 指定Redis最大内存限制。Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，Redis同时也会移除空的list对象。当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。注意：Redis新的vm机制，会把Key存放内存，Value会存放在swap区；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	21）maxmemory-policy volatile-lru 当内存达到最大值的时候Redis会选择删除哪些数据呢？有五种方式可供选择：volatile-lru代表利用LRU算法移除设置过过期时间的key (LRU:最近使用 Least Recently Used )，allkeys-lru代表利用LRU算法移除任何key，volatile-random代表移除设置过过期时间的随机key，allkeys_random代表移除一个随机的key，volatile-ttl代表移除即将过期的key(minor TTL)，noeviction代表不移除任何key，只是返回一个写错误。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	注意：对于上面的策略，如果没有合适的key可以移除，写的时候Redis会返回一个错误；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	22）appendonly no 默认情况下，redis会在后台异步的把数据库镜像备份到磁盘，但是该备份是非常耗时的，而且备份也不能很频繁。如果发生诸如拉闸限电、拔插头等状况，那么将造成比较大范围的数据丢失，所以redis提供了另外一种更加高效的数据库备份及灾难恢复方式。开启append only模式之后，redis会把所接收到的每一次写操作请求都追加到appendonly.aof文件中。当redis重新启动时，会从该文件恢复出之前的状态，但是这样会造成appendonly.aof文件过大，所以redis还支持了BGREWRITEAOF指令对appendonly.aof 进行重新整理，你可以同时开启asynchronous dumps 和 AOF；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	23）appendfilename appendonly.aof &nbsp;<wbr style="padding: 0px; margin: 0px;" />AOF文件名称,默认为&quot;appendonly.aof&quot;;</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	24）appendfsync everysec &nbsp;<wbr style="padding: 0px; margin: 0px;" />Redis支持三种同步AOF文件的策略: no代表不进行同步，系统去操作，always代表每次有写操作都进行同步，everysec代表对写操作进行累积，每秒同步一次，默认是&quot;everysec&quot;，按照速度和安全折中这是最好的。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	25）slowlog-log-slower-than 10000 记录超过特定执行时间的命令。执行时间不包括I/O计算，比如连接客户端，返回结果等，只是命令执行时间。可以通过两个参数设置slow log：一个是告诉Redis执行超过多少时间被记录的参数slowlog-log-slower-than(微妙)，另一个是slow log 的长度。当一个新命令被记录的时候最早的命令将被从队列中移除，下面的时间以微妙微单位，因此1000000代表一分钟。注意制定一个负数将关闭慢日志，而设置为0将强制每个命令都会记录；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	26）hash-max-zipmap-entries 512 &amp;&amp; hash-max-zipmap-value 64 当hash中包含超过指定元素个数并且最大的元素没有超过临界时，hash将以一种特殊的编码方式（大大减少内存使用）来存储，这里可以设置这两个临界值。Redis Hash对应Value内部实际就是一个HashMap，实际这里会有2种不同实现。这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap。当成员数量增大时会自动转成真正的HashMap，此时encoding为ht；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	27）list-max-ziplist-entries 512 list数据类型多少节点以下会采用去指针的紧凑存储格式；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	28）list-max-ziplist-value 64数据类型节点值大小小于多少字节会采用紧凑存储格式；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	29）set-max-intset-entries 512 set数据类型内部数据如果全部是数值型，且包含多少节点以下会采用紧凑格式存储；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	30）zset-max-ziplist-entries 128 zsort数据类型多少节点以下会采用去指针的紧凑存储格式；</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	31）zset-max-ziplist-value 64 zsort数据类型节点值大小小于多少字节会采用紧凑存储格式。</div>
+<div style="font-size: 14px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; padding: 0px; margin: 0px; text-indent: 28px; background-color: rgb(246, 246, 246);">
+	32）activerehashing yes Redis将在每100毫秒时使用1毫秒的CPU时间来对redis的hash表进行重新hash，可以降低内存的使用。当你的使用场景中，有非常严格的实时性需要，不能够接受Redis时不时的对请求有2毫秒的延迟的话，把这项配置为no。如果没有这么严格的实时性要求，可以设置为yes，以便能够尽可能快的释放内存；</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<p style="margin: 0px; padding: 0px 0px 15px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+		<span style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em;">2.2 Redis的常用数据类型</span></p>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		与Memcached仅支持简单的key-value结构的数据记录不同，Redis支持的数据类型要丰富得多。最为常用的数据类型主要由五种：String、Hash、List、Set和Sorted Set。在具体描述这几种数据类型之前，我们先通过一张图来了解下Redis内部内存管理中是如何描述这些不同数据类型的。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101693p&amp;url=http://s4.sinaimg.cn/orignal/48c95a19gc513a3474e83" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929103727326?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			图1 Redis对象</div>
+	</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Redis内部使用一个redisObject对象来表示所有的key和value。redisObject最主要的信息如图1所示：type代表一个value对象具体是何种数据类型，encoding是不同数据类型在redis内部的存储方式，比如：type=string代表value存储的是一个普通字符串，那么对应的encoding可以是raw或者是int，如果是int则代表实际redis内部是按数值型类存储和表示这个字符串的，当然前提是这个字符串本身可以用数值表示，比如:&quot;123&quot; &quot;456&quot;这样的字符串。这里需要特殊说明一下vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存，该功能默认是关闭状态的。通过Figure1我们可以发现Redis使用redisObject来表示所有的key/value数据是比较浪费内存的，当然这些内存管理成本的付出主要也是为了给Redis不同数据类型提供一个统一的管理接口，实际作者也提供了多种方法帮助我们尽量节省内存使用。下面我们先来逐一的分析下这五种数据类型的使用和内部实现方式。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		1）String</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		常用命令：set/get/decr/incr/mget等；</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		应用场景：String是最常用的一种数据类型，普通的key/value存储都可以归为此类；</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		实现方式：String在redis内部存储默认就是一个字符串，被redisObject所引用，当遇到incr、decr等操作时会转成数值型进行计算，此时redisObject的encoding字段为int。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px;">
+			2）Hash</div>
+		<div style="padding: 0px; margin: 0px;">
+			常用命令：hget/hset/hgetall等</div>
+		<div style="padding: 0px; margin: 0px;">
+			应用场景：我们要存储一个用户信息对象数据，其中包括用户ID、用户姓名、年龄和生日，通过用户ID我们希望获取该用户的姓名或者年龄或者生日；</div>
+		<div style="padding: 0px; margin: 0px;">
+			实现方式：Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口。如图2所示，Key是用户ID, value是一个Map。这个Map的key是成员的属性名，value是属性值。这样对数据的修改和存取都可以直接通过其内部Map的Key(Redis里称内部Map的key为field), 也就是通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据。当前HashMap的实现有两种方式：当HashMap的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，这时对应的value的redisObject的encoding为zipmap，当成员数量增大时会自动转成真正的HashMap,此时encoding为ht。</div>
+		<div style="padding: 0px; margin: 0px;">
+			<div style="padding: 0px; margin: 0px; text-align: center;">
+				<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101693p&amp;url=http://s2.sinaimg.cn/orignal/48c95a19gc513abeb9bb1" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929103749499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+			<div style="padding: 0px; margin: 0px; text-align: center;">
+				图2 Redis的Hash数据类型</div>
+		</div>
+		<div style="padding: 0px; margin: 0px;">
+			3）List</div>
+		<div style="padding: 0px; margin: 0px;">
+			常用命令：lpush/rpush/lpop/rpop/lrange等；</div>
+		<div style="padding: 0px; margin: 0px;">
+			应用场景：Redis list的应用场景非常多，也是Redis最重要的数据结构之一，比如twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现；</div>
+		<div style="padding: 0px; margin: 0px;">
+			实现方式：Redis list的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构。</div>
+		<div style="padding: 0px; margin: 0px;">
+			4）Set</div>
+		<div style="padding: 0px; margin: 0px;">
+			常用命令：sadd/spop/smembers/sunion等；</div>
+		<div style="padding: 0px; margin: 0px;">
+			应用场景：Redis set对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以自动排重的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在一个set集合内的重要接口，这个也是list所不能提供的；</div>
+		<div style="padding: 0px; margin: 0px;">
+			实现方式：set 的内部实现是一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因。</div>
+		<div style="padding: 0px; margin: 0px;">
+			5）Sorted Set</div>
+		<div style="padding: 0px; margin: 0px;">
+			常用命令：zadd/zrange/zrem/zcard等；</div>
+		<div style="padding: 0px; margin: 0px;">
+			应用场景：Redis sorted set的使用场景与set类似，区别是set不是自动有序的，而sorted set可以通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序。当你需要一个有序的并且不重复的集合列表，那么可以选择sorted set数据结构，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的。</div>
+		<div style="padding: 0px; margin: 0px;">
+			实现方式：Redis sorted set的内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序，HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员，排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单。</div>
+		<div style="padding: 0px; margin: 0px;">
+			<span style="padding: 0px; margin: 0px;">2.3 Redis的持久化</span></div>
+		<div style="padding: 0px; margin: 0px;">
+			Redis虽然是基于内存的存储系统，但是它本身是支持内存数据的持久化的，而且提供两种主要的持久化策略：RDB快照和AOF日志。我们会在下文分别介绍这两种不同的持久化策略。</div>
+		<div style="padding: 0px; margin: 0px;">
+			<span style="padding: 0px; margin: 0px;">2.3.1 Redis的AOF日志</span></div>
+		<div style="padding: 0px; margin: 0px;">
+			Redis支持将当前数据的快照存成一个数据文件的持久化机制，即RDB快照。这种方法是非常好理解的，但是一个持续写入的数据库如何生成快照呢？Redis借助了fork命令的copy on write机制。在生成快照时，将当前进程fork出一个子进程，然后在子进程中循环所有的数据，将数据写成为RDB文件。</div>
+		<div style="padding: 0px; margin: 0px;">
+			我们可以通过Redis的save指令来配置RDB快照生成的时机，比如你可以配置当10分钟以内有100次写入就生成快照，也可以配置当1小时内有1000次写入就生成快照，也可以多个规则一起实施。这些规则的定义就在Redis的配置文件中，你也可以通过Redis的CONFIG SET命令在Redis运行时设置规则，不需要重启Redis。</div>
+		<div style="padding: 0px; margin: 0px;">
+			Redis的RDB文件不会坏掉，因为其写操作是在一个新进程中进行的，当生成一个新的RDB文件时，Redis生成的子进程会先将数据写到一个临时文件中，然后通过原子性rename系统调用将临时文件重命名为RDB文件，这样在任何时候出现故障，Redis的RDB文件都总是可用的。同时，Redis的RDB文件也是Redis主从同步内部实现中的一环。</div>
+		<div style="padding: 0px; margin: 0px;">
+			但是，我们可以很明显的看到，RDB有他的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的，从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。在某些业务下，这是可以忍受的，我们也推荐这些业务使用RDB的方式进行持久化，因为开启RDB的代价并不高。但是对于另外一些对数据安全性要求极高的应用，无法容忍数据丢失的应用，RDB就无能为力了，所以Redis引入了另一个重要的持久化机制：AOF日志。</div>
+		<div style="padding: 0px; margin: 0px;">
+			<span style="padding: 0px; margin: 0px;">2.3.2 Redis的AOF日志</span></div>
+		<div style="padding: 0px; margin: 0px;">
+			AOF日志的全称是append only file，从名字上我们就能看出来，它是一个追加写入的日志文件。与一般数据库的binlog不同的是，AOF文件是可识别的纯文本，它的内容就是一个个的Redis标准命令。当然，并不是发送发Redis的所有命令都要记录到AOF日志里面，只有那些会导致数据发生修改的命令才会追加到AOF文件。那么每一条修改数据的命令都生成一条日志，那么AOF文件是不是会很大？答案是肯定的，AOF文件会越来越大，所以Redis又提供了一个功能，叫做AOF rewrite。其功能就是重新生成一份AOF文件，新的AOF文件中一条记录的操作只会有一次，而不像一份老文件那样，可能记录了对同一个值的多次操作。其生成过程和RDB类似，也是fork一个进程，直接遍历数据，写入新的AOF临时文件。在写入新文件的过程中，所有的写操作日志还是会写到原来老的AOF文件中，同时还会记录在内存缓冲区中。当重完操作完成后，会将所有缓冲区中的日志一次性写入到临时文件中。然后调用原子性的rename命令用新的AOF文件取代老的AOF文件。</div>
+		<div style="padding: 0px; margin: 0px;">
+			AOF是一个写文件操作，其目的是将操作日志写到磁盘上，所以它也同样会遇到我们上面说的写操作的5个流程。那么写AOF的操作安全性又有多高呢。实际上这是可以设置的，在Redis中对AOF调用write(2)写入后，何时再调用fsync将其写到磁盘上，通过appendfsync选项来控制，下面appendfsync的三个设置项，安全强度逐渐变强。</div>
+		<div style="padding: 0px; margin: 0px;">
+			1）appendfsync no</div>
+		<div style="padding: 0px; margin: 0px;">
+			当设置appendfsync为no的时候，Redis不会主动调用fsync去将AOF日志内容同步到磁盘，所以这一切就完全依赖于操作系统的调试了。对大多数Linux操作系统，是每30秒进行一次fsync，将缓冲区中的数据写到磁盘上。</div>
+		<div style="padding: 0px; margin: 0px;">
+			2）appendfsync everysec</div>
+		<div style="padding: 0px; margin: 0px;">
+			当设置appendfsync为everysec的时候，Redis会默认每隔一秒进行一次fsync调用，将缓冲区中的数据写到磁盘。但是当这一次的fsync调用时长超过1秒时。Redis会采取延迟fsync的策略，再等一秒钟。也就是在两秒后再进行fsync，这一次的fsync就不管会执行多长时间都会进行。这时候由于在fsync时文件描述符会被阻塞，所以当前的写操作就会阻塞。所以结论就是，在绝大多数情况下，Redis会每隔一秒进行一次fsync。在最坏的情况下，两秒钟会进行一次fsync操作。这一操作在大多数数据库系统中被称为group commit，就是组合多次写操作的数据，一次性将日志写到磁盘。</div>
+		<div style="padding: 0px; margin: 0px;">
+			3）appednfsync always</div>
+		<div style="padding: 0px; margin: 0px;">
+			当设置appendfsync为always时，每一次写操作都会调用一次fsync，这时数据是最安全的，当然，由于每次都会执行fsync，所以其性能也会受到影响。</div>
+	</div>
+</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<p style="margin: 0px; padding: 0px 0px 15px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+		<span style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em;">3. Memcached和Redis关键技术对比</span></p>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		作为内存数据缓冲系统，Memcached和Redis均具有很高的性能，但是两者在关键实现技术上具有很大差异，这种差异决定了两者具有不同的特点和不同的适用条件。下面我们会对两者的关键技术进行一些对比，以此来揭示两者的差异。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<span style="padding: 0px; margin: 0px;">3.1 Memcached和Redis的内存管理机制对比</span></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		对于像Redis和Memcached这种基于内存的数据库系统来说，内存管理的效率高低是影响系统性能的关键因素。传统C语言中的malloc/free函数是最常用的分配和释放内存的方法，但是这种方法存在着很大的缺陷：首先，对于开发人员来说不匹配的malloc和free容易造成内存泄露；其次，频繁调用会造成大量内存碎片无法回收重新利用，降低内存利用率；最后，作为系统调用，其系统开销远远大于一般函数调用。所以，为了提高内存的管理效率，高效的内存管理方案都不会直接使用malloc/free调用。Redis和Memcached均使用了自身设计的内存管理机制，但是实现方法存在很大的差异，下面将会对两者的内存管理机制分别进行介绍。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<span style="padding: 0px; margin: 0px;">3.1.1 Memcached的内存管理机制</span></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Memcached默认使用Slab Allocation机制管理内存，其主要思想是按照预先规定的大小，将分配的内存分割成特定长度的块以存储相应长度的key-value数据记录，以完全解决内存碎片问题。Slab Allocation机制只为存储外部数据而设计，也就是说所有的key-value数据都存储在Slab Allocation系统里，而Memcached的其它内存请求则通过普通的malloc/free来申请，因为这些请求的数量和频率决定了它们不会对整个系统的性能造成影响</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Slab Allocation的原理相当简单。 如图3所示，它首先从操作系统申请一大块内存，并将其分割成各种尺寸的块Chunk，并把尺寸相同的块分成组Slab Class。其中，Chunk就是用来存储key-value数据的最小单位。每个Slab Class的大小，可以在Memcached启动的时候通过制定Growth Factor来控制。假定Figure 1中Growth Factor的取值为1.25，所以如果第一组Chunk的大小为88个字节，第二组Chunk的大小就为112个字节，依此类推。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694a&amp;url=http://s16.sinaimg.cn/orignal/48c95a19g7a1b94e761ff" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929103833802?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			<span style="padding: 0px; margin: 0px; word-wrap: normal; word-break: normal;">图3 Memcached内存管理架构</span></div>
+	</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		当Memcached接收到客户端发送过来的数据时首先会根据收到数据的大小选择一个最合适的Slab Class，然后通过查询Memcached保存着的该Slab Class内空闲Chunk的列表就可以找到一个可用于存储数据的Chunk。当一条数据库过期或者丢弃时，该记录所占用的Chunk就可以回收，重新添加到空闲列表中。从以上过程我们可以看出Memcached的内存管理制效率高，而且不会造成内存碎片，但是它最大的缺点就是会导致空间浪费。因为每个Chunk都分配了特定长度的内存空间，所以变长数据无法充分利用这些空间。如图 4所示，将100个字节的数据缓存到128个字节的Chunk中，剩余的28个字节就浪费掉了。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-align: center; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694a&amp;url=http://s5.sinaimg.cn/orignal/48c95a19gc513c1448e64" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929103909462?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a><br style="padding: 0px; margin: 0px;" />
+		图4 Memcached的存储空间浪费</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px;">
+			<span style="padding: 0px; margin: 0px;">3.1.2 Redis的内存管理机制</span></div>
+		<div style="padding: 0px; margin: 0px;">
+			Redis的内存管理主要通过源码中zmalloc.h和zmalloc.c两个文件来实现的。Redis为了方便内存的管理，在分配一块内存之后，会将这块内存的大小存入内存块的头部。如图 5所示，real_ptr是redis调用malloc后返回的指针。redis将内存块的大小size存入头部，size所占据的内存大小是已知的，为size_t类型的长度，然后返回ret_ptr。当需要释放内存的时候，ret_ptr被传给内存管理程序。通过ret_ptr，程序可以很容易的算出real_ptr的值，然后将real_ptr传给free释放内存。</div>
+		<div style="padding: 0px; margin: 0px;">
+			<div style="padding: 0px; margin: 0px; text-align: center;">
+				<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694a&amp;url=http://s12.sinaimg.cn/orignal/48c95a19gc513d4c6853b" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929104002757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+			<div style="padding: 0px; margin: 0px; text-align: center;">
+				<span style="padding: 0px; margin: 0px; word-wrap: normal; word-break: normal;">图5 Redis块分配</span></div>
+		</div>
+		<div style="padding: 0px; margin: 0px;">
+			Redis通过定义一个数组来记录所有的内存分配情况，这个数组的长度为ZMALLOC_MAX_ALLOC_STAT。数组的每一个元素代表当前程序所分配的内存块的个数，且内存块的大小为该元素的下标。在源码中，这个数组为zmalloc_allocations。zmalloc_allocations[16]代表已经分配的长度为16bytes的内存块的个数。zmalloc.c中有一个静态变量used_memory用来记录当前分配的内存总大小。所以，总的来看，Redis采用的是包装的mallc/free，相较于Memcached的内存管理方法来说，要简单很多。</div>
+	</div>
+</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</div>
+<div style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<p style="margin: 0px; padding: 0px 0px 15px; color: rgb(85, 85, 85); font-family: 宋体, 'Arial Narrow', arial, serif; line-height: 28px;">
+		<span style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em;">3.2 Redis和Memcached的集群实现机制对比</span></p>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Memcached是全内存的数据缓冲系统，Redis虽然支持数据的持久化，但是全内存毕竟才是其高性能的本质。作为基于内存的存储系统来说，机器物理内存的大小就是系统能够容纳的最大数据量。如果需要处理的数据量超过了单台机器的物理内存大小，就需要构建分布式集群来扩展存储能力。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<span style="padding: 0px; margin: 0px;">3.2.1 Memcached的分布式存储</span></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Memcached本身并不支持分布式，因此只能在客户端通过像一致性哈希这样的分布式算法来实现Memcached的分布式存储。图6 给出了Memcached的分布式存储实现架构。当客户端向Memcached集群发送数据之前，首先会通过内置的分布式算法计算出该条数据的目标节点，然后数据会直接发送到该节点上存储。但客户端查询数据时，同样要计算出查询数据所在的节点，然后直接向该节点发送查询请求以获取数据。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694s&amp;url=http://s1.sinaimg.cn/orignal/48c95a19gc513ebf63bd0" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929104039561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			图6 Memcached客户端分布式存储实现</div>
+	</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<span style="padding: 0px; margin: 0px;">3.2.2 Redis的分布式存储</span></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		相较于Memcached只能采用客户端实现分布式存储，Redis更偏向于在服务器端构建分布式存储。尽管Redis当前已经发布的稳定版本还没有添加分布式存储功能，但Redis开发版中已经具备了Redis Cluster的基本功能。预计在2.6版本之后，Redis就会发布完全支持分布式的稳定版本，时间不晚于2012年底。下面我们会根据开发版中的实现，简单介绍一下Redis Cluster的核心思想。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Redis Cluster是一个实现了分布式且允许单点故障的Redis高级版本，它没有中心节点，具有线性可伸缩的功能。图7给出Redis Cluster的分布式存储架构，其中节点与节点之间通过二进制协议进行通信，节点与客户端之间通过ascii协议进行通信。在数据的放置策略上，Redis Cluster将整个key的数值域分成4096个哈希槽，每个节点上可以存储一个或多个哈希槽，也就是说当前Redis Cluster支持的最大节点数就是4096。Redis Cluster使用的分布式算法也很简单：crc16( key ) % HASH_SLOTS_NUMBER。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-align: center; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694s&amp;url=http://s12.sinaimg.cn/orignal/48c95a19gc5140371835b" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929104123109?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			&nbsp;</div>
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			图7 Redis分布式架构</div>
+	</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		为了保证单点故障下的数据可用性，Redis Cluster引入了Master节点和Slave节点。如图4所示，在Redis Cluster中，每个Master节点都会有对应的两个用于冗余的Slave节点。这样在整个集群中，任意两个节点的宕机都不会导致数据的不可用。当Master节点退出后，集群会自动选择一个Slave节点成为新的Master节点。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			<a href="http://photo.blog.sina.com.cn/showpic.html#blogid=48c95a190101694s&amp;url=http://s13.sinaimg.cn/orignal/48c95a19gc513f71c0c7c" style="color: rgb(82, 102, 115); text-decoration: initial; padding: 0px; margin: 0px;" target="_blank"><img alt="" src="http://img.blog.csdn.net/20150929104155803?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" style="border: none; max-width: 100%;" /></a></div>
+		<div style="padding: 0px; margin: 0px; text-align: center;">
+			图8 Redis Cluster中的Master节点和Slave节点</div>
+	</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		<span style="padding: 0px; margin: 0px;">3.3 Redis和Memcached整体对比</span></div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		Redis的作者Salvatore Sanfilippo曾经对这两种基于内存的数据存储系统进行过比较，总体来看还是比较客观的，现总结如下：</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		1）性能对比：由于Redis只使用单核，而Memcached可以使用多核，所以平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		2）内存使用效率对比：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。</div>
+	<div style="padding: 0px; margin: 0px; color: rgb(73, 73, 73); font-family: simsun; line-height: 21px; text-indent: 2em; background-color: rgb(246, 246, 246);">
+		3）Redis支持服务器端的数据操作：Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。</div>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/redis/2015/0831/1259.html'>Redis PHP连接操作</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/redis/2016/1019/1549.html'>CentOS7安装配置redis-3.0.0</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/redis/2017/1101/1637.html" >消息中间件的技术选型RabbitMQ、</a><span>11.01</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存</a><span>09.26</span></li>
+<li><a href="/shujuku/redis/2016/1019/1549.html" >CentOS7安装配置redis-3.0.0</a><span>10.19</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>05.10</span></li>
+<li><a href="/shujuku/redis/2015/0831/1259.html" >Redis PHP连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1258.html" >Redis Java连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1254.html" >Redis基准</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1253.html" >Redis安全</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1249.html" >Redis脚本</a><span>08.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/redis/2015/0831/1248.html" >Redis事务</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1247.html" >Redis发布订阅</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1246.html" >Redis有序集合</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1245.html" >Redis列表</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1244.html" >Redis哈希</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1240.html" >Redis数据类型</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1257.html" >Redis分区</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1256.html" >Redis管道传输</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1255.html" >Redis客户端连接</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1252.html" >Redis备份</a><span>08.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/redis/2017/1101/1637.html" >消息中间件的技术选型RabbitMQ、ActiveMQ、RocketMQ、kafka、Redis消息和Zero</a><span>11.01</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存储不再有负担！</a><span>09.26</span></li>
+<li><a href="/shujuku/redis/2016/1019/1549.html" >CentOS7安装配置redis-3.0.0</a><span>10.19</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>05.10</span></li>
+<li><a href="/shujuku/redis/2015/0831/1259.html" >Redis PHP连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1258.html" >Redis Java连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1254.html" >Redis基准</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1253.html" >Redis安全</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1249.html" >Redis脚本</a><span>08.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/redis/2015/0525/871.html" >centos安装Redis出现Redis need tcl 8.5解</a><span>2711</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>486</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存</a><span>471</span></li>
+<li><a href="/shujuku/redis/2015/0831/1236.html" >Redis学习教程</a><span>202</span></li>
+<li><a href="/shujuku/redis/2015/0608/889.html" >redis与mysql数据同步</a><span>71</span></li>
+<li><a href="/shujuku/redis/2015/0608/892.html" > lettuce---redis异步通信</a><span>58</span></li>
+<li><a href="/shujuku/redis/2015/0531/878.html" >Redis操作常用命令大全</a><span>57</span></li>
+<li><a href="/shujuku/redis/2015/0608/890.html" >Redis与mysql的应用以及使用经验</a><span>54</span></li>
+<li><a href="/shujuku/redis/2015/0831/1235.html" >Linux CentOS如何安装Redis</a><span>53</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>52</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1500&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

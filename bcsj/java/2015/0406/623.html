@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下列Java知识点归纳总结你都掌握了吗？_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,java知识点" />
+  <meta name="description" content=" " />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>下列Java知识点归纳总结你都掌握了吗？</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-06 16:01 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="623" class="art_content"><p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">1. 基本数据类型</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">整形：</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	byte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	short&nbsp;&nbsp;&nbsp;&nbsp; 2 个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	字符：</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	char&nbsp;&nbsp;&nbsp;&nbsp; 2个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	浮点数：</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	double&nbsp;&nbsp; 8个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	布尔：</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	boolean&nbsp;&nbsp; 1个字节</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">2.java 7&nbsp; 新增二进制整数</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	以0b或者0B开头</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">3.java中字符时16位的Unicode编码方式，格式是&#39;\uXXXX&#39;，其中xxxx代表一个十六进制整数</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">4.java中规定了正无穷大、负无穷大和零</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	正无穷大=&nbsp; 一个正数除以0</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	负无穷大= 一个负数除以零</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	0.0 除以0.0&nbsp; 或者 对一个负数开方&nbsp; 得到一个非数</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">5. 在java中布尔类型只能是true和false</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">6. 在java中没有多维数组</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	看似像C语言中的多维数组不是真正的数组，比如 a[3][4] , a[0] a[1] a[2]&nbsp; 是真实存在的，装的是地址，和c语言中动态分配为的数组一样</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	int&nbsp; [][]&nbsp; b&nbsp; = new&nbsp; int[3][4]</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">7. Java中带包的编译方法</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	javac -d .&nbsp; Hello.java&nbsp;&nbsp;&nbsp; 会在当前目录下生成目录树</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	运行&nbsp; java&nbsp; 包名字.类名字</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">8. Java多态中的对象的filed 不具有多态性，如&nbsp; 父类&nbsp; 对象 =&nbsp; new&nbsp; 子类（）， 对象.field&nbsp; 是调用的父类的，即使子类中覆盖了该字段。</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">9. instanceof 运算符</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	格式： 引用变量名&nbsp; instanceof&nbsp; 类名（或者接口）&nbsp; 他用于判断前面的对象是否是后面对象的类，子类、实现类的实例，是返回true，否者返回false</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">10. Java 中基本数据类型和对应封装类之间的转化</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp; a&nbsp; =&nbsp; 1;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer&nbsp; A&nbsp; =&nbsp; new Integer(a);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a&nbsp; = A.intValue();</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;&nbsp;&nbsp;&nbsp; 其他的类型也是这样的。</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">11.单例（singleton）类 例子</strong></p>
+<p class="codetitle" style="text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(242,246,251); text-indent: 0px; margin: 3px auto 0px; padding-left: 3px; width: 600px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<span onclick="doCopy('code19634')" style="padding-bottom: 0px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; float: right; font-size: 14px; cursor: pointer; padding-top: 0px"><u style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">复制代码</u></span>代码如下:</p>
+<p class="codebody" id="code19634" style="border-bottom: rgb(0,153,204) 1px solid; text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(221,237,251); text-indent: 0px; margin: 0px auto 3px; padding-left: 5px; width: 598px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	class Singleton<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private static Singleton instance;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private Singleton(){}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public static Singleton getInstance()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(instance == null)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instance = new Singleton();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return instance;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public static void main(String[] args)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Singleton s1 = Singleton.getInstance();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Singleton s2 = Singleton.getInstance();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(s1 == s2);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br style="text-align: left; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px" />
+	<strong style="text-align: left; padding-bottom: 0px; line-height: 25px; widows: 2; text-transform: none; background-color: rgb(247,252,255); font-variant: normal; font-style: normal; text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); font-size: 14px; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">12.final修饰的成员变量初始化问题</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	类Field： 必须在静态初始块中或声明该FIeld时指定初始值</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	实例Field：必须在非静态初始块中或声明该FIeld时指定初始值或构造器中声明</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">13.Final 变量必须显式初始化，系统不会对final变量进行隐式初始化</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">14.java会使用常量池来管理曾经用过的字符串直接常量，例如：String a = &quot;java&quot;; ，系统把常量字符串&ldquo;java&rdquo;存在常量池，当再次执行 String b = &quot;java&quot;;&nbsp; a == b&nbsp; 是true</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">15.final 方法不可以重写，final类不能被继承</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;&nbsp;&nbsp;&nbsp;如果用private 方法 和 final private 是一样的</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;&nbsp;&nbsp; 若果是用final修饰的方法在子类中出现，那是子类新定义的，与父类没有关系</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">16.不可变类：创建后该类的Field是不可改变的。java提供了8个基本变量的包装类和string都是不可改变类。</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">17.缓存实例的不可改变类</strong></p>
+<p class="codetitle" style="text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(242,246,251); text-indent: 0px; margin: 3px auto 0px; padding-left: 3px; width: 600px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<span onclick="doCopy('code11348')" style="padding-bottom: 0px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; float: right; font-size: 14px; cursor: pointer; padding-top: 0px"><u style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">复制代码</u></span>代码如下:</p>
+<p class="codebody" id="code11348" style="border-bottom: rgb(0,153,204) 1px solid; text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(221,237,251); text-indent: 0px; margin: 0px auto 3px; padding-left: 5px; width: 598px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	class CacheImmutale<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private static int MAX_SIZE = 10;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private static CacheImmutale[] cache = new CacheImmutale[MAX_SIZE];<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private static int pos = 0;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private final String name;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private CacheImmutale(String name)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;this. name = name;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public String getName()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;return name;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public static CacheImmutale valueOf(String name)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;for(int i = 0; i &lt; MAX_SIZE; ++i)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;if(cache[i] != null &amp;&amp; cache[i].getName().equals(name))<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;&nbsp;return cache[i];<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;if(pos == MAX_SIZE)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;cache[0] = new CacheImmutale(name);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;pos = 1;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;else<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;cache[pos++] = new CacheImmutale(name);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;return cache[pos -1];<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;public boolean equals(Object obj)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;if(this == obj)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;return true;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;if(obj != null &amp;&amp; obj.getClass() == CacheImmutale.class)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;CacheImmutale ci = (CacheImmutale)obj;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;return name.equals(ci.getName());<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;return false;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public int hashCode()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;return name.hashCode();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	public class CacheImmuteTest<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public static void main(String[] args)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;CacheImmutale c1 = CacheImmutale.valueOf(&quot;Hello&quot;);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;CacheImmutale c2 = CacheImmutale.valueOf(&quot;Hello&quot;);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;System.out.println(c1 == c2);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br style="text-align: left; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px" />
+	<span style="text-align: left; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; display: inline !important; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; float: none; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">用缓存实例要看某个对象的使用频率，若重复使用那就利大于弊，若不经常使用那弊就大于利</span></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	还有java提供的java.lang.Integer&nbsp; 创建数值在-128-127之间的数采用缓存机制的</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	Integer in2 = Integer.valueOf(6);</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	Integer in3= Integer.valueOf(6);</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	in2 == in3&nbsp; is true;</p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">18. static 和 abstract 不能同时修饰一个方法，没有类抽象方法</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">19.一个类可以又一个父类，实现多个接口，接口中Filed是public 、static、final的，方法是public abstract的</strong></p>
+<p style="text-align: left; padding-bottom: 5px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 5px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<strong style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">20.非静态内部类的方法访问某个变量，搜索顺序为：先内部类中方法内-&gt; 内部类&nbsp; -&gt; 外部类中如果都找不到则出现编译错误</strong></p>
+<p class="codetitle" style="text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(242,246,251); text-indent: 0px; margin: 3px auto 0px; padding-left: 3px; width: 600px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<span onclick="doCopy('code89322')" style="padding-bottom: 0px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; float: right; font-size: 14px; cursor: pointer; padding-top: 0px"><u style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">复制代码</u></span>代码如下:</p>
+<p class="codebody" id="code89322" style="border-bottom: rgb(0,153,204) 1px solid; text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(221,237,251); text-indent: 0px; margin: 0px auto 3px; padding-left: 5px; width: 598px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	import java.util.*;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	public class DiscernVariable&nbsp;<span class="Apple-converted-space">&nbsp;</span><br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private String prop = &quot;外部类的实例变量&quot;;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;private class InClass<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;private String prop = &quot;内部类的实例变量&quot;;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;public void info()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;String prop = &quot;局部变量&quot;;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;System.out.println(&quot;外部类的field值：&quot; + DiscernVariable.this.prop);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;System.out.println(&quot;内部类的field值：&quot; + this.prop);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;System.out.println(&quot;局部变量的值：&quot; + prop);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public void test()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;InClass in = new InClass();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;in.info();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public static void main(String[] args)<span class="Apple-converted-space">&nbsp;</span><br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;new DiscernVariable().test();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br style="text-align: left; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px" />
+	<strong style="text-align: left; padding-bottom: 0px; line-height: 25px; widows: 2; text-transform: none; background-color: rgb(247,252,255); font-variant: normal; font-style: normal; text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); font-size: 14px; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">21.非静态内部类不能有静态方法、静态Field、静态初始化块<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	22.在外部类之外访问内部类</strong><br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	<span style="text-align: left; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; display: inline !important; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; float: none; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">&nbsp; 访问非静态内部类：outclass.Inclass varname = new outclass().new InClass();</span><br style="text-align: left; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px" />
+	<span style="text-align: left; widows: 2; text-transform: none; background-color: rgb(247,252,255); text-indent: 0px; display: inline !important; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; float: none; letter-spacing: normal; color: rgb(51,51,51); word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">&nbsp; 访问静态内部类：&nbsp; outclass.Inclass varname = new outclass.Inclass();</span></p>
+<p class="codetitle" style="text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(242,246,251); text-indent: 0px; margin: 3px auto 0px; padding-left: 3px; width: 600px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<span onclick="doCopy('code28843')" style="padding-bottom: 0px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; float: right; font-size: 14px; cursor: pointer; padding-top: 0px"><u style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">复制代码</u></span>代码如下:</p>
+<p class="codebody" id="code28843" style="border-bottom: rgb(0,153,204) 1px solid; text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(221,237,251); text-indent: 0px; margin: 0px auto 3px; padding-left: 5px; width: 598px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	import java.util.*;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	class Out<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;class In<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;public In()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;System.out.println(&quot;非静态内部类构造器&quot;);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	public class CreatInnerInstance<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public static void main(String[] args)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;Out.In in = new Out().new In();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;/*<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;以上的代码可分开写为：<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;Out.In in;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;Out out = new Out();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;in = out.new In();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;*/<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	class SubClass extends Out.In<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;//显示定义SubClass的构造器<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public SubClass(Out out)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;//通过转入的Out对象显示调用In的构造器<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;out.super();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p class="codetitle" style="text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(242,246,251); text-indent: 0px; margin: 3px auto 0px; padding-left: 3px; width: 600px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<span onclick="doCopy('code10280')" style="padding-bottom: 0px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; float: right; font-size: 14px; cursor: pointer; padding-top: 0px"><u style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px">复制代码</u></span>代码如下:</p>
+<p class="codebody" id="code10280" style="border-bottom: rgb(0,153,204) 1px solid; text-align: left; border-left: rgb(0,153,204) 1px solid; padding-bottom: 0px; widows: 2; text-transform: none; background-color: rgb(221,237,251); text-indent: 0px; margin: 0px auto 3px; padding-left: 5px; width: 598px; padding-right: 3px; font: 14px/25px Arial, Tahoma, Verdana, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); clear: both; border-top: rgb(0,153,204) 1px solid; border-right: rgb(0,153,204) 1px solid; word-spacing: 0px; padding-top: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	import java.util.*;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	&nbsp;</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	class StaticOut<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;static class StaticIn<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;public StaticIn()<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;&nbsp;System.out.println(&quot;静态内部类构造器&quot;);<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	public class CreatStaticInnerInstance<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;public static void main(String[] args)<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;StaticOut.StaticIn in = new StaticOut.StaticIn();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;/*<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;以上的代码可分开写为：<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;StaticOut.StaticIn in;<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;in = new StaticOut.StaticIn();<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;&nbsp;*/<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;}<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p style="padding-bottom: 5px; line-height: 25px; margin: 0px; padding-left: 0px; padding-right: 0px; font-size: 14px; padding-top: 5px">
+	class SubClass extends StaticOut.StaticIn<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	{<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	&nbsp;//无须创建内部类实例<br style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px" />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0406/622.html'>数据持久层框架 iBATIS</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0406/624.html'>java HashMap 遍历</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=623&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

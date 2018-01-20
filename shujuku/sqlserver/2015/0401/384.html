@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sql Server数据备份及恢复措施_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Sql Server数据备份及恢复措" />
+  <meta name="description" content="一、备份数据库 1、打开SQL企业管理器，在控制台根目录中依次点开MicrosoftSQLServer 2、SQLServer组--双击打开你的服务器--双击打开数据库目录 3、选择你的数据库名称（如论坛数据库Forum）" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/sqlserver/'>SQL Server</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Sql Server数据备份及恢复措施</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-01 08:50 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="384" class="art_content"><h3>
+	　　一、备份数据库&nbsp;　　&nbsp;</h3>
+<br />
+　　1、打开SQL企业管理器，在控制台根目录中依次点开Microsoft&nbsp;SQL&nbsp;Server&nbsp;<br />
+<br />
+　　2、SQL&nbsp;Server组--&gt;双击打开你的服务器--&gt;双击打开数据库目录&nbsp;<br />
+<br />
+　　3、选择你的数据库名称（如论坛数据库Forum）--&gt;然后点上面菜单中的工具--&gt;选择备份数据库&nbsp;<br />
+<br />
+　　4、备份选项选择完全备份，目的中的备份到如果原来有路径和名称则选中名称点删除，然后点添加，如果原来没有路径和名称则直接选择添加，接着指定路径和文件名，指定后点确定返回备份窗口，接着点确定进行备份&nbsp;　　&nbsp;<br />
+<h3>
+	　　二、还原数据库　　&nbsp;</h3>
+<br />
+　　1、打开SQL企业管理器，在控制台根目录中依次点开Microsoft&nbsp;SQL&nbsp;Server&nbsp;<br />
+<br />
+　　2、SQL&nbsp;Server组--&gt;双击打开你的服务器--&gt;点图标栏的新建数据库图标，新建数据库的名字自行取&nbsp;<br />
+<br />
+　　3、点击新建好的数据库名称（如论坛数据库Forum）--&gt;然后点上面菜单中的工具--&gt;选择恢复数据库&nbsp;<br />
+<br />
+　　4、在弹出来的窗口中的还原选项中选择从设备--&gt;点选择设备--&gt;点添加--&gt;然后选择你的备份文件名--&gt;添加后点确定返回，这时候设备栏应该出现您刚才选择的数据库备份文件名，备份号默认为1（如果您对同一个文件做过多次备份，可以点击备份号旁边的查看内容，在复选框中选择最新的一次备份后点确定）--&gt;然后点击上方常规旁边的选项按钮&nbsp;<br />
+<br />
+　　5、在出现的窗口中选择在现有数据库上强制还原，以及在恢复完成状态中选择使数据库可以继续运行但无法还原其它事务日志的选项。在窗口的中间部位的将数据库文件还原为这里要按照你SQL的安装进行设置（也可以指定自己的目录），逻辑文件名不需要改动，移至物理文件名要根据你所恢复的机器情况做改动，如您的SQL数据库装在D:\\Program&nbsp;Files\\Microsoft&nbsp;SQL&nbsp;Server\\MSSQL\\Data，那么就按照您恢复机器的目录进行相关改动改动，并且最后的文件名最好改成您当前的数据库名（如原来是bbs_data.mdf，现在的数据库是forum，就改成forum_data.mdf），日志和数据文件都要按照这样的方式做相关的改动（日志的文件名是*_log.ldf结尾的），这里的恢复目录您可以自由设置，前提是该目录必须存在（如您可以指定d:\\sqldata\\bbs_data.mdf或者d:\\sqldata\\bbs_log.ldf），否则恢复将报错&nbsp;<br />
+<br />
+　　6、修改完成后，点击下面的确定进行恢复，这时会出现一个进度条，提示恢复的进度，恢复完成后系统会自动提示成功，如中间提示报错，请记录下相关的错误内容并询问对SQL操作比较熟悉的人员，一般的错误无非是目录错误或者文件名重复或者文件名错误或者空间不够或者数据库正在使用中的错误，数据库正在使用的错误您可以尝试关闭所有关于SQL窗口然后重新打开进行恢复操作，如果还提示正在使用的错误可以将SQL服务停止然后重起看看，至于上述其它的错误一般都能按照错误内容做相应改动后即可恢复　　&nbsp;<br />
+<h3>
+	　　三、收缩数据库　　&nbsp;</h3>
+<br />
+　　一般情况下，SQL数据库的收缩并不能很大程度上减小数据库大小，其主要作用是收缩日志大小，应当定期进行此操作以免数据库日志过大&nbsp;<br />
+<br />
+　　1、设置数据库模式为简单模式：打开SQL企业管理器，在控制台根目录中依次点开Microsoft&nbsp;SQL&nbsp;Server--&gt;SQL&nbsp;Server组--&gt;双击打开你的服务器--&gt;双击打开数据库目录--&gt;选择你的数据库名称（如论坛数据库Forum）--&gt;然后点击右键选择属性--&gt;选择选项--&gt;在故障还原的模式中选择&ldquo;简单&rdquo;，然后按确定保存&nbsp;<br />
+<br />
+　　2、在当前数据库上点右键，看所有任务中的收缩数据库，一般里面的默认设置不用调整，直接点确定&nbsp;<br />
+<br />
+　　3、收缩数据库完成后，建议将您的数据库属性重新设置为标准模式，操作方法同第一点，因为日志在一些异常情况下往往是恢复数据库的重要依据&nbsp;<br />
+<h3>
+	　　四、设定每日自动备份数据库　　&nbsp;</h3>
+<br />
+　　强烈建议有条件的用户进行此操作！&nbsp;<br />
+<br />
+　　1、打开企业管理器，在控制台根目录中依次点开Microsoft&nbsp;SQL&nbsp;Server--&gt;SQL&nbsp;Server组--&gt;双击打开你的服务器&nbsp;<br />
+<br />
+　　2、然后点上面菜单中的工具--&gt;选择数据库维护计划器&nbsp;<br />
+<br />
+　　3、下一步选择要进行自动备份的数据--&gt;下一步更新数据优化信息，这里一般不用做选择--&gt;下一步检查数据完整性，也一般不选择&nbsp;<br />
+<br />
+　　4、下一步指定数据库维护计划，默认的是1周备份一次，点击更改选择每天备份后点确定&nbsp;<br />
+<br />
+　　5、下一步指定备份的磁盘目录，选择指定目录，如您可以在D盘新建一个目录如：d:\\databak，然后在这里选择使用此目录，如果您的数据库比较多最好选择为每个数据库建立子目录，然后选择删除早于多少天前的备份，一般设定4－7天，这看您的具体备份要求，备份文件扩展名一般都是bak就用默认的&nbsp;<br />
+<br />
+　　6、下一步指定事务日志备份计划，看您的需要做选择--&gt;下一步要生成的报表，一般不做选择--&gt;下一步维护计划历史记录，最好用默认的选项--&gt;下一步完成&nbsp;<br />
+<br />
+　　7、完成后系统很可能会提示Sql&nbsp;Server&nbsp;Agent服务未启动，先点确定完成计划设定，然后找到桌面最右边状态栏中的SQL绿色图标，双击点开，在服务中选择Sql&nbsp;Server&nbsp;Agent，然后点击运行箭头，选上下方的当启动OS时自动启动服务&nbsp;<br />
+<br />
+　　8、这个时候数据库计划已经成功的运行了，他将按照您上面的设置进行自动备份&nbsp;　　&nbsp;<br />
+<br />
+　　修改计划：&nbsp;<br />
+<br />
+　　1、打开企业管理器，在控制台根目录中依次点开Microsoft&nbsp;SQL&nbsp;Server--&gt;SQL&nbsp;Server组--&gt;双击打开你的服务器--&gt;管理--&gt;数据库维护计划--&gt;打开后可看到你设定的计划，可以进行修改或者删除操作&nbsp;　　&nbsp;<br />
+<h3>
+	　　五、数据的转移（新建数据库或转移服务器&nbsp;</h3>
+<br />
+　　一般情况下，最好使用备份和还原操作来进行转移数据，在特殊情况下，可以用导入导出的方式进行转移，这里介绍的就是导入导出方式，导入导出方式转移数据一个作用就是可以在收缩数据库无效的情况下用来减小（收缩）数据库的大小，本操作默认为您对SQL的操作有一定的了解，如果对其中的部分操作不理解，可以咨询动网相关人员或者查询网上资料&nbsp;<br />
+<br />
+　　1、将原数据库的所有表、存储过程导出成一个SQL文件，导出的时候注意在选项中选择编写索引脚本和编写主键、外键、默认值和检查约束脚本选项&nbsp;<br />
+<br />
+　　2、新建数据库，对新建数据库执行第一步中所建立的SQL文件&nbsp;<br />
+<br />
+　　3、用SQL的导入导出方式，对新数据库导入原数据库中的所有表内容</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/sqlserver/2015/0401/383.html'>SQL注入漏洞全接触－入门篇</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/sqlserver/2015/0401/385.html'>取得插入记录后自动产生的ID</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/sqlserver/2015/1103/1324.html" >sql server临时表怎么删除？正确删</a><span>11.03</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/604.html" >MSSQL增加列、修改列、增加主键、</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/393.html" >MSSQL的索引类型、属性及建立方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/389.html" >“因为文件组'PRIMARY'已满”的原因</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/385.html" >取得插入记录后自动产生的ID</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/384.html" >Sql Server数据备份及恢复措施</a><span>04.01</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/sqlserver/2015/0401/383.html" >SQL注入漏洞全接触－入门篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/382.html" >SQL注入漏洞全接触－进阶篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/381.html" >SQL注入漏洞全接触－高级篇</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/380.html" >SQL查询语句基础知识</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/379.html" >MS SQL-SERVER空口令入侵漏洞</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/378.html" >SQL Server数据库死锁分析</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/377.html" >检测SQL Server 2000是否优化</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/376.html" >将SQL Server表变成txt文件</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/375.html" >读取SQL中text和ntext类型字段内容的</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/374.html" >SQL语句判断已知表是否存在</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/sqlserver/2015/1103/1324.html" >sql server临时表怎么删除？正确删除sql临时表的方法</a><span>11.03</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/604.html" >MSSQL增加列、修改列、增加主键、重设标识列</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/393.html" >MSSQL的索引类型、属性及建立方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/389.html" >“因为文件组'PRIMARY'已满”的原因和解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要求的问题</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/385.html" >取得插入记录后自动产生的ID</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/384.html" >Sql Server数据备份及恢复措施</a><span>04.01</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方</a><span>53</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要</a><span>52</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/370.html" >SQL Server安装时COM+目录要求问题的</a><span>42</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/366.html" >同服务器安装SQL2000和SQL2005冲突的</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/381.html" >SQL注入漏洞全接触－高级篇</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/367.html" >sqlserver2005（Express版）的配置</a><span>36</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/383.html" >SQL注入漏洞全接触－入门篇</a><span>32</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/375.html" >读取SQL中text和ntext类型字段内容的</a><span>31</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=384&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

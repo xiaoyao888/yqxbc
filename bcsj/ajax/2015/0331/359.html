@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XMLHTTP对象应用开发初体验_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="XMLHTTP对象应用开发初体验" />
+  <meta name="description" content="MSXML中提供了Microsoft.XMLHTTP对象，能够完成从数据包到Request对象的转换以及发送任务。创建XMLHTTP对象的语句如下： SetobjXML=CreateObject(Msxml2.XMLHTTP)或 SetobjXML=CreateObject(“Microsoft.XMLHTTP”) " />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Ajax/'>Ajax</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>XMLHTTP对象应用开发初体验</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-31 09:47 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="359" class="art_content">　　MSXML中提供了Microsoft.XMLHTTP对象，能够完成从数据包到Request对象的转换以及发送任务。创建XMLHTTP对象的语句如下：&nbsp;<br />
+<br />
+Set&nbsp;objXML&nbsp;=&nbsp;CreateObject(&quot;Msxml2.XMLHTTP&quot;)&nbsp;或<br />
+<br />
+Set&nbsp;objXML&nbsp;=&nbsp;CreateObject(&ldquo;Microsoft.XMLHTTP&rdquo;)<br />
+<br />
+&#39;&nbsp;Or,&nbsp;for&nbsp;version&nbsp;3.0&nbsp;of&nbsp;XMLHTTP,&nbsp;use:<br />
+<br />
+&#39;&nbsp;Set&nbsp;xml&nbsp;=&nbsp;Server.CreateObject(&quot;MSXML2.ServerXMLHTTP&quot;)&nbsp;<br />
+<br />
+　　对象创建后调用Open方法对Request对象进行初始化，语法格式为：&nbsp;<br />
+<br />
+poster.open&nbsp;http-method,&nbsp;url,&nbsp;async,&nbsp;userID,&nbsp;password&nbsp;<br />
+　　Open方法中包含了5个参数，前三个是必要的，后两个是可选的(在服务器需要进行身份验证时提供)。参数的含义如下所示：&nbsp;<br />
+<br />
+http-method：&nbsp;HTTP的通信方式，比如GET或是&nbsp;POST&nbsp;<br />
+<br />
+url：&nbsp;接收XML数据的服务器的URL地址。通常在URL中要指明&nbsp;ASP或CGI程序&nbsp;<br />
+<br />
+async：&nbsp;一个布尔标识，说明请求是否为异步的。如果是异步通信方式(true)，客户机就不等待服务器的响应；如果是同步方式(false)，客户机就要等到服务器返回消息后才去执行其他操作&nbsp;<br />
+<br />
+userID&nbsp;用户ID，用于服务器身份验证<br />
+<br />
+password&nbsp;用户密码，用于服务器身份验证&nbsp;<br />
+<br />
+　　XMLHTTP对象的Send方法&nbsp;<br />
+<br />
+　　用Open方法对Request对象进行初始化后，调用Send方法发送XML数据：&nbsp;<br />
+<br />
+poster.send&nbsp;XML-data&nbsp;<br />
+　　Send方法的参数类型是Variant，可以是字符串、DOM树或任意数据流。发送数据的方式分为同步和异步两种。在异步方式下，数据包一旦发送完毕，就结束Send进程，客户机执行其他的操作；而在同步方式下，客户机要等到服务器返回确认消息后才结束Send进程。<br />
+<br />
+XMLHTTP对象中的readyState属性能够反映出服务器在处理请求时的进展状况。客户机的程序可以根据这个状态信息设置相应的事件处理方法。属性值及其含义如下表所示：&nbsp;<br />
+<br />
+值&nbsp;说明&nbsp;<br />
+0&nbsp;&nbsp;Response对象已经创建，但XML文档上载过程尚未结束&nbsp;&nbsp;<br />
+1&nbsp;&nbsp;XML文档已经装载完毕&nbsp;&nbsp;<br />
+2&nbsp;&nbsp;XML文档已经装载完毕，正在处理中&nbsp;&nbsp;<br />
+3&nbsp;&nbsp;部分XML文档已经解析&nbsp;&nbsp;<br />
+4&nbsp;&nbsp;文档已经解析完毕，客户端可以接受返回消息&nbsp;&nbsp;<br />
+<br />
+　　客户机处理响应信息&nbsp;<br />
+<br />
+　　客户机接收到返回消息后，进行简单的处理，基本上就完成了C/S之间的一个交互周期。客户机接收响应是通过XMLHTTP对象的属性实现的：&nbsp;<br />
+<br />
+●&nbsp;responseTxt：将返回消息作为文本字符串；&nbsp;<br />
+<br />
+●&nbsp;responseXML：将返回消息视为XML文档，在服务器响应消息中含有XML数据时使用；&nbsp;<br />
+<br />
+●&nbsp;responseStream：将返回消息视为Stream对象&nbsp;<br />
+<br />
+　　就是下面这个很简单的JAVASCRIPT函数SEND(STR,URL)<br />
+<br />
+　　使用到的是XMLDOM和XMLHTTP对象.用这种技术的好处是:全JS控制,方便/简单,比RDS或者remote好多了.(前提:服务器端和客户端都必须安装IE5或者更高版本),在俺贴的那个无刷新在线信息功能使用的也是这种技术.有兴趣的朋友可以看看。<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				function&nbsp;Send(Str,URL)&nbsp;<br />
+				<br />
+				//STR参数是传入的XML数据,你也可以传入其他文本数据.<br />
+				<br />
+				//不过这个函数需要服务器端处理之后返回XML数据,你也可以修改一下<br />
+				<br />
+				//URL参数表示你所要处理数据的ASP文件地址<br />
+				<br />
+				{<br />
+				<br />
+				　var&nbsp;Http&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)&nbsp;//建立XMLHTTP对象<br />
+				<br />
+				　var&nbsp;Dom&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLDOM&quot;)&nbsp;//建立XMLDOM对象<br />
+				<br />
+				　Http.open(&quot;POST&quot;,URL,false)<br />
+				<br />
+				　//第一个参数的意思是,用&quot;POST&quot;方式发送数据.可以大到4MB,也可以换为&quot;GET&quot;.只能256KB<br />
+				<br />
+				　//第2个参数的意思是数据发送到哪个文件处理<br />
+				<br />
+				　//第3个参数意思是同步或异步方式.TRUE为异步,FALSE为同步<br />
+				<br />
+				　Http.send(Str)&nbsp;//开始发送数据.............嘟嘟..<br />
+				<br />
+				　Dom.async=false&nbsp;//设置为同步方式获取数据<br />
+				<br />
+				　Dom.loadXML(Http.responseText)&nbsp;<br />
+				<br />
+				　//开始获取服务器端处理后返回的数据.我在这里设置必须为XML数据,否则出错.<br />
+				<br />
+				　//你也可以自己修改.使返回的是2进制或者记录集数据.................................<br />
+				<br />
+				　if(Dom.parseError.errorCode&nbsp;!=&nbsp;0)&nbsp;//检查是否发生获取数据时错误<br />
+				<br />
+				　{<br />
+				<br />
+				delete(Http)<br />
+				<br />
+				delete(Dom)<br />
+				<br />
+				return(false)<br />
+				<br />
+				　}<br />
+				<br />
+				　else<br />
+				<br />
+				　{<br />
+				<br />
+				var&nbsp;Back&nbsp;=&nbsp;Dom.documentElement.childNodes.item(0).text&nbsp;<br />
+				<br />
+				//得到返回的XML数据,我这里假设处理程序只返回一行XML数据(一个节点)<br />
+				<br />
+				delete(Http)<br />
+				<br />
+				delete(Dom)<br />
+				<br />
+				return(Back)&nbsp;//函数返回数据.......................结束<br />
+				<br />
+				　}<br />
+				<br />
+				}&nbsp;<br />
+				<br />
+				VAR&nbsp;CAT&nbsp;=&nbsp;Send(&quot;&lt;用户资料&gt;&lt;姓名&gt;谢柠檬&quot;,&quot;http://WWW.CHINAASP.COM/VIVA.ASP&quot;)&nbsp;//执行函数<br />
+				<br />
+				IF(CAT&nbsp;==&nbsp;FALSE)<br />
+				<br />
+				{<br />
+				<br />
+				　ALERT(&quot;对不起.处理程序返回的是FALSE.数据处理已经失败........&quot;)<br />
+				<br />
+				}<br />
+				<br />
+				ELSE<br />
+				<br />
+				{&nbsp;<br />
+				<br />
+				　IF(EVAL(CAT))<br />
+				<br />
+				{<br />
+				<br />
+				　ALERT(&quot;OK.数据已经发送成功.兼以处理完成!!!!!!&quot;)<br />
+				<br />
+				}<br />
+				<br />
+				ELSE<br />
+				<br />
+				{<br />
+				<br />
+				　ALERT(&quot;对不起.处理程序返回的是FALSE.数据处理已经失败........&quot;)<br />
+				<br />
+				}<br />
+				<br />
+				}&nbsp;<br />
+				<br />
+				===============================VIVA.ASP============================<br />
+				<br />
+				ON&nbsp;ERROR&nbsp;RESUME&nbsp;NEXT<br />
+				<br />
+				DIM&nbsp;BOBO<br />
+				<br />
+				DIM&nbsp;MOMO<br />
+				<br />
+				SET&nbsp;BOBO&nbsp;=&nbsp;SERVER.CREATEOBJECT(&quot;MICROSOFT.XMLDOM&quot;)<br />
+				<br />
+				BOBO.ASYNC&nbsp;=&nbsp;FALSE<br />
+				<br />
+				BOBO.LOAD&nbsp;REQUEST<br />
+				<br />
+				IF&nbsp;BOBO.PARSEERROR.ERRORCODE&nbsp;&lt;&gt;&nbsp;0&nbsp;THEN<br />
+				<br />
+				RESPONSE.WRITE(&quot;&lt;程序处理结果&gt;&lt;最终结果&gt;FALSE&quot;)<br />
+				<br />
+				ELSE<br />
+				<br />
+				SET&nbsp;MOMO&nbsp;=&nbsp;BOBO.DOCUMENTELEMENT<br />
+				<br />
+				IF&nbsp;MOMO.CHILDNODES.ITEM(0).TEXT&nbsp;=&nbsp;&quot;谢柠檬&quot;&nbsp;THEN<br />
+				<br />
+				RESPONSE.WRITE(&quot;&lt;程序处理结果&gt;&lt;最终结果&gt;TRUE&quot;)<br />
+				<br />
+				ELSE<br />
+				<br />
+				RESPONSE.WRITE(&quot;&lt;程序处理结果&gt;&lt;最终结果&gt;FALSE&quot;)<br />
+				<br />
+				END&nbsp;IF<br />
+				<br />
+				END&nbsp;IF<br />
+				<br />
+				SET&nbsp;BOBO&nbsp;=&nbsp;NOTHING</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Ajax/2015/0331/358.html'>XMLHTTP组件应用</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Ajax/2015/0331/360.html'>XMLHTTP无刷新自动实时更新数据</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0331/356.html" >XMLHTTP为Donews Blog添加最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/355.html" >学习xhtml的教训</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/354.html" >XMLHttpRequest对象简介</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/353.html" >Ajax忧虑与启发</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/352.html" >AJAX编写用户注册实例小结</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/351.html" >AJAX解决的一些常见问题</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/350.html" >AJAX开发Back按钮</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/349.html" >AJAX基础教程</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/348.html" >XML在Web中的应用</a><span>03.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实例</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>70</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>66</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>64</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>63</span></li>
+<li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>50</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>42</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>41</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>35</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>33</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>33</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=359&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

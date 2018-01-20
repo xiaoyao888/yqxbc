@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找不到服务器怎么办 DNS错误的解决办法！_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="找不到服务器,DNS错误" />
+  <meta name="description" content="我最近碰到找不到服务器 或 DNS错误的问题，可以上QQ、迅雷下载，而且直接输入IP地址是可以成功登上的，但就无法打开网页（IE、TTravel和世界之窗3.0）；在网络上大肆搜索解决无果，" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/dnzs/'>电脑知识</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>找不到服务器怎么办 DNS错误的解决办法！</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-09-23 13:23 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1282" class="art_content"><p>
+	我最近碰到&ldquo;找不到服务器 或 DNS错误&rdquo;的问题，可以上QQ、迅雷下载，而且直接输入IP地址是可以成功登上的，但就无法打开网页（IE、TTravel和世界之窗3.0）；在网络上大肆搜索解决无果，偶然发现本人的问题所在，如果你也遇到了类似的问题，请慢慢看完。（Ps：紫色的字体是我加上去的注解）</p>
+<h3>
+	一、用nslookup来判断是否真的是DNS解析故障： （这步是为了确认是否由DNS错误引起）</h3>
+<p>
+	要想百分之百判断是否为DNS解析故障就需要通过系统自带的NSLOOKUP来解决了。&nbsp;<br />
+	第一步：确认自己的系统是windows 2000和windows xp以上操作系统，然后通过&ldquo;开始-&gt;运行-&gt;输入CMD&rdquo;后回车进入命令行模式。&nbsp;<br />
+	第二步：输入nslookup命令后回车，将进入DNS解析查询界面。&nbsp;<br />
+	第三步：命令行窗口中会显示出当前系统所使用的DNS服务器地址，例如笔者的DNS服务器IP为202.106.0.20。&nbsp;<br />
+	第四步：接下来输入你无法访问的站点对应的域名。例如笔者输入 ，假如不能访问的话，那么DNS解析应该是不能够正常进行的。我们会收到DNS request timed out，timeout was 2 seconds的提示信息。这说明我们的计算机确实出现了DNS解析故障。&nbsp;<br />
+	小提示：如果DNS解析正常的话，会反馈回正确的IP地址，例如笔者用 这个地址进行查询解析，会得到 name:sohu.com，addresses：61.135.133.103,61.135.133.104的信息。</p>
+<h3>
+	二、查询DNS服务器工作是否正常： （这步是为了查询你的DNS，记得宽带要连接）</h3>
+<p>
+	这时候我们就要看看自己计算机使用的DNS地址是多少了，并且查询他的运行情况。&nbsp;<br />
+	第一步：确认自己的系统是windows 2000和windows xp以上操作系统，然后通过&ldquo;开始-&gt;运行-&gt;输入CMD&rdquo;后回车进入命令行模式。 （若是VISTA或Win7，也是一样）<br />
+	第二步：输入ipconfig /all命令来查询网络参数。&nbsp;<br />
+	第三步：在ipconfig /all显示信息中我们能够看到一个地方写着DNS SERVERS（VISTA或Win7下显示的是中文&ldquo;DNS 服务器&rdquo;），这个就是我们的DNS服务器地址。例如笔者的是202.106.0.20和202.106.46.151。从这个地址可以看出是个外网地 址，如果使用外网DNS出现解析错误时，我们可以更换一个其他的DNS服务器地址即可解决问题。&nbsp;<br />
+	第四步：如果在DNS服务器处显示的是自己公司的内部网络地址，那么说明你们公司的DNS解 析工作是交给公司内部的DNS服务器来完成的，这时我们需要检查这个DNS服务器，在DNS服务器上进行nslookup操作看是否可以正常解析。解决 DNS服务器上的DNS服务故障，一般来说问题也能够解决。</p>
+<h3>
+	三、清除DNS缓存信息法：&nbsp;</h3>
+<p>
+	当计算机对域名访问时并不是每次访问都需要向DNS服务器寻求帮助的，一般来说当解析工作完 成一次后，该解析条目会保存在计算机的DNS缓存列表中，如果这时DNS解析出现更改变动的话，由于DNS缓存列表信息没有改变，在计算机对该域名访问时 仍然不会连接DNS服务器获取最新解析信息，会根据自己计算机上保存的缓存对应关系来解析，这样就会出现DNS解析故障。这时我们应该通过清除DNS缓存 的命令来解决故障。&nbsp;<br />
+	第一步：通过&ldquo;开始-&gt;运行-&gt;输入CMD&rdquo;进入命令行模式。&nbsp;<br />
+	第二步：在命令行模式中我们可以看到在 ipconfig /? 中有一个名为 /flushdns 的参数，这个就是清除DNS缓存信息的命令。&nbsp;</p>
+第三步：执行 ipconfig /flushdns 命令，当出现&ldquo;successfully flushed the dns resolver cache&rdquo;（已成功刷新 DNS 解析缓存）的提示时就说明当前计算机的缓存信息已经被成功清除。&nbsp;<br />
+第四步：接下来我们再访问域名时，就会到DNS服务器上获取最新解析地址，再也不会出现因为以前的缓存造成解析错误故障了。
+<p>
+	&nbsp;</p>
+<h3>
+	四、修改HOSTS文件法： （此方法我没试过，不过修改Hosts文件，大家可以尝试用360或优化大师之类的软件）</h3>
+<p>
+	修改HOSTS法就是把HOSTS文件中的DNS解析对应关系进行修改，从而实现正确解析的目的。因为在本地计算机访问某域名时会首先查看本地系统中的 HOSTS文件，HOSTS文件中的解析关系优先级大于DNS服务器上的解析关系。</p>
+<p>
+	这样当我们希望把某个域名与某IP地址绑定的话，就可以通过在HOSTS文件中添加解析条目来实现。&nbsp;<br />
+	第一步：通过&ldquo;开始-&gt;搜索&rdquo;，然后查找名叫hosts的文件。&nbsp;<br />
+	第二步：当然对于已经知道他的路径的读者可以直接进入c:\windows\ system32\drivers\etc目录中找到HOSTS文件。如果你的系统是windows 2000，那么应该到c:\winnt\system32\drivers\etc目录中寻找。&nbsp;<br />
+	第三步：双击HOSTS文件，然后选择用&ldquo;记事本&rdquo;程序将其打开。&nbsp;<br />
+	第四步：之后我们就会看到HOSTS文件的所有内容了，默认情况下只有一行内容&ldquo;127.0.0.1 localhost&rdquo;。（其他前面带有#的行都不是真正的内容，只是帮助信息而已）&nbsp;<br />
+	第五步：将你希望进行DNS解析的条目添加到HOSTS文件中，具体格式是先写该域名对应的 IP地址，然后空格接域名信息。例如笔者添加了&ldquo;211.153.80.1&nbsp;&rdquo;与&ldquo;10.82.0.1 &rdquo;两个条 目。&nbsp;<br />
+	第六步：设置完毕后我们访问时 就会自动根据是在内网还是外网来解析了。<br />
+	<br />
+	（我用的是TP-LINK无线路由，上述的办法未能解决我的问题，不过在尝试的过程中，这些还是值得学习的；如果你是直接宽带连接而出现这样的问题，那么请尝试上述的方法。）<br />
+	<br />
+	　</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/dnzs/2015/0923/1281.html'>BIOS怎么设置 显卡bios怎么刷</a> </li>
+            <li class="next">下一篇：<a href='/dnzs/2015/1007/1290.html'>怎么看主板参数 菜鸟必看主板参数知识</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/dnzs/2017/0621/1593.html" >解决虚拟机装mac os 10.12后全屏的问</a><span>06.21</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，</a><span>01.19</span></li>
+<li><a href="/dnzs/2015/0618/906.html" >VMware11安装Mac OS X10提示不可恢复错</a><span>01.19</span></li>
+<li><a href="/dnzs/2016/0105/1417.html" >VMware 11安装OS X 10.10全过程</a><span>01.05</span></li>
+<li><a href="/dnzs/2015/1209/1410.html" >注册表编辑器在哪里怎么打开？注</a><span>12.09</span></li>
+<li><a href="/dnzs/2015/1104/1339.html" >linux释放内存命令</a><span>11.04</span></li>
+<li><a href="/dnzs/2015/0522/846.html" >hkcmd.exe进程是什么？</a><span>11.05</span></li>
+<li><a href="/dnzs/2015/1030/1323.html" >电脑不能上网的常见原因和解决办</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1030/1319.html" >笔记本电脑的功率是多少,有多大</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1029/1318.html" >闪存盘和u盘的区别,什么是闪盘</a><span>10.29</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/dnzs/2015/1007/1290.html" >怎么看主板参数 菜鸟必看主板参</a><span>10.07</span></li>
+<li><a href="/dnzs/2015/0923/1282.html" >找不到服务器怎么办 DNS错误的解</a><span>09.23</span></li>
+<li><a href="/dnzs/2015/0923/1281.html" >BIOS怎么设置 显卡bios怎么刷</a><span>09.23</span></li>
+<li><a href="/dnzs/2015/0915/1277.html" >摄像头不能用解决办法，摄像头不</a><span>09.15</span></li>
+<li><a href="/dnzs/2015/0911/1274.html" >百小度怎么关闭？彻底关闭百小度</a><span>09.11</span></li>
+<li><a href="/dnzs/2015/0906/1267.html" >什么是串并口硬盘 串口与并口硬</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1266.html" >怎么设置本地连接ip 本地连接ip设</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1265.html" >暴风影音怎么去广告 暴风影音5去</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1264.html" >组策略怎么打开 使用组策略命令</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1262.html" >微信猎手怎么用？微信猎手使用详</a><span>09.06</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/dnzs/2017/0621/1593.html" >解决虚拟机装mac os 10.12后全屏的问题显卡问题。</a><span>06.21</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，打不开磁盘的解决办法</a><span>01.19</span></li>
+<li><a href="/dnzs/2015/0618/906.html" >VMware11安装Mac OS X10提示不可恢复错误(vcpu-0)怎么办?</a><span>01.19</span></li>
+<li><a href="/dnzs/2016/0105/1417.html" >VMware 11安装OS X 10.10全过程</a><span>01.05</span></li>
+<li><a href="/dnzs/2015/1209/1410.html" >注册表编辑器在哪里怎么打开？注册表是什么？</a><span>12.09</span></li>
+<li><a href="/dnzs/2015/1104/1339.html" >linux释放内存命令</a><span>11.04</span></li>
+<li><a href="/dnzs/2015/0522/846.html" >hkcmd.exe进程是什么？</a><span>11.05</span></li>
+<li><a href="/dnzs/2015/1030/1323.html" >电脑不能上网的常见原因和解决办法</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1030/1319.html" >笔记本电脑的功率是多少,有多大？</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1029/1318.html" >闪存盘和u盘的区别,什么是闪盘,什么是U盘</a><span>10.29</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/dnzs/2015/0530/876.html" >为什么安全证书会过期？安全证书</a><span>3497</span></li>
+<li><a href="/dnzs/2015/0522/865.html" >UAC是什么？如何关闭UAC</a><span>2713</span></li>
+<li><a href="/dnzs/2015/0923/1282.html" >找不到服务器怎么办 DNS错误的解</a><span>1931</span></li>
+<li><a href="/dnzs/2015/0307/189.html" >U盘装系统出现ntldr is missing</a><span>1630</span></li>
+<li><a href="/dnzs/2015/0328/314.html" >如何利用ipconfig命令重新获取IP地</a><span>1136</span></li>
+<li><a href="/dnzs/2015/0401/433.html" >Win键是哪个 电脑上的Win键在哪？</a><span>1124</span></li>
+<li><a href="/dnzs/2015/0421/854.html" >ARP攻击是什么意思 ARP断网攻击的</a><span>926</span></li>
+<li><a href="/dnzs/2015/0906/1266.html" >怎么设置本地连接ip 本地连接ip设</a><span>833</span></li>
+<li><a href="/dnzs/2015/0923/1281.html" >BIOS怎么设置 显卡bios怎么刷</a><span>778</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，</a><span>759</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1282&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

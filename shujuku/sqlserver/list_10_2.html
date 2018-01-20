@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>数据库  /  SQL Server_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="" />    
+
+    	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+
+    <style type="text/css">
+
+      .pageSelect{height: 35px;}
+
+    </style>
+
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+
+<div class="container">
+
+
+  <div class="col-sm-8  col-md-8">    
+
+      <ol class="breadcrumb">
+
+        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/sqlserver/'>SQL Server</a> > 
+
+      </ol>
+      
+      <div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/381.html'>SQL注入漏洞全接触－高级篇</a></h3>
+
+              <p>看完入门篇和进阶篇后，稍加练习，破解一般的网站是没问题了。但如果碰到表名列名猜不到，或程序作者过滤了一些特殊字符，怎么提高注入的成功率？怎么样提高猜解效率？请大家...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/380.html'>SQL查询语句基础知识</a></h3>
+
+              <p>最常用的SQL语句之一是SELECT语句，它可从一个或多个数据库表中提取指定列，以生成一个记录集。下面是SELECT语句的基本语法： SELECTColumnNameFROMTableName 可以在语句中添加换行符、制表符...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/379.html'>MS SQL-SERVER空口令入侵漏洞</a></h3>
+
+              <p>1.漏洞描述 在微软的MSSQL7.0以下的版本在默认安装时其SA(SystemAdministrator)口令为空，所开端口为1433，一个入侵者只需要使用一个MSSQL客户端与SA口令为空的服务器连接就可以获得System的权...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/378.html'>SQL Server数据库死锁分析</a></h3>
+
+              <p>SQLServer数据库发生死锁时不会像ORACLE那样自动生成一个跟踪文件。有时可以在[管理]-[当前活动]里看到阻塞信息(有时SQLServer企业管理器会因为锁太多而没有响应). 设定跟踪1204: USEMASTER ...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/377.html'>检测SQL Server 2000是否优化</a></h3>
+
+              <p>问：我的服务器是x366(02CPU3.16GB,4GB内存,6x73GBHDD/RAID5-C,D,E,F,CD-ROM)，操作系统是微软的Windows2003企业版，用作数据库服务器(C/S结构应用程序)的是SQLServer2000标准版(SP4)。我有两个问题想请教您...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/376.html'>将SQL Server表变成txt文件</a></h3>
+
+              <p>方法－：用BCP命令 bcp实用工具 bcp实用工具在MicrosoftSQLServer2000实例和数据文件之间以用户指定的格式复数据。 语法 ...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/375.html'>读取SQL中text和ntext类型字段内容的问题</a></h3>
+
+              <p>老是遇到TEXT类型和NTEXT类型的字段读不出来的问题. 今天弄了半天,又查了资料,终于把这个问题搞定了 首先我们应该了解这两个类型的字段到底有什么不同: 虽然看起这他们是叫TEXT,但他...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/374.html'>SQL语句判断已知表是否存在</a></h3>
+
+              <p>如何判断库中已知表是否存在？代码为通常的引用Dao做的一模块： ...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/373.html'>SQL Server数据磁带备份与恢复</a></h3>
+
+              <p>1 引言 实现磁带备份数据的功能有两方面的困难：首先，MSSQLServer（以下简称SQL）所提供的数据库的整体备份及恢复功能不能直接满足本系统要求的数据滚动备份。其次，需要解决如何在...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0401/372.html'>sql server中datetime和smalldatetime的区别</a></h3>
+
+              <p>1、datetime记录的时间范围较长，1753-01-01到9999-12-31，可以精确到“秒”，它的长度为8位，所占的空间较大。 datetime:DateandtimedatafromJanuary1,1753,toDecember31,9999,wIThanaccuracyofthree-hundredthsofaseco...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0331/371.html'>MSSQL2000数据库重命名语句</a></h3>
+
+              <p>1、更改数据库的名称：sp_renamedb 2、语法： ...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0331/370.html'>SQL Server安装时COM+目录要求问题的解决方法</a></h3>
+
+              <p> 很早就不用SQLServer2005了，今天突然接到个项目，说非用SQLServer不可，没办法，只好把久违的老朋友装上去了，遇到了COM+的目录要求不行的问题，以前这个问题我也没有注意，今天想解...</p>
+
+        </div>
+
+      </div>
+
+    <nav>
+
+	  <ul class="pagination">
+
+	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
+
+	    <li><a href='list_10_1.html'>首页</a></li>
+<li><a href='list_10_1.html'>上一页</a></li>
+<li><a href='list_10_1.html'>1</a></li>
+<li class="thisclass">2</li>
+<li><a href='list_10_3.html'>3</a></li>
+<li><a href='list_10_3.html'>下一页</a></li>
+<li><a href='list_10_3.html'>末页</a></li>
+<li><select name='sldd' style='width:36px' onchange='location.href=this.options[this.selectedIndex].value;'>
+<option value='list_10_1.html'>1</option>
+<option value='list_10_2.html' selected>2</option>
+<option value='list_10_3.html'>3</option>
+</select></li>
+
+
+	  </ul>
+
+	</nav>    
+
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="listsubname">
+    
+      <a href='/shujuku/redis/' class="btn btn-default">redis</a>
+    
+      <a href='/shujuku/sqlserver/' class="btn btn-default">SQL Server</a>
+    
+      <a href='/shujuku/memcache/' class="btn btn-default">Memcache</a>
+    
+      <a href='/shujuku/mysql/' class="btn btn-default">MySql</a>
+    
+      <a href='/shujuku/oracle/' class="btn btn-default">Oracle</a>
+    
+      <a href='/shujuku/mangodb/' class="btn btn-default">MangoDB</a>
+    
+      <a href='/shujuku/hbase/' class="btn btn-default">Hbase</a>
+    
+      <a href='/shujuku/access/' class="btn btn-default">Access</a>
+    
+      <a href='/shujuku/db2/' class="btn btn-default">DB2</a>
+    
+      <div class="clear"></div>
+    </div>
+    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+
+      <div class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">最新文章>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/shujuku/sqlserver/2015/1103/1324.html" >sql server临时表怎么删除？正确删除sql临时表的方法</a><span>11.03</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/604.html" >MSSQL增加列、修改列、增加主键、重设标识列</a><span>04.05</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/393.html" >MSSQL的索引类型、属性及建立方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/389.html" >“因为文件组'PRIMARY'已满”的原因和解决方法</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要求的问题</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/385.html" >取得插入记录后自动产生的ID</a><span>04.01</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/384.html" >Sql Server数据备份及恢复措施</a><span>04.01</span></li>
+ 
+
+          </ul>
+
+        </div>
+
+      </div>  
+
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">相关热门>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/shujuku/sqlserver/2015/0401/398.html" >解决SQL Server不允许远程连接的方</a><span>53</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/388.html" >解决安装SQL Server 2005时COM+目录要</a><span>52</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/370.html" >SQL Server安装时COM+目录要求问题的</a><span>42</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/366.html" >同服务器安装SQL2000和SQL2005冲突的</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/381.html" >SQL注入漏洞全接触－高级篇</a><span>37</span></li>
+<li><a href="/shujuku/sqlserver/2015/0331/367.html" >sqlserver2005（Express版）的配置</a><span>36</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/392.html" >SQL数据库超时的原因与解决方法</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0405/603.html" >MSSQL判断表或临时表是否存在</a><span>34</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/383.html" >SQL注入漏洞全接触－入门篇</a><span>32</span></li>
+<li><a href="/shujuku/sqlserver/2015/0401/375.html" >读取SQL中text和ntext类型字段内容的</a><span>31</span></li>
+ 
+
+          </ul>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+
+  </div>
+
+</div>
+
+<div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div>
+
+
+
+
+
+
+
+</body>
+
+</html>
+

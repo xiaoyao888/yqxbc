@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Java泛型简明教程_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,java泛型" />
+  <meta name="description" content="泛型是Java SE 5.0中引入的一项特征，自从这项语言特征出现多年来，我相信，几乎所有的Java程序员不仅听说过，而且使用过它。关于Java泛型的教程，免费的，不免费的，有很多。我遇到" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java泛型简明教程</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-07 09:40 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="709" class="art_content"><p>
+	泛型是Java SE 5.0中引入的一项特征，自从这项语言特征出现多年来，我相信，几乎所有的Java程序员不仅听说过，而且使用过它。关于Java泛型的教程，免费的，不免费的，有很多。我遇到的最好的教材有：</p>
+<ul>
+	<li>
+		<a href="http://download.oracle.com/javase/tutorial/"><font color="#0c74a6">The Java Tutorial</font></a></li>
+	<li>
+		<a href="http://bit.ly/jAzfIt"><font color="#0c74a6">Java Generics and Collections</font></a>, by Maurice Naftalin and Philip Wadler</li>
+	<li>
+		<a href="http://goo.gl/ixwNn"><font color="#0c74a6">Effective Java中文版(第2版)</font></a>, by Joshua Bloch.</li>
+</ul>
+<p>
+	尽管有这么多丰富的资料，有时我感觉，有很多的程序员仍然不太明白Java泛型的功用和意义。这就是为什么我想使用一种最简单的形式来总结一下程序员需要知道的关于Java泛型的最基本的知识。</p>
+<h3>
+	Java泛型由来的动机</h3>
+<p>
+	理解Java泛型最简单的方法是把它看成一种便捷语法，能节省你某些Java类型转换(casting)上的操作：</p>
+<p class="syntaxhighlighter  " id="highlighter_425765">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Apple&gt; box = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">Apple apple = box.get(</code><code class="value">0</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	上面的代码自身已表达的很清楚：box是一个装有Apple对象的List。get方法返回一个Apple对象实例，这个过程不需要进行类型转换。没有泛型，上面的代码需要写成这样：</p>
+<p class="syntaxhighlighter  " id="highlighter_539193">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List box = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">Apple apple = (Apple) box.get(</code><code class="value">0</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	很明显，泛型的主要好处就是让编译器保留参数的类型信息，执行类型检查，执行类型转换操作：编译器保证了这些类型转换的绝对无误。</p>
+<p>
+	相对于依赖程序员来记住对象类型、执行类型转换&mdash;&mdash;这会导致程序运行时的失败，很难调试和解决，而编译器能够帮助程序员在编译时强制进行大量的类型检查，发现其中的错误。</p>
+<h3>
+	泛型的构成</h3>
+<p>
+	由泛型的构成引出了一个类型变量的概念。根据Java语言规范，类型变量是一种没有限制的标志符，产生于以下几种情况：</p>
+<ul>
+	<li>
+		泛型类声明</li>
+	<li>
+		泛型接口声明</li>
+	<li>
+		泛型方法声明</li>
+	<li>
+		泛型构造器(constructor)声明</li>
+</ul>
+<p>
+	&nbsp;</p>
+<h3>
+	泛型类和接口</h3>
+<p>
+	如果一个类或接口上有一个或多个类型变量，那它就是泛型。类型变量由尖括号界定，放在类或接口名的后面：</p>
+<p class="syntaxhighlighter  " id="highlighter_704199">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">public</font></code> <code class="keyword"><font face="Consolas">interface</font></code> <font face="Consolas"><code class="plain">List&lt;T&gt; </code><code class="keyword">extends</code></font> <code class="plain"><font face="Consolas">Collection&lt;T&gt; {</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">...</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">}</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	简单的说，类型变量扮演的角色就如同一个参数，它提供给编译器用来类型检查的信息。</p>
+<p>
+	Java类库里的很多类，例如整个Collection框架都做了泛型化的修改。例如，我们在上面的第一段代码里用到的List接口就是一个泛型类。在那段代码里，box是一个List&lt;Apple&gt;对象，它是一个带有一个Apple类型变量的List接口的类实现的实例。编译器使用这个类型变量参数在get方法被调用、返回一个Apple对象时自动对其进行类型转换。</p>
+<p>
+	实际上，这新出现的泛型标记，或者说这个List接口里的get方法是这样的：</p>
+<p class="syntaxhighlighter  " id="highlighter_970583">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">T get(</code><code class="keyword">int</code></font> <code class="plain"><font face="Consolas">index);</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	get方法实际返回的是一个类型为T的对象，T是在List&lt;T&gt;声明中的类型变量。</p>
+<h3>
+	泛型方法和构造器(Constructor)</h3>
+<p>
+	非常的相似，如果方法和构造器上声明了一个或多个类型变量，它们也可以泛型化。</p>
+<p class="syntaxhighlighter  " id="highlighter_674720">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">public</font></code> <code class="keyword"><font face="Consolas">static</font></code> <code class="plain"><font face="Consolas">&lt;t&gt; T getFirst(List&lt;T&gt; list)</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	这个方法将会接受一个List&lt;T&gt;类型的参数，返回一个T类型的对象。</p>
+<h3>
+	例子</h3>
+<p>
+	你既可以使用Java类库里提供的泛型类，也可以使用自己的泛型类。</p>
+<p>
+	<strong>类型安全的写入数据&hellip;</strong></p>
+<p>
+	下面的这段代码是个例子，我们创建了一个List&lt;String&gt;实例，然后装入一些数据：</p>
+<p class="syntaxhighlighter  " id="highlighter_666087">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;String&gt; str = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;String&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">str.add(</code><code class="string">&quot;Hello &quot;</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">str.add(</code><code class="string">&quot;World.&quot;</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	如果我们试图在List&lt;String&gt;装入另外一种对象，编译器就会提示错误：</p>
+<p class="syntaxhighlighter  " id="highlighter_53246">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">str.add(</code><code class="value">1</code><code class="plain">); </code><code class="comments">// 不能编译</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>类型安全的读取数据&hellip;</strong></p>
+<p>
+	当我们在使用List&lt;String&gt;对象时，它总能保证我们得到的是一个String对象：</p>
+<p class="syntaxhighlighter  " id="highlighter_508369">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">String myString = str.get(</code><code class="value">0</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>遍历</strong></p>
+<p>
+	类库中的很多类，诸如Iterator&lt;T&gt;，功能都有所增强，被泛型化。List&lt;T&gt;接口里的iterator()方法现在返回的是Iterator&lt;T&gt;，由它的T next()方法返回的对象不需要再进行类型转换，你直接得到正确的类型。</p>
+<p class="syntaxhighlighter  " id="highlighter_353278">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">for</font></code> <code class="plain"><font face="Consolas">(Iterator&lt;String&gt; iter = str.iterator(); iter.hasNext();) {</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">String s = iter.next();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">System.out.print(s);</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">4</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">}</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>使用foreach</strong></p>
+<p>
+	&ldquo;for each&rdquo;语法同样受益于泛型。前面的代码可以写出这样：</p>
+<p class="syntaxhighlighter  " id="highlighter_706738">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">for</font></code> <code class="plain"><font face="Consolas">(String s: str) {</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">System.out.print(s);</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">}</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	这样既容易阅读也容易维护。</p>
+<p>
+	<strong>自动封装(Autoboxing)和自动拆封(Autounboxing)</strong></p>
+<p>
+	在使用Java泛型时，autoboxing/autounboxing这两个特征会被自动的用到，就像下面的这段代码：</p>
+<p class="syntaxhighlighter  " id="highlighter_774948">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;Integer&gt; ints = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;Integer&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">ints.add(</code><code class="value">0</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">ints.add(</code><code class="value">1</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">4</font></code></td>
+			<td class="content">
+				&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">5</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">int</font></code> <font face="Consolas"><code class="plain">sum = </code><code class="value">0</code><code class="plain">;</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">6</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">for</font></code> <font face="Consolas"><code class="plain">(</code><code class="keyword">int</code></font> <code class="plain"><font face="Consolas">i : ints) {</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">7</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">sum += i;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">8</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">}</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	然而，你要明白的一点是，封装和解封会带来性能上的损失，所有，通用要谨慎的使用。</p>
+<p>
+	<strong>子类型</strong></p>
+<p>
+	在Java中，跟其它具有面向对象类型的语言一样，类型的层级可以被设计成这样：<br />
+	<br />
+	在Java中，类型T的子类型既可以是类型T的一个扩展，也可以是类型T的一个直接或非直接实现(如果T是一个接口的话)。因为&ldquo;成为某类型的子类型&rdquo;是一个具有传递性质的关系，如果类型A是B的一个子类型，B是C的子类型，那么A也是C的子类型。在上面的图中：</p>
+<ul>
+	<li>
+		FujiApple(富士苹果)是Apple的子类型</li>
+	<li>
+		Apple是Fruit(水果)的子类型</li>
+	<li>
+		FujiApple(富士苹果)是Fruit(水果)的子类型</li>
+</ul>
+<p>
+	所有Java类型都是Object类型的子类型。</p>
+<p>
+	B类型的任何一个子类型A都可以被赋给一个类型B的声明：</p>
+<p class="syntaxhighlighter  " id="highlighter_570650">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Apple a = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Fruit f = a;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>泛型类型的子类型</strong></p>
+<p>
+	如果一个Apple对象的实例可以被赋给一个Fruit对象的声明，就像上面看到的，那么，List&lt;Apple&gt; 和 a List&lt;Fruit&gt;之间又是个什么关系呢？更通用些，如果类型A是类型B的子类型，那C&lt;A&gt; 和 C&lt;B&gt;之间是什么关系？</p>
+<p>
+	答案会出乎你的意料：没有任何关系。用更通俗的话，泛型类型跟其是否子类型没有任何关系。</p>
+<p>
+	这意味着下面的这段代码是无效的：</p>
+<p class="syntaxhighlighter  " id="highlighter_782303">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Apple&gt; apples = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Fruit&gt; fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	下面的同样也不允许：</p>
+<p class="syntaxhighlighter  " id="highlighter_271810">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Apple&gt; apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Fruit&gt; fruits = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">apples = fruits;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	为什么？一个苹果是一个水果，为什么一箱苹果不能是一箱水果？</p>
+<p>
+	在某些事情上，这种说法可以成立，但在类型(类)封装的状态和操作上不成立。如果把一箱苹果当成一箱水果会发生什么情况？</p>
+<p class="syntaxhighlighter  " id="highlighter_879441">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Apple&gt; apples = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">List&lt;Fruit&gt; fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Strawberry());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	如果可以这样的话，我们就可以在list里装入各种不同的水果子类型，这是绝对不允许的。</p>
+<p>
+	另外一种方式会让你有更直观的理解：一箱水果不是一箱苹果，因为它有可能是一箱另外一种水果，比如草莓(子类型)。</p>
+<p>
+	<strong>这是一个需要注意的问题吗？</strong></p>
+<p>
+	应该不是个大问题。而程序员对此感到意外的最大原因是数组和泛型类型上用法的不一致。对于泛型类型，它们和类型的子类型之间是没什么关系的。而对于数组，它们和子类型是相关的：如果类型A是类型B的子类型，那么A[]是B[]的子类型：</p>
+<p class="syntaxhighlighter  " id="highlighter_893022">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Apple[] apples = ...;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Fruit[] fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	可是稍等一下！如果我们把前面的那个议论中暴露出的问题放在这里，我们仍然能够在一个apple类型的数组中加入strawberrie(草莓)对象：</p>
+<p class="syntaxhighlighter  " id="highlighter_694172">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">Apple[] apples = </code><code class="keyword">new</code></font> <font face="Consolas"><code class="plain">Apple[</code><code class="value">1</code><code class="plain">];</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Fruit[] fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits[</code><code class="value">0</code><code class="plain">] = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Strawberry();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	这样写真的可以编译，但是在运行时抛出<a href="http://download.oracle.com/javase/6/docs/api/java/lang/ArrayStoreException.html"><font color="#0c74a6">ArrayStoreException</font></a>异常。因为数组的这特点，在存储数据的操作上，Java运行时需要检查类型的兼容性。这种检查，很显然，会带来一定的性能问题，你需要明白这一点。</p>
+<p>
+	重申一下，泛型使用起来更安全，能&ldquo;纠正&rdquo;Java数组中这种类型上的缺陷。</p>
+<p>
+	现在估计你会感到很奇怪，为什么在数组上会有这种类型和子类型的关系，我来给你一个<a href="http://bit.ly/jAzfIt"><font color="#0c74a6">《Java Generics and Collections》</font></a>这本书上给出的答案：如果它们不相关，你就没有办法把一个未知类型的对象数组传入一个方法里(不经过每次都封装成Object[])，就像下面的：</p>
+<p class="syntaxhighlighter  " id="highlighter_883331">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<code class="keyword"><font face="Consolas">void</font></code> <code class="plain"><font face="Consolas">sort(Object[] o);</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	泛型出现后，数组的这个个性已经不再有使用上的必要了(下面一部分我们会谈到这个)，实际上是应该避免使用。</p>
+<p>
+	<strong>通配符</strong></p>
+<p>
+	在本文的前面的部分里已经说过了泛型类型的子类型的不相关性。但有些时候，我们希望能够像使用普通类型那样使用泛型类型：</p>
+<ul>
+	<li>
+		向上造型一个泛型对象的引用</li>
+	<li>
+		向下造型一个泛型对象的引用</li>
+</ul>
+<p>
+	<strong>向上造型一个泛型对象的引用</strong></p>
+<p>
+	例如，假设我们有很多箱子，每个箱子里都装有不同的水果，我们需要找到一种方法能够通用的处理任何一箱水果。更通俗的说法，A是B的子类型，我们需要找到一种方法能够将C&lt;A&gt;类型的实例赋给一个C&lt;B&gt;类型的声明。</p>
+<p>
+	为了完成这种操作，我们需要使用带有通配符的扩展声明，就像下面的例子里那样：</p>
+<p class="syntaxhighlighter  " id="highlighter_386067">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;Apple&gt; apples = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;Apple&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;? </code><code class="keyword">extends</code></font> <code class="plain"><font face="Consolas">Fruit&gt; fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&ldquo;? extends&rdquo;是泛型类型的子类型相关性成为现实：Apple是Fruit的子类型，List&lt;Apple&gt; 是 List&lt;? extends Fruit&gt; 的子类型。</p>
+<p>
+	<strong>向下造型一个泛型对象的引用</strong></p>
+<p>
+	现在我来介绍另外一种通配符：? super。如果类型B是类型A的超类型(父类型)，那么C&lt;B&gt; 是 C&lt;? super A&gt; 的子类型：</p>
+<p class="syntaxhighlighter  " id="highlighter_329110">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;Fruit&gt; fruits = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;Fruit&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;? </code><code class="keyword">super</code></font> <code class="plain"><font face="Consolas">Apple&gt; = fruits;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>为什么使用通配符标记能行得通？</strong></p>
+<p>
+	原理现在已经很明白：我们如何利用这种新的语法结构？</p>
+<p>
+	<strong>? extends</strong></p>
+<p>
+	让我们重新看看这第二部分使用的一个例子，其中谈到了Java数组的子类型相关性：</p>
+<p class="syntaxhighlighter  " id="highlighter_685314">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">Apple[] apples = </code><code class="keyword">new</code></font> <font face="Consolas"><code class="plain">Apple[</code><code class="value">1</code><code class="plain">];</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<code class="plain"><font face="Consolas">Fruit[] fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits[</code><code class="value">0</code><code class="plain">] = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Strawberry(); </font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	就像我们看到的，当你往一个声明为Fruit数组的Apple对象数组里加入Strawberry对象后，代码可以编译，但在运行时抛出异常。</p>
+<p>
+	现在我们可以使用通配符把相关的代码转换成泛型：因为Apple是Fruit的一个子类，我们使用? extends 通配符，这样就能将一个List&lt;Apple&gt;对象的定义赋到一个List&lt;? extends Fruit&gt;的声明上：</p>
+<p class="syntaxhighlighter  " id="highlighter_195139">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;Apple&gt; apples = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;Apple&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;? </code><code class="keyword">extends</code></font> <code class="plain"><font face="Consolas">Fruit&gt; fruits = apples;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">3</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Strawberry());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	这次，代码就编译不过去了！Java编译器会阻止你往一个Fruit list里加入strawberry。在编译时我们就能检测到错误，在运行时就不需要进行检查来确保往列表里加入不兼容的类型了。即使你往list里加入Fruit对象也不行：</p>
+<p class="syntaxhighlighter  " id="highlighter_501743">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Fruit());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	你没有办法做到这些。事实上你不能够往一个使用了? extends的数据结构里写入任何的值。</p>
+<p>
+	原因非常的简单，你可以这样想：这个? extends T 通配符告诉编译器我们在处理一个类型T的子类型，但我们不知道这个子类型究竟是什么。因为没法确定，为了保证类型安全，我们就不允许往里面加入任何这种类型的数据。另一方面，因为我们知道，不论它是什么类型，它总是类型T的子类型，当我们在读取数据时，能确保得到的数据是一个T类型的实例：</p>
+<p class="syntaxhighlighter  " id="highlighter_389112">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">Fruit get = fruits.get(</code><code class="value">0</code><code class="plain">);</code></font></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>? super</strong></p>
+<p>
+	使用 ? super 通配符一般是什么情况？让我们先看看这个：</p>
+<p class="syntaxhighlighter  " id="highlighter_122121">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;Fruit&gt; fruits = </code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">ArrayList&lt;Fruit&gt;();</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">List&lt;? </code><code class="keyword">super</code></font> <code class="plain"><font face="Consolas">Apple&gt; = fruits;</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	我们看到fruits指向的是一个装有Apple的某种超类(supertype)的List。同样的，我们不知道究竟是什么超类，但我们知道Apple和任何Apple的子类都跟它的类型兼容。既然这个未知的类型即是Apple，也是GreenApple的超类，我们就可以写入：</p>
+<p class="syntaxhighlighter  " id="highlighter_424300">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Apple());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">GreenApple());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	如果我们想往里面加入Apple的超类，编译器就会警告你：</p>
+<p class="syntaxhighlighter  " id="highlighter_31636">
+	&nbsp;</p>
+<p class="lines">
+	&nbsp;</p>
+<p class="line alt1">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">1</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Fruit());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p class="line alt2">
+	&nbsp;</p>
+<table>
+	<tbody>
+		<tr>
+			<td class="number">
+				<code><font face="Consolas">2</font></code></td>
+			<td class="content">
+				<font face="Consolas"><code class="plain">fruits.add(</code><code class="keyword">new</code></font> <code class="plain"><font face="Consolas">Object());</font></code></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	因为我们不知道它是怎样的超类，所有这样的实例就不允许加入。</p>
+<p>
+	从这种形式的类型里获取数据又是怎么样的呢？结果表明，你只能取出Object实例：因为我们不知道超类究竟是什么，编译器唯一能保证的只是它是个Object，因为Object是任何Java类型的超类。</p>
+<p>
+	<strong>存取原则和PECS法则</strong></p>
+<p>
+	总结 ? extends 和 the ? super 通配符的特征，我们可以得出以下结论：</p>
+<ul>
+	<li>
+		如果你想从一个数据类型里获取数据，使用 ? extends 通配符</li>
+	<li>
+		如果你想把对象写入一个数据结构里，使用 ? super 通配符</li>
+	<li>
+		如果你既想存，又想取，那就别用通配符。</li>
+</ul>
+<p>
+	这就是Maurice Naftalin在他的<a href="http://bit.ly/jAzfIt"><font color="#0c74a6">《Java Generics and Collections》</font></a>这本书中所说的存取原则，以及Joshua Bloch在他的<a href="http://goo.gl/ixwNn"><font color="#0c74a6">《Effective Java》</font></a>这本书中所说的PECS法则。</p>
+<p>
+	Bloch提醒说，这PECS是指&rdquo;Producer Extends, Consumer Super&rdquo;，这个更容易记忆和运用。</p>
+<p id="ihacker-ad">
+	<a href="http://ihacker.taobao.com/"><img alt="" src="http://ittopic.gotoip1.com/cup-ad-336.jpg" /></a></p>
+<p class="post_source">
+	[英文原文：<a href="http://www.javacodegeeks.com/2011/04/java-generics-quick-tutorial.html"><font color="#0c74a6">Java Generics Quick Tutorial</font></a> ]</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0507/708.html'>Java环境变量配置方法详解</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0507/710.html'>Java语言与C#语言的区别</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=709&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

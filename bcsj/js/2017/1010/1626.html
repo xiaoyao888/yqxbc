@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>前端框架：Angular React 和 Vue的比较_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Angular,React,Vue" />
+  <meta name="description" content="前端这几年的技术发展很快，细分下来，主要可以分成四个方面： 1.开发语言技术，主要是ES67，coffeescript，typescript等； 2.开发框架，如Angular，React,Vue.js，Angular2等； 3.开发工具的丰富" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/js/'>Javascript</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>前端框架：Angular React 和 Vue的比较</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2017-10-10 10:10 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1626" class="art_content"><p>
+	前端这几年的技术发展很快，细分下来，主要可以分成四个方面：</p>
+<p>
+	1.开发语言技术，主要是ES6&amp;7，coffeescript，typescript等；&nbsp;<br />
+	2.开发框架，如Angular，React,Vue.js，Angular2等；&nbsp;<br />
+	3.开发工具的丰富和前端工程化，像Grunt，Gulp，Webpack，npm，eslint，mocha这些技术；&nbsp;<br />
+	4.前端开发范围的扩展，如服务端的nodejs,express,koa,meteor,GraphQL;移动端和跨平台的PhoneGap,ionic,ReactNative，Weex;计算机图形学和3维建模领域的WebGL(three.js等)；可视化与数据分析领域的d3.js等；包括浏览器不断开放的更多新特性和接口比如svg,canvas,蓝牙，电池，本地存储，service worker，Houdini等新的API能力，以及像WASM这样的底层优化技术；</p>
+<p>
+	就开发框架这块，Angular(1&amp;2),React,Vue目前占据着主流地位而且会相持比较长的一段时间，所以这里对比一下这三门技术，以便之后的技术选型。</p>
+<h2 id="一-数据流">
+	一 数据流</h2>
+<h3 id="数据绑定">
+	数据绑定</h3>
+<p>
+	Angular 使用双向绑定即：界面的操作能实时反映到数据，数据的变更能实时展现到界面。</p>
+<p>
+	实现原理：</p>
+<p>
+	$scope变量中使用脏值检查来实现。像ember.js是基于setter，getter的观测机制，</p>
+<p>
+	$scope.$watch函数，监视一个变量的变化。函数有三参数，&rdquo;要观察什么&rdquo;，&rdquo;在变化时要发生什么&rdquo;,以及你要监视的是一个变量还是一个对象。</p>
+<p>
+	使用ng-model时，你可以使用双向数据绑定。&nbsp;<br />
+	使用$scope.$watch（视图到模型）以及$scope.$apply（模型到视图），还有$scope.$digest</p>
+<p>
+	调用$scope.$watch时只为它传递了一个参数，无论作用域中的什么东西发生了变化，这个函数都会被调用。在ng-model中，这个函数被用来检查模型和视图有没有同步，如果没有同步，它将会使用新值来更新模型数据。</p>
+<p>
+	双向绑定的三个重要方法：</p>
+<pre>
+$scope.$apply()
+
+$scope.$digest()
+
+$scope.$watch()
+</pre>
+<p>
+	在angularjs双向绑定中，有2个很重要的概念叫做dirty check，digest loop，dirty check（脏检测）是用来检查绑定的scope中的对象的状态的，例如，在js里创建了一个对象，并且把这个对象绑定在scope下，这样这个对象就处于digest loop中，loop通过遍历这些对象来发现他们是否改变，如果改变就会调用相应的处理方法来实现双向绑定</p>
+<p>
+	Vue&nbsp;也支持双向绑定，默认为单向绑定，数据从父组件单向传给子组件。在大型应用中使用单向绑定让数据流易于理解。</p>
+<p>
+	脏检测的利弊</p>
+<p>
+	和ember.js等技术的getter/setter观测机制相比（优）：&nbsp;<br />
+	getter/setter当每次对DOM产生变更，它都要修改DOM树的结构，性能影响大，Angular会把批量操作延时到一次更新，性能相对较好。</p>
+<p>
+	和Vue相比（劣）：</p>
+<p>
+	Vue.js 有更好的性能，并且非常非常容易优化，因为它不使用脏检查。Angular，当 watcher 越来越多时会变得越来越慢，因为作用域内的每一次变化，所有 watcher 都要重新计算。并且，如果一些 watcher 触发另一个更新，脏检查循环（digest cycle）可能要运行多次。 Angular 用户常常要使用深奥的技术，以解决脏检查循环的问题。有时没有简单的办法来优化有大量 watcher 的作用域。Vue.js&nbsp;则根本没有这个问题，因为它使用基于依赖追踪的观察系统并且异步列队更新，所有的数据变化都是独立地触发，除非它们之间有明确的依赖关系。唯一需要做的优化是在 v-for 上使用 track-by。</p>
+<h2 id="react-单向数据流">
+	React-单向数据流</h2>
+<p>
+	MVVM流的Angular和Vue，都是通过类似模板的语法，描述界面状态与数据的绑定关系，然后通过内部转换，把这个结构建立起来，当界面发生变化的时候，按照配置规则去更新相应的数据，然后，再根据配置好的规则去，从数据更新界面状态。</p>
+<p>
+	React推崇的是函数式编程和单向数据流：给定原始界面（或数据），施加一个变化，就能推导出另外一个状态（界面或者数据的更新）。</p>
+<p>
+	React和Vue都可以配合Redux来管理状态数据。</p>
+<h2 id="二-视图渲染">
+	二 视图渲染</h2>
+<h3 id="angular1">
+	Angular1</h3>
+<p>
+	AngularJS的工作原理是:HTML模板将会被浏览器解析到DOM中, DOM结构成为AngularJS编译器的输入。AngularJS将会遍历DOM模板, 来生成相应的NG指令,所有的指令都负责针对view(即HTML中的ng-model)来设置数据绑定。因此, NG框架是在DOM加载完成之后, 才开始起作用的。</p>
+<h3 id="react">
+	React</h3>
+<p>
+	React 的渲染建立在 Virtual DOM 上&mdash;&mdash;一种在内存中描述 DOM 树状态的数据结构。当状态发生变化时，React 重新渲染 Virtual DOM，比较计算之后给真实 DOM 打补丁。</p>
+<p>
+	Virtual DOM&nbsp;提供了函数式的方法描述视图，它不使用数据观察机制，每次更新都会重新渲染整个应用，因此从定义上保证了视图与数据的同步。它也开辟了 JavaScript 同构应用的可能性。</p>
+<p>
+	在超大量数据的首屏渲染速度上，React 有一定优势，因为&nbsp;Vue 的渲染机制启动时候要做的工作比较多，而且&nbsp;React 支持服务端渲染。</p>
+<p>
+	React 的&nbsp;Virtual DOM 也需要优化。复杂的应用里可以选择 1. 手动添加&nbsp;shouldComponentUpdate 来避免不需要的 vdom re-render；2. Components 尽可能都用 pureRenderMixin，然后采用 Flux 结构 + Immutable.js。其实也不是那么简单的。相比之下，Vue&nbsp;由于采用依赖追踪，默认就是优化状态：动了多少数据，就触发多少更新，不多也不少。</p>
+<p>
+	React 和 Angular 2 都有服务端渲染和原生渲染的功能。</p>
+<p>
+	Vue.js&nbsp;不使用 Virtual DOM 而是使用真实 DOM 作为模板，数据绑定到真实节点。Vue.js 的应用环境必须提供 DOM。Vue.js 有时性能会比 React 好**，而且几乎不用手工优化。</p>
+<h2 id="三-性能与优化">
+	三 性能与优化</h2>
+<p>
+	性能方面，这几个主流框架都应该可以轻松应付大部分常见场景的性能需求，区别在于可优化性和优化对于开发体验的影响。Vue 的话需要加好 track-by 。React 需要 shouldComponentUpdate 或者全面 Immutable，Angular 2 需要手动指定 change detection strategy。从整体趋势上来说，浏览器和手机还会越变越快，框架本身的渲染性能在整个前端性能优化体系中，会渐渐淡化，更多的优化点还是在构建方式、缓存、图片加载、网络链路、HTTP/2 等方面。</p>
+<h2 id="四-模块化与组件化">
+	四 模块化与组件化</h2>
+<h3 id="angular1-angular2">
+	Angular1 -&gt; Angular2</h3>
+<p>
+	Angular1使用依赖注入来解决模块之间的依赖问题，模块几乎都依赖于注入容器以及其他相关功能。不是异步加载的，根据依赖列出第一次加载所需的所有依赖。</p>
+<p>
+	可以配合类似于Require.js来实现异步加载，懒加载（按需加载）则是借助于 ocLazyLoad 方式的解决方案，但是理想情况下应该是本地框架会更易懂。</p>
+<p>
+	Angular2使用ES6的module来定义模块，也考虑了动态加载的需求。</p>
+<h3 id="vue">
+	Vue</h3>
+<p>
+	Vue中指令和组件分得更清晰。指令只封装 DOM 操作，而组件代表一个自给自足的独立单元 &mdash;&mdash; 有自己的视图和数据逻辑**。在 Angular1 中两者有不少相混的地方。</p>
+<h3 id="react-1">
+	React</h3>
+<p>
+	一个 React 应用就是构建在 React 组件之上的。&nbsp;<br />
+	组件有两个核心概念：props,state。&nbsp;<br />
+	一个组件就是通过这两个属性的值在 render 方法里面生成这个组件对应的 HTML 结构。</p>
+<p>
+	传统的 MVC 是将模板放在其他地方，比如 script 标签或者模板文件，再在 JS 中通过某种手段引用模板。按这种思路，想想多少次我们面对四处分散的模板片段不知所措？纠结模板引擎，纠结模板存放位置，纠结如何引用模板。</p>
+<p>
+	React 认为组件才是王道，而组件是和模板紧密关联的，组件模板和组件逻辑分离让问题复杂化了。所以就有了&nbsp;JSX 这种语法，就是为了把 HTML 模板直接嵌入到 JS 代码里面，这样就做到了模板和组件关联，但是 JS 不支持这种包含 HTML 的语法，所以需要通过工具将 JSX 编译输出成 JS 代码才能使用（可以进行跨平台开发的依据，通过不同的解释器解释成不同平台上运行的代码，由此可以有RN和React开发桌面客户端）。</p>
+<h2 id="五-语法与代码风格">
+	五 语法与代码风格</h2>
+<p>
+	React,Vue,Angular2都支持ES6，Angular2官方拥抱了TypeScript这种 JavaScript 风格。</p>
+<p>
+	React 以 JavaScript 为中心，Angular 2 依然保留以 HTML 为中心。Angular 2 将 &ldquo;JS&rdquo; 嵌入 HTML。React 将 &ldquo;HTML&rdquo; 嵌入 JS。Angular 2 沿用了 Angular 1 试图让 HTML 更强大的方式。</p>
+<p>
+	React 推荐的做法是 JSX + inline style，也就是把 HTML 和 CSS 全都整进 JavaScript 了。Vue 的默认 API 是以简单易上手为目标，但是进阶之后推荐的是使用 webpack + vue-loader 的单文件组件格式（template,script,style写在一个vue文件里作为一个组件）</p>
+<h2 id="六-相关文章资料汇总">
+	六 相关文章资料汇总：</h2>
+<p>
+	[译] Angular 2 VS. React： 血色将至：&nbsp;<br />
+	<a href="http://www.w3ctech.com/topic/1675" target="_blank">http://www.w3ctech.com/topic/1675</a></p>
+<p>
+	[原译] React vs Angular 2: 战争继续：&nbsp;<br />
+	<a href="http://jixianqianduan.com/article-translation/2016/04/07/react-vs-angular2-fight-rages-on.html" target="_blank">http://jixianqianduan.com/article-translation/2016/04/07/react-vs-angular2-fight-rages-on.html</a></p>
+<p>
+	Vue.js 对比其它框架:&nbsp;<br />
+	<a href="https://vuejs.org.cn/guide/comparison.html" target="_blank">https://vuejs.org.cn/guide/comparison.html</a></p>
+<p>
+	Angularjs双向绑定的研究：&nbsp;<br />
+	<a href="https://www.nihaoshijie.com.cn/index.php/archives/306" target="_blank">https://www.nihaoshijie.com.cn/index.php/archives/306</a></p>
+<p>
+	Angular 从 1 到 2 快速参考:&nbsp;<br />
+	<a href="https://angular.cn/docs/ts/latest/cookbook/a1-a2-quick-reference.html" target="_blank">https://angular.cn/docs/ts/latest/cookbook/a1-a2-quick-reference.html</a></p>
+<p>
+	知乎：react.js,angular.js,vue.js学习哪个好？&nbsp;<br />
+	<a href="https://www.zhihu.com/question/39943474" target="_blank">https://www.zhihu.com/question/39943474</a></p>
+<p>
+	React 简介和原理：&nbsp;<br />
+	<a href="http://anjia.github.io/2015/07/24/fe_react/" target="_blank">http://anjia.github.io/2015/07/24/fe_react/</a></p>
+<p>
+	浴火重生的Angular:&nbsp;<br />
+	<a href="https://github.com/xufei/blog/issues/9" target="_blank">https://github.com/xufei/blog/issues/9</a></p>
+<p>
+	React 入门教程：&nbsp;<br />
+	<a href="https://hulufei.gitbooks.io/react-tutorial/content/" target="_blank">https://hulufei.gitbooks.io/react-tutorial/content/</a></p>
+<p>
+	Vue.js官方文档：&nbsp;<br />
+	<a href="https://vuejs.org.cn/guide/" target="_blank">https://vuejs.org.cn/guide/</a></p>
+<p>
+	Angular2中文文档：&nbsp;<br />
+	<a href="https://angular.cn/docs/ts/latest/tutorial/" target="_blank">https://angular.cn/docs/ts/latest/tutorial/</a></p>
+<p>
+	本文的话题实际上很大，需要对Angular,React和Vue三门技术有足够深入的了解，所以难免有很多总结的不全或者不够深入的地方，后续我会不断完善和修改。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/js/2017/0902/1619.html'>Web端如何裁剪图片</a> </li>
+            <li class="next">下一篇：没有了 </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>01.11</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>10.19</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>08.31</span></li>
+<li><a href="/bcsj/js/2015/0829/1113.html" >做网页必备的js特效代码</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1112.html" >11个JavaScript颜色选择器插件</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1111.html" >12种JavaScript MVC框架之比较</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1109.html" >JS函数重载解决方案</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1108.html" >JS的IE和FF兼容性问题汇总</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1107.html" >js小数转换为整数</a><span>08.29</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bootstrap Tree View</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式总结_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清空行tr的简单实例</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴么？</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2015/0827/925.html" >easyui页面加载错乱解决方法，提示</a><span>202</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>152</span></li>
+<li><a href="/bcsj/js/2015/0829/1088.html" >js3秒后自动跳转到指定页面的俩种</a><span>129</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>98</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>81</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>76</span></li>
+<li><a href="/bcsj/js/2015/0827/954.html" >兼容各种浏览器的复制内容到剪贴</a><span>67</span></li>
+<li><a href="/bcsj/js/2015/0827/968.html" >图片自适应大小的通用JS代码</a><span>63</span></li>
+<li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>53</span></li>
+<li><a href="/bcsj/js/2015/0827/926.html" >利用JS将gb2312转成utf-8</a><span>45</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1626&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

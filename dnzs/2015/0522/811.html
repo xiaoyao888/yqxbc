@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>java面试题，面试秘籍（一）_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,面,试题,面试,秘籍,一,抽象,就是,忽略," />
+  <meta name="description" content="1.抽象： 抽象就是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象并不打算了解全部问题，而只是选择其中的一部分，暂时不用部分细节。" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/dnzs/'>电脑知识</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>java面试题，面试秘籍（一）</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-22 14:08 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="811" class="art_content"><p>
+	1.抽象：&nbsp;<br />
+	　抽象就是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象并不打算了解全部问题，而只是选择其中的一部分，暂时不用部分细节。抽象包括两个方面，一是过程抽象，二是数据抽象。&nbsp;<br />
+	<br />
+	2.继承：&nbsp;<br />
+	　继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程称为类继承。新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。&nbsp;<br />
+	<br />
+	3.封装：&nbsp;<br />
+	　封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。&nbsp;<br />
+	<br />
+	4. 多态性：&nbsp;<br />
+	　多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。&nbsp;<br />
+	<br />
+	5、String是最基本的数据类型吗?&nbsp;<br />
+	　基本数据类型包括byte、int、char、long、float、double、boolean和short。&nbsp;<br />
+	　java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类&nbsp;<br />
+	<br />
+	6、int 和 Integer 有什么区别&nbsp;<br />
+	　Java 提供两种不同的类型：引用类型和原始类型（或内置类型）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。&nbsp;<br />
+	原始类型&nbsp;&nbsp; 封装类&nbsp;<br />
+	boolean&nbsp; Boolean&nbsp;<br />
+	char&nbsp; Character&nbsp;<br />
+	byte&nbsp; Byte&nbsp;<br />
+	short&nbsp; Short&nbsp;<br />
+	int&nbsp; Integer&nbsp;<br />
+	long&nbsp; Long&nbsp;<br />
+	float&nbsp; Float&nbsp;<br />
+	double&nbsp; Double&nbsp;<br />
+	　引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关。&nbsp;<br />
+	<br />
+	7、String 和StringBuffer的区别&nbsp;<br />
+	　JAVA平台提供了两个类：String和StringBuffer，它们可以储存和操作字符串，即包含多个字符的字符数据。这个String类提供了数值不可改变的字符串。而这个StringBuffer类提供的字符串进行修改。当你知道字符数据要改变的时候你就可以使用StringBuffer。典型地，你可以使用 StringBuffers来动态构造字符数据。&nbsp;<br />
+	<br />
+	8、运行时异常与一般异常有何异同？&nbsp;<br />
+	　异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。&nbsp;<br />
+	<br />
+	9、说出Servlet的生命周期，并说出Servlet和CGI的区别。&nbsp;<br />
+	　Servlet被服务器实例化后，容器运行其init方法，请求到达时运行其service方法，service方法自动派遣运行与请求对应的doXXX方法（doGet，doPost）等，当服务器决定将实例销毁的时候调用其destroy方法。&nbsp;<br />
+	与cgi的区别在于servlet处于服务器进程中，它通过多线程方式运行其service方法，一个实例可以服务于多个请求，并且其实例一般不会销毁，而CGI对每个请求都产生新的进程，服务完成后就销毁，所以效率上低于servlet。&nbsp;<br />
+	<br />
+	10、说出ArrayList,Vector, LinkedList的存储性能和特性&nbsp;<br />
+	　ArrayList 和Vector都是使用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized方法（线程安全），通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项的前后项即可，所以插入速度较快。&nbsp;<br />
+	<br />
+	11、EJB是基于哪些技术实现的？并说出SessionBean和EntityBean的区别，StatefulBean和StatelessBean的区别。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; EJB包括Session Bean、Entity Bean、Message Driven Bean，基于JNDI、RMI、JAT等技术实现。&nbsp;<br />
+	SessionBean在J2EE应用程序中被用来完成一些服务器端的业务操作，例如访问数据库、调用其他EJB组件。EntityBean被用来代表应用系统中用到的数据。&nbsp;<br />
+	　对于客户机，SessionBean是一种非持久性对象，它实现某些在服务器上运行的业务逻辑。&nbsp;<br />
+	　对于客户机，EntityBean是一种持久性对象，它代表一个存储在持久性存储器中的实体的对象视图，或是一个由现有企业应用程序实现的实体。&nbsp;<br />
+	　Session Bean 还可以再细分为 Stateful Session Bean 与 Stateless Session Bean ，这两种的 Session Bean都可以将系统逻辑放在 method之中执行，不同的是 Stateful Session Bean 可以记录呼叫者的状态，因此通常来说，一个使用者会有一个相对应的 Stateful Session Bean 的实体。Stateless Session Bean 虽然也是逻辑组件，但是他却不负责记录使用者状态，也就是说当使用者呼叫 Stateless Session Bean 的时候，EJB Container 并不会找寻特定的 Stateless Session Bean 的实体来执行这个 method。换言之，很可能数个使用者在执行某个 Stateless Session Bean 的 methods 时，会是同一个 Bean 的 Instance 在执行。从内存方面来看， Stateful Session Bean 与 Stateless Session Bean 比较， Stateful Session Bean 会消耗 J2EE Server 较多的内存，然而 Stateful Session Bean 的优势却在于他可以维持使用者的状态。&nbsp;<br />
+	<br />
+	12、Collection 和 Collections的区别。&nbsp;<br />
+	　　Collection是集合类的上级接口，继承与他的接口主要有Set 和List.&nbsp;<br />
+	Collections是针对集合类的一个帮助类，他提供一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。&nbsp;<br />
+	<br />
+	13、&amp;和&amp;&amp;的区别。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; &amp;是位运算符，表示按位与运算，&amp;&amp;是逻辑运算符，表示逻辑与（and）。&nbsp;<br />
+	<br />
+	14、HashMap和Hashtable的区别。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; HashMap是Hashtable的轻量级实现（非线程安全的实现），他们都完成了Map接口，主要区别在于HashMap允许空（null）键值（key）,由于非线程安全，效率上可能高于Hashtable。&nbsp;<br />
+	HashMap允许将null作为一个entry的key或者value，而Hashtable不允许。&nbsp;<br />
+	HashMap把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解。&nbsp;<br />
+	Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现。&nbsp;<br />
+	最大的不同是，Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap 就必须为之提供外同步。&nbsp;<br />
+	Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。&nbsp;<br />
+	<br />
+	15、final, finally, finalize的区别。&nbsp;<br />
+	　　final 用于声明属性，方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。&nbsp;<br />
+	finally是异常处理语句结构的一部分，表示总是执行。&nbsp;<br />
+	finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等。&nbsp;<br />
+	<br />
+	16、sleep() 和 wait() 有什么区别?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。&nbsp;<br />
+	wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。&nbsp;<br />
+	<br />
+	17、Overload和Override的区别。Overloaded的方法是否可以改变返回值的类型?&nbsp;<br />
+	　方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被&quot;屏蔽&quot;了。如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。Overloaded的方法是可以改变返回值的类型。&nbsp;<br />
+	<br />
+	18、error和exception有什么区别?&nbsp;<br />
+	　error 表示恢复不是不可能但很困难的情况下的一种严重问题。比如说内存溢出。不可能指望程序能处理这样的情况。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; exception 表示一种设计或实现问题。也就是说，它表示如果程序运行正常，从不会发生的情况。&nbsp;<br />
+	<br />
+	19、同步和异步有何异同，在什么情况下分别使用他们？举例说明。&nbsp;<br />
+	　如果数据将在线程间共享。例如正在写的数据以后可能被另一个线程读到，或者正在读的数据可能已经被另一个线程写过了，那么这些数据就是共享数据，必须进行同步存取。&nbsp;<br />
+	当应用程序在对象上调用了一个需要花费很长时间来执行的方法，并且不希望让程序等待方法的返回时，就应该使用异步编程，在很多情况下采用异步途径往往更有效率。&nbsp;<br />
+	20、abstract class和interface有什么区别?&nbsp;<br />
+	　声明方法的存在而不去实现它的类被叫做抽象类（abstract class），它用于要创建一个体现某些基本行为的类，并为该类声明方法，但不能在该类中实现该类的情况。不能创建abstract 类的实例。然而可以创建一个变量，其类型是一个抽象类，并让它指向具体子类的一个实例。不能有抽象构造函数或抽象静态方法。Abstract 类的子类为它们父类中的所有抽象方法提供实现，否则它们也是抽象类为。取而代之，在子类中实现该方法。知道其行为的其它类可以在类中实现这些方法。&nbsp;<br />
+	　接口（interface）是抽象类的变体。在接口中，所有方法都是抽象的。多继承性可通过实现这样的接口而获得。接口中的所有方法都是抽象的，没有一个有程序体。接口只可以定义static final成员变量。接口的实现与子类相似，除了该实现类不能从接口定义中继承行为。当类实现特殊接口时，它定义（即将程序体给予）所有这种接口的方法。然后，它可以在实现了该接口的类的任何对象上调用接口的方法。由于有抽象类，它允许使用接口名作为引用变量的类型。通常的动态联编将生效。引用可以转换到接口类型或从接口类型转换，instanceof 运算符可以用来决定某对象的类是否实现了接口。&nbsp;<br />
+	<br />
+	21、heap和stack有什么区别。&nbsp;<br />
+	　栈是一种线形集合，其添加和删除元素的操作应在同一段完成。栈按照后进先出的方式进行处理。&nbsp;<br />
+	堆是栈的一个组成元素&nbsp;<br />
+	<br />
+	22、forward 和redirect的区别&nbsp;<br />
+	　forward是服务器请求资源，服务器直接访问目标地址的URL，把那个URL的响应内容读取过来，然后把这些内容再发给浏览器，浏览器根本不知道服务器发送的内容是从哪儿来的，所以它的地址栏中还是原来的地址。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; redirect就是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址，一般来说浏览器会用刚才请求的所有参数重新请求，所以session,request参数都可以获取。&nbsp;<br />
+	<br />
+	23、EJB与JAVA BEAN的区别？&nbsp;<br />
+	　Java Bean 是可复用的组件，对Java Bean并没有严格的规范，理论上讲，任何一个Java类都可以是一个Bean。但通常情况下，由于Java Bean是被容器所创建（如Tomcat）的，所以Java Bean应具有一个无参的构造器，另外，通常Java Bean还要实现Serializable接口用于实现Bean的持久性。Java Bean实际上相当于微软COM模型中的本地进程内COM组件，它是不能被跨进程访问的。Enterprise Java Bean 相当于DCOM，即分布式组件。它是基于Java的远程方法调用（RMI）技术的，所以EJB可以被远程访问（跨进程、跨计算机）。但EJB必须被布署在诸如Webspere、WebLogic这样的容器中，EJB客户从不直接访问真正的EJB组件，而是通过其容器访问。EJB容器是EJB组件的代理， EJB组件由容器所创建和管理。客户通过容器来访问真正的EJB组件。&nbsp;<br />
+	<br />
+	24、Static Nested Class 和 Inner Class的不同。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; Static Nested Class是被声明为静态（static）的内部类，它可以不依赖于外部类实例被实例化。而通常的内部类需要在外部类实例化后才能实例化。&nbsp;<br />
+	<br />
+	25、JSP中动态INCLUDE与静态INCLUDE的区别？&nbsp;<br />
+	　动态INCLUDE用jsp:include动作实现 &lt;jsp:include page=&quot;included.jsp&quot; flush=&quot;true&quot; /&gt;它总是会检查所含文件中的变化，适合用于包含动态页面，并且可以带参数。&nbsp;<br />
+	静态INCLUDE用include伪码实现,定不会检查所含文件的变化，适用于包含静态页面&lt;%@ include file=&quot;included.htm&quot; %&gt;&nbsp;<br />
+	<br />
+	26、什么时候用assert。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; assertion(断言)在软件开发中是一种常用的调试方式，很多开发语言中都支持这种机制。在实现中，assertion就是在程序中的一条语句，它对一个boolean表达式进行检查，一个正确程序必须保证这个boolean表达式的值为true；如果该值为false，说明程序已经处于不正确的状态下，系统将给出警告或退出。一般来说，assertion用于保证程序最基本、关键的正确性。assertion检查通常在开发和测试时开启。为了提高性能，在软件发布后，assertion检查通常是关闭的。&nbsp;<br />
+	<br />
+	27、GC是什么? 为什么要有GC?&nbsp;<br />
+	　　GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。&nbsp;<br />
+	<br />
+	28、short s1 = 1; s1 = s1 + 1;有什么错? short s1 = 1; s1 += 1;有什么错?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; short s1 = 1; s1 = s1 + 1; （s1+1运算结果是int型，需要强制转换类型）&nbsp;<br />
+	short s1 = 1; s1 += 1;（可以正确编译）&nbsp;<br />
+	<br />
+	29、Math.round(11.5)等於多少? Math.round(-11.5)等於多少?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; Math.round(11.5)==12&nbsp;<br />
+	Math.round(-11.5)==-11&nbsp;<br />
+	round方法返回与参数最接近的长整数，参数加1/2后求其floor.&nbsp;<br />
+	<br />
+	30、String s = new String(&quot;xyz&quot;);创建了几个String Object?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; 两个&nbsp;<br />
+	<br />
+	31、EJB包括（SessionBean,EntityBean）说出他们的生命周期，及如何管理事务的？&nbsp;<br />
+	　SessionBean： Stateless Session Bean 的生命周期是由容器决定的，当客户机发出请求要建立一个Bean的实例时，EJB容器不一定要创建一个新的Bean的实例供客户机调用，而是随便找一个现有的实例提供给客户机。当客户机第一次调用一个Stateful Session Bean 时，容器必须立即在服务器中创建一个新的Bean实例，并关联到客户机上，以后此客户机调用Stateful Session Bean 的方法时容器会把调用分派到与此客户机相关联的Bean实例。&nbsp;<br />
+	EntityBean：Entity Beans能存活相对较长的时间，并且状态是持续的。只要数据库中的数据存在，Entity beans就一直存活。而不是按照应用程序或者服务进程来说的。即使EJB容器崩溃了，Entity beans也是存活的。Entity Beans生命周期能够被容器或者 Beans自己管理。&nbsp;<br />
+	　EJB通过以下技术管理实务：对象管理组织（OMG）的对象实务服务（OTS），Sun Microsystems的Transaction Service（JTS）、Java Transaction API（JTA），开发组（X/Open）的XA接口。&nbsp;<br />
+	<br />
+	32、应用服务器有那些？&nbsp;<br />
+	BEA WebLogic Server，IBM WebSphere Application Server，Oracle9i Application Server，jBoss，Tomcat&nbsp;<br />
+	<br />
+	33、给我一个你最常见到的runtime exception。&nbsp;<br />
+	ArithmeticException, ArrayStoreException, BufferOverflowException, BufferUnderflowException, CannotRedoException, CannotUndoException, ClassCastException, CMMException, ConcurrentModificationException, DOMException, EmptyStackException, IllegalArgumentException, IllegalMonitorStateException, IllegalPathStateException, IllegalStateException, ImagingOpException, IndexOutOfBoundsException, MissingResourceException, NegativeArraySizeException, NoSuchElementException, NullPointerException, ProfileDataException, ProviderException, RasterFormatException, SecurityException, SystemException, UndeclaredThrowableException, UnmodifiableSetException, UnsupportedOperationException&nbsp;<br />
+	<br />
+	34、接口是否可继承接口? 抽象类是否可实现(implements)接口? 抽象类是否可继承实体类(concrete class)?&nbsp;<br />
+	　接口可以继承接口。抽象类可以实现(implements)接口，抽象类是否可继承实体类，但前提是实体类必须有明确的构造函数。&nbsp;<br />
+	<br />
+	35、List, Set, Map是否继承自Collection接口?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; List，Set是，Map不是&nbsp;<br />
+	<br />
+	36、说出数据连接池的工作机制是什么?&nbsp;<br />
+	　J2EE 服务器启动时会建立一定数量的池连接，并一直维持不少于此数目的池连接。客户端程序需要连接时，池驱动程序会返回一个未使用的池连接并将其表记为忙。如果当前没有空闲连接，池驱动程序就新建一定数量的连接，新建连接的数量有配置参数决定。当使用的池连接调用完成后，池驱动程序将此连接表记为空闲，其他调用就可以使用这个连接。&nbsp;<br />
+	<br />
+	37、abstract的method是否可同时是static,是否可同时是native，是否可同时是synchronized?&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; 都不能&nbsp;<br />
+	<br />
+	38、数组有没有length()这个方法? String有没有length()这个方法？&nbsp;<br />
+	　数组没有length()这个方法，有length的属性。String有有length()这个方法。&nbsp;<br />
+	<br />
+	39、Set里的元素是不能重复的，那么用什么方法来区分重复与否呢? 是用==还是equals()? 它们有何区别?&nbsp;<br />
+	　Set里的元素是不能重复的，那么用iterator()方法来区分重复与否。equals()是判读两个Set是否相等。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; equals()和==方法决定引用值是否指向同一对象equals()在类中被覆盖，为的是当两个分离的对象的内容和类型相配的话，返回真值。&nbsp;<br />
+	40、构造器Constructor是否可被override?&nbsp;<br />
+	　构造器Constructor不能被继承，因此不能重写Overriding，但可以被重载Overloading。&nbsp;<br />
+	<br />
+	41、是否可以继承String类?&nbsp;<br />
+	　String类是final类故不可以继承。&nbsp;<br />
+	<br />
+	42、swtich是否能作用在byte上，是否能作用在long上，是否能作用在String上?&nbsp;<br />
+	　switch（expr1）中，expr1是一个整数表达式。因此传递给 switch 和 case 语句的参数应该是 int、 short、 char 或者 byte。long,string 都不能作用于swtich。&nbsp;<br />
+	<br />
+	43、try {}里有一个return语句，那么紧跟在这个try后的finally {}里的code会不会被执行，什么时候被执行，在return前还是后?&nbsp;<br />
+	　会执行，在return前执行。&nbsp;<br />
+	<br />
+	44、编程题: 用最有效率的方法算出2乘以8等於几?&nbsp;<br />
+	2 &lt;&lt; 3&nbsp;<br />
+	<br />
+	45、两个对象值相同(x.equals(y) == true)，但却可有不同的hash code，这句话对不对?&nbsp;<br />
+	　不对，有相同的hash code。&nbsp;<br />
+	<br />
+	46、当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?&nbsp;<br />
+	　是值传递。Java 编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是对该对象的引用。对象的内容可以在被调用的方法中改变，但对象的引用是永远不会改变的。&nbsp;<br />
+	<br />
+	47、当一个线程进入一个对象的一个synchronized方法后，其它线程是否可进入此对象的其它方法?&nbsp;<br />
+	　不能，一个对象的一个synchronized方法只能由一个线程访问。&nbsp;<br />
+	<br />
+	48、编程题: 写一个Singleton出来。&nbsp;<br />
+	　Singleton模式主要作用是保证在Java应用程序中，一个类Class只有一个实例存在。&nbsp;<br />
+	一般Singleton模式通常有几种种形式:&nbsp;<br />
+	　第一种形式: 定义一个类，它的构造函数为private的，它有一个static的private的该类变量，在类初始化时实例话，通过一个public的getInstance方法获取对它的引用,继而调用其中的方法。&nbsp;<br />
+	public class Singleton {&nbsp;<br />
+	private Singleton(){}&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; //在自己内部定义自己一个实例，是不是很奇怪？&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; //注意这是private 只供内部调用&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; private static Singleton instance = new Singleton();&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; //这里提供了一个供外部访问本class的静态方法，可以直接访问　　&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; public static Singleton getInstance() {&nbsp;<br />
+	　　　　&nbsp;&nbsp;&nbsp; return instance; 　　&nbsp;<br />
+	　　&nbsp;&nbsp;&nbsp; }&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; 第二种形式:&nbsp;<br />
+	public class Singleton {&nbsp;<br />
+	　　private static Singleton instance = null;&nbsp;<br />
+	　　public static synchronized Singleton getInstance() {&nbsp;<br />
+	　　//这个方法比上面有所改进，不用每次都进行生成对象，只是第一次　　　 　&nbsp;<br />
+	　　//使用时生成实例，提高了效率！&nbsp;<br />
+	　　if (instance==null)&nbsp;<br />
+	　　　　instance＝new Singleton();&nbsp;<br />
+	return instance; 　　}&nbsp;<br />
+	}&nbsp;<br />
+	<br />
+	其他形式:&nbsp;<br />
+	定义一个类，它的构造函数为private的，所有方法为static的。&nbsp;<br />
+	一般认为第一种形式要更加安全些&nbsp;<br />
+	<br />
+	49、Java的接口和C++的虚类的相同和不同处。&nbsp;<br />
+	　由于Java不支持多继承，而有可能某个类或对象要使用分别在几个类或对象里面的方法或属性，现有的单继承机制就不能满足要求。与继承相比，接口有更高的灵活性，因为接口中没有任何实现代码。当一个类实现了接口以后，该类要实现接口里面所有的方法和属性，并且接口里面的属性在默认状态下面都是public static,所有方法默认情况下是public.一个类可以实现多个接口。&nbsp;<br />
+	<br />
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/dnzs/2015/0522/810.html'>java面试题，面试秘籍（二）</a> </li>
+            <li class="next">下一篇：<a href='/dnzs/2015/0522/812.html'>windows7切换输入法的电脑知识</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/dnzs/2017/0621/1593.html" >解决虚拟机装mac os 10.12后全屏的问</a><span>06.21</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，</a><span>01.19</span></li>
+<li><a href="/dnzs/2015/0618/906.html" >VMware11安装Mac OS X10提示不可恢复错</a><span>01.19</span></li>
+<li><a href="/dnzs/2016/0105/1417.html" >VMware 11安装OS X 10.10全过程</a><span>01.05</span></li>
+<li><a href="/dnzs/2015/1209/1410.html" >注册表编辑器在哪里怎么打开？注</a><span>12.09</span></li>
+<li><a href="/dnzs/2015/1104/1339.html" >linux释放内存命令</a><span>11.04</span></li>
+<li><a href="/dnzs/2015/0522/846.html" >hkcmd.exe进程是什么？</a><span>11.05</span></li>
+<li><a href="/dnzs/2015/1030/1323.html" >电脑不能上网的常见原因和解决办</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1030/1319.html" >笔记本电脑的功率是多少,有多大</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1029/1318.html" >闪存盘和u盘的区别,什么是闪盘</a><span>10.29</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/dnzs/2015/1007/1290.html" >怎么看主板参数 菜鸟必看主板参</a><span>10.07</span></li>
+<li><a href="/dnzs/2015/0923/1282.html" >找不到服务器怎么办 DNS错误的解</a><span>09.23</span></li>
+<li><a href="/dnzs/2015/0923/1281.html" >BIOS怎么设置 显卡bios怎么刷</a><span>09.23</span></li>
+<li><a href="/dnzs/2015/0915/1277.html" >摄像头不能用解决办法，摄像头不</a><span>09.15</span></li>
+<li><a href="/dnzs/2015/0911/1274.html" >百小度怎么关闭？彻底关闭百小度</a><span>09.11</span></li>
+<li><a href="/dnzs/2015/0906/1267.html" >什么是串并口硬盘 串口与并口硬</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1266.html" >怎么设置本地连接ip 本地连接ip设</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1265.html" >暴风影音怎么去广告 暴风影音5去</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1264.html" >组策略怎么打开 使用组策略命令</a><span>09.06</span></li>
+<li><a href="/dnzs/2015/0906/1262.html" >微信猎手怎么用？微信猎手使用详</a><span>09.06</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/dnzs/2017/0621/1593.html" >解决虚拟机装mac os 10.12后全屏的问题显卡问题。</a><span>06.21</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，打不开磁盘的解决办法</a><span>01.19</span></li>
+<li><a href="/dnzs/2015/0618/906.html" >VMware11安装Mac OS X10提示不可恢复错误(vcpu-0)怎么办?</a><span>01.19</span></li>
+<li><a href="/dnzs/2016/0105/1417.html" >VMware 11安装OS X 10.10全过程</a><span>01.05</span></li>
+<li><a href="/dnzs/2015/1209/1410.html" >注册表编辑器在哪里怎么打开？注册表是什么？</a><span>12.09</span></li>
+<li><a href="/dnzs/2015/1104/1339.html" >linux释放内存命令</a><span>11.04</span></li>
+<li><a href="/dnzs/2015/0522/846.html" >hkcmd.exe进程是什么？</a><span>11.05</span></li>
+<li><a href="/dnzs/2015/1030/1323.html" >电脑不能上网的常见原因和解决办法</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1030/1319.html" >笔记本电脑的功率是多少,有多大？</a><span>10.30</span></li>
+<li><a href="/dnzs/2015/1029/1318.html" >闪存盘和u盘的区别,什么是闪盘,什么是U盘</a><span>10.29</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/dnzs/2015/0530/876.html" >为什么安全证书会过期？安全证书</a><span>3497</span></li>
+<li><a href="/dnzs/2015/0522/865.html" >UAC是什么？如何关闭UAC</a><span>2713</span></li>
+<li><a href="/dnzs/2015/0923/1282.html" >找不到服务器怎么办 DNS错误的解</a><span>1931</span></li>
+<li><a href="/dnzs/2015/0307/189.html" >U盘装系统出现ntldr is missing</a><span>1630</span></li>
+<li><a href="/dnzs/2015/0328/314.html" >如何利用ipconfig命令重新获取IP地</a><span>1136</span></li>
+<li><a href="/dnzs/2015/0401/433.html" >Win键是哪个 电脑上的Win键在哪？</a><span>1124</span></li>
+<li><a href="/dnzs/2015/0421/854.html" >ARP攻击是什么意思 ARP断网攻击的</a><span>926</span></li>
+<li><a href="/dnzs/2015/0906/1266.html" >怎么设置本地连接ip 本地连接ip设</a><span>833</span></li>
+<li><a href="/dnzs/2015/0923/1281.html" >BIOS怎么设置 显卡bios怎么刷</a><span>778</span></li>
+<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，</a><span>759</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=811&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

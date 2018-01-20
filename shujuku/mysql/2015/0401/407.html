@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MySQL5存储过程（三）_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL5存储过程（三）,数据" />
+  <meta name="description" content="新SQL语句 Variables变量 在复合语句中声明变量的指令是DECLARE。 (1)ExamplewithtwoDECLAREstatements 两个DECLARE语句的例子 WHILE...ENDWHILECREATEPROCEDUREp8()BEGINDECLARE" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/mysql/'>MySql</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL5存储过程（三）</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-01 09:03 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="407" class="art_content">新SQL语句&nbsp;<br />
+<br />
+Variables&nbsp;变量&nbsp;<br />
+<br />
+在复合语句中声明变量的指令是DECLARE。&nbsp;<br />
+<br />
+(1)&nbsp;Example&nbsp;with&nbsp;two&nbsp;DECLARE&nbsp;statements&nbsp;<br />
+<br />
+两个DECLARE语句的例子&nbsp;<br />
+<br />
+WHILE&nbsp;...&nbsp;END&nbsp;WHILE&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p8&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;a&nbsp;INT;&nbsp;DECLARE&nbsp;b&nbsp;INT;&nbsp;SET&nbsp;a&nbsp;=&nbsp;5;&nbsp;SET&nbsp;b&nbsp;=&nbsp;5;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(a);&nbsp;SELECT&nbsp;s1&nbsp;*&nbsp;a&nbsp;FROM&nbsp;t&nbsp;WHERE&nbsp;s1&nbsp;&gt;=&nbsp;b;&nbsp;END;&nbsp;//&nbsp;/*&nbsp;I&nbsp;won&#39;t&nbsp;CALL&nbsp;this&nbsp;*/<br />
+&nbsp;<br />
+在过程中定义的变量并不是真正的定义，你只是在BEGIN/END块内定义了而已（译注：也就是形参）。&nbsp;<br />
+<br />
+注意这些变量和会话变量不一样，不能使用修饰符@你必须清楚的在BEGIN/END块中声明变量和它们的类型。&nbsp;<br />
+<br />
+变量一旦声明，你就能在任何能使用会话变量、文字、列名的地方使用。&nbsp;<br />
+<br />
+(2)&nbsp;Example&nbsp;with&nbsp;no&nbsp;DEFAULT&nbsp;clause&nbsp;and&nbsp;SET&nbsp;statement&nbsp;<br />
+<br />
+没有默认子句和设定语句的例子&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p9&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;a&nbsp;INT&nbsp;/*&nbsp;there&nbsp;is&nbsp;no&nbsp;DEFAULT&nbsp;clause&nbsp;*/;&nbsp;DECLARE&nbsp;b&nbsp;INT&nbsp;/*&nbsp;there&nbsp;is&nbsp;no&nbsp;DEFAULT&nbsp;clause&nbsp;*/;&nbsp;SET&nbsp;a&nbsp;=&nbsp;5;&nbsp;/*&nbsp;there&nbsp;is&nbsp;a&nbsp;SET&nbsp;statement&nbsp;*/&nbsp;SET&nbsp;b&nbsp;=&nbsp;5;&nbsp;/*&nbsp;there&nbsp;is&nbsp;a&nbsp;SET&nbsp;statement&nbsp;*/&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(a);&nbsp;SELECT&nbsp;s1&nbsp;*&nbsp;a&nbsp;FROM&nbsp;t&nbsp;WHERE&nbsp;s1&nbsp;&gt;=&nbsp;b;&nbsp;END;&nbsp;//&nbsp;/*&nbsp;I&nbsp;won&#39;t&nbsp;CALL&nbsp;this&nbsp;*/<br />
+<br />
+有很多初始化变量的方法。如果没有默认的子句，那么变量的初始值为NULL。你可以在任何时候使用SET语句给变量赋值。&nbsp;<br />
+<br />
+(3)&nbsp;Example&nbsp;with&nbsp;DEFAULT&nbsp;clause&nbsp;<br />
+<br />
+含有DEFAULT子句的例子&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p10&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;a,&nbsp;b&nbsp;INT&nbsp;DEFAULT&nbsp;5;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(a);&nbsp;SELECT&nbsp;s1&nbsp;*&nbsp;a&nbsp;FROM&nbsp;t&nbsp;WHERE&nbsp;s1&nbsp;&gt;=&nbsp;b;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+我们在这里做了一些改变，但是结果还是一样的。在这里使用了DEFAULT子句来设定初始值，这就不需要把DECLARE和SET语句的实现分开了。&nbsp;<br />
+<br />
+(4)&nbsp;Example&nbsp;of&nbsp;CALL&nbsp;<br />
+<br />
+调用的例子&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p10()&nbsp;//&nbsp;+--------+&nbsp;|&nbsp;s1&nbsp;*&nbsp;a&nbsp;|&nbsp;+--------+&nbsp;|&nbsp;25&nbsp;|&nbsp;|&nbsp;25&nbsp;|&nbsp;+--------+&nbsp;2&nbsp;rows&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)&nbsp;Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)<br />
+<br />
+结果显示了过程能正常工作&nbsp;<br />
+<br />
+(5)&nbsp;Scope&nbsp;<br />
+<br />
+作用域&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p11&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;x1&nbsp;CHAR(5)&nbsp;DEFAULT&nbsp;&#39;outer&#39;;&nbsp;BEGIN&nbsp;DECLARE&nbsp;x1&nbsp;CHAR(5)&nbsp;DEFAULT&nbsp;&#39;inner&#39;;&nbsp;SELECT&nbsp;x1;&nbsp;END;&nbsp;SELECT&nbsp;x1;&nbsp;END;&nbsp;//<br />
+<br />
+现在我们来讨论一下作用域的问题。例子中有嵌套的BEGIN/END块，当然这是合法的。同时包含两个变量，名字都是x1，这样也是合法的。内部的变量在其作用域内享有更高的优先权。当执行到END语句时，内部变量消失，此时已经在其作用域外，变量不再可见了，因此在存储过程外再也不能找到这个声明了的变量，但是你可以通过OUT参数或者将其值指派&nbsp;给会话变量来保存其值。&nbsp;<br />
+<br />
+调用作用域例子的过程：&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p11()//&nbsp;+-------+&nbsp;|&nbsp;x1&nbsp;|&nbsp;+-------+&nbsp;|&nbsp;inner&nbsp;|&nbsp;+-------+&nbsp;+-------+&nbsp;|&nbsp;x1&nbsp;|&nbsp;+-------+&nbsp;|&nbsp;outer&nbsp;|&nbsp;+-------+<br />
+<br />
+我们看到的结果时第一个SELECT语句检索到最内层的变量，第二个检索到第二层的变量&nbsp;<br />
+<br />
+Conditions&nbsp;and&nbsp;IF-THEN-ELSE&nbsp;条件式和IF-THEN-ELSE&nbsp;<br />
+<br />
+1.&nbsp;<br />
+<br />
+现在我们可以写一些包含条件式的例子：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p12&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;IF&nbsp;variable1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;END&nbsp;IF;&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;1;&nbsp;ELSE&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;2;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;//<br />
+<br />
+这里是一个包含IF语句的过程。里面有两个IF语句，一个是IF语句END&nbsp;IF，另一个是IF语句ELSE语句END&nbsp;IF。我们可以在这里使用复杂的过程，但我会尽量使其简单让你能更容易弄清楚。&nbsp;<br />
+<br />
+2.&nbsp;<br />
+<br />
+CALL&nbsp;p12&nbsp;(0)&nbsp;//&nbsp;<br />
+<br />
+我们调用这个过程，传入值为0，这样parameter1的值将为0。&nbsp;<br />
+<br />
+3.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p12&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;&lt;--&nbsp;IF&nbsp;variable1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;END&nbsp;IF;&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;1;&nbsp;ELSE&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;2;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;//<br />
+<br />
+这里变量variable1被赋值为parameter1加1的值，所以执行后变量variable1为1。&nbsp;<br />
+<br />
+4.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p12&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;IF&nbsp;variable1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;&lt;--&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;END&nbsp;IF;&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;1;&nbsp;ELSE&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;2;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+因为变量variable1值为1，因此条件&quot;if&nbsp;variable1&nbsp;=&nbsp;0&quot;为假，&nbsp;<br />
+<br />
+IF&nbsp;<br />
+<br />
+&hellip;&hellip;&nbsp;<br />
+<br />
+END&nbsp;IF&nbsp;<br />
+<br />
+被跳过，没有被执行。&nbsp;<br />
+<br />
+5.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p12&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;IF&nbsp;variable1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;END&nbsp;IF;&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;&lt;--&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;1;&nbsp;ELSE&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;2;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;//<br />
+<br />
+到第二个IF条件，判断结果为真，于是中间语句被执行了&nbsp;<br />
+<br />
+6.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p12&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;IF&nbsp;variable1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;END&nbsp;IF;&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;0&nbsp;THEN&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;1;&nbsp;&lt;--&nbsp;ELSE&nbsp;UPDATE&nbsp;t&nbsp;SET&nbsp;s1&nbsp;=&nbsp;s1&nbsp;+&nbsp;2;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+因为参数parameter1值等于0，UPDATE语句被执行。如果parameter1值为NULL，则下一条UPDATE语句将被执行现在表t中有两行，他们都包含值5，所以如果我们调用p12，两行的值会变成6。&nbsp;<br />
+<br />
+7.&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p12(0)//&nbsp;Query&nbsp;OK,&nbsp;2&nbsp;rows&nbsp;affected&nbsp;(0.28&nbsp;sec)&nbsp;mysql&gt;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;t//&nbsp;+------+&nbsp;|&nbsp;s1&nbsp;|&nbsp;+------+&nbsp;|&nbsp;6&nbsp;|&nbsp;|&nbsp;6&nbsp;|&nbsp;+------+&nbsp;2&nbsp;rows&nbsp;in&nbsp;set&nbsp;(0.01&nbsp;sec)<br />
+&nbsp;<br />
+结果也是我们所期望的那样。<br />
+&nbsp;<br />
+CASE&nbsp;指令&nbsp;<br />
+<br />
+1.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p13&nbsp;(IN&nbsp;parameter1&nbsp;INT)&nbsp;BEGIN&nbsp;DECLARE&nbsp;variable1&nbsp;INT;&nbsp;SET&nbsp;variable1&nbsp;=&nbsp;parameter1&nbsp;+&nbsp;1;&nbsp;CASE&nbsp;variable1&nbsp;WHEN&nbsp;0&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(17);&nbsp;WHEN&nbsp;1&nbsp;THEN&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(18);&nbsp;ELSE&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(19);&nbsp;END&nbsp;CASE;&nbsp;END;&nbsp;//<br />
+<br />
+如果需要进行更多条件真假的判断我们可以使用CASE语句。CASE语句使用和IF一样简单。&nbsp;<br />
+<br />
+我们可以参考上面的例子。　<br />
+<br />
+2.&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p13(1)//&nbsp;Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;mysql&gt;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;t//&nbsp;+------+&nbsp;|&nbsp;s1&nbsp;|&nbsp;+------+&nbsp;|&nbsp;6&nbsp;|&nbsp;|&nbsp;6&nbsp;|&nbsp;|&nbsp;19&nbsp;|&nbsp;+------+&nbsp;3&nbsp;rows&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)<br />
+<br />
+执行过程后，传入值1，如上面例子，值19被插入到表t中。&nbsp;<br />
+<br />
+问题&nbsp;<br />
+<br />
+<br />
+问题:&nbsp;CALL&nbsp;p13(NULL)&nbsp;//的作用是什么？&nbsp;<br />
+<br />
+<br />
+另一个：这个CALL语句做了那些动作？&nbsp;<br />
+<br />
+<br />
+你可以通过执行后观察SELECT做了什么，也可以根据代码判断，在5秒内做出。&nbsp;<br />
+<br />
+答案&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p13(NULL)//&nbsp;Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;mysql&gt;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;t//&nbsp;+------+&nbsp;|&nbsp;s1&nbsp;|&nbsp;+------+&nbsp;|&nbsp;6&nbsp;|&nbsp;|&nbsp;6&nbsp;|&nbsp;|&nbsp;19&nbsp;|&nbsp;|&nbsp;19&nbsp;|&nbsp;+------+&nbsp;4&nbsp;rows&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)<br />
+&nbsp;<br />
+答案是当你调用p13时，MySQL插入了另一条包含数值19的记录。原因是变量variable1的值为NULL，CASE语句的ELSE部分就被执行了。希望这对大家有意义。如果你回答不出来，没有问题，我们可以继续向下走。&nbsp;<br />
+<br />
+Loops&nbsp;循环语句&nbsp;WHILE&nbsp;...&nbsp;END&nbsp;WHILE&nbsp;LOOP&nbsp;...&nbsp;END&nbsp;LOOP&nbsp;REPEAT&nbsp;...&nbsp;END&nbsp;REPEAT&nbsp;GOTO<br />
+<br />
+下面我们将会创建一些循环。我们有三种标准的循环方式：&nbsp;<br />
+<br />
+WHILE循环，LOOP循环以及REPEAT循环。还有一种非标准的循环方式：GO&nbsp;TO（译者语：最好不要用吧，用了就使流程混乱）。&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p14&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;WHILE&nbsp;v&nbsp;&lt;&nbsp;5&nbsp;DO&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;END&nbsp;WHILE;&nbsp;END;&nbsp;//<br />
+<br />
+这是WHILE循环的方式。我很喜欢这种方式，它跟IF语句相似，因此不需要掌握很多新的语法。这里的INSERT和SET语句在WHILE和END&nbsp;WHILE之间，当变量v大于5的时候循环将会退出。使用&nbsp;<br />
+<br />
+&quot;SET&nbsp;v&nbsp;=&nbsp;0;&quot;&nbsp;<br />
+<br />
+语句使为了防止一个常见的错误，如果没有初始化，默认变量值为NULL，而NULL和任何值操作结果都为NULL。&nbsp;<br />
+<br />
+WHILE&nbsp;...&nbsp;END&nbsp;WHILE&nbsp;example&nbsp;mysql&gt;&nbsp;CALL&nbsp;p14()//&nbsp;Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)<br />
+&nbsp;<br />
+以上就是调用过程p14的结果不用关注系统返回是&quot;one&nbsp;row&nbsp;affected&quot;还是&quot;five&nbsp;rows&nbsp;affected&quot;，因为这里的计数只对最后一个INSERT动作进行计数。&nbsp;<br />
+<br />
+WHILE&nbsp;...&nbsp;END&nbsp;WHILE&nbsp;example:&nbsp;CALL&nbsp;mysql&gt;&nbsp;select&nbsp;*&nbsp;from&nbsp;t;&nbsp;//&nbsp;+------+&nbsp;|&nbsp;s1&nbsp;|&nbsp;+------+&nbsp;....&nbsp;|&nbsp;0&nbsp;|&nbsp;|&nbsp;1&nbsp;|&nbsp;|&nbsp;2&nbsp;|&nbsp;|&nbsp;3&nbsp;|&nbsp;|&nbsp;4&nbsp;|&nbsp;+------+&nbsp;9&nbsp;rows&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)<br />
+<br />
+调用后可以看到程序向数据库中插入了5行。&nbsp;<br />
+<br />
+REPEAT&nbsp;...&nbsp;END&nbsp;REPEAT&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p15&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;REPEAT&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;UNTIL&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;END&nbsp;REPEAT;&nbsp;END;&nbsp;//<br />
+<br />
+这是一个REPEAT循环的例子，功能和前面WHILE循环一样。区别在于它在执行后检查结果，而WHILE则是执行前检查。（译者语：可能等同于DO&nbsp;WHILE吧）&nbsp;<br />
+<br />
+REPEAT&nbsp;...&nbsp;END&nbsp;REPEAT:&nbsp;look&nbsp;at&nbsp;the&nbsp;UNTIL：&nbsp;UNTIL的作用&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p15&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;REPEAT&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;UNTIL&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;&lt;--&nbsp;END&nbsp;REPEAT;&nbsp;END;&nbsp;//<br />
+<br />
+注意到UNTIL语句后面没有分号，在这里可以不写分号，当然你加上额外的分号更好。&nbsp;<br />
+<br />
+REPEAT&nbsp;...&nbsp;END&nbsp;REPEAT:&nbsp;calling&nbsp;：调用&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p15()//&nbsp;Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;mysql&gt;&nbsp;SELECT&nbsp;COUNT(*)&nbsp;FROM&nbsp;t//&nbsp;+----------+&nbsp;|&nbsp;COUNT(*)&nbsp;|&nbsp;+----------+&nbsp;|&nbsp;14&nbsp;|&nbsp;+----------+&nbsp;1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)<br />
+<br />
+我们可以看到调用p15过程后又插入了5行记录&nbsp;<br />
+<br />
+LOOP&nbsp;...&nbsp;END&nbsp;LOOP&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p16&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+以上是LOOP循环的例子。&nbsp;<br />
+<br />
+LOOP循环不需要初始条件，这点和WHILE循环相似，同时它又和REPEAT循环一样也不需要结束条件。&nbsp;<br />
+<br />
+LOOP&nbsp;...&nbsp;END&nbsp;LOOP:&nbsp;with&nbsp;IF&nbsp;and&nbsp;LEAVE&nbsp;包含IF和LEAVE的LOOP循环&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p16&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;&lt;--&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+在循环内部加入IF语句，在IF语句中包含LEAVE语句。这里LEAVE语句的意义是离开循环。&nbsp;<br />
+<br />
+LEAVE的语法是LEAVE加循环语句标号，关于循环语句的标号问题我会在后面进一步讲解。&nbsp;<br />
+<br />
+LOOP&nbsp;...&nbsp;END&nbsp;LOOP:&nbsp;calling&nbsp;：调用&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p16()//&nbsp;Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;mysql&gt;&nbsp;SELECT&nbsp;COUNT(*)&nbsp;FROM&nbsp;t//&nbsp;+----------+&nbsp;|&nbsp;COUNT(*)&nbsp;|&nbsp;+----------+&nbsp;|&nbsp;19&nbsp;|&nbsp;+----------+&nbsp;1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)<br />
+<br />
+调用过程p16后，结果是另5行被插入表t中。&nbsp;<br />
+<br />
+Labels&nbsp;标号&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p17&nbsp;()&nbsp;label_1:&nbsp;BEGIN&nbsp;label_2:&nbsp;WHILE&nbsp;0&nbsp;=&nbsp;1&nbsp;DO&nbsp;LEAVE&nbsp;label_2;&nbsp;END&nbsp;WHILE;&nbsp;label_3:&nbsp;REPEAT&nbsp;LEAVE&nbsp;label_3;&nbsp;UNTIL&nbsp;0&nbsp;=0&nbsp;END&nbsp;REPEAT;&nbsp;label_4:&nbsp;LOOP&nbsp;LEAVE&nbsp;label_4;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+最后一个循环例子中我使用了语句标号。现在这里有一个包含4个语句标号的过程的例子。我们可以在BEGIN、WHILE、REPEAT或者LOOP语句前使用语句标号，语句标号只能在合法的语句前面使用。因此&quot;LEAVE&nbsp;label_3&quot;意味着离开语句标号名定义为label_3的语句或复合语句。&nbsp;<br />
+<br />
+End&nbsp;Labels&nbsp;标号结束符&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p18&nbsp;()&nbsp;label_1:&nbsp;BEGIN&nbsp;label_2:&nbsp;WHILE&nbsp;0&nbsp;=&nbsp;1&nbsp;DO&nbsp;LEAVE&nbsp;label_2;&nbsp;END&nbsp;WHILE&nbsp;label_2;&nbsp;label_3:&nbsp;REPEAT&nbsp;LEAVE&nbsp;label_3;&nbsp;UNTIL&nbsp;0&nbsp;=0&nbsp;END&nbsp;REPEAT&nbsp;label_3&nbsp;;&nbsp;label_4:&nbsp;LOOP&nbsp;LEAVE&nbsp;label_4;&nbsp;END&nbsp;LOOP&nbsp;label_4&nbsp;;&nbsp;END&nbsp;label_1&nbsp;;&nbsp;//<br />
+<br />
+你也可以在语句结束时使用语句标号，和在开头时使用一样。这些标号结束符并不是十分有用。&nbsp;<br />
+<br />
+它们是可选的。如果你需要，他们必须和开始定义的标号名字一样当然为了有良好的编程习惯，方便他人阅读，最好还是使用标号结束符。&nbsp;<br />
+<br />
+LEAVE&nbsp;and&nbsp;Labels&nbsp;跳出和标号&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p19&nbsp;(parameter1&nbsp;CHAR)&nbsp;label_1:&nbsp;BEGIN&nbsp;label_2:&nbsp;BEGIN&nbsp;label_3:&nbsp;BEGIN&nbsp;IF&nbsp;parameter1&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;THEN&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;&#39;a&#39;&nbsp;THEN&nbsp;LEAVE&nbsp;label_1;&nbsp;ELSE&nbsp;BEGIN&nbsp;IF&nbsp;parameter1&nbsp;=&nbsp;&#39;b&#39;&nbsp;THEN&nbsp;LEAVE&nbsp;label_2;&nbsp;ELSE&nbsp;LEAVE&nbsp;label_3;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;IF;&nbsp;END;&nbsp;END;&nbsp;END;//&nbsp;LEAVE<br />
+<br />
+语句使程序跳出复杂的复合语句。&nbsp;<br />
+<br />
+ITERATE&nbsp;<br />
+<br />
+迭代如果目标是ITERATE（迭代）语句的话，就必须用到LEAVE语句&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//&nbsp;ITERATE<br />
+<br />
+迭代）语句和LEAVE语句一样也是在循环内部的循环引用，它有点像C语言中的&ldquo;Continue&rdquo;，同样它可以出现在复合语句中，引用复合语句标号，ITERATE（迭代）意思是重新开始复合语句。&nbsp;<br />
+<br />
+那我们启动并观察下面这个循环，这是个需要迭代过程的循环：&nbsp;<br />
+<br />
+ITERATE:&nbsp;Walking&nbsp;through&nbsp;the&nbsp;loop<br />
+&nbsp;<br />
+深入循环&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;&lt;--&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+<br />
+让这个已经定义了标号的循环运行起来。&nbsp;<br />
+<br />
+ITERATE:&nbsp;Walking&nbsp;through&nbsp;the&nbsp;loop&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;&lt;--&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+v的值变成3，然后我们把它增加到4。&nbsp;<br />
+<br />
+ITERATE:&nbsp;walking&nbsp;through&nbsp;the&nbsp;loop&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;&lt;--&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+<br />
+然后开始ITERATE（迭代）过程。&nbsp;<br />
+<br />
+ITERATE:&nbsp;walking&nbsp;through&nbsp;the&nbsp;loop&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;&lt;--&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+<br />
+这里的ITERATE（迭代）让循环又回到了循环的头部。&nbsp;<br />
+<br />
+ITERATE:&nbsp;walking&nbsp;through&nbsp;the&nbsp;loop&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;&lt;--&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//<br />
+&nbsp;<br />
+当v的值变为5时，程序将执行LEAVE语句&nbsp;<br />
+<br />
+ITERATE:&nbsp;walking&nbsp;through&nbsp;the&nbsp;loop&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p20&nbsp;()&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;SET&nbsp;v&nbsp;=&nbsp;0;&nbsp;loop_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;3&nbsp;THEN&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;ITERATE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(v);&nbsp;SET&nbsp;v&nbsp;=&nbsp;v&nbsp;+&nbsp;1;&nbsp;IF&nbsp;v&nbsp;&gt;=&nbsp;5&nbsp;THEN&nbsp;LEAVE&nbsp;loop_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP;&nbsp;END;&nbsp;//&nbsp;&lt;--<br />
+&nbsp;<br />
+LEAVE的结果就是跳出循环，使运行指令到达复合语句的最后一步。&nbsp;<br />
+<br />
+GOTO&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p...&nbsp;BEGIN&nbsp;...&nbsp;LABEL&nbsp;label_name;&nbsp;...&nbsp;GOTO&nbsp;label_name;&nbsp;...&nbsp;END;<br />
+<br />
+MySQL的存储过程中可以使用GOTO语句。虽然这不是标准SQL语句，而且在这里建立标号的方法也和惯例中的不一样。由于为了和其他DBMS兼容，这个语句会慢被淘汰，所以我们在MySQL参考手册中没有提及。&nbsp;<br />
+<br />
+Grand&nbsp;combination&nbsp;<br />
+<br />
+大组合&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p21&nbsp;(IN&nbsp;parameter_1&nbsp;INT,&nbsp;OUT&nbsp;parameter_2&nbsp;INT)&nbsp;LANGUAGE&nbsp;SQL&nbsp;DETERMINISTIC&nbsp;SQL&nbsp;SECURITY&nbsp;INVOKER&nbsp;BEGIN&nbsp;DECLARE&nbsp;v&nbsp;INT;&nbsp;label&nbsp;goto_label;&nbsp;start_label:&nbsp;LOOP&nbsp;IF&nbsp;v&nbsp;=&nbsp;v&nbsp;THEN&nbsp;LEAVE&nbsp;start_label;&nbsp;ELSE&nbsp;ITERATE&nbsp;start_label;&nbsp;END&nbsp;IF;&nbsp;END&nbsp;LOOP&nbsp;start_label;&nbsp;REPEAT&nbsp;WHILE&nbsp;1&nbsp;=&nbsp;0&nbsp;DO&nbsp;BEGIN&nbsp;END;&nbsp;END&nbsp;WHILE;&nbsp;UNTIL&nbsp;v&nbsp;=&nbsp;v&nbsp;END&nbsp;REPEAT;&nbsp;GOTO&nbsp;goto_label;&nbsp;END;//<br />
+<br />
+上面例子中的语句包含了我们之前讲的所有语法，包括参数列表，特性参数，BEGIN/END块复合语句，变量声明，IF，WHILE，LOOP，REPEAT，LEAVE，ITERATE，GOTO。这是一个荒谬的存储过程，我不会运行它，因为里面有无尽的循环。但是里面的语法却十分合法。这些是新的流程控制和变量声明语句。下面我们将要接触更多新的东西。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/mysql/2015/0401/406.html'>MySQL中mysqldump命令使用详解</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/mysql/2015/0401/408.html'>MySQL5存储过程（二）</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2015/1020/1309.html" >MySQL 5.7 GA 版本发布，支持在生产</a><span>10.20</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0618/903.html" >LINUX下MYSQL的启动及相关配置</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/902.html" >Linux开放MySQL的3306端口</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/901.html" >Linux下重启mysql数据库的方法</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0605/881.html" >mysqldump参数介绍教程%mysqldump 参数</a><span>06.05</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>05.07</span></li>
+<li><a href="/shujuku/mysql/2015/0405/602.html" >四种数据库随机获取10条数据的方</a><span>04.05</span></li>
+<li><a href="/shujuku/mysql/2015/0401/422.html" >MySQL CPU占用100%的解决过程和经验</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集群解决方案）</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂Can't get hostname for your a</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2015/0316/222.html" >mysql安装图解 mysql图文安装教程</a><span>504</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>459</span></li>
+<li><a href="/shujuku/mysql/2015/0316/228.html" >phpmyadmin简明安装教程</a><span>303</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>119</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>113</span></li>
+<li><a href="/shujuku/mysql/2015/0316/216.html" >python之mysql连接 MySQLdb</a><span>95</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>94</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>91</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>64</span></li>
+<li><a href="/shujuku/mysql/2015/0316/223.html" >mysql文件太大导入出错的解决方法</a><span>63</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=407&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

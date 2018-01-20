@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MySQL新手入门指南_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL新手入门指南,数据库" />
+  <meta name="description" content="一、SQL速成 以下是一些重要的SQL快速参考，有关SQL的语法和在标准SQL上增加的特性，请查询MySQL手册。 1．创建表 表是数据库的最基本元素之一，表与表之间可以相互独立，也可以相互" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/mysql/'>MySql</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL新手入门指南</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-01 09:04 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="410" class="art_content">一、SQL速成&nbsp;<br />
+<br />
+　　以下是一些重要的SQL快速参考，有关SQL的语法和在标准SQL上增加的特性，请查询MySQL手册。&nbsp;<br />
+<br />
+　　1．创建表&nbsp;<br />
+<br />
+　　表是数据库的最基本元素之一，表与表之间可以相互独立，也可以相互关联。创建表的基本语法如下：&nbsp;<br />
+<br />
+　　create&nbsp;table&nbsp;table_name&nbsp;<br />
+<br />
+　　(column_name&nbsp;datatype&nbsp;{identity&nbsp;|null|not&nbsp;null},&nbsp;<br />
+<br />
+　　&hellip;)&nbsp;<br />
+<br />
+　　其中参数table_name和column_name必须满足用户数据库中的识别器(identifier)的要求，参数datatype是一个标准的SQL类型或由用户数据库提供的类型。用户要使用non-null从句为各字段输入数据。&nbsp;<br />
+<br />
+<br />
+　　create&nbsp;table还有一些其他选项，如创建临时表和使用select子句从其他的表中读取某些字段组成新表等。还有，在创建表是可用PRIMARY&nbsp;KEY、KEY、INDEX等标识符设定某些字段为主键或索引等。&nbsp;<br />
+<br />
+　　书写上要注意：&nbsp;<br />
+<br />
+　　在一对圆括号里的列出完整的字段清单。&nbsp;<br />
+<br />
+　　字段名间用逗号隔开。&nbsp;<br />
+<br />
+　　字段名间的逗号后要加一个空格。&nbsp;<br />
+<br />
+　　最后一个字段名后不用逗号。&nbsp;<br />
+<br />
+　　所有的SQL陈述都以分号&quot;;&quot;结束。&nbsp;<br />
+<br />
+　　例：&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;CREATE&nbsp;TABLE&nbsp;test&nbsp;(blob_col&nbsp;BLOB,&nbsp;index(blob_col(10)));&nbsp;<br />
+<br />
+　　2．创建索引&nbsp;<br />
+<br />
+　　索引用于对数据库的查询。一般数据库建有多种索引方案，每种方案都精于某一特定的查询类。索引可以加速对数据库的查询过程。创建索引的基本语法如下：&nbsp;<br />
+<br />
+　　create&nbsp;index&nbsp;index_name&nbsp;<br />
+<br />
+　　on&nbsp;table_name&nbsp;(col_name[(length)],...&nbsp;)&nbsp;<br />
+<br />
+　　例：&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;CREATE&nbsp;INDEX&nbsp;part_of_name&nbsp;ON&nbsp;customer&nbsp;(name(10));&nbsp;<br />
+<br />
+　　3．改变表结构&nbsp;<br />
+<br />
+　　在数据库的使用过程中，有时需要改变它的表结构，包括改变字段名，甚至改变不同数据库字段间的关系。可以实现上述改变的命令是alter，其基本语法如下：&nbsp;<br />
+<br />
+　　alter&nbsp;table&nbsp;table_name&nbsp;alter_spec&nbsp;[,&nbsp;alter_spec&nbsp;...]&nbsp;<br />
+<br />
+　　例：&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;ALTER&nbsp;TABLE&nbsp;t1&nbsp;CHANGE&nbsp;a&nbsp;b&nbsp;INTEGER;&nbsp;<br />
+<br />
+　　4．删除数据对象&nbsp;<br />
+<br />
+　　很多数据库是动态使用的，有时可能需要删除某个表或索引。大多数数据库对象可以下面的命令删除：&nbsp;<br />
+<br />
+　　drop&nbsp;object_name&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;DROP&nbsp;TABLE&nbsp;tb1;&nbsp;<br />
+<br />
+　　5．执行查询&nbsp;<br />
+<br />
+　　查询是使用最多的SQL命令。查询数据库需要凭借结构、索引和字段类型等因素。大多数数据库含有一个优化器(optimizer)，把用户的查询语句转换成可选的形式，以提高查询效率。&nbsp;<br />
+<br />
+　　值得注意的是MySQL不支持SQL92标准的嵌套的where子句，即它只支持一个where子句。其基本语法如下：&nbsp;<br />
+<br />
+　　SELECT&nbsp;[STRAIGHT_JOIN]&nbsp;[SQL_SMALL_RESULT]&nbsp;[SQL_BIG_RESULT]&nbsp;[HIGH_PRIORITY]&nbsp;[DISTINCT&nbsp;|&nbsp;DISTINCTROW&nbsp;|&nbsp;ALL]&nbsp;<br />
+<br />
+　　select_expression,...&nbsp;[INTO&nbsp;{OUTFILE&nbsp;|&nbsp;DUMPFILE}&nbsp;&#39;file_name&#39;&nbsp;export_options]&nbsp;[FROM&nbsp;table_references&nbsp;[WHERE&nbsp;where_definition]&nbsp;[GROUP&nbsp;BY&nbsp;col_name,...]&nbsp;[HAVING&nbsp;where_definition]&nbsp;[ORDER&nbsp;BY&nbsp;{unsigned_integer&nbsp;|&nbsp;col_name&nbsp;|&nbsp;formula}&nbsp;[ASC&nbsp;|&nbsp;DESC]&nbsp;,...]&nbsp;[LIMIT&nbsp;[offset,]&nbsp;rows]&nbsp;[PROCEDURE&nbsp;procedure_name]&nbsp;]&nbsp;<br />
+<br />
+　　其中where从句是定义选择标准的地方，where_definition可以有不同的格式，但都遵循下面的形式：&nbsp;<br />
+<br />
+　　字段名操作表达式&nbsp;<br />
+<br />
+　　字段名操作字段名&nbsp;<br />
+<br />
+　　在第一种形式下，标准把字段的值与表达式进行比较；在第二种形式下，把两个字段的值进行比较。根据所比较的数据类型，search_condition中的操作可能选以下几种：&nbsp;<br />
+<br />
+　　=&nbsp;检查是否相等&nbsp;<br />
+<br />
+　　！=&nbsp;检查是否不等&nbsp;<br />
+<br />
+　　&gt;&nbsp;(或&gt;=)&nbsp;检查左边值是否大于(或大于等于)右边值&nbsp;<br />
+<br />
+　　&lt;&nbsp;(或&lt;=)&nbsp;检查左边值是否小于(或小于等于)右边值&nbsp;[not]&nbsp;between&nbsp;检查左边值是否在某个范围内&nbsp;[not]&nbsp;in&nbsp;检查左边是否某个特定集的成员&nbsp;[not]&nbsp;like&nbsp;检查左边是否为右边的子串&nbsp;<br />
+<br />
+　　is&nbsp;[not]&nbsp;null&nbsp;检查左边是否为空值&nbsp;<br />
+<br />
+　　在这里，可以用通配符_代表任何一个字符，%代表任何字符串。使用关键字、和可以生成复杂的词，它们运行检查时使用布尔表达式的多重标准集。&nbsp;<br />
+<br />
+　　例：&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;select&nbsp;t1.name,&nbsp;t2.salary&nbsp;from&nbsp;employee&nbsp;AS&nbsp;t1,&nbsp;info&nbsp;AS&nbsp;t2&nbsp;where&nbsp;t1.name&nbsp;=&nbsp;t2.name;&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;select&nbsp;college,&nbsp;region,&nbsp;seed&nbsp;from&nbsp;tournament&nbsp;<br />
+<br />
+　　ORDER&nbsp;BY&nbsp;region,&nbsp;seed;&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;select&nbsp;col_name&nbsp;from&nbsp;tbl_name&nbsp;WHERE&nbsp;col_name&nbsp;&gt;&nbsp;0;&nbsp;<br />
+<br />
+　　6．修改表中数据&nbsp;<br />
+<br />
+　　在使用数据库过程中，往往要修改其表中的数据，比如往表中添加新数据，删除表中原有数据，或对表中原有数据进行更改。它们的基本语法如下：&nbsp;<br />
+<br />
+　　数据添加：&nbsp;<br />
+<br />
+　　insert&nbsp;[into]&nbsp;table_name&nbsp;[(column(s))]&nbsp;<br />
+<br />
+　　values&nbsp;(expression(s))&nbsp;<br />
+<br />
+　　例：&nbsp;<br />
+<br />
+　　mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;tbl_name&nbsp;(col1,col2)&nbsp;VALUES(15,col1*2);&nbsp;<br />
+<br />
+　　数据删除：&nbsp;<br />
+<br />
+　　delete&nbsp;from&nbsp;table_name&nbsp;where&nbsp;search_condition&nbsp;<br />
+<br />
+　　数据更改：&nbsp;<br />
+<br />
+　　update&nbsp;table_name&nbsp;<br />
+<br />
+　　set&nbsp;column1=expression1,&nbsp;<br />
+<br />
+　　column2=expression2,&hellip;&nbsp;<br />
+<br />
+　　where&nbsp;search_condition&nbsp;<br />
+<br />
+　　7．数据库切换&nbsp;<br />
+<br />
+　　当存在多个数据库时，可以用下面的命令定义用户想使用的数据库：&nbsp;<br />
+<br />
+　　use&nbsp;database_name&nbsp;<br />
+<br />
+　　8．统计函数&nbsp;<br />
+<br />
+　　SQL有一些统计函数，它们对于生成数据表格很有帮助。下面介绍几个常用的统计函数：&nbsp;<br />
+<br />
+　　sum&nbsp;(exepression)&nbsp;计算表达式的和&nbsp;<br />
+<br />
+　　avg&nbsp;(exepression)&nbsp;计算表达式的平均值&nbsp;<br />
+<br />
+　　count&nbsp;(exepression)&nbsp;对表达式进行简单的计数&nbsp;<br />
+<br />
+　　count&nbsp;(*)&nbsp;统计记录数&nbsp;<br />
+<br />
+　　max&nbsp;(exepression)&nbsp;求最大值&nbsp;<br />
+<br />
+　　min&nbsp;(exepression)&nbsp;求最小值&nbsp;<br />
+<br />
+　　其中exepression为任何有效的SQL表达式，它可以是一个或多个记录，也可以是别的SQL函数的组合。&nbsp;<br />
+<br />
+二、MySQL使用导引&nbsp;<br />
+<br />
+　　1．运用MySQL建立新数据库&nbsp;<br />
+<br />
+　　在shell下运行：&nbsp;<br />
+<br />
+　　＄&gt;mysqladmin&nbsp;create&nbsp;database01&nbsp;<br />
+<br />
+　　Database&nbsp;&quot;database01&quot;&nbsp;created.&nbsp;<br />
+<br />
+　　2．启动MySQL&nbsp;<br />
+<br />
+　　在shell下运行：&nbsp;<br />
+<br />
+　　＄&gt;mysql&nbsp;<br />
+<br />
+　　Welcome&nbsp;to&nbsp;the&nbsp;MySQL&nbsp;monitor.&nbsp;Commands&nbsp;end&nbsp;with&nbsp;;&nbsp;or&nbsp;g.&nbsp;<br />
+<br />
+　　Your&nbsp;MySQL&nbsp;connection&nbsp;id&nbsp;is&nbsp;22&nbsp;to&nbsp;server&nbsp;version:&nbsp;3.21.&nbsp;29a-gamma-debug&nbsp;<br />
+<br />
+　　Type&nbsp;&#39;help&#39;&nbsp;for&nbsp;help.&nbsp;<br />
+<br />
+　　3．更换数据库&nbsp;<br />
+<br />
+　　mysql&gt;use&nbsp;database01&nbsp;<br />
+<br />
+　　database&nbsp;changed.&nbsp;<br />
+<br />
+　　4．创建表&nbsp;<br />
+<br />
+　　mysql&gt;create&nbsp;table&nbsp;table01&nbsp;(field01&nbsp;integer,&nbsp;field02&nbsp;char(10));&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　5．列出表清单&nbsp;<br />
+<br />
+　　mysql&gt;show&nbsp;tables;&nbsp;<br />
+<br />
+　　Tables&nbsp;in&nbsp;database01&nbsp;<br />
+<br />
+　　Table01&nbsp;<br />
+<br />
+　　table02&nbsp;<br />
+<br />
+　　6．列出表中的字段清单&nbsp;<br />
+<br />
+　　mysql&gt;show&nbsp;columns&nbsp;from&nbsp;table01;&nbsp;<br />
+<br />
+　　Field&nbsp;Type&nbsp;Null&nbsp;Key&nbsp;Default&nbsp;Extra&nbsp;<br />
+<br />
+　　field01&nbsp;int(11)&nbsp;YES&nbsp;<br />
+<br />
+　　field02&nbsp;char(10)&nbsp;YES&nbsp;<br />
+<br />
+　　7．表的数据填写&nbsp;<br />
+<br />
+　　插入数据&nbsp;<br />
+<br />
+　　mysql&gt;insert&nbsp;into&nbsp;table01&nbsp;(field01,&nbsp;field02)&nbsp;values&nbsp;(1,&nbsp;&#39;first&#39;);&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　8．字段的增加&nbsp;<br />
+<br />
+　　...一次一个字段&nbsp;<br />
+<br />
+　　mysql&gt;alter&nbsp;table&nbsp;table01&nbsp;add&nbsp;column&nbsp;field03&nbsp;char(20);&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;l&nbsp;row&nbsp;affected&nbsp;(0.04&nbsp;sec)&nbsp;<br />
+<br />
+　　Records:&nbsp;1&nbsp;Duplicates:&nbsp;0&nbsp;Warnings:&nbsp;0&nbsp;<br />
+<br />
+　　...一次多个字段&nbsp;<br />
+<br />
+　　mysql&gt;alter&nbsp;table&nbsp;table01&nbsp;add&nbsp;column&nbsp;field04&nbsp;date,&nbsp;add&nbsp;column&nbsp;field05&nbsp;time;&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;l&nbsp;row&nbsp;affected&nbsp;(0.04&nbsp;sec)&nbsp;<br />
+<br />
+　　Records:&nbsp;1&nbsp;Duplicates:&nbsp;0&nbsp;Warnings:&nbsp;0&nbsp;<br />
+<br />
+　　注意：每一列都必须以&quot;add&nbsp;column&quot;重新开始。&nbsp;<br />
+<br />
+　　它运行了吗？让我们看看。&nbsp;<br />
+<br />
+　　mysql&gt;select&nbsp;*&nbsp;from&nbsp;table01;&nbsp;<br />
+<br />
+　　field01&nbsp;field02&nbsp;field03&nbsp;field04&nbsp;field05&nbsp;<br />
+<br />
+　　1&nbsp;first&nbsp;NULL&nbsp;NULL&nbsp;NULL&nbsp;<br />
+<br />
+　　9．多行命令输入&nbsp;<br />
+<br />
+　　MySQL命令行界面允许把陈述作为一行输入，也可以把它展开为多行输入。这两者之间并没有语法上的区别。使用多行输入，你可以将SQL陈述一步步分解，从而使你更容易理解。&nbsp;<br />
+<br />
+　　在多行方式下，注释器把每一行都添加到前面的行后，直到你用分号&quot;;&quot;来结束这个SQL陈述。一旦键入分号并按回车键，这个陈述即被执行。&nbsp;<br />
+<br />
+　　下面的例子是同一个严格的SQL陈述的两种输入方法：&nbsp;<br />
+<br />
+　　单行输入&nbsp;<br />
+<br />
+　　Mysql&gt;create&nbsp;table&nbsp;table33&nbsp;(field01&nbsp;integer,&nbsp;field02&nbsp;char(30));&nbsp;<br />
+<br />
+　　多行输入&nbsp;<br />
+<br />
+　　Mysql&gt;create&nbsp;table&nbsp;table33&nbsp;<br />
+<br />
+　　-&gt;(field01&nbsp;<br />
+<br />
+　　-&gt;integer,&nbsp;<br />
+<br />
+　　-&gt;field02&nbsp;<br />
+<br />
+　　-&gt;char(30));&nbsp;<br />
+<br />
+　　注意不能将单词断开，如：&nbsp;<br />
+<br />
+　　正确&nbsp;<br />
+<br />
+　　mysql&gt;create&nbsp;table&nbsp;table33&nbsp;<br />
+<br />
+　　-&gt;(&nbsp;field01&nbsp;<br />
+<br />
+　　-&gt;integer,&nbsp;<br />
+<br />
+　　-&gt;field02&nbsp;<br />
+<br />
+　　-&gt;char(30));&nbsp;<br />
+<br />
+　　错误&nbsp;<br />
+<br />
+　　mysql&gt;create&nbsp;table&nbsp;table33&nbsp;<br />
+<br />
+　　-&gt;(&nbsp;field01&nbsp;inte&nbsp;<br />
+<br />
+　　-&gt;ger,&nbsp;<br />
+<br />
+　　-&gt;field02&nbsp;<br />
+<br />
+　　-&gt;char(30));&nbsp;<br />
+<br />
+　　当插入或更改数据时，不能将字段的字符串展开到多行里，否则硬回车将被储存到数据中：&nbsp;<br />
+<br />
+　　标准操作&nbsp;<br />
+<br />
+　　mysql&gt;insert&nbsp;into&nbsp;table33&nbsp;(field02)&nbsp;<br />
+<br />
+　　-&gt;values&nbsp;<br />
+<br />
+　　-&gt;(&#39;who&nbsp;thought&nbsp;of&nbsp;foo?&#39;);&nbsp;<br />
+<br />
+　　硬回车储存到数据中&nbsp;<br />
+<br />
+　　mysql&gt;insert&nbsp;into&nbsp;table33&nbsp;(field02)&nbsp;<br />
+<br />
+　　-&gt;values&nbsp;<br />
+<br />
+　　-&gt;(&#39;who&nbsp;thought&nbsp;<br />
+<br />
+　　-&gt;of&nbsp;foo?&#39;);&nbsp;<br />
+<br />
+　　结果如下：&nbsp;<br />
+<br />
+　　mysql&gt;select&nbsp;*&nbsp;from&nbsp;table33;&nbsp;<br />
+<br />
+　　field01&nbsp;field02&nbsp;<br />
+<br />
+　　NULL&nbsp;who&nbsp;thought&nbsp;of&nbsp;foo?&nbsp;<br />
+<br />
+　　NULL&nbsp;who&nbsp;thought&nbsp;<br />
+<br />
+　　Of&nbsp;foo?&nbsp;<br />
+<br />
+　　10．表的数据嵌入&nbsp;<br />
+<br />
+　　mysql&gt;insert&nbsp;into&nbsp;table01&nbsp;(field01,&nbsp;field02,&nbsp;field03,&nbsp;field04,&nbsp;field05)&nbsp;values&nbsp;<br />
+<br />
+　　-&gt;(2,&nbsp;&#39;second&#39;,&nbsp;&#39;another&#39;,&nbsp;&#39;1999-10-23&#39;,&nbsp;&#39;10:30:00&#39;);&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　标准日期格式是&quot;yyyy-mm-dd&quot;。&nbsp;<br />
+<br />
+　　标准时间格式是&quot;hh:mm:ss&quot;。&nbsp;<br />
+<br />
+　　引号内要求所给的是上述的标准日期和时间格式。&nbsp;<br />
+<br />
+　　日期也可以&quot;yyyymmdd&quot;形式，时间也可以&quot;hhmmss&quot;形式输入，但其值不需要再加引号。&nbsp;<br />
+<br />
+　　数字值不需要加引号。这种保存与数据类型无关，这些数据类型都有格式化的专栏来包含(例如：文本，日期，时间，整数等)。&nbsp;<br />
+<br />
+　　MySQL有一个很有用的命令缓冲区。它保存着你目前已经键入的SQL语句利用它，对于相同的命令，你就不必一遍又一遍地重复输入。下一步我们就来看这样的一个例子。&nbsp;<br />
+<br />
+　　利用命令缓冲区(及任意的日期和时间格式)增加另一个数据&nbsp;<br />
+<br />
+　　按两次键盘上的向上箭头键。&nbsp;<br />
+<br />
+　　回车。&nbsp;<br />
+<br />
+　　在圆括号内输入新的值，并以分号结尾。&nbsp;<br />
+<br />
+　　(3,&nbsp;&#39;a&nbsp;third&#39;,&nbsp;&#39;more&#39;,&nbsp;19991024,&nbsp;103004);&nbsp;<br />
+<br />
+　　回车。&nbsp;<br />
+<br />
+　　新值存在里面了吗？&nbsp;<br />
+<br />
+　　mysql&gt;select&nbsp;*&nbsp;from&nbsp;table01;&nbsp;<br />
+<br />
+　　field01&nbsp;field02&nbsp;field03&nbsp;field04&nbsp;field05&nbsp;<br />
+<br />
+　　1&nbsp;first&nbsp;NULL&nbsp;NULL&nbsp;NULL&nbsp;<br />
+<br />
+　　2&nbsp;second&nbsp;another&nbsp;1999-10-23&nbsp;10:30:00&nbsp;<br />
+<br />
+　　3&nbsp;a&nbsp;third&nbsp;more&nbsp;1999-10-24&nbsp;10:30:04&nbsp;<br />
+<br />
+　　11．表的数据更新&nbsp;<br />
+<br />
+　　一次修改一个字段&nbsp;<br />
+<br />
+　　再次注意语法。文本需要加引号但数字不要。&nbsp;<br />
+<br />
+　　mysql&gt;update&nbsp;table01&nbsp;set&nbsp;field03=&#39;new&nbsp;info&#39;&nbsp;where&nbsp;field01=1;&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　一次改变多个字段&nbsp;<br />
+<br />
+　　记住在每一个更新的字段间用逗号隔开。&nbsp;<br />
+<br />
+　　mysql&gt;update&nbsp;table01&nbsp;set&nbsp;field04=19991022,&nbsp;field05=062218&nbsp;where&nbsp;field01=1;&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　一次更新多个数据&nbsp;<br />
+<br />
+　　mysql&gt;update&nbsp;table01&nbsp;set&nbsp;field05=152901&nbsp;where&nbsp;field04&gt;19990101;&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;3&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　12．删除数据&nbsp;<br />
+<br />
+　　mysql&gt;delete&nbsp;from&nbsp;table01&nbsp;where&nbsp;field01=3;&nbsp;<br />
+<br />
+　　Query&nbsp;OK,&nbsp;1&nbsp;row&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+　　13．退出&nbsp;<br />
+<br />
+　　mysql&gt;quit&nbsp;<br />
+<br />
+　　Bye&nbsp;<br />
+<br />
+　　现在你已经了解了一些运行MySQL中的数据库的根本命令。由于MySQL是通过执行SQL调用来操作的，在你的处理过程中需要一个强有力工具的充足的数组。例如，通过联接相关的字段，你可以同时显示几个表中的数据。同样，SQL允许综合显示、更新或者删除多个符合具体标准的数据。如果你还想精通掌握它，下一步就要学习所有SQL的知识。&nbsp;<br />
+<br />
+　　另外说明一下，MySQL提供了很好的网络操作安全特性。要想了解MySQL的安全及其它特性的详情，请查询MySQL网站：http://www.mysql.com&nbsp;<br />
+<br />
+　　为了方便大家查询使用MySQL手册,&nbsp;我们将官方手册(Manaul)做在光盘的/docs/manaul/mysql目录下.大家可以用浏览器浏览查询。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/mysql/2015/0401/409.html'>MySQL5存储过程（一）</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/mysql/2015/0401/411.html'>Mysql数据库中mysqldump命令使用详解</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2015/1020/1309.html" >MySQL 5.7 GA 版本发布，支持在生产</a><span>10.20</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0618/903.html" >LINUX下MYSQL的启动及相关配置</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/902.html" >Linux开放MySQL的3306端口</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/901.html" >Linux下重启mysql数据库的方法</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0605/881.html" >mysqldump参数介绍教程%mysqldump 参数</a><span>06.05</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>05.07</span></li>
+<li><a href="/shujuku/mysql/2015/0405/602.html" >四种数据库随机获取10条数据的方</a><span>04.05</span></li>
+<li><a href="/shujuku/mysql/2015/0401/422.html" >MySQL CPU占用100%的解决过程和经验</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集群解决方案）</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂Can't get hostname for your a</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2015/0316/222.html" >mysql安装图解 mysql图文安装教程</a><span>504</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>459</span></li>
+<li><a href="/shujuku/mysql/2015/0316/228.html" >phpmyadmin简明安装教程</a><span>303</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>119</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>113</span></li>
+<li><a href="/shujuku/mysql/2015/0316/216.html" >python之mysql连接 MySQLdb</a><span>95</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>94</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>91</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>64</span></li>
+<li><a href="/shujuku/mysql/2015/0316/223.html" >mysql文件太大导入出错的解决方法</a><span>63</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=410&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

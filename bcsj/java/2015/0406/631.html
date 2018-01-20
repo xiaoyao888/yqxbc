@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>学习JAVA语言基础篇_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JAVA,语言,JAVA语言学习,JA" />
+  <meta name="description" content="Java语言的基本组成Java语言主要由以下五种元素组成：标识符、关键字、文字、运算符和分隔符。这五种元素有着不同的语法含义和组成规则，它们互相配合，共同完成Java语言的语意表" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>学习JAVA语言基础篇</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-06 16:04 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="631" class="art_content"><p>
+	Java语言的基本组成</p>
+<p>
+	Java语言主要由以下五种元素组成：标识符、关键字、文字、运算符和分隔符。这五种元素有着不同的语法含义和组成规则，它们互相配合，共同完成Java语言的语意表达。下面我们分别予以讲解。</p>
+<p>
+	1：标识符</p>
+<p>
+	　　变量，类和方法都需要一定的名称，我们将这种名称叫做标识符。Java中对标识符有一定的限制。首先：所有的标识符的首字符必须是字母（大小写）、下划线＿或美元符￥；其次标示符是由数字（0--9），所有从A--Z的大写字母、a--z的小写字母和下划线＿、美元符￥和所有在十六进制0xc0前的ASCII码等构成；第三注意表示符不能使用系统保留的关键字做标示符。</p>
+<p>
+	以上是标识符命名的基本规则，以下是一个正误对照表，通过它会对标识符的命名规则有一个更好的了解：</p>
+<p>
+	　　　　　　合法标识符　　非法标识符</p>
+<p>
+	　　　　　　try　　　　　　try#　　 （注：不能用#作为标示符）　　　　　<br />
+	　　　　　　group_7　　　　7group （注：不能用数字符号开头）<br />
+	　　　　　　opendoor　　　 open-door （ 注：不能用下-作为标示符号）<br />
+	　　　　　　boolean_1　　　boolean (注：boolean 为关键字，不能用关键字做标示符)</p>
+<p>
+	2：关键字</p>
+<p>
+	　　关键字是Java语言本身使用的标识符，它有其特定的语法含义。所有的Java关键字将不能被用作标识符，Java的关键字有：</p>
+<p>
+	abstract、continue、for、new、switch、boolean、default、goto、null、synchronized、break、do、if、package、this、byte、double、implements、private、threadsafe、byvalue、else、import、protected、throw、case、extends、instanceof、public、transient、catch、false、int return、true、char、final、interface、short、try、class、finally、long、static、void、const、 float、native、super、while等。</p>
+<p>
+	<br />
+	3：数据类型</p>
+<p>
+	　　Java有着不同的数据类型，Java的数据类型有：整型、浮点型、布尔型、字符型、字符串型。</p>
+<p>
+	　　整型数据是最普通的数据类型，它的表现方式有：十进制、十六进制和八进制。十六进制整数必须以0X作为开头。</p>
+<p>
+	　　每一个整型数据占有32位的存储空间，即四个字节。这意味着整型数据所表示,的范围在-2,147,483,648和2,147,483,648之间，假如由于某些原因，你必须表示一个更大的数，64位的长整型应该是足够的。如果你想把一个整数强制存为一个长型（long），你可以在数字后面加字母l。</p>
+<p>
+	　　浮点数据用来代表一个带小数的十进制数。例如1.35或23.6。是浮点数的标准形式，还可以用科学计数法的形式，下面是一些例子：</p>
+<p>
+	　　3.1415926　　0.34　　.86　　.01234　　9.999E8<br />
+	　　标准的浮点数叫做单精度浮点数，它的存储空间为32位，也就是四个字节。也有64位的双精度浮点数。你可以用D后缀确定你想使用这种双精度浮点数。</p>
+<p>
+	　　布尔类型是最简单的一种数据类型，布尔数据只有两种状态：真和假，通常用关键字true和false来表示这两种状态。</p>
+<p>
+	　　字符型数据是由一对单引号括起来的单个字符。它可以是字符集中的任意一个字符，如：&#39;a&#39;，&#39;b&#39;。</p>
+<p>
+	　　字符串数据类型是用一对双引号括起来的字符序列，字符串数据实际上是由String类所实现（类这个概念我们将在后续章节中详细讲解），而不是Ｃ语言中所用的字符数组。每一个字符串数据将产生一个String类的新的实例，读者不必对字符串与类这个概念发生关系而感到担心，由于类的特性，你不必担心如何去实现它们，它们会自己照顾好自己，需要说明的是字符串在Java里作为类只是出于安全的考虑。</p>
+<p>
+	　　下面给出了几个字符串的例子</p>
+<p>
+	　　　　&quot;How are your&quot;<br />
+	　　　　&quot;I am Student<br />
+	4：运算符</p>
+<p>
+	　　任何语言都有自己的运算符，Java语言也不例外，如＋、－、＊、／等都是运算符，运算符的作用是与一定的运算数据组成表达式来完成相应的运算。对不同的数据类型，有着不同的运算符。</p>
+<p>
+	5：分隔符</p>
+<p>
+	　　分隔符用来使编译器确认代码在何处分隔。&lsquo;&rsquo;&lsquo;&rsquo;&lsquo;;&rsquo;&lsquo;:&rsquo;都是Java语言的分隔符。<br />
+	vogue 发表于 2006-3-4 17:51:23</p>
+<p>
+	条件控制</p>
+<p>
+	if (条件表达式)<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp; 语句1<br />
+	}<br />
+	Else<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp; 语句2<br />
+	}<br />
+	语句3</p>
+<p>
+	条件表达式&rdquo;的值为真时执行&ldquo;语句1&rdquo;，然后执行语句3；否则执行&ldquo;语句2&rdquo;，然后执行语句3。</p>
+<p>
+	　下面是一个用if--else语句构造多分支程序的例子：</p>
+<p>
+	<br />
+	if(a&gt;5) b=1<br />
+	else if(a&gt;4) b=2<br />
+	else if(a&gt;3) b=3<br />
+	...<br />
+	else b=-1;</p>
+<p>
+	2：switch分支结构（开关语句）</p>
+<p>
+	　　switch分支结构用于多条件选择，虽然在多条件选择的情况下，也可以使用if...else...结构来实现，但是使用开关语句会使程序更为精炼、清晰。开关语句得格式为：<br />
+	switch(条件表达式)<br />
+	{<br />
+	case 常量表达式1:<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; 语句1 ;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; break ;</p>
+<p>
+	case 常量表达式2:<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; 语句2 ;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; break ;<br />
+	//......<br />
+	case 常量表达式n:<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; 语句n ;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; break ;<br />
+	default:<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; //<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; break<br />
+	}</p>
+<p>
+	开关表达式首先计算出条件表达式的值，如果其值等于某个常量表达式，则执行该常量表达式后的语句，如果其值与所有的常量表达式的值不相等，则执行defualt后的语句。</p>
+<p>
+	　　在switch语句中，你通常在每一种case情况后都应使用break语句，否则，第一个相等情况后面所有的语句都会被执行，这种情况叫做落空。你可以试着分别加上去和去掉break语句来执行下面的例子：<br />
+	class Switch Test</p>
+<p>
+	public static void main(String args[])<br />
+	throws java.io.IOException</p>
+<p>
+	char a;<br />
+	System.out.println(&quot;Enter a number from 1--3:&quot;);<br />
+	a=(char)System.in.read();<br />
+	switch(a)</p>
+<p>
+	case&#39;1&#39;:System.out.println(&quot;win a Car!&quot;);break;<br />
+	case&#39;2&#39;:System.out.println(&quot;picked the goat&quot;);break<br />
+	case&#39;3&#39;:System.out.println(&quot;get to keep your 100&quot;);<br />
+	break;<br />
+	default:System.out.println(&quot;entry&quot;);</p>
+<p>
+	在代码中加break语句后，你应明确知道程序将会发生的变化，并要确认程序没有转移到你不想执行的代码上。<br />
+	　　掌握了以上这些基本语句之后，你可以写更加实际点的程序了，下面这个程序计算从终端输入的数字和字符的数量。<br />
+	class SwitchTest</p>
+<p>
+	public static void main (String args[])<br />
+	throws java.io.IOException</p>
+<p>
+	int numberOfDigits=0,numberOfSpaces=0,numberOfOthers=0;<br />
+	char c;<br />
+	while((c=(char)System.in.read())!=&#39;&#39;)</p>
+<p>
+	switch(c)</p>
+<p>
+	case&#39;0&#39;:<br />
+	case&#39;1&#39;:<br />
+	...<br />
+	...<br />
+	case&#39;8&#39;:<br />
+	case&#39;9&#39;:numberOfDigits++;break;<br />
+	case&#39; &#39;:numberOfSpaces++;break;<br />
+	default:numberOfOthers++;break;</p>
+<p>
+	<br />
+	System.out.println(&quot;:&quot;);<br />
+	System.out.println(&quot;Number of digits=&quot;+numberOfDigits+&quot;&quot;);<br />
+	System.out.println(&quot;Number of spaces=&quot;+numberOfSpaces+&quot;&quot;);<br />
+	System.out.println(&quot;Number of others=&quot;+numberOfOthers+&quot;&quot;);</p>
+<p>
+	代码的while循环从键盘读入字符直至输入一个回车符，循环内部的switch语句先把它和数字比较，当发现相等时，它就使对应的统计变量的值加1，然后break语句结束switch语句，程序回到等待键盘输入的状态。程序中，在default语句中的break是不必要的，不过加上它可以使程序风格保持一致。<br />
+	vogue 发表于 2006-3-4 17:52:51</p>
+<p>
+	Brake和Label</p>
+<p>
+	Brake和Label<br />
+	（akebono　2001年08月06日 09:31）</p>
+<p>
+	<br />
+	1：break</p>
+<p>
+	　 break语句提供了一种方便的跳出循环的方法。<br />
+	boolean test=true;<br />
+	　　int i=0;<br />
+	　　while(test)<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	　&nbsp; 　&nbsp; i++;<br />
+	&nbsp; 　&nbsp; 　if(i&gt;=10) break;<br />
+	&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	执行这段程序时，尽管while条件表达式始终为真，全循环只运行10次。</p>
+<p>
+	2：标号label</p>
+<p>
+	　　标号提供了一种简单的break语句所不能实现的控制循环的方法，当在循环语句中遇到break时，不管其它控制变量，都会终止。但是，当你嵌套在几层循环中想退出循环时又会怎样呢？正常的break只退出一重循环，你可以用标号标出你想退出哪一个语句。<br />
+	char a;<br />
+	　　outer:&nbsp; //this is the label for the outer loop<br />
+	　　for(int i=0;i&lt;10;i++)<br />
+	　　{<br />
+	　　for(int j=0;j&lt;10;j++)<br />
+	　　　　{<br />
+	　　　　　　a=(char)System.in.read();<br />
+	　　　　　　if(a==&#39;b&#39;)<br />
+	　　　　　　　　break outer;<br />
+	　　　　　　if(a==&#39;c&#39;)<br />
+	　　　　　　　　continue outer;<br />
+	　　　　}<br />
+	　　}</p>
+<p>
+	　在这个例子中，循环从键盘接受100个输入字符，输入&ldquo;b&rdquo;字符时，break outer语句会结束两重循环，注意continue outer语句，它告诉计算机退出现在的循环并继续执行outer循环。<br />
+	vogue 发表于 2006-3-4 17:53:41</p>
+<p>
+	数组</p>
+<p>
+	<br />
+	1：数组说明</p>
+<p>
+	　数组是Java语言中的特殊类型。它们存放能通过索引来引用的一系列对象，另外，你可以定义数组的数组，下面是一些示例：</p>
+<p>
+	int i[];<br />
+	char C[];<br />
+	float f[][];</p>
+<p>
+	&nbsp;</p>
+<p>
+	2：数组运算符</p>
+<p>
+	　　在JAVA中数组的分配是通过使用new运算符建立数组然后把它赋给变量，如：</p>
+<p>
+	　　　　int i[]=new int;<br />
+	　　前面这个例子建立了一个包括10个整型变量的数组并把它赋给i，你将得到按数字顺序的变量i，i，......，i，i，注意下标是从第一个元素的0开始，到数组个数减1。<br />
+	　　数组的使用与变量相同，每一个数组成员都可以被用在同类变量被使用的地方，Java也支持多维数组。</p>
+<p>
+	　　　　char c[][]=new char;<br />
+	　　　　float f[][]=new float[];<br />
+	　　清注意在第二个说明中只有一维的尺度被确定，Java要求在编译时（即在源代码中）至少有一维的尺度被确定了，其余维的尺度可以在以后分配。</p>
+<p>
+	　　数组主要用于你有大量相关数据想要存贮在一起而且能够简单地通过数字访问它们，数组是非常强有力的。<br />
+	vogue 发表于 2006-3-4 17:55:32</p>
+<p>
+	循环</p>
+<p>
+	循环: for,while和do<br />
+	　　Java中有三种循环控制语句，他们是：for语句、while语句和do语句，下面分别说明这三种语句的结构。</p>
+<p>
+	1：for循环</p>
+<p>
+	for语句的格式为：</p>
+<p>
+	for (初始化语句; 条件语句; 控制语句)<br />
+	　　{<br />
+	　　　　语句1 ;<br />
+	　　　　语句2 ;<br />
+	　　　　....</p>
+<p>
+	　　　　语句n ;<br />
+	　　}</p>
+<p>
+	&nbsp;</p>
+<p>
+	for 语句的执行顺序是：首先执行&ldquo;初始化语句&rdquo;；然后测试&ldquo;条件语句&rdquo;；若条件成立，则执行语句1到语句n；然后执行&ldquo;控制&rdquo;语句；接着再测试条件语句是否成立，如果成立则重复执行以上过程，直至条件不成立时才结束for循环。如：</p>
+<p>
+	for(i=0;i&lt;10;i++)......;<br />
+	&nbsp; int i,a[]=new int;<br />
+	　　for (i=0,i&lt;10;i++) a= 0;</p>
+<p>
+	<br />
+	这段代码把整型数组a中的所有元素都赋成0。<br />
+	　　你可以在for循环的头部说明你的变量，而且最后一个表达式可以省略，不过要确定在语句中对变量的值有所改变，如：</p>
+<p>
+	　　for(int i=0;i&lt;=10;) i+=i;<br />
+	　　for循环中，&ldquo;初始化语句&rdquo;、&ldquo;条件语句&rdquo;和&ldquo;控制语句&rdquo;都可以省略，但是其间的分号不能省略。例如：</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	int i =0 ;<br />
+	　　for (; ; ;)<br />
+	　　{<br />
+	　　　　if i&gt;10 break ;<br />
+	　　　　i = i +1 ;<br />
+	　　}</p>
+<p>
+	<br />
+	for循环中省略&ldquo;条件语句&rdquo;时，在for语句{}中必须包换转句语句控制程序在某个条件满足时跳出for循环，否则将形成死循环</p>
+<p>
+	2：while循环</p>
+<p>
+	　while循环和for循环类似，其格式为：</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	while (条件语句)<br />
+	　　{<br />
+	　　　　语句1 ;<br />
+	　　　　语句2 ;<br />
+	　　　　....</p>
+<p>
+	　　　　语句n ;<br />
+	　　}</p>
+<p>
+	<br />
+	　　执行while时，先测试&ldquo;条件语句&rdquo;，如果条件成立，则执行语句1到语句n，直至条件不成立时调处循环。</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	int i=0 ;<br />
+	　　while (i&lt;10)<br />
+	　　{<br />
+	　　&nbsp;&nbsp; i++ ;<br />
+	　　&nbsp;&nbsp; System.out.println(&quot;Hey!.get me out of here!:);<br />
+	　　}</p>
+<p>
+	<br />
+	3：do ... while 循环</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	do ... while 循环语句的格式为：<br />
+	　　do<br />
+	&nbsp;&nbsp;&nbsp; {<br />
+	　　　　语句1 ;<br />
+	　　　　语句2 ;<br />
+	　　　　....</p>
+<p>
+	　　　　语句n ;<br />
+	&nbsp;&nbsp;&nbsp; }<br />
+	　　while (条件语句) ;</p>
+<p>
+	&nbsp;</p>
+<p>
+	do ...while 语句的功能是首先执行语句1到语句n，然后进行条件测试，如果条件成立，则继续执行语句1到语句n，否这跳出循环。如：</p>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	boolean test=false;<br />
+	　　do<br />
+	　　{<br />
+	　　......</p>
+<p>
+	　　}<br />
+	　　while(test);</p>
+<p>
+	&nbsp;</p>
+<p>
+	这种控制并不是很常用，但有时却非常重要，使用时注意结尾处while语句后的分号。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0406/630.html'>java中事务四大特性介绍之原子性、一致性、分离性、持久性</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0406/632.html'>使用sql语句写出分页语句</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=631&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

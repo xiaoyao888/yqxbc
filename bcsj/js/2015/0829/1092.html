@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Javascript代码在页面加载时的执行顺序介绍_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Javasript" />
+  <meta name="description" content=" " />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/js/'>Javascript</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Javascript代码在页面加载时的执行顺序介绍</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-08-29 10:19 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1092" class="art_content"><h3>
+	<br />
+	一、在HTML中嵌入Javasript的方法</h3>
+<p>
+	1.直接在Javascript代码放在标记对&lt;script&gt;和&lt;/script&gt;之间<br />
+	2.由&lt;script /&gt;标记的src属性制定外部的js文件<br />
+	3.放在事件处理程序中，比如：&lt;p&gt;点击我&lt;/p&gt;<br />
+	4.作为URL的主体，这个URL使用特殊的Javascript：协议，比如：&lt;a href=&quot;javascript:alert(&#39;我是由javascript:协议执行的javascript&#39;)&quot;&gt;点击我&lt;/a&gt;<br />
+	5.利用javascript本身的document.write()方法写入新的javascript代码<br />
+	6.利用Ajax异步获取javascript代码，然后执行</p>
+<p>
+	第3种和第4种方法写入的Javascript需要触发才能执行，所以除非特别设置，否则页面加载时不会执行。</p>
+<h3>
+	二、Javascript在页面的执行顺序</h3>
+<p>
+	1.页面上的Javascript代码是HTML文档的一部分，所以Javascript在页面装载时执行的顺序就是其引入标记&lt;script /&gt;的出现顺序， &lt;script /&gt;标记里面的或者通过src引入的外部JS，都是按照其语句出现的顺序执行，而且执行过程是文档装载的一部分。<br />
+	2.每个脚本定义的全局变量和函数，都可以被后面执行的脚本所调用。<br />
+	3.变量的调用，必须是前面已经声明，否则获取的变量值是undefined。</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javscrpt&quot;&gt;//&lt;![CDATA[<br />
+	alert(tmp); //输出 undefined<br />
+	var tmp = 1;<br />
+	alert(tmp); //输出 1<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	4.同一段脚本，函数定义可以出现在函数调用的后面，但是如果是分别在两段代码，且函数调用在第一段代码中，则会报函数未定义错误。</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javscrpt&quot;&gt;//&lt;![CDATA[<br />
+	aa(); //浏览器报错<br />
+	//]]&gt;&lt;/script&gt;<br />
+	&lt;script type=&quot;text/javscrpt&quot;&gt;//&lt;![CDATA[<br />
+	aa(); //输出 1<br />
+	function aa(){alert(1);}<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	5.document.write()会把输出写入到脚本文档所在的位置，浏览器解析完documemt.write()所在文档内容后，继续解析document.write()输出的内容，然后在继续解析HTML文档。</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot; src=&quot;test.js&quot;&gt;&lt;\/script&gt;&#39;);<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot;&gt;&#39;);<br />
+	document.write(&#39;alert(2);&#39;)<br />
+	document.write(&#39;alert(&quot;我是&quot; + tmpStr);&#39;);<br />
+	document.write(&#39;&lt;\/script&gt;&#39;);<br />
+	//]]&gt;&lt;/script&gt;<br />
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	alert(3);<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	test.js的内容是：</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	var tmpStr = 1;<br />
+	alert(tmpStr);</p>
+<p>
+	<br />
+	&bull;在Firefox和Opera中的弹出值的顺序是：1、2、我是1、3<br />
+	&bull;在IE中弹出值的顺序是：2、1、3，同时浏览器报错：tmpStr未定义<br />
+	原因可能是IE在document.write时，并未等待加载SRC中的Javascript代码完毕后，才执行下一行，所以导致2先弹出，并且执行到document.write(&lsquo;document.write(&quot;我是&quot; + tmpStr)&#39;)调用tmpStr时，tmpStr并未定义，从而报错。<br />
+	解决这个问题，可以利用HTML解析是解析完一个HTML标签，再执行下一个的原理，把代码拆分来实现：</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot; src=&quot;test.js&quot;&gt;&lt;\/script&gt;&#39;);<br />
+	//]]&gt;&lt;/script&gt;<br />
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot;&gt;&#39;);<br />
+	document.write(&#39;alert(2);&#39;)<br />
+	document.write(&#39;alert(&quot;我是&quot; + tmpStr);&#39;);<br />
+	document.write(&#39;&lt;\/script&gt;&#39;);<br />
+	//]]&gt;&lt;/script&gt;<br />
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	alert(3);<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	这样IE下和其他浏览器输出值的顺序都是一直的了：1、2、我是1、3。</p>
+<h3>
+	三、如何改变Javascript在页面的执行顺序</h3>
+<p>
+	<br />
+	1.利用onload</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	window.onload = f;<br />
+	function f(){alert(1);}<br />
+	alert(2);<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	输出值顺序是 2、1。<br />
+	需要注意的是，如果存在多个winodws.onload的话，只有最有一个生效，解决这个办法是：</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	window.onload = function(){f();f1();f2();.....}</p>
+<p>
+	<br />
+	利用2级DOM事件类型</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	if(document.addEventListener){<br />
+	window.addEventListener(&#39;load&#39;,f,false);<br />
+	window.addEventListener(&#39;load&#39;,f1,false);<br />
+	...<br />
+	}else{<br />
+	window.attachEvent(&#39;onload&#39;,f);<br />
+	window.attachEvent(&#39;onload&#39;,f1);<br />
+	...<br />
+	}</p>
+<p>
+	<br />
+	2.IE中可以利用defer，defer作用是把代码加载下来，并不立即执行，等文档装载完毕之后再执行，有点类似window.onload，但是没有window.onload那样的局限性，可以重复使用，但是只在IE中有效，所以上面的例子可以修改成为</p>
+<p>
+	复制代码 代码如下:</p>
+<p>
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot; src=&quot;test.js&quot;&gt;&lt;\/script&gt;&#39;);<br />
+	document.write(&#39;&lt;script type=&quot;text/javascript&quot; defer=&quot;defer&quot;&gt;&#39;);<br />
+	document.write(&#39;alert(2);&#39;)<br />
+	document.write(&#39;alert(&quot;我是&quot; + tmpStr);&#39;);<br />
+	document.write(&#39;&lt;\/script&gt;&#39;);<br />
+	//]]&gt;&lt;/script&gt;<br />
+	&lt;script type=&quot;text/javascript&quot;&gt;//&lt;![CDATA[<br />
+	alert(3);<br />
+	//]]&gt;&lt;/script&gt;</p>
+<p>
+	<br />
+	这样IE就不报错了，输出值的顺序变成：1、3、2、我是1<br />
+	当HTML解析器遇到一个脚本，它必须按常规终止对文档的解析并等待脚本执行。为了解决这个问题HTML4标准定义了defer。通过defer来提示浏览器可以继续解析HTML文档，并延迟执行脚本。这种延迟在脚本从外部文件载入时非常有用，让浏览器不必等待外部文件全部载入之后才继续执行，能有效的提高性能。IE是目前唯一支持defer属性的浏览器，但IE并没有正确的实现了defer属性，因为延迟的脚本总是被延迟，直到文档结束，而不是只延迟到下一个非延迟的脚本。这意味着，IE中延迟的脚本的执行顺序相当混乱，并且不能定义任何后面非延迟脚本并须的函数和变量。在IE中所有的defer的脚本执行时间应该都是HTML文档树建立以后，window.onload之前。<br />
+	3.利用Ajax。<br />
+	因为xmlhttpRequest能判断外部文档加载的状态，所以能够改变代码的加载顺序</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/js/2015/0829/1091.html'>javascript两种function的定义介绍及区别说明</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/js/2015/0829/1093.html'>JS实现商品倒计时实现代码</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>01.11</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>10.19</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>08.31</span></li>
+<li><a href="/bcsj/js/2015/0829/1113.html" >做网页必备的js特效代码</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1112.html" >11个JavaScript颜色选择器插件</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1111.html" >12种JavaScript MVC框架之比较</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1109.html" >JS函数重载解决方案</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1108.html" >JS的IE和FF兼容性问题汇总</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1107.html" >js小数转换为整数</a><span>08.29</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bootstrap Tree View</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式总结_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清空行tr的简单实例</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴么？</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2015/0827/925.html" >easyui页面加载错乱解决方法，提示</a><span>202</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>152</span></li>
+<li><a href="/bcsj/js/2015/0829/1088.html" >js3秒后自动跳转到指定页面的俩种</a><span>129</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>98</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>81</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>76</span></li>
+<li><a href="/bcsj/js/2015/0827/954.html" >兼容各种浏览器的复制内容到剪贴</a><span>67</span></li>
+<li><a href="/bcsj/js/2015/0827/968.html" >图片自适应大小的通用JS代码</a><span>63</span></li>
+<li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>53</span></li>
+<li><a href="/bcsj/js/2015/0827/926.html" >利用JS将gb2312转成utf-8</a><span>45</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1092&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

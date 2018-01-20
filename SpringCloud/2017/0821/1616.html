@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Spring Cloud实践：降级、限流、滚动、灰度、AB、金丝雀的实现思路_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Spring,Cloud,实践,降级,、,限流,滚动,灰度," />
+  <meta name="description" content="端口：8888，方便起见直接读取配置文件，生产环境可以读取git。application-dev.properties为全局配置。先启动配置中心，所有服务的配置（包括注册中心的地址）均从配置中心读取。 consu" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/SpringCloud/'>SpringCloud</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring Cloud实践：降级、限流、滚动、灰度、AB、金丝雀的实现思路</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2017-08-21 09:22 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1616" class="art_content"><p>
+	端口：8888，方便起见直接读取配置文件，生产环境可以读取git。application-dev.properties为全局配置。先启动配置中心，所有服务的配置（包括注册中心的地址）均从配置中心读取。</p>
+<h4>
+	consumer 服务消费者</h4>
+<p>
+	端口：18090，调用服务提供者，为了演示header传递。</p>
+<h4>
+	core 框架核心包</h4>
+<p>
+	核心jar包，所有微服务均引用该包，使用AutoConfig实现免配置，模拟生产环境下spring-cloud的使用。</p>
+<h4>
+	eureka 注册中心</h4>
+<p>
+	端口：8761，/metadata端点实现metadata信息配置。</p>
+<h4>
+	provider 服务提供者</h4>
+<p>
+	端口：18090，服务提供者，无特殊逻辑。</p>
+<h4>
+	zuul 网关</h4>
+<p>
+	端口：8080，演示解析token获得label并放入header往后传递</p>
+<h2>
+	实践：降级、限流、滚动、灰度、AB、金丝雀&hellip;</h2>
+<p>
+	我本人是从dubbo转过来的，经常看到社区里面拿dubbo和spring-cloud做对比，一对比就提到dubbo所谓的降级、限流功能。spring-cloud默认没有这个能力，让我们来扩展spring-cloud，使她具备比dubbo更牛逼的各种能力。</p>
+<p>
+	所谓的降级、限流、滚动、灰度、AB、金丝雀等等等等，在我看来无非就是扩展了服务路由能力而已。这里说的服务降级，说的是服务A部署多个实例，实例级别的降级限流。如果要做整个服务A的降级，直接采用docker自动扩容缩容即可。</p>
+<p>
+	我们先来看应用场景：服务A 发布了1.0版，部署了3个实例A1、A2、A3，现在要对服务A进行升级，由1.0升级到2.0。先将A1服务流量关闭，使A2、A3负担；升级A1代码版本到2.0；将A1流量调整为1%，观察新版本运行情况，如果运行稳定，则逐步提升流量5%、10%直到完全放开流量控制。A2、A3重复上述步骤。</p>
+<p>
+	在上述步骤中，我们想让特别的人使用2.0，其他人还是使用1.0版，稳定后再全员开放。</p>
+<p>
+	我们想不依赖sleuth做链路跟踪，想自己实现一套基于ELK的链路跟踪。</p>
+<p>
+	我们还有各种千奇百怪的想法。。。</p>
+<h2>
+	实现思路</h2>
+<p>
+	要实现这些想法，我们需要对spring-cloud的各个组件、数据流非常熟悉，这样才能知道该在哪里做扩展。一个典型的调用：</p>
+<pre>
+外网 --&gt; Zuul网关 --&gt; 服务A --&gt; 服务B --&gt; ...
+</pre>
+<p>
+	spring-cloud跟dubbo一样都是客户端负载均衡，所有调用均由Ribbon来做负载均衡选择服务器，所有调用前后会套一层hystrix做隔离、熔断。服务间调用均用带LoadBalanced注解的RestTemplate发出。</p>
+<pre>
+RestTemplate --&gt; Ribbon --&gt; hystrix
+</pre>
+<p>
+	通过上述分析我们可以看到，我们的扩展点就在Ribbon，Ribbon根据我们的规则，选择正确的服务器即可。</p>
+<p>
+	我们先来一个dubbo自带的功能：基于权重的流量控制。dubbo自带的控制台可以设置服务实例粒度的半权，倍权。其实就是在客户端负载均衡时，选择服务器带上权重即可，spring-cloud默认是ZoneAvoidanceRule，优先选择相同Zone下的实例，实例间采用轮询方式做负载均衡。我们的想把基于轮询改为基于权重即可。</p>
+<p>
+	接下来的问题是，每个实例的权重信息保存在哪里？从哪里取？dubbo放在zookeeper中，spring-cloud放在eureka中。我们只需从eureka拿每个实例的权重信息，然后根据权重来选择服务器即可。具体代码LabelAndWeightMetadataRule（先忽略里面的优先匹配label相关代码）。</p>
+<h2>
+	放入核心框架</h2>
+<p>
+	LabelAndWeightMetadataRule写好了，那么我们如何使用它，使之生效呢？有3种方式。</p>
+<p>
+	1）写个AutoConfig将LabelAndWeightMetadataRule声明成@Bean，用来替换默认的ZoneAvoidanceRule。这种方式在技术验证、开发测试阶段使用短平快。但是这种方式是强制全局设置，无法个性化。</p>
+<p>
+	2）由于spring-cloud的Ribbon并没有实现netflix Ribbon的所有配置项。netflix配置全局rule方式为：ribbon.NFLoadBalancerRuleClassName=package.YourRule，spring-cloud并不支持，spring-cloud直接到服务粒度，只支持SERVICE_ID.ribbon.NFLoadBalancerRuleClassName=package.YourRule。我们可以扩展org.springframework.cloud.netflix.ribbon.PropertiesFactory修正spring cloud ribbon未能完全支持netflix ribbon配置的问题。这样我们可以将全局配置写到配置中心的application-dev.properties全局配置中，然后各个微服务还可以根据自身情况做个性化定制。但是PropertiesFactory属性均为私有，应该是spring cloud不建议在此扩展。参见&nbsp;<a href="https://github.com/spring-cloud/spring-cloud-netflix/issues/1741%E3%80%82" rel="nofollow,noindex" target="_blank">https://github.com/spring-cloud/spring-cloud-netflix/issues/1741。</a></p>
+<p>
+	3）使用spring cloud官方建议的@RibbonClient方式。该方式仅存在于spring-cloud单元测试中（在我提问后，现在还存在于spring-cloud issue list）。具体代码参见DefaultRibbonConfiguration、CoreAutoConfiguration。</p>
+<h2>
+	实际测试</h2>
+<p>
+	依次开启 config eureka provide（开两个实例，通过启动参数server.port指定不同端口区分） consumer zuul</p>
+<p>
+	访问&nbsp;<a href="http://localhost:8761/metadata.html" rel="nofollow,noindex" target="_blank">http://localhost:8761/metadata.html</a>&nbsp;这是我手写的一个简单的metadata管理界面，分别设置两个provider实例的weight值（设置完需要一段2分钟才能生效），然后访问&nbsp;<a href="http://localhost:8080/provider/user" rel="nofollow,noindex" target="_blank">http://localhost:8080/provider/user</a>&nbsp;多刷几次来测试zuul是否按权重发送请求，也可以访问&nbsp;<a href="http://localhost:8080/consumer/test" rel="nofollow,noindex" target="_blank">http://localhost:8080/consumer/test</a>&nbsp;多刷几次来测试consumer是否按权重来调用provide服务。</p>
+<h2>
+	进阶，基于标签</h2>
+<p>
+	基于权重的搞定之后，接下来才是重头戏：基于标签的路由。入口请求含有各种标签，然后我们可以根据标签幻化出各种各样的路由规则。例如只有标注为粉丝的用户才使用新版本（灰度、AB、金丝雀），例如标注为中国的用户请求必须发送到中国的服务器（全球部署），例如标注为写的请求必须发送到专门的写服务实例（读写分离），等等等等，唯一限制你的就是你的想象力。</p>
+<h3>
+	实现思路</h3>
+<p>
+	根据标签的控制，我们当然放到之前写的Ribbon的rule中，每个实例配置的不同规则也是跟之前一样放到注册中心的metadata中，关键是标签数据如何传过来。</p>
+<p>
+	权重随机的实现思路里面有答案，请求都通过zuul进来，因此我们可以在zuul里面给请求打标签，基于用户，IP或其他看你的需求，然后将标签信息放入ThreadLocal中，然后在Ribbon Rule中从ThreadLocal拿出来使用就可以了。</p>
+<p>
+	然而，按照这个方式去实验时，发现有问题，拿不到ThreadLocal。原因是有hystrix这个东西，回忆下hystrix的原理，为了做到故障隔离，hystrix启用了自己的线程，不在同一个线程ThreadLocal失效。</p>
+<p>
+	那么还有什么办法能够将标签信息一传到底呢，想想之前有没有人实现过类似的东西，没错sleuth，他的链路跟踪就能够将spam传递下去，翻翻sleuth源码，找找其他资料，发现可以使用HystrixRequestVariableDefault，这里不建议直接使用HystrixConcurrencyStrategy，会和sleuth的strategy冲突。代码参见CoreHeaderInterceptor。现在可以测试zuul里面的rule，看能否拿到标签内容了。</p>
+<p>
+	这里还不是终点，解决了zuul的路由，服务A调服务B这里的路由怎么处理呢？zuul算出来的标签如何往后面依次传递下去呢，我们还是抄sleuth：把标签放入header，服务A调服务B时，将服务A header里面的标签放到服务B的header里，依次传递下去。</p>
+<p>
+	这里的关键点就是：内部的微服务在接收到发来的请求时（zuul-》A，A-》B都是这种情况）我们将请求放入ThreadLocal，哦，不对，是HystrixRequestVariableDefault，还记得上面说的原因么：）。这个容易处理，写一个spring mvc拦截器即可，代码参见CoreHeaderInterceptor。</p>
+<p>
+	然后发送请求时自动带上这个里面保存的标签信息，参见RestTemplate的拦截器CoreHttpRequestInterceptor。到此为止，技术上全部走通实现。</p>
+<p>
+	总结一下：zuul依据用户或IP等计算标签，并将标签放入header里向后传递，后续的微服务通过拦截器，将header里的标签放入RestTemplate请求的header里继续向后接力传递。标签的内容通过放入类似于ThreadLocal的全局变量（HystrixRequestVariableDefault），使Ribbon Rule可以使用。</p>
+<h3>
+	测试</h3>
+<p>
+	参见PreFilter源码，模拟了几个用户的标签，参见LabelAndWeightMetadataRule源码，模拟了OR AND两种标签处理策略。依次开启 config eureka provide（开两个实例，通过启动参数server.port指定不同端口区分） consumer zuul</p>
+<p>
+	访问&nbsp;<a href="http://localhost:8761/metadata.html" rel="nofollow,noindex" target="_blank">http://localhost:8761/metadata.html</a>&nbsp;设置第一个provide 实例 orLabel为 CN,Test 发送请求头带入Authorization: emt 访问&nbsp;<a href="http://localhost:8080/provider/user" rel="nofollow,noindex" target="_blank">http://localhost:8080/provider/user</a>&nbsp;多刷几次，可以看到zuul所有请求均路由给了第一个实例。访问&nbsp;<a href="http://localhost:8080/consumer/test" rel="nofollow,noindex" target="_blank">http://localhost:8080/consumer/test</a>&nbsp;多刷几次，可以看到，consumer调用均路由给了第一个实例。</p>
+<p>
+	设置第二个provide 实例 andLabel为 EN,Male 发送请求头带入Authorization: em 访问&nbsp;<a href="http://localhost:8080/provider/user" rel="nofollow,noindex" target="_blank">http://localhost:8080/provider/user</a>&nbsp;多刷几次，可以看到zuul所有请求均路由给了第二个实例。访问&nbsp;<a href="http://localhost:8080/consumer/test" rel="nofollow,noindex" target="_blank">http://localhost:8080/consumer/test</a>&nbsp;多刷几次，可以看到，consumer调用均路由给了第二个实例。</p>
+<p>
+	Authorization头还可以设置为PreFilter里面的模拟token来做测试，至此所有内容讲解完毕，技术路线拉通，剩下的就是根据需求来完善你自己的路由策略啦。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：没有了 </li>
+            <li class="next">下一篇：<a href='/SpringCloud/2017/0920/1622.html'>spring cloud-给Eureka Server加上安全的用户认证</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/SpringCloud/2017/0920/1624.html" >Spring Cloud中Eureka开启密码认证</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0920/1623.html" >JAR(Spring Boot)应用的后台运行配置</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0920/1622.html" >spring cloud-给Eureka Server加上安全的</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0821/1616.html" >Spring Cloud实践：降级、限流、滚动</a><span>08.21</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/SpringCloud/2017/0920/1624.html" >Spring Cloud中Eureka开启密码认证</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0920/1623.html" >JAR(Spring Boot)应用的后台运行配置</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0920/1622.html" >spring cloud-给Eureka Server加上安全的用户认证</a><span>09.20</span></li>
+<li><a href="/SpringCloud/2017/0821/1616.html" >Spring Cloud实践：降级、限流、滚动、灰度、AB、金丝雀的实现思路</a><span>08.21</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/SpringCloud/2017/0821/1616.html" >Spring Cloud实践：降级、限流、滚动</a><span>12</span></li>
+<li><a href="/SpringCloud/2017/0920/1622.html" >spring cloud-给Eureka Server加上安全的</a><span>11</span></li>
+<li><a href="/SpringCloud/2017/0920/1624.html" >Spring Cloud中Eureka开启密码认证</a><span>6</span></li>
+<li><a href="/SpringCloud/2017/0920/1623.html" >JAR(Spring Boot)应用的后台运行配置</a><span>4</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1616&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

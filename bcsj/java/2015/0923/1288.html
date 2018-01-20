@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>如何获取客户端IP 取客户端IP的方法_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="如何,获取,客户端,取,的,方法,外界,流传,的," />
+  <meta name="description" content="1 外界流传的JAVA/ PHP服务器端获取客户端IP都是这么取的： 2 伪代码： 3 1）ip = request.getHeader(X-FORWARDED-FOR ) 4 可伪造，参考附录A 5 2）如果该值为空或数组长度为0或等于unknown ，那么：" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>如何获取客户端IP 取客户端IP的方法</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-09-23 13:48 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1288" class="art_content"><div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; color: rgb(0, 0, 0); font-family: 'Courier New'; line-height: 21.6000003814697px; background-color: rgb(245, 245, 245);">
+	&nbsp;</div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 21.6000003814697px; font-family: 'Courier New' !important;">
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  1</span> 外界流传的JAVA/<span style="margin: 0px; padding: 0px; line-height: 1.8;">PHP服务器端获取客户端IP都是这么取的：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  2</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">伪代码：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  3</span> 1）ip = request.getHeader(&quot;X-FORWARDED-FOR&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">)
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  4</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">    可伪造，参考附录A
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  5</span> 2）如果该值为空或数组长度为0或等于&quot;unknown&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">，那么：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  6</span> ip = request.getHeader(&quot;Proxy-Client-IP&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">)
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  7</span> 3）如果该值为空或数组长度为0或等于&quot;unknown&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">，那么：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  8</span> ip = request.getHeader(&quot;WL-Proxy-Client-IP&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">)
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">  9</span> 4）如果该值为空或数组长度为0或等于&quot;unknown&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">，那么：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 10</span> ip = request.getHeader(&quot;HTTP_CLIENT_IP&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">)
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 11</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">    可伪造
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 12</span> 5）如果该值为空或数组长度为0或等于&quot;unknown&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">，那么：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 13</span> ip =<span style="margin: 0px; padding: 0px; line-height: 1.8;"> request.getRemoteAddr()
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 14</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">    可对于匿名代理服务器，可隐匿原始ip，参考附录B
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 15</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 16</span> 之所以搞这么麻烦，是因为存在很多种网络结构，如 Nginx+Resin、Apache+WebLogic、Squid+<span style="margin: 0px; padding: 0px; line-height: 1.8;">Nginx。下面挨个儿讲一下。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 17</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">郑昀 :△
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 18</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">首先，明确一下，Nginx 配置一般如下所示：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 19</span>               location /<span style="margin: 0px; padding: 0px; line-height: 1.8;"> {
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 20</span>                        proxy_pass       http:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">//</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">yourdomain.com;</span>
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 21</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">                       proxy_set_header   Host             $host;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 22</span>                        proxy_set_header   X-Real-<span style="margin: 0px; padding: 0px; line-height: 1.8;">IP        $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 23</span>                        proxy_set_header   X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For  $proxy_add_x_forwarded_for;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 24</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">              }
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 25</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">注意看红色字体，这些配置与下面的闯关拿IP有关。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 26</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 27</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 28</span> &mdash;&mdash;第一关|X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For ：背景&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 29</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">这是一个 Squid 开发的字段，并非 RFC 标准。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 30</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">简称 XFF 头，只有在通过了 HTTP 代理或者负载均衡服务器时才会添加该项。在 Squid 开发文档中可以找到该项的详细介绍。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 31</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">XFF 格式如下：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 32</span> X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For: client1, proxy1, proxy2
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 33</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">可以看出，XFF 头信息可以有多个，中间用逗号分隔，第一项为真实的客户端ip，剩下的就是曾经经过的代理或负载均衡服务器的ip地址。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 34</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 35</span> &mdash;&mdash;第一关|X-Forwarded-For ：场景=客户端--CDN--<span style="margin: 0px; padding: 0px; line-height: 1.8;">Nginx&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 36</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">当用户请求经过 CDN 后到达 Nginx 负载均衡服务器时，其 XFF 头信息应该为 &ldquo;客户端IP,CDN的IP&rdquo;。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 37</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">一般情况下CDN服务商出于自身安全考虑会将屏蔽CDN的ip，只保留客户端ip。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 38</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">那么请求头到达 Nginx 时：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 39</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 40</span>     *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> 在默认情况下，Nginx 并不会对 XFF 头做任何处理
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 41</span>     * 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 42</span>         * 此时 Nginx 后面的 Resin/Apache/Tomcat 通过 request.getHeader(&quot;X-FORWARDED-FOR&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">) 获得的ip仍然是原始ip。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 43</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 44</span>     * 当 Nginx 设置 X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For 等于 $proxy_add_x_forwarded_for 时：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 45</span>     * 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 46</span>         *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> 如果从CDN过来的请求没有设置 XFF 头（通常这种事情不会发生），XFF 头为 CDN 的ip
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 47</span>         * 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 48</span>             *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> 此时相对于 Nginx 来说，客户端就是 CDN 
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 49</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 50</span>         *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> 如果 CDN 设置了 XFF 头，我们这里又设置了一次，且值为$proxy_add_x_forwarded_for 的话：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 51</span>         * 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 52</span>             *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> XFF 头为&ldquo;客户端IP,Nginx负载均衡服务器IP&rdquo;，这样取第一个值即可
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 53</span>             *<span style="margin: 0px; padding: 0px; line-height: 1.8;"> 这也就是大家所常见的场景！
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 54</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 55</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 56</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 57</span> 综上所述，XFF 头在上图的场景，Resin 通过 request.getHeader(&quot;X-FORWARDED-FOR&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">) 获得的ip字符串，做一个split，第一个元素就是原始ip。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 58</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">那么，XFF 头可以伪造吗？
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 59</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 60</span> &mdash;&mdash;第一关|X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For ：伪造&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 61</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">可以伪造。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 62</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">XFF 头仅仅是 HTTP Headers 中的一分子，自然是可以随意增删改的。如附录A所示。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 63</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">很多投票系统都有此漏洞，它们简单地取 XFF 头中定义的ip地址设置为来源地址，因此第三方可以伪造任何ip投票。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 64</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 65</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 66</span> &mdash;&mdash;第二和第三关|Proxy-Client-IP/WL-Proxy-Client-<span style="margin: 0px; padding: 0px; line-height: 1.8;">IP ：背景&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 67</span> Proxy-Client-IP 字段和 WL-Proxy-Client-IP 字段只在 Apache（Weblogic Plug-In Enable）+<span style="margin: 0px; padding: 0px; line-height: 1.8;">WebLogic 搭配下出现，其中&ldquo;WL&rdquo; 就是 WebLogic 的缩写。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 68</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">即访问路径是：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 69</span> Client -&gt; Apache WebServer + Weblogic http plugin -&gt;<span style="margin: 0px; padding: 0px; line-height: 1.8;"> Weblogic Instances
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 70</span> 所以这两关对于我们来说仅仅是兼容而已，怕你突然把 Nginx+Resin 换成 Apache+<span style="margin: 0px; padding: 0px; line-height: 1.8;">WebLogic 。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 71</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">也可以直接忽略这两个字段。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 72</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 73</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 74</span> &mdash;&mdash;第四关|HTTP-Client-<span style="margin: 0px; padding: 0px; line-height: 1.8;">IP ：背景&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 75</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">HTTP_CLIENT_IP 是代理服务器发送的HTTP头。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 76</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">很多时候 Nginx 配置中也并没有下面这项：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 77</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">proxy_set_header HTTP_CLIENT_IP $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 78</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">所以本关也可以忽略。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 79</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">郑昀 :△
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 80</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 81</span> &mdash;&mdash;第五关|<span style="margin: 0px; padding: 0px; line-height: 1.8;"> request.getRemoteAddr() ：背景&mdash;&mdash;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 82</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">从 request.getRemoteAddr() 函数的定义看：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 83</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">    Returns the Internet Protocol (IP) address of the client or last proxy that sent the request. 
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 84</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">实际上，REMOTE_ADDR 是客户端跟服务器&ldquo;握手&rdquo;时的IP，但如果使用了&ldquo;匿名代理&rdquo;，REMOTE_ADDR 将显示代理服务器的ip，或者最后一个代理服务器的ip。请参考附录B。 
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 85</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 86</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">综上，
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 87</span> java/<span style="margin: 0px; padding: 0px; line-height: 1.8;">php 里拿到的ip地址可能是伪造的或代理服务器的ip。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 88</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 89</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">郑昀 :△
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 90</span> +++附录A XFF 与 Nginx 配置的测试用例+++
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 91</span> 测试环境： nginx+<span style="margin: 0px; padding: 0px; line-height: 1.8;">resin
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 92</span> 内网IP：172.16.100.10
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 93</span> 客户端IP：123.123.123.123
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 94</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 95</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">测试页面： test.jsp
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 96</span> &lt;%
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 97</span> out.println(&quot;x-forwarded-for: &quot; + request.getHeader(&quot;x-forwarded-for&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">));
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 98</span> out.println(&quot;remote hosts: &quot; +<span style="margin: 0px; padding: 0px; line-height: 1.8;"> request.getRemoteAddr());
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);"> 99</span> %&gt;
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">100</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">101</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">nginx 配置一
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">102</span> proxy_set_header X-Real-<span style="margin: 0px; padding: 0px; line-height: 1.8;">IP $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">103</span> proxy_set_header X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For $proxy_add_x_forwarded_for;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">104</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">105</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">wget测试
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">106</span> wget -O aa --header=&quot;X-Forwarded-For:192.168.0.1&quot; &quot;http://test.com/test.jsp&quot;
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">107</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">页面返回结果：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">108</span> x-forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">for</span>: 192.168.0.1, 123.123.123.123
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">109</span> remote hosts: 172.16.100.10
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">110</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">111</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">curl测试
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">112</span> curl -H &quot;X-Forwarded-For:192.168.0.1&quot; &quot;http://test.com/test.jsp&quot;
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">113</span> x-forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">for</span>: 192.168.0.1, 123.123.123.123
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">114</span> remote hosts: 172.16.100.10
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">115</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">116</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">nginx 配置二
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">117</span> proxy_set_header X-Real-<span style="margin: 0px; padding: 0px; line-height: 1.8;">IP $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">118</span> proxy_set_header X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">119</span> proxy_set_header X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For $proxy_add_x_forwarded_for;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">120</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">121</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">wget测试：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">122</span> wget -O aa --header=&quot;X-Forwarded-For:192.168.0.1&quot; &quot;http://test.com/test.jsp&quot;
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">123</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">页面返回结果：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">124</span> x-forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">for</span>: 123.123.123.123
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">125</span> remote hosts: 172.16.100.10
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">126</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">127</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">curl测试
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">128</span> curl -H &quot;X-Forwarded-For:192.168.0.1&quot; &quot;http://test.com/test.jsp&quot;
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">129</span> x-forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">for</span>: 123.123.123.123
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">130</span> remote hosts: 172.16.100.10
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">131</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">132</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">测试结果：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">133</span> 1<span style="margin: 0px; padding: 0px; line-height: 1.8;">、配置  
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">134</span> proxy_set_header X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For $proxy_add_x_forwarded_for;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">135</span> 增加了一个真实ip X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For，并且顺序是增加到了&ldquo;后面&rdquo;。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">136</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">137</span> 2<span style="margin: 0px; padding: 0px; line-height: 1.8;">、配置  
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">138</span> proxy_set_header X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For $remote_addr;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">139</span> 清空了客户端伪造传入的X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For，
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">140</span> 保证了使用 request.getHeader(&quot;x-forwarded-for&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8;">) 获取的ip为真实ip，
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">141</span> 或者用&ldquo;,&rdquo;分隔，截取 X-Forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8;">For 最后的值。
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">142</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">143</span> +++附录B 搜狗浏览器高速模式的测试用例+++
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">144</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">访问路径：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">145</span> 搜狗浏览器&ldquo;高速&rdquo;模式（即使用代理）--&gt;LVS--&gt;<span style="margin: 0px; padding: 0px; line-height: 1.8;">Apache
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">146</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">获得的值为：
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">147</span> x-forwarded-<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">for</span>:180.70.92.43<span style="margin: 0px; padding: 0px; line-height: 1.8;">   (即真实ip)
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">148</span> Proxy-Client-IP:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">null</span>
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">149</span> WL-Proxy-Client-IP:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 0, 255);">null</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">150</span> getRemoteAddr:123.126.50.185<span style="margin: 0px; padding: 0px; line-height: 1.8;">  （即搜狗代理ip）
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">151</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">152</span>  
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">153</span> <span style="margin: 0px; padding: 0px; line-height: 1.8;">&times;&times;&times;参考资源：&times;&times;&times;
+</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">154</span> 1，http:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">//</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">bbs.linuxtone.org/thread-9050-1-1.html</span>
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">155</span> 2，http:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">//</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">hi.baidu.com/thinkinginlamp/item/e2cf05263eb4d18e6e2cc3e6</span>
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">156</span> 3，http:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">//</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">bbs.chinaunix.net/thread-3659453-1-1.html</span>
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">157</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">158</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">159</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">160</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">161</span> 
+<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 128);">162</span> 转自：http:<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">//</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 128, 0);">www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html</span></pre>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0923/1287.html'>Log4j按级别输出日志到不同文件配置分析</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0923/1289.html'>检测日期字符串是否为合法(java版)</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1288&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

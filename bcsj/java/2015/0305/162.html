@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jspSmartUpload上传下载全攻略_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="jspSmartUpload,上传下载,全攻略,一,、,安装" />
+  <meta name="description" content="一、安装篇 jspSmartUpload是由 www.jspsmart.com 网站开发的一个可免费使用的全功能的文件上传下载组件，适于嵌入执行上传下载操作的JSP文件中。该组件有以下几个特点： 1、使用简单。在" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>jspSmartUpload上传下载全攻略</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-05 15:49 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="162" class="art_content"><p>
+	一、安装篇</p>
+<p>
+	　　jspSmartUpload是由<a href="http://www.jspsmart.com/">www.jspsmart.com</a>网站开发的一个可免费使用的全功能的文件上传下载组件，适于嵌入执行上传下载操作的JSP文件中。该组件有以下几个特点：</p>
+<p>
+	1、使用简单。在JSP文件中仅仅书写三五行JAVA代码就可以搞定文件的上传或下载，方便。</p>
+<p>
+	2、能全程控制上传。利用jspSmartUpload组件提供的对象及其操作方法，可以获得全部上传文件的信息（包括文件名，大小，类型，扩展名，文件数据等），方便存取。</p>
+<p>
+	3、能对上传的文件在大小、类型等方面做出限制。如此可以滤掉不符合要求的文件。</p>
+<p>
+	4、下载灵活。仅写两行代码，就能把Web服务器变成文件服务器。不管文件在Web服务器的目录下或在其它任何目录下，都可以利用jspSmartUpload进行下载。</p>
+<p>
+	5、能将文件上传到数据库中，也能将数据库中的数据下载下来。这种功能针对的是MYSQL数据库，因为不具有通用性，所以本文不准备举例介绍这种用法。</p>
+<p>
+	　　jspSmartUpload组件可以从<a href="http://www.jspsmart.com/">www.jspsmart.com</a>网站上自由下载，压缩包的名字是jspSmartUpload.zip。下载后，用WinZip或WinRAR将其解压到Tomcat的webapps目录下（本文以Tomcat服务器为例进行介绍）。解压后，将webapps/jspsmartupload目录下的子目录Web-inf名字改为全大写的WEB-INF，这样一改jspSmartUpload类才能使用。因为Tomcat对文件名大小写敏感，它要求Web应用程序相关的类所在目录为WEB-INF，且必须是大写。接着重新启动Tomcat，这样就可以在JSP文件中使用jspSmartUpload组件了。</p>
+<p>
+	　　注意，按上述方法安装后，只有webapps/jspsmartupload目录下的程序可以使用jspSmartUpload组件，如果想让Tomcat服务器的所有Web应用程序都能用它，必须做如下工作：</p>
+<p>
+	1．进入命令行状态，将目录切换到Tomcat的webapps/jspsmartupload/WEB-INF目录下。</p>
+<p>
+	2．运行JAR打包命令：jar cvf jspSmartUpload.jar com</p>
+<p>
+	（也可以打开资源管理器，切换到当前目录，用WinZip将com目录下的所有文件压缩成jspSmartUpload.zip，然后将jspSmartUpload.zip换名为jspSmartUpload.jar文件即可。）</p>
+<p>
+	3．将jspSmartUpload.jar拷贝到Tomcat的shared/lib目录下。</p>
+<p>
+	二、相关类说明篇</p>
+<p>
+	㈠ File类</p>
+<p>
+	　　这个类包装了一个上传文件的所有信息。通过它，可以得到上传文件的文件名、文件大小、扩展名、文件数据等信息。</p>
+<p>
+	　　File类主要提供以下方法：</p>
+<p>
+	1、saveAs作用：将文件换名另存。</p>
+<p>
+	原型：</p>
+<p>
+	public void saveAs(java.lang.String destFilePathName)</p>
+<p>
+	或</p>
+<p>
+	public void saveAs(java.lang.String destFilePathName, int optionSaveAs)</p>
+<p>
+	其中，destFilePathName是另存的文件名，optionSaveAs是另存的选项，该选项有三个值，分别是SAVEAS_PHYSICAL,SAVEAS_VIRTUAL，SAVEAS_AUTO。SAVEAS_PHYSICAL表明以操作系统的根目录为文件根目录另存文件，SAVEAS_VIRTUAL表明以Web应用程序的根目录为文件根目录另存文件，SAVEAS_AUTO则表示让组件决定，当Web应用程序的根目录存在另存文件的目录时，它会选择SAVEAS_VIRTUAL，否则会选择SAVEAS_PHYSICAL。</p>
+<p>
+	例如，saveAs(&quot;/upload/sample.zip&quot;,SAVEAS_PHYSICAL)执行后若Web服务器安装在C盘，则另存的文件名实际是c:\upload\sample.zip。而saveAs(&quot;/upload/sample.zip&quot;,SAVEAS_VIRTUAL)执行后若Web应用程序的根目录是webapps/jspsmartupload，则另存的文件名实际是webapps/jspsmartupload/upload/sample.zip。saveAs(&quot;/upload/sample.zip&quot;,SAVEAS_AUTO)执行时若Web应用程序根目录下存在upload目录，则其效果同saveAs(&quot;/upload/sample.zip&quot;,SAVEAS_VIRTUAL)，否则同saveAs(&quot;/upload/sample.zip&quot;,SAVEAS_PHYSICAL)。</p>
+<p>
+	建议：对于Web程序的开发来说，最好使用SAVEAS_VIRTUAL，以便移植。</p>
+<p>
+	2、isMissing</p>
+<p>
+	作用：这个方法用于判断用户是否选择了文件，也即对应的表单项是否有值。选择了文件时，它返回false。未选文件时，它返回true。</p>
+<p>
+	原型：public boolean isMissing()</p>
+<p>
+	3、getFieldName</p>
+<p>
+	作用：取HTML表单中对应于此上传文件的表单项的名字。</p>
+<p>
+	原型：public String getFieldName()</p>
+<p>
+	4、getFileName</p>
+<p>
+	作用：取文件名（不含目录信息）</p>
+<p>
+	原型：public String getFileName()</p>
+<p>
+	5、getFilePathName</p>
+<p>
+	作用：取文件全名（带目录）</p>
+<p>
+	原型：public String getFilePathName</p>
+<p>
+	6、getFileExt</p>
+<p>
+	作用：取文件扩展名（后缀）</p>
+<p>
+	原型：public String getFileExt()</p>
+<p>
+	7、getSize</p>
+<p>
+	作用：取文件长度（以字节计）</p>
+<p>
+	原型：public int getSize()</p>
+<p>
+	8、getBinaryData</p>
+<p>
+	作用：取文件数据中指定位移处的一个字节，用于检测文件等处理。</p>
+<p>
+	原型：public byte getBinaryData(int index)。其中，index表示位移，其值在0到getSize()-1之间。</p>
+<p>
+	㈡ Files类</p>
+<p>
+	　　这个类表示所有上传文件的集合，通过它可以得到上传文件的数目、大小等信息。有以下方法：</p>
+<p>
+	1、getCount</p>
+<p>
+	作用：取得上传文件的数目。</p>
+<p>
+	原型：public int getCount()</p>
+<p>
+	2、getFile</p>
+<p>
+	作用：取得指定位移处的文件对象File（这是com.jspsmart.upload.File，不是java.io.File，注意区分）。</p>
+<p>
+	原型：public File getFile(int index)。其中，index为指定位移，其值在0到getCount()-1之间。</p>
+<p>
+	3、getSize</p>
+<p>
+	作用：取得上传文件的总长度，可用于限制一次性上传的数据量大小。</p>
+<p>
+	原型：public long getSize()</p>
+<p>
+	4、getCollection</p>
+<p>
+	作用：将所有上传文件对象以Collection的形式返回，以便其它应用程序引用，浏览上传文件信息。</p>
+<p>
+	原型：public Collection getCollection()</p>
+<p>
+	5、getEnumeration</p>
+<p>
+	作用：将所有上传文件对象以Enumeration（枚举）的形式返回，以便其它应用程序浏览上传文件信息。</p>
+<p>
+	原型：public Enumeration getEnumeration()</p>
+<p>
+	㈢ Request类</p>
+<p>
+	　　这个类的功能等同于JSP内置的对象request。只所以提供这个类，是因为对于文件上传表单，通过request对象无法获得表单项的值，必须通过jspSmartUpload组件提供的Request对象来获取。该类提供如下方法：</p>
+<p>
+	1、getParameter</p>
+<p>
+	作用：获取指定参数之值。当参数不存在时，返回值为null。</p>
+<p>
+	原型：public String getParameter(String name)。其中，name为参数的名字。</p>
+<p>
+	2、getParameterValues</p>
+<p>
+	作用：当一个参数可以有多个值时，用此方法来取其值。它返回的是一个字符串数组。当参数不存在时，返回值为null。</p>
+<p>
+	原型：public String[] getParameterValues(String name)。其中，name为参数的名字。</p>
+<p>
+	3、getParameterNames</p>
+<p>
+	作用：取得Request对象中所有参数的名字，用于遍历所有参数。它返回的是一个枚举型的对象。</p>
+<p>
+	原型：public Enumeration getParameterNames()</p>
+<p>
+	㈣ SmartUpload类这个类完成上传下载工作。</p>
+<p>
+	A．上传与下载共用的方法：</p>
+<p>
+	只有一个：initialize。</p>
+<p>
+	作用：执行上传下载的初始化工作，必须第一个执行。</p>
+<p>
+	原型：有多个，主要使用下面这个：</p>
+<p>
+	public final void initialize(javax.servlet.jsp.PageContext pageContext)</p>
+<p>
+	其中，pageContext为JSP页面内置对象（页面上下文）。</p>
+<p>
+	B．上传文件使用的方法：</p>
+<p>
+	1、upload</p>
+<p>
+	作用：上传文件数据。对于上传操作，第一步执行initialize方法，第二步就要执行这个方法。</p>
+<p>
+	原型：public void upload()</p>
+<p>
+	2、save</p>
+<p>
+	作用：将全部上传文件保存到指定目录下，并返回保存的文件个数。</p>
+<p>
+	原型：public int save(String destPathName)</p>
+<p>
+	和public int save(String destPathName,int option)</p>
+<p>
+	其中，destPathName为文件保存目录，option为保存选项，它有三个值，分别是SAVE_PHYSICAL,SAVE_VIRTUAL和SAVE_AUTO。（同File类的saveAs方法的选项之值类似）SAVE_PHYSICAL指示组件将文件保存到以操作系统根目录为文件根目录的目录下，SAVE_VIRTUAL指示组件将文件保存到以Web应用程序根目录为文件根目录的目录下，而SAVE_AUTO则表示由组件自动选择。</p>
+<p>
+	注：save(destPathName)作用等同于save(destPathName,SAVE_AUTO)。</p>
+<p>
+	3、getSize</p>
+<p>
+	作用：取上传文件数据的总长度</p>
+<p>
+	原型：public int getSize()</p>
+<p>
+	4、getFiles</p>
+<p>
+	作用：取全部上传文件，以Files对象形式返回，可以利用Files类的操作方法来获得上传文件的数目等信息。</p>
+<p>
+	原型：public Files getFiles()</p>
+<p>
+	5、getRequest</p>
+<p>
+	作用：取得Request对象，以便由此对象获得上传表单参数之值。</p>
+<p>
+	原型：public Request getRequest()</p>
+<p>
+	6、setAllowedFilesList</p>
+<p>
+	作用：设定允许上传带有指定扩展名的文件，当上传过程中有文件名不允许时，组件将抛出异常。</p>
+<p>
+	原型：public void setAllowedFilesList(String allowedFilesList)</p>
+<p>
+	其中，allowedFilesList为允许上传的文件扩展名列表，各个扩展名之间以逗号分隔。如果想允许上传那些没有扩展名的文件，可以用两个逗号表示。例如：setAllowedFilesList(&quot;doc,txt,,&quot;)将允许上传带doc和txt扩展名的文件以及没有扩展名的文件。</p>
+<p>
+	7、setDeniedFilesList</p>
+<p>
+	作用：用于限制上传那些带有指定扩展名的文件。若有文件扩展名被限制，则上传时组件将抛出异常。</p>
+<p>
+	原型：public void setDeniedFilesList(String deniedFilesList)</p>
+<p>
+	其中，deniedFilesList为禁止上传的文件扩展名列表，各个扩展名之间以逗号分隔。如果想禁止上传那些没有扩展名的文件，可以用两个逗号来表示。例如：setDeniedFilesList(&quot;exe,bat,,&quot;)将禁止上传带exe和bat扩展名的文件以及没有扩展名的文件。</p>
+<p>
+	8、setMaxFileSize</p>
+<p>
+	作用：设定每个文件允许上传的最大长度。</p>
+<p>
+	原型：public void setMaxFileSize(long maxFileSize)</p>
+<p>
+	其中，maxFileSize为为每个文件允许上传的最大长度，当文件超出此长度时，将不被上传。</p>
+<p>
+	9、setTotalMaxFileSize</p>
+<p>
+	作用：设定允许上传的文件的总长度，用于限制一次性上传的数据量大小。</p>
+<p>
+	原型：public void setTotalMaxFileSize(long totalMaxFileSize)</p>
+<p>
+	其中，totalMaxFileSize为允许上传的文件的总长度。</p>
+<p>
+	C．下载文件常用的方法</p>
+<p>
+	1、setContentDisposition</p>
+<p>
+	作用：将数据追加到MIME文件头的CONTENT-DISPOSITION域。jspSmartUpload组件会在返回下载的信息时自动填写MIME文件头的CONTENT-DISPOSITION域，如果用户需要添加额外信息，请用此方法。</p>
+<p>
+	原型：public void setContentDisposition(String contentDisposition)</p>
+<p>
+	其中，contentDisposition为要添加的数据。如果contentDisposition为null，则组件将自动添加&quot;attachment;&quot;，以表明将下载的文件作为附件，结果是IE浏览器将会提示另存文件，而不是自动打开这个文件（IE浏览器一般根据下载的文件扩展名决定执行什么操作，扩展名为doc的将用word程序打开，扩展名为pdf的将用acrobat程序打开，等等）。</p>
+<p>
+	2、downloadFile</p>
+<p>
+	作用：下载文件。</p>
+<p>
+	原型：共有以下三个原型可用，第一个最常用，后两个用于特殊情况下的文件下载（如更改内容类型，更改另存的文件名）。</p>
+<p>
+	① public void downloadFile(String sourceFilePathName)</p>
+<p>
+	其中，sourceFilePathName为要下载的文件名（带目录的文件全名）</p>
+<p>
+	② public void downloadFile(String sourceFilePathName,String contentType)</p>
+<p>
+	其中，sourceFilePathName为要下载的文件名（带目录的文件全名）,contentType为内容类型（MIME格式的文件类型信息，可被浏览器识别）。</p>
+<p>
+	③ public void downloadFile(String sourceFilePathName,String contentType,String destFileName)</p>
+<p>
+	其中，sourceFilePathName为要下载的文件名（带目录的文件全名）,contentType为内容类型（MIME格式的文件类型信息，可被浏览器识别）,destFileName为下载后默认的另存文件名。</p>
+<p>
+	三、文件上传篇</p>
+<p>
+	㈠ 表单要求</p>
+<p>
+	对于上传文件的FORM表单，有两个要求：</p>
+<p>
+	1、METHOD应用POST，即METHOD=&quot;POST&quot;。</p>
+<p>
+	2、增加属性：ENCTYPE=&quot;multipart/form-data&quot;</p>
+<p>
+	下面是一个用于上传文件的FORM表单的例子：</p>
+<p>
+	&lt;FORM METHOD=&quot;POST&quot; ENCTYPE=&quot;multipart/form-data&quot; ACTION=&quot;/jspSmartUpload/upload.jsp&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=&quot;FILE&quot; &gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=&quot;SUBMIT&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/FORM&gt;</p>
+<p>
+	㈡ 上传的例子</p>
+<p>
+	1、上传页面upload.html</p>
+<p>
+	本页面提供表单，让用户选择要上传的文件，点击&quot;上传&quot;按钮执行上传操作。</p>
+<p>
+	页面源码如下：</p>
+<p>
+	&lt;!--</p>
+<p>
+	&nbsp;&nbsp;&nbsp; 文件名：upload.html</p>
+<p>
+	--&gt;</p>
+<p>
+	&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;</p>
+<p>
+	&lt;html&gt;</p>
+<p>
+	&lt;head&gt;</p>
+<p>
+	&lt;title&gt;文件上传&lt;/title&gt;</p>
+<p>
+	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;</p>
+<p>
+	&lt;/head&gt;</p>
+<p>
+	&lt;body&gt;</p>
+<p>
+	&lt;p&gt;&amp;nbsp;&lt;/p&gt;</p>
+<p>
+	&lt;p align=&quot;center&quot;&gt;上传文件选择&lt;/p&gt;</p>
+<p>
+	&lt;FORM METHOD=&quot;POST&quot; ACTION=&quot;jsp/do_upload.jsp&quot;</p>
+<p>
+	ENCTYPE=&quot;multipart/form-data&quot;&gt;</p>
+<p>
+	&lt;input type=&quot;hidden&quot; value=&quot;good&quot;&gt;</p>
+<p>
+	&nbsp; &lt;table width=&quot;75%&quot; border=&quot;1&quot; align=&quot;center&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;p align=&quot;center&quot;&gt;1、</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;FILE&quot; size=&quot;30&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;&lt;/td&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;p align=&quot;center&quot;&gt;2、</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;FILE&quot; size=&quot;30&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;&lt;/td&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;p align=&quot;center&quot;&gt;3、</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;FILE&quot; size=&quot;30&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;&lt;/td&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;p align=&quot;center&quot;&gt;4、</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;FILE&quot; size=&quot;30&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;&lt;/td&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;tr&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;p align=&quot;center&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;submit&quot; value=&quot;上传它！&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;&lt;/td&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/tr&gt;</p>
+<p>
+	&nbsp; &lt;/table&gt;</p>
+<p>
+	&lt;/FORM&gt;</p>
+<p>
+	&lt;/body&gt;</p>
+<p>
+	&lt;/html&gt;</p>
+<p>
+	2、上传处理页面do_upload.jsp</p>
+<p>
+	本页面执行文件上传操作。页面源码中详细介绍了上传方法的用法，在此不赘述了。</p>
+<p>
+	页面源码如下：</p>
+<p>
+	&lt;%--</p>
+<p>
+	文件名：do_upload.jsp</p>
+<p>
+	--%&gt;</p>
+<p>
+	&lt;%@ page contentType=&quot;text/html; charset=gb2312&quot; language=&quot;java&quot;</p>
+<p>
+	import=&quot;java.util.*,com.jspsmart.upload.*&quot; errorPage=&quot;&quot; %&gt;</p>
+<p>
+	&lt;html&gt;</p>
+<p>
+	&lt;head&gt;</p>
+<p>
+	&lt;title&gt;文件上传处理页面&lt;/title&gt;</p>
+<p>
+	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;</p>
+<p>
+	&lt;/head&gt;</p>
+<p>
+	&lt;body&gt;</p>
+<p>
+	&lt;%</p>
+<p>
+	// 新建一个SmartUpload对象</p>
+<p>
+	SmartUpload su = new SmartUpload();</p>
+<p>
+	// 上传初始化</p>
+<p>
+	su.initialize(pageContext);</p>
+<p>
+	// 设定上传限制</p>
+<p>
+	// 1.限制每个上传文件的最大长度。</p>
+<p>
+	// su.setMaxFileSize(10000);</p>
+<p>
+	// 2.限制总上传数据的长度。</p>
+<p>
+	// su.setTotalMaxFileSize(20000);</p>
+<p>
+	// 3.设定允许上传的文件（通过扩展名限制）,仅允许doc,txt文件。</p>
+<p>
+	// su.setAllowedFilesList(&quot;doc,txt&quot;);</p>
+<p>
+	// 4.设定禁止上传的文件（通过扩展名限制）,禁止上传带有exe,bat,</p>
+<p>
+	jsp,htm,html扩展名的文件和没有扩展名的文件。</p>
+<p>
+	// su.setDeniedFilesList(&quot;exe,bat,jsp,htm,html,,&quot;);</p>
+<p>
+	// 上传文件</p>
+<p>
+	su.upload();</p>
+<p>
+	// 将上传文件全部保存到指定目录</p>
+<p>
+	int count = su.save(&quot;/upload&quot;);</p>
+<p>
+	out.println(count+&quot;个文件上传成功！&lt;br&gt;&quot;);</p>
+<p>
+	// 利用Request对象获取参数之值</p>
+<p>
+	out.println(&quot;TEST=&quot;+su.getRequest().getParameter(&quot;TEST&quot;)</p>
+<p>
+	+&quot;&lt;BR&gt;&lt;BR&gt;&quot;);</p>
+<p>
+	// 逐一提取上传文件信息，同时可保存文件。</p>
+<p>
+	for (int i=0;i&lt;su.getFiles().getCount();i++)</p>
+<p>
+	{</p>
+<p>
+	com.jspsmart.upload.File file = su.getFiles().getFile(i);</p>
+<p>
+	// 若文件不存在则继续</p>
+<p>
+	if (file.isMissing()) continue;</p>
+<p>
+	// 显示当前文件信息</p>
+<p>
+	out.println(&quot;&lt;TABLE BORDER=1&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;TR&gt;&lt;TD&gt;表单项名（FieldName）&lt;/TD&gt;&lt;TD&gt;&quot;</p>
+<p>
+	+ file.getFieldName() + &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;TR&gt;&lt;TD&gt;文件长度（Size）&lt;/TD&gt;&lt;TD&gt;&quot; +</p>
+<p>
+	file.getSize() + &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;TR&gt;&lt;TD&gt;文件名（FileName）&lt;/TD&gt;&lt;TD&gt;&quot;</p>
+<p>
+	+ file.getFileName() + &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;TR&gt;&lt;TD&gt;文件扩展名（FileExt）&lt;/TD&gt;&lt;TD&gt;&quot;</p>
+<p>
+	+ file.getFileExt() + &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;TR&gt;&lt;TD&gt;文件全名（FilePathName）&lt;/TD&gt;&lt;TD&gt;&quot;</p>
+<p>
+	+ file.getFilePathName() + &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;);</p>
+<p>
+	out.println(&quot;&lt;/TABLE&gt;&lt;BR&gt;&quot;);</p>
+<p>
+	// 将文件另存</p>
+<p>
+	// file.saveAs(&quot;/upload/&quot; + myFile.getFileName());</p>
+<p>
+	// 另存到以WEB应用程序的根目录为文件根目录的目录下</p>
+<p>
+	// file.saveAs(&quot;/upload/&quot; + myFile.getFileName(),</p>
+<p>
+	su.SAVE_VIRTUAL);</p>
+<p>
+	// 另存到操作系统的根目录为文件根目录的目录下</p>
+<p>
+	// file.saveAs(&quot;c:\\temp\\&quot; + myFile.getFileName(),</p>
+<p>
+	su.SAVE_PHYSICAL);</p>
+<p>
+	}</p>
+<p>
+	%&gt;</p>
+<p>
+	&lt;/body&gt;</p>
+<p>
+	&lt;/html&gt;</p>
+<p>
+	四、文件下载篇</p>
+<p>
+	1、下载链接页面download.html</p>
+<p>
+	页面源码如下：</p>
+<p>
+	&lt;!--</p>
+<p>
+	文件名：download.html</p>
+<p>
+	--&gt;</p>
+<p>
+	&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;</p>
+<p>
+	&lt;html&gt;</p>
+<p>
+	&lt;head&gt;</p>
+<p>
+	&lt;title&gt;下载&lt;/title&gt;</p>
+<p>
+	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;</p>
+<p>
+	&lt;/head&gt;</p>
+<p>
+	&lt;body&gt;</p>
+<p>
+	&lt;a href=&quot;jsp/do_download.jsp&quot;&gt;点击下载&lt;/a&gt;</p>
+<p>
+	&lt;/body&gt;</p>
+<p>
+	&lt;/html&gt;</p>
+<p>
+	2、下载处理页面do_download.jsp do_download.jsp展示了如何利用jspSmartUpload组件来下载文件，从下面的源码中就可以看到，下载何其简单。</p>
+<p>
+	源码如下：</p>
+<p>
+	&lt;%@ page contentType=&quot;text/html;charset=gb2312&quot;</p>
+<p>
+	import=&quot;com.jspsmart.upload.*&quot; %&gt;&lt;%</p>
+<p>
+	// 新建一个SmartUpload对象</p>
+<p>
+	SmartUpload su = new SmartUpload();</p>
+<p>
+	// 初始化</p>
+<p>
+	su.initialize(pageContext);</p>
+<p>
+	// 设定contentDisposition为null以禁止浏览器自动打开文件，</p>
+<p>
+	//保证点击链接后是下载文件。若不设定，则下载的文件扩展名为</p>
+<p>
+	//doc时，浏览器将自动用word打开它。扩展名为pdf时，</p>
+<p>
+	//浏览器将用acrobat打开。</p>
+<p>
+	su.setContentDisposition(null);</p>
+<p>
+	// 下载文件</p>
+<p>
+	su.downloadFile(&quot;/upload/如何赚取我的第一桶金.doc&quot;);</p>
+<p>
+	%&gt;</p>
+<p>
+	注意，执行下载的页面，在Java脚本范围外（即&lt;% ... %&gt;之外），不要包含HTML代码、空格、回车或换行等字符，有的话将不能正确下载。不信的话，可以在上述源码中%&gt;&lt;%之间加入一个换行符，再下载一下，保证出错。因为它影响了返回给浏览器的数据流，导致解析出错。</p>
+<p>
+	3、如何下载中文文件</p>
+<p>
+	jspSmartUpload虽然能下载文件，但对中文支持不足。若下载的文件名中有汉字，则浏览器在提示另存的文件名时，显示的是一堆乱码，很扫人兴。上面的例子就是这样。（这个问题也是众多下载组件所存在的问题，很少有人解决，搜索不到相关资料，可叹！）</p>
+<p>
+	为了给jspSmartUpload组件增加下载中文文件的支持，我对该组件进行了研究，发现对返回给浏览器的另存文件名进行UTF-8编码后，浏览器便能正确显示中文名字了。这是一个令人高兴的发现。于是我对jspSmartUpload组件的SmartUpload类做了升级处理，增加了toUtf8String这个方法，改动部分源码如下：</p>
+<p>
+	public void downloadFile(String s, String s1, String s2, int i)</p>
+<p>
+	throws ServletException, IOException, SmartUploadException</p>
+<p>
+	&nbsp;&nbsp;&nbsp; {</p>
+<p>
+	if(s == null)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; throw new IllegalArgumentException(&quot;File &#39;&quot; + s +</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &quot;&#39; not found (1040).&quot;);</p>
+<p>
+	if(s.equals(&quot;&quot;))</p>
+<p>
+	&nbsp;&nbsp;&nbsp; throw new IllegalArgumentException(&quot;File &#39;&quot; + s +</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &quot;&#39; not found (1040).&quot;);</p>
+<p>
+	if(!isVirtual(s) &amp;&amp; m_denyPhysicalPath)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; throw new SecurityException(&quot;Physical path is</p>
+<p>
+	&nbsp;&nbsp;&nbsp; denied (1035).&quot;);</p>
+<p>
+	if(isVirtual(s))</p>
+<p>
+	&nbsp;&nbsp;&nbsp; s = m_application.getRealPath(s);</p>
+<p>
+	java.io.File file = new java.io.File(s);</p>
+<p>
+	FileInputStream fileinputstream = new FileInputStream(file);</p>
+<p>
+	long l = file.length();</p>
+<p>
+	boolean flag = false;</p>
+<p>
+	int k = 0;</p>
+<p>
+	byte abyte0[] = new byte[i];</p>
+<p>
+	if(s1 == null)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setContentType(&quot;application/x-msdownload&quot;);</p>
+<p>
+	else</p>
+<p>
+	if(s1.length() == 0)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setContentType(&quot;application/x-msdownload&quot;);</p>
+<p>
+	else</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setContentType(s1);</p>
+<p>
+	m_response.setContentLength((int)l);</p>
+<p>
+	m_contentDisposition = m_contentDisposition != null ?</p>
+<p>
+	m_contentDis&quot;attachment;&quot;;</p>
+<p>
+	if(s2 == null)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setHeader(&quot;Content-Disposition&quot;,</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_contentDisposition + &quot; filename=&quot; +</p>
+<p>
+	&nbsp;&nbsp;&nbsp; toUtf8String(getFileName(s)));</p>
+<p>
+	else</p>
+<p>
+	if(s2.length() == 0)</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setHeader(&quot;Content-Disposition&quot;,</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_contentDisposition);</p>
+<p>
+	else</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.setHeader(&quot;Content-Disposition&quot;,</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_contentDisposition + &quot; filename=&quot; + toUtf8String(s2));</p>
+<p>
+	while((long)k &lt; l)</p>
+<p>
+	{</p>
+<p>
+	&nbsp;&nbsp;&nbsp; int j = fileinputstream.read(abyte0, 0, i);</p>
+<p>
+	&nbsp;&nbsp;&nbsp; k += j;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; m_response.getOutputStream().write(abyte0, 0, j);</p>
+<p>
+	}</p>
+<p>
+	fileinputstream.close();</p>
+<p>
+	&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	&nbsp;&nbsp;&nbsp; /**</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp; * 将文件名中的汉字转为UTF8编码的串,以便下载时能正确显示另存的文件名.</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp; * @param s 原文件名</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp; * @return 重新编码后的文件名</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp; */</p>
+<p>
+	&nbsp;&nbsp;&nbsp; public static String toUtf8String(String s) {</p>
+<p>
+	StringBuffer sb = new StringBuffer();</p>
+<p>
+	for (int i=0;i&lt;s.length();i++) {</p>
+<p>
+	&nbsp;&nbsp;&nbsp; char c = s.charAt(i);</p>
+<p>
+	&nbsp;&nbsp;&nbsp; if (c &gt;= 0 &amp;&amp; c &lt;= 255) {</p>
+<p>
+	sb.append(c);</p>
+<p>
+	&nbsp;&nbsp;&nbsp; } else {</p>
+<p>
+	byte[] b;</p>
+<p>
+	try {</p>
+<p>
+	&nbsp;&nbsp;&nbsp; b = Character.toString(c).getBytes(&quot;utf-8&quot;);</p>
+<p>
+	} catch (Exception ex) {</p>
+<p>
+	&nbsp;&nbsp;&nbsp; System.out.println(ex);</p>
+<p>
+	&nbsp;&nbsp;&nbsp; b = new byte[0];</p>
+<p>
+	}</p>
+<p>
+	for (int j = 0; j &lt; b.length; j++) {</p>
+<p>
+	&nbsp;&nbsp;&nbsp; int k = b[j];</p>
+<p>
+	&nbsp;&nbsp;&nbsp; if (k &lt; 0) k += 256;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; sb.append(&quot;%&quot; + Integer.toHexString(k).</p>
+<p>
+	&nbsp;&nbsp;&nbsp; toUpperCase());</p>
+<p>
+	}</p>
+<p>
+	&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	}</p>
+<p>
+	return sb.toString();</p>
+<p>
+	}</p>
+<p>
+	注意源码中粗体部分，原jspSmartUpload组件对返回的文件未作任何处理，现在做了编码的转换工作，将文件名转换为UTF-8形式的编码形式。UTF-8编码对英文未作任何处理，对中文则需要转换为%XX的形式。toUtf8String方法中，直接利用Java语言提供的编码转换方法获得汉字字符的UTF-8编码，之后将其转换为%XX的形式。</p>
+<p>
+	将源码编译后打包成jspSmartUpload.jar，拷贝到Tomcat的shared/lib目录下（可为所有WEB应用程序所共享），然后重启Tomcat服务器就可以正常下载含有中文名字的文件了。另，toUtf8String方法也可用于转换含有中文的超级链接，以保证链接的有效，因为有的WEB服务器不支持中文链接。</p>
+<p>
+	小结：jspSmartUpload组件是应用JSP进行B/S程序开发过程中经常使用的上传下载组件，它使用简单，方便。现在我又为其加上了下载中文名字的文件的支持，真个是如虎添翼，必将赢得更多开发者的青睐。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0305/161.html'>JSP的运行机制</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0305/163.html'>jsp常见乱码问题解决办法</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=162&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>优化、分析、检查及修复MySQL数据库的说明_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="优化,分析,检查,修复,MyS" />
+  <meta name="description" content=" 对MySQL数据库的管理常规就是进行预防性的维护，以及修复那些出现问题的内容。 进行检查和修复通常具有四个主要的任务： 1、对表进行优化 2、对表进行分析（分析并存储MyISAM和BD" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/mysql/'>MySql</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>优化、分析、检查及修复MySQL数据库的说明</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-01 08:52 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="391" class="art_content"><p>
+	　　对MySQL数据库的管理常规就是进行预防性的维护，以及修复那些出现问题的内容。&nbsp;<br />
+	<br />
+	　　进行检查和修复通常具有四个主要的任务：<br />
+	<br />
+	　　1、对表进行优化<br />
+	<br />
+	　　2、对表进行分析（分析并存储MyISAM和BDB表中键的分布）<br />
+	<br />
+	　　3、对表进行检查（检查表的错误，并且为MyISAM更新键的统计内容）<br />
+	<br />
+	　　4、对表进行修复（修复被破坏的MyISAM表）<br />
+	<br />
+	　　一、对表进行优化<br />
+	<br />
+	　　优化表有很多方式实现：&nbsp;OPTIMIZE&nbsp;TABLE语句、mysqlcheck工具（服务器要运行）或myisamchk（服务器没有运行或表中没有交互）<br />
+	<br />
+	　　为什么优化？随着MySQL的使用，包括BLOB和VARCHAR字节的表将变得比较繁冗，因为这些字段长度不同，对记录进行插入、更新或删除时，会占有不同大小的空间，记录就会变成碎片，且留下空闲的空间。像具有碎片的磁盘，会降低性能，需要整理，因此要优化。<br />
+	<br />
+	　　1、利用OPTIMIZE语句对表进行优化<br />
+	<br />
+	　　#&nbsp;mysql&gt;OPTIMIZE&nbsp;TABLE&nbsp;表名<br />
+	<br />
+	　　这样就对表名进行了优化。<br />
+	<br />
+	　　2、利用mysqlcheck对表进行优化<br />
+	<br />
+	　　mysqlcheck可进行优化外，还可执行大量的检查和修复任务。<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;表名&nbsp;-uroot&nbsp;-p111111（一张表）<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;表名1&nbsp;表名2&nbsp;-uroot&nbsp;-p111111（多张表）<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;-uroot&nbsp;-p111111（对整个数据库）<br />
+	<br />
+	　　3、利用myisamchk对表进行优化<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;--quick&nbsp;--check-only-changed&nbsp;--sort-index&nbsp;--analyze&nbsp;表名<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-r&nbsp;表名（参数-r表示对表进行修复，同时也删去了浪费的空间）<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-r&nbsp;/usr/local/mysql/data/testblog/article（指定表所在的路径）<br />
+	<br />
+	　　以上操作需在服务器关闭或没有与服务器互操作的时候，可以使用myisamchk命令行工具（如果服务器正在运行，那么在运行这条语句之前利用mysqladmin&nbsp;flush-tables对表进行刷新；需确保服务器没有与表进行互操作，否则会出现故障）。myisamchk是最老的方法。必须在正确位置上运行myisamchk，或者指定表所在的路径。<br />
+	<br />
+	　　注意：在优化过程中，表会被锁住，因此不要在忙时进行优化操作。同样，需要有足够的空间才能进行OPTIMIZE&nbsp;TABLE。如果没有磁盘空间，MySQL将不能进行优化，表也无法使用。<br />
+	<br />
+	　　优化是对包含MyISAM表的数据库的常规管理事务中一个重要环节，应该定期进行。<br />
+	<br />
+	　　二、对表进行分析<br />
+	<br />
+	　　对表的定期分析可以改善性能，且应该成为常规维护工作的一部分。因为通过更新表的索引信息对表进行分析，可改善数据库性能。<br />
+	<br />
+	　　有三种方法可以对表进行分析：<br />
+	<br />
+	　　1、连接到MySQL时，使用ANALYZE&nbsp;TABLE语句<br />
+	<br />
+	　　2、利用mysqlcheck命令行工具（服务器需要运行，并且只对MyISAM表起作用）<br />
+	<br />
+	　　3、利用myisamchk命令行工具（服务器不应该运行，或无对所操作的表发生互操作）<br />
+	<br />
+	　　#&nbsp;ANALYZE&nbsp;TABLE&nbsp;表名;<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-a&nbsp;数据库名&nbsp;表名&nbsp;-uroot&nbsp;-p111111<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-a&nbsp;数据库名&nbsp;表名1&nbsp;表名2&nbsp;-uroot&nbsp;-p111111<br />
+	<br />
+	　　如果试图对不支持分析操作的表进行分析（如InnoDB），那操作将无法进行。<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-a&nbsp;/usr/local/mysql/data/数据库/表名</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/mysql/2015/0316/231.html'>备份、还原MSSQL数据库的方法</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/mysql/2015/0401/399.html'>MySQL加密函数保护网站重要数据</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/mysql/2015/1020/1309.html" >MySQL 5.7 GA 版本发布，支持在生产</a><span>10.20</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>07.26</span></li>
+<li><a href="/shujuku/mysql/2015/0618/903.html" >LINUX下MYSQL的启动及相关配置</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/902.html" >Linux开放MySQL的3306端口</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0618/901.html" >Linux下重启mysql数据库的方法</a><span>06.18</span></li>
+<li><a href="/shujuku/mysql/2015/0605/881.html" >mysqldump参数介绍教程%mysqldump 参数</a><span>06.05</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>05.07</span></li>
+<li><a href="/shujuku/mysql/2015/0405/602.html" >四种数据库随机获取10条数据的方</a><span>04.05</span></li>
+<li><a href="/shujuku/mysql/2015/0401/422.html" >MySQL CPU占用100%的解决过程和经验</a><span>04.01</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集群解决方案）</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/mysql/2016/0629/1513.html" >MySQL Cluster 7.2.4集群配置</a><span>06.29</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂Can't get hostname for your a</a><span>05.06</span></li>
+<li><a href="/shujuku/mysql/2016/0325/1471.html" >MYSQL数据库备份与恢复</a><span>03.25</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>01.12</span></li>
+<li><a href="/shujuku/mysql/2016/0105/1427.html" >MySQL数据库优化总结之备忘</a><span>01.05</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>12.10</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/mysql/2015/0316/222.html" >mysql安装图解 mysql图文安装教程</a><span>504</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>459</span></li>
+<li><a href="/shujuku/mysql/2015/0316/228.html" >phpmyadmin简明安装教程</a><span>303</span></li>
+<li><a href="/shujuku/mysql/2015/0726/909.html" >linux中mysql开启远程访问功能</a><span>119</span></li>
+<li><a href="/shujuku/mysql/2016/0506/1489.html" >MySQL报错如下message from server: ＂</a><span>113</span></li>
+<li><a href="/shujuku/mysql/2015/0316/216.html" >python之mysql连接 MySQLdb</a><span>95</span></li>
+<li><a href="/shujuku/mysql/2016/0112/1431.html" >14款经典的MySQL客户端软件</a><span>94</span></li>
+<li><a href="/shujuku/mysql/2015/0726/908.html" >MySQL修改密码和忘记ROOT密码</a><span>91</span></li>
+<li><a href="/shujuku/mysql/2015/1210/1411.html" >Linux下修改Mysql的用户(root)的密码</a><span>64</span></li>
+<li><a href="/shujuku/mysql/2015/0316/223.html" >mysql文件太大导入出错的解决方法</a><span>63</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=391&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

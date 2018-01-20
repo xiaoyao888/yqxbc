@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>找不到页面</title>
+<style>
+table a{
+font-size:14px;
+color:#545454;
+}
+</style>
+</head>
+<body>
+<table width="970" height="169" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+    <td align="center"><img src="/images/404.png" width="646" height="391"></td>
+  </tr>
+  <tr>
+
+    <td align="center"><span id="tiao">3</span><a href="javascript:countDown"></a>秒后自动跳转……</td>
+  </tr></table>
+  <!--脚本开始-->
+<script language="javascript" >
+function countDown(secs){
+  tiao.innerText=secs;
+if(secs==1){
+	window.location.href="http://www.flypeng.com";
+}
+  if(--secs>0){	
+	setTimeout("countDown("+secs+")",1000);
+	}
+  }
+
+  countDown(3);
+</script>
+<!-- flypeng.com Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F01a1ff7b6ab0650920aa64bf8bfad7e2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

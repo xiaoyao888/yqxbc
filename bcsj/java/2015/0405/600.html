@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>配置Web应用环境实现JSP留言本的开发_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="配置Web应用环境实现JSP留" />
+  <meta name="description" content="JavaServerPage（简称JSP），和ASP、PHP一样都是网络编程语言，只不过在JSP页面中插入的脚本代码是Java语句片段。要利用JSP编写应用，首先，必须要有一个能执行JSP脚本的Web服务器，可以在" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>配置Web应用环境实现JSP留言本的开发</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-04-05 12:50 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="600" class="art_content">&nbsp;&nbsp;&nbsp;&nbsp;Java&nbsp;Server&nbsp;Page（简称JSP），和ASP、PHP一样都是网络编程语言，只不过在JSP页面中插入的脚本代码是Java语句片段。要利用JSP编写应用，首先，必须要有一个能执行JSP脚本的Web服务器，可以在原有的Apache、IIS或PWS服务器的基础上建立，不过有许多技术上的问题。建议刚接触JSP的虫们，还是白手起家，直接安装一个专门支持JSP的Web服务器，以免节外生枝，这里给大家介绍的是Tomcat&nbsp;3.1。<br />
+<br />
+　　熟悉网络编程的人都知道，在网络编程中要是没有数据库的支持，一件很简单的事做起来都是相当的辛苦。那么在Java环境下使用什么数据库比较好呢？目前，流行的网络数据库主要有Oracle、Sybase、SQL&nbsp;Server、MySQL等，不过最适合个人网站或小型网络使用的首推MySQL，其完全免费、容易安装、容易管理、容易获得、完全支持SQL语言等特点，为目前广大网络编程爱好者所喜欢。本文介绍一下在Windows环境下如何安装Java&nbsp;SDK、Tomcat、MySQL、JDBC&nbsp;for&nbsp;MySQL。<br />
+<br />
+　　软件准备<br />
+<br />
+　　首先要下载到下面这些程序：<br />
+<br />
+1、java编译支持环境：j2sdk1_3_-win.exe(30MB)<br />
+<br />
+2、JDBC&nbsp;for&nbsp;MySQL驱动程序：mm.mysql.jdbc-1.2b.zip(386KB)<br />
+<br />
+3、支持JSP的Web服务器Tomcat3.1:jakarta-to,cat.zip(2.23MB)&nbsp;<br />
+<br />
+4、MySQL数据库存服务器：mysql-3.23.21-beta-win-src.zip(2.23MB)<br />
+<br />
+　　以上程序除MySQL数据库存服务器外，在http://java.sun.com/中都有最新版的程序，在各大下载中心也都很容易下载到。<br />
+<br />
+　　安装具有JDBC&nbsp;for&nbsp;MySQL的JSP开发环境<br />
+<br />
+　　安装Java&nbsp;开发工具包<br />
+<br />
+　　在用户访问Tomcat服务器的JSP页面时，Tomcat首先调用Java开发工具包，编译并执行JSP页面中的Java代码，将结果以HTML的格式返回给客户。因此在安装Tomcat之前，必须先安装Java开发工具包。安装时直接双击下载的j2sdk1_3_0-win.exe，就可以安装Java开发环境,惟一需要操作的就是选择一下安装目录，这里假设安装在C:\\JDK1.3目录下。<br />
+<br />
+　　另外，&nbsp;如果选用中文的Windows，必须修改系统注册表，因为在安装过程中，系统用中文注册&ldquo;Java&nbsp;运行时环境&rdquo;这一分支，该分支用于指明Java运行时所需文件的目录，而Java&nbsp;SDK不能识别系统注册表中的中文数据。<br />
+<br />
+　　具体步骤是：用RegEdit打开注册表并找到Javasoft项,位置为：hkey_local_machine&rarr;software&rarr;javasoft，找到&nbsp;&ldquo;Java&nbsp;运行时环境&rdquo;，把这个分支导出到文件1.reg中。然后用文本编辑器打开1.reg，把其中的所有&ldquo;Java&nbsp;运行时环境&rdquo;替换成&ldquo;Java&nbsp;Runtime&nbsp;Environment&rdquo;并保存，双击该文件导入注册表。&nbsp;<br />
+<br />
+　　接着是设置环境变量。在Win&nbsp;9x中，要编辑Autoexec.bat文件，用Set&nbsp;语句来设定环境变量。在Win&nbsp;NT或Win&nbsp;2000中可以选择&ldquo;我的电脑&rdquo;，右键点出选单，选择&ldquo;属性&rdquo;，弹出&ldquo;系统特性&rdquo;对话框,&nbsp;选择&ldquo;高级&rdquo;,然后点按钮&ldquo;环境变量&rdquo;，就可以编辑系统的环境变量了。<br />
+<br />
+　　在其中加入如下语句：<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				rem&nbsp;设置路径&nbsp;<br />
+				PATH=%PATH%;c:\\jdk1.3;<br />
+				c:\\jdk1.3\\bin&nbsp;<br />
+				rem&nbsp;设置java环境变量&nbsp;<br />
+				set&nbsp;CLASSPATH=C:\\jdk1.3\\lib\\Tools.jar;<br />
+				C:\\jdk1.3\\lib\\dt.jar;&nbsp;<br />
+				rem&nbsp;设置java主目录&nbsp;<br />
+				set&nbsp;JAVA_HOME=c:\\jdk1.3</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;&nbsp;<br />
+<br />
+　　安装Tomcat&nbsp;3.1<br />
+<br />
+　　安装Tomcat3.1比较简单，直接把jakarta-tomcat.zip解压释放到C:\\Tomcat目录下即可，接着是设置环境变量，加入如下语句：<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				rem&nbsp;设置路径&nbsp;<br />
+				PATH=%PATH%;<br />
+				c:\\tomcat&nbsp;<br />
+				rem&nbsp;设置tomcat环境变量&nbsp;<br />
+				set&nbsp;CLASSPATH=c:\\tomcat\\classes;<br />
+				c:\\tomcat\\lib;%CLASSPATH&nbsp;<br />
+				rem&nbsp;设置TOMcat的主目录&nbsp;<br />
+				set&nbsp;TOMCAT_HOME=c:\\tomcat</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;&nbsp;<br />
+<br />
+　　重新启动电脑后，你就拥有了一台支持JSP的Web服务器。运行C:\\Tomcat\\Bin目录下Startup.bat后出现两个命令行方式的窗口。这时在浏览器中键入&nbsp;http://localhost:8080/，应该可以看到Tomcat&nbsp;3.1的画面了。对了，千万不要把这两个窗口关了，它表示是Java和Tomcat正在后台运行。要关闭服务器可执行C:\\Tomcat\\Bin目录下Shutdown.bat。&nbsp;<br />
+<br />
+　　安装MySQL数据库管理系统&nbsp;<br />
+<br />
+　　将下载的mysql-3.23.21-beta-win-src.zip解压缩到一个临时目录，运行临时目录中的Setup，根据安装向导选择好安装目录和安装方式，系统就会完成安装。这里假设安装在C:\\MySQL目录下。运行C:\\MySQL\\Bin\\目录下的mysqld-shareware.exe就可以启动MySQL了。启动MySQL后，Windows桌面没什么变化，可以通过执行MySQL&nbsp;Manager来检查数据库服务是否安装成功。如果安装成功，你就可以直接打开里面的库Test和MySQL。&nbsp;<br />
+<br />
+　　安装JDBC&nbsp;for&nbsp;MySQL&nbsp;<br />
+<br />
+　　为了使Java能操作MySQL的数据库，需要安装MySQL的JDBC驱动程序，将mm.mysql.jdbc-1.2b.zip解压到C:\\下，自动生成一个mm.mysql.jdbc-1.2b的目录，并设置环境变量：&nbsp;<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				rem&nbsp;设置mysql.jdbc环境变量&nbsp;<br />
+				set&nbsp;CLASSPATH=c:\\mm.mysql.jdbc-1.2b;<br />
+				%CLASSPATH</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　重新启动后，所有的安装就全部OK了！&nbsp;<br />
+<br />
+　　例子：使用环境建立留言本&nbsp;<br />
+<br />
+　　建立存放数据的表&nbsp;<br />
+<br />
+　　要设计一个留言本，首先必须在MySQL的数据库中建立一个存放留言数据的表，假设该表为Questbook，其结构如下：&nbsp;<br />
+<br />
+Recordid&nbsp;存放记录号&nbsp;<br />
+<br />
+name&nbsp;存放留言者的姓名&nbsp;<br />
+<br />
+Email&nbsp;存放留言者的邮件地址&nbsp;<br />
+<br />
+body&nbsp;存放留言者的留言&nbsp;<br />
+<br />
+　　具体操作步骤：&nbsp;<br />
+<br />
+1.执行程序mysqld-shareware.exe，启动MySQL。&nbsp;<br />
+<br />
+2.执行程序MySQLManager，打开库Test。&nbsp;<br />
+<br />
+3.选择Tools选单下的SQL&nbsp;Query&nbsp;，出现MySQL&nbsp;Query窗口。&nbsp;<br />
+<br />
+4.在Query标签下，输入命令如下：create&nbsp;table&nbsp;questbook(Recordid&nbsp;int,Name&nbsp;char(20),Email&nbsp;char(30),&nbsp;Body&nbsp;text)。&nbsp;<br />
+<br />
+5.单击运行图标。你就可以得到用于存放留言本数据的表Questbook。&nbsp;<br />
+<br />
+　　编写留言本程序&nbsp;<br />
+<br />
+　　Java是通过JDBC&nbsp;for&nbsp;MySQL提供的工具包中的API函数，来调用MySQL的数据库，你可以用浏览器打开C:\\mm.mysql.jdbc-1.2b\\doc\\apidoc\\index.html文件来获得所有API函数说明。下面我只向大家介绍几个编写留言本所需的函数。&nbsp;<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				Class.forName(&quot;org.gjt.mm.mysql.Driver&quot;);<br />
+				用于加载&nbsp;mm.mysql驱动程序&nbsp;<br />
+				con&nbsp;=&nbsp;DriverManager.getConnection<br />
+				(&quot;jdbc:mysql://localhost:3306/test?user=root;<br />
+				password=&quot;);<br />
+				用于连接本地数据库MySQL&nbsp;<br />
+				stmt&nbsp;=&nbsp;con.createStatement();<br />
+				生成数据库对象&nbsp;<br />
+				rs&nbsp;=&nbsp;stmt.executeQuery(&quot;SELECT&nbsp;*&nbsp;FROM&nbsp;guestbook&quot;);<br />
+				执行SQL语句并返回结果集</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+<br />
+　　将程序编好后放在Tomat的发布目录C:\\Tomcat\\webapps\\ROOT下就可以了。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0405/599.html'>关于传递参数长度为奇数时最后一个字符乱码的问题</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0405/601.html'>Tomcat数据库连接池设置与应用</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=600&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

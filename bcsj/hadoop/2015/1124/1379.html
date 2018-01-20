@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hadoop集群（第1期）_CentOS安装配置_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Hadoop集群,CentOS安装配置" />
+  <meta name="description" content="1、准备安装 1.1 系统简介 CentOS 是什么？ CentOS 是一个基于 Red Hat 企业级 Linux 提供的可自由使用的 源代码企业级 的 Linux 发行版本。 每个版本 的 CentOS 都会获得 七年 的 支持 （通过安全" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Hadoop/'>Hadoop</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Hadoop集群（第1期）_CentOS安装配置</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-11-24 13:37 来源：虾皮工作室 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1379" class="art_content"><h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	1、准备安装</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.1 系统简介</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　CentOS 是什么？</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　CentOS</strong></span>是一个基于<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Red Hat&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;">企业级 Linux</span></strong>&nbsp;</span>提供的可自由使用的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">源代码企业级</strong></span>的 Linux 发行版本。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">每个版本</strong></span>的&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">CentOS</strong></span>&nbsp;都会获得<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">七年</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">支持</strong></span>（通过安全更新方式）。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">新</strong></span>版本的&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">CentOS</strong></span>&nbsp;每<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">两年</strong></span>发行一次，而每个版本的 CentOS 会定期（大概每六个月）更新一次，以便支持新的硬件。这样，建立一个安全、低维护、稳定、高预测性、高重复性的 Linux 环境。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　CentOS（Community Enterprise Operating System）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">高度稳定性</strong></span>的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">两者</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">不同</strong></span>，在于<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">CentOS</strong></span>并<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">不包含<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;">封闭源代码<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;">软件</span></span></strong>。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　CentOS是一个开源软件贡献者和用户的社区。它对RHEL源代码进行重新编译，成为众多发布新发行版本的社区当中的一个，并且在不断的发展过程中，CentOS社区不断与其他的同类社区合并，使CentOS Linux逐渐成为使用最广泛的RHEL兼容版本。CentOS Linux的稳定性不比RHEL差，<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">唯一不足</strong></span>的就是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">缺乏<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;">技术支持</span></strong>，因为它是由社区发布的免费版。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　CentOS Linux</strong></span>与<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">RHEL</strong></span>产品有着<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">严格</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">版本对应关系</strong></span>，例如使用RHEL4源代码重新编译发布的是CentOS Linux 4.0，RHEL5对应的是CentOS Linux 5.0，RHEL6对应的是CentOS Linux 6。由于RHEL产品的生命周期较长（通常具有3~5年的官方支持），因此Red Hat公司在RHEL系列产品发布后每隔一段时间，都会将累积的更新程序重新打包成为更新的发行版进行发布，通常称为RHEL Update。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　例如，RHEL5的第1个更新版本叫做RHEL 5 Update 1，用户通常也称为RHEL 5.1。对Red Hat公司发布的每一个RHEL Update CentOS社区都会发布对应的更新发行版，例如根据RHEL 5的Update 1更新程序源码包，CentOS会重新编译并打包发布CentOS Linux 5.1版。CentOS Linux和与之对应版本号的RHEL发行版具有软件包级别的二进制兼容性，即某个RPM软件包如果可以安装运行在RHEL产品中，就可以正常地安装运行在对应版本的CentOS Linux中。CentOS Linux由于同时具有与RHEL的兼容性和企业级应用的稳定性，又允许用户自由使用，因此得到了越来越广泛的应用。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　CentOS特点</strong></span></p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		可以把<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">CentOS</strong></span>理解为Red Hat AS系列！它完全就是对Red Hat AS进行改进后发布的！各种操作、使用和RED HAT没有区别！</li>
+	<li class="_mce_tagged_br" style="margin: 0px; padding: 0px; list-style: disc; text-align: justify;">
+		CentOS完全免费，不存在RED HAT AS4需要序列号的问题。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		CentOS<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">独有</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">yum</strong></span>命令支持在线升级，可以即时更新系统，不像RED HAT那样需要花钱购买支持服务！</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		CentOS修正了许多RED HAT AS的BUG！</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		CentOS版本说明： CentOS3.1 等同于 RED HAT AS3 Update1 CentOS3.4 等同于 RED HAT AS3 Update4 CentOS4.0 等同于 RED HAT AS4。</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.2 安装版本</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　本次安装</strong></span>我们选择<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">CetOS6.0</strong></span>版本，下面从几个方面介绍一下这个版本。</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">集成基于内核的虚拟化</strong></span>。CentOS 6.0集成了基于内核的虚拟化，将<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">KVM</strong></span>管理程序完全集成到内核中。这样的功能可以帮助CentOS 6.0用户在主机之间轻松迁移虚拟机，更加灵活地部署和管理IT资源，有效为企业节省资源。利用内核的硬件抽象使应用程序能够独立于底层硬件，并且提高 CPU和内存可扩展性，使每个服务器可容纳更多虚拟机。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">提升系统和资源管理功能</strong></span>。基于标准的Linux可管理性规范（SBLIM）使用基于Web的企业管理（WBEM）来管理系统。用Dracut取代mkinitrd，最大限度地减少底层硬件改变的影响，更易于维护，并使支持第三方驱动程序更容易。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">加强电源管理</strong></span>，按时的内核改进使CentOS 6.0可以将没有活动任务的处理器置为空闲状态，以达到降低CPU的温度和更进一步减少能耗。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			在一种叫做<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">控制组</strong></span>（即cgroups）的新框架的帮助下CentOS 6.0<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">提供对硬件资源的细颗粒度控制、分配和管理</strong></span>。cgroups运行在进程组水平上，可被用于为应用管理从CPU、内存、网络和硬盘I/O的资源。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">增强了系统的可靠性、可用性和适用性</strong></span>。CentOS 6.0利用新硬件能力提供热插拔特性，并且可以通过AER的PCIe设备的增强错误检查。CentOS 6.0包括高级数据完整性特性（DIF/DIX）。这类特性通过硬件检查和检验来自应用的数据。自动缺陷报告工具（ABRT）的引进提供了确定和报告系统 异常情况，包括内核故障和用户空间应用崩溃等。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">改进了可伸缩性和内核性能</strong></span>。CentOS 6.0提供了适应未来系统的可伸缩性，其可伸缩性能力从对大量CPU和内存配置的优化的支持到处理更多数量的系统互联总线和外设的能力。在虚拟化变得同裸机部署一样无处不在之时，这些能力适合于裸机环境和虚拟化环境。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">CentOS 6.0改进了内核性能</strong></span>，可以通过让更高优先级的进程在最低限度的较低优先级处理干扰的条件下，更公平地在处理器之间分配计算时间。同时CentOS 6.0将多种多处理器锁同步进行改进，以消除不必要的锁定事件、用睡眠锁定代替许多旋转（spin）锁定和采用更高效的锁定基元。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">稳定的应用程序开发与生产平台</strong></span>。CentOS 6.0是一个高性能、高度可扩展、分布式、基于内存的对象缓存系统，大大提高了动态Web应用程序的速度。在Web基础架构上主要改进了Apache、 Squid和Memcached三个方面的改进。在Java性能支持上，CentOS 6.0和OpenJDK的紧密集成包括在SystemTap中支持Java探测器，从而可支持更好的Java调试。同时，CentOS 6.0也在逐步完善Tomcat 6的支持。</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　官方网站与文档</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		官方主页：&nbsp;http://www.centos.org/</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		官方Wiki：&nbsp;http://wiki.centos.org/</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		官方中文文档 ：http://wiki.centos.org/zh/Documentation</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		安装说明：&nbsp;http://www.centos.org/docs/</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.3 硬件信息</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">　　现在<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">Linux发行版</span></strong>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">安装程序</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">硬件识别能力<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">都比较强</span></strong>，即使不查询什么硬件信息，安装操作系统也没有什么大问题，不过对于<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">非常新</strong></span>的硬件和笔记本电脑这样比较特殊的设备，还是建议在网络上查询一下相关硬件的信息，以确保硬件</span>可以被驱动。这里列举几种可能需要<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">重点考察</strong></span>的硬件，对于任何一种发行版都需要注意如下这些问题。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc; text-align: justify;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">主板芯片组支持</strong></span>。这是一组比较重要的硬件信息，可能影响到硬盘是否可以使用、可以启用UDMA，是否可以使用ACPI或APM电源管理等。这里的支持程序总是和内核版本相关的，考察的时候要注意对应的内核版本。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">网络设备支持</strong></span>。目前，对于一般用户主要是以太网卡和无线网卡，有些无线网卡的驱动还没有被整合进内核，但确实已经有驱动支持了。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">声卡</strong></span>。Linux对声音芯片的支持在历史上饱受诟病，但自从ALSA（Advanced Linux Sound Architecture）诞生以来，这个问题已经得到了很大程序的缓解，现在，ALSA是2.6内核的一部分。不过，仍然有一些声卡问题不时地出现。特别的，目前大多数的用户使用的是主板板载声卡，在安装系统之前应该考察一下Linux内核对该主板芯片声效功能的支持。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">显卡</strong></span>。主流的显卡目前都可以得到支持，如果需要的话，看一下显卡芯片的厂商、型号、显存大小基本就可以了，如果希望省事的话，可以考虑选择性能虽然不强，但开源驱动的稳定性和性能最好的Intel整合显卡，而追求高性能显卡的用户可以考虑NVIDIA芯片并在日后使用官方的驱动程序，来获得更好的3D性能，ATI/ADM显卡目前的Linux驱动是不理想的，但AMD已经开放了芯片的技术规范，未来一定会得到开源驱动的良好支持。</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">其他外设</strong></span>。USB键盘和鼠标一般都可以被支持，少数最低端的硬盘盒的移动硬盘可能不会被支持，摄像头这些小硬件大部分都可以被支持了，另外就是一些笔记本电脑，需要考察一下。</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　为了有备无患，要考察的信息还是比较多的，除了上网查找和询问周围的朋友外，使用Live CD进行体验也是一个很不错的办法。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.4 硬盘分区</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在计算机上安装Linux系统，对硬盘进行分区是一个非常重要的步骤，下面介绍几个分区方案。</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">方案1（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">桌面<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">）</span></span></strong></span></li>
+</ul>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/boot</strong></span>：用来存放与Linux系统启动有关的程序，比如启动引导装载程序等，建议大小为100MB。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/</strong></span>：Linux系统的根目录，所有的目录都挂在这个目录下面，建议大小为5GB以上。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/home</strong></span>：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">swap</strong></span>：实现虚拟内存，建议大小是物理内存的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">1~2</strong></span>倍。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">方案2（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">服务器<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">）</span></span></strong></span></li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/boot</strong></span>：用来存放与Linux系统<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">启动有关</strong></span>的程序，比如启动引导装载程序等，建议大小为100MB。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/usr</strong></span>：用来存放Linux系统中的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">应用程序</strong></span>，其相关数据较多，建议大于3GB以上。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/var</strong></span>：用来存放Linux系统中经常变化的数据以及日志文件，建议大于1GB以上。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/home</strong></span>：存放普通用户的数据，是普通用户的宿主目录，建议大小为剩下的空间。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/</strong></span>：Linux系统的根目录，所有的目录都挂在这个目录下面，建议大小为5GB以上。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">/tmp</strong></span>：将临时盘在独立的分区，可避免在文件系统被塞满时影响到系统的稳定性。建议大小为500MB以上。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">swap</strong></span>：实现虚拟内存，建议大小是物理内存的1~2倍。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	2、光盘安装</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.1 安装引导</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　首先要设置计算机的BIOS启动顺序为光驱启动，保存设置后将安装光盘放入光驱，重新启动计算机。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　计算机启动以后会出现如下图所示的界面。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125B3-0.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　你可以直接按下<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">&lt;Enter&gt;</strong></span>来进入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">图形界面</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">安装方式</strong></span>或者<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">等待<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">60<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">秒</span></span></strong>。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　下面是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">上图</strong></span>所示<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">引导菜单</strong></span>选项如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Install or upgrade an existing system</strong></span>（安装或升级现有系统）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　这个选项是默认的。 选择此选项，安装到您的计算机使用CentOS的图形安装程序的系统。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Install system with basic video driver</strong></span>（安装系统，基本的视频驱动程序）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　此选项允许您安装CentOS的模式，即使在图形安装程序无法加载视频卡的正确驱动程序为您的。如果你的屏幕上出现扭曲或一片空白时使用的安装或升级现有系统的选项，重新启动计算机，并尝试此选项。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Rescue installed system</strong></span>（救援安装的系统）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择这个选项来修复您的安装CentOS系统，防止正常启动你一个问题。虽然CentOS是一个非常稳定的计算平台，它是偶然的问题仍有可能发生，防止启动。 救援环境包含实用程序，允许您解决这些问题，品种繁多。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Boot from local drive</strong></span>（从本地驱动器启动）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　此选项将引导从第一个安装的磁盘系统。 如果你意外地启动这个光盘，使用未立即启动安装程序这是从硬盘启动选项。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.2 检测光盘介质</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如下图所示，如果是一张完整的安装盘，可以直接单击&quot;Skip&quot;按钮跳过，否则单击&quot;OK&quot;按钮检测安装盘的完整性。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125303-1.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：如果你确定你所下载的DVD或光盘没有问题的话，那么这里可以选择<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">&#39;Skip&#39;</strong></span>， 不过，你也可以按下<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">&#39;OK&#39;</strong></span>来进行DVD的分析，因为通过DVD的分析后，后续的安装比较不会出现奇怪的问题。 不过如果你按下&#39;OK&#39;后，程式会开始分析光盘内的所有文件的资讯，会<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">花非常多</strong></span>的时间喔！</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.3 安装欢迎界面</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　当检测完电脑硬件信息后，进入安装欢迎界面，如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612KU-2.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.4 选择安装过程中的语言</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　单击&quot;Next&quot;按钮进入如下图所示的界面，选择安装过程中使用的语言，此处选择&quot;Chinese （Simplified）（中文（简体））&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612I38-3.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.5 选择键盘布局类型</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择完安装过程中的语言后，单击&quot;下一步&quot;按钮进入如下图所示的界面，选择键盘类型一般默认会选择&quot;美国英语式（U.S.English）&quot;，即美式键盘，在此使用默认的选择。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612G91-4.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.6 选择设备</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择一种存储设备进行安装。&quot;基本存储设备&quot;作为安装空间的默认选择，适合哪些不知道应该选择哪个存储设备的用户。而&quot;指定的存储设备&quot;则需要用户将系统安装指定到特定的存储设备上，可以是本地某个设备，当然也可以是SAN（存储局域网）。用户一旦选择了这个选项，可以添加FCoE/iSCSI/zFCP磁盘，并且能够过滤掉安装程序应该忽略的设备。这里选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">基本存储设备</strong></span>&quot;，单击&quot;下一步&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612E34-5.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">基本存储设备</strong></span>：用于台式机和笔记本等等；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">指定存储设备</strong></span>：用于服务器等等。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.7 初始化硬盘</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如果硬盘上<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">没有</strong></span>找到分区表，安装程序会要求<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">初始化硬盘</strong></span>。此操作使硬盘上的任何现有数据无法读取。如果您的系统具有全新的硬盘没有操作系统安装，或删除硬盘上的所有分区，则单击 &quot;重新初始化&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336123Z3-6.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：安装程序将为您提供一个单独的对话框，为每个磁盘，它无法读取一个有效的分区表。单击&quot;忽略所有&quot;按钮，或&quot;重新初始化所有&quot;按钮，可将应用到所有设备相同的答案。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.8 设置主机名与网络</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　安装程序会提示您提供和域名为这台计算机的主机名格式，设置主机名和域名 。 许多网络有DHCP（动态主机配置协议）服务，它会自动提供域名系统的一个连接，让用户输入一个主机名。除非您有特定需要定制的主机名和域名，默认设置 localhost.localdomain 是一个很好的选择大多数用户。我们这里按照下表进行填写主机名和域名，详情请看&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Hadoop集群_第<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">2<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">期_机器信息分布表</span></span></strong>&quot;。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	表2.8-1 机器信息分布</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<table border="1" cellpadding="1" cellspacing="1" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; word-break: break-word;">
+		<caption style="margin: 0px; padding: 0px;">
+			&nbsp;</caption>
+		<colgroup style="margin: 0px; padding: 0px;">
+			<col style="margin: 0px; padding: 0px; width: 171px;" />
+			<col style="margin: 0px; padding: 0px; width: 180px;" />
+		</colgroup>
+		<tbody style="margin: 0px; padding: 0px;" valign="top">
+			<tr style="margin: 0px; padding: 0px; background: rgb(224, 224, 224);">
+				<td style="margin: 0px; padding: 3px 7px; border: 0.5pt solid; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 宋体; font-size: 10pt;"><strong style="margin: 0px; padding: 0px;">机器名称</strong></span></p>
+				</td>
+				<td style="margin: 0px; padding: 3px 7px; border-width: 0.5pt 0.5pt 0.5pt 1px; border-style: solid solid solid none; border-left-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-size: 10pt;"><strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman';">IP</span><span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 宋体;">地址</span></strong></span></p>
+				</td>
+			</tr>
+			<tr style="margin: 0px; padding: 0px;">
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt; border-style: none solid solid; border-top-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">Master.Hadoop</span></p>
+				</td>
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt 1px; border-style: none solid solid none; border-top-color: silver; border-left-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">192.168.1.2</span></p>
+				</td>
+			</tr>
+			<tr style="margin: 0px; padding: 0px;">
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt; border-style: none solid solid; border-top-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">Salve1.Hadoop</span></p>
+				</td>
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt 1px; border-style: none solid solid none; border-top-color: silver; border-left-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">192.168.1.3</span></p>
+				</td>
+			</tr>
+			<tr style="margin: 0px; padding: 0px;">
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt; border-style: none solid solid; border-top-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">Salve2.Hadoop</span></p>
+				</td>
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt 1px; border-style: none solid solid none; border-top-color: silver; border-left-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">192.168.1.4</span></p>
+				</td>
+			</tr>
+			<tr style="margin: 0px; padding: 0px;">
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt; border-style: none solid solid; border-top-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">Salve3.Hadoop</span></p>
+				</td>
+				<td style="margin: 0px; padding: 3px 7px; border-width: 1px 0.5pt 0.5pt 1px; border-style: none solid solid none; border-top-color: silver; border-left-color: silver; border-collapse: collapse;">
+					<p style="margin: 10px auto; padding: 0px; text-align: justify;">
+						<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 'times new roman'; font-size: 10pt;">192.168.1.5</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336123163-7.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　设置固定IP</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择『配置网络』<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: wingdings;">&agrave;</span>『有线』<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: wingdings;">&agrave;</span>『eth0』<span style="margin: 0px; padding: 0px; line-height: 1.8; font-family: wingdings;">&agrave;</span>『编辑』，弹出编辑窗口上选择&quot;IPv4设置&quot;，打开&quot;方法&quot;边上的下拉菜单，选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">手动</strong></span>&quot;。单击 &quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">添加</strong></span>&quot;按钮，依次输入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">本机的IP</strong></span>、<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">子网掩码</strong></span>、<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">网关</strong></span>。在下面的&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">DNS服务器</strong></span>&quot;处输入DNS地址。最后，点击&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">应用</strong></span>&quot;按钮即可。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612E96-8.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按照前面的表2.8-1进行配置IP地址。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336124002-9.png" style="margin: 0px; padding: 0px; border: 0px;" />&nbsp;<img alt="" src="/uploads/allimg/151124/133612M08-10.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.9 时区选择</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　因为全世界分为24个时区，所以，要告知系统时区在哪里。如下图所示，你可以选择北京，或直接用鼠标在地图上选择。要特别注意UTC，它与&quot;夏令时&quot;有关，我们<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">不需要</strong></span>选择这个选项，否则会造成时区混乱，导致系统显示的时间与本地时间不同。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336121454-11.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.10 设置管理员密码</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　下面是最重要的&quot;系统管理员的口令&quot;设置，如下图所示。在Linux中，系统管理员的默认名称为<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">root</strong></span>，请注意，这个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">口令很重要</strong></span>。至少6个字符以上，含有特殊符号，并要记好。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336126324-12.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：当你设置好进入下一步时，由于你的密码可能设置的过于简单，此时会弹出一个对话框，如果你要坚持你设置的密码，可以选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">无论如何都是用</strong></span>&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.11 磁盘分区配置</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　为方便大家分区硬盘，CentOS预设给了我们分区模式，分别为：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/13361234U-13.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：我们<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">实际</strong></span>是直接选的是&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">使用所有空间</strong></span>&quot;，当时就是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">图方便</strong></span>，但实际工作中却要按照实际的要求对硬盘进行分区，合理利用硬盘。而这里选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">创建自定义布局</strong></span>&quot;，按照<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">1.4</strong></span>小节给出的服务器分区方案对硬盘重新分区。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　下面是对每个选项的详细介绍：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">使用所有空间</strong></span>（Use All Space ）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择此选项，删除您硬盘上的所有分区（这包括如Windows的NTFS分区VFAT或其他操作系统创建的分区）。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">替换现有的Linux系统</strong></span>（Replace Existing Linux System）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择此选项，以消除先前的Linux安装创建的分区。 这不会删除其他分区（如VFAT或FAT32分区），你可能对您的硬盘驱动器。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">缩小现有系统</strong></span>（Shrink Current System）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择此选项，调整当前的数据和分区安装在手动释放的空间是一个默认的红帽企业Linux布局。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">使用剩余空间</strong></span>（Use Free Space）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择此选项以保留您当前的数据和分区并安装在未使用的存储驱动器上的空间可用的Scientific。 确保有足够的存储驱动器上的可用空间，然后再选择此选项。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px;">
+		<li style="margin: 0px; padding: 0px; list-style: disc;">
+			<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">创建自定义布局</strong></span>（Create Custom Layout）：</li>
+	</ul>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择此选项，手动存储设备进行分区并创建自定义布局。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　下面是&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">创建自定义布局</strong></span>&quot;的步骤：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第一步</strong></span>：选择&quot;创建自定义布局&quot;，按&quot;下一步&quot;按钮；如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336122L9-14.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第二步</strong></span>：创建&quot;/boot&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　选择要分区的空闲空间，按下&quot;创建&quot;后，就会出现如下的画面。选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">标准分区</strong></span>&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336123409-15.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/boot&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">100</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;；点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612N61-16.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第三步</strong></span>：创建&quot;/&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，按下&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">5000</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;；点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612C96-17.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第四步</strong></span>：创建交换空间</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，点&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　文件系统类型</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">swap</strong></span>&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">1000</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;。点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/13361251C-18.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：&quot;交换空间&quot;用于实现虚拟内存，建议大小是物理内存的1~2倍。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第五步</strong></span>：创建&quot;/usr&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，按下&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/usr&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">3000</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;；点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336121304-19.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第六步</strong></span>：创建&quot;/var&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，按下&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/var&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">1000</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;，点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：图与第五步基本相同，故略。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第七步</strong></span>：创建&quot;/tmp&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，按下&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/tmp&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">大小</strong></span>：输入分配的大小<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">500</strong></span>，以 MB 为单位；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">固定大小</strong></span>&quot;，点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：图与第五步基本相同，故略。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　第八步：</strong></span>&quot;/home&quot;分区</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　继续选择空闲空间，点&quot;创建&quot;后，就会出现如下的画面。选择&quot;标准分区&quot;后，点击&quot;生成&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">　　挂载点</strong></span>：选择&quot;/home&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">文件系统类型</strong></span>：使用默认&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Ext4</strong></span>&nbsp;日志文件系统&quot;；<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">其它大小选项</strong></span>：选择&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">使用全部可用空间</strong></span>&quot;，点&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">确定</strong></span>&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336121591-20.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　至此，分区已全部创建完毕，如果不满意，还可以点击&quot;重设&quot;按钮进行更改。如果确定，就点&quot;下一步&quot;按钮后，弹出&quot;是否格式化以下已存在的硬盘&quot;，选择&quot;格式化&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336121412-21.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　安装程序会提示您确认您所选的分区选项。单击&quot;将修改写入磁盘&quot;，以允许安装程序在您的硬盘进行分区，并安装系统更改。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125Q3-22.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.12引导装载程序设置</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如下图所示为GRUB引导安装窗口，可采用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">默认设置</strong></span>，直接单击&quot;下一步&quot;按钮。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/133612CO-23.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：设置引导装载程序密码的方法是，选择&quot;使用引导装载程序口令&quot;，在弹出的窗口中输入密码。我们<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">实际</strong></span>中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">并没有</strong></span>设置<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">此项</strong></span>。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.13选择安装的软件包</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　可选的服务器类型更多，而且默认安装是一个非常小的甚至不完整的系统。选中&quot;现在自定义&quot;，然后单击&quot;下一步&quot;按钮，如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336123242-24.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　可选的类型说明如下：</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc; text-align: justify;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Desktop</strong></span>：基本的桌面系统，包括常用的桌面软件，如文档查看工具。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Minimal Desktop</strong></span>：基本的桌面系统，包含的软件更少。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Minimal</strong></span>：基本的系统，不含有任何可选的软件包。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Basic Server</strong></span>：安装的基本系统的平台支持，不包含桌面。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Database Serve</strong></span>r：基本系统平台，加上MySQL和PostgreSQL数据库，无桌面。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Web Server</strong></span>：基本系统平台，加上PHP，Web server，还有MySQL和PostgreSQL数据库的客户端，无桌面。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Virtual Host</strong></span>：基本系统加虚拟平台。</li>
+</ul>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Software Development Workstation</strong></span>：包含软件包较多，基本系统，虚拟化平台，桌面环境，开发工具。</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：我们这里安装Linux是作为服务器使用，没有必要安装图形界面，故选择的是最小化安装（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Minimal</strong></span>），如果想安装图形界面，可以选择桌面安装（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Desktop</strong></span>）。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	因为上一步我们选择的是最小化安装（Minimal），所以在以下软件包设置画面中，所有的软件包默认都是没有被选中的状态。这里我们只选择我们需要的软件包来安装。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　首先</strong></span>，选中「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">基本系统</strong></span>」中的「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">基本</strong></span>」。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125291-25.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　然后</strong></span>，选中「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">开发</strong></span>」中的「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">开发工具</strong></span>」。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125Z0-26.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">　　最后</strong></span>，在「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">语言支持</strong></span>」中选中「<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;"><strong style="margin: 0px; padding: 0px;">中文支持</strong></span>」。如果您有支持其他语言的需要，也可以在这里一并选择。最后点击&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">下一步</strong></span>&quot;，开始安装。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336121109-27.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.14开始安装Linux系统</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　开始安装。在安装的画面中，会显示还需要多少时间，每个软件包的名称，以及该软件包的简单说明，如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/13361242b-28.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　等到安装完之后，一切就都完成了。出现最后这个画面时，请将光盘拿出来，并按下&quot;重新引导&quot;按钮去启动，如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336124F3-29.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	3、环境设置</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在CentOS 6刚刚安装好之后，<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">默认的安全设置</strong></span>以及<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">服务启动</strong></span>等等可能<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">并不符</strong></span>合我们的需求，所以在搭建各种系统服务之前，我们先将系统环境设置为最为简洁的状态，在以后开通各种服务的时候，在按照服务的需求来进行具体的定制。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.1 建立一般用户</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　root</strong></span>&nbsp;用户拥有<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">控制<span style="margin: 0px; padding: 0px; line-height: 1.8; color: fuchsia;">整个系统</span></strong>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">最高权限</strong></span>，如果在一般的操作中我们用</span>&nbsp;root 来进行，很容易不小心对系统造成误删、误更改等操作，所以我们首先建立一般用户，用一般用户来应付日常的系统操作。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336126152-30.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在一般用户建立成功以后，我们就可以用一般用户来登录系统进行日常的系统管理。在一些需要 root 权限的情况，我们可以通过以下方式在一般用户的登录状态下直接登录为 root 用户来进行需要 root 权限的操作。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125E4-31.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如以上示范，我们可以在一般用户登录的状态下通过&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">su -</strong></span>&quot;命令来直接登录为 root 用户。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.2 关闭防火墙及SELinux</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　本站文档是假定「服务器在防火墙以内」的前提下编纂的，在这个前提下，服务器本身在内部网络是不需要防火墙的（在需要抵御内部安全威胁的情况下，您也可以用您在 iptables 方面的相关知识，根据实情设置防火前，并保证服务器端防火墙启动的状态）。另外，在一般情况下，我们不需要 SELinux 复杂的保护，所以也将其设置为无效的状态。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　关闭防火墙</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/13361252I-32.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　关闭SELinux</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　用下面命令执行，并修改内容如下所示：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		vim /etc/sysconfig/selinux</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">SELINUX=enforcing</strong></span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&darr;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">SELINUX=disabled</strong></span></p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125251-33.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　接着在执行如下命令：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		setenforce 0</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		getenforce</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336124533-34.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.3 关闭不需要的服务</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　使用下面命令进行关闭不需要的服务：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">for</strong></span>&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">SERVICES</strong></span>&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">in</strong></span>&nbsp;abrtd acpid auditd avahi-daemon cpuspeed haldaemon mdmonitor messagebus udev-post;&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">do</strong></span>&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">chkconfig</strong></span>&nbsp;${<span style="margin: 0px; padding: 0px; line-height: 1.8; color: green;"><strong style="margin: 0px; padding: 0px;">SERVICES</strong></span>}<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">off</strong></span>;&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">done</strong></span></p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1336125059-35.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注</strong></span>：该文档由于是事后很久才编写，当时在安装Linux的时候，所以本节的3.2和3.3并没有进行，以至于后来遇到不少麻烦，所以在这里把这些遗漏的补上。另外本文档所有的截图并不是当时实际安装，而是为了编写此文档在虚拟机上安装时截的图，所以个别图上的信息反映的是虚拟机的硬件信息，在实际中则不一样，安装时请注意细微差别。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	原文链接http://www.cnblogs.com/xia520pi/archive/2012/05/16/2503770.html</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Hadoop/2015/1106/1361.html'>还不懂Hadoop分布式文件系统HDFS的工作原理？</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Hadoop/2015/1124/1380.html'>Hadoop集群（第2期）_机器信息分布表</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>11.06</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>06.18</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>06.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案例</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详解</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境设置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无密码配置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布表</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>951</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>554</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>218</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>59</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>48</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>47</span></li>
+<li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>39</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>37</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>32</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>29</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1379&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

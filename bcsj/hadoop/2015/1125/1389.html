@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hadoop集群（第6期）_WordCount运行详解_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Hadoop集群,WordCount运行详解" />
+  <meta name="description" content="1、MapReduce理论简介 1.1 MapReduce编程模型 MapReduce采用分而治之的思想，把对大规模数据集的操作，分发给一个主节点管理下的各个分节点共同完成，然后通过整合各个节点的中间结果，得" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Hadoop/'>Hadoop</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Hadoop集群（第6期）_WordCount运行详解</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-11-25 13:38 来源：虾皮工作室 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1389" class="art_content"><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	1、MapReduce理论简介</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.1 MapReduce编程模型</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　MapReduce采用&quot;分而治之&quot;的思想，把对大规模数据集的操作，分发给一个主节点管理下的各个分节点共同完成，然后通过整合各个节点的中间结果，得到最终结果。简单地说，MapReduce就是&quot;任务的分解与结果的汇总&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在Hadoop中，用于执行MapReduce任务的机器角色有两个：一个是JobTracker；另一个是TaskTracker，JobTracker是用于调度工作的，TaskTracker是用于执行工作的。一个Hadoop集群中只有一台JobTracker。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在分布式计算中，MapReduce框架负责处理了并行编程中分布式存储、工作调度、负载均衡、容错均衡、容错处理以及网络通信等复杂问题，把处理过程高度抽象为两个函数：map和reduce，map负责把任务分解成多个任务，reduce负责把分解后多任务处理的结果汇总起来。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　需要注意的是，用MapReduce来处理的数据集（或任务）必须具备这样的特点：待处理的数据集可以分解成许多小的数据集，而且每一个小数据集都可以完全并行地进行处理。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	1.2 MapReduce处理过程</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在Hadoop中，每个MapReduce任务都被初始化为一个Job，每个Job又可以分为两种阶段：map阶段和reduce阶段。这两个阶段分别用两个函数表示，即map函数和reduce函数。map函数接收一个&lt;key,value&gt;形式的输入，然后同样产生一个&lt;key,value&gt;形式的中间输出，Hadoop函数接收一个如&lt;key,(list of values)&gt;形式的输入，然后对这个value集合进行处理，每个reduce产生0或1个输出，reduce的输出也是&lt;key,value&gt;形式的。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205161645307855.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="243" src="/uploads/allimg/151125/1335426306-0.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="621" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	MapReduce处理大数据集的过程</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	2、运行WordCount程序</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　单词计数是最简单也是最能体现MapReduce思想的程序之一，可以称为MapReduce版&quot;Hello World&quot;，该程序的完整代码可以在Hadoop安装包的&quot;src/examples&quot;目录下找到。单词计数主要完成功能是：统计一系列文本文件中每个单词出现的次数，如下图所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205161651486331.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="150" src="/uploads/allimg/151125/133542J07-1.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="323" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.1 准备工作</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　现在以&quot;hadoop&quot;普通用户登录&quot;Master.Hadoop&quot;服务器。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）创建本地示例文件</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　首先在&quot;/home/hadoop&quot;目录下创建文件夹&quot;file&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119098393.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="246" src="/uploads/allimg/151125/1335423318-2.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="712" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　接着创建两个文本文件file1.txt和file2.txt，使file1.txt内容为&quot;Hello World&quot;，而file2.txt的内容为&quot;Hello Hadoop&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119112655.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="266" src="/uploads/allimg/151125/13354224D-3.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="608" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）在HDFS上创建输入文件夹</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119165997.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="119" src="/uploads/allimg/151125/133542L24-4.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="732" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）上传本地file中文件到集群的input目录下</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119189387.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="134" src="/uploads/allimg/151125/1335421638-5.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="732" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.2 运行例子</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）在集群上运行WordCount程序</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　备注：</strong></span>以input作为输入目录，output目录作为输出目录。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　已经编译好的WordCount的Jar在&quot;/usr/hadoop&quot;下面，就是&quot;hadoop-examples-1.0.0.jar&quot;，所以在下面执行命令时记得把路径写全了，不然会提示找不到该Jar包。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119199222.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="190" src="/uploads/allimg/151125/1335424402-6.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; width: 846px; background-image: none;" title="image" width="847" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）MapReduce执行过程显示信息</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119218467.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="197" src="/uploads/allimg/151125/1335425555-7.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; width: 846px; background-image: none;" title="image" width="892" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Hadoop命令会启动一个JVM来运行这个MapReduce程序，并自动获得Hadoop的配置，同时把类的路径（及其依赖关系）加入到Hadoop的库中。以上就是Hadoop Job的运行记录，从这里可以看到，这个Job被赋予了一个ID号：job_201202292213_0002，而且得知输入文件有两个（Total input paths to process : 2），同时还可以了解map的输入输出记录（record数及字节数），以及reduce输入输出记录。比如说，在本例中，map的task数量是2个，reduce的task数量是一个。map的输入record数是2个，输出record数是4个等信息。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.3 查看结果</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）查看HDFS上output目录内容</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119242107.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="141" src="/uploads/allimg/151125/1335421649-8.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="845" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　从上图中知道生成了三个文件，我们的结果在&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">part-r-00000</strong></span>&quot;中。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2）查看结果输出文件内容</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205171119292102.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="130" src="/uploads/allimg/151125/1335423623-9.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="609" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	3、WordCount源码分析</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.1 特别数据类型介绍</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Hadoop提供了如下内容的数据类型，这些数据类型都实现了WritableComparable接口，以便用这些类型定义的数据可以被序列化进行网络传输和文件存储，以及进行大小比较。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; BooleanWritable：标准布尔型数值</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; ByteWritable：单字节数值</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; DoubleWritable：双字节数</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; FloatWritable：浮点数</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; IntWritable：整型数</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; LongWritable：长整型数</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; Text：使用UTF8格式存储的文本</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; NullWritable：当&lt;key,value&gt;中的key或value为空时使用</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.2 旧的WordCount分析</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）源代码程序</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		package org.apache.hadoop.examples;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import java.io.IOException;<br style="margin: 0px; padding: 0px;" />
+		import java.util.Iterator;<br style="margin: 0px; padding: 0px;" />
+		import java.util.StringTokenizer;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.fs.Path;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.io.IntWritable;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.io.LongWritable;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.io.Text;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.FileInputFormat;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.FileOutputFormat;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.JobClient;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.JobConf;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.MapReduceBase;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.Mapper;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.OutputCollector;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.Reducer;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.Reporter;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.TextInputFormat;<br style="margin: 0px; padding: 0px;" />
+		import org.apache.hadoop.mapred.TextOutputFormat;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		public class WordCount {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; public static class Map extends MapReduceBase implements<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mapper&lt;LongWritable, Text, Text, IntWritable&gt; {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private final static IntWritable one = new IntWritable(1);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private Text word = new Text();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void map(LongWritable key, Text value,<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String line = value.toString();<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringTokenizer tokenizer = new StringTokenizer(line);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (tokenizer.hasMoreTokens()) {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; word.set(tokenizer.nextToken());<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; output.collect(word, one);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; }</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; public static class Reduce extends MapReduceBase implements<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reducer&lt;Text, IntWritable, Text, IntWritable&gt; {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void reduce(Text key, Iterator&lt;IntWritable&gt; values,<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int sum = 0;<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (values.hasNext()) {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sum += values.next().get();<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; output.collect(key, new IntWritable(sum));<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; }</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; public static void main(String[] args) throws Exception {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JobConf conf = new JobConf(WordCount.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setJobName(&quot;wordcount&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setOutputKeyClass(Text.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setOutputValueClass(IntWritable.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setMapperClass(Map.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setCombinerClass(Reduce.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setReducerClass(Reduce.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setInputFormat(TextInputFormat.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conf.setOutputFormat(TextOutputFormat.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileInputFormat.setInputPaths(conf, new Path(args[0]));<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileOutputFormat.setOutputPath(conf, new Path(args[1]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JobClient.runJob(conf);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		}</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）主方法<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">Main<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);">分析</span></span></strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static void main(String[] args) throws Exception {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; JobConf conf = new JobConf(WordCount.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; conf.setJobName(&quot;wordcount&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; conf.setOutputKeyClass(Text.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; conf.setOutputValueClass(IntWritable.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; conf.setMapperClass(Map.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; conf.setCombinerClass(Reduce.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; conf.setReducerClass(Reduce.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; conf.setInputFormat(TextInputFormat.class);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; conf.setOutputFormat(TextOutputFormat.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; FileInputFormat.setInputPaths(conf, new Path(args[0]));<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; FileOutputFormat.setOutputPath(conf, new Path(args[1]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; JobClient.runJob(conf);<br style="margin: 0px; padding: 0px;" />
+		}</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　首先讲解一下<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Job</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">初始化过程</strong></span>。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">main</strong></span>函数调用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Jobconf</strong></span>类来对<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">MapReduce Job</strong></span>进行初始化，然后调用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">setJobName()</strong></span>方法命名这个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Job</strong></span>。对Job进行合理的命名有助于<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">更快</strong></span>地找到Job，以便在JobTracker和Tasktracker的页面中对其进行<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">监视</strong></span>。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	JobConf conf = new JobConf(WordCount. class ); conf.setJobName(&quot;wordcount&quot; );</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　接着设置Job输出结果&lt;key,value&gt;的中key和value数据类型，因为结果是&lt;单词,个数&gt;，所以key设置为&quot;Text&quot;类型，相当于Java中String类型。Value设置为&quot;IntWritable&quot;，相当于Java中的int类型。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setOutputKeyClass(Text.class );</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setOutputValueClass(IntWritable.class );</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　然后设置Job处理的Map（拆分）、Combiner（中间结果合并）以及Reduce（合并）的相关处理类。这里用Reduce类来进行Map产生的中间结果合并，避免给网络数据传输产生压力。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setMapperClass(Map.class );</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setCombinerClass(Reduce.class );</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setReducerClass(Reduce.class );</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　接着就是调用setInputPath()和setOutputPath()设置输入输出路径。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setInputFormat(TextInputFormat.class );</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		conf.setOutputFormat(TextOutputFormat.class );</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 204, 255);"><strong style="margin: 0px; padding: 0px;">　　（1）InputFormat和InputSplit</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　InputSplit是Hadoop定义的用来<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">传送</strong></span>给每个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">单独</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">map</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">数据</strong></span>，InputSplit<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">存储</strong></span>的并<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">非<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">数据本身</span></strong>，</span>而是一个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">分片长度</strong></span>和一个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">记录数据位置</strong></span>的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">数组</strong></span>。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">生成InputSplit的方法</strong></span>可以通过<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">InputFormat()</strong></span>来<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">设置</strong></span>。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　当数据传送给<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">map</strong></span>时，map会将输入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">分片</strong></span>传送到<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">InputFormat</strong></span>，InputFormat则<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">调用</strong></span>方法<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">getRecordReader()<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">生成<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">RecordReader</span></span></strong>，</span>RecordReader再通过<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">creatKey()</strong></span>、<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">creatValue()</strong></span>方法<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">创建</strong></span>可供map处理的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">&lt;key,value&gt;</strong></span>对。简而言之，InputFormat()方法是用来生成可供map处理的&lt;key,value&gt;对的。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Hadoop预定义了多种方法将不同类型的输入数据转化为map能够处理的&lt;key,value&gt;对，它们都继承自InputFormat，分别是：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; InputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---BaileyBorweinPlouffe.BbpInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---ComposableInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---CompositeInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---DBInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---DistSum.Machine.AbstractInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---FileInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---CombineFileInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---KeyValueTextInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---NLineInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---SequenceFileInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---TeraInputFormat</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---TextInputFormat</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　其中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">TextInputFormat</strong></span>是Hadoop<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">默认</strong></span>的输入方法，在TextInputFormat中，每个文件（或其一部分）都会单独地作为map的输入，而这个是继承自FileInputFormat的。之后，每行数据都会生成一条记录，每条记录则表示成&lt;key,value&gt;形式：</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			key值是每个数据的记录在<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">数据分片</strong></span>中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">字节偏移量</strong></span>，数据类型是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">LongWritable</strong></span>；　　</div>
+	</li>
+</ul>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	value值是每行的内容，数据类型是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">Text</strong></span>。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(0, 204, 255);"><strong style="margin: 0px; padding: 0px;">　　（2）OutputFormat</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　每一种<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">输<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">格式</span></span></strong>都有一种<strong style="margin: 0px; padding: 0px;">输<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">出<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">格式</span></span></strong>与其对应。默认的输出格式是<strong style="margin: 0px; padding: 0px;">TextOutputFormat</strong></span>，这种输出方式与输入类似，会将每条记录以一行的形式存入文本文件。不过，它的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">键和值</strong></span>可以是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">任意形式</strong></span>的，因为程序<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">内容</strong></span>会调用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">toString()</strong></span>方法将键和值转换为<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">String</strong></span>类型再输出。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3）Map类中map方法分析</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static class Map extends MapReduceBase implements<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mapper&lt;LongWritable, Text, Text, IntWritable&gt; {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; private final static IntWritable one = new IntWritable(1);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; private Text word = new Text();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;&nbsp;&nbsp; public void map(LongWritable key, Text value,<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String line = value.toString();<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringTokenizer tokenizer = new StringTokenizer(line);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (tokenizer.hasMoreTokens()) {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; word.set(tokenizer.nextToken());<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; output.collect(word, one);<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		}</p>
+</blockquote>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; color: rgb(51, 51, 51); font-size: 14px; line-height: 25.2px;">
+&nbsp;</pre>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　Map类</strong></span>继承自<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">MapReduceBase</strong></span>，并且它实现了<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">Mapper接口</strong></span>，此接口是一个<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">规范类型</strong></span>，它有4种形式的参数，分别用来指定map的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">输入</strong></span>key值类型、<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">输入</strong></span>value值类型、<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">输出</strong></span>key值类型和<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">输出</strong></span>value值类型。在本例中，因为使用的是TextInputFormat，它的输出key值是LongWritable类型，输出value值是Text类型，所以map的输入类型为&lt;LongWritable,Text&gt;。在本例中需要输出&lt;word,1&gt;这样的形式，因此输出的key值类型是Text，输出的value值类型是IntWritable。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　实现此接口类还需要实现map方法，map方法会具体负责对输入进行操作，在本例中，map方法对输入的行以空格为单位进行切分，然后使用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">OutputCollect</strong></span>收集输出的&lt;word,1&gt;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　4）Reduce类中reduce方法分析</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static class Reduce extends MapReduceBase implements<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reducer&lt;Text, IntWritable, Text, IntWritable&gt; {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; public void reduce(Text key, Iterator&lt;IntWritable&gt; values,<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int sum = 0;<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (values.hasNext()) {<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sum += values.next().get();<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; output.collect(key, new IntWritable(sum));<br style="margin: 0px; padding: 0px;" />
+		&nbsp;&nbsp;&nbsp; }<br style="margin: 0px; padding: 0px;" />
+		}</p>
+</blockquote>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; color: rgb(51, 51, 51); font-size: 14px; line-height: 25.2px;">
+&nbsp;</pre>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　Reduce类</strong></span>也是继承自<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">MapReduceBase</strong></span>的，需要实现Reducer接口。Reduce类以map的输出作为输入，因此Reduce的输入类型是&lt;Text，Intwritable&gt;。而Reduce的输出是<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">单词</strong></span>和<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">它的数目</strong></span>，因此，它的输出类型是&lt;Text,IntWritable&gt;。Reduce类也要实现reduce方法，在此方法中，reduce函数将输入的key值作为输出的key值，然后将获得多个value值加起来，作为输出的值。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.3 新的WordCount分析</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）源代码程序</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		package org.apache.hadoop.examples;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import java.io.IOException;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import java.util.StringTokenizer;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.conf.Configuration;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.fs.Path;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.io.IntWritable;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.io.Text;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.mapreduce.Job;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.mapreduce.Mapper;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.mapreduce.Reducer;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		import org.apache.hadoop.util.GenericOptionsParser;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		public class WordCount {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　public static class&nbsp;<strong style="margin: 0px; padding: 0px;">TokenizerMapper</strong></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　extends Mapper&lt;Object, Text, Text, IntWritable&gt;{</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　private final static IntWritable one = new IntWritable(1);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　private Text word = new Text();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　public void map(Object key, Text value, Context context)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　throws IOException, InterruptedException {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　StringTokenizer itr = new StringTokenizer(value.toString());</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　while (itr.hasMoreTokens()) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　word.set(itr.nextToken());</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　context.write(word, one);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　public static class&nbsp;<strong style="margin: 0px; padding: 0px;">IntSumReducer</strong></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　extends Reducer&lt;Text,IntWritable,Text,IntWritable&gt; {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　private IntWritable result = new IntWritable();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　public void reduce(Text key, Iterable&lt;IntWritable&gt; values,Context context)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　　　 throws IOException, InterruptedException {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　int sum = 0;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　for (IntWritable val : values) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　　　　sum += val.get();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　result.set(sum);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　context.write(key, result);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　public static void&nbsp;<strong style="margin: 0px; padding: 0px;">main</strong>(String[] args) throws Exception {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　Configuration conf = new Configuration();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　if (otherArgs.length != 2) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　System.err.println(&quot;Usage: wordcount &lt;in&gt; &lt;out&gt;&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　System.exit(2);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　Job job = new Job(conf, &quot;word count&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setJarByClass(WordCount.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setMapperClass(TokenizerMapper.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setCombinerClass(IntSumReducer.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setReducerClass(IntSumReducer.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setOutputKeyClass(Text.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　job.setOutputValueClass(IntWritable.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　FileInputFormat.addInputPath(job, new Path(otherArgs[0]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　System.exit(job.waitForCompletion(true) ? 0 : 1);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　 1）Map过程</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static class&nbsp;<strong style="margin: 0px; padding: 0px;">TokenizerMapper</strong></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　extends Mapper&lt;Object, Text, Text, IntWritable&gt;{</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　private final static IntWritable one = new IntWritable(1);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　private Text word = new Text();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　public void map(Object key, Text value, Context context)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　throws IOException, InterruptedException {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　StringTokenizer itr = new StringTokenizer(value.toString());</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　while (itr.hasMoreTokens()) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　word.set(itr.nextToken());</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　context.write(word, one);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Map过程需要继承org.apache.hadoop.mapreduce包中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Mapper</strong></span>类，并<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">重写</strong></span>其map方法。通过在map方法中添加两句把key值和value值输出到控制台的代码，可以发现map方法中value值存储的是文本文件中的一行（以回车符为行结束标记），而key值为该行的首字母相对于文本文件的首地址的偏移量。然后StringTokenizer类将每一行拆分成为一个个的单词，并将&lt;word,1&gt;作为map方法的结果输出，其余的工作都交有<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">MapReduce框架</strong></span>处理。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">2）Reduce过程</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static class&nbsp;<strong style="margin: 0px; padding: 0px;">IntSumReducer</strong></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　extends Reducer&lt;Text,IntWritable,Text,IntWritable&gt; {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　private IntWritable result = new IntWritable();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　public void reduce(Text key, Iterable&lt;IntWritable&gt; values,Context context)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　 throws IOException, InterruptedException {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　int sum = 0;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　for (IntWritable val : values) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　　　sum += val.get();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　result.set(sum);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　context.write(key, result);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+</blockquote>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; color: rgb(51, 51, 51); font-size: 14px; line-height: 25.2px;">
+&nbsp;</pre>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Reduce过程需要继承org.apache.hadoop.mapreduce包中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Reducer</strong></span>类，并<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">重写</strong></span>其reduce方法。Map过程输出&lt;key,values&gt;中key为单个单词，而values是对应单词的计数值所组成的列表，Map的输出就是Reduce的输入，所以reduce方法只要遍历values并求和，即可得到某个单词的总次数。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">3）执行MapReduce任务</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		public static void&nbsp;<strong style="margin: 0px; padding: 0px;">main</strong>(String[] args) throws Exception {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　Configuration conf = new Configuration();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　if (otherArgs.length != 2) {</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　System.err.println(&quot;Usage: wordcount &lt;in&gt; &lt;out&gt;&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　　　System.exit(2);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　}</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　Job job = new Job(conf, &quot;word count&quot;);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setJarByClass(WordCount.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setMapperClass(TokenizerMapper.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setCombinerClass(IntSumReducer.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setReducerClass(IntSumReducer.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setOutputKeyClass(Text.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　job.setOutputValueClass(IntWritable.class);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　FileInputFormat.addInputPath(job, new Path(otherArgs[0]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		　　System.exit(job.waitForCompletion(true) ? 0 : 1);</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		}</p>
+</blockquote>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; color: rgb(51, 51, 51); font-size: 14px; line-height: 25.2px;">
+&nbsp;</pre>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在MapReduce中，由Job对象负责管理和运行一个计算任务，并通过Job的一些方法对任务的参数进行相关的设置。此处设置了使用TokenizerMapper完成Map过程中的处理和使用IntSumReducer完成Combine和Reduce过程中的处理。还设置了Map过程和Reduce过程的输出类型：key的类型为Text，value的类型为IntWritable。任务的输出和输入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">路径</strong></span>则由命令行参数指定，并由FileInputFormat和FileOutputFormat分别设定。完成相应任务的参数设定后，即可调用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 102, 0);"><strong style="margin: 0px; padding: 0px;">job.waitForCompletion()</strong></span>方法执行任务。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	4、WordCount处理过程</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　本节将对WordCount进行更详细的讲解。详细执行步骤如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　1）将文件拆分成splits，由于测试用的文件较小，所以每个文件为一个split，并将文件按行分割形成&lt;key,value&gt;对，如图4-1所示。这一步由MapReduce框架自动完成，其中偏移量（即key值）包括了回车所占的字符数（Windows和Linux环境会不同）。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205161651549641.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="235" src="/uploads/allimg/151125/1335425164-10.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="470" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	图4-1 分割过程</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　2）将分割好的&lt;key,value&gt;对交给用户定义的map方法进行处理，生成新的&lt;key,value&gt;对，如图4-2所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/2012051616515532.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="277" src="/uploads/allimg/151125/1335423051-11.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="466" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	图4-2 执行map方法</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　3）得到map方法输出的&lt;key,value&gt;对后，Mapper会将它们按照key值进行排序，并执行Combine过程，将key至相同value值累加，得到Mapper的最终输出结果。如图4-3所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205161651583846.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="281" src="/uploads/allimg/151125/1335423911-12.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="620" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	图4-3 Map端排序及Combine过程</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　4）Reducer先对从Mapper接收的数据进行排序，再交由用户自定义的reduce方法进行处理，得到新的&lt;key,value&gt;对，并作为WordCount的输出结果，如图4-4所示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;<a href="http://images.cnblogs.com/cnblogs_com/xia520pi/201205/201205161652016057.png" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);"><img alt="image" border="0" height="257" src="/uploads/allimg/151125/1335425441-13.png" style="margin: 0px; padding: 0px; border: 0px; display: inline; background-image: none;" title="image" width="622" /></a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	图4-4 Reduce端排序及输出结果</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	5、MapReduce新旧改变</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　Hadoop最新版本的MapReduce Release 0.20.0的API包括了一个全新的Mapreduce JAVA API，有时候也称为上下文对象。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　新的API类型上不兼容以前的API，所以，以前的应用程序需要重写才能使新的API发挥其作用 。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　新的API和旧的API之间有下面几个明显的区别。</p>
+<ul style="margin: 0px 0px 0px 30px; padding-right: 0px; padding-left: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			新的API倾向于使用抽象类，而不是接口，因为这更容易扩展。例如，你可以添加一个方法(用默认的实现)到一个抽象类而不需修改类之前的实现方法。在新的API中，Mapper和Reducer是抽象类。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			新的API是在org.apache.hadoop.mapreduce包(和子包)中的。之前版本的API则是放在org.apache.hadoop.mapred中的。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			新的API广泛使用context object(上下文对象)，并允许用户代码与MapReduce系统进行通信。例如，MapContext基本上充当着JobConf的OutputCollector和Reporter的角色。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			新的API同时支持&quot;推&quot;和&quot;拉&quot;式的迭代。在这两个新老API中，键/值记录对被推mapper中，但除此之外，新的API允许把记录从map()方法中拉出，这也适用于reducer。&quot;拉&quot;式的一个有用的例子是分批处理记录，而不是一个接一个。</div>
+	</li>
+	<li style="margin: 0px; padding: 0px; list-style: disc;">
+		<div style="margin: 0px; padding: 0px; text-align: justify;">
+			新的API统一了配置。旧的API有一个特殊的JobConf对象用于作业配置，这是一个对于Hadoop通常的Configuration对象的扩展。在新的API中，这种区别没有了，所以作业配置通过Configuration来完成。作业控制的执行由Job类来负责，而不是JobClient，它在新的API中已经荡然无存。<br />
+			<br />
+			原文地址http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html</div>
+	</li>
+</ul>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Hadoop/2015/1125/1388.html'>Hadoop集群（第5期副刊）_JDK和SSH无密码配置</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Hadoop/2015/1125/1390.html'>Hadoop集群（第7期）_Eclipse开发环境设置</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>11.06</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>06.18</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>06.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案例</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1389.html" >Hadoop集群（第6期）_WordCount运行详解</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境设置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1388.html" >Hadoop集群（第5期副刊）_JDK和SSH无密码配置</a><span>11.25</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布表</a><span>11.24</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1379.html" >Hadoop集群（第1期）_CentOS安装配置</a><span>11.24</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>951</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>554</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1384.html" >Hadoop集群（第5期）_Hadoop安装配置</a><span>218</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1390.html" >Hadoop集群（第7期）_Eclipse开发环境</a><span>59</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1391.html" >Hadoop集群（第8期）_HDFS初探之旅</a><span>48</span></li>
+<li><a href="/bcsj/Hadoop/2015/0618/905.html" >Hadoop HDFS如何配置</a><span>47</span></li>
+<li><a href="/bcsj/Hadoop/2015/1106/1361.html" >还不懂Hadoop分布式文件系统HDFS的</a><span>39</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1382.html" >Hadoop集群（第3期）_VSFTP安装配置</a><span>37</span></li>
+<li><a href="/bcsj/Hadoop/2015/0611/899.html" >HADOOP基本操作命令</a><span>32</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1380.html" >Hadoop集群（第2期）_机器信息分布</a><span>29</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1389&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XML编码问题的解决方案_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="XML编码问题的解决方案," />
+  <meta name="description" content="最近碰到一个项目，需要将申报文件存成XML的格式，编码问题着实让我头疼了一会。现在全部统一成UTF-8编码。具体在各种语言下的操作 这里，我用DOM进行XML解析，应为它简单。 1客户首" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/Ajax/'>Ajax</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>XML编码问题的解决方案</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-03-31 09:48 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="361" class="art_content">　　最近碰到一个项目，需要将申报文件存成XML的格式，编码问题着实让我头疼了一会。现在全部统一成UTF-8编码。具体在各种语言下的操作<br />
+<br />
+　　这里，我用DOM进行XML解析，应为它简单。<br />
+<h3>
+	　　1&nbsp;客户首先使用VB进行编辑表单，生成一个apply.xml文件。</h3>
+<br />
+　　在VB中，使用MSXML&nbsp;4.0。如果不设定编码方式，保存的时候，文件默认就是UTF-8编码<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;dom&nbsp;=&nbsp;CreateDOM<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;node&nbsp;=&nbsp;dom.createProcessingInstruction(&quot;xml&quot;,&nbsp;&quot;version=&#39;1.0&#39;&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dom.appendChild&nbsp;node<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;node&nbsp;=&nbsp;Nothing<br />
+<h3>
+	　　2&nbsp;接下来，客户将这个XML通过Web上传到服务器</h3>
+<br />
+　　在PHP中，XMLDOM只支持UTF-8作为默认编码。所以生成的XML文件，上传以后可以直接解析这个文件，获得一些信息<br />
+<br />
+&nbsp;&nbsp;if&nbsp;(!$dom&nbsp;=&nbsp;domxml_open_mem($content))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$t-&gt;assign(&#39;msg&#39;,&nbsp;&quot;文件解析错误！&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$t-&gt;render(&#39;noavailable.html&#39;,&nbsp;PAGE_TITLE,&nbsp;&#39;wrap.html&#39;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+　　接下来，要将这个文件存到数据库里面，因为数据库使用MS&nbsp;Sql&nbsp;Server,它不支持UTF-8的数据结构，所以将整个文件以二进制的方式存到数据库里面，这里让我搞了半天的就是二进制文件的存放方式，如果是mysql,那不需要做任何转换就可以直接存了，但是mssql不行，原因是：<br />
+<br />
+This&nbsp;is&nbsp;because&nbsp;the&nbsp;MSSQL&nbsp;parser&nbsp;makes&nbsp;a&nbsp;clear&nbsp;distinction&nbsp;between&nbsp;binary&nbsp;an&nbsp;character&nbsp;constants.&nbsp;You&nbsp;can&nbsp;therefore&nbsp;not&nbsp;easilly&nbsp;insert&nbsp;binary&nbsp;data&nbsp;with&nbsp;&quot;column&nbsp;=&nbsp;&#39;$data&#39;&quot;&nbsp;syntax&nbsp;like&nbsp;in&nbsp;MySQL&nbsp;and&nbsp;others.<br />
+<br />
+The&nbsp;MSSQL&nbsp;documentation&nbsp;states&nbsp;that&nbsp;binary&nbsp;constants&nbsp;should&nbsp;be&nbsp;represented&nbsp;by&nbsp;their&nbsp;unquoted&nbsp;hexadecimal&nbsp;byte-string.&nbsp;That&nbsp;is..&nbsp;to&nbsp;set&nbsp;the&nbsp;binary&nbsp;column&nbsp;&quot;col&quot;&nbsp;to&nbsp;contain&nbsp;the&nbsp;bytes&nbsp;0x12,&nbsp;0x65&nbsp;and&nbsp;0x35&nbsp;you&nbsp;shold&nbsp;do&nbsp;&quot;col&nbsp;=&nbsp;0x126535&quot;&nbsp;in&nbsp;you&nbsp;query.<br />
+<br />
+　　具体操作如下：<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;//读取上传的文件<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$original&nbsp;=&nbsp;$_FILES[&#39;content&#39;][&#39;name&#39;];&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!empty($original))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($_FILES[&#39;content&#39;][&#39;type&#39;]&nbsp;==&nbsp;&quot;text/xml&quot;)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$filename&nbsp;=&nbsp;$_FILES[&#39;content&#39;][&#39;tmp_name&#39;];<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$handle&nbsp;=&nbsp;fopen($filename,&nbsp;&quot;rb&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$originalcontent&nbsp;=&nbsp;fread($handle,&nbsp;filesize($filename));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fclose($handle);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;//end&nbsp;&nbsp;if(!empty($original))&nbsp;<br />
+<br />
+$originalcontent&nbsp;=&nbsp;unpack(&quot;H*hex&quot;,&nbsp;$originalcontent);&nbsp;//这步是关键<br />
+<br />
+&nbsp;$db-&gt;query(&quot;insert&nbsp;into&nbsp;&quot;.TBL_SB_ONLINE_USER.&quot;&nbsp;(sb_id,&nbsp;user_id,&nbsp;username,&nbsp;sbmc,&nbsp;content,&nbsp;created_date)&nbsp;values&nbsp;(&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.$newid.&quot;,&nbsp;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.$u.&quot;,&nbsp;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.$db-&gt;quote(stripslashes($name)).&quot;,&nbsp;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.$db-&gt;quote(stripslashes($sbmc)).&quot;,&nbsp;0x&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.$originalcontent[&#39;hex&#39;].&quot;,&nbsp;&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//注意这里，前面有0x<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&quot;&#39;$now&#39;)&quot;);<br />
+<br />
+　　3&nbsp;上传之后，用户也可以在网上对这个文件进行在线编辑，这时需要将这个文件从数据库读出，然后还原成UTF-8编码，再进行解析。虽然我们上面使用了unpack，但读出的时候不需要还原。<br />
+<br />
+&nbsp;$sb&nbsp;=&nbsp;$db-&gt;getRow(&#39;select&nbsp;sbmc,&nbsp;content&nbsp;from&nbsp;&#39;.TBL_SB_ONLINE_USER.&quot;&nbsp;where&nbsp;sb_id&nbsp;=&nbsp;$sb_id&quot;);<br />
+&nbsp;$originalcontent&nbsp;=$sb[content];<br />
+<br />
+&nbsp;if&nbsp;(!$dom&nbsp;=&nbsp;domxml_open_mem($originalcontent))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$t-&gt;assign(&#39;msg&#39;,&nbsp;&quot;文件解析错误！&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$t-&gt;render(&#39;noavailable.html&#39;,&nbsp;PAGE_TITLE,&nbsp;&#39;wrap.html&#39;,true);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$context&nbsp;=&nbsp;xpath_new_context($dom);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$xpath&nbsp;=&nbsp;$context-&gt;xpath_eval(&quot;//material/xm&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$t-&gt;assign(&#39;xm&#39;,iconv(&quot;UTF-8&quot;,&quot;GBK&quot;,$xpath-&gt;nodeset[0]-&gt;get_content()));<br />
+<br />
+　　读出的时候，mssql除了用于&nbsp;SQL&nbsp;Server&nbsp;的&nbsp;Microsoft&nbsp;OLE&nbsp;DB&nbsp;提供程序和&nbsp;SQL&nbsp;Server&nbsp;ODBC&nbsp;驱动程序自动将&nbsp;@@TEXTSIZE&nbsp;设置为最大值&nbsp;2&nbsp;GB。其他的都是4096&nbsp;(4&nbsp;KB)，所以用PHP访问时候，务必将下面打开mssql.textlimit&nbsp;=&nbsp;2147483647<br />
+mssql.textsize&nbsp;=&nbsp;2147483647<br />
+<br />
+　　4&nbsp;后台用VB，要解析该函数需要添加以下代码，用来将byte()转换成utf-8编码<br />
+<br />
+Public&nbsp;Declare&nbsp;Function&nbsp;MultiByteToWideChar&nbsp;Lib&nbsp;&quot;kernel32&quot;&nbsp;(ByVal&nbsp;CodePage&nbsp;As&nbsp;Long,&nbsp;ByVal&nbsp;dwFlags&nbsp;As&nbsp;Long,&nbsp;ByVal&nbsp;lpMultiByteStr&nbsp;As&nbsp;Long,&nbsp;_<br />
+ByVal&nbsp;cchMultiByte&nbsp;As&nbsp;Long,&nbsp;ByVal&nbsp;lpWideCharStr&nbsp;As&nbsp;Long,&nbsp;ByVal&nbsp;cchWideChar&nbsp;As&nbsp;Long)&nbsp;As&nbsp;Long<br />
+<br />
+Public&nbsp;Const&nbsp;CP_UTF8&nbsp;=&nbsp;65001<br />
+<br />
+Public&nbsp;Function&nbsp;UTF8_Decode(bUTF8()&nbsp;As&nbsp;Byte)&nbsp;As&nbsp;String<br />
+Dim&nbsp;lRet&nbsp;As&nbsp;Long<br />
+Dim&nbsp;lLen&nbsp;As&nbsp;Long<br />
+Dim&nbsp;lBufferSize&nbsp;As&nbsp;Long<br />
+Dim&nbsp;sBuffer&nbsp;As&nbsp;String<br />
+Dim&nbsp;bBuffer()&nbsp;As&nbsp;Byte<br />
+lLen&nbsp;=&nbsp;UBound(bUTF8)&nbsp;+&nbsp;1<br />
+If&nbsp;lLen&nbsp;=&nbsp;0&nbsp;Then&nbsp;Exit&nbsp;Function<br />
+lBufferSize&nbsp;=&nbsp;lLen&nbsp;*&nbsp;2<br />
+sBuffer&nbsp;=&nbsp;String$(lBufferSize,&nbsp;Chr(0))<br />
+lRet&nbsp;=&nbsp;MultiByteToWideChar(CP_UTF8,&nbsp;0,&nbsp;VarPtr(bUTF8(0)),&nbsp;lLen,&nbsp;StrPtr(sBuffer),&nbsp;lBufferSize)<br />
+If&nbsp;lRet&nbsp;&lt;&gt;&nbsp;0&nbsp;Then<br />
+sBuffer&nbsp;=&nbsp;Left(sBuffer,&nbsp;lRet)<br />
+End&nbsp;If<br />
+UTF8_Decode&nbsp;=&nbsp;sBuffer<br />
+End&nbsp;Function<br />
+<br />
+　　具体读数据库的操作是<br />
+<br />
+&nbsp;&nbsp;&nbsp;Dim&nbsp;varcontent()&nbsp;As&nbsp;Byte<br />
+&nbsp;&nbsp;&nbsp;&nbsp;varfilesize&nbsp;=&nbsp;mrc.Fields(&quot;content&quot;).ActualSize<br />
+&nbsp;&nbsp;&nbsp;&nbsp;varcontent&nbsp;=&nbsp;mrc.Fields(&quot;content&quot;).GetChunk(varfilesize)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;content&nbsp;=&nbsp;UTF8_Decode(varcontent)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;xmlDoc.async&nbsp;=&nbsp;False<br />
+&nbsp;&nbsp;&nbsp;&nbsp;xmlDoc.resolveExternals&nbsp;=&nbsp;False<br />
+&nbsp;&nbsp;&nbsp;&nbsp;xmlDoc.loadXML&nbsp;(content)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;(xmlDoc.parseError.errorCode&nbsp;&lt;&gt;&nbsp;0)&nbsp;Then<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim&nbsp;myErr<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;myErr&nbsp;=&nbsp;xmlDoc.parseError<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox&nbsp;(&quot;发生错误&nbsp;&quot;&nbsp;&amp;&nbsp;myErr.reason)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Else<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlDoc.setProperty&nbsp;&quot;SelectionLanguage&quot;,&nbsp;&quot;XPath&quot;<br />
+<br />
+　　5&nbsp;后台，在Java里面就更好操作了，将读出的数据变成byte[]，然后转换成UTF-8的字符串。<br />
+<br />
+　　最后要说的是，PHP的确是一个非常强大的脚本语言，如果开发PHP过程中遇到难以解决，google都不容易搜到的问题，大家直接上php.net的在线文档，文档里面通常有很多好心人将自己的使用心得写在上面，非常有帮助。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/Ajax/2015/0331/360.html'>XMLHTTP无刷新自动实时更新数据</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/Ajax/2015/0331/362.html'>利用XMLHTTP显示最新文章列表</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/Ajax/2015/0331/356.html" >XMLHTTP为Donews Blog添加最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/355.html" >学习xhtml的教训</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/354.html" >XMLHttpRequest对象简介</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/353.html" >Ajax忧虑与启发</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/352.html" >AJAX编写用户注册实例小结</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/351.html" >AJAX解决的一些常见问题</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/350.html" >AJAX开发Back按钮</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/349.html" >AJAX基础教程</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/348.html" >XML在Web中的应用</a><span>03.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>08.29</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实例</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>05.27</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>03.31</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>03.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/Ajax/2015/0331/362.html" >利用XMLHTTP显示最新文章列表</a><span>70</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/875.html" >JQuery的Ajax跨域请求原理概述及实</a><span>66</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/360.html" >XMLHTTP无刷新自动实时更新数据</a><span>64</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/357.html" >Java中四种XML解析技术不完全测试</a><span>63</span></li>
+<li><a href="/bcsj/Ajax/2015/0829/1082.html" >ajax跨域的三种方法</a><span>50</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/359.html" >XMLHTTP对象应用开发初体验</a><span>42</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/358.html" >XMLHTTP组件应用</a><span>41</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/363.html" >XML模板详解</a><span>35</span></li>
+<li><a href="/bcsj/Ajax/2015/0331/361.html" >XML编码问题的解决方案</a><span>33</span></li>
+<li><a href="/bcsj/Ajax/2015/0527/874.html" >ajax原理和技术分析</a><span>33</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=361&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

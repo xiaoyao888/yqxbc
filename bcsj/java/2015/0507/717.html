@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>如何优化JAVA程序设计和编码，提高JAVA性能_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JAVA" />
+  <meta name="description" content=" " />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>如何优化JAVA程序设计和编码，提高JAVA性能</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-07 09:49 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="717" class="art_content"><p>
+	通过使用一些辅助性工具来找到程序中的瓶颈，然后就可以对瓶颈部分的代码进行优化。一般有两种方案：即优化代码或更改设计方法。我们一般会选择后者，因为不去调用以下代码要比调用一些优化的代码更能提高程序的性能。而一个设计良好的程序能够精简代码，从而提高性能。<br style="width: 0px; height: 0px; clear: both" />
+	下面将提供一些在JAVA程序的设计和编码中，为了能够提高JAVA程序的性能，而经常采用的一些方法和技巧。<br style="width: 0px; height: 0px; clear: both" />
+	<strong>1．对象的生成和大小的调整。</strong><br style="width: 0px; height: 0px; clear: both" />
+	　　JAVA程序设计中一个普遍的问题就是没有好好的利用JAVA语言本身提供的函数，从而常常会生成大量的对象（或实例）。由于系统不仅要花时间生成对象，以后可能还需花时间对这些对象进行垃圾回收和处理。因此，生成过多的对象将会给程序的性能带来很大的影响。<br style="width: 0px; height: 0px; clear: both" />
+	　　例1：关于String ,StringBuffer，+和append<br style="width: 0px; height: 0px; clear: both" />
+	　　JAVA语言提供了对于String类型变量的操作。但如果使用不当，会给程序的性能带来影响。如下面的语句：<br style="width: 0px; height: 0px; clear: both" />
+	　　String name=new String(&quot;HuangWeiFeng&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　System.out.println(name+&quot;is my name&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　看似已经很精简了，其实并非如此。为了生成二进制的代码，要进行如下的步骤和操作：<br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 生成新的字符串 new String（STR_1);<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 复制该字符串;<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 加载字符串常量&quot;HuangWeiFeng&quot;（STR_2);<br style="width: 0px; height: 0px; clear: both" />
+	　　(4) 调用字符串的构架器（Constructor）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(5) 保存该字符串到数组中（从位置0开始）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(6) 从java.io.PrintStream类中得到静态的out变量;<br style="width: 0px; height: 0px; clear: both" />
+	　　(7) 生成新的字符串缓冲变量new StringBuffer(STR_BUF_1);<br style="width: 0px; height: 0px; clear: both" />
+	　　(8) 复制该字符串缓冲变量;<br style="width: 0px; height: 0px; clear: both" />
+	　　(9) 调用字符串缓冲的构架器（Constructor）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(10) 保存该字符串缓冲到数组中（从位置1开始）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(11) 以STR_1为参数，调用字符串缓冲(StringBuffer)类中的append方法;<br style="width: 0px; height: 0px; clear: both" />
+	　　(12) 加载字符串常量&quot;is my name&quot;(STR_3);<br style="width: 0px; height: 0px; clear: both" />
+	　　(13) 以STR_3为参数，调用字符串缓冲(StringBuffer)类中的append方法;<br style="width: 0px; height: 0px; clear: both" />
+	　　(14) 对于STR_BUF_1执行toString命令;<br style="width: 0px; height: 0px; clear: both" />
+	　　(15) 调用out变量中的println方法，输出结果。<br style="width: 0px; height: 0px; clear: both" />
+	　　由此可以看出，这两行简单的代码，就生成了STR_1,STR_2,STR_3,STR_4和STR_BUF_1五个对象变量。这些生成的类的实例一般都存放在堆中。堆要对所有类的超类，类的实例进行初始化，同时还要调用类极其每个超类的构架器。而这些操作都是非常消耗系统资源的。因此，对对象的生成进行限制，是完全有必要的。<br style="width: 0px; height: 0px; clear: both" />
+	　　经修改，上面的代码可以用如下的代码来替换。<br style="width: 0px; height: 0px; clear: both" />
+	　　StringBuffer name=new StringBuffer(&quot;HuangWeiFeng&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　System.out.println(name.append(&quot;is my name.&quot;).toString());<br style="width: 0px; height: 0px; clear: both" />
+	　　系统将进行如下的操作：<br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 生成新的字符串缓冲变量new StringBuffer(STR_BUF_1);<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 复制该字符串缓冲变量;<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 加载字符串常量&quot;HuangWeiFeng&quot;(STR_1);<br style="width: 0px; height: 0px; clear: both" />
+	　　(4) 调用字符串缓冲的构架器（Constructor）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(5) 保存该字符串缓冲到数组中（从位置1开始）;<br style="width: 0px; height: 0px; clear: both" />
+	　　(6) 从java.io.PrintStream类中得到静态的out变量;<br style="width: 0px; height: 0px; clear: both" />
+	　　(7) 加载STR_BUF_1;<br style="width: 0px; height: 0px; clear: both" />
+	　　(8) 加载字符串常量&quot;is my name&quot;(STR_2);<br style="width: 0px; height: 0px; clear: both" />
+	　　(9) 以STR_2为参数，调用字符串缓冲(StringBuffer)实例中的append方法;<br style="width: 0px; height: 0px; clear: both" />
+	　　(10) 对于STR_BUF_1执行toString命令(STR_3);<br style="width: 0px; height: 0px; clear: both" />
+	　　(11)调用out变量中的println方法，输出结果。<br style="width: 0px; height: 0px; clear: both" />
+	　　由此可以看出，经过改进后的代码只生成了四个对象变量：STR_1,STR_2,STR_3和STR_BUF_1.你可能觉得少生成一个对象不会对程序的性能有很大的提高。但下面的代码段2的执行速度将是代码段1的2倍。因为代码段1生成了八个对象，而代码段2只生成了四个对象。<br style="width: 0px; height: 0px; clear: both" />
+	　　代码段1：<br style="width: 0px; height: 0px; clear: both" />
+	　　String name= new StringBuffer(&quot;HuangWeiFeng&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　name+=&quot;is my&quot;;<br style="width: 0px; height: 0px; clear: both" />
+	　　name+=&quot;name&quot;;<br style="width: 0px; height: 0px; clear: both" />
+	　　代码段2：<br style="width: 0px; height: 0px; clear: both" />
+	　　StringBuffer name=new StringBuffer(&quot;HuangWeiFeng&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　name.append(&quot;is my&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　name.append(&quot;name.&quot;).toString();<br style="width: 0px; height: 0px; clear: both" />
+	　　因此，充分的利用JAVA提供的库函数来优化程序，对提高JAVA程序的性能时非常重要的.其注意点主要有如下几方面；<span class="Apple-converted-space">&nbsp;</span><br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 尽可能的使用静态变量（Static Class Variables）<br style="width: 0px; height: 0px; clear: both" />
+	　　如果类中的变量不会随他的实例而变化，就可以定义为静态变量，从而使他所有的实例都共享这个变量。<br style="width: 0px; height: 0px; clear: both" />
+	　　例：<br style="width: 0px; height: 0px; clear: both" />
+	　　public class foo<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　SomeObject so=new SomeObject();<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　就可以定义为：<br style="width: 0px; height: 0px; clear: both" />
+	　　public class foo<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　static SomeObject so=new SomeObject();<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 不要对已生成的对象作过多的改变。<br style="width: 0px; height: 0px; clear: both" />
+	　　对于一些类(如：String类)来讲，宁愿在重新生成一个新的对象实例，而不应该修改已经生成的对象实例。<br style="width: 0px; height: 0px; clear: both" />
+	　　例：<br style="width: 0px; height: 0px; clear: both" />
+	　　String name=&quot;Huang&quot;;<br style="width: 0px; height: 0px; clear: both" />
+	　　name=&quot;Wei&quot;;<br style="width: 0px; height: 0px; clear: both" />
+	　　name=&quot;Feng&quot;;<br style="width: 0px; height: 0px; clear: both" />
+	　　上述代码生成了三个String类型的对象实例。而前两个马上就需要系统进行垃圾回收处理。如果要对字符串进行连接的操作，性能将得更差，因为系统将不得为此生成更多得临时变量，如上例1所示。<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 生成对象时，要分配给它合理的空间和大小JAVA中的很多类都有它的默认的空间分配大小。对于StringBuffer类来讲，默认的分配空间大小是16个字符。如果在程序中使用StringBuffer的空间大小不是16个字符，那么就必须进行正确的初始化。<br style="width: 0px; height: 0px; clear: both" />
+	　　(4) 避免生成不太使用或生命周期短的对象或变量。对于这种情况，因该定义一个对象缓冲池。以为管理一个对象缓冲池的开销要比频繁的生成和回收对象的开销小的多。<br style="width: 0px; height: 0px; clear: both" />
+	　　(5) 只在对象作用范围内进行初始化。JAVA允许在代码的任何地方定义和初始化对象。这样，就可以只在对象作用的范围内进行初始化。从而节约系统的开销。<br style="width: 0px; height: 0px; clear: both" />
+	　　例：<br style="width: 0px; height: 0px; clear: both" />
+	　　SomeObject so=new SomeObject();<br style="width: 0px; height: 0px; clear: both" />
+	　　If(x==1) then<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　Foo=so.getXX();<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　可以修改为：<br style="width: 0px; height: 0px; clear: both" />
+	　　if(x==1) then<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　SomeObject so=new SomeObject();<br style="width: 0px; height: 0px; clear: both" />
+	　　　Foo=so.getXX();<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	<strong>2．异常(Exceptions)</strong><br style="width: 0px; height: 0px; clear: both" />
+	　　JAVA语言中提供了try/catch来发方便用户捕捉异常，进行异常的处理。但是如果使用不当，也会给JAVA程序的性能带来影响。因此，要注意以下两点：<br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 避免对应用程序的逻辑使用try/catch<br style="width: 0px; height: 0px; clear: both" />
+	　　如果可以用if,while等逻辑语句来处理，那么就尽可能的不用try/catch语句。<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 重用异常<br style="width: 0px; height: 0px; clear: both" />
+	　　在必须要进行异常的处理时，要尽可能的重用已经存在的异常对象。以为在异常的处理中，生成一个异常对象要消耗掉大部分的时间。<br style="width: 0px; height: 0px; clear: both" />
+	<strong>3. 线程(Threading)</strong><br style="width: 0px; height: 0px; clear: both" />
+	　　一个高性能的应用程序中一般都会用到线程。因为线程能充分利用系统的资源。在其他线程因为等待硬盘或网络读写而 时，程序能继续处理和运行。但是对线程运用不当，也会影响程序的性能。<br style="width: 0px; height: 0px; clear: both" />
+	　　例2：正确使用Vector类<br style="width: 0px; height: 0px; clear: both" />
+	　　Vector主要用来保存各种类型的对象（包括相同类型和不同类型的对象）。但是在一些情况下使用会给程序带来性能上的影响。这主要是由Vector类的两个特点所决定的。第一，Vector提供了线程的安全保护功能。即使Vector类中的许多方法同步。但是如果你已经确认你的应用程序是单线程，这些方法的同步就完全不必要了。第二，在Vector查找存储的各种对象时，常常要花很多的时间进行类型的匹配。而当这些对象都是同一类型时，这些匹配就完全不必要了。因此，有必要设计一个单线程的，保存特定类型对象的类或集合来替代Vector类.用来替换的程序如下（StringVector.java）：<br style="width: 0px; height: 0px; clear: both" />
+	　　public class StringVector<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　private String [] data;<br style="width: 0px; height: 0px; clear: both" />
+	　　　private int count;<br style="width: 0px; height: 0px; clear: both" />
+	　　　public StringVector()<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　this(10); // default size is 10<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　public StringVector(int initialSize)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　data = new String[initialSize];<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　public void add(String str)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　// ignore null strings<br style="width: 0px; height: 0px; clear: both" />
+	　　　if(str == null) { return; }<br style="width: 0px; height: 0px; clear: both" />
+	　　　ensureCapacity(count + 1);<br style="width: 0px; height: 0px; clear: both" />
+	　　　data[count++] = str;<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　private void ensureCapacity(int minCapacity)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　int oldCapacity = data.length;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　if (minCapacity &gt; oldCapacity)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　String oldData[] = data;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　int newCapacity = oldCapacity * 2;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　data = new String[newCapacity];<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.arraycopy(oldData, 0, data, 0, count);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　public void remove(String str)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　if(str == null) { return; // ignore null str }<br style="width: 0px; height: 0px; clear: both" />
+	　　　for(int i = 0; i &lt; count; i++)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　// check for a match<br style="width: 0px; height: 0px; clear: both" />
+	　　　　if(data[i].equals(str))<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.arraycopy(data,i+1,data,i,count-1); // copy data<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　// allow previously valid array element be gc&#39;d<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　data[--count] = null;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　return;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　public final String getStringAt(int index)<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　if(index &lt; 0) { return null; }<br style="width: 0px; height: 0px; clear: both" />
+	　　　else if(index &gt; count) { return null; // index is &gt; # strings }<br style="width: 0px; height: 0px; clear: both" />
+	　　　else { return data[index]; // index is good }<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　因此，代码：<br style="width: 0px; height: 0px; clear: both" />
+	　　Vector Strings=new Vector();<br style="width: 0px; height: 0px; clear: both" />
+	　　Strings.add(&quot;One&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　Strings.add(&quot;Two&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　String Second=(String)Strings.elementAt(1);<br style="width: 0px; height: 0px; clear: both" />
+	　　可以用如下的代码替换：<br style="width: 0px; height: 0px; clear: both" />
+	　　StringVector Strings=new StringVector();<br style="width: 0px; height: 0px; clear: both" />
+	　　Strings.add(&quot;One&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　Strings.add(&quot;Two&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　String Second=Strings.getStringAt(1);<span class="Apple-converted-space">&nbsp;</span><br style="width: 0px; height: 0px; clear: both" />
+	　　这样就可以通过优化线程来提高JAVA程序的性能。用于测试的程序如下（TestCollection.java）:<span class="Apple-converted-space">&nbsp;</span><br style="width: 0px; height: 0px; clear: both" />
+	　　import java.util.Vector;<br style="width: 0px; height: 0px; clear: both" />
+	　　public class TestCollection<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　public static void main(String args [])<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　TestCollection collect = new TestCollection();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　if(args.length == 0)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.out.println(&quot;Usage: java TestCollection [ vector | stringvector ]&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.exit(1);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　　if(args[0].equals(&quot;vector&quot;))<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　Vector store = new Vector();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　long start = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　for(int i = 0; i &lt; 1000000; i++)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　　store.addElement(&quot;string&quot;);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　long finish = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.out.println((finish-start));<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　start = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　for(int i = 0; i &lt; 1000000; i++)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　　String result = (String)store.elementAt(i);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　finish = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.out.println((finish-start));<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　　else if(args[0].equals(&quot;stringvector&quot;))<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　StringVector store = new StringVector();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　long start = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　for(int i = 0; i &lt; 1000000; i++) { store.add(&quot;string&quot;); }<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　long finish = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.out.println((finish-start));<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　start = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　for(int i = 0; i &lt; 1000000; i++) {<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　　String result = store.getStringAt(i);<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　finish = System.currentTimeMillis();<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　System.out.println((finish-start));<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　关于线程的操作，要注意如下几个方面：<br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 防止过多的同步<br style="width: 0px; height: 0px; clear: both" />
+	　　如上所示，不必要的同步常常会造成程序性能的下降。因此，如果程序是单线程，则一定不要使用同步。<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 同步方法而不要同步整个代码段<br style="width: 0px; height: 0px; clear: both" />
+	　　对某个方法或函数进行同步比对整个代码段进行同步的性能要好。<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 对每个对象使用多&rdquo;锁&rdquo;的机制来增大并发。<br style="width: 0px; height: 0px; clear: both" />
+	　　一般每个对象都只有一个&rdquo;锁&rdquo;，这就表明如果两个线程执行一个对象的两个不同的同步方法时，会发生&rdquo;死锁&rdquo;。即使这两个方法并不共享任何资源。为了避免这个问题，可以对一个对象实行&rdquo;多锁&rdquo;的机制。如下所示：<br style="width: 0px; height: 0px; clear: both" />
+	　　class foo<br style="width: 0px; height: 0px; clear: both" />
+	　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　private static int var1;<br style="width: 0px; height: 0px; clear: both" />
+	　　　private static Object lock1=new Object();<br style="width: 0px; height: 0px; clear: both" />
+	　　　private static int var2;<br style="width: 0px; height: 0px; clear: both" />
+	　　　private static Object lock2=new Object();<br style="width: 0px; height: 0px; clear: both" />
+	　　　public static void increment1()<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　synchronized(lock1)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　var1++;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　public static void increment2()<br style="width: 0px; height: 0px; clear: both" />
+	　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　synchronized(lock2)<br style="width: 0px; height: 0px; clear: both" />
+	　　　　{<br style="width: 0px; height: 0px; clear: both" />
+	　　　　　var2++;<br style="width: 0px; height: 0px; clear: both" />
+	　　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　　}<br style="width: 0px; height: 0px; clear: both" />
+	　　}<br style="width: 0px; height: 0px; clear: both" />
+	<strong>4．输入和输出(I/O)<span class="Apple-converted-space">&nbsp;</span></strong><br style="width: 0px; height: 0px; clear: both" />
+	　　输入和输出包括很多方面，但涉及最多的是对硬盘，网络或数据库的读写操作。对于读写操作，又分为有缓存和没有缓存的；对于数据库的操作，又可以有多种类型的JDBC驱动器可以选择。但无论怎样，都会给程序的性能带来影响。因此，需要注意如下几点：<br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 使用输入输出缓冲<br style="width: 0px; height: 0px; clear: both" />
+	　　尽可能的多使用缓存。但如果要经常对缓存进行刷新（flush）,则建议不要使用缓存。<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 输出流(Output Stream)和Unicode字符串<br style="width: 0px; height: 0px; clear: both" />
+	当时用Output Stream和Unicode字符串时，Write类的开销比较大。因为它要实现Unicode到字节(byte)的转换.因此，如果可能的话,在使用Write类之前就实现转换或用OutputStream类代替Writer类来使用。<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 当需序列化时使用transient<br style="width: 0px; height: 0px; clear: both" />
+	当序列化一个类或对象时，对于那些原子类型（atomic）或可以重建的原素要表识为transient类型。这样就不用每一次都进行序列化。如果这些序列化的对象要在网络上传输，这一小小的改变对性能会有很大的提高。<br style="width: 0px; height: 0px; clear: both" />
+	　　(4) 使用高速缓存（Cache）<br style="width: 0px; height: 0px; clear: both" />
+	对于那些经常要使用而又不大变化的对象或数据，可以把它存储在高速缓存中。这样就可以提高访问的速度。这一点对于从数据库中返回的结果集尤其重要。<br style="width: 0px; height: 0px; clear: both" />
+	　　(5) 使用速度快的JDBC驱动器（Driver）<br style="width: 0px; height: 0px; clear: both" />
+	JAVA对访问数据库提供了四种方法。这其中有两种是JDBC驱动器。一种是用JAVA外包的本地驱动器；另一种是完全的JAVA驱动器。具体要使用哪一种得根据JAVA布署的环境和应用程序本身来定。<br style="width: 0px; height: 0px; clear: both" />
+	<strong>5.一些其他的经验和技巧</strong><br style="width: 0px; height: 0px; clear: both" />
+	　　(1) 使用局部变量。<br style="width: 0px; height: 0px; clear: both" />
+	　　(2) 避免在同一个类中动过调用函数或方法(get或set)来设置或调用变量。<br style="width: 0px; height: 0px; clear: both" />
+	　　(3) 避免在循环中生成同一个变量或调用同一个函数（参数变量也一样）。<br style="width: 0px; height: 0px; clear: both" />
+	　　(4) 尽可能的使用static,final,private等关键字。<br style="width: 0px; height: 0px; clear: both" />
+	　　(5) 当复制大量数据时，使用System.arraycopy()命令。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0507/716.html'>Java程序性能优化常见的23个方法.</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0507/718.html'>前端页面性能优化提速</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=717&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>编程设计  /  Java_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="" />    
+
+    	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+
+    <style type="text/css">
+
+      .pageSelect{height: 35px;}
+
+    </style>
+
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了1009 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+
+<div class="container">
+
+
+  <div class="col-sm-8  col-md-8">    
+
+      <ol class="breadcrumb">
+
+        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+
+      </ol>
+      
+      <div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/641.html'>java 局部变量和全局变量问题</a></h3>
+
+              <p> 所谓临时变量，就是为了方便起见申明的变量，存放一些中间结果。有点像中学几何里面的辅助线。 如果基于性能的考虑，避免每次调用的时候为临时变量分配空间，就可以将它声明为...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/640.html'>利用java的HttpURLConnection和Servlet通信,Post方式</a></h3>
+
+              <p>这几天测试Servlet通信，写了一个小程序，通过从Properties文件中读取设定信息，构造Http头，向Servlet发Post请求，并且接收Servlet的结果，下面给出程序的大概结构： import java.net.*; import j...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/639.html'>使用Hibernate进行大数据量的性能测试</a></h3>
+
+              <p>近日为是否在项目中使用Hibernate进行大数据量的性能测试，有一些总结，1) 在处理大数据量时，会有大量的数据缓冲保存在Session的一级缓存中，这缓存大太时会严重显示性能，所以在使...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/638.html'>java中this怎么用,java中this用法小结</a></h3>
+
+              <p>Java关键字this只能用于方法方法体内。当一个对象创建后，Java虚拟机（JVM）就会给这个对象分配一个引用自身的指针，这个指针的名字就是 this。因此，this只能在类中的非静态方法中使...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/637.html'>java关于多线程的部分操作</a></h3>
+
+              <p>一般服务器端代码，每次收到一个线程，一个client就会产生： /************************ 开始监听 **************************/ int port = 4311； ServerSocket server = null；//服务器 Socket client = null；//客户端...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/636.html'>彻底明白Java语言中的IO系统</a></h3>
+
+              <p>Java的核心库java.io提供了全面的IO接口，包括：文件读写，标准设备输出等等。Java中IO是以流为基础进行输入输出的，所有数据被串行化写入输出流，或者从输入流读入。在具体使用中很...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/635.html'>java中list、set和map 的区别</a></h3>
+
+              <p> List按对象进入的顺序保存对象，不做排序或编辑操作。Set对每个对象只接受一次，并使用自己内部的排序方法(通常，你只关心某个元素是否属于Set,而不关心它的顺序--否则应该使用L...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/634.html'>java中最常见到的runtime exception</a></h3>
+
+              <p>ArithmeticException, ArrayStoreException, BufferOverflowException, BufferUnderflowException, CannotRedoException, CannotUndoException, ClassCastException, CMMException, ConcurrentModificationException, DOMException, ...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/633.html'>Singleton单例模式的俩种形式</a></h3>
+
+              <p>Singleton模式主要作用是保证在Java应用程序中，一个类Class只有一个实例存在。一般Singleton模式通常有几种种形式:第一种形式:定义一个类，它的构造函数为private的，它有一个static的priv...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/632.html'>使用sql语句写出分页语句</a></h3>
+
+              <p> 使用sql语句写出分页语句 (每页条数)pagesize=20 (第几页)pagenum=5select top 20 * from t_news where id not in(select top ((5-1)*20)id from t_news)...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/631.html'>学习JAVA语言基础篇</a></h3>
+
+              <p>Java语言的基本组成Java语言主要由以下五种元素组成：标识符、关键字、文字、运算符和分隔符。这五种元素有着不同的语法含义和组成规则，它们互相配合，共同完成Java语言的语意表...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2015/0406/630.html'>java中事务四大特性介绍之原子性、一致性、分离性、持久性</a></h3>
+
+              <p>事务的的特性包括：原子性、一致性、分离性、持久性(1) 原子性 事务的原子性指的是，事务中包含的程序作为数据库的逻辑工作单位，它所做的对数据修改操作要么全部执行，要么完全...</p>
+
+        </div>
+
+      </div>
+
+    <nav>
+
+	  <ul class="pagination">
+
+	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
+
+	    <li><a href='list_26_1.html'>首页</a></li>
+<li><a href='list_26_13.html'>上一页</a></li>
+<li><a href='list_26_9.html'>9</a></li>
+<li><a href='list_26_10.html'>10</a></li>
+<li><a href='list_26_11.html'>11</a></li>
+<li><a href='list_26_12.html'>12</a></li>
+<li><a href='list_26_13.html'>13</a></li>
+<li class="thisclass">14</li>
+<li><a href='list_26_15.html'>15</a></li>
+<li><a href='list_26_16.html'>16</a></li>
+<li><a href='list_26_17.html'>17</a></li>
+<li><a href='list_26_18.html'>18</a></li>
+<li><a href='list_26_19.html'>19</a></li>
+<li><a href='list_26_15.html'>下一页</a></li>
+<li><a href='list_26_21.html'>末页</a></li>
+<li><select name='sldd' style='width:42px' onchange='location.href=this.options[this.selectedIndex].value;'>
+<option value='list_26_1.html'>1</option>
+<option value='list_26_2.html'>2</option>
+<option value='list_26_3.html'>3</option>
+<option value='list_26_4.html'>4</option>
+<option value='list_26_5.html'>5</option>
+<option value='list_26_6.html'>6</option>
+<option value='list_26_7.html'>7</option>
+<option value='list_26_8.html'>8</option>
+<option value='list_26_9.html'>9</option>
+<option value='list_26_10.html'>10</option>
+<option value='list_26_11.html'>11</option>
+<option value='list_26_12.html'>12</option>
+<option value='list_26_13.html'>13</option>
+<option value='list_26_14.html' selected>14</option>
+<option value='list_26_15.html'>15</option>
+<option value='list_26_16.html'>16</option>
+<option value='list_26_17.html'>17</option>
+<option value='list_26_18.html'>18</option>
+<option value='list_26_19.html'>19</option>
+<option value='list_26_20.html'>20</option>
+<option value='list_26_21.html'>21</option>
+</select></li>
+
+
+	  </ul>
+
+	</nav>    
+
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="listsubname">
+    
+      <a href='/bcsj/css/' class="btn btn-default">CSS</a>
+    
+      <a href='/bcsj/Hadoop/' class="btn btn-default">Hadoop</a>
+    
+      <a href='/bcsj/Ajax/' class="btn btn-default">Ajax</a>
+    
+      <a href='/bcsj/js/' class="btn btn-default">Javascript</a>
+    
+      <a href='/bcsj/java/' class="btn btn-default">Java</a>
+    
+      <a href='/bcsj/Jetty/' class="btn btn-default">Jetty</a>
+    
+      <a href='/bcsj/Python/' class="btn btn-default">Python</a>
+    
+      <a href='/storm/' class="btn btn-default">Storm</a>
+    
+      <a href='/ElasticSearch/' class="btn btn-default">ElasticSearch</a>
+    
+      <a href='/SpringBoot/' class="btn btn-default">SpringBoot</a>
+    
+      <a href='/sublime/' class="btn btn-default">Sublime</a>
+    
+      <a href='/SpringCloud/' class="btn btn-default">SpringCloud</a>
+    
+      <a href='/ZooKeeper/' class="btn btn-default">ZooKeeper</a>
+    
+      <a href='/Git/' class="btn btn-default">Git</a>
+    
+      <a href='/maven/' class="btn btn-default">Maven</a>
+    
+      <a href='/Gradle/' class="btn btn-default">Gradle</a>
+    
+      <div class="clear"></div>
+    </div>
+    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+
+      <div class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">最新文章>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/bcsj/java/2017/1219/1656.html" >Intellij IDEA 快捷键大全</a><span>12.19</span></li>
+<li><a href="/bcsj/java/2017/1115/1655.html" >什么是SOA，以及SOA的优点特性原理</a><span>11.15</span></li>
+<li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+ 
+
+          </ul>
+
+        </div>
+
+      </div>  
+
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">相关热门>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1777</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1412</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>879</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>816</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>731</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>673</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>546</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>303</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>222</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>182</span></li>
+ 
+
+          </ul>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+
+  </div>
+
+</div>
+
+<div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>
+

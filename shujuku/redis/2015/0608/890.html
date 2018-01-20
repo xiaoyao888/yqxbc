@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Redis与mysql的应用以及使用经验_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Redis,与,mysql,的,应用,以及,使用,经验,使用" />
+  <meta name="description" content="使用初衷 从2010年上半年起，我们就开始尝试使用Redis，主要出于以下几方面的考虑。 性能比MySQL好。因为业务的发展对性能的需求越来越强烈。 丰富的数据类型。在速度就是市场的互" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > <a href='/shujuku/redis/'>redis</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Redis与mysql的应用以及使用经验</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-06-08 16:04 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="890" class="art_content"><h2>
+	使用初衷</h2>
+<p>
+	从2010年上半年起，我们就开始尝试使用Redis，主要出于以下几方面的考虑。</p>
+<ul>
+	<li>
+		性能比MySQL好。因为业务的发展对性能的需求越来越强烈。</li>
+	<li>
+		丰富的数据类型。在速度就是市场的互联网时代，快速开发是一个不变的需求。</li>
+	<li>
+		Cache宕机让人纠结，Redis有半持久化和持久化两种方式，能从某种程度上解决这个问题，以减少Cache宕机带来的雪崩效应。</li>
+	<li>
+		在部分业务场景中，使用MySQL+Memcached存在一致性问题，若使用Redis替代，能降低整体架构复杂度。</li>
+</ul>
+<h2>
+	完善过程</h2>
+<p>
+	在开始应用Redis时，规模比较小，数据量也很小，没有遇到太多的问题。而随着数据量的增加，遇到了很多问题。总结一句话就是，当数据量变大时，以前不是问题的问题都变成了问题。</p>
+<h2>
+	Master/Slave同步问题</h2>
+<p>
+	首先遇到的是Master/Slave的同步问题。它的原理是Slave做了Slaveof之后，向Master发送一个Sync，Master把内存的数 据Dump出来，形成rdb文件，然后传到Slave，Slave把这个文件加载到内存，完成之后Master向Slave发送新数据包。</p>
+<p>
+	在网络出现问题时，比如瞬断，会导致Master里的数据全部重传。对单个端口来说，如果数据量小，那么这个影响不大，而如果数据量比较大的话，则会导致网 络瞬间流量暴增，同时在同步时Slave做不了读操作。我们对其进行了修改，加入Position的概念来解决这个问题，确保在网络出现问题时不会重传所 有数据，只重传断开时后面的数据。</p>
+<h2>
+	aof的定期归档问题</h2>
+<p>
+	Redis默认产生的aof文件需要手工做 bgrewrite-aof，这个操作产生的lock会对写产生一定的影响。因此，我们最开始用脚本在凌晨业务低峰时进行这个操作。而随着数量的增 加，lock的时间越来越不能被业务接受。我们对源代码进行了修改，将bgrewriteaof放到Redis内部去实现，在配置文件内制定执行时间，让这个操作自动执行，并且不会导致写产生的lock问题。</p>
+<p>
+	同时，我们还将aof设计得与MySQL的binlog类似，设定每个aof的大小，在达到一定值时，会自动产生一个新的aof。</p>
+<h2>
+	Mytrigger和MytriggerQ的设计</h2>
+<p>
+	业务有这样的需求：应用按用户维度写入数据，统计用户的记录数（如关注数、粉丝数）时，需要从数据库中执行count(*)操作。在InnoDB中执行这个 相对较慢，而增加Cache方案又满足不了业务对实时性的要求。因此，我们开发了Mytrigger组件来读取MySQL的binlog，然后通过业务逻 辑转化写入Redis。</p>
+<p>
+	例如，MySQL中存每条记录，Redis中存按用户维度的记录总和。这样实现之后，应用从MySQL中读取数据，从Redis里读取记录条数，MySQL的压力降低很多，同时计数读取性能提高了很多。</p>
+<p>
+	如果应用是数据的写入方，那么它需要将数据写入数据库，同时需要把这些新增或变更通知给另一个应用，另一个应用获得这些新增或更新后开始做自己的业务逻辑处理。</p>
+<p>
+	刚开始，我们采用了写数据库的同时再写一份MemcacheQ的方法，后来更换为MytriggerQ读取MySQL的binlog，将读取到的数据转化为 队列。需要了解数据变化的业务通过读取这个MytriggerQ服务来获取数据的变化。这样，应用只用写一次，简化了应用架构的复杂度。</p>
+<h2>
+	容量设计</h2>
+<p>
+	在申请使用Redis之前，我们会对业务进行评估。通过填写预计容量和性能需求表格，我们能算出Redis占用的内存量，确保单个端口的数据量不高于机器内存的三分之一。</p>
+<p>
+	当前，我们使用的是96GB的内存型机型，每个端口最终容量控制在30GB以下。当业务需求的容量超过机器最大内存时，采用的拆分方式是Hash到多个端 口，通过基准测试得出在容量允许的情况下，一台机器部署2个实例、4个实例或8个实例的最大性能，预留20%的容量用于增长，根据业务指标计算出需要的资 源数。</p>
+<p>
+	使用了Redis自身的过期策略之后，发现存入Redis的数据有可能出现即使还有大量内存没有使用，Redis还会让key过期去释放内存，或者内存不足时key还没有过期的问题。</p>
+<p>
+	对于过期的数据，我们采用清理和滚动两种方式。清理容易出现内存碎片；滚动即建两组端口，同时写两组端口。比如要保留3个月的数据，那么每个断开保留6个月 的数据，两个同时写，使用奇数端口，在第4个月时，把读写切换到偶数端口，同时清理奇数端口里的数据，但使用这种方式带来了很高的维护成本。</p>
+<h2>
+	应用场景</h2>
+<p>
+	做Cache还是做Storage是我们一直在思考的问题。Redis有持久化和半持久化两种方式，但即使这样，所有Redis的数据都在内存中。大数据量存储时，数据类型的优势将越来越不明显。</p>
+<p>
+	当数据量小时，可以不用做过多考虑，因为一切都不是问题，可以利用其丰富的数据类型带来业务的快速开发和上线；数据量总量和增加量都相对可控，数据比较精细 可以使用Redis做存储。例如，用户维度的计数就用Redis来做Storage。但对于对象维度，如微博维度的数据使用Redis做Cache。</p>
+<p>
+	有些业务的容量增长过快，与之前的预计有出入，且所有的数据都在内存中，没有冷热区分（降低存储最好的办法就是分级存储），我们就将这部分不再适合放在 Redis的业务使用新的方案代替。例如把它替换成MySQL+Memcached的方式。因为每次做滚动切换的方案运维成本和硬件成本投入都很高，所以 可使用HandlerSocket来替换。例如，前6个月的数据放在Redis中，之后的数据放到MySQL中，在减少切换的同时也能降低运维成本。</p>
+<h2>
+	未来的计划</h2>
+<p>
+	随着机器规模的不断增加，可用性和自动化需求越来越强烈，目前我们正在结合ZooKeeper设计Redis的自动切换，同时提高Redis自动化维护需 求。我们会开发一个高速数据访问框架和管理系统，将故障切换、数据拆分逻辑和自动数据迁移放到里面，实现其应用的产品化。希望走过的这些路对大家在使用 Redis的过程中有所帮助。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/shujuku/redis/2015/0608/889.html'>redis与mysql数据同步</a> </li>
+            <li class="next">下一篇：<a href='/shujuku/redis/2015/0608/891.html'>redis结构设计及针对msyql相关查询实现考虑</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/shujuku/redis/2017/1101/1637.html" >消息中间件的技术选型RabbitMQ、</a><span>11.01</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存</a><span>09.26</span></li>
+<li><a href="/shujuku/redis/2016/1019/1549.html" >CentOS7安装配置redis-3.0.0</a><span>10.19</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>05.10</span></li>
+<li><a href="/shujuku/redis/2015/0831/1259.html" >Redis PHP连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1258.html" >Redis Java连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1254.html" >Redis基准</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1253.html" >Redis安全</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1249.html" >Redis脚本</a><span>08.31</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/shujuku/redis/2015/0831/1248.html" >Redis事务</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1247.html" >Redis发布订阅</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1246.html" >Redis有序集合</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1245.html" >Redis列表</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1244.html" >Redis哈希</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1240.html" >Redis数据类型</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1257.html" >Redis分区</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1256.html" >Redis管道传输</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1255.html" >Redis客户端连接</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1252.html" >Redis备份</a><span>08.31</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/redis/2017/1101/1637.html" >消息中间件的技术选型RabbitMQ、ActiveMQ、RocketMQ、kafka、Redis消息和Zero</a><span>11.01</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存储不再有负担！</a><span>09.26</span></li>
+<li><a href="/shujuku/redis/2016/1019/1549.html" >CentOS7安装配置redis-3.0.0</a><span>10.19</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>05.10</span></li>
+<li><a href="/shujuku/redis/2015/0831/1259.html" >Redis PHP连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1258.html" >Redis Java连接操作</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1254.html" >Redis基准</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1253.html" >Redis安全</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>08.31</span></li>
+<li><a href="/shujuku/redis/2015/0831/1249.html" >Redis脚本</a><span>08.31</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/shujuku/redis/2015/0525/871.html" >centos安装Redis出现Redis need tcl 8.5解</a><span>2711</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>486</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存</a><span>471</span></li>
+<li><a href="/shujuku/redis/2015/0831/1236.html" >Redis学习教程</a><span>202</span></li>
+<li><a href="/shujuku/redis/2015/0608/889.html" >redis与mysql数据同步</a><span>71</span></li>
+<li><a href="/shujuku/redis/2015/0608/892.html" > lettuce---redis异步通信</a><span>58</span></li>
+<li><a href="/shujuku/redis/2015/0531/878.html" >Redis操作常用命令大全</a><span>57</span></li>
+<li><a href="/shujuku/redis/2015/0608/890.html" >Redis与mysql的应用以及使用经验</a><span>54</span></li>
+<li><a href="/shujuku/redis/2015/0831/1235.html" >Linux CentOS如何安装Redis</a><span>53</span></li>
+<li><a href="/shujuku/redis/2015/0831/1251.html" >Redis服务器</a><span>52</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=890&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

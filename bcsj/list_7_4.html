@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>编程设计_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="" />    
+
+    	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+
+    <style type="text/css">
+
+      .pageSelect{height: 35px;}
+
+    </style>
+
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了1009 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+
+<div class="container">
+
+
+  <div class="col-sm-8  col-md-8">    
+
+      <ol class="breadcrumb">
+
+        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > 
+
+      </ol>
+      
+      <div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/sublime/1597.html'>Sublime Text 3 常用插件以及安装方法(vue 插件)</a></h3>
+
+              <p>使用Package Control组件安装 也可以安装package control组件，然后直接在线安装： 按Ctrl+` 调出console 粘贴以下代码到底部命令行并回车： { import urllib.request,os; pf = Package Control.sublime-package;...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/sublime/1596.html'>sublime vue 语法高亮插件安装</a></h3>
+
+              <p>默认情况下，Vue.js 的单文件组件（*.vue）在 sublime 编辑器中是不被识别的。若要想高亮显示，需要安装插件 Vue Syntax Hightlight。安装步骤如下： 第一，在 sublime 中打开 PackageControl 如下图...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/sublime/1595.html'>用sublime text3 快捷键创建一个html5 代码</a></h3>
+
+              <p>1、 利用Package Control安装Sublime Tmpl ctrl + shift + p 呼出Package Control界面 输入 install 回车 2、输入SublimeTmpl 回车 使用Sublime Tmpl快捷键快速创建html5 ctrl + alt + h 新建一个html5文件...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/SpringBoot/1594.html'>spring-boot 热加载实现替换Jrebel</a></h3>
+
+              <p>导读： 本文主要说说，在玩spring-boot时，我们经常要遇到重启服务这种浪费时间的事情，为了割掉这个痛点，我们一般有2中方式实现。 一个是springload , 另外一个是 spring-boot-devtools 方式...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/js/2017/0611/1592.html'>Nodejs回调加超时限制两种实现方法</a></h3>
+
+              <p>Nodejs回调加超时限制两种实现方法 Nodejs下的IO操作都是异步的，有时候异步请求返回太慢，不想无限等待回调怎么办呢？我们可以给回调函数加一个超时限制，到一定时间还没有回调就...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2017/0415/1591.html'>SpringMVC之后台接收参数与前台传递数据</a></h3>
+
+              <p>1、接收请求参数 1. 使用HttpServletRequest获取 @RequestMapping(/login.do) public String login(HttpServletRequest request){ String name = request.getParameter(name) String pass = request.getParameter(pass) } 2. spring会自动将表单...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/ZooKeeper/1587.html'>Zookeeper设置开启启动</a></h3>
+
+              <p>在Centos 中将zookeeper设置成开机启动 部署了Zookeeper之后，当需要重启机器时，开机后往往需要花一点时间对zookeeper集群进行启动， 由于zookeeper没有主节点的概念，且一个节点的重启不会...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/ZooKeeper/1576.html'>Zookeeper动态更新服务器列表</a></h3>
+
+              <p>今天分享的是大数据实践的zookeeper。 zookeeper内部就是一个集群，主节点是选举出来的，外部看起来就像只有一台一样，保存的是一份状态数据。 做分布式应用协调的时候，可以降低开...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/js/2016/1109/1573.html'>实用Bootstrap树形菜单特效插件Bootstrap Tree View</a></h3>
+
+              <p>实用Bootstrap树形菜单特效插件Bootstrap Tree View，非常不错的Bootstrap插件，现在很多 Bootstrap制作的页面都需要此功能，此插件需要Bootstrap3版本以及jQuery 2.0极以上版本支 持，支持众多参数...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/bcsj/java/2016/1107/1572.html'>Comet4j基于AJAX的服务器推送框架</a></h3>
+
+              <p>Comet4J(Comet for Java)是一个纯粹基于AJAX(XMLHTTPRequest)的服务器推送框架，消息以JSON方式传递，具备长轮询、长连接、自动选择三种工作模式。 下面网址可以下载： http://code.google.com/p/comet...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/Gradle/1570.html'>如何在windows系统安装Gradle</a></h3>
+
+              <p>在本教程中，我们将学习 Gradle 的安装，对于一个初学者，有时安装开发环境也是一个比较麻烦的问题。如果按照 Gradle 官方网站的说明安装，则可能会遇到一些麻烦，有时还要在互联网...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/Gradle/1569.html'>Gradle构建脚本详细介绍</a></h3>
+
+              <p>Gradle构建脚本文件用来处理两件事情：一个是项目和另一个的任务。每个Gradle生成表示一个或多个项目。一个项目表示一个JAR库或Web应用程序，也可能表示由其他项目产生的JAR文件组装...</p>
+
+        </div>
+
+      </div>
+
+    <nav>
+
+	  <ul class="pagination">
+
+	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
+
+	    <li><a href='list_7_1.html'>首页</a></li>
+<li><a href='list_7_3.html'>上一页</a></li>
+<li><a href='list_7_1.html'>1</a></li>
+<li><a href='list_7_2.html'>2</a></li>
+<li><a href='list_7_3.html'>3</a></li>
+<li class="thisclass">4</li>
+<li><a href='list_7_5.html'>5</a></li>
+<li><a href='list_7_6.html'>6</a></li>
+<li><a href='list_7_7.html'>7</a></li>
+<li><a href='list_7_8.html'>8</a></li>
+<li><a href='list_7_9.html'>9</a></li>
+<li><a href='list_7_10.html'>10</a></li>
+<li><a href='list_7_11.html'>11</a></li>
+<li><a href='list_7_5.html'>下一页</a></li>
+<li><a href='list_7_46.html'>末页</a></li>
+<li><select name='sldd' style='width:42px' onchange='location.href=this.options[this.selectedIndex].value;'>
+<option value='list_7_1.html'>1</option>
+<option value='list_7_2.html'>2</option>
+<option value='list_7_3.html'>3</option>
+<option value='list_7_4.html' selected>4</option>
+<option value='list_7_5.html'>5</option>
+<option value='list_7_6.html'>6</option>
+<option value='list_7_7.html'>7</option>
+<option value='list_7_8.html'>8</option>
+<option value='list_7_9.html'>9</option>
+<option value='list_7_10.html'>10</option>
+<option value='list_7_11.html'>11</option>
+<option value='list_7_12.html'>12</option>
+<option value='list_7_13.html'>13</option>
+<option value='list_7_14.html'>14</option>
+<option value='list_7_15.html'>15</option>
+<option value='list_7_16.html'>16</option>
+<option value='list_7_17.html'>17</option>
+<option value='list_7_18.html'>18</option>
+<option value='list_7_19.html'>19</option>
+<option value='list_7_20.html'>20</option>
+<option value='list_7_21.html'>21</option>
+<option value='list_7_22.html'>22</option>
+<option value='list_7_23.html'>23</option>
+<option value='list_7_24.html'>24</option>
+<option value='list_7_25.html'>25</option>
+<option value='list_7_26.html'>26</option>
+<option value='list_7_27.html'>27</option>
+<option value='list_7_28.html'>28</option>
+<option value='list_7_29.html'>29</option>
+<option value='list_7_30.html'>30</option>
+<option value='list_7_31.html'>31</option>
+<option value='list_7_32.html'>32</option>
+<option value='list_7_33.html'>33</option>
+<option value='list_7_34.html'>34</option>
+<option value='list_7_35.html'>35</option>
+<option value='list_7_36.html'>36</option>
+<option value='list_7_37.html'>37</option>
+<option value='list_7_38.html'>38</option>
+<option value='list_7_39.html'>39</option>
+<option value='list_7_40.html'>40</option>
+<option value='list_7_41.html'>41</option>
+<option value='list_7_42.html'>42</option>
+<option value='list_7_43.html'>43</option>
+<option value='list_7_44.html'>44</option>
+<option value='list_7_45.html'>45</option>
+<option value='list_7_46.html'>46</option>
+</select></li>
+
+
+	  </ul>
+
+	</nav>    
+
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="listsubname">
+    
+      <a href='/bcsj/css/' class="btn btn-default">CSS</a>
+    
+      <a href='/bcsj/Hadoop/' class="btn btn-default">Hadoop</a>
+    
+      <a href='/bcsj/Ajax/' class="btn btn-default">Ajax</a>
+    
+      <a href='/bcsj/js/' class="btn btn-default">Javascript</a>
+    
+      <a href='/bcsj/java/' class="btn btn-default">Java</a>
+    
+      <a href='/bcsj/Jetty/' class="btn btn-default">Jetty</a>
+    
+      <a href='/bcsj/Python/' class="btn btn-default">Python</a>
+    
+      <a href='/storm/' class="btn btn-default">Storm</a>
+    
+      <a href='/ElasticSearch/' class="btn btn-default">ElasticSearch</a>
+    
+      <a href='/SpringBoot/' class="btn btn-default">SpringBoot</a>
+    
+      <a href='/sublime/' class="btn btn-default">Sublime</a>
+    
+      <a href='/SpringCloud/' class="btn btn-default">SpringCloud</a>
+    
+      <a href='/ZooKeeper/' class="btn btn-default">ZooKeeper</a>
+    
+      <a href='/Git/' class="btn btn-default">Git</a>
+    
+      <a href='/maven/' class="btn btn-default">Maven</a>
+    
+      <a href='/Gradle/' class="btn btn-default">Gradle</a>
+    
+      <div class="clear"></div>
+    </div>
+    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+
+      <div class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">最新文章>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/bcsj/java/2017/1219/1656.html" >Intellij IDEA 快捷键大全</a><span>12.19</span></li>
+<li><a href="/bcsj/java/2017/1115/1655.html" >什么是SOA，以及SOA的优点特性原理</a><span>11.15</span></li>
+<li><a href="/ZooKeeper/1654.html" >zookeeper常用命令</a><span>11.15</span></li>
+<li><a href="/Git/2017/1106/1638.html" >GitHub 的 12 个实用技巧，你 get 了几个？</a><span>11.06</span></li>
+<li><a href="/SpringBoot/1632.html" > spring boot 使用spring AOP实现拦截器实现权限管理</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/SpringBoot/1631.html" >Spring Boot整合jpa,Shiro进行权限管理教程</a><span>10.12</span></li>
+<li><a href="/SpringBoot/1630.html" >Spring @RequestMapping 注解使用技巧</a><span>10.12</span></li>
+<li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+ 
+
+          </ul>
+
+        </div>
+
+      </div>  
+
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">相关热门>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1777</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1412</span></li>
+<li><a href="/bcsj/Hadoop/2015/1125/1392.html" >Hadoop集群（第9期）_MapReduce初级案</a><span>954</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>879</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>816</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>731</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>673</span></li>
+<li><a href="/bcsj/Hadoop/2015/1124/1383.html" >Hadoop集群（第4期）_SecureCRT使用</a><span>562</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>546</span></li>
+<li><a href="/bcsj/Jetty/2016/0328/1475.html" >eclipse jee配置jetty的两种方法</a><span>469</span></li>
+ 
+
+          </ul>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+
+  </div>
+
+</div>
+
+<div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>
+

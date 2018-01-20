@@ -1,0 +1,36 @@
+<?php
+$typeArr[1] = '电脑知识';
+$typeArr[4] = '网络知识';
+$typeArr[5] = '操作系统';
+$typeArr[7] = '编程设计';
+$typeArr[8] = '数据库';
+$typeArr[56] = 'Python';
+$typeArr[10] = 'SQL Server';
+$typeArr[55] = 'Jetty';
+$typeArr[16] = 'windows10';
+$typeArr[17] = 'linux';
+$typeArr[61] = 'Maven';
+$typeArr[59] = 'Git';
+$typeArr[58] = 'Memcache';
+$typeArr[21] = 'MySql';
+$typeArr[22] = 'Oracle';
+$typeArr[23] = 'MangoDB';
+$typeArr[24] = 'Hbase';
+$typeArr[25] = 'Access';
+$typeArr[26] = 'Java';
+$typeArr[29] = 'CSS';
+$typeArr[30] = 'Javascript';
+$typeArr[31] = 'Ajax';
+$typeArr[64] = 'SpringBoot';
+$typeArr[33] = '程序员之道';
+$typeArr[65] = 'Sublime';
+$typeArr[36] = 'DB2';
+$typeArr[37] = 'redis';
+$typeArr[39] = 'Hadoop';
+$typeArr[66] = 'SpringCloud';
+$typeArr[67] = 'ElasticSearch';
+$typeArr[68] = '手机知识';
+$typeArr[53] = 'Storm';
+$typeArr[62] = 'Gradle';
+$typeArr[63] = 'ZooKeeper';
+?>

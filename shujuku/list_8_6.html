@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>数据库_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="" />    
+
+    	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+
+    <style type="text/css">
+
+      .pageSelect{height: 35px;}
+
+    </style>
+
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+
+<div class="container">
+
+
+  <div class="col-sm-8  col-md-8">    
+
+      <ol class="breadcrumb">
+
+        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/shujuku/'>数据库</a> > 
+
+      </ol>
+      
+      <div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/redis/2015/0608/891.html'>redis结构设计及针对msyql相关查询实现考虑</a></h3>
+
+              <p>针对项目需求，以下主要针对对象及相关操作进行分析。 对象存储： redis对象存储有三种方案，考虑到操作的便利及存储效率，项目采用序列化存储和hash存储。 进行hash存储时，首先需...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/redis/2015/0608/890.html'>Redis与mysql的应用以及使用经验</a></h3>
+
+              <p>使用初衷 从2010年上半年起，我们就开始尝试使用Redis，主要出于以下几方面的考虑。 性能比MySQL好。因为业务的发展对性能的需求越来越强烈。 丰富的数据类型。在速度就是市场的互...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/redis/2015/0608/889.html'>redis与mysql数据同步</a></h3>
+
+              <p>应用Redis实现数据的读写，同时利用队列处理器定时将数据写入mysql，此种情况存在的问题主要是如何保证mysql与redis的数据同步，二者数据同步的关键在于mysql数据库中主键，方案是在...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/mysql/2015/0605/881.html'>mysqldump参数介绍教程%mysqldump 参数列表</a></h3>
+
+              <p>参数介绍教程mysqldump 参数列表 (1)直接使用mysqldump -uroot -pxxxx tetratest d:\data1.sql 导出数据时，没有建库语句，这时你可以手动创建一个库，然后使用： mysql -uroot -pabcd mydatabase d:\data1.sql，...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/redis/2015/0531/878.html'>Redis操作常用命令大全</a></h3>
+
+              <p>Redis操作常用命令 1）连接操作命令 quit：关闭连接（connection） auth：简单密码认证 help cmd： 查看cmd帮助，例如：help quit 2）持久化 save：将数据同步保存到磁盘 bgsave：将数据异步保存到...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/redis/2015/0525/871.html'>centos安装Redis出现Redis need tcl 8.5解决办法</a></h3>
+
+              <p>You need tcl 8.5 or newer in order to run the Redis test hadoop@stormspark:~/workspace/redis2.6.13/src$ make test You need tcl 8.5 or newer in order to run the Redis test make: *** [test] Error 1 wgethttp://downloads.sourceforge.net/tcl/tcl...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/mysql/2015/0507/734.html'>10款最好用的MySQL数据库客户端图形界面管理工具</a></h3>
+
+              <p>MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，因此被广泛地应用在Internet上的中小型网站中。随着MySQL的不断成熟，它也逐渐用于更多大规模网站和应用，...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0405/603.html'>MSSQL判断表或临时表是否存在</a></h3>
+
+              <p>中国站长天空为中国站长提供各种网页制作教程...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/sqlserver/2015/0405/604.html'>MSSQL增加列、修改列、增加主键、重设标识列</a></h3>
+
+              <p>--SQL语句增加列、修改列、增加主键...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/mysql/2015/0405/602.html'>四种数据库随机获取10条数据的方法</a></h3>
+
+              <p>SQLServer： SELECTTOP10*FROMT_USERORDERBYNEWID() ORACLE： SELECT*FROM(SELECT*FROMT_USERORDERBYDBMS_RANDOM.RANDOM())WHERERONUM=10 MySQL： SELECT*FROMT_USERORDERBYRAND()LIMIT10 Access： SELECTTOP10*FROMT_USERORDERBYrnd([一个自动编号字...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/oracle/2015/0401/432.html'>Oracle数据库备份与恢复</a></h3>
+
+              <p>当我们使用一个数据库时，总希望数据库的内容是可靠的、正确的，但由于计算机系统的故障（包括机器故障、介质故障、误操作等），数据库有时也可能遭到破坏，这时如何尽快恢复...</p>
+
+        </div>
+
+      </div><div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='/shujuku/oracle/2015/0401/431.html'>入侵oracle常用的操作命令</a></h3>
+
+              <p>最近遇到一个使用了oracle数据库的服务器,在狂学oracle+请教高手后终于搞到了网站后台管理界面的所有用户密码,我发现oracle操作起来真是太麻烦,为了兄弟们以后少走些弯路,我把入侵当中...</p>
+
+        </div>
+
+      </div>
+
+    <nav>
+
+	  <ul class="pagination">
+
+	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
+
+	    <li><a href='list_8_1.html'>首页</a></li>
+<li><a href='list_8_5.html'>上一页</a></li>
+<li><a href='list_8_1.html'>1</a></li>
+<li><a href='list_8_2.html'>2</a></li>
+<li><a href='list_8_3.html'>3</a></li>
+<li><a href='list_8_4.html'>4</a></li>
+<li><a href='list_8_5.html'>5</a></li>
+<li class="thisclass">6</li>
+<li><a href='list_8_7.html'>7</a></li>
+<li><a href='list_8_8.html'>8</a></li>
+<li><a href='list_8_9.html'>9</a></li>
+<li><a href='list_8_10.html'>10</a></li>
+<li><a href='list_8_11.html'>11</a></li>
+<li><a href='list_8_7.html'>下一页</a></li>
+<li><a href='list_8_14.html'>末页</a></li>
+<li><select name='sldd' style='width:42px' onchange='location.href=this.options[this.selectedIndex].value;'>
+<option value='list_8_1.html'>1</option>
+<option value='list_8_2.html'>2</option>
+<option value='list_8_3.html'>3</option>
+<option value='list_8_4.html'>4</option>
+<option value='list_8_5.html'>5</option>
+<option value='list_8_6.html' selected>6</option>
+<option value='list_8_7.html'>7</option>
+<option value='list_8_8.html'>8</option>
+<option value='list_8_9.html'>9</option>
+<option value='list_8_10.html'>10</option>
+<option value='list_8_11.html'>11</option>
+<option value='list_8_12.html'>12</option>
+<option value='list_8_13.html'>13</option>
+<option value='list_8_14.html'>14</option>
+</select></li>
+
+
+	  </ul>
+
+	</nav>    
+
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="listsubname">
+    
+      <a href='/shujuku/redis/' class="btn btn-default">redis</a>
+    
+      <a href='/shujuku/sqlserver/' class="btn btn-default">SQL Server</a>
+    
+      <a href='/shujuku/memcache/' class="btn btn-default">Memcache</a>
+    
+      <a href='/shujuku/mysql/' class="btn btn-default">MySql</a>
+    
+      <a href='/shujuku/oracle/' class="btn btn-default">Oracle</a>
+    
+      <a href='/shujuku/mangodb/' class="btn btn-default">MangoDB</a>
+    
+      <a href='/shujuku/hbase/' class="btn btn-default">Hbase</a>
+    
+      <a href='/shujuku/access/' class="btn btn-default">Access</a>
+    
+      <a href='/shujuku/db2/' class="btn btn-default">DB2</a>
+    
+      <div class="clear"></div>
+    </div>
+    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+
+      <div class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">最新文章>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/shujuku/redis/2017/1101/1637.html" >消息中间件的技术选型RabbitMQ、ActiveMQ、RocketMQ、kafka、Redis消息和Zero</a><span>11.01</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存储不再有负担！</a><span>09.26</span></li>
+<li><a href="/shujuku/mysql/2017/0814/1609.html" > MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</a><span>08.14</span></li>
+<li><a href="/shujuku/mysql/2017/0408/1589.html" >MySQL5.1: 安装启用InnoDB引擎</a><span>04.08</span></li>
+<li><a href="/shujuku/mangodb/2017/0403/1588.html" >在 CentOS7 上安装 MongoDB</a><span>04.03</span></li>
+<li><a href="/shujuku/memcache/2017/0111/1584.html" >Spring整合Memcached完整示例,经测无误。</a><span>01.11</span></li>
+<li><a href="/shujuku/redis/2016/1019/1549.html" >CentOS7安装配置redis-3.0.0</a><span>10.19</span></li>
+<li><a href="/shujuku/mysql/2016/1008/1528.html" >Cobar使用文档（可用作MySQL大型集群解决方案）</a><span>10.08</span></li>
+<li><a href="/shujuku/mysql/2016/0927/1523.html" >MySQL force Index 强制索引概述</a><span>09.27</span></li>
+<li><a href="/shujuku/memcache/2016/0708/1520.html" >Memcache使用场景，应用场景</a><span>07.08</span></li>
+ 
+
+          </ul>
+
+        </div>
+
+      </div>  
+
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">相关热门>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            <li><a href="/shujuku/oracle/2015/0401/428.html" >怎么完全卸载oracle11g,如何完全卸</a><span>4977</span></li>
+<li><a href="/shujuku/redis/2015/0525/871.html" >centos安装Redis出现Redis need tcl 8.5解</a><span>2711</span></li>
+<li><a href="/shujuku/mysql/2015/0316/222.html" >mysql安装图解 mysql图文安装教程</a><span>504</span></li>
+<li><a href="/shujuku/mangodb/2015/0312/209.html" >Mongodb在Windows下安装及配置</a><span>496</span></li>
+<li><a href="/shujuku/redis/2016/0510/1500.html" >详解Redis与Memcached的区别</a><span>486</span></li>
+<li><a href="/shujuku/redis/2017/0926/1625.html" >直击Redis持久化磁盘IO痛点，让存</a><span>471</span></li>
+<li><a href="/shujuku/mysql/2015/0507/734.html" >10款最好用的MySQL数据库客户端图</a><span>459</span></li>
+<li><a href="/shujuku/mysql/2015/0316/228.html" >phpmyadmin简明安装教程</a><span>303</span></li>
+<li><a href="/shujuku/redis/2015/0831/1236.html" >Redis学习教程</a><span>202</span></li>
+<li><a href="/shujuku/oracle/2015/0401/423.html" >完全卸载oracle11g步骤</a><span>145</span></li>
+ 
+
+          </ul>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+
+  </div>
+
+</div>
+
+<div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div>
+
+
+
+
+
+
+
+</body>
+
+</html>
+

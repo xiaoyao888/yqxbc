@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>不用Cookie的防刷新二级高亮菜单_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="不用Cookie的防刷新二级高" />
+  <meta name="description" content=" 菜单高亮效果是每个网页经常采用的设计方式，它能有效地让用户知道自己当前所在的栏目。这也是我经常采用的方式，一般的网页至少都有两级菜单，第一个是顶部的总导航条菜单，" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/js/'>Javascript</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>不用Cookie的防刷新二级高亮菜单</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-08-27 13:59 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="975" class="art_content">　　菜单高亮效果是每个网页经常采用的设计方式，它能有效地让用户知道自己当前所在的栏目。这也是我经常采用的方式，一般的网页至少都有两级菜单，第一个是顶部的总导航条菜单，另一个是左侧的分类导航菜单。一般要求在一级菜单高亮下二级菜单也能记录当前状态。<br />
+<br />
+　　对于一个包含顶部菜单的页头区域如果固定不变的，也就是它不用每次都重新加载，这种情况下用纯CSS或JS方式可以很容易地实现，但今天我要谈的不是这种，<b>今天说的是一级菜单和二级菜单在每个页面中都是动态加载的，</b>也就是它们是作为用户控件的方式载入的。这种情况下要想记录菜单的高亮状态是一件比较困难的事情。<br />
+<br />
+　　当然，你可能会说，用cookie可以记录每个页面加载时上次记录的高亮状态，是的，它确实可以记录，但是这种方式在一些复杂的包含许多子页面的应用中，会给用户造成许多困扰和麻烦。比如在cookie生存周期内，重新打开这个项目时，此时cookie的生存周期还没有完全结束，它还记录着上次保存的状态，而这时页面地址已经发生了变化，那么当前高亮的菜单所指向的就不是用户所希望看到的页面。实践证明，这个cookie的生存周期无论你设置多长都不能完美解决用户恶意刷新页面的状况。这确实是一件糟糕的事情！<br />
+<br />
+　　那么有没有一种较好的办法来解决这种状况呢？<br />
+<br />
+　　答案是有的。我们知道要解决这个问题，<b>最理想的办法是在每个页面加载时，根据页面的url地址显式地设置当前菜单的高亮样式。</b>这能完美地解决此类问题，并且这种方式无论用户如何恶意点击刷新按钮，高亮状态依旧保持不变。<br />
+<br />
+　　知道了原理，要实现起来就容易多了。<br />
+<br />
+　　<b>【结构层】</b><br />
+<br />
+　　一级菜单结构层：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;ul&nbsp;id=&quot;menu&quot;&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;default.html&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;clothing.html&quot;&gt;服装用品&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html&quot;&gt;家居用品&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;cosmetic.html&quot;&gt;化妆用品&lt;/a&gt;&lt;/li&gt;<br />
+				&lt;/ul&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　可以看到在这个一级菜单中，其链接地址一般是没有参数值的。<br />
+<br />
+　　二级菜单的结构层：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;ul&nbsp;id=&quot;othermenu&quot;&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=1&quot;&gt;日常用品&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=2&quot;&gt;小型家具&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=3&quot;&gt;电器配件&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=4&quot;&gt;床品套件&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=5&quot;&gt;婚庆床品&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=6&quot;&gt;儿童床品&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=7&quot;&gt;工艺摆设&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=8&quot;&gt;清洁工具&lt;/a&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href=&quot;house.html?pId=2&amp;sId=9&quot;&gt;家居清洁&lt;/a&gt;&lt;/li&gt;<br />
+				&lt;/ul&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　与一级菜单不同的是，我们将二级菜单中的链接地址加入两个参数值，pId参数指向的是顶部一级菜单的的序号，而sId则是菜单自己的顺序号。<br />
+<br />
+　　我们将这两个菜单的总容器ul都设置了两个不同中的ID，它们需要在JS中调用，所以千万不能少。<br />
+<br />
+　　<b>【样式层】</b><br />
+<br />
+　　关于样式，其实都没有什么特别的地方，你可以随心所意地设置成你想要的样式，只是需要注意的地方是，我们需要单独设置菜单高亮的三种状态样式，以供JS动态调用：<br />
+&nbsp;
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				/*一级菜单的三种样式设置*/<br />
+				#menu&nbsp;li&nbsp;a.normal{background:#fff;}//普通样式<br />
+				#menu&nbsp;li&nbsp;a.over{background:#00ff00;}//翻滚样式<br />
+				#menu&nbsp;li&nbsp;a.cur{background:#ff0000;color:#fff;}//高亮样式<br />
+				/*二级菜单的三种样式设置*/<br />
+				#othermenu&nbsp;li&nbsp;a.normal{background:#fff;}//普通样式<br />
+				#othermenu&nbsp;li&nbsp;a.over{background:#AA7F00;color:#fff;}//翻滚样式<br />
+				#othermenu&nbsp;li&nbsp;a.cur{background:#7F0000;color:#fff;}//高亮样式</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　<b>【行为层】</b><br />
+<br />
+　　因为要在行为层中控制菜单的三种状态，所以对于A链接标签，我们就不使用hover伪类来达到菜单的三种动态行为了，我们可以用onmouseover、onmouseout和onclick来模仿伪类的三种行为，这样好便于js的动态调整。并且为了达到行为、样式和结构的三层分离，我们也不用在A标签的html中去加上动态的行为控制代码，这不是一种良好的制作习惯。因此我们需要在页面的加载函数上做点文章，这就需要使用到onload函数，当页面一加载完后就动态绑定a标签的三种行为状态。<br />
+<br />
+　　在页面一加载完成后，我们首先获取当前的页面url字符串，再根据这个字符串和一二级菜单中的A标签的href地址进行对比，如果存在相同项，则高亮此菜单项的样式。<br />
+<br />
+　　详细的注释说明我都在下面的函数中一一标注出来，在此就不一一细述了。关键函数代码如下：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				//根据URL地址的参数或字符串高亮当前菜单<br />
+				function&nbsp;hightLightMenu(firstMenuID,twoMenuID){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;strUrl,strHref,subNavs,strLast,strParentID,strSelfID,parentID,selfID,strID;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;Navs=document.getElementById(firstMenuID).getElementsByTagName(&quot;a&quot;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;如果链接没有参数，或者URL链接中不存在我们要获取的参数，则返回数组中的序号<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;if(location.href.indexOf(&quot;?&quot;)==-1){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;strUrl=location.href.substring(location.href.lastIndexOf(&quot;/&quot;)+1);//取得URL页面名称<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//一级菜单高亮<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;Navs.length;&nbsp;i++)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//在IE6,IE7中strHref获得的是全路径，而在IE8和ff中获得的是页面名称，为了兼容，需要将它的字符串进行拆分<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strHref=Navs[i].getAttribute(&quot;href&quot;).substring(Navs[i].getAttribute(&quot;href&quot;).lastIndexOf(&#39;/&#39;)+1);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(strUrl==strHref){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//高亮当前菜单项<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addClass(Navs[i],&quot;cur&quot;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else{//如果是其它项，则绑定鼠标两态事件<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(function(i){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;obj=Navs[i];<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEventHandler(obj,&quot;mouseover&quot;,function(){overMe(obj)});<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEventHandler(obj,&quot;mouseout&quot;,function(){outme(obj)});<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(i)<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//二级菜单高亮<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(document.getElementById(twoMenuID)&nbsp;!=&nbsp;null)&nbsp;{//判断是否存在二级菜单<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//有可能二级菜单不存在，如首页只有一级菜单，所以当菜单id存在时，则<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subNavs&nbsp;=&nbsp;document.getElementById(&quot;othermenu&quot;).getElementsByTagName(&#39;a&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;n&nbsp;=&nbsp;0;&nbsp;n&nbsp;&lt;&nbsp;subNavs.length;&nbsp;n++)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hightlight(subNavs,n,0);//默认高亮第一个菜单项<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;else{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//如果url中带有参数的页面，则<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strLast&nbsp;=&nbsp;location.href.substring(location.href.indexOf(&quot;?&quot;)+1);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strParentID=strLast.substring(0,strLast.indexOf(&quot;&amp;&quot;));<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strSelfID=strLast.substring(strLast.indexOf(&quot;&amp;&quot;)+1);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parentID=strParentID.substring(strParentID.indexOf(&quot;=&quot;)+1);//获得第一个参数，这是一级菜单的id<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selfID=strSelfID.substring(strSelfID.indexOf(&quot;=&quot;)+1);//获得第二个参数，这是二级菜单的id<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//一级菜单高亮<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;Navs.length;&nbsp;i++)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hightlight(Navs,i,parentID);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//二级菜单高亮<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(document.getElementById(twoMenuID)&nbsp;!=&nbsp;null)&nbsp;{//判断是否存在二级菜单<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subNavs&nbsp;=&nbsp;document.getElementById(twoMenuID).getElementsByTagName(&#39;a&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;n&nbsp;=&nbsp;0;&nbsp;n&nbsp;&lt;&nbsp;subNavs.length;&nbsp;n++)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strID=selfID&nbsp;-&nbsp;1;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hightlight(subNavs,n,strID);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				}<br />
+				//高亮函数<br />
+				function&nbsp;hightlight(elementArray,inumber,curMenuIndex){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(inumber&nbsp;==&nbsp;curMenuIndex)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addClass(elementArray[inumber],&quot;cur&quot;);//高亮当前菜单样式<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(function(inumber){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;obj&nbsp;=&nbsp;elementArray[inumber];<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEventHandler(obj,&nbsp;&quot;mouseover&quot;,&nbsp;function(){overMe(obj)});//增加鼠标移上去时的事件<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEventHandler(obj,&nbsp;&quot;mouseout&quot;,&nbsp;function(){outme(obj)});//增加鼠标移走时的事件<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(inumber)<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　经过如上一番设置，一个通用、兼容的高亮函数就诞生了，我们看看它的效果截图：<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+　　本案例的高亮函数在如下浏览器中测试通过：IE5.5、IE6、IE7、IE8、FF3、TT、Maxthon、Chrome、Safari4.0、opera。<br />
+<br />
+　　查看演示：<a href="\" target="\&quot;_blank\&quot;">http://www.zzsky.cn/build/downloads/201007032130/default.html</a>。<br />
+<br />
+　　下载源码：<a href="\" target="\&quot;_blank\&quot;">http://www.zzsky.cn/build/downloads/201007032130/demo.rar</a>。<br />
+<br />
+　　作者：冰极峰（http://www.cnblogs.com/binyong/archive/2009/07/27/1531441.html）。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/js/2015/0827/974.html'>仿265上网导航眼睛会动的LOGO代码与变量说明</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/js/2015/0827/976.html'>从一道js笔试题到==运算符的简析</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>01.11</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>10.19</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>08.31</span></li>
+<li><a href="/bcsj/js/2015/0829/1113.html" >做网页必备的js特效代码</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1112.html" >11个JavaScript颜色选择器插件</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1111.html" >12种JavaScript MVC框架之比较</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1109.html" >JS函数重载解决方案</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1108.html" >JS的IE和FF兼容性问题汇总</a><span>08.29</span></li>
+<li><a href="/bcsj/js/2015/0829/1107.html" >js小数转换为整数</a><span>08.29</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2017/1010/1626.html" >前端框架：Angular React 和 Vue的比较</a><span>10.10</span></li>
+<li><a href="/bcsj/js/2016/0929/1524.html" >如果你不幸是一个前端工程师</a><span>09.04</span></li>
+<li><a href="/bcsj/js/2017/0902/1619.html" >Web端如何裁剪图片</a><span>09.02</span></li>
+<li><a href="/bcsj/js/2017/0611/1592.html" >Nodejs回调加超时限制两种实现方法</a><span>06.11</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bootstrap Tree View</a><span>11.09</span></li>
+<li><a href="/bcsj/js/2016/1015/1544.html" >js关闭当前页面(窗口)的几种方式总结_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1543.html" >javascript深入理解js闭包_javascript技巧</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/1015/1542.html" >js实现table添加行tr、删除行tr、清空行tr的简单实例</a><span>10.15</span></li>
+<li><a href="/bcsj/js/2016/0929/1525.html" >你知道Javascript还可以这么玩耍滴么？</a><span>09.29</span></li>
+<li><a href="/bcsj/js/2016/0506/1491.html" >带你一分钟理解 JavaScript 闭包</a><span>05.06</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/js/2015/0827/925.html" >easyui页面加载错乱解决方法，提示</a><span>202</span></li>
+<li><a href="/bcsj/js/2015/1019/1303.html" >30 个惊艳的 Bootstrap 扩展插件</a><span>152</span></li>
+<li><a href="/bcsj/js/2015/0829/1088.html" >js3秒后自动跳转到指定页面的俩种</a><span>129</span></li>
+<li><a href="/bcsj/js/2016/1109/1573.html" >实用Bootstrap树形菜单特效插件Bo</a><span>98</span></li>
+<li><a href="/bcsj/js/2015/0831/1260.html" >easyui页面加载错乱解决方法提示正</a><span>81</span></li>
+<li><a href="/bcsj/js/2015/0829/1110.html" >JS复制内容到剪贴板(兼容FF/Chrom</a><span>76</span></li>
+<li><a href="/bcsj/js/2015/0827/954.html" >兼容各种浏览器的复制内容到剪贴</a><span>67</span></li>
+<li><a href="/bcsj/js/2015/0827/968.html" >图片自适应大小的通用JS代码</a><span>63</span></li>
+<li><a href="/bcsj/js/2016/0111/1428.html" >jQuery 2.2 和 1.12 新版本发布</a><span>53</span></li>
+<li><a href="/bcsj/js/2015/0827/926.html" >利用JS将gb2312转成utf-8</a><span>45</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=975&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

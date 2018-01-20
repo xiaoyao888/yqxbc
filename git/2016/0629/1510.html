@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>常用 Git 命令清单_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="常用,Git,命令,清单,我,每天,使用,Git,但," />
+  <meta name="description" content="我每天使用 Git ，但是很多命令记不住。 一般来说，日常使用只要记住下图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。 下面是我整理的常用 Git 命令清单。几个专用" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/Git/'>Git</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>常用 Git 命令清单</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-06-29 16:17 来源：未知 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1510" class="art_content"><p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	我每天使用 Git ，但是很多命令记不住。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　　一般来说，日常使用只要记住下图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; text-align: center; background-color: rgb(249, 249, 249);">
+	&nbsp;<img alt="" src="/uploads/allimg/160629/161Z41130-0.JPG" style="border: none; width: 660px;" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　　下面是我整理的常用 Git 命令清单。几个专用名词的译名如下。</p>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<ul style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none;">
+		<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+			Workspace：工作区</li>
+		<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+			Index / Stage：暂存区</li>
+		<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+			Repository：仓库区（或本地仓库）</li>
+		<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+			Remote：远程仓库</li>
+	</ul>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　一、新建代码库</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 在当前目录新建一个Git代码库
+$ git init
+
+# 新建一个目录，将其初始化为Git代码库
+$ git init [project-name]
+
+# 下载一个项目和它的整个代码历史
+$ git clone [url]
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　二、配置</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　　Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 显示当前的Git配置
+$ git config --list
+
+# 编辑Git配置文件
+$ git config -e [--global]
+
+# 设置提交代码时的用户信息
+$ git config [--global] user.name &quot;[name]&quot;
+$ git config [--global] user.email &quot;[email address]&quot;
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　三、增加/删除文件</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 添加指定文件到暂存区
+$ git add [file1] [file2] ...
+
+# 添加指定目录到暂存区，包括子目录
+$ git add [dir]
+
+# 添加当前目录的所有文件到暂存区
+$ git add .
+
+# 删除工作区文件，并且将这次删除放入暂存区
+$ git rm [file1] [file2] ...
+
+# 停止追踪指定文件，但该文件会保留在工作区
+$ git rm --cached [file]
+
+# 改名文件，并且将这个改名放入暂存区
+$ git mv [file-original] [file-renamed]
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　四、代码提交</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 提交暂存区到仓库区
+$ git commit -m [message]
+
+# 提交暂存区的指定文件到仓库区
+$ git commit [file1] [file2] ... -m [message]
+
+# 提交工作区自上次commit之后的变化，直接到仓库区
+$ git commit -a
+
+# 提交时显示所有diff信息
+$ git commit -v
+
+# 使用一次新的commit，替代上一次提交
+# 如果代码没有任何新变化，则用来改写上一次commit的提交信息
+$ git commit --amend -m [message]
+
+# 重做上一次commit，并包括指定文件的新变化
+$ git commit --amend   ...
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　五、分支</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 列出所有本地分支
+$ git branch
+
+# 列出所有远程分支
+$ git branch -r
+
+# 列出所有本地分支和远程分支
+$ git branch -a
+
+# 新建一个分支，但依然停留在当前分支
+$ git branch [branch-name]
+
+# 新建一个分支，并切换到该分支
+$ git checkout -b [branch]
+
+# 新建一个分支，指向指定commit
+$ git branch [branch] [commit]
+
+# 新建一个分支，与指定的远程分支建立追踪关系
+$ git branch --track [branch] [remote-branch]
+
+# 切换到指定分支，并更新工作区
+$ git checkout [branch-name]
+
+# 建立追踪关系，在现有分支与指定的远程分支之间
+$ git branch --set-upstream [branch] [remote-branch]
+
+# 合并指定分支到当前分支
+$ git merge [branch]
+
+# 选择一个commit，合并进当前分支
+$ git cherry-pick [commit]
+
+# 删除分支
+$ git branch -d [branch-name]
+
+# 删除远程分支
+$ git push origin --delete 
+$ git branch -dr 
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　六、标签</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 列出所有tag
+$ git tag
+
+# 新建一个tag在当前commit
+$ git tag [tag]
+
+# 新建一个tag在指定commit
+$ git tag [tag] [commit]
+
+# 查看tag信息
+$ git show [tag]
+
+# 提交指定tag
+$ git push [remote] [tag]
+
+# 提交所有tag
+$ git push [remote] --tags
+
+# 新建一个分支，指向某个tag
+$ git checkout -b [branch] [tag]
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　七、查看信息</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 显示有变更的文件
+$ git status
+
+# 显示当前分支的版本历史
+$ git log
+
+# 显示commit历史，以及每次commit发生变更的文件
+$ git log --stat
+
+# 显示某个文件的版本历史，包括文件改名
+$ git log --follow [file]
+$ git whatchanged [file]
+
+# 显示指定文件相关的每一次diff
+$ git log -p [file]
+
+# 显示指定文件是什么人在什么时间修改过
+$ git blame [file]
+
+# 显示暂存区和工作区的差异
+$ git diff
+
+# 显示暂存区和上一个commit的差异
+$ git diff --cached []
+
+# 显示工作区与当前分支最新commit之间的差异
+$ git diff HEAD
+
+# 显示两次提交之间的差异
+$ git diff [first-branch]...[second-branch]
+
+# 显示某次提交的元数据和内容变化
+$ git show [commit]
+
+# 显示某次提交发生变化的文件
+$ git show --name-only [commit]
+
+# 显示某次提交时，某个文件的内容
+$ git show [commit]:[filename]
+
+# 显示当前分支的最近几次提交
+$ git reflog
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　八、远程同步</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 下载远程仓库的所有变动
+$ git fetch [remote]
+
+# 显示所有远程仓库
+$ git remote -v
+
+# 显示某个远程仓库的信息
+$ git remote show [remote]
+
+# 增加一个新的远程仓库，并命名
+$ git remote add [shortname] [url]
+
+# 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
+
+# 上传本地指定分支到远程仓库
+$ git push [remote] [branch]
+
+# 强行推送当前分支到远程仓库，即使有冲突
+$ git push [remote] --force
+
+# 推送所有分支到远程仓库
+$ git push [remote] --all
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　九、撤销</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 恢复暂存区的指定文件到工作区
+$ git checkout [file]
+
+# 恢复某个commit的指定文件到工作区
+$ git checkout [commit] [file]
+
+# 恢复上一个commit的所有文件到工作区
+$ git checkout .
+
+# 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+$ git reset [file]
+
+# 重置暂存区与工作区，与上一次commit保持一致
+$ git reset --hard
+
+# 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+$ git reset [commit]
+
+# 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+$ git reset --hard [commit]
+
+# 重置当前HEAD为指定commit，但保持暂存区和工作区不变
+$ git reset --keep [commit]
+
+# 新建一个commit，用来撤销指定commit
+# 后者的所有变化都将被前者抵消，并且应用到当前分支
+$ git revert [commit]
+</pre>
+</blockquote>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	　十、其他</h2>
+<blockquote style="margin: 0px 0px 0px 12px; padding: 6px 12px; border-width: 1px 1px 1px 10px; border-style: solid; border-color: rgb(243, 243, 243) rgb(243, 243, 243) rgb(243, 243, 243) rgb(204, 204, 204); color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+	<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+# 生成一个可供发布的压缩包
+$ git archive</pre>
+</blockquote>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：没有了 </li>
+            <li class="next">下一篇：<a href='/Git/2016/0629/1511.html'>30分钟Git命令入门到放弃</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/Git/2016/1018/1547.html" >Git:代码冲突常见解决方法</a><span>10.18</span></li>
+<li><a href="/Git/2016/0629/1512.html" >Git 使用规范流程</a><span>06.29</span></li>
+<li><a href="/Git/2016/0629/1511.html" >30分钟Git命令入门到放弃</a><span>06.29</span></li>
+<li><a href="/Git/2016/0629/1510.html" >常用 Git 命令清单</a><span>06.29</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/Git/2016/1018/1547.html" >Git:代码冲突常见解决方法</a><span>10.18</span></li>
+<li><a href="/Git/2016/0629/1512.html" >Git 使用规范流程</a><span>06.29</span></li>
+<li><a href="/Git/2016/0629/1511.html" >30分钟Git命令入门到放弃</a><span>06.29</span></li>
+<li><a href="/Git/2016/0629/1510.html" >常用 Git 命令清单</a><span>06.29</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/Git/2016/0629/1511.html" >30分钟Git命令入门到放弃</a><span>26</span></li>
+<li><a href="/Git/2016/0629/1512.html" >Git 使用规范流程</a><span>23</span></li>
+<li><a href="/Git/2016/0629/1510.html" >常用 Git 命令清单</a><span>10</span></li>
+<li><a href="/Git/2016/1018/1547.html" >Git:代码冲突常见解决方法</a><span>9</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1510&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

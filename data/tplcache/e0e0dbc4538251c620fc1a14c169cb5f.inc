@@ -1,0 +1,1 @@
+<li><SPAN>[field:pubdate function="MyDate('m.d',@me)"/]</SPAN>[<font><A href="[field:typeurl/]" title="[field:fulltitle/]" >[field:typename/]</A></font>] <A href="[field:arcurl/]" title="[field:fulltitle/]" target=_blank>[field:title/]</A></li>

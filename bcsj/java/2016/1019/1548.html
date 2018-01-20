@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Spring使用支付宝扫码支付_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Spring,支付宝,扫码支付" />
+  <meta name="description" content="这篇文章主要为大家详细介绍了Spring使用支付宝扫码支付的相关资料，具有一定的参考价值，感兴趣的小伙伴们可以参考一下" />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring使用支付宝扫码支付</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2016-10-19 10:31 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1548" class="art_content"><p>
+	前一段一直在研究支付宝的扫码支付，不得不说，支付宝的文档写的真是一个烂（起码在下刚开始看的时候是mengbi的）。文档上面的示例和demo里面的示例长的完全不一样。往往文档上面的例子很简单，而demo的代码写的很复杂，所以一开始就不知道该采用哪个代码，后来仔细看了一下demo的那些包里面的代码，发现也是调用的文档示例的那些接口，这才明白它们原来是一个东西，只不过demo对文档的接口进行了一些包装而已。</p>
+<p>
+	首先申请一个企业的支付宝账号，这个账号有个pid，需要向这个账号里面添加应用，每个应用都有一个appid，和一个公钥和私钥。公钥和私钥可以通过支付宝提供的工具生成，另外，java开发者需要使用pkcs6格式的私钥。如果应用需要使用扫码的功能，就需要在应用里面添加当面付的选项，这个需要签约。签约了当面付功能之后，还不能直接使用，因为应用需要上线才能使用，所以开发的时候可以使用沙箱版本的应用，支付宝提供的有沙箱版本的网关、支付宝公钥、pid和appid，在配置的时候需要修改过来。</p>
+<p>
+	代码可以直接使用demo里面的代码，先在工程里面导入支付宝提供的api（注意不是demo代码），然后再导入demo代码，如图所示：</p>
+<p>
+	<img alt="" id="theimg" src="/uploads/allimg/161019/10322MF4-0.jpg?201691984215" /></p>
+<p>
+	这个com.alipay.demo.trade.Main文件是能够直接运行的，不过需要配置一个资源文件：</p>
+<p>
+	<img alt="" id="theimg" src="/uploads/allimg/161019/10322J628-1.jpg?201691984237" /></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+# 支付宝网关名、partnerId和appId
+#此为沙箱环境的网关
+open_api_domain = https://openapi.alipaydev.com/gateway.do
+mcloud_api_domain = http://mcloudmonitor.com/gateway.do
+#此为沙箱环境的商户UID
+pid = 2088102172329883
+#此处请填写你沙箱环境当面付的APPID
+appid = 2016082000300485
+
+# RSA私钥、公钥和支付宝公钥
+#此处请填写你的商户私钥且转PKCS8格式
+private_key = MIICeQIBADANBgkqhkiG9w0BAQEFAASCAmMwggJfAgEAAoGBAMKXZrFR+rnvYgBs9qz2cE1mCSIBReaqan+5Pf5+02Hyj4HzcNTTWqHFm91IH3wYPyhpM7XlbgJ5yWJtgC4g1lz75r8a+UCyuxP8by1LV/44Gi/TIfLSgATfQ73OcM9imXocRdYz2ZCwqi1gV+b3UDoy/Da5w07gRWizFzS6Vq1rAgMBAAECgYEAqHHc4GRBsRCKeinYtK1Vhqcj0Yg11Lvy85z3si0fNY26dvs8R5gFydzC/Mx5f8rNPUUYUHQn+4CqOR3D/c291X1iToV2NEVLHeJrOUDknP4oQriqt2w9pZ8rzwZp2jcWvRVUF4zTpEiMppmORP6spRfX6DLZg29SFI6GZWu6TkCQQDp3mim1BhuS3YONEZgqC69zn0/DGOFkeIx0S18qAu1X4I1FEjVTkY4HPdwihpgYajm0UFg1lk8mTiunHpZRCnAkEA1QF6U1AKjM6zsVdEnRXEDTCC75uVJGSYFJWHHx9Pjyd9vX8nSZV0Z0U4V0ZG0n0yvHj5LRO6U5FCqFRw1WixnQJBALmCKz8SvF/H9N6LiwmSPY6w5q82kNRlRc7wSceNspQT0wqL5+SACG98M0xXY5j1HmiOlHxgCTvyriXOwObivQcCQQCTNaNB4uZ3q/86R/KukbVd3DIRwLfRYAhO6Yxp8Oy+Je/bv/359+Vr3cXzYyldHZOr9/tVsPWr/Y9Q4JLemq1tAkEAlBU7+4EdzFap7e/FMgyKD5DmL8H2iAEuMRRCPL84GhFfK/7PSQ/40NgKxpTgY44NlElHXcRPw5CZu6gqdiNJOA==
+#此处请填写你的商户公钥
+public_key = MIGfMA0GCSqGSIbDQEBAQUAA4GNADCBiQKBgQDCl2axUfq572IAbPas9nBNZgkiAUXmqmp/uT3+ftNh8o+B83DU01qhxZvdSB98GD8oaTO15W4CeclibYAuINZc++a/GvlAsrsT/G8tS1f+OBov0yHy0oAE30O9znDPYpl6HEXWM9mQsKotYFfm91A6Mvw2ucNO4EVosxc0ulatawIDAQAB
+
+#此为沙箱环境的公钥
+alipay_public_key = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIgHnOn7LLILlKETd6BFRJ0GqgS2Y3mn1wMQmyh9zEyWlz5p1zrahRahbXAfCfSqshSNfqOmAQzSHRVjCqjsAw1jyqrXaPdKBmr90DIpIxmIyKXv4GGAkPyJ/6FTFY99uhpiq0qadD/uSzQsefWo0aTvP/65zi3eof7TcZ32oWpwIDAQAB
+
+# 当面付最大查询次数和查询间隔（毫秒）
+max_query_retry = 5
+query_duration = 5000
+
+# 当面付最大撤销次数和撤销间隔（毫秒）
+max_cancel_retry = 3
+cancel_duration = 2000
+
+# 交易保障线程第一次调度延迟和调度间隔（秒）
+heartbeat_delay = 5
+heartbeat_duration = 900
+
+</pre>
+</div>
+<p>
+	然后运行就可以运行Main.java文件了。至于我们实际应用中的扫码支付代码可以直接copy Main.java文件中的test_trade_precreate()函数，在Controller中建立一个函数：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+@RequestMapping(value = &quot;/pay/alipay&quot;, method = RequestMethod.POST)
+  public Map&lt;String, String&gt; alipay(@RequestParam String amount, @RequestParam int userid) {
+
+    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+
+    // (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
+    // 需保证商户系统端不能重复，建议通过数据库sequence生成，
+    String outTradeNo = &quot;xxxxx&quot; + System.currentTimeMillis() + (long)(Math.random() * 10000000L);
+
+    // (必填) 订单标题，粗略描述用户的支付目的。如&ldquo;xxx品牌xxx门店当面付扫码消费&rdquo;
+    String subject = &quot;支付&quot;;
+
+    // (必填) 订单总金额，单位为元，不能超过1亿元
+    // 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】
+    String totalAmount = amount;
+
+    // (可选) 订单不可打折金额，可以配合商家平台配置折扣活动，如果酒水不参与打折，则将对应金额填写至此字段
+    // 如果该值未传入,但传入了【订单总金额】,【打折金额】,则该值默认为【订单总金额】-【打折金额】
+    String undiscountableAmount = &quot;0&quot;;
+
+    // 卖家支付宝账号ID，用于支持一个签约账号下支持打款到不同的收款账号，(打款到sellerId对应的支付宝账号)
+    // 如果该字段为空，则默认为与支付宝签约的商户的PID，也就是appid对应的PID
+    String sellerId = &quot;2088102172329883&quot;;
+
+    // 订单描述，可以对交易或商品进行一个详细地描述，比如填写&quot;购买商品2件共15.00元&quot;
+    String body = &quot;购买商品3件共20.00元&quot;;
+
+    // 商户操作员编号，添加此参数可以为商户操作员做销售统计
+    String operatorId = &quot;test_operator_id&quot;;
+
+    // (必填) 商户门店编号，通过门店号和商家后台可以配置精准到门店的折扣信息，详询支付宝技术支持
+    String storeId = &quot;2088102172329883&quot;;
+
+    // 业务扩展参数，目前可添加由支付宝分配的系统商编号(通过setSysServiceProviderId方法)，详情请咨询支付宝技术支持
+    ExtendParams extendParams = new ExtendParams();
+    extendParams.setSysServiceProviderId(&quot;2088100200300400500&quot;);
+
+    // 支付超时，定义为120分钟
+    String timeoutExpress = TIMEOUT;
+
+//    // 商品明细列表，需填写购买商品详细信息，
+//    List&lt;GoodsDetail&gt; goodsDetailList = new ArrayList&lt;GoodsDetail&gt;();
+//    // 创建一个商品信息，参数含义分别为商品id（使用国标）、名称、单价（单位为分）、数量，如果需要添加商品类别，详见GoodsDetail
+//    GoodsDetail goods1 = GoodsDetail.newInstance(&quot;goods_id001&quot;, &quot;xxx小面包&quot;, 1000, 1);
+//    // 创建好一个商品后添加至商品明细列表
+//    goodsDetailList.add(goods1);
+//
+//    // 继续创建并添加第一条商品信息，用户购买的产品为&ldquo;黑人牙刷&rdquo;，单价为5.00元，购买了两件
+//    GoodsDetail goods2 = GoodsDetail.newInstance(&quot;goods_id002&quot;, &quot;xxx牙刷&quot;, 500, 2);
+//    goodsDetailList.add(goods2);
+
+    // 创建扫码支付请求builder，设置请求参数
+    AlipayTradePrecreateRequestBuilder builder = new AlipayTradePrecreateRequestBuilder()
+        .setSubject(subject)
+        .setTotalAmount(totalAmount)
+        .setOutTradeNo(outTradeNo)
+        .setUndiscountableAmount(undiscountableAmount)
+        .setSellerId(sellerId)
+        .setBody(body)
+        .setOperatorId(operatorId)
+        .setStoreId(storeId)
+        .setExtendParams(extendParams)
+        .setTimeoutExpress(timeoutExpress)
+        .setNotifyUrl(&quot;http://xxx.xx.xxx.xxx:8080/baobiao/pay/notify&quot;);//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置，这里我们设置的是我们自己写的一个接口，等下会有介绍
+//        .setGoodsDetailList(goodsDetailList);
+
+    AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
+    switch (result.getTradeStatus()) {
+      case SUCCESS:
+        log.info(&quot;支付宝预下单成功: )&quot;);
+        System.out.println(&quot;支付宝预下单成功: )&quot;);
+
+        AlipayTradePrecreateResponse response = result.getResponse();
+//        dumpResponse(response);
+//        System.out.println(response.getBody());
+
+//        // 需要修改为运行机器上的路径
+//        String filePath = String.format(&quot;/Users/liuyangkly/qr-%s.png&quot;, response.getOutTradeNo());
+//        log.info(&quot;filePath:&quot; + filePath);
+//        ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+//        System.out.println(response.getQrCode());
+
+        //生成订单，插入数据库
+        BaobiaoOrder order = new BaobiaoOrder(userid, outTradeNo, &quot;&quot;, Double.parseDouble(amount), new Date(), 1);
+        baobiaoOrderService.insertOrder(order);
+
+        map.put(&quot;status&quot;, &quot;true&quot;);
+        map.put(&quot;qrcode&quot;, response.getQrCode()); //返回给客户端二维码
+        map.put(&quot;outtradeno&quot;, outTradeNo);
+
+        return map;
+
+      case FAILED:
+        log.error(&quot;支付宝预下单失败!!!&quot;);
+        System.out.println(&quot;支付宝预下单失败!!!&quot;);
+        System.out.println(result.getResponse().getBody());
+        break;
+
+      case UNKNOWN:
+        log.error(&quot;系统异常，预下单状态未知!!!&quot;);
+        System.out.println(&quot;系统异常，预下单状态未知!!!&quot;);
+        break;
+
+      default:
+        log.error(&quot;不支持的交易状态，交易返回异常!!!&quot;);
+        System.out.println(&quot;不支持的交易状态，交易返回异常!!!&quot;);
+        break;
+    }
+    map.put(&quot;status&quot;, &quot;false&quot;);
+    map.put(&quot;msg&quot;, &quot;系统出现异常，请稍后再试！&quot;);
+    return map;
+  }
+
+</pre>
+</div>
+<p>
+	然后的逻辑就是用户会用手机扫码给支付宝付款，然后支付宝收到之后会发送一条支付成功的消息给我们设置的notify_url，如下所示：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+@RequestMapping(value = &quot;/pay/notify&quot;, method = RequestMethod.POST)
+  public String notifyResult(HttpServletRequest request, HttpServletResponse response) {
+    log.info(&quot;收到支付宝异步通知！&quot;);
+    Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();
+
+    //取出所有参数是为了验证签名
+    Enumeration&lt;String&gt; parameterNames = request.getParameterNames();
+    while (parameterNames.hasMoreElements()) {
+      String parameterName = parameterNames.nextElement();
+      params.put(parameterName, request.getParameter(parameterName));
+    }
+    boolean signVerified;
+    try {
+      signVerified = AlipaySignature.rsaCheckV1(params, Configs.getAlipayPublicKey(), &quot;UTF-8&quot;);
+    } catch (AlipayApiException e) {
+      e.printStackTrace();
+      return &quot;failed&quot;;
+    }
+    if (signVerified) {
+      String outtradeno = params.get(&quot;out_trade_no&quot;);
+      log.info(outtradeno + &quot;号订单回调通知。&quot;);
+//      System.out.println(&quot;验证签名成功！&quot;);
+      log.info(&quot;验证签名成功！&quot;);
+
+      //若参数中的appid和填入的appid不相同，则为异常通知
+      if (!Configs.getAppid().equals(params.get(&quot;app_id&quot;))) {
+        log.warn(&quot;与付款时的appid不同，此为异常通知，应忽略！&quot;);
+        return &quot;failed&quot;;
+      }
+
+      //在数据库中查找订单号对应的订单，并将其金额与数据库中的金额对比，若对不上，也为异常通知
+      BaobiaoOrder order = baobiaoOrderService.findOrderByOuttradeno(outtradeno);
+      if (order == null) {
+        log.warn(outtradeno + &quot;查无此订单！&quot;);
+        return &quot;failed&quot;;
+      }
+      if (order.getAmount() != Double.parseDouble(params.get(&quot;total_amount&quot;))) {
+        log.warn(&quot;与付款时的金额不同，此为异常通知，应忽略！&quot;);
+        return &quot;failed&quot;;
+      }
+
+      if (order.getStatus() == BaobiaoOrder.TRADE_SUCCESS) return &quot;success&quot;; //如果订单已经支付成功了，就直接忽略这次通知
+
+      String status = params.get(&quot;trade_status&quot;);
+      if (status.equals(&quot;WAIT_BUYER_PAY&quot;)) { //如果状态是正在等待用户付款
+        if (order.getStatus() != BaobiaoOrder.WAIT_BUYER_PAY) baobiaoOrderService.modifyTradeStatus(BaobiaoOrder.WAIT_BUYER_PAY, outtradeno);
+      } else if (status.equals(&quot;TRADE_CLOSED&quot;)) { //如果状态是未付款交易超时关闭，或支付完成后全额退款
+        if (order.getStatus() != BaobiaoOrder.TRADE_CLOSED) baobiaoOrderService.modifyTradeStatus(BaobiaoOrder.TRADE_CLOSED, outtradeno);
+      } else if (status.equals(&quot;TRADE_SUCCESS&quot;) || status.equals(&quot;TRADE_FINISHED&quot;)) { //如果状态是已经支付成功
+        if (order.getStatus() != BaobiaoOrder.TRADE_SUCCESS) baobiaoOrderService.modifyTradeStatus(BaobiaoOrder.TRADE_SUCCESS, outtradeno);
+      } else {
+        baobiaoOrderService.modifyTradeStatus(BaobiaoOrder.UNKNOWN_STATE, outtradeno);
+      }
+      log.info(outtradeno + &quot;订单的状态已经修改为&quot; + status);
+    } else { //如果验证签名没有通过
+      return &quot;failed&quot;;
+    }
+    return &quot;success&quot;;
+  }
+
+</pre>
+</div>
+<p>
+	大概就是这样子，只不过少了给客户端发送支付成功的通知，还有一些安全性的问题。</p>
+<p>
+	最后总结一下在这个过程中遇到的问题：</p>
+<p>
+	1.支付宝返回的二维码不能直接在浏览器中打开，而要用二维码转换工具来生成二维码，或者可以通过cli.im这个网站查看<br />
+	2.支付宝沙箱环境生成的二维码只能用沙箱版本的手机支付宝来扫码，正常版本的支付宝扫会出现此二维码过期之类的错误<br />
+	3.支付之后如果收不到支付宝发送的异步通知，可以使用postman等工具检查一下填写的notify_url是否能用公网ip访问到<br />
+	4.如果遇到isv权限不足的问题就是因为没有签约或者应用没有添加相应的功能，应用没有上线也不能使用，开发的时候可以选择沙箱应用<br />
+	5.沙箱版本的手机支付宝注册的时候收不到短信，可以联系客服索要一个账号</p>
+<p>
+	以上就是本文的全部内容，希望对大家的学习有所帮助，也希望大家多多支持本站。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2016/1015/1540.html'>Java  队列实现原理及简单实现代码</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2016/1107/1572.html'>Comet4j基于AJAX的服务器推送框架</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=1548&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

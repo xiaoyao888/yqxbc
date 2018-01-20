@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Java程序性能优化常见的23个方法._为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,程序,性能优化" />
+  <meta name="description" content=" " />
+  	<!-- Bootstrap core CSS -->
+	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/templets/default/css/theme.css" rel="stylesheet">
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script src="/templets/default/js/jquery-2.1.3.js"></script>
+	<script src="/templets/default/js/bootstrap.min.js"></script>
+	<script src="/templets/default/js/docs.min.js"></script>
+	<link href="/templets/default/css/main.css" rel="stylesheet">
+	<script src="/templets/default/js/main.js"></script>
+
+  <script src="/templets/default/js/article.js"></script>
+  
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		共收藏了990 篇技术文章
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                 
+                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                 
+                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
+                 
+                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
+                 
+                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                 
+                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                 
+                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
+                 
+                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
+                 
+                  <li><a href="/storm/" title="Storm">Storm</a> </li>
+                 
+                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                 
+                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                 
+                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                 
+                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
+                 
+                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                 
+                  <li><a href="/Git/" title="Git">Git</a> </li>
+                 
+                  <li><a href="/maven/" title="Maven">Maven</a> </li>
+                 
+                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
+                
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                 
+                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                 
+                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                 
+                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                 
+                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                 
+                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                 
+                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                 
+                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                 
+                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/java/'>Java</a> > 
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java程序性能优化常见的23个方法.</div>
+            <a href="http://www.flypeng.com" title="http://www.flypeng.com">http://www.flypeng.com</a>&nbsp;<a href="http://www.flypeng.com">win10系统</a>  发布时间：2015-05-07 09:48 来源：鹏鹏电脑知识网 浏览：<span id="count"style="font-size:14px;">加载中</span>次
+          </div>
+          <div class="art_body">
+            <div class="art_share"><div><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div></div>
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="716" class="art_content"><h3>
+	<font color="#ff0000">一、避免在循环条件中使用复杂表达式</font></h3>
+<p>
+	<br />
+	在不做编译优化的情况下，在循环中，循环条件会被反复计算，如果不使用复杂表达式，而使循环条件值不变的话，程序将会运行的更快。<br />
+	<br />
+	例子：<br />
+	import java.util.vector;<br />
+	class cel {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (vector vector) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; vector.size (); i++)&nbsp;&nbsp;// violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; // ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	class cel_fixed {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (vector vector) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int size = vector.size ()<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; size; i++)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; // ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">二、为vectors </font>和 hashtables定义初始大小</h3>
+<p>
+	<br />
+	jvm为vector扩充大小的时候需要重新创建一个更大的数组，将原原先数组中的内容复制过来，最后，原先的数组再被回收。可见vector容量的扩大是一个颇费时间的事。<br />
+	通常，默认的10个元素大小是不够的。你最好能准确的估计你所需要的最佳大小。<br />
+	<br />
+	例子：<br />
+	import java.util.vector;<br />
+	public class dic {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void addobjects (object[] o) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// if length &gt; 10, vector needs to expand<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i&lt; o.length;i++) {&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.add(o<em>);&nbsp;&nbsp;&nbsp;// capacity before it can add more elements.</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public vector v = new vector();&nbsp;&nbsp;// no initialcapacity.<br />
+	}<br />
+	<br />
+	更正：<br />
+	自己设定初始大小。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public vector v = new vector(20);&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public hashtable hash = new hashtable(10);<br />
+	<br />
+	参考资料：<br />
+	dov bulka, &quot;java performance and scalability volume 1: server-side programming<br />
+	techniques&quot; addison wesley, isbn: 0-201-70429-3 pp.55 &ndash; 57</p>
+<h3>
+	<font color="#ff0000">三、在finally</font>块中关闭stream</h3>
+<p>
+	<br />
+	程序中使用到的资源应当被释放，以避免资源泄漏。这最好在finally块中去做。不管程序执行的结果如何，finally块总是会执行的，以确保资源的正确关闭。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：<br />
+	import java.io.*;<br />
+	public class cs {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public static void main (string args[]) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cs cs = new cs ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cs.method ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileinputstream fis = new fileinputstream (&quot;cs.java&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int count = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (fis.read () != -1)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count++;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println (count);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fis.close ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (filenotfoundexception e1) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (ioexception e2) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：<br />
+	在最后一个catch后添加一个finally块<br />
+	<br />
+	参考资料：<br />
+	peter haggar: &quot;practical java - programming language guide&quot;.<br />
+	addison wesley, 2000, pp.77-79</p>
+<h3>
+	<font color="#ff0000">四、使用system.arraycopy ()</font>代替通过来循环复制数组</h3>
+<p>
+	<br />
+	system.arraycopy () 要比通过循环来复制数组快的多。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：<br />
+	public class irb<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[] array1 = new int [100];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; array1.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array1 [i] = i;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[] array2 = new int [100];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; array2.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array2 [i] = array1 [i];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：<br />
+	public class irb<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[] array1 = new int [100];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; array1.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array1 [i] = i;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[] array2 = new int [100];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.arraycopy(array1, 0, array2, 0, 100);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：<br />
+	<a href="http://www.cs.cmu.edu/~jch/java/speed.html" target="_blank"><font face="Verdana">http://www.cs.cmu.edu/~jch/java/speed.html</font></a></p>
+<h3>
+	<font color="#ff0000">五、让访问实例内变量的getter/setter</font>方法变成&rdquo;final&rdquo;</h3>
+<p>
+	<br />
+	简单的getter/setter方法应该被置成final，这会告诉编译器，这个方法不会被重载，所以，可以变成&rdquo;inlined&rdquo;<br />
+	<br />
+	例子：<br />
+	class maf {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void setsize (int size) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_size = size;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _size;<br />
+	}<br />
+	<br />
+	更正：<br />
+	class daf_fixed {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;final public void setsize (int size) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_size = size;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _size;<br />
+	}<br />
+	<br />
+	参考资料：<br />
+	warren n. and bishop p. (1999), &quot;java in practice&quot;, p. 4-5<br />
+	addison-wesley, isbn 0-201-36065-9</p>
+<h3>
+	<font color="#ff0000">六、避免不需要的instanceof</font>操作</h3>
+<p>
+	<br />
+	如果左边的对象的静态类型等于右边的，instanceof表达式返回永远为true。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	public class uiso {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public uiso () {}<br />
+	}<br />
+	class dog extends uiso {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (dog dog, uiso u) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog d = dog;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (d instanceof uiso) // always true.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println(&quot;dog is a uiso&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uiso uiso = u;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (uiso instanceof object) // always true.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println(&quot;uiso is an object&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	删掉不需要的instanceof操作。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	class dog extends uiso {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog d;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println (&quot;dog is an uiso&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println (&quot;uiso is an uiso&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">七、避免不需要的造型操作</font></h3>
+<p>
+	<br />
+	所有的类都是直接或者间接继承自object。同样，所有的子类也都隐含的&ldquo;等于&rdquo;其父类。那么，由子类造型至父类的操作就是不必要的了。<br />
+	例子：<br />
+	class unc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;string _id = &quot;unc&quot;;<br />
+	}<br />
+	class dog extends unc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog dog = new dog ();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unc animal = (unc)dog;&nbsp;&nbsp;// not necessary.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object o = (object)dog;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// not necessary.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	class dog extends unc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog dog = new dog();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unc animal = dog;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object o = dog;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：<br />
+	nigel warren, philip bishop: &quot;java in practice - design styles and idioms<br />
+	for effective java&quot;.&nbsp;&nbsp;addison-wesley, 1999. pp.22-23</p>
+<h3>
+	<font color="#ff0000">八、如果只是查找单个字符的话，用charat()</font>代替startswith()</h3>
+<p>
+	<br />
+	用一个字符作为参数调用startswith()也会工作的很好，但从性能角度上来看，调用用string api无疑是错误的!<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：<br />
+	public class pcts {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private void method(string s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (s.startswith(&quot;a&quot;)) { // violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	将startswith() 替换成charat().<br />
+	public class pcts {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private void method(string s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (a == s.charat(0)) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：<br />
+	dov bulka, &quot;java performance and scalability volume 1: server-side programming<br />
+	techniques&quot;&nbsp;&nbsp;addison wesley, isbn: 0-201-70429-3</p>
+<h3>
+	<font color="#ff0000">九、使用移位操作来代替a / b</font>操作</h3>
+<p>
+	<br />
+	&quot;/&quot;是一个很&ldquo;昂贵&rdquo;的操作，使用移位操作将会更快更有效。<br />
+	<br />
+	例子：<br />
+	public class sp {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public static final int num = 16;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void calculate(int a) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int p = a / 4;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// should be replaced with &quot;a &gt;&gt; 2&quot;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int p2 = a / 8;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// should be replaced with &quot;a &gt;&gt; 3&quot;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = a / 3;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	public class sp {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public static final int num = 16;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void calculate(int a) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int p = a &gt;&gt; 2;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int p2 = a &gt;&gt; 3;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = a / 3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 不能转换成位移操作<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十、使用移位操作代替a * b </font></h3>
+<p>
+	<br />
+	同上。<br />
+	[i]但我个人认为，除非是在一个非常大的循环内，性能非常重要，而且你很清楚你自己在做什么，方可使用这种方法。否则提高性能所带来的程序晚读性的降低将是不合算的。<br />
+	<br />
+	例子：<br />
+	public class smul {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void calculate(int a) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int mul = a * 4;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// should be replaced with &quot;a &lt;&lt; 2&quot;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int mul2 = 8 * a;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// should be replaced with &quot;a &lt;&lt; 3&quot;.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = a * 3;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	package opt;<br />
+	public class smul {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void calculate(int a) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int mul = a &lt;&lt; 2;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int mul2 = a &lt;&lt; 3;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = a * 3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 不能转换<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十一、在字符串相加的时候，使用 </font>代替 &quot; &quot;，如果该字符串只有一个字符的话</h3>
+<p>
+	<br />
+	<br />
+	例子：<br />
+	public class str {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void method(string s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string string = s + &quot;d&quot;&nbsp;&nbsp;// violation.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string = &quot;abc&quot; + &quot;d&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// violation.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	将一个字符的字符串替换成<br />
+	public class str {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void method(string s) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string string = s + d<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string = &quot;abc&quot; + d&nbsp;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十二、不要在循环中调用synchronized(</font>同步)方法</h3>
+<p>
+	<br />
+	方法的同步需要消耗相当大的资料，在一个循环中调用它绝对不是一个好主意。<br />
+	<br />
+	例子：<br />
+	import java.util.vector;<br />
+	public class syn {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public synchronized void method (object o) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private void test () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; vector.size(); i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method (vector.elementat(i));&nbsp;&nbsp;&nbsp;&nbsp;// violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private vector vector = new vector (5, 5);<br />
+	}<br />
+	<br />
+	更正：<br />
+	不要在循环体中调用同步方法，如果必须同步的话，推荐以下方式：<br />
+	import java.util.vector;<br />
+	public class syn {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public void method (object o) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	private void test () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;synchronized{//在一个同步块中执行非同步方法<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; vector.size(); i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method (vector.elementat(i));&nbsp;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private vector vector = new vector (5, 5);<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十三、将try/catch</font>块移出循环</h3>
+<p>
+	<br />
+	把try/catch块放入循环体内，会极大的影响性能，如果编译jit被关闭或者你所使用的是一个不带jit的jvm，性能会将下降21%之多!<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	import java.io.fileinputstream;<br />
+	public class try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (fileinputstream fis) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; size; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_sum += fis.read();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (exception e) {}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _sum;<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	将try/catch块移出循环&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (fileinputstream fis) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; size; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_sum += fis.read();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (exception e) {}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：<br />
+	peter haggar: &quot;practical java - programming language guide&quot;.<br />
+	addison wesley, 2000, pp.81 &ndash; 83</p>
+<h3>
+	<font color="#ff0000">十四、对于boolean</font>值，避免不必要的等式判断</h3>
+<p>
+	<br />
+	将一个boolean值与一个true比较是一个恒等操作(直接返回该boolean变量的值). 移走对于boolean的不必要操作至少会带来2个好处：<br />
+	1)代码执行的更快 (生成的字节码少了5个字节)；<br />
+	2)代码也会更加干净 。<br />
+	<br />
+	例子：<br />
+	public class ueq<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;boolean method (string string) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return string.endswith (&quot;a&quot;) == true;&nbsp;&nbsp;&nbsp;// violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	class ueq_fixed<br />
+	{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;boolean method (string string) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return string.endswith (&quot;a&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十五、对于常量字符串，用string </font>代替 stringbuffer</h3>
+<p>
+	<br />
+	常量字符串并不需要动态改变长度。<br />
+	例子：<br />
+	public class usc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;string method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringbuffer s = new stringbuffer (&quot;hello&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string t = s + &quot;world!&quot;;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return t;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	把stringbuffer换成string，如果确定这个string不会再变的话，这将会减少运行开销提高性能。</p>
+<h3>
+	<font color="#ff0000">十六、用stringtokenizer </font>代替 indexof() 和substring()</h3>
+<p>
+	<br />
+	字符串的分析在很多应用中都是常见的。使用indexof()和substring()来分析字符串容易导致stringindexoutofboundsexception。而使用stringtokenizer类来分析字符串则会容易一些，效率也会高一些。<br />
+	<br />
+	例子：<br />
+	public class ust {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void parsestring(string string) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int index = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ((index = string.indexof(&quot;.&quot;, index)) != -1) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system.out.println (string.substring(index, string.length()));<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	参考资料：<br />
+	graig larman, rhett guthrie: &quot;java 2 performance and idiom guide&quot;<br />
+	prentice hall ptr, isbn: 0-13-014260-3 pp. 282 &ndash; 283</p>
+<h3>
+	<font color="#ff0000">十七、使用条件操作符替代&quot;if (cond) return; else return;&quot; </font>结构</h3>
+<p>
+	<br />
+	条件操作符更加的简捷<br />
+	例子：<br />
+	public class if {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public int method(boolean isdone) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (isdone) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 10;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	public class if {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;public int method(boolean isdone) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (isdone ? 0 : 10);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十八、使用条件操作符代替&quot;if (cond) a = b; else a = c;&quot; </font>结构</h3>
+<p>
+	<br />
+	例子：<br />
+	public class ifas {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method(boolean istrue) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (istrue) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_value = 0;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_value = 1;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _value = 0;<br />
+	}<br />
+	<br />
+	更正：<br />
+	public class ifas {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method(boolean istrue) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_value = (istrue ? 0 : 1);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// compact expression.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _value = 0;<br />
+	}</p>
+<h3>
+	<font color="#ff0000">十九、不要在循环体中实例化变量</font></h3>
+<p>
+	<br />
+	在循环体中实例化临时变量将会增加内存消耗<br />
+	<br />
+	例子：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	import java.util.vector;<br />
+	public class loop {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (vector v) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i=0;i &lt; v.size();i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object o = new object();<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o = v.elementat(i);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	在循环体外定义变量，并反复使用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	import java.util.vector;<br />
+	public class loop {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method (vector v) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object o;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i=0;i&lt;v.size();i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o = v.elementat(i);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}</p>
+<h3>
+	<font color="#ff0000">二十、确定 stringbuffer</font>的容量</h3>
+<p>
+	<br />
+	stringbuffer的构造器会创建一个默认大小(通常是16)的字符数组。在使用中，如果超出这个大小，就会重新分配内存，创建一个更大的数组，并将原先的数组复制过来，再丢弃旧的数组。在大多数情况下，你可以在创建stringbuffer的时候指定大小，这样就避免了在容量不够的时候自动增长，以提高性能。<br />
+	<br />
+	例子：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	public class rsbc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringbuffer buffer = new stringbuffer(); // violation<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer.append (&quot;hello&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	为stringbuffer提供寝大小。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	public class rsbc {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void method () {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringbuffer buffer = new stringbuffer(max);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer.append (&quot;hello&quot;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private final int max = 100;<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：<br />
+	dov bulka, &quot;java performance and scalability volume 1: server-side programming<br />
+	techniques&quot; addison wesley, isbn: 0-201-70429-3 p.30 &ndash; 31</p>
+<h3>
+	<font color="#ff0000">二十一、尽可能的使用栈变量</font></h3>
+<p>
+	<br />
+	如果一个变量需要经常访问，那么你就需要考虑这个变量的作用域了。static? local?还是实例变量？访问静态变量和实例变量将会比访问局部变量多耗费2-3个时钟周期。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	例子：<br />
+	public class usv {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void getsum (int[] values) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i=0; i &lt; value.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_sum += value[i];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// violation.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;void getsum2 (int[] values) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i=0; i &lt; value.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_staticsum += value[i];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private int _sum;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private static int _staticsum;<br />
+	}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	更正：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	如果可能，请使用局部变量作为你经常访问的变量。<br />
+	你可以按下面的方法来修改getsum()方法：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	void getsum (int[] values) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;int sum = _sum;&nbsp;&nbsp;// temporary local variable.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;for (int i=0; i &lt; value.length; i++) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += value[i];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;_sum = sum;<br />
+	}<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	参考资料：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	peter haggar: &quot;practical java - programming language guide&quot;.<br />
+	addison wesley, 2000, pp.122 &ndash; 125</p>
+<h3>
+	<font color="#ff0000">二十二、不要总是使用取反操作符(!)</font></h3>
+<p>
+	<br />
+	取反操作符(!)降低程序的可读性，所以不要总是使用。<br />
+	<br />
+	例子：<br />
+	public class dun {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;boolean method (boolean a, boolean b) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!a)<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return !a;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return !b;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	更正：<br />
+	如果可能不要使用取反操作符(!)</p>
+<h3>
+	<font color="#ff0000">二十三、与一个接口 </font>进行instanceof操作</h3>
+<p>
+	<br />
+	基于接口的设计通常是件好事，因为它允许有不同的实现，而又保持灵活。只要可能，对一个对象进行instanceof操作，以判断它是否某一接口要比是否某一个类要快。<br />
+	<br />
+	例子：<br />
+	public class insof {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;private void method (object o) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (o instanceof interfacebase) { }&nbsp;&nbsp;// better<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (o instanceof classbase) { }&nbsp;&nbsp;&nbsp;// worse.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+	}<br />
+	<br />
+	class classbase {}<br />
+	interface interfacebase {}</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous">上一篇：<a href='/bcsj/java/2015/0507/715.html'>java中23种经典设计模式</a> </li>
+            <li class="next">下一篇：<a href='/bcsj/java/2015/0507/717.html'>如何优化JAVA程序设计和编码，提高JAVA性能</a> </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>  
+      <div class="row"> 
+         <div class="col-sm-6 col-md-6">  
+            <div class="panel panel-body">
+      		    <ul class="all_list">     
+	             <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Tar</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，jso</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+
+	           </ul>
+           </div>
+        </div>
+        <div class="col-sm-6 col-md-6">  
+          <div class="panel panel-body">
+      		   <ul class="all_list">     
+	             <li><a href="/bcsj/java/2016/1015/1540.html" >Java  队列实现原理及简单实现代码</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1539.html" >java多线程编程之使用Synchronized块</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1538.html" >用Java实现全国天气预报的api接口</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1537.html" >java邮件发送的实现</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1536.html" >Java ArrayList 数组之间相互转换</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1535.html" >java的多线程用法编程总结</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1015/1534.html" >Intellij Mybatis连接Mysql数据库</a><span>10.15</span></li>
+<li><a href="/bcsj/java/2016/1013/1532.html" >Java运算符&gt;、&gt;&gt;、&gt;&gt;&g</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1013/1533.html" >JAVA 十六进制与字符串的转换</a><span>10.13</span></li>
+<li><a href="/bcsj/java/2016/1011/1531.html" >Java 创建URL的常见问题及解决方案</a><span>10.11</span></li>
+
+	          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2017/1019/1633.html" >自定义注解Permission类，Java中Target注解与Retention注解说明</a><span>10.19</span></li>
+<li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a><span>10.16</span></li>
+<li><a href="/bcsj/java/2017/0904/1620.html" >Java中有效使用EasyMock编写java单元测试</a><span>09.04</span></li>
+<li><a href="/bcsj/java/2017/0830/1617.html" >JAVA事务四大特征：原子性，一致性，隔离性和持久性(ACID)</a><span>08.30</span></li>
+<li><a href="/bcsj/java/2017/0820/1615.html" >40个Java多线程问题总结</a><span>08.20</span></li>
+<li><a href="/bcsj/java/2017/0731/1606.html" > Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</a><span>07.31</span></li>
+<li><a href="/bcsj/java/2017/0728/1600.html" >jackson简单使用，对象转json，json转对象，json转list</a><span>07.28</span></li>
+<li><a href="/bcsj/java/2017/0415/1591.html" >SpringMVC之后台接收参数与前台传递数据</a><span>04.15</span></li>
+<li><a href="/bcsj/java/2016/1107/1572.html" >Comet4j基于AJAX的服务器推送框架</a><span>11.07</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>10.19</span></li>
+ 
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href="/bcsj/java/2016/0322/1459.html" >maven国内快速镜像中央仓库地址</a><span>1648</span></li>
+<li><a href="/bcsj/java/2016/0125/1439.html" >SpringMVC+JSP企业支付宝账号开发接</a><span>1406</span></li>
+<li><a href="/bcsj/java/2015/0401/452.html" >在MyEclipse中搭建Spring MVC开发环境</a><span>877</span></li>
+<li><a href="/bcsj/java/2015/1107/1365.html" >Java虚拟机(JVM)以及跨平台原理</a><span>794</span></li>
+<li><a href="/bcsj/java/2015/0210/128.html" >错误整理：No plugin found for prefix</a><span>723</span></li>
+<li><a href="/bcsj/java/2015/0305/152.html" >HTTP大文件上传断点续传控件发布</a><span>664</span></li>
+<li><a href="/bcsj/java/2016/1019/1548.html" >Spring使用支付宝扫码支付</a><span>540</span></li>
+<li><a href="/bcsj/java/2016/0215/1440.html" >JAVA环境变量JAVA_HOME、CLASSPATH、P</a><span>302</span></li>
+<li><a href="/bcsj/java/2015/0410/728.html" >Java开发工具</a><span>220</span></li>
+<li><a href="/bcsj/java/2015/1106/1362.html" >web service对外发布一个hello world接</a><span>177</span></li>
+ 
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+	<div class="foot">
+<br/>
+              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
+             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
+            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
+            flypeng.com 版权所有 京ICP备11048740号<br/>
+			
+	</div>
+</div> 
+  <span id="count_data" style="display:none">
+    <script src="/plus/count.php?view=yes&aid=716&mid=1" type='text/javascript' language="javascript">
+    </script>
+  </span>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+  </script>
+    <script>
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+    </script>
+
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+
+  var bdShare_config = {
+
+  	"type":"large",
+
+  	"color":"blue",
+
+  	"likeText":"内容很精彩",
+
+  	"likedText":"您已顶过，谢谢！"
+
+  };
+
+  document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+
+  </script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>
