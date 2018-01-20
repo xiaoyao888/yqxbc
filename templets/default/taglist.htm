@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+
+	<title>TAG标签_{dede:global.cfg_webname/}</title>
+	
+
+	{dede:include filename="common.htm"/}
+
+    <style type="text/css">
+    	.panel{border: 1px solid #ccc;background: #F7F7F7;min-height: 130px;}
+    	p{text-indent:2em;}
+    </style>
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+	{dede:include filename="header.htm"/}
+
+	<div class="container">
+	    <ol class="breadcrumb">
+	      当前位置：标签
+	    </ol>
+
+		<div class="col-sm-8  col-md-8">
+
+			{dede:list orderby='sortrank' pagesize='10'}
+
+			<div class="panel">				
+
+		        <div class="panel-body">
+
+		        	<h3 style="background:url('/templets/bootstrap/images/document.png') no-repeat;padding-left:30px;"><a href='[field:arcurl/]'>[field:title/]</a></h3>
+
+		            <p>[field:description/]...</p>
+		            
+		        </div>
+
+		    </div>    
+
+			{/dede:list}
+
+			<div class="pre_next">
+		        <nav>
+		          <ul class="pager">
+		            <li class="previous">{dede:prenext get='pre' /}</li>
+		            <li class="next">{dede:prenext get='next' /}</li>
+		          </ul>
+		        </nav>
+	     	</div>
+
+		</div>
+
+		<div class="col-sm-4 col-md-4">
+	  		<script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+	        <div class="panel panel-custom panel-custom-right">
+		        <div class="panel-heading">最新文章>>></div>
+		        <div class="panel-body">
+		          <ul class="all_list">
+		            {dede:arclist  row=10 titlelen=88 infolen=160 orderby='pubdate' }
+		            <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+		            {/dede:arclist} 
+		          </ul>
+		        </div>
+		    </div>  
+	        <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+	        <div id="scr_cont" class="panel panel-custom panel-custom-right">
+		        <div class="panel-heading">相关热门>>></div>
+		        <div class="panel-body">
+		          <ul class="all_list">
+		            {dede:arclist  row=10 titlelen=40 orderby='click' }            
+		            <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:click/]</span></li>
+		            {/dede:arclist} 
+		          </ul>
+		          </ul>
+		        </div>
+		    </div>	      
+	    </div>
+
+	</div>
+
+	{dede:include filename="footer.htm"/}
+
+
+
+</body>
+
+</html>

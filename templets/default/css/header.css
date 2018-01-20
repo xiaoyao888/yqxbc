@@ -1,0 +1,80 @@
+.site-header {
+    position: relative;
+    text-align: center;
+    background-color: #27ae60;
+    color: #fff;
+    margin-bottom: 0;
+}
+@media screen and (min-width: 768px){
+	.site-header {
+	    padding-bottom: 0px;
+	    padding-top: 20px;
+	}
+}
+.main-navbar {
+    margin-bottom: 0;
+    background-color: transparent;
+}
+.searchFrm{
+	max-width: 500px;
+	margin:0 auto;
+}
+.title-site-domain{
+	font-size: 24px;
+	font-weight: 200;
+	margin-bottom: 15px;
+	text-align:center;
+}
+.title-site-memo{
+    margin-bottom: 15px;
+    font-size: 21px;
+    font-weight: 200;
+	text-align:center;
+}
+.title-site-article-count{
+	margin-bottom: 15px;
+	font-size: 18px;
+	font-weight:200;
+	text-align:center;
+}
+.site-header h2{
+    width: 100%;
+    font-size: 35px;
+    font-weight: 900;
+    text-align: center;
+    color: rgba(255, 2, 2, 0.4);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+
+}
+.title-site-name { 
+	color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 60s infinite linear;
+}
+@-webkit-keyframes hue {  
+  from {  
+    -webkit-filter: hue-rotate(0deg);  
+  }  
+  
+  to {  
+    -webkit-filter: hue-rotate(-360deg);  
+  }  
+}  
+
+@media screen and (min-width: 768px){
+
+	.title-site-name {
+	    font-size: 30px;
+	    text-shadow: 2px 1px 0 rgba(0,0,0,.1); 
+	}
+}
+@media (min-width: 650px){
+	.mega {
+	    font-size: 6rem;
+	    line-height: 1;
+	}
+}

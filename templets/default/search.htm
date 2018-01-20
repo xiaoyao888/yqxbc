@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+
+	<title>内容搜索页_{dede:global.cfg_webname/}</title>
+
+    {dede:include filename="common.htm"/}
+
+    <style type="text/css">
+    	.panel{border: 1px solid #ccc;background: #F7F7F7;min-height: 130px;}
+    	p{text-indent:2em;}
+    </style>
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+	{dede:include filename="header.htm"/}
+	<div class="container">
+	    <ol class="breadcrumb">
+	      当前位置：内容搜索
+	    </ol>
+
+		<div class="col-sm-12  col-md-12">
+
+			{dede:list pagesize='12' titlelen=80}
+
+			<div class="panel">				
+
+		        <div class="panel-body">
+
+		        	<h3 style="background:url('/templets/bootstrap/images/document.png') no-repeat;padding-left:30px;"><a href='[field:arcurl/]'>[field:title/]</a></h3>
+
+		            <p>[field:description/]...</p>
+
+		            <h5>标签：[field:id function=GetTags(@me)/]</h5>
+		        </div>
+
+		    </div>    
+
+			{/dede:list}
+
+			<div class="pre_next">
+		        <nav>
+		          <ul class="pager">
+		            <li class="previous">{dede:prenext get='pre' /}</li>
+		            <li class="next">{dede:prenext get='next' /}</li>
+		          </ul>
+		        </nav>
+	     	</div>
+
+		</div>
+	</div>
+	{dede:include filename="footer.htm"/}
+</body>
+
+</html>

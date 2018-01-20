@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={dede:global.cfg_soft_lang/}" />
+<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field.keywords/}" />
+<meta name="description" content="{dede:field.description function='html2text(@me)'/}" />
+<link href="{dede:global.cfg_templets_skin/}/style/dedecms.css" rel="stylesheet" media="screen" type="text/css" />
+<meta http-equiv="mobile-agent" content="format=xhtml;url={dede:global.cfg_mobileurl/}/view.php?aid={dede:field.id/}">
+<script type="text/javascript">if(window.location.toString().indexOf('pref=padindex') != -1){}else{if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){if(window.location.href.indexOf("?mobile")<0){try{if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){window.location.href="{dede:global.cfg_mobileurl/}/view.php?aid={dede:field.id/}";}else if(/iPad/i.test(navigator.userAgent)){}else{}}catch(e){}}}}</script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://www.flypeng.com/templets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="http://www.flypeng.com/templets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://www.flypeng.com/templets/bootstrap/css/theme.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://www.flypeng.com/templets/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://www.flypeng.com/templets/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://www.flypeng.com/templets/bootstrap/js/jquery-2.1.3.js"></script>
+    <script src="http://www.flypeng.com/templets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://www.flypeng.com/templets/bootstrap/js/docs.min.js"></script>
+    <link href="http://www.flypeng.com/templets/bootstrap/css/main.css" rel="stylesheet">
+    <script src="http://www.flypeng.com/templets/bootstrap/js/main.js"></script>
+</head>
+<body>
+{dede:include filename="../bootstrap/header.htm"/}
+<!-- /header -->
+
+<div class="container">
+	<div class="col-sm-9 col-md-9">
+                <ol class="breadcrumb" style="margin-top:10px;">
+                  <li><strong>当前位置:</strong></li>
+                  <li><a href="/">主页</a></li>
+                  <li class="active">专题</li>
+                </ol><!-- /breadcrumb -->
+
+		<div class="well">
+			<div class="title">
+				<h2>{dede:field name="title"/}</h2>
+			</div><!-- /title -->
+			<div class="info">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>时间:</small>{dede:field.pubdate function="MyDate('Y-m-d H:i',@me)"/}&nbsp;&nbsp;<small>责任编辑:</small>{dede:field.writer/} &nbsp;&nbsp;<small>点击:</small><script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}" type='text/javascript' language="javascript"></script>次 
+			</div><!-- /info -->
+			<!--<div class="specialpic">
+				<img src="{dede:field name='litpic'/}" />
+			</div>--> 
+                     　<div class="info">
+                     　  {dede:field name='description'/}	
+                     　</div>
+		</div><!-- /well -->
+		<div class="art_spec_list"> 
+                   {dede:field.note/}
+		</div>
+			
+
+		
+	</div><!-- /pleft -->
+	
+	<div class="col-sm-3 col-md-3">
+		<!--<div class="commend">
+			<dl class="tbox">
+				<dt><strong>推荐专题</strong></dt>
+				<dd>
+					<ul class="d4">
+           {dede:arclist flag='c' channelid='-1' titlelen=42 row=6}
+          	<li><a href="[field:arcurl/]">[field:title/]</a>
+            	<p>[field:description function='cn_substr(@me,80)'/]...</p>
+            </li>{/dede:arclist}
+					</ul>
+				</dd>
+			</dl>
+		</div> --><!-- /commend -->
+		<div id="contentRtPicAD" style="margin:10px auto">{dede:myad name='contentRtPicAD'/}</div>		
+		<div class="panel">
+		  <div class="panel-heading">热点内容</div>
+		   <div>
+		    <ul class="c1 ico2">
+                    {dede:arclist row=10 orderby=click}
+                    	<li><a href="[field:arcurl/]">[field:title/]</a></li>
+                    {/dede:arclist}
+		    </ul>
+		  </div>
+		</div><!-- /panel -->
+        
+	</div><!-- /pright -->
+</div>
+{dede:include filename="../bootstrap/footer.htm"/}
+<!-- /footer -->
+
+
+</body>
+</html>

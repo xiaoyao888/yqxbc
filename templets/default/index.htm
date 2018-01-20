@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>    
+    <meta name="baidu-site-verification" content="XqUhnV4tBL" />
+    <title>{dede:global.cfg_webname/}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset={dede:global.cfg_soft_lang/}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <META name=keywords content={dede:global.cfg_keywords/}>
+    <META name=description content={dede:global.cfg_description/}>
+    <meta name="author" content="">
+    
+    <!-- <meta name="baidu-tc-verification" content="fa82bf14b3f43ab9b6e47fd1346d7007" />  -->
+    <LINK rel="shortcut icon" type=image/x-icon href="/favicon.ico">    
+    
+    {dede:include filename="common.htm"/}
+  <!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+  <body >
+    {dede:include filename="header.htm"/}
+    <div class="container theme-showcase" role="main">    
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:304px;">
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+              </ol>
+              <div class="carousel-inner" role="listbox" style="height:304px;">
+                {dede:arclist limit='0,1' orderby=pubdate titlelen=34 flag='p'}
+                <div class="item active" style="height:304px;">
+                  <a href="[field:arcurl/]" ><img src="[field:litpic/]" title="[field:fulltitle/]" style="width:100%;height:100%" alt="[field:title/]"/></a>
+                </div>
+                {/dede:arclist}
+                {dede:arclist limit='1,5' orderby=pubdate titlelen=34 flag='p'}
+                <div class="item" style="height:304px;">
+                  <a href="[field:arcurl/]" ><img src="[field:litpic/]" title="[field:fulltitle/]" style="width:100%;height:100%" alt="[field:title/]"/></a>
+                </div>
+                {/dede:arclist}
+              </div>
+              <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div> 
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">最新文章</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist orderby='pubdte'titlelen='40' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom" >
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">Win10资料</h3>
+            </div>
+            <div class="panel-body">
+              <div class="list-group">
+                <a href="http://www.win10os.com/win10xiazai" class="list-group-item" target="_blank" title="Win10下载">Win10下载</a>
+                <a href="http://www.win10os.com/win10ruanjian/2014/1030/93.html" class="list-group-item" target="_blank" title="Win10U盘制作工具">Win10U盘制作工具</a>
+                <a href="http://www.win10os.com/win10xitong/2014/1014/20.html" class="list-group-item" target="_blank" title="Win10安装">Win10安装</a>
+                <a href="http://www.win10os.com/win10jihuo/" class="list-group-item" target="_blank" title="Win10激活">Win10激活</a>
+                <a href="http://www.win10os.com/win10jiqiao/2014/1019/39.html" class="list-group-item" target="_blank" title="Win10去水印工具">Win10去水印工具</a>
+                <a href="http://www.win10os.com/win10jiqiao/" class="list-group-item" target="_blank" title="Win10教程">Win10教程</a>
+              </div>
+            </div>
+          </div>
+         </div>
+      <!--电脑知识-->
+        <div class="col-sm-6 col-md-8">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">电脑知识</h3><span class="pull-right"><a href="/dnzs/" title="电脑知识">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">                
+                {dede:arclist typeid='1' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>
+            </div>
+          </div>
+        </div>         
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">网络知识</h3><span class="pull-right"><a href="/wlzs/" title="网络知识">更多</a></span>
+            </div>
+            <div class="panel-body">                
+              <ul class="all_list">                
+                {dede:arclist typeid='4' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="col-sm-6 col-md-6">
+              <div class="panel">
+                  <div class="panel-body">
+                      <a href="/shujuku/redis/2015/0831/1236.html" target="_blank" title="redis学习教程"><img src="/templets/default/images/redis_topic.jpg" width="100%" height="100%" alt="redis学习教程"/></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+              <div class="panel">
+                  <div class="panel-body">
+                  <a href="http://www.win10os.com/" target="_blank" title="win10系统下载安装与激活"><img src="/templets/default/images/win10_ad.jpg" width="100%" height="100%" alt="win10系统下载安装与激活"/></a>
+                  </div>
+              </div>
+          </div>
+      <!--编程设计-->
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">JAVA</h3><span class="pull-right"><a href="/bcsj/java" title="JAVA">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist typeid='26' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>               
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+           <div class="panel-heading">
+                <h3 class="panel-title pull-left">CSS</h3><span class="pull-right"><a href="/bcsj/css" title="CSS">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist typeid='29' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>               
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+           <div class="panel-heading">
+                <h3 class="panel-title pull-left">数据库</h3><span class="pull-right"><a href="/shujuku" title="数据库">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist typeid='8' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>               
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">JAVASCRIPT</h3><span class="pull-right"><a href="/bcsj/js" title="JAVASCRIPT">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist typeid='30' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">AJAX</h3><span class="pull-right"><a href="/bcsj/ajax" title="AJAX">更多</a></span>
+            </div>
+            <div class="panel-body">                
+              <ul class="all_list">
+                {dede:arclist typeid='31' limit='0,10' titlelen='43' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-custom">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">程序员之道</h3><span class="pull-right"><a href="/zhanzhang/cxy/" title="程序员之道">更多</a></span>
+            </div>
+            <div class="panel-body">
+              <ul class="all_list">
+                {dede:arclist typeid='33' limit='0,10' titlelen='44' row='pubdate' row='10'}
+                <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+                {/dede:arclist}
+              </ul>               
+            </div>
+          </div>
+        </div>
+         <div class="col-sm-12 col-md-12">
+          <div class="panel panel-custom" style="min-height:100px;">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">云标签</h3><span class="pull-right"></span>
+            </div>
+            <div class="panel-body">
+              <textarea id="tagList" style="display:none"></textarea>
+					<div id="tagbox" style="display:none"></div>
+<div id="tagbox"><a class="blue" target="_blank" href="/plus/search.php?keyword=成就7000">成就7000</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=setinterval">setinterval</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=navicat for mysql 注册码">navicat for mysql 注册码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=photoshop cc 2017">photoshop cc 2017</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=脚本之家">脚本之家</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js截取字符串">js截取字符串</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=editplus 注册码">editplus 注册码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=strip">strip</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js正则表达式">js正则表达式</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js刷新当前页面">js刷新当前页面</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ps cc 2017">ps cc 2017</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=jsonobject">jsonobject</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=javascript:void(0);">javascript:void(0);</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js foreach">js foreach</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=暗影精灵3">暗影精灵3</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=shell if">shell if</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=sql server 2008 r2">sql server 2008 r2</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=截取字符串">截取字符串</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=mysql case when">mysql case when</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=iis配置">iis配置</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=double保留两位小数">double保留两位小数</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=tinyint">tinyint</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=cad2007激活码">cad2007激活码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=shell脚本学习指南">shell脚本学习指南</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=手机掉水里怎么处理">手机掉水里怎么处理</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=d3dcompiler_43.dll">d3dcompiler_43.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ftp 命令">ftp 命令</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=当前页面的脚本发生错误">当前页面的脚本发生错误</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=d3dcompiler_43.dll">d3dcompiler_43.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ftp 命令">ftp 命令</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=当前页面的脚本发生错误">当前页面的脚本发生错误</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ps cs6破解补丁">ps cs6破解补丁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=replaceall">replaceall</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=正则表达式 数字">正则表达式 数字</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js 正则表达式">js 正则表达式</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=google play 服务">google play 服务</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=怎么破解压缩包密码">怎么破解压缩包密码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=cs6破解补丁">cs6破解补丁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=批处理命令">批处理命令</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=迅雷下载任务出错">迅雷下载任务出错</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=chkdsk工具怎么修复">chkdsk工具怎么修复</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=sql2012">sql2012</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js正则">js正则</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=触摸板">触摸板</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=易语言破解版">易语言破解版</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=javascript 正则表达式">javascript 正则表达式</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=thunder network">thunder network</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=mediaplayer">mediaplayer</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=jquery 手册">jquery 手册</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=已阻止此网站显示有安全证书错误的内容">已阻止此网站显示有安全证书错误的内容</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=droidcam">droidcam</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=网线线序">网线线序</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=视频加速器">视频加速器</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ps羽化在哪">ps羽化在哪</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=msvcp140.dll丢失">msvcp140.dll丢失</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=数组合并">数组合并</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=批处理教程">批处理教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=y码手机验证码">y码手机验证码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=vbs脚本">vbs脚本</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=弹出窗口">弹出窗口</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=778棋牌">778棋牌</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=autocad2007序列号">autocad2007序列号</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=php文件怎么打开">php文件怎么打开</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=virtualbox安装教程">virtualbox安装教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=itunes xp版">itunes xp版</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=手机当电脑摄像头">手机当电脑摄像头</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=数组长度">数组长度</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=硬盘哨兵">硬盘哨兵</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=editplus注册码">editplus注册码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=teamviewer未就绪请检查您的连接">teamviewer未就绪请检查您的连接</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=myeclipse10破解">myeclipse10破解</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=啊d注入工具">啊d注入工具</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=一体机电脑好不好">一体机电脑好不好</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=libcurl.dll">libcurl.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=手机卡剪卡">手机卡剪卡</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=c语言程序clonecd">c语言程序clonecd</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=normal.dot">normal.dot</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=prototype是什么">prototype是什么</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=storm.dll">storm.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=currentstyle">currentstyle</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=libcef.dll">libcef.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=setinterval 参数">setinterval 参数</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=php正则">php正则</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=photoshop 序列号">photoshop 序列号</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=wince6.0模拟器">wince6.0模拟器</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=jquery表单验证">jquery表单验证</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=场景助手">场景助手</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=如何在">如何在</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=sqlserver2005">sqlserver2005</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=tabctl32.ocx">tabctl32.ocx</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=计算机网络 谢希仁">计算机网络 谢希仁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=sim卡剪卡">sim卡剪卡</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=apache启动失败">apache启动失败</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=百度网盘限速破解vip自动提速补丁">百度网盘限速破解vip自动提速补丁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=bin文件编辑器">bin文件编辑器</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=虚拟机怎么安装系统">虚拟机怎么安装系统</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=autocad2008激活码">autocad2008激活码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=bt4">bt4</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=translateanimation">translateanimation</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=shell脚本编程">shell脚本编程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ps6破解补丁">ps6破解补丁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=iis安装教程">iis安装教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=vb6.0教程">vb6.0教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=srvinstw.exe">srvinstw.exe</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=c语言小程序">c语言小程序</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=脚本错误怎么解决">脚本错误怎么解决</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=maple下载">maple下载</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=php递归函数">php递归函数</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=千兆网线做法">千兆网线做法</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=精通正则表达式">精通正则表达式</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=中国建设银行获取网银盾序列号插件不可用">中国建设银行获取网银盾序列号插件不可用</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=手机浏览器模拟器">手机浏览器模拟器</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=js下拉菜单">js下拉菜单</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=回到顶部代码">回到顶部代码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=iphone7无线充电">iphone7无线充电</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=esp文件">esp文件</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=c#代码">c#代码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=asp 数组">asp 数组</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=steam更新失败">steam更新失败</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=yy马甲格式">yy马甲格式</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=bcdautofix">bcdautofix</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=引入js">引入js</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=php四舍五入rgss202j.dll">php四舍五入rgss202j.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=winhex教程">winhex教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=脚本制作">脚本制作</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=javascript高级编程">javascript高级编程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=键盘连发">键盘连发</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=黑客攻防技术宝典">黑客攻防技术宝典</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=vbs整人代码">vbs整人代码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=正则表达式数字">正则表达式数字</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=批处理删除文件">批处理删除文件</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=allowoverride">allowoverride</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=iis 配置">iis 配置</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=widcomm">widcomm</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=安卓系统怎么升级">安卓系统怎么升级</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=安卓升级">安卓升级</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=吉他调音器软件">吉他调音器软件</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=创新文字朗读精灵">创新文字朗读精灵</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=ntscan">ntscan</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=php实例">php实例</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=华为matebook怎么样">华为matebook怎么样</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=mysql更改密码">mysql更改密码</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=当前脚本发生错误">当前脚本发生错误</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=vs2010教程">vs2010教程</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=天正8.5过期补丁">天正8.5过期补丁</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword=granny2.dll">granny2.dll</a>
+<a class="blue" target="_blank" href="/plus/search.php?keyword="></a>
+</div>
+            </div>
+          </div>
+        </div> 
+        <div class="col-sm-12 col-md-12">
+          <div class="panel panel-custom" style="min-height:100px;">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">友情链接</h3><span class="pull-right"></span>
+            </div>
+            <div class="panel-body">
+              <DL class=index_link>    
+              <DL class=index_link>
+              	<li><a href="http://mz-bag.com/" target="_blank" title="tutorabc">tutorabc</a></li>              
+                <li><a href="http://www.yinhangkatao.com/" target="_blank" title="哒哒英语怎么样">哒哒英语怎么样</a></li>
+				        <li><a href="http://www.lmobile.cn" target="_blank">乐信</a></li>
+                <li><a href="http://www.landray.com.cn" target="_blank" title="oa系统">oa系统</a></li>
+                <li><a href='http://www.zftb.com/' target='_blank'>ZFTB</a> </li>
+                <li><a href='http://www.xplaysoft.com/' target='_blank'>软件玩家</a> </li>
+                <li><a href='http://www.360xt.cn' target='_blank'>360系统之家</a> </li>
+                <li><a href='http://www.xitongcity.com' target='_blank'>ghost win8</a> </li>
+                <li><a href='http://www.pc196.com/' target='_blank'>XP系统下载</a> </li>
+                <li><a href='http://www.android-study.net' target='_blank'>android学习</a> </li>
+                <li><a href='http://www.dnzg.cn' target='_blank'>电脑技术</a> </li>
+                <li><a href='http://www.freegateway.cn' target='_blank'>小草软路由</a> </li>
+                <li><a href='http://www.softcps.com/' target='_blank'>777软件</a></li>
+                <li><a href='http://www.ip110.com/' target='_blank'>香港空间</a> </li>
+                <li><a href="http://www.360xt.cn/" target="_blank">系统之家</a></li>
+                <li><a href="http://www.itbiancheng.com/" target="_blank">吾爱编程</a></li>
+                <li><a href="http://www.zfengit.com/" target="_blank">轻薄笔记本</a></li>
+                
+              </DL>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+    {dede:include filename="footer.htm"/}
+    <script>
+	var text = $("#tagList").val();
+	var arr = text.replace(/[\r\n]/g,"$$$").split("$$");
+	size = arr.length;
+	var str = "";
+	$.each(arr,function(index,el){
+		str+="<a class='blue' target='_blank' href='/plus/search.php?keyword="+el+"'>"+el+"</a>\r\n";
+	});
+	$("#tagbox").html(str);
+</script>
+
+  </body>
+</html>

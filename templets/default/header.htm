@@ -1,0 +1,84 @@
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="/templets/default/css/header.css" rel="stylesheet">
+<header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">     
+      <div class="row" >
+        <div class="col-sm-12 col-md-12">
+	        <div class="site-header-banner" style="min-height:300px;">
+	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
+	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+	        	<div class="title-site-article-count" id="title-site-article-count">
+	        		{dede:sql sql="select count(*) as c from dede_archives"}共收藏了[field:c /] 篇技术文章{/dede:sql}
+	        	</div>
+	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="{dede:global.cfg_cmsurl/}/plus/search.php">
+		            <div class="input-group">		            	
+		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
+		                <span class="input-group-btn">
+		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
+		                </span>
+		            </div><!-- /input-group -->
+	            </form>
+	        </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                {dede:channel type='son'  typeid='7'} 
+                  <li><a href="[field:typeurl/]" title="[field:typename/]">[field:typename/]</a> </li>
+                {/dede:channel}
+              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+               {dede:channel type='son'  typeid='8'} 
+                  <li><a href="[field:typeurl/]" title="[field:typename/]">[field:typename/]</a> </li>
+                {/dede:channel}
+              </ul>
+            </li>     
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
+            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
+            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header><!-- /header --> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
+             </div>
+             <div class="modal-body">
+                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="/templets/default/js/header.js"></script>

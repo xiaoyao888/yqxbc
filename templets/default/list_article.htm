@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset={dede:global.cfg_soft_lang/}" />
+
+    <title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="{dede:field name='keywords'/}" />
+
+    <meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />    
+
+    {dede:include filename="common.htm"/}
+
+    <style type="text/css">
+
+      .pageSelect{height: 35px;}
+
+    </style>
+
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+{dede:include filename="header.htm"/}
+
+<div class="container">
+
+
+  <div class="col-sm-8  col-md-8">    
+
+      <ol class="breadcrumb">
+
+        当前位置：{dede:field name='position'/}
+
+      </ol>
+      
+      {dede:list pagesize='12'}
+
+      <div class="panel">
+
+        <div class="panel-body">
+
+              <h3><a href='[field:arcurl/]'>[field:title/]</a></h3>
+
+              <p>[field:description/]...</p>
+
+        </div>
+
+      </div>    
+
+      {/dede:list}
+
+    <nav>
+
+	  <ul class="pagination">
+
+	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
+
+	    {dede:pagelist listsize='5' listitem='index pre pageno next end option'/}
+
+	  </ul>
+
+	</nav>    
+
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="listsubname">
+    {dede:channel}
+      <a href='[field:typelink /]' class="btn btn-default">[field:typename/]</a>
+    {/dede:channel}
+      <div class="clear"></div>
+    </div>
+    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+
+      <div class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">最新文章>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            {dede:arclist  row=10 titlelen=88 infolen=160 orderby='pubdate' }
+
+            <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:pubdate function="MyDate('m.d',@me)"/]</span></li>
+
+            {/dede:arclist} 
+
+          </ul>
+
+        </div>
+
+      </div>  
+
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+
+        <div class="panel-heading">相关热门>>></div>
+
+        <div class="panel-body">
+
+          <ul class="all_list">
+
+            {dede:arclist  row=10 titlelen=40 orderby='click' }            
+
+            <li><a href="[field:arcurl/]" >[field:title/]</a><span>[field:click/]</span></li>
+
+            {/dede:arclist} 
+
+          </ul>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
+
+  </div>
+
+</div>
+
+{dede:include filename="footer.htm"/}
+
+
+
+
+
+
+
+</body>
+
+</html>
+
