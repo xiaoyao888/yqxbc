@@ -1,1 +1,0 @@
-<DT><A href="[field:arcurl/]" target=_blank title="[field:title/]"><IMG border=0 alt=[field:title/]  src="[field:litpic/]" width=130 height=98></A></DT>

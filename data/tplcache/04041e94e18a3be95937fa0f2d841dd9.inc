@@ -1,1 +1,0 @@
-<div class="renei_new_pic" ><img src="[field:litpic/]" alt="[field:fulltitle/]"/></div><div class="renei_new_tit"><a href='[field:arcurl/]'>[field:title/]</a><br/><span>[field:pubdate function='strftime("%Y-%m-%d %H:%M:%S",@me)'/] </span><span style="padding-left:8px;color:#26AAF5">[field:click/]次</span></div>

@@ -1,5 +1,0 @@
-<div><a href="[field:arcurl/]" title="[field:fulltitle/]" target="_blank">[field:title/]</a></div>
-							<div>
-							  <img src="[field:litpic/]" alt="[field:fulltitle/]" width="90" height="60" />
-							  <span>[field:info/]...<a href="[field:arcurl/]">[详细]</a></span>
-							</div>

@@ -1,1 +1,0 @@
-<li>[field:imglink/]<br />[field:textlink/]</li>
