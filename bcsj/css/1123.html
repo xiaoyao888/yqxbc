@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>浏览器的兼容性问题大全</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="兼容性,浏览器,兼容性问题" />
+  <meta name="description" content=" " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>浏览器的兼容性问题大全</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：9次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1123" class="art_content"><p>
+	1.&nbsp;默认的内外边距不同</p>
+<p>
+	问题：</p>
+<p>
+	各个浏览器默认的内外边距不同</p>
+<p>
+	解决：</p>
+<p>
+	*{margin:0;padding:0;}</p>
+<p>
+	2.&nbsp;水平居中的问题</p>
+<p>
+	问题：</p>
+<p>
+	设置&nbsp;text-align: center&nbsp;&nbsp;</p>
+<p>
+	ie6-7文本居中，嵌套的块元素也会居中</p>
+<p>
+	ff /opera /safari /ie8文本会居中，嵌套块不会居中</p>
+<p>
+	解决：</p>
+<p>
+	块元素设置</p>
+<p>
+	1、margin-left:auto;margin-right:auto</p>
+<p>
+	2、margin:0 auto;</p>
+<p>
+	3、&lt;p align=&rdquo;center&rdquo;&gt;&lt;/p&gt;</p>
+<p>
+	3.&nbsp;垂直居中的问题</p>
+<p>
+	问题：</p>
+<p>
+	在浏览器中想要垂直居中，设置vertical-align:middle;&nbsp;不起作用。例如：ie6下文本与文本输入框对不齐，需设置vertical-align:middle，但是文本框的内容不会垂直居中</p>
+<p>
+	解决：</p>
+<p>
+	给容器设置一个与其高度相同的行高</p>
+<p>
+	line-height:与容器的height一样</p>
+<p>
+	4.&nbsp;关于高度问题</p>
+<p>
+	问题：</p>
+<p>
+	如果是动态地添加内容，高度最好不要定义。浏览器可以自动伸缩，然而如果是静态的内容，高度最好定好。</p>
+<p>
+	如果设定了高度，内容过多时，ie6下会自动增加高度、其他浏览器会超出边框</p>
+<p>
+	解决：</p>
+<p>
+	1.设置overflow:hidden;</p>
+<p>
+	2.高度自增height:auto!important;height:100px;</p>
+<p>
+	5. IE6&nbsp;默认的p高度</p>
+<p>
+	问题：</p>
+<p>
+	ie6默认p高度为一个字体显示的高度，所在ie6下p的高度大于等于一个字的高度，因此在ie6下定义高度为1px的容器，显示的是一个字体的高度</p>
+<p>
+	解决：</p>
+<p>
+	为这个容器设置下列属性之一</p>
+<p>
+	1、设置overflow:hidden;</p>
+<p>
+	2、设置line-height:1px;</p>
+<p>
+	3、设置zoom:0.08</p>
+<p>
+	&nbsp;</p>
+<p>
+	6. IE6&nbsp;最小高度(宽度)的问题</p>
+<p>
+	问题：</p>
+<p>
+	ie6不支持min-height、min-width属性，默认height是最小高度，width是最小宽度。</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;使用ie6不支持但其余浏览器支持的属性!important。</p>
+<p>
+	设置属性min-height:200px; height:auto !important; height:200px;&nbsp;</p>
+<p>
+	7. td高度的问题</p>
+<p>
+	问题：</p>
+<p>
+	table中td的宽度都不包含border的宽度，但是oprea和ff中td的高度包含了border的高度</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置line-height和height一样。在ie中如果td中的没有内容，那么border将不会显示</p>
+<p>
+	8. p嵌套p时，出现空白行</p>
+<p>
+	问题：</p>
+<p>
+	p中显示&lt;p&gt;文本&lt;/p&gt;，ff、oprea、Chrome：top和bottom都会出现空白行，但是在ie下不会出现空白行。</p>
+<p>
+	解决：</p>
+<p>
+	设置p的margin:0px，再设置p的padding-top和padding-bottom</p>
+<p>
+	9. IE6-7图片下面有空隙的问题</p>
+<p>
+	问题：</p>
+<p>
+	块元素中含有图片时，ie6-7中会出现图片下有空隙</p>
+<p>
+	解决：</p>
+<p>
+	1、在源代码中让&lt;/p&gt;和&lt;img&gt;在同一行</p>
+<p>
+	2、将图片转换为块级对象display:block;</p>
+<p>
+	3、设置图片的垂直对齐方式&nbsp;vertical-align:top/middle/bottom</p>
+<p>
+	4、改变父对象的属性，如果父对象的宽、高固定，图片大小随父对象而定，那么可以对父元素设置：&nbsp;overflow:hidden;</p>
+<p>
+	5、设置图片的浮动属性&nbsp;&nbsp;float:left;</p>
+<p>
+	10. IE6双倍边距的问题</p>
+<p>
+	问题：</p>
+<p>
+	ie6中设置浮动，同时又设置margin时，会出现双倍边距的问题</p>
+<p>
+	例float:left;width:100px;margin:0 100px;</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置display:inline;</p>
+<p>
+	11. IE6 weidth为奇数，右边多出1px的问题</p>
+<p>
+	问题：</p>
+<p>
+	父级元素采用相对定位，且宽度设置为奇数时，子元素采用绝对定位，在ie6中会出现右侧多出1像素</p>
+<p>
+	解决：</p>
+<p>
+	将宽度的奇数值改成偶数</p>
+<p>
+	12. IE6两个层之间3px的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;左边层采用浮动，右边没有采用浮动，这时在ie6中两层之间就会产生3像素的间距</p>
+<p>
+	解决：</p>
+<p>
+	1、右边层也采用浮动&nbsp; float</p>
+<p>
+	2、左边层添加属性&nbsp;margin-right:-3px;</p>
+<p>
+	13. IE6&nbsp;子元素绝对定位的问题</p>
+<p>
+	问题：</p>
+<p>
+	<a name="t1" style="color: rgb(255, 153, 0); " target="_blank"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;父级元素使用padding后，子元素使用绝对定位，不能精确定位</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在子元素中设置&nbsp; _left:-20px; _top:-1px;</p>
+<p>
+	14.&nbsp;显示手型cursor:hand</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ie6/7/8、opera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;都支持&nbsp;&nbsp;但是safari&nbsp;、&nbsp;ff&nbsp;不支持</p>
+<p>
+	解决：</p>
+<p>
+	写成&nbsp;cursor:pointer;&nbsp; (所有浏览器都能识别)&nbsp;&nbsp;</p>
+<p>
+	15. IE6-7 line-height失效的问题</p>
+<p>
+	问题：</p>
+<p>
+	<a name="t2" style="color: rgb(255, 153, 0); " target="_blank"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在ie中img与文字放一起时，&nbsp;line-height不起作用&nbsp;</p>
+<p>
+	解决：</p>
+<p>
+	都设置成float</p>
+<p>
+	16. td自动换行的问题</p>
+<p>
+	问题：</p>
+<p>
+	Table宽度固定，td自动换行</p>
+<p>
+	解决：</p>
+<p>
+	设置Table的table-layout:fixed，td的word-wrap:break-word</p>
+<p>
+	17.&nbsp;子容器浮动后，父容器扩展问题</p>
+<p>
+	问题：</p>
+<p>
+	子容器都float以后，父容器没有设定高度,父容器将不会扩展</p>
+<p>
+	解决：</p>
+<p>
+	只需要添加一个clear:both的p，代码如下：</p>
+<p>
+	&lt;p style=&quot;border:1px solid#333;width:204px&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;pstyle=&quot;width:100px;border:1px solid #333; float:left; &quot;&gt;子容器a&lt;/p&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;pstyle=&quot;width:100px;border:1px solid #333; float:left;&quot;&gt;子容器b&lt;/p&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;pstyle=&quot;clear:both&quot;&gt;&lt;/p&gt;</p>
+<p>
+	&lt;/p&gt;</p>
+<p>
+	18.&nbsp;透明png图片会带背景色</p>
+<p>
+	问题：</p>
+<p>
+	在ie6下透明的png图片会带一个背景色</p>
+<p>
+	解决：</p>
+<p>
+	background-image: url(icon_home.png);</p>
+<p>
+	background-repeat: no-repeat;</p>
+<p>
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&#39;icon_home.png&#39;);</p>
+<p>
+	_background-image: none;</p>
+<p>
+	19. list-style-position默认值的问题</p>
+<p>
+	问题：</p>
+<p>
+	ie下list-style-position默认为inside,&nbsp;&nbsp;firefox默认为outside</p>
+<p>
+	解决：</p>
+<p>
+	css中指定为outside即可解决兼容性问题</p>
+<p>
+	&nbsp;</p>
+<p>
+	20. list-style-image准确定位的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; li前设置图片时，图片与其后的文字对齐问题</p>
+<p>
+	解决：</p>
+<p>
+	1、采用背景定位&nbsp;和&nbsp;字符缩进的方法</p>
+<p>
+	background:url() no-repeat left center;text-index:16px;</p>
+<p>
+	2、采用相对定位方法</p>
+<p>
+	li&nbsp;设置list-style:url();</p>
+<p>
+	li的子元素position:relative;top:-5px;</p>
+<p>
+	21. ul标签默认值的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ul标签在ff中默认是有padding值的,而在ie中只有margin有值</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定义ul{margin:0;padding:0;}就能解决大部分问题</p>
+<p>
+	22. IE中li指定高度后，出现排版错误</p>
+<p>
+	问题：</p>
+<p>
+	在ie下如果为li指定高度可能会出现排版错位</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置line-height</p>
+<p>
+	23. ul或li浮动后，显示在p外</p>
+<p>
+	问题：</p>
+<p>
+	p中的ul或li设置float以后，都不在p中</p>
+<p>
+	解决：</p>
+<p>
+	必须在ul标签后加&lt;p style=&quot;clear:both&quot;&gt;&lt;/p&gt;来闭合外层p</p>
+<p>
+	24. ul浮动后，margin变大</p>
+<p>
+	问题：</p>
+<p>
+	ul设置&nbsp;float后，在ie中margin将变大</p>
+<p>
+	解决：</p>
+<p>
+	设置ul的display:inline，li的list-style-position:outside</p>
+<p>
+	25. li浮动后，margin变大</p>
+<p>
+	问题：</p>
+<p>
+	li设置&nbsp;float后，在ie中margin将变大</p>
+<p>
+	解决：</p>
+<p>
+	设置li的display:inline</p>
+<p>
+	26.&nbsp;嵌套使用ul、li的问题</p>
+<p>
+	问题：</p>
+<p>
+	ie的bug，嵌套使用ul、li时，里层的li设置float以后，外层li不设置float,&nbsp;里面的ul顶部和它外面的li总是有一段间距</p>
+<p>
+	解决：</p>
+<p>
+	设置里面的ul的zoom:1</p>
+<p>
+	&nbsp;</p>
+<p>
+	27. IE6-7 li底部有3px的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个bug产生的充要条件是li的子元素浮动并且li设置了以下CSS属性之一：width、height、zoom、padding-top、padding-bottom、margin-top、margin-bottom。</p>
+<p>
+	解决：</p>
+<p>
+	1、p设置clear:left|both，这时li不能设置width、height、zoom。</p>
+<p>
+	2、li设置float:left，这时li可以设置width、height、zoom。</p>
+<p>
+	3、li设置clear:left|both，这时li不能设置width、height、zoom。</p>
+<p>
+	4、IE6/IE7的这个Bug可以通过给li中的p设置vertical-align:top|middle|bottom解决。</p>
+<p>
+	&nbsp;</p>
+<p>
+	28. IE6&nbsp;垂直列表间隙的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li中有a且设置display:block时，ie6中列表间会出现空隙</p>
+<p>
+	解决：</p>
+<p>
+	1、li中加display:inline;</p>
+<p>
+	2、li使用float&nbsp;然后&nbsp;clear:both;</p>
+<p>
+	3、给包含的文本末尾添加一个空格</p>
+<p>
+	4、设置width</p>
+<p>
+	&nbsp;</p>
+<p>
+	29. IE6&nbsp;列表背景颜色失效的问题</p>
+<p>
+	问题：</p>
+<p>
+	当父元素设置position:relative;时，在ie6中第一个ul、ol、dl的背景颜色失效</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ul、ol、dl&nbsp;都设置为position:relative;</p>
+<p>
+	&nbsp;</p>
+<p>
+	30. IE6-7&nbsp;列表背景颜色失效的问题2</p>
+<p>
+	问题：</p>
+<p>
+	做横向导航栏时，ul设置为float且有背景色，li设置为float。ie6-7背景颜色失效</p>
+<p>
+	解决：</p>
+<p>
+	很多ie的bug都可以通过触发layout来解决&nbsp;ul添加属性</p>
+<p>
+	1、height:1%;</p>
+<p>
+	2、float:left;</p>
+<p>
+	3、zoom:1;</p>
+<p>
+	&nbsp;</p>
+<p>
+	31.&nbsp;列表不能换行的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; li设置为浮动，后面的li紧随其后，不能换行</p>
+<p>
+	解决：</p>
+<p>
+	1、为这个ul定义合适的宽高</p>
+<p>
+	2、给包含这个ul&nbsp;的父p定义合适的宽高。</p>
+<p>
+	&nbsp;</p>
+<p>
+	32. li中的内容以省略号显示</p>
+<p>
+	问题：</p>
+<p>
+	li中内容超过长度时，想以省略号显示，&nbsp;此方法适用于ie6-7-8、opera、safari浏览器</p>
+<p>
+	ff浏览器不支持</p>
+<p>
+	解决：</p>
+<p>
+	li{width:200px;white-space:nowrap;text-overflow:ellipsis;</p>
+<p>
+	-o-text-overflow:ellipsis; overflow:hidden; }</p>
+<p>
+	&nbsp;</p>
+<p>
+	33.&nbsp;超链接访问过后hover样式不出现的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击超链接后，hover、active样式没有效果</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改变CSS属性的排列顺序: L-V-H-A&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	34.&nbsp;禁用中文输入法的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不能在输入框中输入汉字</p>
+<p>
+	解决：</p>
+<p>
+	只在ie系列和ff中有效</p>
+<p>
+	ime-mode:disabled&nbsp;&nbsp;&nbsp;&nbsp;(但可以粘贴)</p>
+<p>
+	禁用粘贴：</p>
+<p>
+	onpaste=&quot;return false&quot;</p>
+<p>
+	&nbsp;</p>
+<p>
+	35.&nbsp;除去滚动条的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;隐藏滚动条</p>
+<p>
+	解决：</p>
+<p>
+	1、只有ie6-7支持&lt;bodyscroll=&quot;no&quot;&gt;</p>
+<p>
+	2、除ie6-7不支持&nbsp;body{overflow:hidden}</p>
+<p>
+	3、所有浏览器&nbsp;html{overflow:hidden}</p>
+<p>
+	&nbsp;</p>
+<p>
+	36.&nbsp;让层显示在FLASH之上</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;想让层的内容显示在flash上</p>
+<p>
+	解决：</p>
+<p>
+	把FLASH设置透明</p>
+<p>
+	1、&lt;paramname=&quot; wmode &quot; value=&quot;transparent&quot; /&gt;</p>
+<p>
+	2、&lt;paramname=&quot;wmode&quot; value=&quot;opaque&quot;/&gt;</p>
+<p>
+	&nbsp;</p>
+<p>
+	37.&nbsp;去除链接虚线边框的问题</p>
+<p>
+	问题：</p>
+<p>
+	当点击超链接后，ie6/7/8&nbsp; ff会出现虚线边框&nbsp;,而opera、safari没有虚线边框</p>
+<p>
+	解决：</p>
+<p>
+	ie6/7中&nbsp;设置为a {blr:expression_r(this.onFocus=this.blur()) }</p>
+<p>
+	ie8&nbsp;和&nbsp;ff&nbsp;都不支持expression&nbsp;在ie8&nbsp;、ff中设置为&nbsp; :focus { outline: none; }</p>
+<p>
+	&nbsp;</p>
+<p>
+	38. css滤镜的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;css滤镜只在ie中有效，Firefox, Safari(WebKit), Opera只能够设置透明，它们不支持滤镜filter，无法实现图片切换中间变换的效果，只能通过透明度来设置。</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ff中设置透明度&nbsp;&nbsp;&nbsp;-moz-opacity:0.10;&nbsp;opacity:0.6;</p>
+<p>
+	ie中只设置filter:alpha(opacity=50);时，ie6-7失效，还要设置</p>
+<p>
+	1、zoom:1;&nbsp; 2、width:100%;</p>
+<p>
+	&nbsp;</p>
+<p>
+	39. IE6背景闪烁的问题</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;链接、按钮用CSS sprites作为背景，在ie6下会有背景图闪烁的现象。原因是:IE6没有将背景图缓存，每次触发hover的时候都会重新加载</p>
+<p>
+	解决：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以用JavaScript设置ie6缓存这些图片：</p>
+<p>
+	document.execCommand(&quot;BackgroundImageCache&quot;,false,true);</p>
+<p>
+	&nbsp;</p>
+<p>
+	40.&nbsp;出现重复文字的问题</p>
+<p>
+	问题：</p>
+<p>
+	&lt;pstyle=&quot;width:400px&quot;&gt;</p>
+<p>
+	&nbsp; &lt;pstyle=&quot;float:left&quot;&gt;&lt;/p&gt;</p>
+<p>
+	&nbsp; &lt;!&ndash; _ &ndash;&gt;</p>
+<p>
+	&nbsp; &lt;pstyle=&quot;float:right;width:400px&quot;&gt;&darr;这就是多出来的那只猪&lt;/p&gt;</p>
+<p>
+	&lt;/p&gt;</p>
+<p>
+	解决：</p>
+<p>
+	1、&nbsp;&nbsp;改变结构，不出现【一个容器包含2两个具有&ldquo;float&rdquo;样式的子容器】的结构。</p>
+<p>
+	2、减小第二个容器的宽度，使父容器宽度减去第二个容器宽度的值大于3</p>
+<p>
+	3、去掉所有的注释。</p>
+<p>
+	4、修正注释的写法。&lt;!--[if!IE]&gt;这里是注释内容&lt;![endif]--&gt;</p>
+<p>
+	5、在第二个容器后面加一个或者多个&lt;pstyle=&quot;clear&quot;&gt;&lt;/p&gt;来解决。</p>
+<p>
+	41. ff、chrome绝对定位无效</p>
+<p>
+	问题：</p>
+<p>
+	在IE给td设置position:relative，然后给它包含的一个容器使用position:absolute进行定位是有效的，但在FF和Chrome下却不可以。</p>
+<p>
+	解决：</p>
+<p>
+	设置td的display:block。</p>
+<p>
+	&nbsp;</p>
+<p>
+	42. IE6&nbsp;绝对定位的问题</p>
+<p>
+	问题：</p>
+<p>
+	&lt;pstyle=&quot;position:relative;border:1px solidorange;text-align:center;&quot;&gt;</p>
+<p>
+	&lt;pstyle=&quot;position:absolute;top:0;left:0;</p>
+<p>
+	background:#CCC;&quot;&gt;dovapour&lt;/p&gt;</p>
+<p>
+	&lt;a href=&quot;#&quot; title=&quot;vapour的blog&quot;&gt;内容&lt;/a&gt;</p>
+<p>
+	&lt;/p&gt;</p>
+<p>
+	解决：</p>
+<p>
+	left的定位错误问题</p>
+<p>
+	1、给父层设置zoom:1触发layout。</p>
+<p>
+	2、给父层设置宽度width</p>
+<p>
+	&nbsp;</p>
+<p>
+	bottom的定位错误问题</p>
+<p>
+	1、给父层设置zoom:1触发layout。</p>
+<p>
+	2、给父层设置高度height</p>
+<p>
+	&nbsp;</p>
+<p>
+	43.&nbsp;子容器宽度大于父容器宽度时，内容超出</p>
+<p>
+	问题：</p>
+<p>
+	子DIV的宽度和父DIV的宽度都已经定义，在IE6中如果其子DIV的宽度大于父DIV的宽度，父DIV的宽度将会被扩展，在其他浏览器中父DIV的宽度将不会扩展，子DIV将超出父DIV</p>
+<p>
+	解决：</p>
+<p>
+	设置overflow:hidden，子DIV将不会超出父DIV。</p>
+<p>
+	44. float的p闭合的问题</p>
+<p>
+	问题：</p>
+<p>
+	例如：&lt;#p id=&rdquo;floatA&rdquo; &gt;&lt;#p id=&rdquo;floatB&rdquo; &gt;&lt;#p id=&rdquo;NOTfloatC&rdquo; &gt;这里的NOTfloatC并不希望继续平移，而是希望往下排。(其中floatA、floatB的属性已经设置为&nbsp;float:left;)&nbsp;&nbsp;</p>
+<p>
+	这段代码在IE中毫无问题，问题出在其他浏览器中。原因是NOTfloatC并非float标签，必须将float标签闭合。</p>
+<p>
+	解决：</p>
+<p>
+	在&nbsp;&lt;#p class=&rdquo;floatB&rdquo;&gt; &lt;#p class=&rdquo;NOTfloatC&rdquo;&gt;之间加上&nbsp;&lt;#p class=&rdquo;clear&rdquo;&gt;这个p一定要注意位置，而且必须与两个具有float属性的p同级，之间不能存在嵌套关系，否则会产生异常。并且将clear这种样式定义为为如下即可：.clear{ clear:both;}</p>
+<p>
+	&nbsp;</p>
+<p>
+	45.&nbsp;单选框、复选框与后面的文字对不齐</p>
+<p>
+	问题：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单选框、复选框与后面的文字对不齐。</p>
+<p>
+	解决：</p>
+<p>
+	.align{font-size:12px;}</p>
+<p>
+	.align input{ display:block; float:left;}</p>
+<p>
+	.align label{ display:block; float:left;padding-top:3px; *padding-top:5px;}</p>
+<p>
+	<br />
+	&nbsp;</p>
+<p>
+	需注意的问题：</p>
+<p>
+	&nbsp;</p>
+<p>
+	1.&nbsp;设置padding后高度和宽带都会增加</p>
+<p>
+	说明：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除了ie5.5，其他所有浏览器中，设置padding以后高度和宽带都会增加</p>
+<p>
+	2.&nbsp;使用XHTML 1.0Transitional后，p宽度</p>
+<p>
+	说明：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在使用XHTML 1.0Transitional以后p宽度都不包含border的宽度了，设置宽度的时候需要注意下。</p>
+<p>
+	3.&nbsp;外层相对定位，内层绝对定位</p>
+<p>
+	说明：</p>
+<p>
+	ie6下，外层p的postion:relative，并设置text-align，内层p的postion: absolute，这时内层的位置是相对于text-align而言的</p>
+<p>
+	例如：</p>
+<p>
+	&lt;pstyle=&quot;position:relative;border:1px solidorange;text-align:center;zoom:1&quot;&gt; position:relative</p>
+<p>
+	&lt;pstyle=&quot;position:absolute;top:0;left:0;background:#CCC;&quot;&gt;position:absolute&lt;/p&gt;</p>
+<p>
+	&lt;/p&gt;</p>
+<p>
+	4. &amp;nbsp;&nbsp;显示的大小不一致</p>
+<p>
+	说明：</p>
+<p>
+	默认字本显示问题，导致&amp;nbsp;显示的大小不一致，在ie下比较小一点，其他的浏览器都一致，当你使用了&amp;nbsp;造成问题时请注意。</p>
+<p>
+	5.&nbsp;边框重叠说明</p>
+<p>
+	说明：</p>
+<p>
+	为&nbsp;table、td&nbsp;都指定了边框后，然后使用border-collapse:collapse让边框重叠，可以看出在发生重叠时，Firefox是用&nbsp;td&nbsp;覆盖&nbsp;table&nbsp;的，而&nbsp;IE&nbsp;是用&nbsp;table&nbsp;覆盖&nbsp;td&nbsp;的。使用时候需要注意。</p>
+<p>
+	6.&nbsp;设置td padding的说明</p>
+<p>
+	说明：</p>
+<p>
+	设置td的padding以后高度和宽带都会增加,padding-left和padding-right的效果都一样增加了td的宽带，但是padding-top和padding-bottom的效果不一样。最好不要使用td的ding-top和padding-bottom</p>
+<p>
+	7. ul设置的说明</p>
+<p>
+	说明：</p>
+<p>
+	ul一般设置：list-style-type:none;margin:0px;padding:0px；li一般设置：list-style-type:none;list-style-position:outside</p>
+<p>
+	8.&nbsp;使一个层垂直居中于浏览器中</p>
+<p>
+	说明：</p>
+<p>
+	使用百分比绝对定位,与外补丁负值的技巧,负值的大小为其自身宽度高度除以二</p>
+<p>
+	p {<br />
+	position:absolute; top:50%; lef:50%; margin:-100px 0 0 -100px;</p>
+<p>
+	width:200px; height:200px; border:1px solidred;<br />
+	}</p>
+<p>
+	&nbsp;</p>
+<p>
+	9.&nbsp;万能&nbsp;float&nbsp;闭合</p>
+<p>
+	说明：</p>
+<p>
+	可以用这个解决多个p对齐时的间距不对，将以下代码加入Global CSS&nbsp;中,给需要闭合的p加上&nbsp;class=&rdquo;clearfix&rdquo;&nbsp;即可</p>
+<p>
+	&lt;style&gt;<br />
+	<br />
+	.clearfix:after { content:&quot;.&quot;;display:block;height:0; clear:both;visibility:hidden;<br />
+	}<br />
+	.clearfix {<br />
+	&nbsp;&nbsp;&nbsp; display:inline-block;<br />
+	}<br />
+	<br />
+	.clearfix {display:block;}<br />
+	<br />
+	<br />
+	&lt;/style&gt;</p>
+<p>
+	10.&nbsp;触发layout</p>
+<p>
+	说明：</p>
+<p>
+	IE6中很多Bug都可以通过触发layout得到解决.下列的CSS属性或取值会让一个元素获得layout：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>
+	position:absolute&nbsp;绝对定位元素的包含区块(containingblock)就会经常在这一方面出问题</p>
+<p>
+	float:left|right&nbsp;由于layout元素的特性，浮动模型会有很多怪异的表现</p>
+<p>
+	display:inline-block&nbsp;当一个内联级别的元素需要layout的时候就往往符用到它，这也可能也是这个CSS属性的唯一效果----让某个元素有layout</p>
+<p>
+	width:&nbsp;除auto外的任何值</p>
+<p>
+	height:&nbsp;除auto外的任何值</p>
+<p>
+	zoom:&nbsp;除auto外的任何值</p>
+<p>
+	&nbsp;</p>
+<p>
+	11、如何使连续长字段自动换行</p>
+<p>
+	ff最新版本word-wrap:break-word;就可以了</p>
+<p>
+	ff旧版本&nbsp;还要使用javascript完成文字换行</p>
+<p>
+	&lt;style type=&quot;text/css&quot;&gt;</p>
+<p>
+	p {</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:300px;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;word-wrap:break-word;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border:1px solid red;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	&lt;/style&gt;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&lt;scripttype=&quot;text/javascript&quot;&gt;</p>
+<p>
+	function toBreakWord(intLen){</p>
+<p>
+	varobj=document.getElementByIdx_x(&quot;ff&quot;);</p>
+<p>
+	var strContent=obj.innerHTML;&nbsp;</p>
+<p>
+	var strTemp=&quot;&quot;;</p>
+<p>
+	while(strContent.length&gt;intLen){</p>
+<p>
+	strTemp+=strContent.substr(0,intLen)+&quot;&amp;#10;&quot;;&nbsp;</p>
+<p>
+	strContent=strContent.substr(intLen,strContent.length);&nbsp;</p>
+<p>
+	}</p>
+<p>
+	strTemp+=&quot;&amp;#10;&quot;+strContent;</p>
+<p>
+	obj.innerHTML=strTemp;</p>
+<p>
+	}</p>
+<p>
+	if(document.getElementByIdx_x&nbsp;&amp;&amp;&nbsp; !document.all)&nbsp; toBreakWord(37)</p>
+<p>
+	&nbsp;</p>
+<p>
+	12、设置滚动条颜色&nbsp;只对ie系列有效&nbsp;在html中&nbsp;而不是设置body</p>
+<p>
+	&lt;style type=&quot;text/css&quot;&gt;</p>
+<p>
+	html {</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-face-color:#f6f6f6;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-highlight-color:#fff;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-shadow-color:#eeeeee;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-3dlight-color:#eeeeee;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-arrow-color:#000;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-track-color:#fff;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollbar-darkshadow-color:#fff;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	&lt;/style&gt;</p>
+<p>
+	IE不支持float：inherit&nbsp;overflow:hidden有2个用法，一个是隐藏溢出，另一个是清除浮动。</p>
+<p>
+	&lt;p&gt;, &lt;p&gt;, &lt;h1&gt;,&lt;form&gt;, &lt;ul&gt;&nbsp;和&nbsp;&lt;li&gt;是块元素的例子</p>
+<p>
+	&lt;span&gt;, &lt;a&gt;, &lt;label&gt;,&lt;input&gt;, &lt;img&gt;, &lt;strong&gt;&nbsp;和&lt;em&gt;是inline元素</p>
+<p>
+	&lt;body oncontextmenu=&quot;returnfalse&quot; ondragstart=&quot;return false&quot;&nbsp; tstart=&quot;returnfalse&quot;&nbsp; scroll=&quot;auto&quot;&gt;</p>
+<p>
+	这行代码放在body中，去掉了页面鼠标右键快捷菜单，达到防止图片另存为的目的。</p>
+<p>
+	<br />
+	&nbsp;</p>
+<p>
+	javascript部分<br />
+	1. document.form.item&nbsp;问题<br />
+	问题：<br />
+	代码中存在&nbsp;document.formName.item(&quot;itemName&quot;)&nbsp;这样的语句，不能在FF下运行<br />
+	解决方法：<br />
+	改用&nbsp;document.formName.elements[&quot;elementName&quot;]<br />
+	<br />
+	2.&nbsp;集合类对象问题<br />
+	问题：<br />
+	代码中许多集合类对象取用时使用()，IE能接受，FF不能<br />
+	解决方法：<br />
+	改用&nbsp;[]&nbsp;作为下标运算，例：<br />
+	document.getElementsByName(&quot;inputName&quot;)(1)&nbsp;改为document.getElementsByName(&quot;inputName&quot;)[1]<br />
+	<br />
+	3. window.event<br />
+	问题：<br />
+	使用&nbsp;window.event&nbsp;无法在FF上运行<br />
+	解决方法：<br />
+	FF的&nbsp;event&nbsp;只能在事件发生的现场使用，此问题暂无法解决。可以把&nbsp;event&nbsp;传到函数里变通解决：<br />
+	onMouseMove = &quot;functionName(event)&quot;<br />
+	function functionName (e) {<br />
+	&nbsp; &nbsp; e = e || window.event;<br />
+	&nbsp; &nbsp; ......<br />
+	}<br />
+	<br />
+	4. HTML对象的&nbsp;id&nbsp;作为对象名的问题<br />
+	问题：<br />
+	在IE中，HTML对象的&nbsp;ID&nbsp;可以作为&nbsp;document&nbsp;的下属对象变量名直接使用，在FF中不能<br />
+	解决方法：<br />
+	使用对象变量时全部用标准的&nbsp;getElementById(&quot;idName&quot;)<br />
+	<br />
+	5.&nbsp;用&nbsp;idName&nbsp;字符串取得对象的问题<br />
+	问题：<br />
+	在IE中，利用&nbsp;eval_r(&quot;idName&quot;)&nbsp;可以取得&nbsp;id&nbsp;为&nbsp;idName&nbsp;的HTML对象，在FF中不能<br />
+	解决方法：<br />
+	用&nbsp;getElementById(&quot;idName&quot;)&nbsp;代替eval_r(&quot;idName&quot;)<br />
+	<br />
+	6.&nbsp;变量名与某HTML对象&nbsp;id&nbsp;相同的问题<br />
+	问题：<br />
+	在FF中，因为对象&nbsp;id&nbsp;不作为HTML对象的名称，所以可以使用与HTML对象&nbsp;id&nbsp;相同的变量名，IE中不能<br />
+	解决方法：<br />
+	在声明变量时，一律加上&nbsp;var&nbsp;，以避免歧义，这样在IE中亦可正常运行<br />
+	最好不要取与HTML对象&nbsp;id&nbsp;相同的变量名，以减少错误<br />
+	<br />
+	7. event.x&nbsp;与&nbsp;event.y&nbsp;问题<br />
+	问题：<br />
+	在IE中，event&nbsp;对象有x,y属性，FF中没有<br />
+	解决方法：<br />
+	在FF中，与&nbsp;event.x&nbsp;等效的是&nbsp;event.pageX&nbsp;，但event.pageX IE中没有<br />
+	故采用&nbsp;event.clientX&nbsp;代替&nbsp;event.x&nbsp;，在IE中也有这个变量<br />
+	event.clientX&nbsp;与&nbsp;event.pageX&nbsp;有微妙的差别，就是滚动条<br />
+	要完全一样，可以这样：<br />
+	mX = event.x ? event.x : event.pageX;<br />
+	然后用&nbsp;mX&nbsp;代替&nbsp;event.x<br />
+	<br />
+	8.&nbsp;关于frame<br />
+	问题：<br />
+	在IE中可以用&nbsp;window.testFrame&nbsp;取得该frame，FF中不行<br />
+	解决方法：<br />
+	window.top.document.getElementByIdx_x(&quot;testFrame&quot;).src = &#39;xx.htm&#39;<br />
+	window.top.frameName.location = &#39;xx.htm&#39;<br />
+	<br />
+	9.&nbsp;取得元素的属性<br />
+	在FF中，自己定义的属性必须&nbsp;getAttribute()&nbsp;取得<br />
+	<br />
+	10.&nbsp;在FF中没有&nbsp;parentElement，parement.children&nbsp;而用&nbsp;parentNode，parentNode.childNodes<br />
+	问题：<br />
+	childNodes&nbsp;的下标的含义在IE和FF中不同，FF的&nbsp;childNodes&nbsp;中会插入空白文本节点<br />
+	解决方法：<br />
+	可以通过&nbsp;node.getElementsByTagName_r()&nbsp;来回避这个问题<br />
+	问题：<br />
+	当html中节点缺失时，IE和FF对&nbsp;parentNode&nbsp;的解释不同，例如：<br />
+	&lt;form&gt;<br />
+	&lt;table&gt;<br />
+	&lt;input/&gt;<br />
+	&lt;/table&gt;<br />
+	&lt;/form&gt;<br />
+	FF中&nbsp;input.parentNode&nbsp;的值为form，而IE中&nbsp;input.parentNode&nbsp;的值为空节点<br />
+	问题：<br />
+	FF中节点自己没有&nbsp;removeNode&nbsp;方法<br />
+	解决方法：<br />
+	必须使用如下方法&nbsp;node.parentNode.removeChild(node)<br />
+	<br />
+	11. const&nbsp;问题<br />
+	问题：<br />
+	在IE中不能使用&nbsp;const&nbsp;关键字<br />
+	解决方法：<br />
+	以&nbsp;var&nbsp;代替<br />
+	<br />
+	12. body&nbsp;对象<br />
+	FF的&nbsp;body&nbsp;在&nbsp;body&nbsp;标签没有被浏览器完全读入之前就存在，而IE则必须在&nbsp;body&nbsp;完全被读入之后才存在<br />
+	这会产生在IE下，文档没有载入完时，在body上appendChild会出现空白页面的问题<br />
+	解决方法：<br />
+	一切在body上插入节点的动作，全部在onload后进行<br />
+	<br />
+	13. url encoding<br />
+	问题：<br />
+	一般FF无法识别js中的&amp;<br />
+	解决方法：<br />
+	在js中如果书写url就直接写&amp;不要写&amp;<br />
+	<br />
+	14. nodeName&nbsp;和&nbsp;tagName&nbsp;问题<br />
+	问题：<br />
+	在FF中，所有节点均有&nbsp;nodeName&nbsp;值，但&nbsp;textNode&nbsp;没有&nbsp;tagName&nbsp;值，在IE中，nodeName&nbsp;的使用有问题<br />
+	解决方法：<br />
+	使用&nbsp;tagName，但应检测其是否为空<br />
+	<br />
+	15.&nbsp;元素属性<br />
+	IE下&nbsp;input.type&nbsp;属性为只读，但是FF下可以修改<br />
+	<br />
+	16. document.getElementsByName()&nbsp;和&nbsp;document.all[name]&nbsp;的问题<br />
+	问题：<br />
+	在IE中，getElementsByName()、document.all[name]&nbsp;均不能用来取得&nbsp;p&nbsp;元素<br />
+	是否还有其它不能取的元素还不知道（这个问题还有争议，还在研究中）<br />
+	<br />
+	17.&nbsp;调用子框架或者其它框架中的元素的问题<br />
+	在IE中，可以用如下方法来取得子元素中的值<br />
+	document.getElementByIdx_x(&quot;frameName&quot;).(document.)elementName<br />
+	window.frames[&quot;frameName&quot;].elementName<br />
+	在FF中则需要改成如下形式来执行，与IE兼容：<br />
+	window.frames[&quot;frameName&quot;].contentWindow.document.elementName<br />
+	window.frames[&quot;frameName&quot;].document.elementName<br />
+	<br />
+	18.&nbsp;对象宽高赋值问题<br />
+	问题：<br />
+	FireFox中类似&nbsp;obj.style.height = imgObj.height&nbsp;的语句无效<br />
+	解决方法：<br />
+	统一使用&nbsp;obj.style.height = imgObj.height + &quot;px&quot;;<br />
+	19. innerText的问题<br />
+	问题：<br />
+	innerText&nbsp;在IE中能正常工作，但是&nbsp;innerText&nbsp;在FireFox中却不行<br />
+	解决方法：<br />
+	在非IE浏览器中使用textContent代替innerText</p>
+<p>
+	<br />
+	20. event.srcElement和event.toElement问题<br />
+	问题：<br />
+	IE下，even对象有srcElement属性，但是没有target属性；Firefox下，even对象有target属性，但是没有srcElement属性<br />
+	解决方法：<br />
+	var source = e.target || e.srcElement;<br />
+	var target = e.relatedTarget || e.toElement;<br />
+	<br />
+	21.&nbsp;禁止选取网页内容<br />
+	问题：<br />
+	FF需要用CSS禁止，IE用JS禁止<br />
+	解决方法：<br />
+	IE: obj.onselectstart = function() {return false;}<br />
+	FF: -moz-user-select:none;<br />
+	22.&nbsp;捕获事件<br />
+	问题：<br />
+	FF没有setCapture()、releaseCapture()方法<br />
+	解决方法：<br />
+	IE:<br />
+	obj.setCapture();<br />
+	obj.releaseCapture();<br />
+	FF:<br />
+	window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);<br />
+	window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);<br />
+	if (!window.captureEvents) {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp;o.setCapture();<br />
+	}else {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp;window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);<br />
+	}<br />
+	if (!window.captureEvents) {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp;o.releaseCapture();<br />
+	}else {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp;window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);<br />
+	}</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

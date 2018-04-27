@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySQL CPU占用100%的解决过程和经验总结</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL,CPU占用100%,解决过程" />
+  <meta name="description" content=" 早上帮朋友一台服务器解决了MySQLCPU占用100%的问题，稍整理如下，希望对各位有所帮助。 朋友主机(Windows2003+IIS+PHP+MySQL)近来MySQL服务进程(MySQLd-nt.exe)CPU占用率总为100%高居不下。此主机有" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL CPU占用100%的解决过程和经验总结</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：36次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="422" class="art_content"><p>
+	　　早上帮朋友一台服务器解决了&nbsp;MySQL&nbsp;CPU&nbsp;占用&nbsp;100%&nbsp;的问题，稍整理如下，希望对各位有所帮助。<br />
+	<br />
+	　　朋友主机&nbsp;(Windows&nbsp;2003&nbsp;+&nbsp;IIS&nbsp;+&nbsp;PHP&nbsp;+&nbsp;MySQL)&nbsp;近来&nbsp;MySQL&nbsp;服务进程&nbsp;(MySQLd-nt.exe)&nbsp;CPU&nbsp;占用率总为&nbsp;100%&nbsp;高居不下。此主机有10个左右的&nbsp;database，分别给十个网站调用。据朋友测试，导致&nbsp;MySQLd-nt.exe&nbsp;CPU&nbsp;占用奇高的是网站A，一旦在&nbsp;IIS&nbsp;中将此网站停止服务，CPU&nbsp;占用就降下来了。一启用，则马上上升。<br />
+	<br />
+	　　<b>MySQL&nbsp;CPU&nbsp;占用&nbsp;100%&nbsp;的解决过程</b><br />
+	<br />
+	　　今天早上仔细检查了一下。目前此网站的七日平均日&nbsp;IP&nbsp;为2000，PageView&nbsp;为&nbsp;3万左右。网站A&nbsp;用的&nbsp;database&nbsp;目前有39个表，记录数&nbsp;60.1万条，占空间&nbsp;45MB。按这个数据，MySQL&nbsp;不可能占用这么高的资源。<br />
+	<br />
+	　　于是在服务器上运行命令，将&nbsp;MySQL&nbsp;当前的环境变量输出到文件&nbsp;output.txt：</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				d:\web\MySQL&gt;&nbsp;MySQLd.exe&nbsp;--help&nbsp;&gt;output.txt</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　发现&nbsp;tmp_table_size&nbsp;的值是默认的&nbsp;32M，于是修改&nbsp;My.ini，将&nbsp;tmp_table_size&nbsp;赋值到&nbsp;200M:
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				d:\web\MySQL&gt;&nbsp;notepad&nbsp;c:\windows\my.ini<br />
+				[MySQLd]<br />
+				tmp_table_size=200M</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　然后重启&nbsp;MySQL&nbsp;服务。CPU&nbsp;占用有轻微下降，以前的CPU&nbsp;占用波形图是&nbsp;100%&nbsp;一根直线，现在则在&nbsp;97%~100%&nbsp;之间起伏。这表明调整&nbsp;tmp_table_size&nbsp;参数对&nbsp;MySQL&nbsp;性能提升有改善作用。但问题还没有完全解决。<br />
+<br />
+　　于是进入&nbsp;MySQL&nbsp;的&nbsp;shell&nbsp;命令行，调用&nbsp;show&nbsp;processlist，&nbsp;查看当前&nbsp;MySQL&nbsp;使用频繁的&nbsp;sql&nbsp;语句：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				MySQL&gt;&nbsp;show&nbsp;processlist;</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　反复调用此命令（每秒刷两次），发现网站&nbsp;A&nbsp;的两个&nbsp;SQL&nbsp;语句经常在&nbsp;process&nbsp;list&nbsp;中出现，其语法如下：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				SELECT&nbsp;t1.pid,&nbsp;t2.userid,&nbsp;t3.count,&nbsp;t1.date<br />
+				FROM&nbsp;_mydata&nbsp;AS&nbsp;t1<br />
+				LEFT&nbsp;JOIN&nbsp;_myuser&nbsp;AS&nbsp;t3&nbsp;ON&nbsp;t1.userid=t3.userid<br />
+				LEFT&nbsp;JOIN&nbsp;_mydata_body&nbsp;AS&nbsp;t2&nbsp;ON&nbsp;t1.pid=t3.pid<br />
+				ORDER&nbsp;BY&nbsp;t1.pid<br />
+				LIMIT&nbsp;0,&nbsp;15</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　调用&nbsp;show&nbsp;columns&nbsp;检查这三个表的结构：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				MySQL&gt;&nbsp;show&nbsp;columns&nbsp;from&nbsp;_myuser;<br />
+				MySQL&gt;&nbsp;show&nbsp;columns&nbsp;from&nbsp;_mydata;<br />
+				MySQL&gt;&nbsp;show&nbsp;columns&nbsp;from&nbsp;_mydata_body;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　终于发现了问题所在：_mydata&nbsp;表，只根据&nbsp;pid&nbsp;建立了一个&nbsp;primary&nbsp;key，但并没有为&nbsp;userid&nbsp;建立索引。而在这个&nbsp;SQL&nbsp;语句的第一个&nbsp;LEFT&nbsp;JOIN&nbsp;ON&nbsp;子句中：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				LEFT&nbsp;JOIN&nbsp;_myuser&nbsp;AS&nbsp;t3&nbsp;ON&nbsp;t1.userid=t3.userid</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　_mydata&nbsp;的&nbsp;userid&nbsp;被参与了条件比较运算。于是我为给&nbsp;_mydata&nbsp;表根据字段&nbsp;userid&nbsp;建立了一个索引：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				MySQL&gt;&nbsp;ALTER&nbsp;TABLE&nbsp;`_mydata`&nbsp;ADD&nbsp;INDEX&nbsp;(&nbsp;`userid`&nbsp;)</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　建立此索引之后，CPU&nbsp;马上降到了&nbsp;80%&nbsp;左右。看到找到了问题所在，于是检查另一个反复出现在&nbsp;show&nbsp;processlist&nbsp;中的&nbsp;sql&nbsp;语句：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				SELECT&nbsp;COUNT(*)<br />
+				FROM&nbsp;_mydata&nbsp;AS&nbsp;t1,&nbsp;_mydata_key&nbsp;AS&nbsp;t2<br />
+				WHERE&nbsp;t1.pid=t2.pid&nbsp;and&nbsp;t2.keywords&nbsp;=&nbsp;&#39;孔雀&#39;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　经检查_mydata_key&nbsp;表的结构，发现它只为&nbsp;pid&nbsp;建了了&nbsp;primary&nbsp;key，没有为&nbsp;keywords&nbsp;建立&nbsp;index。_mydata_key&nbsp;目前有&nbsp;33&nbsp;万条记录，在没有索引的情况下对33万条记录进行文本检索匹配，不耗费大量的&nbsp;CPU&nbsp;时间才怪。看来就是针对这个表的检索出问题了。于是同样为&nbsp;_mydata_key&nbsp;表根据字段&nbsp;keywords&nbsp;加上索引:&nbsp;
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				MySQL&gt;&nbsp;ALTER&nbsp;TABLE&nbsp;`_mydata_key`&nbsp;ADD&nbsp;INDEX&nbsp;(&nbsp;`keywords`&nbsp;)</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　建立此索引之后，CPU立刻降了下来，在&nbsp;50%~70%&nbsp;之间震荡。<br />
+<br />
+　　再次调用&nbsp;show&nbsp;prosslist，网站&nbsp;A&nbsp;的&nbsp;sql&nbsp;调用就很少出现在结果列表中了。但发现此主机运行了几个&nbsp;Discuz&nbsp;的论坛程序，&nbsp;Discuz&nbsp;论坛的好几个表也存在着这个问题。于是顺手一并解决，CPU&nbsp;占用再次降下来了。<br />
+<br />
+　　至此，问题解决。<br />
+<br />
+　　<b>解决&nbsp;MySQL&nbsp;CPU&nbsp;占用&nbsp;100%&nbsp;的经验总结</b><br />
+<br />
+　　1.&nbsp;增加&nbsp;tmp_table_size&nbsp;值。MySQL&nbsp;的配置文件中，tmp_table_size&nbsp;的默认大小是&nbsp;32M。如果一张临时表超出该大小，MySQL&nbsp;产生一个&nbsp;The&nbsp;table&nbsp;tbl_name&nbsp;is&nbsp;full&nbsp;形式的错误，如果你做很多高级&nbsp;GROUP&nbsp;BY&nbsp;查询，增加&nbsp;tmp_table_size&nbsp;值。&nbsp;这是&nbsp;MySQL&nbsp;官方关于此选项的解释：<br />
+<br />
+　　tmp_table_size<br />
+　　This&nbsp;variable&nbsp;determines&nbsp;the&nbsp;maximum&nbsp;size&nbsp;for&nbsp;a&nbsp;temporary&nbsp;table&nbsp;in&nbsp;memory.&nbsp;If&nbsp;the&nbsp;table&nbsp;becomes&nbsp;too&nbsp;large,&nbsp;a&nbsp;MYISAM&nbsp;table&nbsp;is&nbsp;created&nbsp;on&nbsp;disk.&nbsp;Try&nbsp;to&nbsp;avoid&nbsp;temporary&nbsp;tables&nbsp;by&nbsp;optimizing&nbsp;the&nbsp;queries&nbsp;where&nbsp;possible,&nbsp;but&nbsp;where&nbsp;this&nbsp;is&nbsp;not&nbsp;possible,&nbsp;try&nbsp;to&nbsp;ensure&nbsp;temporary&nbsp;tables&nbsp;are&nbsp;always&nbsp;stored&nbsp;in&nbsp;memory.&nbsp;Watching&nbsp;the&nbsp;processlist&nbsp;for&nbsp;queries&nbsp;with&nbsp;temporary&nbsp;tables&nbsp;that&nbsp;take&nbsp;too&nbsp;long&nbsp;to&nbsp;resolve&nbsp;can&nbsp;give&nbsp;you&nbsp;an&nbsp;early&nbsp;warning&nbsp;that&nbsp;tmp_table_size&nbsp;needs&nbsp;to&nbsp;be&nbsp;upped.&nbsp;Be&nbsp;aware&nbsp;that&nbsp;memory&nbsp;is&nbsp;also&nbsp;allocated&nbsp;per-thread.&nbsp;An&nbsp;example&nbsp;where&nbsp;upping&nbsp;this&nbsp;worked&nbsp;for&nbsp;more&nbsp;was&nbsp;a&nbsp;server&nbsp;where&nbsp;I&nbsp;upped&nbsp;this&nbsp;from&nbsp;32MB&nbsp;(the&nbsp;default)&nbsp;to&nbsp;64MB&nbsp;with&nbsp;immediate&nbsp;effect.&nbsp;The&nbsp;quicker&nbsp;resolution&nbsp;of&nbsp;queries&nbsp;resulted&nbsp;in&nbsp;less&nbsp;threads&nbsp;being&nbsp;active&nbsp;at&nbsp;any&nbsp;one&nbsp;time,&nbsp;with&nbsp;all-round&nbsp;benefits&nbsp;for&nbsp;the&nbsp;server,&nbsp;and&nbsp;available&nbsp;memory.&nbsp;<br />
+<br />
+　　2.&nbsp;对&nbsp;WHERE、JOIN、MAX()、MIN()及ORDER&nbsp;BY&nbsp;等子句中的条件判断中用到的字段，应该根据其建立索引&nbsp;INDEX。<br />
+<br />
+　　索引被用来快速找出在一个列上用一特定值的行。没有索引，MySQL&nbsp;不得不首先以第一条记录开始并然后读完整个表直到它找出相关的行。表越大，花费时间越多。如果表对于查询的列有一个索引，MySQL&nbsp;能快速到达一个位置去搜寻到数据文件的中间，没有必要考虑所有数据。如果一个表有&nbsp;1000&nbsp;行，这比顺序读取至少快&nbsp;100&nbsp;倍。所有的MySQL索引（PRIMARY、UNIQUE&nbsp;及&nbsp;INDEX）在B树中存储。<br />
+<br />
+　　根据&nbsp;MySQL&nbsp;的开发文档:&nbsp;<br />
+<br />
+　　索引&nbsp;index&nbsp;用于：<br />
+<br />
+　　o&nbsp;快速找出匹配一个&nbsp;WHERE&nbsp;子句的行。<br />
+<br />
+　　o&nbsp;当执行联结&nbsp;(JOIN)&nbsp;时，从其他表检索行。<br />
+<br />
+　　o&nbsp;对特定的索引列找出&nbsp;MAX()&nbsp;或&nbsp;MIN()&nbsp;值。<br />
+<br />
+　　o&nbsp;如果排序或分组在一个可用键的最左面前缀上进行（例如：ORDER&nbsp;BY&nbsp;key_part_1,&nbsp;key_part_2），排序或分组一个表。如果所有键值部分跟随&nbsp;DESC，键以倒序被读取。&nbsp;<br />
+<br />
+　　o&nbsp;在一些情况中，一个查询能被优化来检索值，不用咨询数据文件。如果对某些表的所有使用的列是数字型的并且构成某些键的最左面前缀，为了更快，值可以从索引树被检索出来。<br />
+<br />
+　　假定你发出下列&nbsp;SELECT&nbsp;语句：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="code" width="560">
+				MySQL&gt;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;tbl_name&nbsp;WHERE&nbsp;col1=val1&nbsp;AND&nbsp;col2=val2;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　如果一个多列索引存在于&nbsp;col1&nbsp;和&nbsp;col2&nbsp;上，适当的行可以直接被取出。如果分开的单行列索引存在于&nbsp;col1&nbsp;和&nbsp;col2&nbsp;上，优化器试图通过决定哪个索引将找到更少的行并来找出更具限制性的索引并且使用该索引取行。<br />
+<br />
+　　开发人员做&nbsp;SQL&nbsp;数据表设计的时候，一定要通盘考虑清楚。
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

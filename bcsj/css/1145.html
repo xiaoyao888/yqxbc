@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS设计复合型条状图表</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS设计复合型条状图表," />
+  <meta name="description" content=" 这是一种相对比较复杂的图表，我们先看一下效果截图： " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CSS设计复合型条状图表</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：7次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1145" class="art_content">　　这是一种相对比较复杂的图表，我们先看一下效果截图：<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+　　本例中使用的定义列表标签dl可能平常我们见得不多，一般我们在做列表的时候通常只会用到ul和li标签,至于dl一般都很少用到，它也属于列表类的标签，下面说一下大概的用法：<br />
+<br />
+　　dl标记定义了一个定义列表，定义列表中的条目是通过使用dt标记(定义标题)和dd标记(定义描述)创建的。dt给出了术语名，dd标记给出了术语的定义信息。<br />
+<br />
+　　也就是说dt用来创建列表中的上层项目，dd用来创建列表中最下层项目，dt和dd都必须放在dl的起始和结束标签之间。来看一个例子：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;dl&gt;&nbsp;<br />
+				&nbsp;&nbsp;&lt;dt&gt;西米CC&lt;/dt&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;触手生春&lt;/dd&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;不可或缺&lt;/dd&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;无懈可击&lt;/dd&gt;&nbsp;<br />
+				&nbsp;&nbsp;&lt;dt&gt;触手生春&lt;/dt&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;Html基础&lt;/dd&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;CSS入门&lt;/dd&gt;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;应用实例&lt;/dd&gt;&nbsp;<br />
+				&lt;/dl&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　在不进行任何样式设计的话，它的显示效果如下：<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+　　在本例的CSS柱状图中，每个图标前都有相应的项目说明文字，我们把它放在dd标签中。dd中的内容就如基本的CSS柱状图原理一样，通过背景的设置来显示相应比例的效果。首先来看一下XHTML代码：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;dl&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dt&gt;Spring&lt;/dt&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;style=&quot;width:25%;&quot;&gt;&lt;strong&gt;25%&lt;/strong&gt;&lt;/p&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dd&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dt&gt;Ximicc&lt;/dt&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;style=&quot;width:55%;&quot;&gt;&lt;strong&gt;55%&lt;/strong&gt;&lt;/p&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dd&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dt&gt;Technique&lt;/dt&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;dd&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;style=&quot;width:75%;&quot;&gt;&lt;strong&gt;75%&lt;/strong&gt;&lt;/p&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dd&gt;<br />
+				&lt;/dl&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　注意这里的strong标签，它并不是仅仅为了修饰文字，在后续步骤中它还有很重要的作用。理解了dl标签的用法之后，整个的XHTML结构看起来就不是很复杂了，最终出来的效果中将会有三条柱状图标，当然在运用的时候可以进行增减。下面是三张在CSS样式设计是要用到的背景图片：<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+　　在CSS样式中，dl部分只是简单的把内外边距设置为0，dd部分有一个clear属性需要特别注意。当某个元素的属性设置float浮动时，它所在的物理位置已经脱离文档流了，但是大多时候我们希望文档流能识别float浮动，或者是希望浮动元素后面的内容不被其float浮动所影响，这个时候我们就需要设置clear来清除这种浮动关联。举个例子，假如文档中有下列内容：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td align="\&quot;center\&quot;" class="\&quot;runcode\&quot;" width="\&quot;560\&quot;">
+				<textarea id="\&quot;runcode_1145_1\&quot;" name="\&quot;runcode_1145_1\&quot;" readonly="readonly" style="\&quot;width:560px;height:150px;\&quot;">&lt;p style=&quot;float:left;width:200px;&quot;&gt;这个是第一列，&lt;/p&gt;\n&lt;p style=&quot;float:left;width :200px;&quot;&gt;这个是第二列，&lt;/p&gt;\n&lt;p&gt;这个是新起一行的段落。&lt;/p&gt;</textarea><br />
+				<input class="\&quot;button\&quot;" onclick="\&quot;runcode(runcode_1145_1)\&quot;" type="\&quot;button\&quot;" value="\&quot;运行代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;copycode(runcode_1145_1)\&quot;" type="\&quot;button\&quot;" value="\&quot;复制代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;savecode(runcode_1145_1)\&quot;" type="\&quot;button\&quot;" value="\&quot;另存代码\&quot;" /></td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　如果不使用浮动清除，那么第3个P里的文字就紧跟在第一、二个P显示在同一行，这个时候如果要达到预期中的效果，我们需要在第3个P的样式中加一个清除浮动：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td align="\&quot;center\&quot;" class="\&quot;runcode\&quot;" width="\&quot;560\&quot;">
+				<textarea id="\&quot;runcode_1145_2\&quot;" name="\&quot;runcode_1145_2\&quot;" readonly="readonly" style="\&quot;width:560px;height:150px;\&quot;">&lt;p style=&quot;float:left;width:200px;&quot;&gt;这个是第1列，&lt;/p&gt;\n&lt;p style=&quot;float:left;width:200px;&quot;&gt;这个是第2列，&lt;/p&gt;\n&lt;p style=&quot;clear:both;&quot;&gt;这个是列的下面。&lt;/p&gt;</textarea><br />
+				<input class="\&quot;button\&quot;" onclick="\&quot;runcode(runcode_1145_2)\&quot;" type="\&quot;button\&quot;" value="\&quot;运行代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;copycode(runcode_1145_2)\&quot;" type="\&quot;button\&quot;" value="\&quot;复制代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;savecode(runcode_1145_2)\&quot;" type="\&quot;button\&quot;" value="\&quot;另存代码\&quot;" /></td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　在本例中，如果dt不使用浮动清除，三个图表的内容就无法实现对齐，如图：<br />
+<br />
+<center>
+	<span class="\&quot;imgresize2\&quot;"><a href="\" target="\&quot;_blank\&quot;"><img alt="\&quot;点击图片打开新窗口浏览\&quot;" border="\&quot;0\&quot;" src="\" /></a></span></center>
+<br />
+<br />
+　　dt和dd涉及到的其它样式都比较简单，主要是背景、宽高、浮动等属性，这里就不一一解释了。进度条效果的实现依靠背景覆盖来完成，因为两张背景图只是在色彩鲜明度上有所差异，使得最终的效果呈现出类似一个半透明图层覆盖在底部背景上，兼顾了视觉上的差异和融合。<br />
+<br />
+　　指针的效果在strong标签中定义，来看看它的完整CSS：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				dd&nbsp;p&nbsp;strong&nbsp;{&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;absolute;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right:&nbsp;-5px;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top:&nbsp;-2px;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display:&nbsp;block;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;url(http://www.blueidea.com/articleimg/2008/07/5924/05.gif);&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;24px;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;9px;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align:&nbsp;left;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-indent:&nbsp;-9999px;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overflow:&nbsp;hidden;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　里面所用到的背景就是指针图像，需要注意的是该图像的尺寸是24*9像素，所以这里有几个数值要进行精确的计算。首先因为一部分的指针图像要显示在dl区域之外，因此使用了absolute绝对定位方式；其次因为dl元素的高度我们设置成了20像素，所以指针的上、下溢出部分在高度上均为(24-20)/2即2像素，水平方向的溢出也同理参照指针的宽度9像素进行计算，根据这些数据最终计算出right和top的值。最后通过text-indent属性设置文本的缩进，目的是实现对文本的隐藏。<br />
+<br />
+　　最后在CSS样式中还要加入一行Hack完善其在IE中的效果：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				*&nbsp;html&nbsp;dd&nbsp;{float:&nbsp;none;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　最终的代码：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td align="\&quot;center\&quot;" class="\&quot;runcode\&quot;" width="\&quot;560\&quot;">
+				<textarea id="\&quot;runcode_1145_3\&quot;" name="\&quot;runcode_1145_3\&quot;" readonly="readonly" style="\&quot;width:560px;height:150px;\&quot;">&lt;style type=&quot;text/css&quot;&gt;\ndl {\nmargin: 0;\npadding: 0;\n}\ndt {\nposition: relative; /* IE is dumb */\nclear: both;\ndisplay: block;\nfloat: left;\nwidth: 104px;\nheight: 20px;\nline-height: 20px;\nmargin-right: 17px;\nfont-size: .75em;\ntext-align: right;\n}\ndd {\nposition: relative; /* IE is dumb */\ndisplay: block;\nfloat: left;\nwidth: 197px;\nheight: 20px;\nmargin: 0 0 15px;\nbackground: url(&quot;/uploads/uploads/allimg/c130918/13O4V64644150-322E.jpg&quot;);\n}\n* html dd { float: none; }\n/* IE is dumb; Quick IE hack, apply favorite filter methods for\nwider browser compatibility */\ndd p {\nposition: relative;\nbackground: url(&quot;/uploads/uploads/allimg/c130918/13O4V64a30Z-45511.jpg&quot;);\nheight: 20px;\ntext-align:right;\n}\ndd p strong {\nposition: absolute;\nright: -5px;\ntop: -2px;\ndisplay: block;\nbackground: url(&quot;http://www.zzsky.cn/build/images/200873145955.gif&quot;);\nheight: 24px;\nwidth: 9px;\ntext-align: left;\ntext-indent: -9999px;\noverflow: hidden;\n}\n&lt;/style&gt;\n&lt;dl&gt;\n&lt;dt&gt;Spring&lt;/dt&gt;\n&lt;dd&gt;\n&lt;p style=&quot;width:25%;&quot;&gt;&lt;strong&gt;25%&lt;/strong&gt;&lt;/p&gt;\n&lt;/dd&gt;\n&lt;dt&gt;Ximicc&lt;/dt&gt;\n&lt;dd&gt;\n&lt;p style=&quot;width:55%;&quot;&gt;&lt;strong&gt;55%&lt;/strong&gt;&lt;/p&gt;\n&lt;/dd&gt;\n&lt;dt&gt;Technique&lt;/dt&gt;\n&lt;dd&gt;\n&lt;p style=&quot;width:75%;&quot;&gt;&lt;strong&gt;75%&lt;/strong&gt;&lt;/p&gt;\n&lt;/dd&gt;\n&lt;/dl&gt;</textarea><br />
+				<input class="\&quot;button\&quot;" onclick="\&quot;runcode(runcode_1145_3)\&quot;" type="\&quot;button\&quot;" value="\&quot;运行代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;copycode(runcode_1145_3)\&quot;" type="\&quot;button\&quot;" value="\&quot;复制代码\&quot;" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="\&quot;button\&quot;" onclick="\&quot;savecode(runcode_1145_3)\&quot;" type="\&quot;button\&quot;" value="\&quot;另存代码\&quot;" /></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

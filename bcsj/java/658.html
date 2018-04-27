@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DAO到底是怎样一种设计模式EJB是DAO设计模式的一种实现</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="DAO,设计模式,EJB" />
+  <meta name="description" content="所谓DAO设计模式，我现在的理解是，它就是想办法将数据库表和对象对应，向上层隐藏实现细节，并使得项目与具体数据库系统无关，提供一系列简单的对象只通过简单的方法即可实现" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>DAO到底是怎样一种设计模式EJB是DAO设计模式的一种实现</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：65次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="658" class="art_content"><p>
+	所谓DAO设计模式，我现在的理解是，它就是想办法将数据库表和对象对应，向上层隐藏实现细节，并使得项目与具体数据库系统无关，提供一系列简单的对象只通过简单的方法即可实现数据持久化，这么一个思想或者说思路。</p>
+<p>
+	如此说来似乎并不复杂，相信很多人在知道DAO之前都会有类似想法，但它毕竟到了设计模式的高度，其中还有什么更深层次更复杂的东西呢？</p>
+<p>
+	另：按以上理解，EJB似乎也是DAO的一种实现，不过比Hibernate之类更重量级些而已，是这样的吗？</p>
+<p>
+	&nbsp;</p>
+<p>
+	好帖！</p>
+<p>
+	DAO 我感觉是实现了对持久层的操作，就是实现对数据库的所有操作，最好与表映射的对象分别建立DAO类！</p>
+<p>
+	至于EJB就是一个分布式的javaBean，并通过规范进行了划分！</p>
+<p>
+	个人体会，听说新的ejb好像是3.0已经采用了hibernate，该看看新东西了！</p>
+<p>
+	早期我们自己设计的DAO只能做到数据的存取和具体SQL无关，而使用Hibernate或EntityBean之后就能做到数据的存取跟具体数据库都无关了。窃以为实际上DAO要达到的目的是使&ldquo;数据操纵&rdquo;和&ldquo;数据库访问&rdquo;无关，达到业务逻辑与数据库访问逻辑的剥离，哪怕所谓的数据库仅仅是一个xml文件甚至普通文本文件。</p>
+<p>
+	对于DAO这个东西我的感觉是hibernaet和EJB与之无关。DAO出现的意图本来就是封装数据库操作，使业务中不出现任何与数据库操作相关的代码。但是这要看你的写法。实际上，如果你在业务中直接引用某个数据库操作的DAO，譬如说是针对Oracle的，那你在业务用都用了OracleDAO，那如果你换数据库的时候怎么办呢？还不是一样要把OracleDAO改成MysqlDAO等等。所以这个时候你就可能用一个Facotry来进行引用，同时将OracleDAO抽取为一个接口，比如BaseDAO，然后</p>
+<p>
+	public OracleDAO implements BaseDAO</p>
+<p>
+	如果以后改数据库的时候，只要再同样public MysqlDAO implements BaseDAO，然后实现Mysql的实现方法就可以了。最后在Factory中把对OracleDAO的应用改成对MysqlDAO的应用就行了。</p>
+<p>
+	而Hibernate和EJB显然站在了一个比DAO还要高的地位，尤其是hibernate，它把对数据库的sql操作变成了面向OO的java操作，这更加面向对象。至于EJB，它的缺点是所有的操作都要引入EJB相关的东西，这样的话，你的系统耦合非常大，如果以后不用EJB了，所有bean操作都要改，而hibernate你可以只写一个基础类，在这个类中实现POJO持久化操作就行了。如果以后不用hibernate，别的地方基本上都不用改。这也是hibernate和EJB一个很大的差别。</p>
+<p>
+	至于EJB3.0嘛，呵呵，SUN吸收了Gavin，使他成为了3.0中的一员，但是否就是hibernate的模式还不清楚，但据说目标就是要达到这种低耦合的效果。</p>
+<p>
+	另外，使用hibernate后是否还用DAO模式一直争论不清，有用的有不用的，但是从软件设计角度来讲，DAO仍然是必要的，所以我仍然在用它。而你为了图省事，就大可不用了。</p>
+<p>
+	&nbsp;</p>
+<p>
+	我是个新手，我也想说两句，错误的话请大家指正阿。我觉得DAO实际上就是一个与数据库操作打交道的接口，我写的程序中DAOImpl 用来具体实现其方法，另外还有一个Manager或者System的类用来实现逻辑。</p>
+<p>
+	大家说的不错,一直以来,都为有些模式的应用场景感到有些困惑.今天看到大家的评论,感觉好了一些.DAO 和factory模式,是我目前经常用的,如何设计一个好的应用,如何把功能独立,把修改封闭,增加系统的可维护性,可修改性,都是这些模式的最初的目的.以后看来要好好斟酌才行啊.&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	我是楼主，看了大家的讨论，很有收获啊！</p>
+<p>
+	mxlmwl(飞星)，DAO只是一种设计模式，是一种思想，并没有限定我们必须怎么去实现，如果一种实现不能使得项目和具体数据库系统无关，那么它应该是不满足DAO设计模式思想的，因而也不能称其为DAO模式的一种实现吧？</p>
+<p>
+	在孙卫琴的《精通Struts：基于MVC的Java Web设计与开发》一书的6.4.2数据访问对象（DAO）设计模式一节中，是这么描述DAO设计模式的，原文节选如下：</p>
+<p>
+	&ldquo;&hellip;&hellip;围绕对象－关系的映射和持久化数据的访问，在软件领域中发展起来了一种数据访问对象设计模式。</p>
+<p>
+	&ldquo;DAO模式提供了访问关系型数据库系统所需的所有操作的接口，其中包括创建数据库、定义表、字段和索引，建立表间的关系，更新和查询数据库等。DAO模式将底层数据访问操作与高层业务逻辑分离开，对上层提供面向对象的数据访问接口。&hellip;&hellip;</p>
+<p>
+	&ldquo;&hellip;&hellip;许多ORM框架都采用DAO设计模式来实现，为模型层提供了访问关系型数据库的API。&hellip;&hellip;</p>
+<p>
+	&ldquo;&hellip;&hellip;ORM框架是一种持久化框架，DAO是用于实现持久化框架的一种设计模式。&rdquo;</p>
+<p>
+	综上理解，首先，DAO应该不只是java特有的，所有面向对象的语言都可以使用；另外，根据mxlmwl(飞星)对Hibernate的描述，Hibernate就应该是DAO的一种实现了，我也一直是这么理解的，可mxlmwl(飞星)后面的话似乎又说明Hibernate不是DAO的一种实现，而是在ORM框架下的另一种模式的实现，有点困惑，从DAO的原理来说，Hibernate似乎都能满足其要求，还不能说是DAO模式的一种实现吗？EJB是分布式环境下用的，其耦合度也确实比Hibernate要高，不过只要在EJB层上再加上一层（例如现在常用的Facade层），还是可以做到不在高层业务逻辑中引入EJB相关东西的，只是确实比Hibernate复杂得多。</p>
+<p>
+	这么看来严格来说，EJB应该不能算是DAO模式的一种实现了？</p>
+<p>
+	我对DAO和Hibernate都不熟悉，有诸多疑问，还望指教，谢谢</p>
+<p>
+	呵呵，我说的可能你有些糊涂了。</p>
+<p>
+	&ldquo;&hellip;&hellip;许多ORM框架都采用DAO设计模式来实现，为模型层提供了访问关系型数据库的API。&hellip;&hellip;</p>
+<p>
+	就是这个样子，hibernate就是采用DAO模式的，所以才比DAO又高了一层。也算是你说的那个意思吧，确切的说，它是以ORM为核心，以DAO为具体实现方式的这么一个东东。</p>
+<p>
+	&quot;如果一种实现不能使得项目和具体数据库系统无关，那么它应该是不满足DAO设计模式思想的，因而也不能称其为DAO模式的一种实现吧？&quot;</p>
+<p>
+	这句话我觉得不正确，DAO只是隐藏了数据库的具体实现细节，但是并不代表就一定要保证它一定要和具体数据库系统无关，说白了一点，就是应该用工厂模式+DAO来达到你说的那个功能，DAO中并不包含工厂模式，就是这个样子。</p>
+<p>
+	其实这些东西都是一些理论性的东西，解释起来蛮抽象的，还是用实际项目或代码来说比较好些。</p>
+<p>
+	&nbsp;</p>
+<p>
+	也就是说DAO模式并没有要求一定要让上层业务逻辑和具体数据库无关？如果要做到和数据库无关，就需要使用工厂模式之类的附加手段？那Hibernate就是不仅符合了DAO设计模式，而且还实现了数据库无关，所以你说Hibernate站在了更高的高度？</p>
+<p>
+	其实我的抽象思维能力还是不错的，呵呵，所以比较喜欢讨论理论上的东西，站在更一般化的高度考虑问题，实际项目总是有其特殊性的</p>
+<p>
+	那能不能讨论一下，为什么EJB不能算是DAO设计模式的一种实现呢？仅仅因为需要在上层引入EJB的相关东西吗？DAO模式并没有限定这一点吧？EJB到底能不能算是DAO模式的一种实现呢？</p>
+<p>
+	DAO就是DAO,EJB就是EJB,DAO是一个设计模式（解决问题的一种经验方式）,而EJB是SUN公司的J2EE技术中的一个规范，不仅仅是数据存取这么简单。</p>
+<p>
+	&nbsp;&nbsp; DAO它主要解决数据存储和业务逻辑层的分离这类问题，它本身思想是很简单的，大家都喜欢说多态，喜欢说面向接口，DAO就是一个鲜活的例子，至于具体数据库无关这些都是具体实现上面的东西。</p>
+<p>
+	&nbsp;&nbsp; Hibernate,或者其他O/R mapping工具，它们会用到DAO模式，但是它们可不仅仅是DAO这么简单。</p>
+<p>
+	&nbsp;&nbsp; EJB中得Entity Bean是用于数据持久操作的。毫无疑问，里面的确有DAO的思想，但是不能说EJB就是DAO的实现。</p>
+<p>
+	&nbsp;&nbsp; 说白了， 楼主可能有些糊涂了， DAO它只是一种解决问题的思路， 而不能说到什么数据持久框架都用DAO去考虑。那就有些太看得起DAO了。有些看到胡子就叫爸爸的感觉，^_^&nbsp;&nbsp; 开玩笑。&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	我是楼主，super_zzw(之支吾)所说深有道理，DAO不过是一种思想（我也是一直这么认为的），Hibernate和EJB，或者别的什么映射机制也许只是借鉴了其思想，往往所包含的远远不只是DAO，如果将它们称为DAO的一种实现，如果从狭义上说也是说得过去的，但从广义上来说，它们又不只是DAO的一种实现，应该说这类似于B继承自A，B是A又不只是A吧？</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

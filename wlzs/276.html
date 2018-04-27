@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>无线路由器提示wan口未连接是什么意思？</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="wan,无线路由器,提示wan口未" />
+  <meta name="description" content="本文为大家解答无线路由器提示wan口未连接是什么意思?该怎么进行故障排查并解决,请看以下详细内容介绍:初步判断:WAN口未连接是说明你网线接错了.路由上WAN口接的是网线.还有一种原" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>无线路由器提示wan口未连接是什么意思？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：144次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="276" class="art_content"><p>
+	本文为大家解答无线路由器提示wan口未连接是什么意思?该怎么进行故障排查并解决,请看以下详细内容介绍:</p>
+<p>
+	初步判断:WAN口未连接是说明你网线接错了.路由上WAN口接的是网线.还有一种原因就是水晶头坏掉了!</p>
+<p>
+	1、检查路由WAN指示灯亮没亮</p>
+<p>
+	2、把入户网线从路由器WAN端口拔下来,直接插在电脑网卡端口上,看网卡指示灯亮不亮</p>
+<p>
+	3、直接连入户网线时查看 XP系统路径是控制面板--网络连接--本地连接 本地连接上是否有一个红色叉叉,本地连接有惊叹号不影响</p>
+<p>
+	WIN7系统的路径是 控制面板--网络和共享中心--查看网络连接和任务--更改适配器设置</p>
+<p>
+	4、点击宽带连接,无法连接的话,跳出的错误提示代码是678或者651</p>
+<p>
+	以上情况都符合的话,就直接打电话给运营商报修吧!</p>
+<p>
+	1,如果您的宽带是网线入户,且确保单机接宽带上网正常,建议您尝试以下接法测试下:</p>
+<p>
+	将入户网线连接在路由器的LAN1口,电脑连接路由器的LAN2口,用一条质量比较好的网线将路由器的LAN2口和WAN口连接起来.确保路由器指示灯都正常以后,将路由器恢复出厂设置,然后登录到路由器的管理界面,在&ldquo;网络参数&rdquo;--&ldquo;WAN口设置&rdquo;页面,重新设置PPPOE拨号.看能否拨号成功.</p>
+<p>
+	2,如果您的宽带是电话线接入,经过ADSL Modem再接网线,建议:</p>
+<p>
+	1)更换线序为标准568A/568B,且质量比较好的网线来连接MODEM和路由器的WAN口测试;</p>
+<p>
+	wan口未连接相关案例：</p>
+<p>
+	客户的笔记本无法连接无线路由器上网了,让我过去瞧一下.客户网络情况是,采用电信宽带上网,有一个黑色电信Modem,此Modem上有两个网线接口,一个接电信主线,另一口用网线连接电脑上网.现在,客户有两台笔记本电脑,都需上网,这时一根网线不够用,就新购了一台TP-Link无线路由器,通过无线上网.发现总是连接不上网络,可以登录路由器的设置界面,发现网络连接界面上,网关处总显示&ldquo;WAN口未连接&rdquo;,但此时路由器的WAN口确实已连接电信主线.为什么总是显示&ldquo;WAN口未连接&rdquo;未连接?</p>
+<p>
+	wan口未连接问题解答：</p>
+<p>
+	开始,以为是TP-Link无线路由器坏了,听客户说,这已经是第二个了,以前出现过这种情况,就将路由器拿到商家调换了一个新的.那基本确定路由器是没问题的,问题出现连接线路和设置方面.</p>
+<p>
+	又询问客户得知,前两天使用此路由器还能上网.由此得知问题不大,仔细检查就会找出原因.又多此登录管理界面设置,重启路由器,问题依旧.后来,不得不求助专门销售路由器的同学,经情况反应后,同学说TP-Link路由器没问题,检查线路和电信Modem.经他提醒,回想我们刚才的操作,路由器一直没有经过电信Modem,而是用主线直接插到WAN口了.一个念头闪过,是不是刚才没有经过电信Modem原因.</p>
+<p>
+	于是,将电信主线还插到电信Modem接口上,将另一接口网线插到WAN接口上,登录设置界面,根据向导,很快出现让输入上网帐号和密码,输入正常后,连接Internet成功.再检查连网设置界面,这次网关处没有红字&ldquo;WAN口未连接&rdquo;提示,问题解决.</p>
+<p>
+	经验总结：</p>
+<p>
+	看来无论是电信宽带,还是联通宽带,使用无线路由器上网时,都需要从宽带Modem引出的网线(即本该插到电脑上的那根网线)插到路由器的WAN接口上.</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

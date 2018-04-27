@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java中有效使用EasyMock编写java单元测试</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java单元测试,EasyMock" />
+  <meta name="description" content="Java单元测试 对于开发人员质量保证至关重要，尤其当面对一团乱码的遗留代码时，没有高覆盖率的单元测试做保障，没人敢轻易对代码进行重构。 然而单元测试的编写也不是一件容易" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java中有效使用EasyMock编写java单元测试</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：13次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1620" class="art_content"><p>
+	<strong>Java单元测试</strong>对于开发人员质量保证至关重要，尤其当面对一团乱码的遗留代码时，没有高覆盖率的单元测试做保障，没人敢轻易对代码进行重构。</p>
+<p>
+	然而单元测试的编写也不是一件容易的事情，除非使用TDD方式，否则编写出容易测试的代码不但对开发人员的设计编码要求很高，而且代码中的各种依赖也常常为单元测试带来无穷无尽的障碍。</p>
+<p>
+	令人欣慰的是开源社区各种优秀的<strong>Mock框架</strong>让单元测试不再复杂，本文简单介绍<strong>EasyMock</strong>等的基本常用用法。</p>
+<p>
+	Mock说白了就是打桩（Stub）或则模拟，当你调用一个不好在测试中创建的对象时，Mock框架为你模拟一个和真实对象类似的替身来完成相应的行为。</p>
+<p>
+	<strong>EasyMock</strong>：</p>
+<p>
+	使用如下方式在Maven中添加EasyMock的依赖：</p>
+<pre>
+&lt;dependency&gt;  
+      &lt;groupId&gt;org.easymock&lt;/groupId&gt;  
+      &lt;artifactId&gt;easymock&lt;/artifactId&gt;  
+      &lt;version&gt;3.2&lt;/version&gt;  
+      &lt;scope&gt;test&lt;/scope&gt;  
+&lt;/dependency&gt;  </pre>
+<br />
+EasyMock使用动态代理实现模拟对象创建，其基本步骤为以下四步：
+<p>
+	&nbsp;</p>
+<p>
+	以数据库应用为例的被测试代码如下：</p>
+<pre>
+public class UserServiceImpl{  
+    private UserDao dao;  
+    public User query(String id) throws Exception{  
+        try{  
+    return dao.getById(id);  
+}catch(Exception e){  
+    throw e;  
+}  
+return null;  
+}  
+}  
+  
+public class UserDao{  
+    public User getById(String id) throws Exception{  
+        try{  
+    return &hellip;&hellip;;  
+}catch(Exception e){  
+    throw e;  
+}  
+return null;  
+}  
+}  </pre>
+现在希望对UserServiceImpl进行测试，而UserDao开发组只给出接口，尚未完成功能实现。
+<p>
+	使用Mock对UserDao进行模拟来测试UserServiceImpl。</p>
+<h3>
+	(1).基本的测试代码如下：</h3>
+<pre>
+public class UserServiceImplTest {  
+        @Test  
+        public void testQuery() {  
+            User expectedUser = new User();  
+            user.setId(&ldquo;1001&rdquo;);  
+            UserDao mock  = EasyMock.createMock(UserDao.class);//创建Mock对象  
+            Easymock.expect(mock.getById(&quot;1001&quot;)).andReturn(expectedUser);//录制Mock对象预期行为  
+            Easymock.replay(mock);//重放Mock对象，测试时以录制的对象预期行为代替真实对象的行为  
+  
+            UserServiceImpl  service = new UserServiceImpl();  
+            service.setUserDao(mock);  
+            user user = service.query(&quot;1001&quot;);//调用测试方法  
+            assertEquals(expectedUser, user); //断言测试结果   
+            Easymock.verify(mock);//验证Mock对象被调用  
+        }  
+    }   </pre>
+<p>
+	注意：</p>
+<p>
+	在EasyMock3.0之前，org.easymock.EasyMock使用JDK的动态代理实现Mock对象创建，因此只能针对接口进行Mock，org.easymock.classextension.EasyMock使用CGLIB动态代理创建Mock对象，可以针对普通类进行Mock。</p>
+<p>
+	在EasyMock3.0之后，org.easymock.classextension.EasyMock被废弃，使用org.easymock.EasyMock可以针对接口和普通类进行Mock对象创建。</p>
+<h3>
+	(2).调用测试设定：</h3>
+如果想测试UserServiceImpl调用了UserDao的getById方法3次，则使用如下代码即可：
+<div>
+	<pre>
+Easymock.expect(mock.getById(&quot;1001&quot;)).andReturn(exceptUser).times(3);  </pre>
+</div>
+<h3>
+	(3).方法异常：</h3>
+如果想测试UserServiceImpl在调用UserDao的getById方法时发生异常，可以使用如下代码：
+<div>
+	<pre>
+Easymock.expect(mock.getById(&quot;1001&quot;)).andThrow(new RuntimeException());  </pre>
+</div>
+在测试UserServiceImpl时就可以使用try-catch捕获Mock的异常。
+<p>
+	&nbsp;</p>
+<h3>
+	(4).基本参数匹配：</h3>
+<p>
+	上面的方法在Mock UserDao的getById方法时传入了&ldquo;0001&rdquo;的预期值，这种方式是精确参数匹配，如果UserServiceImpl在调用是传入的参数不是&ldquo;0001&rdquo;就会发生Unexpect method的Mock异常，可以使用下面的方法在Mock时进行参数匹配：</p>
+<pre>
+Easymock.expect(mock.getById(Easymock.isA(String.class))).andReturn(exceptedUser).times(3);  </pre>
+<p>
+	isA()方法会使用instanceof进行参数类型匹配，类似的方法还有anyInt()，anyObject()，&nbsp;isNull()，same(),&nbsp;startsWith()......</p>
+<h3>
+	(5).数组类型参数匹配：</h3>
+<p>
+	如果UserServiceImpl在调用UserDao的方法时传入的参数是数组，代码如下：</p>
+<pre>
+public class UserServiceImpl{    
+    private UserDao dao;    
+    public List&lt;String&gt; queryNames(String[] ids) throws Exception{    
+        try{    
+    return dao.getNames(ids);    
+}catch(Exception e){    
+    throw e;    
+}    
+return null;    
+}    
+}    
+    
+public class UserDao{    
+    public List&lt;String&gt; getNames(String[] ids) throws Exception{    
+        try{    
+    return &hellip;&hellip;;    
+}catch(Exception e){    
+    throw e;    
+}    
+return null;    
+}    
+}  </pre>
+此时有两种办法来进行参数匹配：
+<p>
+	a.数组必须和测试给定的一致：</p>
+<div>
+	<pre>
+Easymock.expect(mock.getNames(EasyMock.aryEq(testIds))).andReturn(exceptedNames);  </pre>
+</div>
+b.不考虑测试数组内容：
+<div>
+	<pre>
+Easymock.expect(mock.getNames(EasyMock.isA(String[].class))).andReturn(exceptedNames);  </pre>
+</div>
+<h3>
+	(6).void方法Mock：</h3>
+<p>
+	如果要Mock的方法是无返回值类型，例子如下：</p>
+<div>
+	<pre>
+public class UserDao {  
+        public void updateUserById(String id) throws Exception{  
+            try{  
+            update&hellip;  
+        }catch(Exception e){  
+            throw e;   
+        }  
+        }  
+    }  </pre>
+</div>
+a.正常Mock代码如下：
+<pre>
+mock.updateUserById(&ldquo;TestId&rdquo;);  
+EasyMock.expectLastCall().anytimes();  </pre>
+b.模拟发生异常的Mock代码如下：
+<div>
+	<pre>
+mock.updateUserById(&ldquo;TestId&rdquo;);  
+EasyMock.expectLastCall().andThrow(new RuntimeException()).anytimes();  </pre>
+	<h3>
+		(7).多次调用返回不同值的Mock：</h3>
+</div>
+<p>
+	对于迭代器类型的遍历代码来说，需要在不同调用时间返回不同的结果，以JDBC结果集为例代码如下：</p>
+<div>
+	<pre>
+public List&lt;String&gt; getUserNames () throws Exception{  
+    List&lt;String&gt; usernames = new ArrayList&lt;String&gt;();  
+    ResultSet rs = pstmt.executeQuery(query);  
+    try {  
+        while(rs.next()){  
+            usernames.add(rs.getString(2));  
+        }  
+    } catch (SQLException e) {  
+        throw e;  
+    }  
+ }  </pre>
+</div>
+在Mock结果集的next方法时如果总返回true，则代码就会陷入死循环，如果总返回false则代码逻辑根本无法执行到循环体内。
+<p>
+	正常的测试逻辑应该是先返回几次true执行循环体，然后在返回false退出循环，使用Mock可以方便模拟这种预期的行为，代码如下：</p>
+<div>
+	<pre>
+​EasyMock.expect(rs.next()).andReturn(true).times(2).andReturn(false).times(1);  </pre>
+</div>
+<p>
+	更多的关于EasyMock的用法，请参考EasyMock官方文档：</p>
+<p>
+	<a href="http://easymock.org/EasyMock3_0_Documentation.html" target="_blank">http://easymock.org/EasyMock3_0_Documentation.html</a>。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

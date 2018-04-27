@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python编程规范</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Python,编程规范" />
+  <meta name="description" content="1，Python编程规范 编码 所有的 Python 脚本文件都应在文件头标上 # -*- coding:utf-8 -*- 用于设置编辑器，默认保存为 utf-8 格式。 注释 业界普遍认同 Python 的注释分为两种， 一种是由 # 开头" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Python编程规范</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：42次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1504" class="art_content"><p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; text-align: center;">
+	<a href="/uploads/allimg/160607/12231030Q-0.jpg" style="padding: 0px; margin: 0px; color: rgb(68, 102, 187); outline: 0px;" target="_blank"><img alt="" height="296" src="/uploads/allimg/160607/12231030Q-0.jpg" style="padding: 0px; margin: 10px 0px; border: 1px solid rgb(221, 221, 221); max-width: 640px; height: auto; cursor: pointer; background: rgb(244, 247, 249);" width="500" /></a></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<span style="padding: 0px; margin: 0px; font-size: 18px;"><strong style="padding: 0px; margin: 0px;">1，Python编程规范</strong></span></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&nbsp;</strong><strong style="padding: 0px; margin: 0px;">编码</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	所有的 Python 脚本文件都应在文件头标上</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># -*- coding:utf-8 -*- </span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	用于设置编辑器，默认保存为 utf-8 格式。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&nbsp;</strong><strong style="padding: 0px; margin: 0px;">注释</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	业界普遍认同 Python 的注释分为两种，</p>
+<ul style="padding-right: 0px; padding-left: 0px; margin: 0px 0px 10px 20px; line-height: 28.8px; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; font-size: 16px;">
+	<li style="padding: 0px; margin: 0px;">
+		一种是由 # 开头的&ldquo;真正的&rdquo;注释，例如，用于表明为何选择当前实现以及这种实现的原理和难点</li>
+	<li style="padding: 0px; margin: 0px;">
+		另一种是 docstrings，例如，用于表明如何使用这个包、模块、类、函数（方法），甚至包括使用示例和单元测试</li>
+</ul>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	坚持适当注释原则。对不存在技术难点的代码坚持不注释，对存在技术难点的代码必须注释。但与注释不同，建议对每一个包、模块、类、函数（方法）写 docstrings，除非代码一目了然，非常简单。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&nbsp;</strong><strong style="padding: 0px; margin: 0px;">缩进</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	Python 依赖缩进来确定代码块的层次，行首空白符主要有两种：tab 和 空格，但严禁两者混用。<strong style="padding: 0px; margin: 0px;">如果使用</strong><strong style="padding: 0px; margin: 0px;">&nbsp;tab&nbsp;</strong><strong style="padding: 0px; margin: 0px;">缩进，设定</strong><strong style="padding: 0px; margin: 0px;">tab&nbsp;</strong><strong style="padding: 0px; margin: 0px;">为</strong><strong style="padding: 0px; margin: 0px;">&nbsp;4&nbsp;</strong><strong style="padding: 0px; margin: 0px;">个空格</strong>。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">空格</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	空格在 Python 代码中是有意义的，因为 Python 的语法依赖于缩进，在行首的空格称为<strong style="padding: 0px; margin: 0px;">前导空格</strong>。在这一节不讨论前导空格相关的内容，只讨论<strong style="padding: 0px; margin: 0px;">非前导空格</strong>。非前导空格在 Python 代码中没有意义，但适当地加入非前导空格可以增进代码的可读性。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1） 在二元算术、逻辑运算符前后加空格：如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">a = b + c;</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;2） 在一元前缀运算符后不加空格，如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">if</span> !flg: <span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">pass</span>;</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 3） &ldquo;:&rdquo;用在行尾时前后皆不加空格，如分枝、循环、函数和类定义语言；用在非行尾时两端加空格，如：</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	dict 对象的定义</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">d = {<span class="hljs-string" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">&#39;key&#39;</span> :  <span class="hljs-string" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">&#39;value&#39;</span>}</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 4） 括号（含圆括号、方括号和花括号）前后不加空格，如：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">do_something(arg1, arg2)</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 而不是</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">do_something( arg1, arg2 )</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 5） 不要在逗号、分号、冒号前面加空格，但应该在它们后面加（除了在行尾）</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 6） 不要用空格来垂直对齐多行间的标记，因为这会成为维护的负担（适用于:，#，=等）</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">空行</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	适当的空行有利于增加代码的可读性，加空行可以参考如下几个准则：</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1） 在类、函数的定义间加空行；</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 2） 在 import 不同种类的模块间加空行；</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 3） 在函数中的逻辑段落间加空行，即把相关的代码紧凑写在一起，作为一个逻辑段落，段落间以空行分隔；</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">断行</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	尽管现在的宽屏显示器已经可以单屏显示超过 256 列字符，但本规范仍然坚持行的最大长度不得超过 80&nbsp; &nbsp;个字符的标准。折叠长行的方法有以下几种方法：</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1) 为长变量名换一个短名，如：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">this.<span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">is</span>.a.very.long.variable_name = this.<span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">is</span>.another.long.variable_name</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;应改为：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">variable_name1 = this.<span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">is</span>.a.very.long.variable_name
+variable_name2 = this.<span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">is</span>.another.variable_name
+variable_name1 = variable_name2s</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 2) Python会将圆括号、中括号和花括号中的行隐式的连接起来，你可以利用这个特点。如需要，你可以在表达式外围增加一对额外的圆括号</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 3) 在长行加入续行符强行断行，断行的位置应在操作符前，且换行后多一个缩进，以使维护人员看代码的时候看到代码行首即可判定这里存在换行，如：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">if</span> color == WHITE <span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">or</span> color == BLACK \
+    <span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">or</span> color == BLUE: <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 注意 or 操作符在新行的行首而不是旧行的行尾</span>
+do_something(color);</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">字符串</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1）&nbsp;&nbsp;避免在循环中用+和+=操作符来累加字符串。由于字符串是不可变的，这样做会创建不必要的临时对象，并且导致二次方而不是线性的运行时间。作为替代方案，你可以将每个子串加入列表，然后在循环结束后用 .join 连接列表。（也可以将每个子串写入一个 cStringIO.StringIO 缓存中）</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 2）&nbsp;&nbsp;为多行字符串使用三重双引号而非三重单引号。不过要注意, 通常用隐式行连接更清晰，因为多行字符串与程序其他部分的缩进方式不一致。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">命名</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	一致的命名可以给开发人员减少许多麻烦，而恰如其分的命名则可以大幅提高代码的可读性，降低维护成本。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">常量</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	常量名所有字母大写，由下划线连接各个单词，如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">WHITE = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">0XFFFFFF</span>
+THIS_IS_A_CONSTANT = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">1</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">变量</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	变量名全部小写，由下划线连接各个单词，如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">color = WHITE
+this_is_a_variable = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">1</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">私有类成员</strong>使用单一下划线前缀标识，多定义公开成员，少定义私有成员。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	变量名不应带有类型信息，因为 Python 是动态类型语言。如 iValue、names_list、dict_obj 等都是不好的命名。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">函数</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	函数名的命名规则与变量名相同。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">类</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	对类名使用大写字母开头的单词（如CapWords, 即Pascal风格），不使用下划线连接单词。如：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-class" style="padding: 0px; margin: 0px;"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">class</span> <span class="hljs-title" style="padding: 0px; margin: 0px; color: rgb(181, 137, 0);">ThisIsAClass</span><span class="hljs-params" style="padding: 0px; margin: 0px;">(object)</span>:</span><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">pass</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">模块</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	模块名全部小写，对于包内使用的模块，可以加一个下划线前缀，如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">module.py
+_internal_module.py</code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">包</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	包的命名规范与模块相同。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">缩写</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	命名应当尽量使用全拼写的单词，缩写的情况有如下两种：</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1） 常用的缩写，如 XML、ID等，在命名时也应只大写首字母，如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-class" style="padding: 0px; margin: 0px;"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">class</span> <span class="hljs-title" style="padding: 0px; margin: 0px; color: rgb(181, 137, 0);">XmlParser</span><span class="hljs-params" style="padding: 0px; margin: 0px;">(object)</span>:</span><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">pass</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 2） 命名中含有长单词，对某个单词进行缩写。这时应使用约定成俗的缩写方式，如去除元音、包含辅音的首字符等方式，例如：</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;function 缩写为 fn</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;text 缩写为 txt</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;object 缩写为 obj</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;count 缩写为 cnt</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;number 缩写为 num，等。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">特定命名方式</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	主要是指 __xxx__ 形式的系统保留字命名法。项目中也可以使用这种命名，它的意义在于这种形式的变量是只读的，这种形式的类成员函数尽量不要重载。如</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);"><span class="hljs-class" style="padding: 0px; margin: 0px;"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">class</span> <span class="hljs-title" style="padding: 0px; margin: 0px; color: rgb(181, 137, 0);">Base</span><span class="hljs-params" style="padding: 0px; margin: 0px;">(object)</span>:</span>
+    <span class="hljs-function" style="padding: 0px; margin: 0px;"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">def</span> <span class="hljs-title" style="padding: 0px; margin: 0px; color: rgb(38, 139, 210);">__init__</span><span class="hljs-params" style="padding: 0px; margin: 0px;">(self, id, parent =None)</span>:</span>
+        self.__id__ = id
+        self.__parent__ = parent
+    <span class="hljs-function" style="padding: 0px; margin: 0px;"><span class="hljs-keyword" style="padding: 0px; margin: 0px; color: rgb(133, 153, 0);">def</span> <span class="hljs-title" style="padding: 0px; margin: 0px; color: rgb(38, 139, 210);">__message__</span><span class="hljs-params" style="padding: 0px; margin: 0px;">(self, msgid)</span>:</span>
+        <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># &hellip;略</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	其中 __id__、__parent__ 和 __message__ 都采用了系统保留字命名法。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">导入格式</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 1） import 的次序，先 import Python 内置模块，再 import 第三方模块，最后 import 自己开发的项目中的其它模块；这几种模块用空行分隔开来。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 2） 每个import应该独占一行。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp; &nbsp; 3） 不要使用 from module import *，除非是 import 常量定义模块或其它你确保不会出现命名空间冲突的模块。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">赋值</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	对于赋值语言，主要是不要做无谓的对齐，如：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">a            = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">1</span>                               <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 这是一个行注释</span>
+variable = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">2</span>                               <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 另一个行注释</span>
+fn           = callback_function    <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 还是行注释</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<br style="padding: 0px; margin: 0px;" />
+	没有必要做这种对齐，原因有两点：一是这种对齐会打乱编程时的注意力，大脑要同时处理两件事（编程和对齐）；二是以后阅读和维护都很困难，因为人眼的横向视野很窄，把三个字段看成一行很困难，而且维护时要增加一个更长的变量名也会破坏对齐。直接这样写为佳：</p>
+<pre style="padding: 1px; margin-top: 0px; margin-bottom: 0px; line-height: 18px; font-size: 10pt; border: 0px; color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+<code class="language-python hljs" style="padding: 0.5em; margin: 0px; display: block; color: rgb(101, 123, 131); border-radius: 4px; overflow-x: auto; background: rgb(253, 246, 227);">a = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">1</span> <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 这是一个行注释</span>
+variable = <span class="hljs-number" style="padding: 0px; margin: 0px; color: rgb(42, 161, 152);">2</span> <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 另一个行注释</span>
+fn = callback_function <span class="hljs-comment" style="padding: 0px; margin: 0px; color: rgb(147, 161, 161);"># 还是行注释</span></code></pre>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<strong style="padding: 0px; margin: 0px;">&gt;</strong>&nbsp;&nbsp;<strong style="padding: 0px; margin: 0px;">语句</strong></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	通常每个语句应该独占一行。不过， 如果测试结果与测试语句在一行放得下， 你也可以将它们放在同一行。如果是if语句， 只有在没有else时才能这样做。特别地，绝不要对 try/except 这样做，因为try和except不能放在同一行。</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp;</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<span style="padding: 0px; margin: 0px; font-size: 18px;"><strong style="padding: 0px; margin: 0px;">2，参考资料</strong></span></p>
+<ul style="padding-right: 0px; padding-left: 0px; margin: 0px 0px 10px 20px; line-height: 28.8px; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; font-size: 16px;">
+	<li style="padding: 0px; margin: 0px;">
+		<a href="http://wenku.baidu.com/link?url=ArnV_IaWvSHIas6LR_Atcx8VyqJQ30A2ugKcCA3sVDwcUsTeIEaxT9sy6cehI-Gd61tILaPFeMw07YFfifo0v-njaD_-RS5zO1ZYlsPRTjq" rel="nofollow" style="padding: 0px; margin: 0px; color: rgb(68, 102, 187); outline: 0px;" target="_blank">Google Python编程风格指南</a></li>
+</ul>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	&nbsp;</p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	<span style="padding: 0px; margin: 0px; font-size: 18px;"><strong style="padding: 0px; margin: 0px;">3，文档修改历史</strong></span></p>
+<p style="padding: 0px; margin: 20px 0px; line-height: 28.8px; letter-spacing: 0.5px; font-size: 16px; word-wrap: break-word; word-break: break-all; color: rgb(0, 0, 0); font-family: &quot;Lantinghei SC&quot;, &quot;Open Sans&quot;, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif;">
+	2016-06-03：V1.0</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

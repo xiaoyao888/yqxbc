@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="屏幕闪烁,电脑屏幕闪烁,显示器闪烁" />
+  <meta name="description" content="经常使用电脑的网友们有时候会碰到电脑屏幕一直闪烁抖动的情况，严重影响了电脑的使用，那么这种烦人的情况该怎么解决？一起来看看这篇文章如何为大家答疑解惑。一般新电脑显" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：461次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1647" class="art_content"><p>
+	经常使用电脑的网友们有时候会碰到电脑屏幕一直闪烁抖动的情况，严重影响了电脑的使用，那么这种烦人的情况该怎么解决？一起来看看这篇文章如何为大家答疑解惑。一般新电脑显示器很少出现电脑屏幕闪烁或者抖动，如果新显示器出现以上故障我们首先排除以下几种可能：</p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/1302512322-0.png" /></p>
+<p>
+	一、显示刷新率设置是否正确</p>
+<p>
+	检查方法是：在我们电脑桌面空白区域右键---属性--设置--高级---监视器&nbsp;如下图：</p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/13025163G-1.jpg" /></p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/13025112U-2.jpg" /></p>
+<p>
+	从中可以看到显示器的刷新频率设置为&ldquo;60&rdquo; ，这正是造成显示器屏幕不断抖动的原因。将新频率设置为&ldquo;75&rdquo;以上，再点击确定返回桌面就可以了。部分笔记本电脑只有60HZ这个数值，那么就不需要设置了，另外设置过高容易引起显示器损坏，所以大家尝试改下，如果以前没动过，可以直接选用默认即可。</p>
+<p>
+	二、检查显卡驱动程序是否正确</p>
+<p>
+	有时我们进入电脑的显示器刷新频率时，却发现没有刷新频率可供选择，这就是由于前显卡的驱动程序不正确或太旧造成的。购买时间较早的电脑容易出现这个问题，此时不要再使用购买电脑时所配光盘中的驱动，可以自行检查与安装最新版本的驱动程序。</p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/130251I28-3.jpg" /></p>
+<p>
+	三、电脑周围是否存在干扰</p>
+<p>
+	观察电脑显示器周围是否存在强电场或强磁场的干扰，磁场干扰非常容易导致电脑屏幕抖动或者闪烁，排除方法是将电脑放置在另外一个空旷的地方再观察下，也可以去别的地方拿一台好的电脑过来测试排除，尽量不将显示器靠近大型电器产品附近。也可以重新启动电脑显示器看看，一般目前的显示器在开启过程都具有自动消磁功能。</p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/1302511291-4.jpg" /></p>
+<p>
+	四、显示器硬件问题或电源问题</p>
+<p>
+	以上情况遇到的比较少，遇到最多的是硬件问题，比如显示器与主机连接的数据线不量等，大家都可以采用更换排除的方法解决，另外显示器电源也只重点排查对象，在遇到的电脑屏幕抖动与电脑屏幕闪烁的故障中，其中电脑屏幕闪烁遇到最多的是显示器电源问题，也有不少是显示器老化，显示器故障。显示器抖动除了受磁场或电场干扰外，遇到最多的就是显示器老化故障，解决办法只有拿去专业维修点维修了。一般新显示器可以拿去保修或更换，新显示器由于硬件问题导致的一般很少见。</p>
+<p>
+	<img alt="屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法" src="/uploads/allimg/171114/130251EN-5.jpg" /></p>
+<div>
+	<div id="_dnlj5nm7jl">
+		&nbsp;</div>
+</div>
+<p>
+	介绍到这里关于电脑屏幕闪烁与电脑屏幕抖动的故障排除方法基本上就是以上介绍的方法，有的时候电脑病毒破坏也会导致你打开某些软件或浏览网页出现类似的情况，另外一些整蛊网页也会放置一些网页特效实现电脑屏幕抖动与闪所效果，最后提醒大家如果真的不好排除，可以将电脑死马当活马医，直接重新安装系统，如果问题依旧那么多数是硬件故障，需要拿去专业维修店维修解决。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

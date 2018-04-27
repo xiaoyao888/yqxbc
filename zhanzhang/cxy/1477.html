@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>如何提高编写代码的速度？</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="代码" />
+  <meta name="description" content="如何提高代码编写的速度，一直是一个逃避不了的问题。在天朝你得像打字员一样做程序员，不然老板和上司都觉得你是在玩耍。对项目的贡献体现在哪里？码农难道不是以code量来体现" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>如何提高编写代码的速度？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：站长之家 浏览：19次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1477" class="art_content"><p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px; text-align: center;">
+	<a class="bPic" href="/uploads/allimg/160412/1920352H4-0.jpg" style="color: rgb(30, 62, 116); text-decoration: none;"><img alt="如何提高编写代码的速度？" height="" id="" img_height="877" img_width="1000" src="/uploads/allimg/160412/1920352H4-0.jpg" style="border: 0px; vertical-align: bottom; width: 600px; height: auto;" width="" /></a></p>
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px; line-height: 21px;">如何提高代码编写的速度，一直是一个逃避不了的问题。在天朝你得像打字员一样做程序员，不然老板和上司都觉得你是在玩耍。对项目的贡献体现在哪里？码农难道不是以code量来体现的么，就跟码砖一样，看谁码的面积多快，那工作量就在哪里摆着的嘛。</span>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	&nbsp;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	一个牛逼工程师就一定会五笔？这个比喻不是很恰当。但是在码字上来说五笔是最快的没有之一。但编程真的是这样的吗？我认为绝不等于代码量除以时间就等于你编写代码的速度。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	的确如果你是一个刚入门的编程新手，速度和量是你要追求的，为什么要这么讲呢？基础知识的熟练度直接体现出你编码的速度。速度上去了说明你的基础知识掌握更好，所以速度才能快。为什么好多公司面试都会问到这个问题，你编写的代码量是几万行？速度和熟练度能够说明一个人code的效率。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<span style="color: rgb(0, 0, 0); line-height: 21px;">第一步我们该做什么？提高你的打字速度</span></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	1. 用搜狗等中文输入法聊天/写文档与写代码切换时，养成直接切回系统英文输入法的习惯。都是一个快捷键的事，省去不少麻烦。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	2. 尝试手打现成英文文章/文档/代码，有兴趣还可以试试限时托福或者 GRE 作文练习。输入中文快是因为熟悉每一个拼音的组合，比如你打一个常用拼音&ldquo;changyongpinyin&rdquo;这个组合你分成两个词根本是条件反射打出来，而&ldquo;frequent word&rdquo;你需要经思考字母顺序然后再凭借手对键盘的熟悉去找相应字母的位置。通过平时多练习英文输入使之接近中文水平。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	3. 习惯日常生活如聊天时使用规范的标点符号与中英文格式，如中文用&ldquo;。&rdquo;而不是&ldquo;.&rdquo;，中英文数字间空格等。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	4. 使用标有拼写错误提示的浏览器/软件。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	5. 使用规范指法。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	6. 打字通这种小学用的软件现在还有吗？</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	7. 使用反馈比较明确的键盘。不一定要机械键盘但键程清晰掷地有声还是要的。比如 thinkpad、 mbp 以及 mac 外接键盘，乃至 surface 键盘我认为都是达标的。MacBook Air 和 NMB 就比较差了&hellip;&hellip;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	以上步骤是从网上摘抄的，这个是练习打字的速度是最最基础的熟练方法。个人觉得都大同小异。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px; text-align: center;">
+	<img alt="如何提高编写代码的速度？" height="" id="" img_height="220" img_width="330" src="/uploads/allimg/160412/1920355T0-1.jpg" style="border: 0px; vertical-align: bottom;" width="" /></p>
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px; line-height: 21px;">下面我们重点来讲讲如何真正提高编程速度的方法，仅供参考。</span>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	&nbsp;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	一、强调基础知识</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	基础这个东西不是用说就能有的，常用的东西只有牢牢的记住熟悉才能了然于胸。如果你还在为一个基础函数参数返回值困扰，那你要多去背背理解基础知识别无它法。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	二、学会找轮子，不要去造轮子</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	这个观点其实是有异议的，不造轮子是指你要去用一些成型库函数和api，不要唯我独尊，什么都自己写，这样的话你基本脱离不了低级趣味了。比如一个消息队列在c++中就有实现，难道你会为一个只用它来存几个字符串消息，自己写个消息队列实现？</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	三、找个好的IDE</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	搞java开发的弄个eclipse，window开发用vs，linux开发用vim。一个好的IDE能让你事半功倍。更何况是在天朝，大部分都在ctrl+c、ctrl+v。一个好的IDE，自动补全，函数跳转查找，自动排版，检错。你决定使用一个IDE， 你就应该去认认真真的学习它的快捷键和一桶使用方法。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	四、重思考</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	一个段好的代码并不是它们月复杂越好，简单实现复杂功能才是我们最需要的，liunx内核代码虽大，但是那些金典的算法实现的代码精炼的不能再精炼了。要提高编码速度更重要的是简化梳理程序流程，以最小的代码量完成功能。所以编程最重要的事情是思考。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px; text-align: center;">
+	<img alt="如何提高编写代码的速度？" height="" id="" img_height="310" img_width="420" src="/uploads/allimg/160412/1920354154-2.jpg" style="border: 0px; vertical-align: bottom;" width="" /></p>
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px; line-height: 21px;">大牛于码农的区别就在思想上了。但是提高代码编写的速度，是我们可以锻炼出来的，做好以上几点，剩下的就是思考一下我们为什么说的多做的少，骚年，我这有如来神掌秘籍，未来保护世界的重任就交给你了，来这里我们有更多的武林秘籍等你。</span></div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

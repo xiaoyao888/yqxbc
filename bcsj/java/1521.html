@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IntelliJ IDEA 14 利用JRebel实现热部署</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="intellij,idea,热,部署,jrebel,详细,配" />
+  <meta name="description" content="一、软件安装 ideaIU-12.1.1.exe 下载地址: http://www.jetbrains.com/idea/download/index.html 算 号器：？？？要低调，用社区版吧，如果想用 Ultimate 版，自己找算号器吧。 apache-tomcat-7.0.39(64)下载地址" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>IntelliJ IDEA 14 利用JRebel实现热部署</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：138次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1521" class="art_content"><h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：IntelliJ IDEA的版本：ideaIU-14.1.5</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	JRebel版本：jr-ide-idea-6.0.2</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label0" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-0-0-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	前言：</h1>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.在Java的开发过程中，每次写完代码，都要&ldquo;编译-&gt;发布-&gt;启动-&gt;查看启动结果-&gt;刷新浏览器&rdquo;，会耗费一定的时间，而且影响心情，而运用JRebel的热部署可解决此问题。使用IntelliJ IDEA+JRebel热部署，不仅在修改java代码上十分方便，且在修改js代码、HTML代码上更是可以算上即时刷新。2.本博客第一次采用&ldquo;特别鸣谢&rdquo;中的方法在配置JRebel的过程中可能是因为破解JRebel失败而没有成功，第二次采用&copy;IntelliJ IDEA开源社①群中的破解方法配置成功，所以建议读者直接按本博客方法进行配置，不用下载破解版。（当然你也可以按照鸣谢网址中的方法进行尝试。）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	步骤：</p>
+<h2 id="autoid-1-0-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	一、下载JRebel插件</h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	地址：<a href="http://download.csdn.net/detail/ablipan/8397321" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);" target="_blank">http://download.csdn.net/detail/ablipan/8397321</a></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：下载后为zip文件，不用解压，待会儿安装直接可以用zip格式安装。</p>
+<h2 id="autoid-1-1-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	二、安装JRebel插件</h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	（这个过程的第1步是照搬&ldquo;特别鸣谢&rdquo;中网址的方法进行的，第2步是&copy;IntelliJ IDEA开源社①群中的方法。）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.File-&gt;Settings-&gt;Plugins-&gt;Install plugin from disk...-&gt;Apply-&gt;Restart，这样Jrebel插件就装好了。如下图所示：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114A45-0.jpg" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114OE-1.jpg" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221142295-2.jpg" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.激活Jrebel。重启IntelliJ IDEA后，按照以下的图示方法：(<strong style="margin: 0px; padding: 0px;">注：下面的图或许不够清晰..尤其是对第一次装这个的童鞋--可以直接看本文最后的<em style="margin: 0px; padding: 0px;">&ldquo;附3：清晰版2.2&rdquo;</em></strong>)</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211415Q-3.jpg" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：上图中右边的框中的信息写在这里，以免看不清：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	http://idea.lanyus.com/ilanyu</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	langyu199950316@gmail.com</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	出现了上图中的Offline Mode is:ACTIVE(36499 days and 23 hours left) 信息表明已经激活成功了。此外，配置成功后会在IntelliJ IDEA出现以下提示：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221143534-4.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<h2 id="autoid-1-2-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	三、测试</h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.java代码修改测试。修改发布项目的Tomcat的配置，具体修改处见以下图示。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211440H-5.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221141157-6.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.通过JRebel启动Tomcat</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221143956-7.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	这是运行后的界面：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211450G-8.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	3.修改java代码：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	原java代码：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221142495-9.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	修改后的代码：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211424O-10.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">可以看到在修改java代码后，只要点击项目发布的浏览器，JRebel会自动地进行编译。</strong>IntelliJ IDEA的底部会显示JRebel自动编译java的信息：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114I26-11.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	当然，你也可以点击下面的Deploy All按钮进行手工编译。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114HD-12.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	点击&ldquo;提交&rdquo;后运行结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221142F1-13.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	4.js代码测试</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	原js代码：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211423b-14.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	修改后：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114B52-15.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	刷新页面：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/12211452P-16.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	后记：通过热部署，可以明显地体会到修改代码后开发人员什么都不用做JRebel就可以自动地对项目进行快捷地编译、部署工作。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label1" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-1-3-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	热部署的应用</h1>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);"><strong style="margin: 0px; padding: 0px;">重要说明：在上文的&ldquo;测试中&rdquo;及下文中的&ldquo;补&rdquo;中，我大谈特谈热部署的应用，实际上基本都是错的，没什么参考价值。那么怎样在修改文件后进行编译呢？如何知道是否热部署是否成功呢？今天像一位热心的网友请教才知道特简单！</strong></span>看下面：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">如我们修改任意一个java类，右键：</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114FG-17.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">点击Compile &#39;UserController.java&#39;即可编辑所在java类。</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">或者：点击下面红框中的图标即可</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;"><img alt="" src="/uploads/allimg/160719/1221143513-18.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	在Event log 可看到编译日志。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221143596-19.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">我们点击页面，控制台出现下面信息，说明热部署成功：</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221144120-20.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">我这里怎么重载了2次？--暂时不管了。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">2016/2/14</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">又不行了。还是按补1中的方式去做咯。。。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">待续。。。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<hr style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;" />
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label2" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-2-0-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	补：</h1>
+<h2 id="autoid-3-0-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	补1：</h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.火狐偶尔好像不灵，<strong style="margin: 0px; padding: 0px;">但是欧朋和谷歌是100%支持热部署的。</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.<strong style="margin: 0px; padding: 0px;">如果新建的项目JRebel没发挥作用，这八成是项目中缺少rebel.xml的原因，用idea的命令把rebel.xml弄出来就可以，点击项目右键，然后如以下图示：</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114N49-21.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">点击rebel.xml，在maven项目中的resource文件夹中就会生成rebel.xml了。</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">此外，打开rebel.xml，会显示：</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;"><img alt="" src="/uploads/allimg/160719/1221145157-22.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	3.虽然开发者运用热部署在修改代码后什么都不用干，只需点击项目所在的浏览器就可触发热部署，热部署虽然快捷，但也需要时间（即使一个简单的测试项目也要2~3秒），所以在修改代码后立即点击项目发布的浏览器并不知道部署完了没有，还要回到idea上去看，这样不太方便。在上面的博文中介绍了可以点击idea下面的Deploy All 按钮，部署完毕在到发布的页面，但经测试点另外一个命令会更快一些（特别是较大项目时）：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	下面进行对比测试：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.点击&nbsp;<strong style="margin: 0px; padding: 0px;">Deploy All</strong>&nbsp;命令，下面是控制台的打印信息</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221145941-23.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.点击<strong style="margin: 0px; padding: 0px;">Update &#39;Unnamed&#39; application</strong>&nbsp;（Unnamed就是Tomcat，因为没有命名，是默认名）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114G56-24.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	弹出对话框，选择<strong style="margin: 0px; padding: 0px;">Update classes and resources</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221141919-25.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	以下是控制台信息</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221141464-26.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	当点击项目的发布浏览器，并点击相应的请求，出现以下信息（<strong style="margin: 0px; padding: 0px;">注意：用点击&nbsp;Deploy All 命令并不会出现下面红框框中的信息</strong>）。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114D93-27.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">小结：通过以上测试可看出执行2种命令的区别：1.执行Deploy All命令，是部署服务器所有应该部署的内容；而执行Update &#39;Unnamed&#39; application的Update classes and resources只是更新项目的classes、resources文件。2.二者的执行顺序不同。执行Deploy All命令是一下子全部部署完，而后者是先进行编译，当用户提交页面请求时，JRebel执行了更新classes、resources文件的命令。<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">综合考虑，在修改代码后，</span><span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">优先使用Update &#39;Unnamed&#39; application的Update classes and resources命令。</span></strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<h2 id="autoid-3-1-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	补2：</h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">通过测试，发现热部署主要是针对于服务器的，因此建议通过启动服务器访问页面（在web.xml设置默认主页），如果是在页面上启动，现在可以肯定的是点击服务器发布的页面不会触发热部署（前台代码--js/html可以，后台java代码不可以），而通过idea底部的JRebel Executor命令栏中的<strong style="margin: 0px; padding: 0px;">Update &#39;xxxx&#39; application<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">偶尔无效</span></strong>。</strong>如下图说明：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.<strong style="margin: 0px; padding: 0px;">通过启动服务器访问页面</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221144X6-28.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.在<strong style="margin: 0px; padding: 0px;">页面上启动服务器</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221143P6-29.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	点击1--<strong style="margin: 0px; padding: 0px;">Update &#39;index2.jsp&#39; application,若弹出的提示框有像下面这样，表示可进行热部署，但偶尔不会出现&ldquo;<strong style="margin: 0px; padding: 0px;">Update classes and resources</strong>&rdquo;。</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221142216-30.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<h2 id="autoid-3-2-0" style="padding: 5px 0px; color: rgb(85, 85, 85); line-height: 21px; font-size: 14.5px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; height: 21px; width: 1176px; font-family: verdana, Arial, Helvetica, sans-serif; margin: 0px !important;">
+	补3：<strong style="margin: 0px; padding: 0px;">如果修改的是web.xml,则选择Redeploy（重新部署）</strong></h2>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221141128-31.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label3" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-3-3-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	附1：热部署成功的标志</h1>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114M94-32.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label4" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-4-0-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	附2：:<strong style="margin: 0px; padding: 0px;">Jrebel</strong><strong style="margin: 0px; padding: 0px;">官方对热布署支持的场景列表</strong>（查看官网说明<a href="http://www.zeroturnaround.com/jrebel/features/" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(235, 235, 235); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);" target="_blank">http://www.zeroturnaround.com/jrebel/features/</a>）</h1>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="margin: 0px; padding: 0px; border-style: solid; border-color: silver; border-collapse: collapse; word-break: break-word; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<tbody style="margin: 0px; padding: 0px;">
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Java EE Support</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Jrebel</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JVM Hot Swap</strong></p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Time to reload</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">&lt; 1s</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">&lt; 1s</strong></p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">No memory leak</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				&nbsp;</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Changes to method bodies</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing Methods</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing constructors</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing fields</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing classes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing annotations</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Changing static field value</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing enum values</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Changing interfaces</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Replacing superclass</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Adding/removing implemented interfaces</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				&nbsp;</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Skip builds for WAR directories</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Skip builds for .WAR/.EAR class updates</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Skip builds for .WAR/.EAR resource updates</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Map multiple source dirs to one .WAR/.EAR target dir</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Map classes and resources with include/exclude patterns</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Map multiple source dirs with Ant-style patterns</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Use system properties to make mapping machine-independent</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Maven plugin</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JSP EL changes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JSP Scriptlet changes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Enterprise Add-on</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">EJB 1.x session bean interface changes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Enterprise Add-on</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">EJB 2.x session bean interface changes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Enterprise Add-on</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">EJB 3.x session bean interface changes</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JSF changes (Mojarra)</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JPA changes (Hibernate, EclipseLink, TopLink, OpenJPA)</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">CDI changes (Weld)</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">ResourceBundle</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Spring Framework 2.x or later</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Hibernate</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">JBoss Seam 2.x or later</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Google Guice</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Stripes 1.x or later</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache log4j 1.2.x or later</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Struts 1.x</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Struts 2.x or later</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Tapestry4</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Velocity</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Wicket</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">CgLib</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Javassist</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES JRebel 3.0+</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Atlassian Confluence plugins</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">ClassWorlds</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Beta</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Apache Felix</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Beta</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">Eclipse Equinox</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Beta</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">IntelliJ IDEA 7.x, 8.x plugins</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Beta</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					<strong style="margin: 0px; padding: 0px;">NetBeans plugins</strong></p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					YES Beta</p>
+			</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				<p style="margin: 10px auto; padding: 0px;">
+					NO</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong style="margin: 0px; padding: 0px;">Jrebel</strong><strong style="margin: 0px; padding: 0px;">对第三方框架支持对应表</strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	查看官网<a href="http://www.zeroturnaround.com/jrebel/features/frameworks/" style="margin: 0px; padding: 0px; text-decoration: none; color: rgb(0, 0, 0); border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: rgb(51, 51, 51);">http://www.zeroturnaround.com/jrebel/features/frameworks/</a></p>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label5" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-5-0-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	&nbsp;</h1>
+<h2>
+	&nbsp;</h2>
+<div style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-align: right;">
+	<a name="_label6" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); border-bottom-color: rgb(51, 51, 51);"></a></div>
+<h1 id="autoid-6-0-0" style="padding: 5px 0px 5px 20px; color: rgb(85, 85, 85); line-height: 25px; font-size: 17px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; width: 1176px; margin: 15px 0px !important; background: none 0% 0% repeat scroll rgba(197, 195, 188, 0.741176);">
+	<strong style="margin: 0px; padding: 0px;">附3：清晰版2.2（所谓2.2是指本文</strong>安装JRebel插件的第二步）</h1>
+<h2>
+	&nbsp;</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	这是我在新电脑上装IDEA的热部署，所以把原文中&ldquo;安装JRebel插件的第二步&rdquo;分化几个小步骤，说更清楚点。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	1.打开设置Settings--&gt;Other Settings--&gt;Offine Mode，点击Configure</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221145Q8-33.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	2.填写以下信息，点Activate JRebel</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221142410-34.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	3.激活成功</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/122114G92-35.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	4.重启IDEA，打开这里，这里要说明一下--因为没来得及截图，实际上当你看到下面的这个画面之前还要做件事--即下面的紫色框框下面的现在是：Deactivate，可是本来记得是Activate，你点一下，才变成Deactivate，然后上面显示激活的的天数。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<img alt="" src="/uploads/allimg/160719/1221141600-36.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px;" /></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

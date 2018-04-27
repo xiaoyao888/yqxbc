@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>安装、设置与启动MySql绿色版的方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="安装,、,设置,与,启动,MySql,绿,色版,的,方法," />
+  <meta name="description" content="1、解压 mysql-noinstall-5.1.30-win32.zip(下载地址http://dev.mysql.com/downloads/mysql/5.1.html) 2、在 F 盘建立目录 MySql\MySqlServer5.1\ 3、把解压的内容复制到 F:\MySql\MySqlServer5.1\ 4、在 F:\MySql\MySqlServer5.1\" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>安装、设置与启动MySql绿色版的方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：42次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="218" class="art_content"><h3>
+	1、解压</h3>
+<p>
+	mysql-noinstall-5.1.30-win32.zip(下载地址http://dev.mysql.com/downloads/mysql/5.1.html)</p>
+<h3>
+	2、在 F 盘建立目录 MySql\MySqlServer5.1\ &nbsp; &nbsp;</h3>
+<h3>
+	3、把解压的内容复制到 F:\MySql\MySqlServer5.1\</h3>
+<h3>
+	4、在 F:\MySql\MySqlServer5.1\ 中找 my-large.ini 把它复制成 my.ini</h3>
+<h3>
+	5、在 my.ini 中找 [mysqld] ，添加以下语句;</h3>
+<p>
+	basedir=&quot;F:/MySql/MySqlServer5.1/&quot;</p>
+<p>
+	datadir=&quot;F:/MySql/MySqlServer5.1/data/&quot;</p>
+<p>
+	default-character-set=latin1 &nbsp; &nbsp; &nbsp;#utf8</p>
+<p>
+	default-storage-engine=innodb&nbsp;</p>
+<p>
+	max_allowed_packet =12M</p>
+<p>
+	#skip-networking &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#// 这句会忽略网络登陆</p>
+<p>
+	#bind-address=192.168.0.72 #// 如果加上这句 localhost 就用不了 只要改 user 表的 127.0.0.1 为 % 重启服务 就可以远程登陆</p>
+<h3>
+	6、安装 MySQL_Administrator_1.2 绿色版：把 mysql-gui-tools-noinstall-5.0-r14-win32.zip 解压到 F:\MySql\MySQL GUI Tools 5.0</h3>
+<p>
+	6.5、可以尝试手动启动 MySql 服务器，并用 MySQL_Administrator_1.2 和 console 登陆：</p>
+<h4>
+	&nbsp;&nbsp; &nbsp; 1、手动启动服务：cmd --&gt; F:\MySql\MySqlServer5.1\bin\mysqld --console</h4>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;会看到 InnoDB: The first specified datafile c:\ibdata\ibdata1 did not exist:</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;InnoDB: a new database to be created！</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;InnoDB: Setting file c:\ibdata\ibdata1 size to 209715200</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;InnoDB: Database physically writes the file full: wait... 等 很长的</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;最后看到 mysqld: ready for connections</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Version: &#39;5.1.2-alpha&#39; socket: &#39;&#39; port: 3306</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;表示 MySql 服务已经启动，可以登陆了，这时： 登陆名是 root ，密码为空，IP 地址只能写 localhost 或 127.0.0.1 ，因为现在</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;root 的权限只允许本地登陆，远程登陆不可以，在本机写本机 IP 地址来登陆被 MySql 视为远程登陆，所以是登陆不了的，会报错 1130</p>
+<h4>
+	&nbsp;&nbsp; &nbsp; 2、MySQL_Administrator_1.2 登陆：到 F:\MySql\MySQL GUI Tools 5.0\ 运行 MySQLAdministrator.exe ，</h4>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;填入 localhost或127.0.0.1 &nbsp; &nbsp;3306 &nbsp; root 密码为空 就可以登陆</p>
+<h4>
+	&nbsp;&nbsp; &nbsp; 3、用 console 登陆: cmd --&gt; f:\MySql\MySqlServer5.1\bin\mysql -u root -p</h4>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;密码为空</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;如果要在登陆时就选定数据库可以这样写：f:\MySql\MySqlServer5.1\bin\mysql -u root -p[密码] [数据库名]</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当前情况举例：f:\MySql\MySqlServer5.1\bin\mysql -u root -p mysql 就是密码是空的，登陆的数据库是 mysql 库&nbsp;</p>
+<h4>
+	&nbsp;&nbsp; &nbsp; 4、修改root的密码、让root可以远程登陆、添加新用户</h4>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;修改root的密码:在登陆后的 console 中输入&nbsp;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;use mysql</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;update user set Password=PASSWORD(&#39;[密码]&#39;) where user=&#39;root&#39;;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;让root可以远程登陆:在登陆后的 console 中输入</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;use mysql</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;update user set Host=&#39;%&#39; where user=&#39;root&#39; and Host=&#39;127.0.0.1&#39;;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;添加新用户，用户名是 gary，密码为空，权限等于root，用户允许远程登陆 :在登陆后的 console 中输入</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;GRANT ALL PRIVILEGES ON *.* TO &#39;gary&#39;@&#39;%&#39;;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;如果用户不可以远程登陆：GRANT ALL PRIVILEGES ON *.* TO &#39;gary&#39;@&#39;localhost&#39;;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;然后用上面的方法修改gary的密码，root 改为 gary</p>
+<h4>
+	&nbsp;&nbsp; &nbsp; 5、手工停止 MySql 服务：cmd --&gt; F:\MySql\MySqlServer5.1\bin\mysqladmin -u root shutdown&nbsp;</h4>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;如果MySQL root用户账户有密码，你需要调用命令 F:\MySql\MySqlServer5.1\bin\mysqladmin -u root -p shutdown 并根据提示输入密码。</p>
+<p>
+	&nbsp;&nbsp; &nbsp;&nbsp;</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 注意：修改密码、修改是否远程登陆，添加用户后必须重启MySql服务才生效 !!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 注意: MySQL权限系统中的用户完全独立于Windows下的登录用户。</p>
+<p>
+	&nbsp;&nbsp; &nbsp;</p>
+<h3>
+	7、添加 MySql 服务到windows服务中：</h3>
+<p>
+	&nbsp;&nbsp; &nbsp; 1、简易添加方法：cmd --&gt; F:\MySql\MySqlServer5.1\bin\mysqld --install 这样用默认的 MySQL 为名称添加一个windows服务</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 这是，该服务的属性写着：F:\MySql\MySqlServer5.1\bin\mysqld MySQL</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 2、指定服务名称与指定启动选项文件的添加方法：</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;F:\MySql\MySqlServer5.1\bin\mysqld --install LevelDBServer --defaults-file=F:\MySql\MySqlServer5.1\my.ini</p>
+<p>
+	&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;用 LevelDBServer 为名称来创建windows服务，指定 F:\MySql\MySqlServer5.1\my.ini 为MySql的启动选项文件</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 如果在服务安装命令中，在--install选项后面指定的服务名不是默认服务名(MySQL)。则从具有相同服务名的组中读取选项，并从标准选项文件读取选项。</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 服务器还从标准选项文件的[mysqld]组读取选项。你可以使用[mysqld]组中的选项用于所有MySQL 服务，还可以使用具有相同服务名的组，用于该服务名所对应的服务器。</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 该命令中，--install选项后面给出了默认服务名(MySQL)。如果未给出--defaults-file选项，该命令可以让服务器从标准选项文件的[mysqld]组中读数。</p>
+<p>
+	&nbsp;&nbsp; &nbsp; 由于提供了--defaults-file选项，服务器只从命名文件的[mysqld]组读取选项。</p>
+<p>
+	&nbsp;&nbsp;&nbsp;</p>
+<p>
+	&nbsp;&nbsp; 注意：添加服务后该服务并未启动。重启电脑服务就会启动，要手动启动与关闭 MySql 服务用以下语句：</p>
+<p>
+	&nbsp;&nbsp; &nbsp; cmd --&gt; NET START MySQL 或 NET START LevelDBServer , NET STOP MySQL 或 NET STOP LevelDBServer</p>
+<h3>
+	8、测试MySQL安装</h3>
+<p>
+	可以通过以下命令测试MySQL服务器是否工作：</p>
+<p>
+	C:\&gt; F:\MySql\MySqlServer5.1\bin\mysqlshow</p>
+<p>
+	C:\&gt; F:\MySql\MySqlServer5.1\bin\mysqlshow -u root mysql</p>
+<p>
+	C:\&gt; F:\MySql\MySqlServer5.1\bin\mysqladmin version status proc</p>
+<p>
+	C:\&gt; F:\MySql\MySqlServer5.1\bin\mysql test</p>
+<p>
+	如果mysqld对客户端程序TCP/IP连接的响应较慢，可能是DNS问题。此时，使用--skip-name-resolve选项启动 mysqld，在MySQL授权表的Host列只使用localhost和IP号。</p>
+<p>
+	可以通过 --pipe 或 --protocol=PIPE 选项强制 MySQL 客户端使用命名管道连接代替TCP/IP连接，或指定.(阶段)做为主机名。使用 --socket 选项指定管道名。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

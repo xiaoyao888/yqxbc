@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQL Server数据磁带备份与恢复</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="SQL Server数据磁带备份与恢" />
+  <meta name="description" content="1 引言 实现磁带备份数据的功能有两方面的困难：首先，MSSQLServer（以下简称SQL）所提供的数据库的整体备份及恢复功能不能直接满足本系统要求的数据滚动备份。其次，需要解决如何在" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>SQL Server数据磁带备份与恢复</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：29次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="373" class="art_content">&nbsp;&nbsp;&nbsp;&nbsp;1　引言&nbsp;<br />
+<br />
+　　实现磁带备份数据的功能有两方面的困难：首先，MS&nbsp;SQL&nbsp;Server（以下简称SQL）所提供的数据库的整体备份及恢复功能不能直接满足本系统要求的数据滚动备份。其次，需要解决如何在Web环境下实现磁带数据备份功能。&nbsp;<br />
+<br />
+　　利用SQL中现有的数据库备份和恢复的命令以及NT中的IDC技术，实现SQL数据库中数据滚动备份到磁带的功能。本系统所实现功能既能保证近一段时间的数据总在数据库中，又能保证系统管理员可随时恢复备份数据，供用户查询。本文所实现的功能具有普遍的意义，特别适用于中小型企业开发基于Intranet技术的管理信息系统。&nbsp;<br />
+<br />
+　　2　磁带数据备份及恢复的工作过程&nbsp;<br />
+<br />
+　　为了充分利用SQL中现有的数据库备份与恢复功能，以降低实现磁带数据备份的代价，我们特地在硬盘上建立了一个与磁带的容量相当的数据库，我们称之为桥数据库，如FJJDBBK。可方便地实现数据的滚动备份了。其工作过程是：管理员把某月的数据从主数据库移到桥数据库中；然后用SQL的备份功能把桥数据库备份到磁带上。用户需要查看磁带中的历史数据时，系统又用SQL的恢复备份功能把磁带中的数据恢复到桥数据库中，用户直接在桥数据库中查阅历史数据。此外，在数据备份到磁带后，在进行下次数据备份前，必须清空备份数据库中的数据。为了提高工作效率，我们建立了一个空白桥数据库（没有数据时的桥数据库）。每次进行磁带备份数据之前，就用此空白数据库恢复桥数据库。空白数据库文件建立后要保存好，不可随便删除。&nbsp;<br />
+<br />
+　　建立该备份空白数据库过程为：先建立主数据库FJJDBBK，然后在FJJDBBK中建立与当前数据库中一样结构的表。建立这些表结构时最好的方法是先用Enterprise&nbsp;Manager的Object菜单下的Generate&nbsp;SQL&nbsp;Scripts功能生成建立这些表的Scripts文件，然后选择FJJDBBK数据库，用Enterprise&nbsp;Manager的Tools菜单下的Query&nbsp;Analyzer功能运行该文件，就建立了这些所需表。显然，这时的FJJDBBK为空数据库。我们再利用备份命令或运行Tools菜单下的Backup/Restore功能备份该空数据库。&nbsp;<br />
+<br />
+　　3　磁带数据备份及恢复的实现&nbsp;<br />
+<br />
+　　在NT中，Web服务器IIS（Internet&nbsp;Information&nbsp;Server）提供了完善的访问SQL的技术IDC。IDC是一个DLL文件（HTTPODBC.DLL）,其实，它通过ODBC接口可访问各种数据库。在具体实现Web页面访问数据库时，需建立两种类型的文件：IDC文件（*.idc）和HTML模板文件（*.htx）。IDC文件用于控制数据库的访问。它一般由两部分组成：&nbsp;<br />
+<br />
+　　.文件头　指明系统数据源，模板文件名，用户名及口令。有时还包括一些有关检索数据库方面的参数设置。&nbsp;<br />
+<br />
+　　.文件主体　这部分内容以&quot;SQLStatement：&quot;为起始标志，然后写操纵数据库的标准SQL语句。注意，每条语句以&quot;+&quot;号开头，它作为区分每条SQL语句的标志。需要强调的是，对于MS&nbsp;SQL数据库，IDC可用其任何标准的命令及函数。例如定义变量，控制数据流等（见实例）。&nbsp;<br />
+<br />
+　　IDC的处理流程如下：&nbsp;<br />
+<br />
+　　首先，Web服务器IIS分析浏览器传来的URL字符串。如果当前字符串以&quot;*.idc&quot;结尾，就将该IDC请求传给IDC接口模块，IDC将依次读取并解释IDC文件的内容，通过ODBC模块向数据库服务器发服务请求；数据库服务器将执行结果通过ODBC接口返回给IDC模块。接着IDC模块把结果插入指定的的模板文件，形成一个实际的HTML文件交给IIS；最后由IIS将该HTML返回浏览器。&nbsp;<br />
+<br />
+　　在Web信息系统中要实现完整的磁带数据备份及恢复功能需要实现以下三个功能：&quot;数据备份&quot;功能、&quot;数据恢复&quot;功能和&quot;清理数据&quot;功能。&quot;数据备份&quot;功能在保证系统管理员操作的前提下，根据用户输入的所要备份数据的起始日期和终止日期，从主数据库把要备份的数据转存到桥数据库中，然后运用SQL的DUMP命令实现该功能。&quot;数据恢复&quot;功能则在保证系统管理员操作的前提下，提供&quot;恢复桥数据库&quot;和&quot;恢复空白桥数据库&quot;的功能。只要运用SQL的LOAD命令就可实现上述功能；同样，&quot;清理数据&quot;功能也要保证在系统管理员操作的前提下，根据用户输入的所要删除数据的起始日期和终止日期，运用SQL中的DELETE命令删除当前数据库中数据。因此。为了&quot;数据备份&quot;功能和&quot;清理数据&quot;功能的顺利实施，要求每个表都有归档时间字段。&nbsp;<br />
+<br />
+　　实现本系统磁带数据备份与恢复功能的部分IDC文件如下：&nbsp;<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				/*BKUP.IDC*/<br />
+				Datasource:&nbsp;Web&nbsp;SQL<br />
+				Template:&nbsp;BKUP.htx<br />
+				Username:&nbsp;sa<br />
+				Password:&nbsp;sa<br />
+				SQLStatement:&nbsp;<br />
+				+if&nbsp;%jb%=1<br />
+				+/*判断系统维护员*/<br />
+				+SELECT&nbsp;qsrq=convert(varchar(12),getdate(),1),<br />
+				zzrq=convert(varchar(12),+dateadd(day,1,getdate()),1)<br />
+				+/*预置起始日期和终止日期*/<br />
+				/*BKUPCZ.IDC*/<br />
+				Datasource:&nbsp;Web&nbsp;SQL<br />
+				Template:&nbsp;BKUPCZ.htx<br />
+				Username:&nbsp;sa<br />
+				Password:&nbsp;sa<br />
+				SQLStatement:&nbsp;<br />
+				+INSERT&nbsp;FJJDBBK.DBO.JKLD&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;FJJDB.DBO.JKLD&nbsp;<br />
+				+where&nbsp;convert(varchar(12),gdsj,1)&gt;=&prime;%QSRQ%&prime;&nbsp;<br />
+				and&nbsp;convert(varchar(12),gdsj,1)&lt;&nbsp;=&prime;%ZZRQ%&prime;<br />
+				&hellip;&hellip;&hellip;&hellip;<br />
+				+/*把当前数据库中选定的数据转存到桥数据库中*/<br />
+				+DUMP&nbsp;DATABASE&nbsp;FJJDBBK&nbsp;TO&nbsp;TAPE&nbsp;=&nbsp;&prime;\\\\.\\tape0&prime;&nbsp;WITH&nbsp;INIT,&nbsp;NOUNLOAD&nbsp;<br />
+				+/*备份数据*/<br />
+				+SELECT&nbsp;TS=&prime;备份数据库操作已完成!&prime;<br />
+				/*HUIF.IDC*/<br />
+				Datasource:&nbsp;Web&nbsp;SQL<br />
+				Template:&nbsp;HUIF.htx<br />
+				Username:&nbsp;sa<br />
+				Password:&nbsp;sa<br />
+				SQLStatement:&nbsp;<br />
+				+if&nbsp;%jb%=1<br />
+				+begin<br />
+				+LOAD&nbsp;DATABASE&nbsp;FJJDBBK&nbsp;FROM&nbsp;TAPE=&prime;\\\\.\\TAPE0&prime;&nbsp;WITH&nbsp;<br />
+				NOUNLOAD&nbsp;<br />
+				+/*恢复备份数据*/<br />
+				+SELECT&nbsp;TS=&prime;恢复数据库操作已完成!&prime;+/*<br />
+				+end<br />
+				/*QLSJKCZ.IDC*/<br />
+				Datasource:&nbsp;Web&nbsp;SQL<br />
+				Username:&nbsp;sa<br />
+				Password:&nbsp;sa<br />
+				Template:&nbsp;QLSJKCZ.htx<br />
+				SQLStatement:<br />
+				+delete&nbsp;FJJDB.DBO.JKLD<br />
+				where&nbsp;convert(varchar(12),gdsj,1)&gt;=&prime;%QSRQ%&prime;&nbsp;and<br />
+				convert(varchar(12),gdsj,1)&lt;=&prime;%ZZRQ%&prime;<br />
+				&hellip;&hellip;&hellip;&hellip;<br />
+				+/*删除当前数据库中选定的数据*/<br />
+				+SELECT&nbsp;TS=&prime;删除操作已完成!&prime;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+&nbsp;<br />
+　　在本系统中，主数据库保证存储4个月数据。系统规定，系统管理员每月月初备份上月的数据到磁带。然后删除前第4个月的数据。实现了当前数据与历史数据的同步查阅，这是Web系统的一个显著的优点。&nbsp;<br />
+<br />
+　　4　结语&nbsp;<br />
+<br />
+　　本文介绍了一种特殊的数据磁带备份与恢复的具体实现方法。需要指出的是，数据库备份操作是数据库管理系统非常重要的环节，而数据库备份操作过程又比较复杂，因此，要求我们必须建立完善的规章制度，由专业的系统管理员进行数据库备份和恢复操作。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

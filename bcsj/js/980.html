@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>紧贴布局的序列化内容块</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="紧贴布局的序列化内容块" />
+  <meta name="description" content="代码和注释如下： " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>紧贴布局的序列化内容块</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：3次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="980" class="art_content">代码和注释如下：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;<br />
+				&lt;html&nbsp;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;<br />
+				&lt;head&gt;<br />
+				&lt;title&gt;紧贴布局的序列化内容块&lt;/title&gt;<br />
+				&lt;meta&nbsp;http-equiv=&quot;content-type&quot;&nbsp;content=&quot;text/html;charset=gb2312&quot;&gt;<br />
+				&lt;style&nbsp;type=&quot;text/css&quot;&gt;<br />
+				*{<br />
+				&nbsp;margin:0;<br />
+				&nbsp;padding:0;<br />
+				}<br />
+				body{<br />
+				&nbsp;padding:0&nbsp;0&nbsp;5px;<br />
+				}<br />
+				#trust{<br />
+				&nbsp;position:relative;<br />
+				&nbsp;margin:5px&nbsp;auto;<br />
+				}<br />
+				.block{<br />
+				&nbsp;float:left;<br />
+				&nbsp;width:170px;<br />
+				&nbsp;min-height:100px;<br />
+				&nbsp;padding:5px;<br />
+				}<br />
+				.block&nbsp;img{<br />
+				&nbsp;display:block;<br />
+				&nbsp;width:160px;<br />
+				&nbsp;padding:5px;<br />
+				&nbsp;border:1px&nbsp;solid&nbsp;#666;<br />
+				}<br />
+				&lt;/style&gt;<br />
+				&lt;script&nbsp;type=&quot;text/javascript&quot;&nbsp;src=&quot;http://www.zzsky.cn/effect/images/mootools.js&quot;&gt;&lt;/script&gt;<br />
+				&lt;script&nbsp;type=&quot;text/javascript&quot;&gt;<br />
+				var&nbsp;Serialization&nbsp;=&nbsp;new&nbsp;Class({<br />
+				&nbsp;initialize:&nbsp;function(id){<br />
+				&nbsp;&nbsp;this.id&nbsp;=&nbsp;id;&nbsp;//外部容器id<br />
+				&nbsp;&nbsp;this.box&nbsp;=&nbsp;$(id);&nbsp;//外部容器，通过mootools封装为Element对象<br />
+				&nbsp;&nbsp;this.mod_width&nbsp;=&nbsp;this.box.getElement(&#39;p&#39;).getSize().x;&nbsp;//缓存内容块的宽度<br />
+				&nbsp;&nbsp;this.items&nbsp;=&nbsp;$$(&#39;#&#39;&nbsp;+&nbsp;this.id&nbsp;+&nbsp;&#39;&nbsp;p.block&#39;);&nbsp;//缓存内容块数组.通过mootools选择器封装为Element对象<br />
+				&nbsp;&nbsp;this.max_col&nbsp;=&nbsp;0;&nbsp;//&nbsp;初始化一个最大列数<br />
+				&nbsp;},<br />
+				&nbsp;run:function(){<br />
+				&nbsp;&nbsp;var&nbsp;_this&nbsp;=&nbsp;this;&nbsp;//缓存对象<br />
+				&nbsp;&nbsp;var&nbsp;arr&nbsp;=&nbsp;[];&nbsp;//新建一个数组，用以保存每列的宽度<br />
+				&nbsp;&nbsp;var&nbsp;win_width&nbsp;=&nbsp;$(window).getSize().x;&nbsp;//获取当前窗口宽度<br />
+				&nbsp;&nbsp;var&nbsp;max_col&nbsp;=&nbsp;win_width&nbsp;%&nbsp;this.mod_width&nbsp;==&nbsp;0&nbsp;?&nbsp;win_width&nbsp;/&nbsp;this.mod_width&nbsp;:&nbsp;Math.ceil(win_width&nbsp;/&nbsp;this.mod_width)&nbsp;-&nbsp;1;&nbsp;//计算最大列数<br />
+				&nbsp;&nbsp;this.box.setStyle(&#39;width&#39;,this.mod_width&nbsp;*&nbsp;max_col);&nbsp;//设置外部容器宽度<br />
+				&nbsp;&nbsp;if(max_col&nbsp;==&nbsp;this.max_col){&nbsp;//如果当前可容纳的最大列数等于以缓存的最大列数，返回<br />
+				&nbsp;&nbsp;&nbsp;return&nbsp;false;<br />
+				&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;this.max_col&nbsp;=&nbsp;max_col;&nbsp;//缓存最大列数<br />
+				&nbsp;&nbsp;for(var&nbsp;i&nbsp;=&nbsp;0&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;max_col&nbsp;;&nbsp;i++){&nbsp;//初始化数组的内容<br />
+				&nbsp;&nbsp;&nbsp;arr.push(0);<br />
+				&nbsp;&nbsp;};<br />
+				&nbsp;&nbsp;this.items.each(function(item&nbsp;,&nbsp;index){&nbsp;//循环内容块数组，进行排列<br />
+				&nbsp;&nbsp;&nbsp;var&nbsp;n&nbsp;=&nbsp;0;&nbsp;//初始化一个最小高度列<br />
+				&nbsp;&nbsp;&nbsp;for(var&nbsp;i&nbsp;=&nbsp;0&nbsp;,&nbsp;len&nbsp;=&nbsp;arr.length&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;len&nbsp;;&nbsp;i++){&nbsp;//通过循环数组得到最小高度列（这个还在想怎么改进算法）<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;=&nbsp;arr[n]&nbsp;&lt;=&nbsp;arr[i]&nbsp;?&nbsp;n&nbsp;:&nbsp;i;<br />
+				&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;item.setStyle(&#39;position&#39;,&#39;absolute&#39;);&nbsp;//赋予内容块绝对定位（这个还在想怎么改进）<br />
+				&nbsp;&nbsp;&nbsp;new&nbsp;Fx.Tween(item).start(&#39;left&#39;,n&nbsp;*&nbsp;_this.mod_width&nbsp;+&nbsp;&#39;px&#39;);&nbsp;//设置内容块的横向移动目标，开始移动<br />
+				&nbsp;&nbsp;&nbsp;new&nbsp;Fx.Tween(item).set(&#39;top&#39;,arr[n]&nbsp;+&nbsp;&#39;px&#39;);&nbsp;//设置内容块的纵向移动目标，开始移动<br />
+				&nbsp;&nbsp;&nbsp;arr[n]&nbsp;=&nbsp;arr[n]&nbsp;+&nbsp;item.getSize().y&nbsp;-&nbsp;0;&nbsp;//更新当前所在列的高度<br />
+				&nbsp;&nbsp;&nbsp;n&nbsp;=&nbsp;null;&nbsp;//清空变量<br />
+				&nbsp;&nbsp;})<br />
+				&nbsp;&nbsp;var&nbsp;n&nbsp;=&nbsp;0;&nbsp;//初始化一个最大高度列<br />
+				&nbsp;&nbsp;for(var&nbsp;i&nbsp;=&nbsp;0&nbsp;,&nbsp;len&nbsp;=&nbsp;arr.length&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;len&nbsp;;&nbsp;i++){&nbsp;//通过循环数组得到最大高度列（这个还在想怎么改进算法）<br />
+				&nbsp;&nbsp;&nbsp;n&nbsp;=&nbsp;arr[n]&nbsp;&gt;=&nbsp;arr[i]&nbsp;?&nbsp;n&nbsp;:&nbsp;i;<br />
+				&nbsp;&nbsp;};<br />
+				&nbsp;&nbsp;new&nbsp;Fx.Tween(this.box).set(&#39;height&#39;,arr[n]);&nbsp;//设置外部容器高度<br />
+				&nbsp;&nbsp;arr&nbsp;=&nbsp;null;&nbsp;//清空变量<br />
+				&nbsp;&nbsp;n&nbsp;=&nbsp;null;&nbsp;//清空变量<br />
+				&nbsp;&nbsp;win_width&nbsp;=&nbsp;null;&nbsp;//清空变量<br />
+				&nbsp;}<br />
+				});<br />
+				window.addEvent(&#39;load&#39;,&nbsp;function(){<br />
+				&nbsp;var&nbsp;serialization&nbsp;=&nbsp;new&nbsp;Serialization(&#39;trust&#39;);&nbsp;//初始化一个新的序列对象<br />
+				&nbsp;serialization.run();&nbsp;//执行序列对象的run方法<br />
+				&nbsp;if(Browser.Engine.trident){&nbsp;//判断是否IE，如果是IE则把resize事件绑定在外部容器<br />
+				&nbsp;&nbsp;serialization.box.addEvent(&#39;resize&#39;,function(){<br />
+				&nbsp;&nbsp;&nbsp;serialization.run();<br />
+				&nbsp;&nbsp;});<br />
+				&nbsp;}else{&nbsp;//否则绑定在window对象上<br />
+				&nbsp;&nbsp;window.addEvent(&#39;resize&#39;,function(){<br />
+				&nbsp;&nbsp;&nbsp;serialization.run();<br />
+				&nbsp;&nbsp;});<br />
+				&nbsp;}<br />
+				});<br />
+				&lt;/script&gt;<br />
+				&lt;/head&gt;<br />
+				&lt;body&gt;<br />
+				&lt;p&nbsp;id=&quot;trust&quot;&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/5443.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/2-09111Z94620.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/0312162V345.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/031215442A6.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/252.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/234.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/78_104229_1.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20070827110712610.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223023348557968.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/19014.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20090405041908238537.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/renwu_039.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/211063531J.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223021545360846.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/192215324L8.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/5443.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/2-09111Z94620.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/0312162V345.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/031215442A6.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/252.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/234.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/78_104229_1.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20070827110712610.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223023348557968.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/19014.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20090405041908238537.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/renwu_039.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/211063531J.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223021545360846.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/192215324L8.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/5443.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/2-09111Z94620.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/0312162V345.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/031215442A6.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/252.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/234.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/78_104229_1.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20070827110712610.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223023348557968.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/19014.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20090405041908238537.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/renwu_039.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/211063531J.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/20081223021545360846.jpg&quot;&gt;&lt;/p&gt;<br />
+				&nbsp;&lt;p&nbsp;class=&quot;block&quot;&gt;&lt;img&nbsp;src=&quot;http://www.zzsky.cn/effect/images/201004122000/192215324L8.jpg&quot;&gt;&lt;/p&gt;<br />
+				&lt;/p&gt;<br />
+				&lt;/body&gt;<br />
+				&lt;/html&gt;</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

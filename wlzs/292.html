@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>四种ADSL频繁掉线解决办法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="ADSL,ADSL频繁掉线,ADSL频繁掉" />
+  <meta name="description" content=" " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>四种ADSL频繁掉线解决办法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：67次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="292" class="art_content"><p>
+	对于ADSL，相信大家都在使用中。但是其中也会有一些故障问题的发生，尤其是ADSL掉线的问题。那么我们就总结了4种问题，帮助大家分析处理一下。ADSL，AsymmetricDigitalSubscriberLine，即非对称数字用户环路。不要误会，我们这里不是要介绍ADSL，更不是要讨论它的未来，我们只做你最关心的事&mdash;&mdash;如何解决ADSL频繁掉线的问题。<br />
+	&nbsp;&nbsp;&nbsp;ADSL作为现代家庭上网的第一选择，在为我们带来宽带享受的同时，也在不经意间为我们带来了些许烦恼，而在这些烦恼中，ADSL的掉线问题最为令人头疼。ADSL掉线的原因非常多，涉及到硬件和软件的问题。解决方法也比较繁琐。所以，我们将就ADSL在实际应用中出现的一些ADSL掉线案例做详细的剖析，让大家在以后面对相似的问题时，不烦也不愁，轻松解决这些&ldquo;麻烦&rdquo;，ADSL为何总掉线？</p>
+<h3>
+	&nbsp;&nbsp;&nbsp;案例一：忽视散热ADSL频繁上演掉线秀</h3>
+<p>
+	&nbsp;&nbsp;&nbsp;小A：我是PPPoE虚拟拨号用户，是通过无线路由器拨号上网的，最近上网总是掉线，一般十几分钟一次。<br />
+	&nbsp;&nbsp;&nbsp;小B：先不要通过无线路由器，直接使用Windows&nbsp;XP自带的拨号软件试试。<br />
+	&nbsp;&nbsp;&nbsp;小A：试过了，还是一样的频繁掉线。<br />
+	&nbsp;&nbsp;&nbsp;小B：哦，那ADSL掉线时宽带连接显示断开了吗？<br />
+	&nbsp;&nbsp;&nbsp;小A：没有，只是显示没有数据流。<br />
+	&nbsp;&nbsp;&nbsp;小B：那先全面查杀病毒吧。<br />
+	&nbsp;&nbsp;&nbsp;小A：已经查过了，没有病毒、也没有木马。<br />
+	&nbsp;&nbsp;&nbsp;小B：这就奇怪了，我来帮你检查一下吧。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;问题探索：<br />
+	&nbsp;&nbsp;&nbsp;通过上面的案例我们可以看出，无线路由器和操作系统都没有问题，所以问题的原因应该是与ADSL的应用软件有关。于是我们下载了新的拨号软件，不过掉线故障仍然没有解决&hellip;&hellip;不过在ADSL掉线时，我们在DOS提示符下，Ping网站发现超时，由此可以判断计算机与ADSL服务器已经无法相互通讯。<br />
+	&nbsp;&nbsp;&nbsp;于是我们等待宽带连接自动断开，再次拨号，出现&ldquo;678错误&rdquo;提示，再查看ADSLModem状态，一切都很正常。于是决定重启ADSLModem，果然，再次拨号就可以上网了。遗憾的是一段时间后又自动掉线了&hellip;&hellip;看来，故障应该是出在ADSLModem身上了。<br />
+	&nbsp;&nbsp;&nbsp;用手摸了一下ADSLModem的机身，居然有较烫的感觉，于是我们关掉ADSLModem的电源，等待其降温，冷去完毕后，再次拨号上网，很长时间没有掉线，但几个小时之后，掉线频率明显增加，再次触摸ADSLModem，发现依然较烫手，此时，在DOS提示符下，使用Ping命令检查计算机与ADSLModem的通讯，显示为超时。由此，我们找到了最终原因，ADSLModem因过热造成频繁掉线，甚至死机。<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;小结：<br />
+	&nbsp;&nbsp;&nbsp;散热问题带来的危害大家都知道，但在实际应用中我们却经常忽视它，例如很多用户都喜欢将ADSLModem和无线路由器叠放在一起使用，这样很容易造成热量的堆积，最终导致ADSL工作异常，另外灰尘问题我们也不能忽视，因为灰尘一旦堵住了散热孔，散热效果自然大大折扣，所以及时清理灰尘也很重要，为了拥有更好的网络体验，请把这些网络设备放在通风良好的地方，并且要避免阳光直射。</p>
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;案例二：电压不稳ADSL也会频繁掉线</h3>
+<p>
+	小A：我的笔记本是直接连接ADSLModem上网的，使用Windows&nbsp;XP自带的宽带拨号软件，最近开始频繁掉线。<br />
+	小B：哦，那ADSL掉线时有什么现象吗？<br />
+	小A：有啊，就是宽带连接自动断开了，不过过一会就自动恢复连接了。<br />
+	小B：掉线可以自动恢复，这可能是线路问题。<br />
+	小A：我检查过了，新换了电话线，还是没用啊。<br />
+	小B：ADSLModem的工作状态正常吗？<br />
+	小A：正常啊。<br />
+	小B：查杀病毒了吗？系统有漏洞吗？<br />
+	小A：查了，没有病毒，系统也没有漏洞。<br />
+	小B：看来还是ADSLModem的问题，我来仔细研究下。<br />
+	问题探索：<br />
+	我们开始对对ADSLModem进行检查，首先看散热，触摸机身温度并不高。在观察掉线的规律，发现掉线前没有任何征兆，毫无规律。再次仔细观察发现，每次掉线时ADSLModem的灯都会瞬间熄灭，然后重新点亮，好像重启一样。于是我们抱着试试看的心态，用电压表测量电压，发现电压非常不稳定，在150V-180V之间波动。至此，终于找到了ADSLModem掉线的原因&mdash;&mdash;电压不稳。<br />
+	小结：<br />
+	工作电压不稳定，会使ADSLModem自动重启，造成ADSL频繁掉线。在本次案例的使用环境中，由于笔记本使用电源适配器供电，不会感觉到电压的不稳。而ADSL则不然，所以在面对类似问题时，我们应先观察ADSLModem的指示灯，并测量其电压。</p>
+<h3>
+	案例三：高峰时段ADSL频繁掉线</h3>
+<p>
+	&nbsp;&nbsp;&nbsp;小A：我是PPPoE虚拟拨号用户，通过无线路由器拨号上网。最近每天晚上7点至8点之间就会无规律掉线。<br />
+	&nbsp;&nbsp;&nbsp;小B：掉线后再拨号可以连接上吗？<br />
+	&nbsp;&nbsp;&nbsp;小A：重新拨号后就可以重新上网，不过一会儿还是会掉线。<br />
+	&nbsp;&nbsp;&nbsp;小B：还有什么其它现象吗？<br />
+	&nbsp;&nbsp;&nbsp;小A：因为是通过无线路由器自动拨号，感觉就是闪断一下就恢复了。<br />
+	&nbsp;&nbsp;&nbsp;小B：这样啊，先查看无线路由日志看看吧。<br />
+	&nbsp;&nbsp;&nbsp;问题探索：<br />
+	&nbsp;&nbsp;&nbsp;因为是通过路由器自动拨号上网，路由器的日志里会记录每次拨号的记录，所以我们先去看看日志情况。遗憾的是，在查看过日志后，我们并没有发现掉线的原因，所以还要进一步检查，于是我们暂时先移除了无线路由。<br />
+	&nbsp;&nbsp;&nbsp;移除无线路由后，使用XP自带的拨号软件上网，ADSL掉线时，发现宽带连接会自动断开，之后再手动点击连接后又可以上网。每逢晚上上网高峰，掉线的频率会更高。再仔细检查ADSL宽带线路，一切都正常。没有办法，只能求助宽带运营商帮忙，客服人员解释说，由于宽带用户急骤增加，宽带服务器在上网高峰期不堪重负，用户只能重新拨号，或使用另外一台服务器提供的宽带接入服务。<br />
+	&nbsp;&nbsp;&nbsp;那么如何指定这台拨号服务器呢？在无线路由的设置中，可以指定拨号服务器的名字，这样拨号时就可以直接使用指定的拨号服务器。修改之后，在高峰上网也再没有出现掉线的现象。<br />
+	&nbsp;&nbsp;&nbsp;小结：<br />
+	&nbsp;&nbsp;&nbsp;检查ADSL问题时，最好选择单机检测，这样可以更加准确地找到故障的原因。再通过排除方法检测各种问题，如果最后实在查不出原因，你的问题很可能出在运营商的服务器端，这时就可以咨询ADSL的客服人员了。</p>
+<h3>
+	案例四：频繁掉线网页打不开QQ登不上</h3>
+<p>
+	&nbsp;&nbsp;&nbsp;小A：我家用的是2MADSL，使用WindowsXP自带的拨号软件上网，最近总是频繁掉线。<br />
+	&nbsp;&nbsp;&nbsp;小B：连接时有数据流吗？<br />
+	&nbsp;&nbsp;&nbsp;小A：有啊，但是无法打开网页，也无法登录QQ。<br />
+	&nbsp;&nbsp;&nbsp;小B：这样啊，不应该啊。<br />
+	&nbsp;&nbsp;&nbsp;小A：一边掉线时，我都是在进行BT下载。<br />
+	&nbsp;&nbsp;&nbsp;小B：&hellip;&hellip;果然是BT的原因。<br />
+	&nbsp;&nbsp;&nbsp;小A：那怎么办啊？我就是为了BT才升级到2MADSL的啊。为什么下BT就掉线啊？有解决办法吗？<br />
+	&nbsp;&nbsp;&nbsp;小B：&hellip;&hellip;有。<br />
+	&nbsp;&nbsp;&nbsp;问题探索：<br />
+	&nbsp;&nbsp;&nbsp;解决方法很简单，其实像BT这样的P2P下载软件都提供了&ldquo;预防断流&rdquo;这样的功能，我们只需开启此功能，ADSL就不会因为数据流量过大而闪断了。不过由于BT、电驴等P2P下载软件在下载文件的同时，还要上传文件，会占用大量的带宽。为了不影响用户的其他正常网络应用，我们应对这些P2P下载软件上、下行带宽限制，这样不仅可以让BT下载更稳定，还能保证上网操作不受影响。<br />
+	&nbsp;&nbsp;&nbsp;小结：由于P2P下载非常消耗带宽，所以如果不加以控制，很可能导致ADSL掉线甚至是死机。所以建议大家在进行BT下载时，对其进行上、下行带宽限制。</p>
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;总结：</h3>
+<p>
+	&nbsp;&nbsp;&nbsp;造成ADSL频繁断线的原因很多，解决方法也不尽相同，所以我们推荐最高效的检查方法&mdash;&mdash;排除法，从单机测试、查杀病毒、查看散热等最基本问题开始探索，通过观察ADSL的工作状态，最终一定可以找到问题的根源。如果实在没辙，别忘了拨打运营商的客服电话咨询。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

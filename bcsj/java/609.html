@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>教你成为一名优秀的JSP程序员</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="教你成为一名优秀的JSP程" />
+  <meta name="description" content="在网上看到很多问题是关于如何学习jsp的，正好网上看到一篇关于学习jsp的文章，就摘了一部分翻译过来，希望能对大家学习jsp有点指导。 一个普通的错误是把JSP当作简化的Java。它不是" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>教你成为一名优秀的JSP程序员</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：3次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="609" class="art_content">　　在网上看到很多问题是关于如何学习jsp的，正好网上看到一篇关于学习jsp的文章，就摘了一部分翻译过来，希望能对大家学习jsp有点指导。&nbsp;<br />
+　　一个普通的错误是把JSP当作简化的&nbsp;Java。它不是，（事实上,&nbsp;JSP&nbsp;是简化的&nbsp;servlets&nbsp;。）程序员通常试着没有学习要求的支持技巧而&nbsp;直接学习&nbsp;JSP&nbsp;。JSP&nbsp;是一个衔接技术，并且成功地连接你需要理解的另外的技术。<br />
+<br />
+　　如果你已经知道&nbsp;Java&nbsp;，&nbsp;HTML&nbsp;和&nbsp;Javascript，这意味着&nbsp;JSP&nbsp;将确实是简单的。&nbsp;需要成为一个成功的&nbsp;JSP&nbsp;程序员可以参考这个时间表。请注意下列：&nbsp;*忽略你已经熟悉的步骤。&nbsp;*训练的时间只是代表学习好足够的基础时间，这样才能转移到下一步。&nbsp;<br />
+<br />
+　　１、建立并且理解你的Web&nbsp;Server。&nbsp;<br />
+<br />
+因为Apache&nbsp;是免费的并且在大多数平台上工作，为训练目的推荐&nbsp;Apache。&nbsp;安装时间：2&nbsp;天。&nbsp;<br />
+<br />
+　　２、&nbsp;保证你理解&nbsp;HTML&nbsp;/&nbsp;XHTML&nbsp;。<br />
+<br />
+　　你将需要了解html基础,&nbsp;特别是&nbsp;HTML&nbsp;布局中的table的使用。XHTML&nbsp;不久将代替&nbsp;HTML&nbsp;，学习&nbsp;XHTML&nbsp;的基础是一个好主意。许多程序员&nbsp;通过&nbsp;HTML&nbsp;IDE&nbsp;学习&nbsp;HTML&nbsp;(&nbsp;集成开发环境&nbsp;)&nbsp;。因为大多数&nbsp;HTML&nbsp;IDE产生混乱的HTMl语法，所以花时间学习手工写作html是很有必要的。因&nbsp;为你将会使用&nbsp;JSP&nbsp;和&nbsp;HTML&nbsp;混合编程，精通HTML语法是重要的。所以，你必须能流利地写&nbsp;HTML&nbsp;。&nbsp;训练时间：2&nbsp;～&nbsp;4&nbsp;个星期。&nbsp;<br />
+<br />
+　　３、开始学习&nbsp;Java&nbsp;。<br />
+<br />
+　　开始学习&nbsp;Java&nbsp;1.3&nbsp;理解&nbsp;Java&nbsp;基础是很重要的。不用担心学习Swing或&nbsp;Java&nbsp;的图形方面，因为在JSP&nbsp;中你不会使用这些特征。集中精力&nbsp;在&nbsp;Java&nbsp;工作的细节，学习&nbsp;Java&nbsp;的逻辑，也在&nbsp;Java&nbsp;Bean上花时间。学习Applet是好的,&nbsp;但是就象Swing，&nbsp;JSP&nbsp;的大多数应用将不使用小程&nbsp;序。&nbsp;训练时间：3&nbsp;～&nbsp;6&nbsp;个星期。<br />
+&nbsp;<br />
+　　４、学习&nbsp;JavaScript&nbsp;<br />
+<br />
+　　学习怎么将&nbsp;JavaScript在HTML中验证输入的Form元素。也学习&nbsp;JavaScript怎么能在一&nbsp;HTML&nbsp;页以内修改Form的元素。最后要求你能从一&nbsp;HTML&nbsp;页内的事件中触发&nbsp;JavaScript&nbsp;Function。&nbsp;训练时间：一～&nbsp;2&nbsp;个星期。&nbsp;<br />
+<br />
+　　５、学习并且理解你的Web&nbsp;Server的更好的细节。&nbsp;<br />
+<br />
+　　熟悉Web&nbsp;Server的特征，这是很重要的。&nbsp;训练时间：2&nbsp;天。&nbsp;<br />
+<br />
+　　６、建立你的&nbsp;JSP&nbsp;Server<br />
+<br />
+　　我推荐以Tomcat开始。它可以很好地运行JSP程序。当你不能在生产使用Tomcat时，学习尽可能多的知识以便于更好的运行程序。另外,&nbsp;许&nbsp;多&nbsp;JSP&nbsp;程序员使用Tomcat。因此当你遇到一个问题时，你将容易发现帮助。&nbsp;安装时间：一～&nbsp;2&nbsp;天。&nbsp;<br />
+<br />
+　　７、开始学习&nbsp;JSP&nbsp;。&nbsp;<br />
+<br />
+　　基本的&nbsp;JSP&nbsp;学习通过的步骤&nbsp;1到步骤6可以完成,&nbsp;然后使用&nbsp;JSP&nbsp;对象和脚本写&nbsp;JSP&nbsp;程序来联系。学习&nbsp;JSP&nbsp;的另外一个方面可以学习怎么创&nbsp;建一个分布式的应用程序。&nbsp;训练时间：4&nbsp;～&nbsp;6&nbsp;个星期。<br />
+&nbsp;<br />
+　　８、学习更多的&nbsp;JSP&nbsp;server。<br />
+<br />
+&nbsp;　　没有关于更多的&nbsp;JSP&nbsp;Server当然也可以运行jsp程序。然而,&nbsp;许多&nbsp;JSP&nbsp;server都由自己特殊的特征，可以让你更好的理解你的JSP&nbsp;工程。&nbsp;学习更多的Jsp&nbsp;server如何处理jsp程序是有必要的。同样也可以优化你的&nbsp;JSP&nbsp;应用程序，并且使之运行得更快而不出任何问题。&nbsp;训练时间：2&nbsp;～&nbsp;7&nbsp;天。&nbsp;<br />
+<br />
+　　９、&nbsp;学习&nbsp;JDBC&nbsp;。<br />
+<br />
+　　JSP&nbsp;大多数应用将使用数据库，JDBC&nbsp;被用于数据库连接。经常忽略的一个事实就是，每个&nbsp;JDBC&nbsp;Driver&nbsp;所支持的东西是相当不同的。了&nbsp;解并熟悉在jsp工程上被使用的&nbsp;JDBC&nbsp;driver的细节是很重要的。&nbsp;（有时这部分的学习被包含在前面&nbsp;Java&nbsp;或JSP的学习中了&nbsp;。）&nbsp;训练时间：1～&nbsp;2&nbsp;个星期。<br />
+&nbsp;<br />
+　　到现在，你已经成为了熟练的&nbsp;JSP&nbsp;程序员。仍然有很多需要学习，你可以考虑扩展你的知识比如&nbsp;DHTML&nbsp;，&nbsp;XML&nbsp;，java证书，&nbsp;JSP&nbsp;Tag&nbsp;Libraries&nbsp;或&nbsp;Servlets&nbsp;,&nbsp;看你想要造什么类型的网站而决定了。&nbsp;这些训练是JSP&nbsp;的核心。<br />
+<br />
+　　你不必都学习上面所有的,&nbsp;取决于你在工程中分配到什么任务和你已经有什么知识。但是这是我成功地训练程序员&nbsp;的时间表。关键的单元是时间。平均的说,&nbsp;5&nbsp;个月时间确实能够训练一个人&nbsp;(&nbsp;从开始到完成&nbsp;)&nbsp;成为一个对jsp熟悉程序员。5&nbsp;个月时间似乎很&nbsp;长，但要成为一个资深的WEB程序员所学的东西远远不止这一些。<br />
+<br />
+　　也许你认为这样学习一种语言花费的时间太长了，因为学&nbsp;ASP&nbsp;会更快、时间会更短。&nbsp;但是学习&nbsp;ASP&nbsp;不需要学习java的。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

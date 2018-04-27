@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cas完全配置</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="cas,完全,配置,服务,端,配置,cas,是个,好东西," />
+  <meta name="description" content="服务端配置 cas是个好东西，很灵活很好用，但是配置起来很麻烦，网上资料比较零碎。不弄个三五天根本不知道其中的原理，终于在多天的奋斗中配置成功，现在将配置的一些过程记录" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>cas完全配置</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：24次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1420" class="art_content"><p>
+	服务端配置<br />
+	cas是个好东西，很灵活很好用，但是配置起来很麻烦，网上资料比较零碎。不弄个三五天根本不知道其中的原理，终于在多天的奋斗中配置成功，现在将配置的一些过程记录下来供大家参考。</p>
+<p>
+	<br />
+	cas官方网站</p>
+<p>
+	<a href="http://www.jasig.org/cas">http://www.jasig.org/cas</a></p>
+<p>
+	下载最新的服务端 CAS Server 3.3.3 Final(<a href="http://www.jasig.org/cas/download/cas-server-333-final">http://www.jasig.org/cas/download/cas-server-333-final</a>)</p>
+<p>
+	1、将服务器端解压，将modules下面的cas-server-webapp-3.3.3.war部署到web服务器，重命名为CAS.war，作为单点的服务器。</p>
+<p>
+	2、导入modules中的cas-server-support-jdbc-3.3.3.jar包</p>
+<p>
+	3、导入数据库驱动</p>
+<p>
+	4、导入附件中的所有文件 (commons-dbcp.jar,commons-pool-1.3.jar,spring.jar)<br />
+	&nbsp;<wbr /></p>
+<p>
+	数据库：<br />
+	CREATE TABLE `users` (<br />
+	&nbsp;<wbr />&nbsp;`username` varchar(50) DEFAULT NULL,<br />
+	&nbsp;<wbr />&nbsp;`password` varchar(50) DEFAULT NULL,<br />
+	&nbsp;<wbr />&nbsp;`is_admin` int(11) DEFAULT NULL,<br />
+	&nbsp;<wbr />&nbsp;`id` int(11) DEFAULT NULL<br />
+	)</p>
+<p>
+	insert&nbsp;<wbr />&nbsp;into `users`(`username`,`password`,`is_admin`,`id`) values (&#39;zjx&#39;,&#39;202cb962ac59075b964b0715<wbr />2d234b70&#39;,1,123);</p>
+<p>
+	<br />
+	登录的服务器下面很多配置文件，通过配置可以做一些扩展。</p>
+<p>
+	修改点1：验证方式使用我们自己的用户表验证</p>
+<p>
+	cas和当前已有的系统做集成的入口</p>
+<p>
+	1.修改deployerConfigContext.xml文件</p>
+<p>
+	添加数据源配置</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean id=&quot;casDataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;driverClassName&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;url&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;value&gt;jdbc:mysql://localhost/ires?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true&lt;/value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;username&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;value&gt;root&lt;/value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;password&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;value&gt;i709394&lt;/value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	定义MD5的加密方式</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	<br />
+	&lt;bean id=&quot;passwordEncoder&quot;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;class=&quot;org.jasig.cas.authentication.handler.DefaultPasswordEncoder&quot; &gt;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;constructor-arg value=&quot;MD5&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;</p>
+<p>
+	配置authenticationManager下面的authenticationHandlers属性</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean class=&quot;org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticat<wbr />ionHandler&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;dataSource&quot; ref=&quot;casDataSource&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;sql&quot; value=&quot;select password from users where username = ?&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property&nbsp;<wbr />&nbsp;name=&quot;passwordEncoder&quot;&nbsp;<wbr />&nbsp;ref=&quot;passwordEncoder&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;</p>
+<p>
+	修改点2：获取用户信息保存，方便各个客户端可以统一得到用户信息</p>
+<p>
+	1.定义attributeRepository，通过jdbc查询用户的详细信息，可以把用户表或用户的所属组织机构或角色等查询出来。</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean id=&quot;attributeRepository&quot; class=&quot;org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttri<wbr />buteDao&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;constructor-arg index=&quot;0&quot; ref=&quot;casDataSource&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;constructor-arg index=&quot;1&quot; &gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;list&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;value&gt;username&lt;/value&gt;&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;/list&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;&lt;/constructor-arg&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;constructor-arg index=&quot;2&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />select id,username,is_admin from users where username = ?&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;/value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;/constructor-arg&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;property name=&quot;columnsToAttributes&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;map&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&lt;entry key=&quot;id&quot; value=&quot;id&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&lt;entry key=&quot;username&quot; value=&quot;username&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&lt;entry key=&quot;is_admin&quot; value=&quot;is_admin&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&lt;/map&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	2.配置authenticationManager中credentialsToPrincipalRe<wbr />solvers属性</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	<br />
+	&lt;bean class=&quot;org.jasig.cas.authentication.principal.UsernamePasswordCredenti<wbr />alsToPrincipalResolver&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;attributeRepository&quot; ref=&quot;attributeRepository&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	注意：默认cas登录服务器没有把用户信息传到客户端中，所以要修改WEB-INF\view\jsp\protocol\2.0\casServiceValidationSucc<wbr />ess.jsp文件，增加</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	<br />
+	&lt;c:if test=&quot;${fn:length(assertion.chainedAuthentications[fn:length(assertion.chainedAuthentications)-1].principal.attributes) &gt; 0}&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;cas:attributes&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;c:forEach var=&quot;attr&quot; items=&quot;${assertion.chainedAuthentications[fn:length(assertion.chainedAuthentications)-1].principal.attributes}&quot;&gt;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;cas:${fn:escapeXml(attr.key)}&gt;${fn:escapeXml(attr.value)}&lt;/cas:${fn:escapeXml(attr.key)}&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/c:forEach&gt;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/cas:attributes&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/c:if&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	修改点3：用数据库来保存登录的会话</p>
+<p>
+	这样服务器在重新启动的时候不会丢失会话。</p>
+<p>
+	1.修改ticketRegistry.xml文件</p>
+<p>
+	将默认的ticketRegistry改成</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	<br />
+	&lt;bean id=&quot;ticketRegistry&quot; class=&quot;org.jasig.cas.ticket.registry.JpaTicketRegistry&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;constructor-arg index=&quot;0&quot; ref=&quot;entityManagerFactory&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean id=&quot;entityManagerFactory&quot; class=&quot;org.springframework.orm.jpa.LocalContainerEntityMana<wbr />gerFactoryBean&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;jpaVendorAdapter&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean class=&quot;org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapte<wbr />r&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;generateDdl&quot; value=&quot;true&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;showSql&quot; value=&quot;true&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;jpaProperties&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;props&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;prop key=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/prop&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;prop key=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/prop&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/props&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.jpa.JpaTransactionManager&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:entityManagerFactory-ref=&quot;entityManagerFactory&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;id=&quot;dataSource&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:driverClassName=&quot;com.mysql.jdbc.Driver&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:url=&quot;jdbc:mysql://192.168.1.100:3306/cas?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:password=&quot;709394&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:username=&quot;itravel&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	配置完之后还需要一些jar的支持，根据提示那些包缺少到网上找。</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	修改点4：配置remenber me的功能，可以让客户端永久保存session</p>
+<p>
+	1.修改deployerConfigContext.xml文件</p>
+<p>
+	authenticationManager增加authenticationMetaDataPo<wbr />pulators属性</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;property name=&quot;authenticationMetaDataPo<wbr />pulators&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;list&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean class=&quot;org.jasig.cas.authentication.principal.RememberMeAuthentication<wbr />MetaDataPopulator&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/list&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	2.修改cas-servlet.xml</p>
+<p>
+	修改authenticationViaFormAct<wbr />ion配置变成</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean id=&quot;authenticationViaFormAct<wbr />ion&quot; class=&quot;org.jasig.cas.web.flow.AuthenticationViaFormAct<wbr />ion&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:centralAuthenticationSer<wbr />vice-ref=&quot;centralAuthenticationSer<wbr />vice&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:formObjectClass=&quot;org.jasig.cas.authentication.principal.RememberMeUsernamePasswo<wbr />rdCredentials&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:formObjectName=&quot;credentials&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:validator-ref=&quot;UsernamePasswordCredenti<wbr />alsValidator&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:warnCookieGenerator-ref=&quot;warnCookieGenerator&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	增加UsernamePasswordCredenti<wbr />alsValidator</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean id=&quot;UsernamePasswordCredenti<wbr />alsValidator&quot; class=&quot;org.jasig.cas.validation.UsernamePasswordCredenti<wbr />alsValidator&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	修改ticketExpirationPolicies<wbr />.xml，grantingTicketExpiration<wbr />Policy配置如下，注意时间要加大，不然session很容易过期，达不到remember me的效果。</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&lt;bean id=&quot;grantingTicketExpiration<wbr />Policy&quot; class=&quot;org.jasig.cas.ticket.support.RememberMeDelegatingExpi<wbr />rationPolicy&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;sessionExpirationPolicy&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean class=&quot;org.jasig.cas.ticket.support.TimeoutExpirationPolicy&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;constructor-arg index=&quot;0&quot; value=&quot;2592000000&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;property name=&quot;rememberMeExpirationPoli<wbr />cy&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;bean class=&quot;org.jasig.cas.ticket.support.TimeoutExpirationPolicy&quot;&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;constructor-arg index=&quot;0&quot; value=&quot;2592000000&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/property&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&lt;/bean&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	修改点5：取消https验证</p>
+<p>
+	在网络安全性较好，对系统安全没有那么高的情况下可以取消https验证，使系统更加容易部署。</p>
+<p>
+	1.修改ticketGrantingTicketCook<wbr />ieGenerator.xml</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	<br />
+	&lt;bean id=&quot;ticketGrantingTicketCook<wbr />ieGenerator&quot; class=&quot;org.jasig.cas.web.support.CookieRetrievingCookieGe<wbr />nerator&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:cookieSecure=&quot;false&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:cookieMaxAge=&quot;-1&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:cookieName=&quot;CASTGC&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:cookiePath=&quot;/cas&quot; /&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	p:cookieSecure改成false，客户端web.xml中单独服务器的链接改成http</p>
+<p>
+	warnCookieGenerator.xml的p:cookieSecure同样设置为false</p>
+<p>
+	deployerConfigContext.xml 改成：<br />
+	&lt;bean class=&quot;org.jasig.cas.authentication.handler.support.HttpBasedServiceCredenti<wbr />alsAuthenticationHandler<wbr />&quot;&nbsp;<wbr />&nbsp;<wbr />&nbsp;p:httpClient-ref=&quot;httpClient&quot; p:requireSecure=&quot;false&quot;/&gt;<br />
+	增加p:requireSecure=&quot;false&quot;<br />
+	&nbsp;<wbr /></p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	使用https协议的配置</p>
+<p>
+	1.证书生成和导入</p>
+<p>
+	下面是一个生成证书和导入证书的bat脚本，如果web应用和单独登录服务器部署在同一台机可以一起执行</p>
+<p>
+	C++代码</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	@echo off&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	if &quot;%JAVA_HOME%&quot; == &quot;&quot; goto error&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	@echo on&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	@echo off&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	cls&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem please set the env JAVA_HOME before run this bat file&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem delete alia tomcat if it is existed&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -delete -alias tomcatsso -keystore &quot;%JAVA_HOME%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -delete -alias tomcatsso -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	REM （注释： 清除系统中可能存在的名字为tomcatsso 的同名证书）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem list all alias in the cacerts&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -list -keystore &quot;%JAVA_HOME%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	REM （注释： 列出系统证书仓库中存在证书名称列表）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem generator a key&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -genkey -keyalg RSA -alias tomcatsso -dname &quot;cn=localhost&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	REM （注释：指定使用RSA算法，生成别名为tomcatsso的证书，存贮口令为changeit，证书的DN为&quot;cn=linly&quot; ，这个DN必须同当前主机完整名称一致哦，切记！！！）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem export the key&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -export -alias tomcatsso -file &quot;%java_home%/jre/lib/security/tomcatsso.crt&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	REM （注释： 从keystore中导出别名为tomcatsso的证书，生成文件tomcatsso.crt）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem import into trust cacerts&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -import -alias tomcatsso -file &quot;%java_home%/jre/lib/security/tomcatsso.crt&quot; -keystore &quot;%java_home%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	REM （注释：将tomcatsso.crt导入jre的可信任证书仓库。注意，安装JDK是有两个jre目录，一个在jdk底下，一个是独立的jre，这里的目录必须同Tomcat使用的jre目录一致，否则后面Tomcat的HTTPS通讯就找不到证书了）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem list all alias in the cacerts&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -list -keystore &quot;%JAVA_HOME%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	pause&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	:error&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	echo 请先设置JAVA_HOME环境变量&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	:end&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	3.将.keystore文件拷贝到tomcat的conf目录下面，注意.keystore会在证书生成的时候生成到系统的用户文件夹中，如windows会生产到C:\Documents and Settings\[yourusername]\下面</p>
+<p>
+	2.配置tomcat，把https协议的8443端口打开，指定证书的位置。</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	&lt;Connector port=&quot;8443&quot; maxHttpHeaderSize=&quot;8192&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;enableLookups=&quot;false&quot; disableUploadTimeout=&quot;true&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;acceptCount=&quot;100&quot; scheme=&quot;https&quot; secure=&quot;true&quot;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;keystoreFile=&quot;conf/.keystore&quot;&nbsp;<wbr />&nbsp;keystorePass=&quot;changeit&quot;&nbsp;<wbr />&nbsp;<wbr />&nbsp;truststoreFile=&quot;C:\Program Files\Java\jdk1.5.0_07\jre\lib\security\cacerts&quot;/&gt;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	客户端配置</p>
+<p>
+	cas官方网站上面的客户端下载地址比较隐秘，没有完全公开，具体地址为</p>
+<p>
+	<a href="http://www.ja-sig.org/downloads/cas-clients/">http://www.ja-sig.org/downloads/cas-clients/</a></p>
+<p>
+	下载最新的cas-client-3.1.6-release.zip(<a href="http://www.ja-sig.org/downloads/cas-clients/cas-client-3.1.6-release.zip">http://www.ja-sig.org/downloads/cas-clients/cas-client-3.1.6-release.zip</a>)</p>
+<p>
+	1.解压后把modules下面的包放到我们的web应用中</p>
+<p>
+	serverName是我们web应用的地址和端口</p>
+<p>
+	XML/HTML代码</p>
+<p>
+	注意serverName是客户端应用</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;context-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;param-name&gt;serverName&lt;/param-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&lt;param-value&gt;http://192.168.1.145:81&lt;/param-value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/context-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Single Sign Out Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.session.SingleSignOutFilter&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Single Sign Out Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;listener&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;listener-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.session.SingleSignOutHttpSession<wbr />Listener&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/listener-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/listener&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Authentication Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.authentication.AuthenticationFilter&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;init-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;param-name&gt;casServerLoginUrl&lt;/param-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;param-value&gt;http://192.168.1.100/cas/login&lt;/param-value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/init-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Validation Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.validation.Cas20ProxyReceivingTicke<wbr />tValidationFilter&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;init-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;param-name&gt;casServerUrlPrefix&lt;/param-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;param-value&gt;http://192.168.1.100/cas&lt;/param-value&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/init-param&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS HttpServletRequest Wrapper Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.util.HttpServletRequestWrappe<wbr />rFilter&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Assertion Thread Local Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;org.jasig.cas.client.util.AssertionThreadLocalFilt<wbr />er&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-class&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Authentication Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Validation Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS HttpServletRequest Wrapper Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;filter-name&gt;CAS Assertion Thread Local Filter&lt;/filter-name&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;url-pattern&gt;/*&lt;/url-pattern&gt;&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&lt;/filter-mapping&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	3.导入证书，如果不用https的话，这步可以跳过，把tomcatsso.crt证书拷贝到c盘下面，在jdk的bin目录下面运行下面的语句。</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	JavaScript代码</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	rem （注释： 清除系统中可能存在的名字为tomcatsso 的同名证书）&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -delete -alias tomcatsso -keystore &quot;%JAVA_HOME%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -delete -alias tomcatsso -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	&nbsp;<wbr />&nbsp;<wbr /><br />
+	rem 在客户端的 JVM 里导入信任的 SERVER 的证书 ( 根据情况有可能需要管理员权限 )&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /><br />
+	keytool -import -alias tomcatsso -file &quot;c:/tomcatsso.crt&quot; -keystore &quot;%java_home%/jre/lib/security/cacerts&quot; -storepass changeit&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	<br />
+	&nbsp;<wbr />客户端获取登录用户名和用户信息实例</p>
+<p>
+	Java代码</p>
+<p>
+	<br />
+	AttributePrincipal principal = (AttributePrincipal) request<br />
+	&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />.getUserPrincipal();<br />
+	String username = principal.getName();</p>
+<p>
+	System.out.println(username);</p>
+<p>
+	System.out.println(principal.getAttributes().get(&quot;id&quot;));<br />
+	System.out.println(principal.getAttributes().get(&quot;username&quot;));<br />
+	System.out.println(principal.getAttributes().get(&quot;is_admin&quot;));</p>
+<p>
+	response.setContentType(&quot;text/plain&quot;);<br />
+	response.getWriter().println(&quot;zjx&quot;);</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

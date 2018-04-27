@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Axis与XFire的比较,AXIS与CXF的比较,webService为其它程序提供接口示例，创建wsdl文件</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="webService,Axis,XFire,CXF,wsdl" />
+  <meta name="description" content="Web Service实践之开始XFire一、Axis与XFire的比较XFire是与Axis2 并列的新一代WebService平台。之所以并称为新一代，因为它：1、支持一系列Web Service的新标准--JSR181、WSDL2.0 、JAXB2、WS-Security等；" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Axis与XFire的比较,AXIS与CXF的比较,webService为其它程序提供接口示例，创建wsdl文件</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：39次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="571" class="art_content"><p>
+	Web Service实践之&mdash;&mdash;开始XFire</p>
+<p>
+	一、Axis与XFire的比较</p>
+<p>
+	XFire是与Axis2 并列的新一代WebService平台。之所以并称为新一代，因为它：</p>
+<p>
+	1、支持一系列Web Service的新标准--JSR181、WSDL2.0 、JAXB2、WS-Security等；</p>
+<p>
+	2、使用Stax解释XML,性能有了质的提高。XFire采用Woodstox 作Stax实现；</p>
+<p>
+	3、容易上手，可以方便快速地从pojo发布服务；</p>
+<p>
+	4、Spring的结合；</p>
+<p>
+	5、灵活的Binding机制，包括默认的Acegis,xmlbeans,jaxb2,castor。</p>
+<p>
+	XFire与Axis1性能的比较</p>
+<p>
+	1、XFire比Axis1.3快2-6倍</p>
+<p>
+	2、XFire的响应时间是Axis1.3的1/2到1/5</p>
+<p>
+	XFire与Axis2的比较</p>
+<p>
+	虽然XFire与Axis2都是新一代的WebService平台，但是Axis2的开发者太急于推出1.0版本，所以1.0还不是一个稳定的版本，它的开发者宣称1.1版本即将推出，希望1.1版本会是个稳定的版本。在XFire捐献给apache后有人认为Axis2将会灭亡。其实在很多人眼里，Axis2并不是pojo形式，现在也好象XFire比Axis更有市场，也有很多人开始从Axis转向XFire。</p>
+<p>
+	据说，XFire确实比Axis2简单很多</p>
+<p>
+	AXIS VS CXF</p>
+<p>
+	在SOA领域，我们认为Web Service是SOA体系的构建单元（building block）。对于作过WebService的开发人员来说，AXIS和CXF一定都不会陌生。这两个产品都是Apache孵化器下面的Web Service开源开发工具。 Axis2的最新版本是1.3，CXF现在已经到了2.0版本。</p>
+<p>
+	这两个框架 都是从已有的开源项目发展起来的。Axis2是从Axis1.x系列发展而来。CXF则是XFire和Celtix项目的结合产品。Axis2是从底层全部重新实现，使用了新的扩展性更好模块架构。 CXF也重新的深化了XFire和Celtix这两个开发工具。</p>
+<p>
+	新产品的退出导致了几个问题。是不是现有的使用Axis 1.x，XFire和Celix的应用需要迁移的新的版本上。如果一个开发人员确定要迁移它的应用到新的框架上，那么他应该选择哪一个呢？相反的，如果一个开发者决定从头开发一个新的Web Service，他应该使用哪个呢？ 这两个框架哪一个更好一些呢？</p>
+<p>
+	对于系统迁移来说，也许迁移到新的框架并不难。Axis和CXF都提供了迁移的指导。能够给开发者一些迁移的技巧和经验。但是对于这样迁移，这两个开源项目都没有提供迁移的工具。对于这样的迁移工作，尽管很值得去寻找所有的可行方案。Axis2和CXF都有各自不同的WebService开发方法，每个方法都有相当数量拥护者。</p>
+<p>
+	通过一个比较矩阵来比较Axis2和CXF变得有现实的意义。这两个项目都开发不够成熟，但是最主要的区别在以下几个方面：</p>
+<p>
+	1. CXF支持 WS-Addressing，WS-Policy， WS-RM， WS-Security和WS-I Basic Profile。Axis2不支持WS-Policy，但是承诺在下面的版本支持。</p>
+<p>
+	2. CXF可以很好支持Spring。Axis2不能</p>
+<p>
+	3. AXIS2支持更广泛的数据并对，如XMLBeans，JiBX，JaxMe和JaxBRI和它自定义的数据绑定ADB。注意JaxME和JaxBRI都还是试验性的。CXF只支持JAXB和Aegis。在CXF2.1</p>
+<p>
+	4. Axis2支持多语言-除了Java,他还支持C/C++版本。</p>
+<p>
+	比较这两个框架的Web Service开发方法与比较它们的特性同样重要。 从开发者的角度，两个框架的特性相当的不同。 Axis2的开发方式类似一个小型的应用服务器，Axis2的开发包要以WAR的形式部署到Servlet容器中，比如Tomcat，通过这些容器可以对工作中的Web Service进行很好的监控和管理。Axis2 的Web administrion模块可以让我们动态的配置Axis2.一个新的服务可以上载，激活，使之失效，修改web服务的参数。管理UI也可以管理一个或者多个处于运行状态的服务。这种界面化管理方式的一个弊端是所有在运行时修改的参数没有办法保存，因为在重启动之后，你所做的修改就会全部失效。</p>
+<p>
+	Axis2允许自己作为独立的应用来发布Web Service，并提供了大量的功能和一个很好的模型，这个模型可以通过它本身的架构（modular architecture）不断添加新的功能。有些开发人员认为这种方式对于他们的需求太过于繁琐。这些开发人员会更喜欢CXF。</p>
+<p>
+	CXF更注重开发人员的工效（ergonomics）和嵌入能力（embeddability）。大多数配置都可以API来完成，替代了比较繁琐的XML配置文件， Spring的集成性经常的被提及，CXF支持Spring2.0和CXF&#39;s API和Spring的配置文件可以非常好的对应。CXF强调代码优先的设计方式（code-first design)，使用了简单的API使得从现有的应用开发服务变得方便。</p>
+<p>
+	不过你选择Axis2还是CXF，你都可以从开源社区得到大量的帮助。这两个框架都有商业公司提供服务，WSO2提供AXIS2的支持，Iona提供CXF的支持。这两公司都有很活跃的开发者社区。 Axis2出现的时间较早，CXF的追赶速度快。我的建议是：如果你需要多语言的支持，你应该选择AXIS2。如果你需要把你的实现侧重JAVA并希望和Spring集成，CXF就是更好的选择，特别是把你的Web Service嵌入其他的程序中。如果你觉得这两个框架的新特性对于你并没有太大的用处，你会觉得Axis1也是不错的选择，你应该继续使用它知道你有充分的理由去更换它。</p>
+<p>
+	二、开始XFire的示例代码编写：</p>
+<p>
+	源代码下载地址: webservice下载</p>
+<p>
+	下载地址:http://download.csdn.net/detail/zenson_g/5126810</p>
+<p>
+	以下是对代码的解释,可以把示例项目下载导入MyEclipse中，导入相应jar包直接运行。</p>
+<p>
+	1、配置XFire运行环境：</p>
+<p>
+	在Tomcat下新建一个Web Applications，命名为stove，然后在其WEB-INF目录下新建一个web.xml文件，文件中输入：</p>
+<p>
+	Xml代码</p>
+<p>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;GB2312&quot;&gt;</p>
+<p>
+	&lt;!DOCTYPE web-app</p>
+<p>
+	&nbsp;&nbsp;&nbsp; PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &quot;<a href="http://java.sun.com/dtd/web-app_2_3.dtd">http://java.sun.com/dtd/web-app_2_3.dtd</a>&quot;&gt;&nbsp;&nbsp;&nbsp;</p>
+<p>
+	&lt;web-app&gt;</p>
+<p>
+	&nbsp; &lt;servlet&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;XFireServlet&lt;/servlet-name&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;display-name&gt;XFire Servlet&lt;/display-name&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;servlet-class&gt;org.codehaus.xfire.transport.http.XFireConfigurableServlet&lt;/servlet-class&gt;</p>
+<p>
+	&nbsp; &lt;/servlet&gt;</p>
+<p>
+	&nbsp; &lt;servlet-mapping&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;XFireServlet&lt;/servlet-name&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;url-pattern&gt;/servlet/XFireServlet/*&lt;/url-pattern&gt;</p>
+<p>
+	&nbsp; &lt;/servlet-mapping&gt;</p>
+<p>
+	&nbsp; &lt;servlet-mapping&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;XFireServlet&lt;/servlet-name&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;url-pattern&gt;/services/*&lt;/url-pattern&gt;</p>
+<p>
+	&nbsp; &lt;/servlet-mapping&gt;</p>
+<p>
+	&lt;/web-app&gt;</p>
+<p>
+	其中主要就是引入了XFireServlet，用以处理Web Service请求，并且负责提供Web Service的WSDL，如果你发布了一个名为BookService的WebService，则可以通过网址：</p>
+<p>
+	http://&lt;服务器&gt;[:端口]/&lt;webapp名&gt;/services/BookService</p>
+<p>
+	来访问这个WebService，并且通过地址：</p>
+<p>
+	http://&lt;服务器&gt;[:端口]/&lt;webapp名&gt;/services/BookService?WSDL&nbsp; 来得到这个WebService的WSDL信息。</p>
+<p>
+	2、开发最简单的WebService</p>
+<p>
+	在WEB-INF目录下新建src文件夹，然后再建一个package:</p>
+<p>
+	cn.com.pansky.webservice.xfire.study</p>
+<p>
+	，在这个包下面新建一个接口：</p>
+<p>
+	Java代码&nbsp;</p>
+<p>
+	package cn.com.pansky.webservice.xfire.study;</p>
+<p>
+	public interface SayHiService{</p>
+<p>
+	&nbsp; public String sayHi(String name);</p>
+<p>
+	}</p>
+<p>
+	这个接口是告诉服务器你的WebService哪些方法可以被用户调用的。下面我们再来写一个SayHiService的实现类，以完成业务逻辑：</p>
+<p>
+	Java代码</p>
+<p>
+	package cn.com.pansky.webservice.xfire.study;</p>
+<p>
+	public class SayHiServiceImpl implements SayHiService{</p>
+<p>
+	&nbsp; public String sayHi(String name){</p>
+<p>
+	&nbsp;&nbsp;&nbsp; if(name==null){</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return &quot;连名字也不肯告诉我吗？&quot;;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	&nbsp;&nbsp;&nbsp; return name+&quot;, 你吃了吗？没吃回家吃去吧。&quot;;</p>
+<p>
+	&nbsp; }</p>
+<p>
+	&nbsp; public String 不告诉你(){</p>
+<p>
+	&nbsp;&nbsp;&nbsp; return &quot;我的名字不告诉你！&quot;;</p>
+<p>
+	&nbsp; }</p>
+<p>
+	}</p>
+<p>
+	这个类实现了sayHi方法，该方法是可以通过WebService调用访问到的。另外还实现了一个方法&ldquo;不告诉你&rdquo;，该方法因为没有在接口SayHiService中定义，所以不能被WebService调用到。</p>
+<p>
+	这个例子足够简单吧，就跟我们刚学Java时写的&quot;Hello world&quot;没什么两样。</p>
+<p>
+	到这里为止，我们做的跟平时的Java开发没啥区别，该如何来发布WebService呢？</p>
+<p>
+	3、把JAVA类发布为WebService：</p>
+<p>
+	在WEB-INF/classes目录下新建文件夹：META-INF/xfire，然后在该文件夹下新建一个XML文件：services.xml，文件内容如下：</p>
+<p>
+	Xml代码&nbsp;</p>
+<p>
+	&lt;beans xmlns=&quot;<a href="http://xfire.codehaus.org/config/1.0">http://xfire.codehaus.org/config/1.0</a>&quot;&gt;</p>
+<p>
+	&nbsp; &lt;service&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;name&gt;SayHiService&lt;/name&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;namespace&gt;http://cn.com.pansky/SayHiService&lt;/namespace&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;serviceClass&gt;cn.com.pansky.webservice.xfire.study.SayHiService&lt;/serviceClass&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;implementationClass&gt;cn.com.pansky.webservice.xfire.study.SayHiServiceImpl&lt;/implementationClass&gt;</p>
+<p>
+	&nbsp; &lt;/service&gt;</p>
+<p>
+	&lt;/beans&gt;</p>
+<p>
+	&nbsp;这个文件定义一个WebService: SayHiService，并同时定义了接口和实现类。</p>
+<p>
+	好了，该建的文件基本建完了，现在想办法把src下的java文件编译成class，并复制到WEB-INF/classes目录下</p>
+<p>
+	4、启动Tomcat，测试WebService</p>
+<p>
+	如果Tomcat还没配置好，抽两分钟再配一下。再把Tomcat启动起来。</p>
+<p>
+	再打开浏览器，输入：</p>
+<p>
+	<a href="http://localhost/stove/services">http://localhost/stove/services</a></p>
+<p>
+	，服务器返回的结果如下：</p>
+<p>
+	Available Services:</p>
+<p>
+	&nbsp;&nbsp;&nbsp; * SayHiService [wsdl]</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp; Generated by XFire ( <a href="http://xfire.codehaus.org/">http://xfire.codehaus.org/</a> )</p>
+<p>
+	我们看到我们的WebService已经布署成功了，我们再看看它的WSDL信息：</p>
+<p>
+	Xml代码</p>
+<p>
+	&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</p>
+<p>
+	&lt;wsdl:definitions targetNamespace=&quot;<a href="http://cn.com.pansky/SayHiService">http://cn.com.pansky/SayHiService</a>&quot; xmlns:tns=&quot;<a href="http://cn.com.pansky/SayHiService">http://cn.com.pansky/SayHiService</a>&quot; xmlns:wsdlsoap=&quot;<a href="http://schemas.xmlsoap.org/wsdl/soap/">http://schemas.xmlsoap.org/wsdl/soap/</a>&quot; xmlns:soap12=&quot;<a href="http://www.w3.org/2003/05/soap-envelope">http://www.w3.org/2003/05/soap-envelope</a>&quot; xmlns:xsd=&quot;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&quot; xmlns:soapenc11=&quot;<a href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</a>&quot; xmlns:soapenc12=&quot;<a href="http://www.w3.org/2003/05/soap-encoding">http://www.w3.org/2003/05/soap-encoding</a>&quot; xmlns:soap11=&quot;<a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a>&quot; xmlns:wsdl=&quot;<a href="http://schemas.xmlsoap.org/wsdl/">http://schemas.xmlsoap.org/wsdl/</a>&quot;&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:types&gt;</p>
+<p>
+	&lt;xsd:schema xmlns:xsd=&quot;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&quot; attributeFormDefault=&quot;qualified&quot; elementFormDefault=&quot;qualified&quot; targetNamespace=&quot;<a href="http://cn.com.pansky/SayHiService%22%3E%3Cxsd:element">http://cn.com.pansky/SayHiService&quot;&gt;</a></p>
+<p>
+	<a href="http://cn.com.pansky/SayHiService%22%3E%3Cxsd:element">&lt;xsd:element</a> name=&quot;sayHi&quot;&gt;</p>
+<p>
+	&lt;xsd:complexType&gt;</p>
+<p>
+	&lt;xsd:sequence&gt;</p>
+<p>
+	&lt;xsd:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;in0&quot; nillable=&quot;true&quot; type=&quot;xsd:string&quot;/&gt;</p>
+<p>
+	&lt;/xsd:sequence&gt;</p>
+<p>
+	&lt;/xsd:complexType&gt;</p>
+<p>
+	&lt;/xsd:element&gt;</p>
+<p>
+	&lt;xsd:element name=&quot;sayHiResponse&quot;&gt;</p>
+<p>
+	&lt;xsd:complexType&gt;</p>
+<p>
+	&lt;xsd:sequence&gt;</p>
+<p>
+	&lt;xsd:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;out&quot; nillable=&quot;true&quot; type=&quot;xsd:string&quot;/&gt;</p>
+<p>
+	&lt;/xsd:sequence&gt;</p>
+<p>
+	&lt;/xsd:complexType&gt;</p>
+<p>
+	&lt;/xsd:element&gt;</p>
+<p>
+	&lt;/xsd:schema&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:types&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:message name=&quot;sayHiRequest&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdl:part name=&quot;parameters&quot; element=&quot;tns:sayHi&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:part&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:message&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:message name=&quot;sayHiResponse&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdl:part name=&quot;parameters&quot; element=&quot;tns:sayHiResponse&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:part&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:message&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:portType name=&quot;SayHiServicePortType&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdl:operation name=&quot;sayHi&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdl:input name=&quot;sayHiRequest&quot; message=&quot;tns:sayHiRequest&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:input&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdl:output name=&quot;sayHiResponse&quot; message=&quot;tns:sayHiResponse&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:output&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:operation&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:portType&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:binding name=&quot;SayHiServiceHttpBinding&quot; type=&quot;tns:SayHiServicePortType&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdlsoap:binding style=&quot;document&quot; transport=&quot;<a href="http://schemas.xmlsoap.org/soap/http&quot;/">http://schemas.xmlsoap.org/soap/http&quot;/</a>&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdl:operation name=&quot;sayHi&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdlsoap:operation soapAction=&quot;&quot;/&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdl:input name=&quot;sayHiRequest&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdlsoap:body use=&quot;literal&quot;/&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/wsdl:input&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdl:output name=&quot;sayHiResponse&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdlsoap:body use=&quot;literal&quot;/&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/wsdl:output&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:operation&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:binding&gt;</p>
+<p>
+	&nbsp; &lt;wsdl:service name=&quot;SayHiService&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;wsdl:port name=&quot;SayHiServiceHttpPort&quot; binding=&quot;tns:SayHiServiceHttpBinding&quot;&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;wsdlsoap:address location=&quot;<a href="http://localhost/stove/services/SayHiService&quot;/">http://localhost/stove/services/SayHiService&quot;/</a>&gt;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; &lt;/wsdl:port&gt;</p>
+<p>
+	&nbsp; &lt;/wsdl:service&gt;</p>
+<p>
+	&lt;/wsdl:definitions&gt;</p>
+<p>
+	&nbsp;这个文件跟我们用Axis生成的基本是一样的。</p>
+<p>
+	5、享受美味的时刻</p>
+<p>
+	WebService这道大餐算是烹制好了，现在是享用美餐的时候了。</p>
+<p>
+	我们写一个客户端吃掉这道大餐：</p>
+<p>
+	Java代码</p>
+<p>
+	package cn.com.pansky.webservice.xfire.study;</p>
+<p>
+	import java.net.MalformedURLException;</p>
+<p>
+	import java.util.Map;</p>
+<p>
+	import org.codehaus.xfire.client.Client;</p>
+<p>
+	import org.codehaus.xfire.client.XFireProxyFactory;</p>
+<p>
+	import org.codehaus.xfire.service.Service;</p>
+<p>
+	import org.codehaus.xfire.service.binding.ObjectServiceFactory;</p>
+<p>
+	import org.codehaus.xfire.transport.http.CommonsHttpMessageSender;</p>
+<p>
+	public class SayHiClient{</p>
+<p>
+	&nbsp; public static void main(String args[]) {</p>
+<p>
+	&nbsp;&nbsp;&nbsp; String serviceURL = &quot;<a href="http://localhost/stove/services/SayHiService">http://localhost/stove/services/SayHiService</a>&quot;;</p>
+<p>
+	&nbsp;&nbsp;&nbsp; Service serviceModel = new ObjectServiceFactory().create(SayHiService.class,null,&quot;<a href="http://cn.com.pansky/SayHiService&quot;,null">http://cn.com.pansky/SayHiService&quot;,null</a>);</p>
+<p>
+	&nbsp;&nbsp;&nbsp; XFireProxyFactory serviceFactory = new XFireProxyFactory();</p>
+<p>
+	&nbsp;&nbsp;&nbsp; try{</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SayHiService service = (SayHiService) serviceFactory.create(serviceModel, serviceURL);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Client client = Client.getInstance(service);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //client.addOutHandler(new OutHeaderHandler());</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // disable timeout</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; client.setProperty(CommonsHttpMessageSender.HTTP_TIMEOUT, &quot;1&quot;);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String hello = service.sayHi(&quot;张山疯&quot;);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;服务器对[张山疯] 的回答是：&quot; + hello );</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hello = service.sayHi(null);</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(&quot;服务器胡言乱语说：&quot; + hello );</p>
+<p>
+	&nbsp;&nbsp;&nbsp; } catch (MalformedURLException e) {</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e.printStackTrace();</p>
+<p>
+	&nbsp;&nbsp;&nbsp; }</p>
+<p>
+	&nbsp; }</p>
+<p>
+	}</p>
+<p>
+	&nbsp;编译这个类，再执行一下，服务器服务的结果是：</p>
+<p>
+	2008-5-22 17:39:17 org.apache.commons.httpclient.HttpMethodBase writeRequest</p>
+<p>
+	信息: 100 (continue) read timeout. Resume sending the request</p>
+<p>
+	2008-5-22 17:39:17 org.apache.commons.httpclient.HttpMethodBase readResponse</p>
+<p>
+	信息: Discarding unexpected response: HTTP/1.1 100 Continue</p>
+<p>
+	服务器对[张山疯] 的回答是：张山疯, 你吃了吗？没吃回家吃去吧。</p>
+<p>
+	2008-5-22 17:39:20 org.apache.commons.httpclient.HttpMethodBase writeRequest</p>
+<p>
+	信息: 100 (continue) read timeout. Resume sending the request</p>
+<p>
+	2008-5-22 17:39:20 org.apache.commons.httpclient.HttpMethodBase readResponse</p>
+<p>
+	信息: Discarding unexpected response: HTTP/1.1 100 Continue</p>
+<p>
+	服务器胡言乱语说：连名字也不肯告诉我吗？</p>
+<p>
+	好了，WebService布署成功。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

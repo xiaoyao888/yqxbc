@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>防范被别人蹭网的策略：如何防范无线网被“蹭”</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="无线网络,蹭网,如何防止蹭" />
+  <meta name="description" content=" " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>防范被别人蹭网的策略：如何防范无线网被“蹭”</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：48次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="315" class="art_content"><p>
+	很多家庭和单位现在都在使用无线网络，享受无线带给大家的方便，但是，无线网络中已经出现了这些不和谐的声音，针对这些蹭网的情况，那么应该如何防范呢？这里为大家祭出几个妙招。</p>
+<h3>
+	1.WEP/WPA加密</h3>
+<p>
+	首先，应该在不用网络的时候把无线路由器关掉，这是最保险的硬办法，这样就可以避免别人在自己不在的时候使用自家的网络。其次，对无线网络进行加密也是一个好方法。具体操作如下：</p>
+<p>
+	在浏览器中输入192.168.0.1进行无线路由器的配置（以D-Link无线路由器为例），在最后一步&ldquo;设定无线通讯联机&rdquo;中设置无线网络密码。802.11标准定义了一个安全协议，称为有线等效隐私WEP（Wired Equivalent Privacy），WEP能够对无线数据包进行加密，使得攻击者不能够轻松地读取这些数据包。这里提供了两种强度的加密：64位和128位。选择其中一种，然后在&ldquo;WEP密码&rdquo;输入密码，然后点击&ldquo;下一步&rdquo;完成配置即可。</p>
+<p>
+	经过加密后的无线网络，再次连接时，将提示你&ldquo;此网络需要网络密钥&rdquo;：</p>
+<p>
+	点击&ldquo;连接&rdquo;，在新的窗口中，只有输入密码才能正常连接。</p>
+<p>
+	设置好密码后，这类问题就不会出现了。</p>
+<h3>
+	2.使用更安全的WPA2加密</h3>
+<p>
+	可能有的用户也听说了，WPA加密前一阵也被破解了，那么无线安全还有什么好的解决办法呢？大家也不必过分担心，首先真正能破解WPA，也不是很容易的事儿，其次，还可以使用更安全的WPA2方式来加密。</p>
+<p>
+	WPA2加密使用的高级加密标准AES，所以不会受到WPA的破解方法影响，所以说目前使用WPA2方式加密数据通讯可以为无线网络提供足够的安全，但是WPA2方式还不是很成熟，并不是所有用户都可以顺利使用的，部分无线设备也不支持WPA2加密，所以对于这些用户和无线网络设备来说，我们只能被迫停留在不安全的WPA加密技术上。</p>
+<p>
+	未来与WPA2相关的更多安全协议会逐步推出，例如更可靠标准的WPA XP，还有WPA KB Preview，还有WPA beta正式版，以及WPA正式版SP1，这些标准与协议都会大大提高无线网络安全性的。<br />
+	<br />
+	提示：有的用户可能在无线加密设置中没有看到WPA2加密方式的选项，这是由于Windows系统的问题，Windows XP Sp2默认只支持到WPA加密，不过微软已经推出了相应的补丁，安装之后即可使用WPA2加密了，下载地址是：http://support.microsoft.com/?id=893357。但是需要注意，并非所有的网卡都支持WPA2标准，有的网卡可以通过升级驱动来解决。安装好补丁后，重启计算机，你可以看到系统已经支持WPA2加密了。</p>
+<p>
+	&nbsp;</p>
+<center>
+	&nbsp;</center>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;3.隐藏SSID<br />
+	&nbsp;&nbsp;&nbsp; SSID，即Service Set Identifier的简称，让无线客户端对不同无线网络的识别，类似我们的手机识别不同的移动运营商的机制。参数在设备缺省设定中是被AP无线接入点广播出去的，客户端只有收到这个参数或者手动设定与AP相同的SSID才能连接到无线网络。而我们如果把这个广播禁止，一般的漫游用户在无法找到 SSID的情况下是无法连接到网络的。</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;提示：需要注意的是，如果黑客利用其他手段获取相应参数，仍可接入目标网络，因此，隐藏SSID适用于一般SOHO环境当作简单口令安全方式。<br />
+	　　<br />
+	&nbsp;&nbsp;&nbsp; 4.MAC地址过滤<br />
+	<br />
+	&nbsp;&nbsp;&nbsp; 这种方式就是通过对AP的设定，将指定的无线网卡的物理地址(MAC地址)输入到AP中。而AP对收到的每个数据包都会做出判断，只有符合设定标准的才能被转发，否则将会被丢弃。</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;提示：这种方式比较麻烦，而且不能支持大量的移动客户端。另外，如果黑客盗取合法的MAC地址信息，仍可以通过各种方法适用假冒的MAC地址登陆网络，一般SOHO，小型企业工作室可以采用该安全手段。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

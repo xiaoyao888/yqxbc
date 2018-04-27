@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>无线网桥是什么意思，如何进行无线网桥设置？</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="无线网桥,无线" />
+  <meta name="description" content=" 桥，能使两地相连相通。那么，在无线网络中，两个独立的无线网络如何做到连接互通呢？这就需要我们现在要介绍的无线网桥了。想必，通过这个名字，大家都能知道它的作用。在此" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>无线网桥是什么意思，如何进行无线网桥设置？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：78次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="318" class="art_content"><p>
+	无线网桥，能使两地相连相通。那么，在无线网络中，两个独立的无线网络如何做到连接互通呢？这就需要我们现在要介绍的无线网桥了。</p>
+<p>
+	想必，通过这个名字，大家都能知道它的作用。</p>
+<p>
+	在此，我们的重点则是为大家介绍一下无线网桥是什么意思及如何进行无线网桥设置。</p>
+<p>
+	在了解无线网桥设置之前，先让我们来了解一下什么是无线网桥。</p>
+<p>
+	顾名思义就是无线网络的桥接，它可在两个或多个网络之间搭起通信的桥梁（无线网桥亦是无线AP的一种分支）。无线网桥除了具备上述有线网桥的基本特点之外，无线网桥工作在2.4G或5.8G的免申请无线执照的频段，因而比其它有线网络设备更方便部署。</p>
+<p>
+	其传输标准常采用802.11b或802.11g、802.11a标准，802.11b标准的数据速率是11Mbps，在保持足够的数据传输带宽的前提下，802.11b通常能够提供4Mbps到6Mbps的实际数据速率，而802.11g、802.11a标准的无线网桥都具备54Mbps的传输带宽，其实际数据速率可达802.11b的5倍左右。</p>
+<p>
+	在厂商的宣传描述中，虽然很多无线AP或无线路由器也具备网桥功能，亦被厂商称为无线网桥，但我们在本文中谈的无线网桥严格意义上是指传输距离在1-20公里以上产品，而非象普通无线AP或无线路由器在几百米范围内的桥接。</p>
+<p>
+	两点之间(如总部和分支机构、网络中心和小区等)建立通信连接。从客户的需求和实际勘查的状况来看传输方式，并进行适合的无线网桥设置，有以下几种传输方式：</p>
+<p>
+	(1)AB两点之间可视；没有障碍物阻挡；无电磁干扰，或干扰小；AB两点之间距离符合网桥设备通讯距离的要求。</p>
+<p>
+	可采用点对点方式直接传输：A大楼放置一台无线网桥，顶部放置一面定向天线；B大楼同样放置一台无网桥，顶部放置一面定向天线。两地的无线网桥分别通过馈线与本地天线连接后，两点的无线通讯可迅速搭建起来。无线网桥分别通过超五类双绞线连接各地的网络交换机。这样两处的网络即可连为一体。</p>
+<p>
+	(2)AB两点之间不可视，但两者之间可以通过一座C楼间接可视。并且AC两点，BC两点之间满足网桥设备通讯的要求。</p>
+<p>
+	我们采用中继方式，C楼作为中继点。AB各放置网桥，定向天线。</p>
+<p>
+	C点可选方式有：</p>
+<p>
+	放置一台网桥和一面全向天线，这种方式适合对传输带宽要求不高，距离较近的情况；</p>
+<p>
+	放置两台网桥和两面定向天线，这种方式优点在于：传输距离远，信号强，带宽和传输质量有保证。(由客户需求和实际情况而定)。&nbsp;</p>
+<p>
+	(3)：A点,B点之间不可视，但两者之间间距较近，仅几公里，且两者之间有多座建筑物。根据实际情况，可采用信号反射方案，将A点B点互连。 AB点分别放置无线网桥，定向天线，进行无线网桥设置。定向天线A发射的微波信号通过CD两座建筑反射后与定向天线B建立起通信。</p>
+<p style="text-align: left">
+	无线网桥对于那些急需扩展现有的以太网络的覆盖范围和系统容量的网络管理者来说，超过了传统布线所能达到的解决方案。无线网桥可拓展现有以太网，与高性能的无线网络连接。它可以灵活的满足您的要求。尤其在现今不断变化的办公环境下，它能够大大提高工作效益。</p>
+<p>
+	无线网桥扩展了您的有线以太网络的范围，为移动终端用户及难以布线的地区提供了方便的上网方式。特别的结构，优越的性能以及双PCMCIA插口赋予了下列的优势：</p>
+<p>
+	◎保证您的投资 双PCMCIA插口提供了一个移接到未来无线网络技术（包括局域网络标准IEEE802.11）的畅通无阻的途径，以确保您在其它的WaveLAN产品上的投资。<br />
+	◎加倍的网络容量 您同时可以使用两个PCMCIA网卡，且采用各自的频率。<br />
+	◎可以建立无线的主干网 在大型仓库及零售商店的开放性区域里，您可将无线网桥作为连接无线子网的网桥，免除重新铺线的麻烦与费用。<br />
+	◎无线网桥是WaveLAN产品系列的一员，可通过WaveMANAGER/Access　Point软件来进行管理。<br />
+	◎低费用的网络管理以Windows为基础且符合简单网管协议（SNMP）的WaveMANAGER/Access Point软件，使您方便的对无线网桥进行参数的设置。通过该套软件，您可以对网络进行集中管理、控制和远程监控。<br />
+	◎控制未经授权的访问WaveLAN的产品系列提供您4重的安全保护措施：直接序列调制扩频传输技术、NWID、Access Control、DES或AES数据加密。</p>
+<p>
+	&nbsp;</p>
+<p>
+	产品应用</p>
+<p>
+	无线网桥的典型用途包括：<br />
+	◎国际互联网接入、临时安装、或会议室环境；<br />
+	◎开放空间但无法采用有线方式，如展览会、历史建筑等；<br />
+	◎建筑物间网络互连、灾难恢复、备份；<br />
+	◎仓储和进港管理、医院、机场等。</p>
+<p>
+	技术指标</p>
+<p>
+	特征<br />
+	双PCMCIA插口结构、无线网络对无线网络网桥、IEEE802.11升级、IEEE802.1D透明网桥、多路执行延迟、选择协议过滤、访问控制面板管理、站点检测工具、远程点对点连网、多信道支持、漫游支持、加密功能</p>
+<p>
+	网络管理<br />
+	WaveMANAGER/Access Point管理软件、SNMP网络管理信息库I-II兼容、Windows视窗应用</p>
+<p>
+	LEDS</p>
+<p>
+	电源、以太网络活动状况、WaveLAN无线网状况（插口A）、WaveLAN无线网状况（插口B）</p>
+<p>
+	界面　</p>
+<p>
+	有线：10BASE-T（RJ-45接口）、10BASE-2（BNC接口）、WaveLAN双PCMCIA插口</p>
+<p>
+	无线：IEEE802.3</p>
+<p>
+	尺寸</p>
+<p>
+	50mm&times;185mm&times;261mm</p>
+<p>
+	重量</p>
+<p>
+	1.75kg</p>
+<p>
+	电源供给</p>
+<p>
+	集成模块化、自动感应100/240 VAC 50/60HZ、0.2A</p>
+<p>
+	操作温度</p>
+<p>
+	0℃~40℃（20%~80%相对湿度）</p>
+<p>
+	机械规格</p>
+<p>
+	模块化设计、塑料外包装、金属镶架</p>
+<p>
+	从作用上来理解无线网桥，它可以用于连接两个或多个独立的网络段，这些独立的网络段通常位于不同的建筑内，相距几百米到几十公里。所以说它可以广泛应用在不同建筑物间的互联。同时，根据协议不同，无线网桥又可以分为2.4GHz频段的802.11b或802.11G以及采用5.8GHz频段的 802.11a无线网桥。无线网桥有三种工作方式，点对点，点对多点，中继连接。特别适用于城市中的远距离通讯．</p>
+<p>
+	在无高大障碍（山峰或建筑）的条件下，一对速组网和野外作业的临时组网。其作用距离取决于环境和天线，现7km的点对点微波互连。一对 27dbi的定向天线可以实现10km的点对点微波互连。12dbi的定向天线可以实现2km的点对点微波互连；一对只实现到链路层功能的无线网桥是透明网桥，而具有路由等网络层功能、在网络24dbi的定向天线可以实层实现异种网络互联的设备叫无线路由器，也可作为第三层网桥使用。</p>
+<p>
+	无线网桥通常是用于室外，主要用于连接两个网络，使用无线网桥不可能只使用一个，必需两个以上，而AP可以单独使用。无线网桥功率大，传输距离远（最大可达约50km），抗干扰能力强等，不自带天线，一般配备抛物面天线实现长距离的点对点连接。</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

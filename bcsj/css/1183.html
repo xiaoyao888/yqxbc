@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>14个常用的css字体样式(Font Style),属性</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS,样式属性,font,14个常用" />
+  <meta name="description" content="序号 中文说明 标记语法 1 字体样式 {font:font-style font-variant font-weight font-size font-family} 2 字体类型 {font-family:字体1,字体2,字体3,...} 3 字体大小 {font-size:数值|inherit| medium| large| larger| x-larg" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>14个常用的css字体样式(Font Style),属性</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：20次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1183" class="art_content"><p>
+	序号 中文说明 标记语法<br />
+	1 字体样式 {font:font-style font-variant font-weight font-size font-family}&nbsp;<br />
+	2 字体类型 {font-family:&quot;字体1&quot;,&quot;字体2&quot;,&quot;字体3&quot;,...}&nbsp;<br />
+	3 字体大小 {font-size:数值|inherit| medium| large| larger| x-large| xx-large| small| smaller| x-small| xx-small}&nbsp;<br />
+	4 字体风格 {font-style:inherit|italic|normal|oblique}&nbsp;<br />
+	5 字体粗细&nbsp; {font-weight:100-900|bold|bolder|lighter|normal;}&nbsp;<br />
+	6 字体颜色&nbsp; {color:数值;}<br />
+	7 阴影颜色 {text-shadow:16位色值}<br />
+	8 字体行高&nbsp; {line-height:数值|inherit|normal;}<br />
+	9 字 间 距&nbsp; {letter-spacing:数值|inherit|normal}<br />
+	10 单词间距 {word-spacing:数值|inherit|normal}<br />
+	11 字体变形 {font-variant:inherit|normal|small-cps }&nbsp;<br />
+	12 英文转换 {text-transform:inherit|none|capitalize|uppercase|lowercase}<br />
+	13 ？ {font-size-adjust:inherit|none}&nbsp;<br />
+	14 ？ {font-stretch:condensed|expanded|extra-condensed|extra-expanded|inherit|narrower|normal| semi-condensed|semi-expanded|ultra-condensed|ultra-expanded|wider}&nbsp;</p>
+<p>
+	<strong>1. 字体样式：font</strong></p>
+<p>
+	语法：{font:font-style font-variant font-weight font-size font-family}<br />
+	　　　[ &lt;字体风格&gt; || &lt;字体变形&gt; || &lt;字体加粗&gt; ]? &lt;字体大小&gt; [ / &lt;行高&gt; ]? &lt;字体类形&gt;<br />
+	作用：简写属性，提供了对字体所有属性进行设置的快捷方法。<br />
+	注意：字体样式用作不同字体属性的略写，特别是行高。例如 P { font: italic bold 12pt/14pt Times, serif }指定该段为bold(粗体)和italic(斜体)Times或serif字体，12点大小，行高为14点。<br />
+	例子：字体字体</p>
+<p>
+	<strong>2. 字体类形：font-family</strong></p>
+<p>
+	语法：{font-family:字体1,字体2,字体3,...}<br />
+	作用：调用客户端字体<br />
+	说明：<br />
+	&middot;当指定多种字体时，用&ldquo;，&rdquo;分隔每种字体名称。<br />
+	&middot;当字体名称包含两个以上分开的单词时，用&ldquo;&rdquo;把该字体名称括起来。<br />
+	&middot;当样式规则外已经有&ldquo;&rdquo;时，用&lsquo;&rsquo;代替&ldquo;&rdquo;。<br />
+	注意：如果在font-family后加上多种字体的名称，浏览器会按字体名称的顺序逐一在用户的计算机里寻找已经安装的字体，一旦遇到与要求的相匹配的字体，就按这种字体显示网页内容，并停止搜索；如果不匹配就继续搜索，直到找到为止，万一样式表里的所有字体都没有安装的话，浏览器就会用自己默认的字体来替代显示网页的内容。 本文来自<a href="http://www.45it.com">www.45it.com</a><br />
+	例子：{font-family:黑体,隶书;}　　字体类型</p>
+<p>
+	<strong>3．字体大小：font-size</strong></p>
+<p>
+	语法：{font-size:数值|inherit| medium| large| larger| x-large| xx-large| small| smaller| x-small| xx-small}<br />
+	作用：设定文字大小，参考取值单位<br />
+	说明：使用比例关系<br />
+	&middot;xx-small<br />
+	&middot;x-small<br />
+	&middot;small<br />
+	&middot;medium<br />
+	&middot;large<br />
+	&middot;x-large<br />
+	&middot;xx-large<br />
+	例子：{font-size:18pt;}　　字体大小</p>
+<p>
+	<strong>4. 字体风格：font-style</strong></p>
+<p>
+	语法：{font-style:inherit|italic|normal|oblique}<br />
+	作用：使文本显示为扁斜体或斜体等表示强调<br />
+	说明：<br />
+	&middot;inherit　继承<br />
+	&middot;italic 　斜体<br />
+	&middot;normal　 正常<br />
+	&middot;oblique　偏斜体</p>
+<p>
+	<strong>5．字体粗细：font-weight</strong></p>
+<p>
+	语法：{font-weight:100-900|bold|bolder|lighter|normal;}<br />
+	作用：设定文字的粗细<br />
+	说明：<br />
+	&middot;bold 粗体(相当于数值700 )<br />
+	&middot;bolder 特粗体<br />
+	&middot;lighter 细体<br />
+	&middot;normal 正常体(相当于数值400)<br />
+	注意：取值范围从数字100~900，浏览器默认的字体粗细为400。另外可以通过参数lighter和bolder使得字体在原有基础上显得更细或更粗些。</p>
+<p>
+	<strong>6. 字体颜色：color</strong></p>
+<p>
+	语法：{color: 数值}</p>
+<p>
+	作用：字体颜色<br />
+	说明：颜色参数取值范围<br />
+	&middot;以RGB值表示<br />
+	&middot;以16进制（hex）的色彩值表示<br />
+	&middot;以默认颜色的英文名称表示<br />
+	注意：以默认颜色的英文名称表示无疑是最为方便的，但由于预定义的颜色种类太少，所以更多的网页设计者喜欢用RGB的方式。RGB方式的好处很多，不但可以用数字的形式精确地表示颜色，而且也是很多图像制作软件（如Photoshop）里默认使用的规范，这样一来就为图片和网页更好地结合打下了坚实的基础。</p>
+<p>
+	<br />
+	<strong>7. 文字阴影颜色：text-shadow</strong></p>
+<p>
+	<br />
+	语法：{text-shadow:16位色值}<br />
+	说明：好像不起作用?<br />
+	例子：中国中国</p>
+<p>
+	<strong>8. 字体行高</strong></p>
+<p>
+	<br />
+	语法：{line-height:数值|inherit|normal}<br />
+	作用：行与行之间的距离<br />
+	说明：取值范围<br />
+	&middot;不带单位的数字：以1为基数，相当于比例关系的100%<br />
+	&middot;带长度单位的数字：以具体的单位为准<br />
+	&middot;比例关系<br />
+	注意：行距是指上下两行基准线之间的垂直距离。一般地说，英文五线格练习本，从上往下数的第三条横线就是计算机所认为的该行的基准线。如果文字字体很大，而行距相对较小的话，可能会发生上下两行文字互相重叠的现象。</p>
+<p>
+	<strong>9. 字 间 距：letter-spacing</strong></p>
+<p>
+	<br />
+	语法：{letter-spacing:数值|inherit|normal}<br />
+	作用：控制文本元素字母间的间距，所设置的距离适用于整个元素。<br />
+	注意：数值 - 设置字间距长度，正值表示加进父元素中继承的正常长度，负值则減去正常长度。在数字后指定度量单位：ex(小写字母x的高度), em(大写字母M的宽度)。<br />
+	例子： 中国china　　 中国china</p>
+<p>
+	<strong>10. 单词间距：word-spacing</strong></p>
+<p>
+	<br />
+	语法：{word-spacing:数值|inherit|normal}<br />
+	说明：单词间距指的是英文每个单词之间的距离，不包括中文文字。间隔距离的取值：points、em、pixes、in、cm、mm、pc、ex、normal等。</p>
+<p>
+	<strong>11. 字体变形：font-variant</strong></p>
+<p>
+	<br />
+	语法：{font-variant:inherit|normal|small-cps<br />
+	作用：用于正常和小型大写字母间切换(比正常大写字母略小)<br />
+	说明：small-caps 小型大写字母</p>
+<p>
+	7. 字母大小写转换：text-transform</p>
+<p>
+	<br />
+	语法：{text-transform:inherit|none|capitalize|uppercase|lowercase}<br />
+	作用：设置一个或几个字母的大小写标准。<br />
+	说明：<br />
+	&middot;none　　　　不改变文本的大写小写。<br />
+	&middot;capitalize　元素中毎个单词的第一个字母用大写。<br />
+	&middot;uppercase　 将所有文本设置为大写。<br />
+	&middot;lowercase　 将所有文本设置为小写。<br />
+	例子：china abcd　china abcd</p>
+<p>
+	<br />
+	<strong>13. font-size-adjust </strong></p>
+<p>
+	<br />
+	语法：{font-size-adjust:inherit|none}<br />
+	作用：不详</p>
+<p>
+	<strong>14. font-stretch</strong></p>
+<p>
+	<br />
+	语法：{font-stretch:condensed | expanded | extra-condensed | extra-expanded | inherit | narrower | normal |<br />
+	　　　 semi-condensed | semi-expanded | ultra-condensed | ultra-expanded | wider}</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

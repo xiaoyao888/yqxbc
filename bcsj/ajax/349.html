@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX基础教程</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="AJAX基础教程,XML教程,网页" />
+  <meta name="description" content="什么是AJAX? AJAX(异步JavaScript和XML)是个新产生的术语,专为描述JavaScript的两项强大性能.这两项性能在多年来一直被网络开发者所忽略,直到最近Gmail,Googlesuggest和googleMaps的横空出世才使人们" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>AJAX基础教程</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：4次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="349" class="art_content"><p>
+	什么是&nbsp;AJAX?</p>
+<p>
+	AJAX&nbsp;(异步&nbsp;JavaScript&nbsp;和&nbsp;XML)&nbsp;是个新产生的术语,专为描述JavaScript的两项强大性能.这两项性能在多年来一直被网络开发者所忽略,直到最近Gmail,&nbsp;Google&nbsp;suggest和google&nbsp;Maps的横空出世才使人们开始意识到其重要性.</p>
+<p>
+	这两项被忽视的性能是:</p>
+<p>
+	*&nbsp;无需重新装载整个页面便能向服务器发送请求.</p>
+<p>
+	*&nbsp;对XML文档的解析和处理．<br />
+	<br />
+	步骤&nbsp;1&nbsp;&ndash;&nbsp;&quot;请求&quot;&nbsp;---&nbsp;如何发送一个HTTP请求</p>
+<p>
+	为了用JavaScript向服务器发送一个HTTP请求,&nbsp;需要一个具备这种功能的类实例.&nbsp;</p>
+<p>
+	这样的类首先由Internet&nbsp;Explorer以ActiveX对象引入,&nbsp;被称为XMLHTTP.&nbsp;后来Mozilla,&nbsp;Safari&nbsp;和其他浏览器纷纷仿效,&nbsp;提供了XMLHttpRequest类,它支持微软的ActiveX对象所提供的方法和属性.</p>
+<p>
+	因此,&nbsp;为了创建一个跨浏览器的这样的类实例(对象),&nbsp;可以应用如下代码:</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				if&nbsp;(window.XMLHttpRequest)&nbsp;{&nbsp;//&nbsp;Mozilla,&nbsp;Safari,&nbsp;...<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;new&nbsp;XMLHttpRequest();<br />
+				}&nbsp;else&nbsp;if&nbsp;(window.ActiveXObject)&nbsp;{&nbsp;//&nbsp;IE<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	(上例对代码做了一定简化,这是为了解释如何创建XMLHTTP类实例.&nbsp;实际的代码实例可参阅本篇步骤3.</p>
+<p>
+	如果服务器的响应没有XML&nbsp;mime-type&nbsp;header,某些Mozilla浏览器可能无法正常工作.&nbsp;为了解决这个问题,&nbsp;如果服务器响应的header不是text/xml,可以调用其它方法修改该header.</p>
+<p>
+	&nbsp;</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				http_request&nbsp;=&nbsp;new&nbsp;XMLHttpRequest();<br />
+				http_request.overrideMimeType(&#39;text/xml&#39;);</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+接下来要决定当收到服务器的响应后,需要做什么.这需要告诉HTTP请求对象用哪一个JavaScript函数处理这个响应.可以将对象的onreadystatechange属性设置为要使用的JavaScript的函数名,如下所示:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				http_request.onreadystatechange&nbsp;=&nbsp;nameOfTheFunction;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+注意:在函数名后没有括号,也无需传递参数.另外还有一种方法,可以在扉页(fly)中定义函数及其对响应要采取的行为,如下所示:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				http_request.onreadystatechange&nbsp;=&nbsp;function(){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;do&nbsp;the&nbsp;thing<br />
+				};</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+在定义了如何处理响应后,就要发送请求了.可以调用HTTP请求类的open()和send()方法,&nbsp;如下所示:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				http_request.open(&#39;GET&#39;,&nbsp;&#39;http://www.example.org/some.file&#39;,&nbsp;true);<br />
+				http_request.send(null);</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+	<br />
+	* open()的第一个参数是HTTP请求方式&nbsp;&ndash;&nbsp;GET,&nbsp;POST,&nbsp;HEAD&nbsp;或任何服务器所支持的您想调用的方式.&nbsp;按照HTTP规范,该参数要大写;否则,某些浏览器(如Firefox)可能无法处理请求.有关HTTP请求方法的详细信息可参考http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html&nbsp;W3C&nbsp;specs</p>
+<p>
+	*&nbsp;第二个参数是请求页面的URL.由于自身安全特性的限制,该页面不能为第三方域名的页面.同时一定要保证在所有的页面中都使用准确的域名,否则调用open()会得到&quot;permission&nbsp;denied&quot;的错误提示.一个常见的错误是访问站点时使用domain.tld,而当请求页面时,却使用www.domain.tld.</p>
+<p>
+	*&nbsp;第三个参数设置请求是否为异步模式.如果是TRUE,&nbsp;JavaScript函数将继续执行,而不等待服务器响应.这就是&quot;AJAX&quot;中的&quot;A&quot;.&nbsp;</p>
+<p>
+	如果第一个参数是&quot;POST&quot;,send()方法的参数可以是任何想送给服务器的数据.&nbsp;这时数据要以字符串的形式送给服务器,如下所示:</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				name=value&amp;anothername=othervalue&amp;so=on</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<h3>
+	步骤&nbsp;2&nbsp;&ndash;&nbsp;&quot;收到!&quot;&nbsp;---&nbsp;处理服务器的响应</h3>
+<br />
+当发送请求时,要提供指定处理响应的JavaScript函数名.<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				http_request.onreadystatechange&nbsp;=&nbsp;nameOfTheFunction;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+我们来看看这个函数的功能是什么.首先函数会检查请求的状态.如果状态值是4,就意味着一个完整的服务器响应已经收到了,您将可以处理该响应.<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				if&nbsp;(http_request.readyState&nbsp;==&nbsp;4)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;everything&nbsp;is&nbsp;good,&nbsp;the&nbsp;response&nbsp;is&nbsp;received<br />
+				}&nbsp;else&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;still&nbsp;not&nbsp;ready<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+readyState的取值如下:<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;0&nbsp;(未初始化)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;1&nbsp;(正在装载)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;2&nbsp;(装载完毕)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;3&nbsp;(交互中)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;4&nbsp;(完成)&nbsp;<br />
+<br />
+(Source)<br />
+<br />
+接着,函数会检查HTTP服务器响应的状态值.&nbsp;完整的状态取值可参见&nbsp;W3C&nbsp;site.&nbsp;我们着重看值为200&nbsp;OK的响应.<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				if&nbsp;(http_request.status&nbsp;==&nbsp;200)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;perfect!<br />
+				}&nbsp;else&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;there&nbsp;was&nbsp;a&nbsp;problem&nbsp;with&nbsp;the&nbsp;request,<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;for&nbsp;example&nbsp;the&nbsp;response&nbsp;may&nbsp;be&nbsp;a&nbsp;404&nbsp;(Not&nbsp;Found)<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;or&nbsp;500&nbsp;(Internal&nbsp;Server&nbsp;Error)&nbsp;response&nbsp;codes<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+在检查完请求的状态值和响应的HTTP状态值后,&nbsp;您就可以处理从服务器得到的数据了.有两种方式可以得到这些数据:<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				*&nbsp;http_request.responseText&nbsp;&ndash;&nbsp;以文本字符串的方式返回服务器的响应<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;http_request.responseXML&nbsp;&ndash;&nbsp;以XMLDocument对象方式返回响应</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+处理XMLDocument对象可以用JavaScript&nbsp;DOM函数&nbsp;<br />
+<h3>
+	步骤&nbsp;3&nbsp;&ndash;&nbsp;&quot;万事俱备!&quot;&nbsp;-&nbsp;简单实例</h3>
+<br />
+我们现在将整个过程完整地做一次,发送一个简单的HTTP请求.&nbsp;我们用JavaScript请求一个HTML文件,&nbsp;test.html,&nbsp;文件的文本内容为&quot;I&#39;m&nbsp;a&nbsp;test.&quot;.然后我们&quot;alert()&quot;test.html文件的内容.<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;script&nbsp;type=&quot;text/javascript&quot;&nbsp;language=&quot;javascript&quot;&gt;<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;http_request&nbsp;=&nbsp;false;<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;makeRequest(url)&nbsp;{<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;false;<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(window.XMLHttpRequest)&nbsp;{&nbsp;//&nbsp;Mozilla,&nbsp;Safari,...<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;new&nbsp;XMLHttpRequest();<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(http_request.overrideMimeType)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request.overrideMimeType(&#39;text/xml&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(window.ActiveXObject)&nbsp;{&nbsp;//&nbsp;IE<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(e)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request&nbsp;=&nbsp;new&nbsp;ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(e)&nbsp;{}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!http_request)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;Giving&nbsp;up&nbsp;:(&nbsp;Cannot&nbsp;create&nbsp;an&nbsp;XMLHTTP&nbsp;instance&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request.onreadystatechange&nbsp;=&nbsp;alertContents;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request.open(&#39;GET&#39;,&nbsp;url,&nbsp;true);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_request.send(null);<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;alertContents()&nbsp;{<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(http_request.readyState&nbsp;==&nbsp;4)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(http_request.status&nbsp;==&nbsp;200)&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(http_request.responseText);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;There&nbsp;was&nbsp;a&nbsp;problem&nbsp;with&nbsp;the&nbsp;request.&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&lt;/script&gt;<br />
+				&lt;span<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;style=&quot;cursor:&nbsp;pointer;&nbsp;text-decoration:&nbsp;underline&quot;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;onclick=&quot;makeRequest(&#39;test.html&#39;)&quot;&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make&nbsp;a&nbsp;request<br />
+				&lt;/span&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+本例中:<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;用户点击浏览器上的&quot;请求&quot;链接;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;接着函数makeRequest()将被调用.其参数&nbsp;&ndash;&nbsp;HTML文件test.html在同一目录下;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;这样就发起了一个请求.onreadystatechange的执行结果会被传送给alertContents();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;alertContents()将检查服务器的响应是否成功地收到,如果是,就会&quot;alert()&quot;test.html文件的内容.&nbsp;<br />
+<h3>
+	步骤&nbsp;4&nbsp;&ndash;&nbsp;&quot;X-文档&quot;&nbsp;---&nbsp;处理XML响应</h3>
+<br />
+在前面的例子中,当服务器对HTTP请求的响应被收到后,我们会调用请求对象的reponseText属性.该属性包含了test.html文件的内容.现在我们来试试responseXML属性.<br />
+<br />
+首先,我们新建一个有效的XML文件,后面我们将使用这个文件.该文件(test.xml)源代码如下所示:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;?xml&nbsp;version=&quot;1.0&quot;&nbsp;?&gt;<br />
+				&lt;root&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;I&#39;m&nbsp;a&nbsp;test.<br />
+				&lt;/root&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+在该脚本中,我们只需修改请求部分:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				...<br />
+				onclick=&quot;makeRequest(&#39;test.xml&#39;)&quot;&gt;<br />
+				...</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+接着,在alertContents()中,我们将alert()的代码alert(http_request.responseText);换成:<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				var&nbsp;xmldoc&nbsp;=&nbsp;http_request.responseXML;<br />
+				var&nbsp;root_node&nbsp;=&nbsp;xmldoc.getElementsByTagName(&#39;root&#39;).item(0);<br />
+				alert(root_node.firstChild.data);</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+这里,我们使用了responseXML提供的XMLDocument对象并用DOM方法获取存于XML文件中的内容.</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hibernate中各个包的作用</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Hibernate中各个包的作用," />
+  <meta name="description" content="下载Hibernate，例如2.0.3稳定版本，解压缩，可以看到一个hibernate2.jar和lib目录下有22个jar包： hibernate2.jar: Hibernate的库，没有什么可说的，必须使用的jar包 cglib-asm.jar: CGLIB库，Hibernate用它来" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Hibernate中各个包的作用</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：10次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="608" class="art_content">　　下载Hibernate，例如2.0.3稳定版本，解压缩，可以看到一个hibernate2.jar和lib目录下有22个jar包：&nbsp;<br />
+<br />
+　　hibernate2.jar:&nbsp;<br />
+<br />
+　　Hibernate的库，没有什么可说的，必须使用的jar包&nbsp;<br />
+<br />
+　　cglib-asm.jar:&nbsp;<br />
+<br />
+　　CGLIB库，Hibernate用它来实现PO字节码的动态生成，非常核心的库，必须使用的jar包&nbsp;<br />
+<br />
+　　dom4j.jar:&nbsp;<br />
+<br />
+　　dom4j是一个Java的XML&nbsp;API，类似于jdom，用来读写XML文件的。dom4j是一个非常非常优秀的Java&nbsp;XML&nbsp;API，具有性能优异、功能强大和极端易用使用的特点，同时它也是一个开放源代码的软件，可以在SourceForge上找到它。在IBM&nbsp;developerWorks上面可以找到一篇文章，对主流的Java&nbsp;XML&nbsp;API进行的性能、功能和易用性的评测，dom4j无论在那个方面都是非常出色的。我早在将近两年之前就开始使用dom4j，直到现在。如今你可以看到越来越多的Java软件都在使用dom4j来读写XML，特别值得一提的是连Sun的JAXM也在用dom4j。这是必须使用的jar包，Hibernate用它来读写配置文件。&nbsp;<br />
+<br />
+　　odmg.jar:&nbsp;<br />
+<br />
+　　ODMG是一个ORM的规范，Hibernate实现了ODMG规范，这是一个核心的库，必须使用的jar包。&nbsp;<br />
+<br />
+　　commons-collections.jar：&nbsp;<br />
+<br />
+　　Apache&nbsp;Commons包中的一个，包含了一些Apache开发的集合类，功能比java.util.*强大。必须使用的jar包。&nbsp;<br />
+<br />
+　　commons-beanutils.jar：&nbsp;<br />
+<br />
+　　Apache&nbsp;Commons包中的一个，包含了一些Bean工具类类。必须使用的jar包。&nbsp;<br />
+<br />
+　　commons-lang.jar:&nbsp;<br />
+<br />
+　　Apache&nbsp;Commons包中的一个，包含了一些数据类型工具类，是java.lang.*的扩展。必须使用的jar包。&nbsp;<br />
+<br />
+　　commons-logging.jar:&nbsp;<br />
+<br />
+　　Apache&nbsp;Commons包中的一个，包含了日志功能，必须使用的jar包。这个包本身包含了一个Simple&nbsp;Logger，但是功能很弱。在运行的时候它会先在CLASSPATH找log4j，如果有，就使用log4j，如果没有，就找JDK1.4带的java.util.logging，如果也找不到就用Simple&nbsp;Logger。commons-logging.jar的出现是一个历史的的遗留的遗憾，当初Apache极力游说Sun把log4j加入JDK1.4，然而JDK1.4项目小组已经接近发布JDK1.4产品的时间了，因此拒绝了Apache的要求，使用自己的java.util.logging，这个包的功能比log4j差的很远，性能也一般。<br />
+<br />
+　　后来Apache就开发出来了commons-logging.jar用来兼容两个logger。因此用commons-logging.jar写的log程序，底层的Logger是可以切换的，你可以选择log4j，java.util.logging或者它自带的Simple&nbsp;Logger。不过我仍然强烈建议使用log4j，因为log4j性能很高，log输出信息时间几乎等于System.out，而处理一条log平均只需要5us。你可以在Hibernate的src目录下找到Hibernate已经为你准备好了的log4j的配置文件，你只需要到Apache&nbsp;网站去下载log4j就可以了。commons-logging.jar也是必须的jar包。&nbsp;<br />
+<br />
+　　使用Hibernate必须的jar包就是以上的这几个，剩下的都是可选的。&nbsp;<br />
+<br />
+　　ant.jar:&nbsp;<br />
+<br />
+　　Ant编译工具的jar包，用来编译Hibernate源代码的。如果你不准备修改和编译Hibernate源代码，那么就没有什么用，可选的jar包&nbsp;<br />
+<br />
+　　optional.jar：&nbsp;<br />
+<br />
+　　Ant的一个辅助包。&nbsp;<br />
+<br />
+　　c3p0.jar：&nbsp;<br />
+<br />
+　　C3PO是一个数据库连接池，Hibernate可以配置为使用C3PO连接池。如果你准备用这个连接池，就需要这个jar包。&nbsp;<br />
+<br />
+　　proxool.jar：&nbsp;<br />
+<br />
+　　也是一个连接池，同上。&nbsp;<br />
+<br />
+　　commons-pool.jar,&nbsp;commons-dbcp.jar:&nbsp;<br />
+<br />
+　　DBCP数据库连接池，Apache的Jakarta组织开发的，Tomcat4的连接池也是DBCP。&nbsp;<br />
+<br />
+　　实际上Hibernate自己也实现了一个非常非常简单的数据库连接池，加上上面3个，你实际上可以在Hibernate上选择4种不同的数据库连接池，选择哪一个看个人的偏好，不过DBCP可能更通用一些。另外强调一点，如果在EJB中使用Hibernate，一定要用App&nbsp;Server的连接池，不要用以上4种连接池，否则容器管理事务不起作用。&nbsp;<br />
+<br />
+　　connector.jar:&nbsp;<br />
+<br />
+　　JCA&nbsp;规范，如果你在App&nbsp;Server上把Hibernate配置为Connector的话，就需要这个jar。不过实际上一般App&nbsp;Server肯定会带上这个包，所以实际上是多余的包。&nbsp;<br />
+<br />
+　　jaas.jar:&nbsp;<br />
+<br />
+　　JAAS是用来进行权限验证的，已经包含在JDK1.4里面了。所以实际上是多余的包。&nbsp;<br />
+<br />
+　　jcs.jar：&nbsp;<br />
+<br />
+　　如果你准备在Hibernate中使用JCS的话，那么必须包括它，否则就不用。&nbsp;<br />
+<br />
+　　jdbc2_0-stdext.jar:&nbsp;<br />
+<br />
+　　JDBC2.0的扩展包，一般来说数据库连接池会用上它。不过App&nbsp;Server都会带上，所以也是多余的。&nbsp;<br />
+<br />
+　　jta.jar：&nbsp;<br />
+<br />
+　　JTA规范，当Hibernate使用JTA的时候需要，不过App&nbsp;Server都会带上，所以也是多余的。&nbsp;<br />
+<br />
+　　junit.jar:&nbsp;<br />
+<br />
+　　Junit包，当你运行Hibernate自带的测试代码的时候需要，否则就不用。&nbsp;<br />
+<br />
+　　xalan.jar,&nbsp;xerces.jar,&nbsp;xml-apis.jar:&nbsp;<br />
+<br />
+　　Xerces是XML解析器，Xalan是格式化器，xml-apis实际上是JAXP。一般App&nbsp;Server都会带上，JDK1.4也包含了解析器，不过不是Xerces，是Crimson，效率比较差，不过Hibernate用XML只不过是读取配置文件，性能没什么紧要的，所以也是多余的。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

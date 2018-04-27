@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>教你如何调试思科路由器</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="路由,如何调试思科路由器" />
+  <meta name="description" content="本文描述了如何进行思科路由器的基本设置，基本的命令操作以及常用命令进行操作和总体的设置，并讲述了一些基本的服务设置。本文详尽的介绍了如何配置思科路由器，并且附有的" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>教你如何调试思科路由器</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：57次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="296" class="art_content"><p>
+	本文描述了如何进行思科路由器的基本设置，基本的命令操作以及常用命令进行操作和总体的设置，并讲述了一些基本的服务设置。</p>
+<p>
+	本文详尽的介绍了如何配置思科路由器，并且附有的基本代码的配置说明。同是为大家详细的介绍了广域网协议设置和基本的操作命令的讲解，相信大家会对思科路由器设置有基本的了解。</p>
+<p>
+	一、基本设置方式</p>
+<p>
+	一般来说，可以用5种方式来设置Cisco思科路由器：</p>
+<p>
+	1.Console口接终端或运行终端仿真软件的微机；</p>
+<p>
+	2.AUX口接MODEM，通过电话线与远方的终端或运行终端仿真软件的微机相连；</p>
+<p>
+	3.通过Ethernet上的TFTP服务器；</p>
+<p>
+	4.通过Ethernet上的TELNET程序；</p>
+<p>
+	5.通过Ethernet上的SNMP网管工作站。</p>
+<p>
+	但Cisco思科路由器的第一次设置必须通过第一种方式进行,一般用超级终端通过com口进行控制。此时终端的硬件设置如下:</p>
+<p>
+	波特率 ：9600</p>
+<p>
+	数据位 ：8</p>
+<p>
+	停止位 ：1</p>
+<p>
+	奇偶校验: 无</p>
+<p>
+	二、命令操作</p>
+<p>
+	Cisco思科路由器所用的操作系统是IOS.共有以下几种状态：</p>
+<p>
+	1、router&gt;</p>
+<p>
+	在router&gt;提示符下，Cisco思科路由器处于用户命令状态，这时用户可以看Cisco思科路由器的连接状态，访问其它网络和主机，但不能看到和更改Cisco思科路由器的设置内容。此时输入？并回车，可以查看到在此状态下可以用的命令。（IOS允许你在任何时候用这种方式查看在某种状态下可以用的命令）。在敲入enable并回车后，按照系统提示输入密码，（在新的Cisco思科路由器第一次进行调试的时候不需要输入密码，直接回车即可）进入#提示符，就可以对Cisco思科路由器进行各种操作了。</p>
+<p>
+	2、router#</p>
+<p>
+	Cisco思科路由器进入特权命令状态router#后，不但可以执行所有的用户命令，还可以看到和更改Cisco思科路由器的设置内容。此时就可以对Cisco思科路由器的名字、密码等进行设置。</p>
+<p>
+	3、router(config)#</p>
+<p>
+	在router#提示符下键入configure terminal,出现提示符router(config)#，此时Cisco思科路由器处于全局设置状态，这时可以设置Cisco思科路由器的全局参数。</p>
+<p>
+	4、router(config-if)#;</p>
+<p>
+	router(config-line)#;</p>
+<p>
+	router(config-router)#;&hellip;</p>
+<p>
+	Cisco思科路由器处于局部设置状态，这时可以设置Cisco思科路由器某个局部的参数。</p>
+<p>
+	5、Cisco思科路由器处于RXBOOT状态，在开机后60秒内按ctrl-break可进入此状态，这时Cisco思科路由器不能完成正常的功能，只能进行软件升级和手工引导。在此状态下，可以进行口令恢复。</p>
+<p>
+	三、常用命令</p>
+<p>
+	1.帮助</p>
+<p>
+	在IOS操作中，无论任何状态和位置，都可以键入&ldquo;？&rdquo;得到系统的帮助。系统会显示此时可以使用的命令。</p>
+<p>
+	2.改变命令状态</p>
+<p>
+	任务命令</p>
+<p>
+	进入特权命令状态enable</p>
+<p>
+	退出特权命令状态disable</p>
+<p>
+	进入设置对话状态Setup</p>
+<p>
+	进入全局设置状态config terminal</p>
+<p>
+	退出全局设置状态End</p>
+<p>
+	进入端口设置状态interface type slot/number</p>
+<p>
+	进入子端口设置状态interface type number.subinterface [point-to-point | multipoint]</p>
+<p>
+	进入线路设置状态line type slot/number</p>
+<p>
+	进入路由设置状态router protocol</p>
+<p>
+	退出局部设置状态Exit</p>
+<p>
+	3.显示命令</p>
+<p>
+	任务命令</p>
+<p>
+	查看版本及引导信息show version</p>
+<p>
+	查看运行设置show running-config</p>
+<p>
+	查看开机设置show startup-config</p>
+<p>
+	显示端口信息show interface type slot/number</p>
+<p>
+	显示路由信息show ip router</p>
+<p>
+	4.拷贝命令</p>
+<p>
+	用于IOS及CONFIG的备份和升级</p>
+<p>
+	5.网络命令</p>
+<p>
+	任务命令</p>
+<p>
+	登录远程主机telnet hostname|IP address</p>
+<p>
+	网络侦测ping hostname|IP address</p>
+<p>
+	路由跟踪Trace hostname|IP address</p>
+<p>
+	6.基本设置命令</p>
+<p>
+	任务命令</p>
+<p>
+	全局设置config terminal</p>
+<p>
+	设置访问用户及密码username username password password</p>
+<p>
+	设置特权密码enable secret password</p>
+<p>
+	设置Cisco思科路由器名hostname name</p>
+<p>
+	设置静态路由ip route destination subnet-mask next-hop</p>
+<p>
+	启动IP路由ip routing</p>
+<p>
+	启动IPX路由Ipx routing</p>
+<p>
+	端口设置interface type slot/number</p>
+<p>
+	设置IP地址ip address address subnet-mask</p>
+<p>
+	设置IPX网络Ipx network network</p>
+<p>
+	激活端口no shutdown</p>
+<p>
+	物理线路设置line type number</p>
+<p>
+	启动登录进程login [local|tacacs server]</p>
+<p>
+	设置登录密码password password</p>
+<p>
+	本文描述了如何进行思科路由器的基本设置，基本的命令操作以及常用命令进行操作和总体的设置，并讲述了一些基本的服务设置。</p>
+<p>
+	四、总体设置</p>
+<p>
+	在router#特权命令状态下，可以用setup对Cisco思科路由器进行总体设计，利用这个设计过程可以省略手工设置的烦琐。但它还不能完全代替手工设置，一些特殊的设置还必须通过手工输入的方式完成。</p>
+<p>
+	进入设置对话过程后，Cisco思科路由器首先会显示一些提示信息：</p>
+<p>
+	--- System Configuration Dialog ---</p>
+<p>
+	At any point you may enter a question mark &#39;?&#39; for help.</p>
+<p>
+	Use ctrl-c to abort configuration dialog at any prompt.</p>
+<p>
+	Default settings are in square brackets &#39;[]&#39;.</p>
+<p>
+	这是告诉你在设置对话过程中的任何地方都可以键入&ldquo;？&rdquo;得到系统的帮助，按ctrl-c可以退出设置过程，缺省设置将显示在&lsquo;[]&rsquo;中。然后Cisco思科路由器会问是否进入设置对话：</p>
+<p>
+	Would you like to enter the initial configuration dialog? [yes]:</p>
+<p>
+	如果按y或回车，Cisco思科路由器就会进入设置对话过程。首先你可以看到各端口当前的状况：</p>
+<p>
+	First, would you like to see the current interface summary? [yes]:</p>
+<p>
+	Any interface listed with OK? value &quot;NO&quot; does not have a valid configuration</p>
+<p>
+	InterfaceIP-AddressOK?MethodStatusProtocol</p>
+<p>
+	Ethernet0unassignedNOunsetupup</p>
+<p>
+	Serial0unassignedNOunsetupup</p>
+<p>
+	&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;</p>
+<p>
+	然后，Cisco思科路由器就开始全局参数的设置：</p>
+<p>
+	Configuring global parameters:</p>
+<p>
+	1．设置Cisco思科路由器名：</p>
+<p>
+	Enter host name [Router]:</p>
+<p>
+	2．设置进入特权状态的密文(secret)，此密文在设置以后不会以明文方式显示：</p>
+<p>
+	The enable secret is a one-way cryptographic secret used</p>
+<p>
+	instead of the enable password when it exists.</p>
+<p>
+	Enter enable secret: cisco</p>
+<p>
+	3．设置进入特权状态的密码(password)，此密码只在没有密文时起作用，并且在设置以后会以明文方式显示：</p>
+<p>
+	The enable password is used when there is no enable secret</p>
+<p>
+	and when using older software and some boot images.</p>
+<p>
+	Enter enable password: pass</p>
+<p>
+	4．设置虚拟终端访问时的密码：</p>
+<p>
+	Enter virtual terminal password: cisco</p>
+<p>
+	5．询问是否要设置Cisco思科路由器支持的各种网络协议：</p>
+<p>
+	Configure SNMP Network Management? [yes]:</p>
+<p>
+	Configure DECnet? [no]:</p>
+<p>
+	Configure AppleTalk? [no]:</p>
+<p>
+	Configure IPX? [no]:</p>
+<p>
+	Configure IP? [yes]:</p>
+<p>
+	Configure IGRP routing? [yes]:</p>
+<p>
+	Configure RIP routing? [no]:</p>
+<p>
+	&hellip;&hellip;&hellip;</p>
+<p>
+	6．如果配置的是拨号访问服务器，系统还会设置异步口的参数：</p>
+<p>
+	Configure Async lines? [yes]:]</p>
+<p>
+	1)设置线路的最高速度：</p>
+<p>
+	Async line speed [9600]:</p>
+<p>
+	2)是否使用硬件流控：</p>
+<p>
+	Configure for HW flow control? [yes]:</p>
+<p>
+	3)是否设置modem：</p>
+<p>
+	Configure for modems? [yes/no]: yes</p>
+<p>
+	4)是否使用默认的modem命令：</p>
+<p>
+	Configure for default chat script? [yes]:</p>
+<p>
+	5)是否设置异步口的PPP参数：</p>
+<p>
+	Configure for Dial-in IP SLIP/PPP access? [no]: yes</p>
+<p>
+	6)是否使用动态IP地址：</p>
+<p>
+	Configure for Dynamic IP addresses? [yes]:</p>
+<p>
+	7)是否使用缺省IP地址：</p>
+<p>
+	Configure Default IP addresses? [no]: yes</p>
+<p>
+	是否使用TCP头压缩：</p>
+<p>
+	Configure for TCP Header Compression? [yes]:</p>
+<p>
+	9)是否在异步口上使用路由表更新：</p>
+<p>
+	Configure for routing updates on async links? [no]: y</p>
+<p>
+	10)是否设置异步口上的其它协议。接下来，系统会对每个接口进行参数的设置。</p>
+<p>
+	1．Configuring interface Ethernet0:</p>
+<p>
+	1)是否使用此接口：</p>
+<p>
+	Is this interface in use? [yes]:</p>
+<p>
+	2)是否设置此接口的IP参数：</p>
+<p>
+	Configure IP on this interface? [yes]:</p>
+<p>
+	3)设置接口的IP地址：</p>
+<p>
+	IP address for this interface: 192.168.162.2</p>
+<p>
+	4)设置接口的IP子网掩码：</p>
+<p>
+	Number of bits in subnet field [0]:</p>
+<p>
+	Class C network is 192.168.162.0, 0 subnet bits; mask is /24</p>
+<p>
+	在设置完所有接口的参数后，系统会把整个设置对话过程的结果显示出来：</p>
+<p>
+	The following configuration command script was created:</p>
+<p>
+	hostname Router</p>
+<p>
+	enable secret 5 $W5Oh$p6J7tIgRMBOIKVXVG53Uh1</p>
+<p>
+	enable password pass</p>
+<p>
+	&hellip;&hellip;&hellip;&hellip;</p>
+<p>
+	请注意在enable secret后面显示的是乱码，而enable password后面显示的是设置的内容。就是说，secret密码的优先级比较高，在两个密码都设了的情况下，secret密码起作用。</p>
+<p>
+	显示结束后，系统会问是否使用这个设置：</p>
+<p>
+	Use this configuration? [yes/no]: yes</p>
+<p>
+	如果回答yes，系统就会把设置的结果存入Cisco思科路由器的NVRAM中，然后结束设置对话过程，使Cisco思科路由器开始正常的工作。</p>
+<p>
+	本文描述了如何进行思科路由器的基本设置，基本的命令操作以及常用命令进行操作和总体的设置，并讲述了一些基本的服务设置。</p>
+<p>
+	广域网协议设置</p>
+<p>
+	PPP</p>
+<p>
+	PPP(Point-to-Point Protocol)是SLIP(Serial Line IP protocol)的继承者，它提供了跨过同步和异步电路实现Cisco思科路由器到Cisco思科路由器(router-to-router)和主机到网络(host-to-network)的连接。</p>
+<p>
+	CHAP(Challenge Handshake Authentication Protocol)和PAP(Password Authentication Protocol) (PAP)通常被用于在PPP封装的串行线路上提供安全性认证。使用CHAP和PAP认证,每个Cisco思科路由器通过名字来识别，可以防止未经授权的访问。</p>
+<p>
+	任务命令</p>
+<p>
+	设置PPP封装encapsulation ppp1</p>
+<p>
+	设置认证方法ppp authentication {chap | chap pap | pap chap | pap} [if-needed] [list-name | default] [callin]</p>
+<p>
+	指定口令username name password secret</p>
+<p>
+	设置DCE端线路速度clockrate speed</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>错误整理：No plugin found for prefix 'jetty' in the current proje</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="错误,整理,plugin,found,for,prefix," />
+  <meta name="description" content="在maven进行jetty的调试中出现错误： [ERROR]Nopluginfoundforprefixjettyinthecurrentprojectandintheplu gingroups[org.apache.maven.plugins,org.codehaus.mojo]availablefromtherepo sitories[local(C:\DocumentsandSettings\Administrator\." />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>错误整理：No plugin found for prefix 'jetty' in the current proje</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：732次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="128" class="art_content"><p>
+	在maven进行jetty的调试中出现错误：</p>
+<p>
+	&nbsp;</p>
+<ol>
+	<li>
+		[ERROR]&nbsp;No&nbsp;plugin&nbsp;found&nbsp;for&nbsp;prefix&nbsp;&#39;jetty&#39;&nbsp;in&nbsp;the&nbsp;current&nbsp;project&nbsp;and&nbsp;in&nbsp;the&nbsp;plu&nbsp;&nbsp;</li>
+	<li>
+		gin&nbsp;groups&nbsp;[org.apache.maven.plugins,&nbsp;org.codehaus.mojo]&nbsp;available&nbsp;from&nbsp;the&nbsp;repo&nbsp;&nbsp;</li>
+	<li>
+		sitories&nbsp;[local&nbsp;(C:\Documents&nbsp;and&nbsp;Settings\Administrator\.m2\repository),&nbsp;centra&nbsp;&nbsp;</li>
+	<li>
+		l&nbsp;(http://repo.maven.apache.org/maven2)]&nbsp;-&gt;&nbsp;[Help&nbsp;1]&nbsp;&nbsp;</li>
+	<li>
+		[ERROR]&nbsp;&nbsp;</li>
+	<li>
+		[ERROR]&nbsp;To&nbsp;see&nbsp;the&nbsp;full&nbsp;stack&nbsp;trace&nbsp;of&nbsp;the&nbsp;errors,&nbsp;re-run&nbsp;Maven&nbsp;with&nbsp;the&nbsp;-e&nbsp;swit&nbsp;&nbsp;</li>
+</ol>
+<p>
+	&nbsp;</p>
+<p>
+	详情如下：</p>
+<p>
+	&nbsp;</p>
+<ol>
+	<li>
+		C:\myjava\workspace&gt;mvn&nbsp;jetty:run&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;Scanning&nbsp;for&nbsp;projects...&nbsp;&nbsp;</li>
+	<li>
+		[WARNING]&nbsp;Failed&nbsp;to&nbsp;retrieve&nbsp;plugin&nbsp;descriptor&nbsp;for&nbsp;org.apache.maven.plugins:mave&nbsp;&nbsp;</li>
+	<li>
+		n-deploy-plugin:2.7:&nbsp;Failed&nbsp;to&nbsp;parse&nbsp;plugin&nbsp;descriptor&nbsp;for&nbsp;org.apache.maven.plug&nbsp;&nbsp;</li>
+	<li>
+		ins:maven-deploy-plugin:2.7&nbsp;(C:\Documents&nbsp;and&nbsp;Settings\Administrator\.m2\reposit&nbsp;&nbsp;</li>
+	<li>
+		ory\org\apache\maven\plugins\maven-deploy-plugin\2.7\maven-deploy-plugin-2.7.jar&nbsp;&nbsp;</li>
+	<li>
+		):&nbsp;invalid&nbsp;LOC&nbsp;header&nbsp;(bad&nbsp;signature)&nbsp;&nbsp;</li>
+	<li>
+		[WARNING]&nbsp;Failed&nbsp;to&nbsp;retrieve&nbsp;plugin&nbsp;descriptor&nbsp;for&nbsp;org.apache.maven.plugins:mave&nbsp;&nbsp;</li>
+	<li>
+		n-site-plugin:3.0:&nbsp;Failed&nbsp;to&nbsp;parse&nbsp;plugin&nbsp;descriptor&nbsp;for&nbsp;org.apache.maven.plugin&nbsp;&nbsp;</li>
+	<li>
+		s:maven-site-plugin:3.0&nbsp;(C:\Documents&nbsp;and&nbsp;Settings\Administrator\.m2\repository\&nbsp;&nbsp;</li>
+	<li>
+		org\apache\maven\plugins\maven-site-plugin\3.0\maven-site-plugin-3.0.jar):&nbsp;inval&nbsp;&nbsp;</li>
+	<li>
+		id&nbsp;LOC&nbsp;header&nbsp;(bad&nbsp;signature)&nbsp;&nbsp;</li>
+	<li>
+		Downloading:&nbsp;http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-&nbsp;&nbsp;</li>
+	<li>
+		metadata.xml&nbsp;&nbsp;</li>
+	<li>
+		Downloading:&nbsp;http://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadat&nbsp;&nbsp;</li>
+	<li>
+		a.xml&nbsp;&nbsp;</li>
+	<li>
+		Downloaded:&nbsp;http://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-m&nbsp;&nbsp;</li>
+	<li>
+		etadata.xml&nbsp;(11&nbsp;KB&nbsp;at&nbsp;10.7&nbsp;KB/sec)&nbsp;&nbsp;</li>
+	<li>
+		Downloaded:&nbsp;http://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata&nbsp;&nbsp;</li>
+	<li>
+		.xml&nbsp;(22&nbsp;KB&nbsp;at&nbsp;18.2&nbsp;KB/sec)&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;------------------------------------------------------------------------&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;BUILD&nbsp;FAILURE&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;------------------------------------------------------------------------&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;Total&nbsp;time:&nbsp;2.110s&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;Finished&nbsp;at:&nbsp;Sun&nbsp;Mar&nbsp;03&nbsp;17:31:20&nbsp;CST&nbsp;2013&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;Final&nbsp;Memory:&nbsp;4M/15M&nbsp;&nbsp;</li>
+	<li>
+		[INFO]&nbsp;------------------------------------------------------------------------&nbsp;&nbsp;</li>
+	<li>
+		[ERROR]&nbsp;No&nbsp;plugin&nbsp;found&nbsp;for&nbsp;prefix&nbsp;&#39;jetty&#39;&nbsp;in&nbsp;the&nbsp;current&nbsp;project&nbsp;and&nbsp;in&nbsp;the&nbsp;plu&nbsp;&nbsp;</li>
+	<li>
+		gin&nbsp;groups&nbsp;[org.apache.maven.plugins,&nbsp;org.codehaus.mojo]&nbsp;available&nbsp;from&nbsp;the&nbsp;repo&nbsp;&nbsp;</li>
+	<li>
+		sitories&nbsp;[local&nbsp;(C:\Documents&nbsp;and&nbsp;Settings\Administrator\.m2\repository),&nbsp;centra&nbsp;&nbsp;</li>
+	<li>
+		l&nbsp;(http://repo.maven.apache.org/maven2)]&nbsp;-&gt;&nbsp;[Help&nbsp;1]&nbsp;&nbsp;</li>
+	<li>
+		[ERROR]&nbsp;&nbsp;</li>
+	<li>
+		[ERROR]&nbsp;To&nbsp;see&nbsp;the&nbsp;full&nbsp;stack&nbsp;trace&nbsp;of&nbsp;the&nbsp;errors,&nbsp;re-run&nbsp;Maven&nbsp;with&nbsp;the&nbsp;-e&nbsp;swit &nbsp;</li>
+</ol>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	settings.xml没有配置插件应此需要</p>
+<p>
+	&nbsp;</p>
+<ol>
+	<li>
+		mvn&nbsp;org.mortbay.jetty:maven-jetty-plugin:run&nbsp;&nbsp;&nbsp;</li>
+</ol>
+<p>
+	&nbsp;</p>
+<p>
+	<br />
+	这样来运行。<br />
+	如果需要使用jetty:run,那么必须在maven的setting.xml下配置</p>
+<p>
+	&nbsp;</p>
+<ol>
+	<li>
+		&lt;pluginGroups&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;pluginGroup&gt;org.mortbay.jetty&lt;/pluginGroup&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&lt;/pluginGroups&gt;&nbsp;&nbsp;</li>
+</ol>
+<p>
+	&nbsp;</p>
+<p>
+	或者在对应项目的pom.xml中plugins的节点下添加配置</p>
+<p>
+	&nbsp;</p>
+<ol>
+	<li>
+		&lt;plugin&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;webApp&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contextPath&gt;/&lt;/contextPath&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/webApp&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;stopKey&gt;webx&lt;/stopKey&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;stopPort&gt;9999&lt;/stopPort&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;connectors&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;connector&nbsp;implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;port&gt;8081&lt;/port&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maxIdleTime&gt;60000&lt;/maxIdleTime&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/connector&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/connectors&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;requestLog&nbsp;implementation=&quot;org.eclipse.jetty.server.NCSARequestLog&quot;&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filename&gt;target/access.log&lt;/filename&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;retainDays&gt;90&lt;/retainDays&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;append&gt;false&lt;/append&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extended&gt;false&lt;/extended&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;logTimeZone&gt;GMT+8:00&lt;/logTimeZone&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/requestLog&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;systemProperties&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;systemProperty&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;productionMode&lt;/name&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;${productionMode}&lt;/value&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/systemProperty&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/systemProperties&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;&nbsp;&nbsp;</li>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/plugin&gt; &nbsp;</li>
+</ol>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

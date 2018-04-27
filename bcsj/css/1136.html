@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS属性全解析</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS属性全解析,CSS教程,网页" />
+  <meta name="description" content=" 一、类型属性 “类型”属性共有九项： “字体”(font-family)，设定时，需考虑浏览器中有无该字体。 “大小”(font-size)，注意度量单位。 “粗细”(font-weight)，除了normal(正常)、bold(粗体" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CSS属性全解析</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：13次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1136" class="art_content">　　一、类型属性<br />
+　　&ldquo;类型&rdquo;属性共有九项：<br />
+　　&ldquo;字体&rdquo;(font-family)，设定时，需考虑浏览器中有无该字体。<br />
+　　&ldquo;大小&rdquo;(font-size)，注意度量单位。<br />
+　　&ldquo;粗细&rdquo;(font-weight)，除了normal(正常)、bold(粗体)、bolder(特粗)、lighter(细体)外，还有9种以像素为度量为单位的设置方式。<br />
+　　&ldquo;样式&rdquo;(font-style)，也就是字型。<br />
+　　&ldquo;行高&rdquo;(line-height)，就是行距。<br />
+　　&ldquo;变形&rdquo;(font-variant)，可以将正常文字一半尺寸后大写显示，但IE目前不支持这项属性。<br />
+　　&ldquo;大小写&rdquo;(text-transform)，这项属性能轻而易举地控制字母大小写，有首字大写(capitalize)、大写(uppercase)、小写(lowercase)和无（none，使所有继承文字和变形参数被忽略，文字将以正常形式显示）等4种。<br />
+　　&ldquo;修饰&rdquo;(text-decoration)，用于控制链接文本的显示形态，有下划线(underline)、无下划线(overline)、删除线(line-through)、闪烁(blink)和无（none，使上述效果均不会发生）等5种修饰方式。但IE4不支持文字闪烁。<br />
+<br />
+　　二、背景<br />
+　　&ldquo;背景&rdquo;属性共有六项：<br />
+　　&ldquo;背景颜色&rdquo;(background-color)，设置背景颜色。<br />
+　　&ldquo;背景图像&rdquo;(background-image)，设置网页背景图像。<br />
+　　&ldquo;重复&rdquo;(background-repeat)，控制背景图像的平鋪方式，有不重复(no-repeat)、重复（repeat，沿水平、垂直方向平铺）、横向重复（repeat-X，图像沿水平方向平铺）和纵向重复（repeat-Y，沿图像垂直方向平铺）等4种选择。<br />
+　　&ldquo;附加&rdquo;(background-attachment)，用于控制背景图像是否会随页面的滚动而一起滚动。有固定（fixd，文字滚动时，背景图像保质固定）和滚动（scroll，背景图像随文字内容一起滚动）两种选择。<br />
+　　&ldquo;水平位置&rdquo;/&ldquo;垂直位置&rdquo;(background-position)，确定背景图像的水平、垂直位置。共有左对齐(left)、右对齐(right)、顶部(top)、底部(bottom)、居中(center)和值（自定义背景图像的起点位置，可使用户对背景图像的位置做出更精确的控制）等6种选择。<br />
+<br />
+　　三、区块<br />
+　　&ldquo;区块&rdquo;属性共有六项：<br />
+　　&ldquo;单词间距&rdquo;(word-spacing)，主要用于控制文字间相隔的距离。有正常(normal)和值（自定义间隔值）两种选择方式。当选择值时，可用的单位有英寸(in)、厘米(cm)、毫米(mm)、点数(pt)、12pt字(pc)、字体高(em)、字体x有高(ex)像素(px)。<br />
+　　&ldquo;字母间距&rdquo;(letter-spacing)，其作用与字符间距类似，也有正常(normal)和值（自定义间隔值）两种选择方式。<br />
+　　&ldquo;垂直对齐&rdquo;(vertical-align)，控制文字或图像相对于其母体元素的垂直位置。如将一个2&times;3像素的GIF图像同其母体元素文字的顶部垂直对齐，则该GIF图像将在该行文字的顶部显示。共有基线（baseline，将元素的基准线同母体元素的基准线对齐）、下标（sub，将元素以下标的形式显示），上标（super，将元素以上标的形式显示）、顶部（top，将元素顶部同最高的母体元素对齐）、文本顶对齐（text-top，将元素的顶部同母体元素文字的顶部对齐）、中线对齐（middle，将元素的中点同母体元素的中点对齐）、底部（bottom，将元素的底部同最低的母体元素对齐）及值（自定义）等9种选择。<br />
+　　&ldquo;文本对齐&rdquo;(text-align)，设置块的水平对齐方式。共有左对齐(left)、右对齐(right)、居中(center)和均分(justify）等4种选择。<br />
+　　&ldquo;文字缩进&rdquo;(text-indent)，控制块的缩进程度。<br />
+　　&ldquo;空白间距&rdquo;(white-space)，在HTML中，空格是被省略的；在CSS中则使用属性(white-space)控制空格的输入。共有正常(normal)、保留(pre)和不换行(nowrap)等3种选择。<br />
+<br />
+　　四、盒子<br />
+　　&ldquo;盒子&rdquo;属性共有6项：<br />
+　　&ldquo;宽&rdquo;(width)，确定盒子本身的宽度，可以使盒子的宽度不依靠它所包含的内容多少。<br />
+　　&ldquo;高&rdquo;(height)，确定盒子本身的高度。<br />
+　　&ldquo;浮动&rdquo;(float)，设置块元素的浮动效果。<br />
+　　&ldquo;清除&rdquo;(clear)，用于清除设置的浮动效果。<br />
+　　&ldquo;边距&rdquo;(margin)，控制围绕边框　的边距大小。其中包含4个属性：margin-top控制上边距的宽度、margin-right控制右边距的宽度、margin-bottom控制下边距的宽度、margin-left控制左边距的宽度。<br />
+　　&ldquo;边界&rdquo;(padding)，确定围绕块元素的空格填充数量，其中包含4个属性&ldquo;padding-top控制上留白的宽度、padding-right控制右留白的宽度、padding-bottom控制下留白宽度、padding-left控制左留白的宽度。<br />
+<br />
+　　五、边框<br />
+　　&ldquo;边框&rdquo;的属性有3项：<br />
+　　&ldquo;宽&rdquo;(border-width)，控制边框的宽度，其中分为4个属性：border-top-width顶边框的宽度、border-right-width右边框的宽度、border-bottom-width底边框的宽度、border-left-width左边框的宽度。<br />
+　　&ldquo;颜色&rdquo;(border-color)，设置各边框的颜色。若要使边框的四边显示不同的颜色，可在设置中分别列出。如，<br />
+　　p{:&nbsp;#ff0000&nbsp;#009900&nbsp;#0000ff&nbsp;#55cc00}<br />
+　　浏览器将四种颜色依次理解为：上边框、右边框、底边框和左边框（自上开始顺时针）。<br />
+　　&ldquo;样式&rdquo;(border-style)，设定边框的样式，共有无(none)、虚线(dotted)、点划线线(dotted)、点划线(dashed)、实线(solid)、双线(double)、槽状(grove)、脊状(ridge)、凹陷(inset)和凸起(outset)等9种。<br />
+<br />
+　　六、列表<br />
+　　&ldquo;列表&rdquo;属性共有3项：<br />
+　　&ldquo;类型&rdquo;(list-style-type)，确定列表每一项前使用的符号，共有圆点(disc)、圆圈(circle)、方形(square)、数字(decimal)、小写罗马数字(lower-roman)、大写罗马数字(upper-roman)、小写字母(lower-alpha）和大写字母(upper－alpha)等8种。<br />
+　　&ldquo;项目图像&rdquo;(list-style-image)，其作用是将列表前面的符号换为图形。<br />
+　　&ldquo;位置&rdquo;(list-style-position)，用于描述列表位置，有内(outside)和外(inside)两种选择。<br />
+<br />
+　　七、定位<br />
+　　&ldquo;定位&rdquo;属性共有6项：<br />
+　　&ldquo;类型&rdquo;(position)，用于确定定位的类型，共有绝对(absolute)、相对(relative)和静态(static)等3种选择。<br />
+　　&ldquo;Z轴&rdquo;(z-index)，用于控制网页中块元素的叠放顺序，可为元素设置重叠效果。该属性的参数值使用纯整数，值为0时，元素在最下层，适用于绝对定位或相对定位的元素。<br />
+　　&ldquo;显示&rdquo;(visibility)使用该属性可将网页中的元素隐藏，共有继承（inherit，继承母体要素的可视性设置）、可见(visible)和隐藏(hidden)等3种选择。<br />
+　　&ldquo;溢出&rdquo;(overflow)，在确定了元素的高度和宽度后，如果元素的面积不能全部显示元素中的内容时，该属性做一日和尚撞一天钟起作用了。其中共有可见（visible，扩大面积以显示所有内容）、隐藏（hidden，隐藏超出范围的内容）、滚动（scroll，在元素的右边显示一个滚动条）和自动（auto，当内容超出元素面积时，显示滚动条）等4种选择。<br />
+　　&ldquo;定位&rdquo;，当为元素确定了绝对定位类型后，该组属性决定元素在网页中的具体位置。该组属性包含4个子属性，分别是&ldquo;左&rdquo;（属性名为&ldquo;left&rdquo;，控制元素左边的起始位置）、&ldquo;上&rdquo;（属性名为&ldquo;top&rdquo;，控制元素上面的起始位置）、&ldquo;宽&rdquo;或&ldquo;高&rdquo;（与&ldquo;盒子&rdquo;类属性面板中&ldquo;宽&rdquo;或&ldquo;高&rdquo;的属性作用相同）。<br />
+　　&ldquo;剪辑&rdquo;(clip)，当元素被指定为绝对定位类型后，该属性可以把元素区域切成各种形状，但目前提供的只有方形一种。属性值为rect(top&nbsp;right&nbsp;bottom&nbsp;left)，即：<br />
+　　rect(top&nbsp;right&nbsp;bottom&nbsp;left)，属性值的单位为任何一种长度单位。<br />
+<br />
+　　八、扩展<br />
+　　&ldquo;扩展&rdquo;属性共有两部分：<br />
+　　&ldquo;分页&rdquo;，其中两个属性的作用是为打印的页面设置分页符。&ldquo;之前&rdquo;(page-break-before)；&ldquo;之后&rdquo;(page-break-after)。<br />
+　　&ldquo;视觉效果&rdquo;，其中两个属性的作用是为网页中的元素施加特殊效果。&ldquo;光标&rdquo;(cusor)，可以指定在某个元素上要使用的光标形状，共有15种选择方式，分别代表鼠标在Windows操作系统中的各种形状。另外它还可以指定指针图标的URL地址；&ldquo;滤镜&rdquo;(fiter)，可以为网页中元素施加各种奇妙的滤镜效果，共包含有16种滤镜。&nbsp;</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

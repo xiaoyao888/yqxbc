@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS边距属性定义：用margin还是padding？</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS,边距属性,padding,margin" />
+  <meta name="description" content=" 用margin还是用padding这个问题是每个学习CSS进阶时的必经之路。 CSS边距属性定义元素周围的空间，通过使用单独的属性，可以对上、右、下、左的外边距进行设置，也可以使用简写的外" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CSS边距属性定义：用margin还是padding？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：52次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1194" class="art_content"><p>
+	　　用margin还是用padding这个问题是每个学习CSS进阶时的必经之路。<br />
+	<br />
+	　　CSS边距属性定义元素周围的空间，通过使用单独的属性，可以对上、右、下、左的外边距进行设置，也可以使用简写的外边距属性同时改变所有的外边距。<br />
+	<br />
+	　　边界(margin)：元素周围生成额外的空白区，&ldquo;空白区&rdquo;通常是指其他元素不能出现且父元素背景可见的区域。<br />
+	<br />
+	　　padding称呼为内边距，其判断的依据即边框离内容正文的距离，而我喜欢CSS权威指南解释的&ldquo;补白&rdquo;（或者叫&ldquo;留白&rdquo;），因为他很形象。补白(padding)：补白位于元素框的边界与内容区之间。很自然，用于影响这个区域的属性是padding。<br />
+	<br />
+	　　关于什么时候用margin什么时候用padding，网上有许许多多的讨论，大多数似乎讨论到点上面，却又有些隔靴搔痒的感觉，总是答不到点上。而且margin和padding在许多地方往往效果都是一模一样，而且你也不能说这个一定得用margin那个一定要用padding，因为实际的效果都一样，你说margin用起来好他说padding用起来会更好，但往往争论无果。根据网上的总结归纳大致发现这几条还是比较靠谱的：<br />
+	<br />
+	　　何时应当使用margin：<br />
+	<br />
+	　　1、需要在border外侧添加空白时。<br />
+	<br />
+	　　2、空白处不需要背景（色）时。<br />
+	<br />
+	　　3、上下相连的两个盒子之间的空白，需要相互抵消时。如15px&nbsp;+&nbsp;20px的margin，将得到20px的空白。<br />
+	<br />
+	　　何时应当时用padding：<br />
+	<br />
+	　　1、需要在border内测添加空白时。<br />
+	<br />
+	　　2、空白处需要背景（色）时。<br />
+	<br />
+	　　3、上下相连的两个盒子之间的空白，希望等于两者之和时。如15px&nbsp;+&nbsp;20px的padding，将得到35px的空白。<br />
+	<br />
+	　　个人认为：margin是用来隔开元素与元素的间距；padding是用来隔开元素与内容的间隔。margin用于布局分开元素使元素与元素互不相干；padding用于元素与内容之间的间隔，让内容（文字）与（包裹）元素之间有一段&ldquo;呼吸距离&rdquo;。<br />
+	<br />
+	<br />
+	　　上面这个效果看起来很不错，达到了我们需要实现的目标。然而，我们细细查看下这个代码，对照下我们上文所说的规则，firstChild用了margin-top:20px来隔开父元素与他的距离，secondChild也用margin-top:15来隔开他与firstChild的距离，咋看之下挺符合我们所说的margin是用来隔开元素与元素的间距。但是他符合我们所说的margin用于布局分开元素使元素与元素互不相干吗？<br />
+	<br />
+	　　这里我想说的是NO，firstChild同middle属于一种父子元素关系，又是一种包裹元素与内容的关系，他们之间从拟人化的角度来讲，不应该是老死不相干的局面。我们再来看我们为什么要让firstChild与他的父元素隔开的距离，从表现的角度上来看，文字与边靠的太近，肯定不好看。让文字与元素边隔开的距离，既美观，又使得文字有了足够的&ldquo;呼吸空间&rdquo;，方便阅读，这恰恰符合padding用于元素与内容之间的间隔让内容（文字）与（包裹）元素之间有个&ldquo;呼吸距离&rdquo;。<br />
+	<br />
+	　　我们再来看，firstChild使用margin-top引发了垂直外边距合并的隐患，middle如果不加一个类似border-top:1px&nbsp;solid&nbsp;#ccc的话标准浏览器下就会呈现子元素顶了父元素margin隐患可见这个时候margin显然不是很好的选择。<br />
+	<br />
+	　　我们试着这样来修改：<br />
+	<br />
+	<br />
+	　　我们来看看这么写的好处吧：<br />
+	<br />
+	　　1、外观依旧良好，结构清晰也没有破坏布局。<br />
+	<br />
+	　　2、不会产生垂直外边距合并这样的问题。<br />
+	<br />
+	　　3、书写规范、代码量减少、重用性好。<br />
+	<br />
+	　　我们可以看到在middle_2中去除了不需要的border-top，改为更为实用的padding:20px&nbsp;0，让middle_2中的内容有了足够的&ldquo;呼吸空间&rdquo;，以后还可以随时随地修改这个padding，让内容文字的&ldquo;呼吸空间&rdquo;增大或者缩小，随时随地只修改一个middle_2的padding就能搞定所有包裹元素与内部内容的规划。<br />
+	<br />
+	　　请注意这里是父元素应用padding，使得与其内容产生间隙，这是符合我们翻译为&ldquo;补白&rdquo;精髓（所以我一直喜欢称padding为&ldquo;补白&rdquo;而不是内边距），而padding也恰恰是在这儿最能体检他的价值。这个例子把第一个元素的margin-top去除，在父元素中应用padding。反过来，你会想，既然margin-top不好用，那么我第一个元素用padding-top不是也能达到效果么。恭喜你，你已经前进了一步了，的确使用padding-top即让第一元素与外包裹元素产生了呼吸距离，而且也不会出现所谓的垂直外边距重叠问题，&nbsp;但是我依旧不推荐你这么做。为什么呢？我们来设想这么一个情况吧，假如有一天，你这个模块要产生变动，新需求要删除这个firstChild，替换为otherChild，会怎么样呢？<br />
+	<br />
+	　　新的需求要求我们新加一个otherChild，替换原来的firstChild：<br />
+	<br />
+	<br />
+	　　发现问题了么？如果你把原先的firstChild给删除掉了，新来的元素根本就没有定义上边距或者上补白，那么他就会自然顶在头部，不是理想的效果。的确，你可以为了他新写一个css来让他距离头部多一点空隙，但是你该怎么写？直接改otherChild吗？如果其他页面里面也有otherChild那么你会把其他地方的otherChild布局打乱。恩，那么我用.middle_3&nbsp;.otherChild{padding-top:10px;}怎么样可以吧。恩，可以可以，可是你不觉得这么累吗？每次修改，都要增加这一个多余的代码就为了简简单单的隔开点距离，久而久之，你的css文件代码会臃肿不堪，可移植性大大削弱。<br />
+	<br />
+	　　每次开发的时候我一直对自己讲，你写的代码总有一天会被别的开发人员所替换、修改、更新。而一个优秀的前端写出的css不但在现在结构坚固并且还能为日后的开发人员提供方便。修改我的代码，改前改后的式样位置都一样，让之后的开发人员根本上避免接触到再次&ldquo;修复&rdquo;开发的机会，那才是一名真正前端的追求。这里你把包裹的p类似&ldquo;封装&rdquo;好一个环境，而且这个p内已经留有足够的内容的&ldquo;呼吸空间&rdquo;，你只需要改内容，内容所要考虑到得位置边距问题，外包的p元素早已经帮你预留好了，你用起来方便，今后改起来也方便，直接找到middle修改padding即可。<br />
+	<br />
+	　　To&nbsp;margin&nbsp;or&nbsp;to&nbsp;be&nbsp;padding,&nbsp;that&nbsp;is&nbsp;the&nbsp;question.<br />
+	<br />
+	　　所谓大道万千，运用之妙存乎一心。该用margin的时候就大胆的用他，该用padding也不用退缩不前，实战中累积出来的经验往往是最有用的，而当你不确定是用margin好还是用padding，请在看看这个原则吧，或许你会有一个自己的答案。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

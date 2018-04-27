@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>彻底明白Java语言中的IO系统</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,java语言,IO" />
+  <meta name="description" content="Java的核心库java.io提供了全面的IO接口，包括：文件读写，标准设备输出等等。Java中IO是以流为基础进行输入输出的，所有数据被串行化写入输出流，或者从输入流读入。在具体使用中很" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>彻底明白Java语言中的IO系统</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：4次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="636" class="art_content"><p>
+	Java的核心库java.io提供了全面的IO接口，包括：文件读写，标准设备输出等等。Java中IO是以流为基础进行输入输出的，所有数据被串行化写入输出流，或者从输入流读入。在具体使用中很多初学者对Java.io包的使用非常含糊，本文将详细解说关于Java.io的使用。<br />
+	　　一、Input和Output<br />
+	　　1.stream代表的是任何有能力产出数据的数据源，或是任何有能力接收数据的接收源。在Java的IO系统中，所有的stream（包括Input和Out stream）都包括两种类型：<br />
+	　　1.1以字节为导向的stream<br />
+	　　以字节为导向的stream，表示以字节为单位从stream中读取或往stream中写入信息。以字节为导向的stream包括下面几种类型：<br />
+	　　input<br />
+	　　stream：<br />
+	　　1）ByteArrayInputStream：把内存中的一个缓冲区作为InputStream使用<br />
+	　　2）StringBufferInputStream：把一个String对象作为InputStream<br />
+	　　3）FileInputStream：把一个文件作为InputStream，实现对文件的读取操作<br />
+	　　4）PipedInputStream：实现了pipe的概念，主要在线程中使用<br />
+	　　5）SequenceInputStream：把多个InputStream合并为一个InputStream<br />
+	　　Out<br />
+	　　stream<br />
+	　　1）ByteArrayOutputStream：把信息存入内存中的一个缓冲区中<br />
+	　　2）FileOutputStream：把信息存入文件中<br />
+	　　3）PipedOutputStream：实现了pipe的概念，主要在线程中使用<br />
+	　　4）SequenceOutputStream：把多个OutStream合并为一个OutStream<br />
+	　　1.2 以Unicode字符为导向的stream<br />
+	　　以Unicode字符为导向的stream，表示以Unicode字符为单位从stream中读取或往stream中写入信息。以Unicode字符为导向的stream包括下面几种类型：<br />
+	　　Input<br />
+	　　Stream<br />
+	　　1）CharArrayReader：与ByteArrayInputStream对应<br />
+	　　2）StringReader：与StringBufferInputStream对应<br />
+	　　3）FileReader：与FileInputStream对应<br />
+	　　4）PipedReader：与PipedInputStream对应<br />
+	　　Out<br />
+	　　Stream<br />
+	　　1）CharArrayWrite：与ByteArrayOutputStream对应<br />
+	　　2）StringWrite：无与之对应的以字节为导向的stream<br />
+	　　3）FileWrite：与FileOutputStream对应<br />
+	　　4）PipedWrite：与PipedOutputStream对应<br />
+	　　以字符为导向的stream基本上对有与之相对应的以字节为导向的stream.两个对应类实现的功能相同，字是在操作时的导向不同。如 CharArrayReader：和ByteArrayInputStream的作用都是把内存中的一个缓冲区作为InputStream使用，所不同的 是前者每次从内存中读取一个字节的信息，而后者每次从内存中读取一个字符。<br />
+	　　1.3两种不现导向的stream之间的转换<br />
+	　　InputStreamReader和OutputStreamReader：把一个以字节为导向的stream转换成一个以字符为导向的stream.<br />
+	2. stream添加属性<br />
+	　　2.1&ldquo;为stream添加属性&rdquo;的作用<br />
+	　　运用上面介绍的Java中操作IO的API，我们就可完成我们想完成的任何操作了。但通过FilterInputStream和FilterOutStream的子类，我们可以为stream添加属性。下面以一个例子来说明这种功能的作用。<br />
+	　　如果我们要往一个文件中写入数据，我们可以这样操作：<br />
+	　　FileOutStream fs = new FileOutStream（&ldquo;test.txt&rdquo;）；<br />
+	　　然后就可以通过产生的fs对象调用write（）函数来往test.txt文件中写入数据了。但是，如果我们想实现&ldquo;先把要写入文件的数据先缓存到内存 中，再把缓存中的数据写入文件中&rdquo;的功能时，上面的API就没有一个能满足我们的需求了。但是通过FilterInputStream和 FilterOutStream的子类，为FileOutStream添加我们所需要的功能。<br />
+	　　2.2FilterInputStream的各种类型<br />
+	　　2.2.1用于封装以字节为导向的InputStream<br />
+	　　1）DataInputStream：从stream中读取基本类型（int、char等）数据。<br />
+	　　2）BufferedInputStream：使用缓冲区<br />
+	　　3）LineNumberInputStream：会记录input stream内的行数，然后可以调用getLineNumber（）和setLineNumber（int）<br />
+	　　4）PushbackInputStream：很少用到，一般用于编译器开发<br />
+	　　2.2.2用于封装以字符为导向的InputStream<br />
+	　　1）没有与DataInputStream对应的类。除非在要使用readLine（）时改用BufferedReader，否则使用DataInputStream<br />
+	　　2）BufferedReader：与BufferedInputStream对应<br />
+	　　3）LineNumberReader：与LineNumberInputStream对应<br />
+	　　4）PushBackReader：与PushbackInputStream对应<br />
+	　　2.3FilterOutStream的各种类型<br />
+	　　2.2.3用于封装以字节为导向的OutputStream<br />
+	　　1）DataIOutStream：往stream中输出基本类型（int、char等）数据。<br />
+	　　2）BufferedOutStream：使用缓冲区<br />
+	　　3）PrintStream：产生格式化输出<br />
+	　　2.2.4用于封装以字符为导向的OutputStream<br />
+	　　1）BufferedWrite：与对应<br />
+	　　2）PrintWrite：与对应<br />
+	　　3.RandomAccessFile<br />
+	　　1）可通过RandomAccessFile对象完成对文件的读写操作<br />
+	　　2）在产生一个对象时，可指明要打开的文件的性质：r，只读；w，只写；rw可读写<br />
+	　　3）可以直接跳到文件中指定的位置<br />
+	4.I/O应用的一个例子<br />
+	　　java代码<br />
+	　　import java.io.*；<br />
+	　　public class TestIO{<br />
+	　　public static void main（String[] args）<br />
+	　　throws IOException{<br />
+	　　//1.以行为单位从一个文件读取数据<br />
+	　　BufferedReader in = new BufferedReader（<br />
+	　　new FileReader（&quot;F：<a href="file://\\nepalon\\TestIO.java">\\nepalon\\TestIO.java</a>&quot;））；<br />
+	　　String s， s2 = new String（）；<br />
+	　　while（（s = in.readLine（）） ！= null）<br />
+	　　s2 += s + &quot;\n&quot;；<br />
+	　　in.close（）；<br />
+	　　//1b. 接收键盘的输入<br />
+	　　BufferedReader stdin = new BufferedReader（new InputStreamReader（System.in））；<br />
+	　　System.out.println（&quot;Enter a line：&quot;）；<br />
+	　　System.out.println（stdin.readLine（））；<br />
+	　　//2. 从一个String对象中读取数据<br />
+	　　StringReader in2 = new StringReader（s2）；<br />
+	　　int c；<br />
+	　　while（（c = in2.read（）） ！= -1）<br />
+	　　System.out.println（（char）c）；<br />
+	　　in2.close（）；<br />
+	　　//3. 从内存取出格式化输入<br />
+	　　try{<br />
+	　　DataInputStream in3 =new DataInputStream（new ByteArrayInputStream（s2.getBytes（）））；<br />
+	　　while（true）<br />
+	　　System.out.println（（char）in3.readByte（））；<br />
+	　　}<br />
+	　　catch（EOFException e）{<br />
+	　　System.out.println（&quot;End of stream&quot;）；<br />
+	　　}<br />
+	　　//4. 输出到文件<br />
+	　　try{<br />
+	　　BufferedReader in4 =new BufferedReader（new StringReader（s2））；<br />
+	　　PrintWriter out1 =new PrintWriter（new BufferedWriter（new FileWriter（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> TestIO.out&quot;）））；<br />
+	　　int lineCount = 1；<br />
+	　　while（（s = in4.readLine（）） ！= null）<br />
+	　　out1.println（lineCount++ + &quot;：&quot; + s）；<br />
+	　　out1.close（）；<br />
+	　　in4.close（）；<br />
+	　　}<br />
+	　　catch（EOFException ex）{<br />
+	　　System.out.println（&quot;End of stream&quot;）；<br />
+	　　}<br />
+	　　//5. 数据的存储和恢复<br />
+	　　try{<br />
+	　　DataOutputStream out2 =new DataOutputStream（new BufferedOutputStream（<br />
+	　　new FileOutputStream（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> Data.txt&quot;）））；<br />
+	　　out2.writeDouble（3.1415926）；<br />
+	　　out2.writeChars（&quot;\nThas was pi：writeChars\n&quot;）；<br />
+	　　out2.writeBytes（&quot;Thas was pi：writeByte\n&quot;）；<br />
+	　　out2.close（）；<br />
+	　　DataInputStream in5 =new DataInputStream（<br />
+	　　new BufferedInputStream（new FileInputStream（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> Data.txt&quot;）））；<br />
+	　　BufferedReader in5br =new BufferedReader（new InputStreamReader（in5））；<br />
+	　　System.out.println（in5.readDouble（））；<br />
+	　　System.out.println（in5br.readLine（））；<br />
+	　　System.out.println（in5br.readLine（））；<br />
+	　　}<br />
+	　　catch（EOFException e）{<br />
+	　　System.out.println（&quot;End of stream&quot;）；<br />
+	　　}<br />
+	　　//6. 通过RandomAccessFile操作文件<br />
+	　　RandomAccessFile rf = new RandomAccessFile（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> rtest.dat&quot;，&gt;<br />
+	　　for（int i=0； i &lt;10； i++）<br />
+	　　rf.writeDouble（i*1.414）；<br />
+	　　rf.close（）；<br />
+	　　rf = new RandomAccessFile（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> rtest.dat&quot;，&gt;<br />
+	　　for（int i=0； i &lt;10； i++）<br />
+	　　System.out.println（&quot;Value &quot; + i + &quot;：&quot; + rf.readDouble（））；<br />
+	　　rf.close（）；<br />
+	　　rf = new RandomAccessFile（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> rtest.dat&quot;，&gt;<br />
+	　　rf.seek（5*8）；<br />
+	　　rf.writeDouble（47.0001）；<br />
+	　　rf.close（）；<br />
+	　　rf = new RandomAccessFile（&quot;F：<a href="file://\\nepalon\\">\\nepalon\\</a> rtest.dat&quot;，&gt;<br />
+	　　for（int i=0； i &lt;10； i++）<br />
+	　　System.out.println（&quot;Value &quot; + i + &quot;：&quot; + rf.readDouble（））；<br />
+	　　rf.close（）；<br />
+	　　}<br />
+	　　}<br />
+	　　关于代码的解释（以区为单位）：<br />
+	　　1区中，当读取文件时，先把文件内容读到缓存中，当调用in.readLine（）时，再从缓存中以字符的方式读取数据（以下简称&ldquo;缓存字节读取方式&rdquo;）。<br />
+	　　1b区中，由于想以缓存字节读取方式从标准IO（键盘）中读取数据，所以要先把标准IO（System.in）转换成字符导向的stream，再进行BufferedReader封装。<br />
+	　　2区中，要以字符的形式从一个String对象中读取数据，所以要产生一个StringReader类型的stream.</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

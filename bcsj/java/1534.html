@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intellij Mybatis连接Mysql数据库</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="mybatis连接数据库,Mybatis连接Mysql" />
+  <meta name="description" content="最近在搞android的项目，在开发过程中遇到了好多问题，今天小编给大家说下mybatis连接MySQL数据库的方法，感兴趣的朋友跟着小编一起学习吧" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Intellij Mybatis连接Mysql数据库</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：19次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1534" class="art_content"><p>
+	有好一段时间没有学习新东西了，过了个十月一感觉事情还是越早做越好，废话不多说了，说一下用mybatis连接MySQL数据库，上一篇写了jdbc测试，我的数据库表还是原来的。由于从网上查的资料大部分都是eclipse，由于我是做Android开发的，习惯了ide，所以就硬着头皮来了，中间其实遇到过好多问题。</p>
+<p>
+	看一下工程结构</p>
+<p style="text-align: center">
+	<img alt="这里写图片描述" src="/uploads/allimg/161015/1621313Y4-0.jpg" title="" /></p>
+<p>
+	先说一下Java代码，dao是查询接口，model是ben和对应的查询语句的xml，我感觉这样有点不好，user.xml放在dao里面比较好，等理解了就知道了，由于我是初学者所以好多东西都不是很理解，后期会给出合理的包的定义</p>
+<p>
+	test是我做测试用的</p>
+<p>
+	再说一下resources，configuration是配置文件，log4j是日志打印，其他的暂时用不到。</p>
+<p>
+	好来看一下代码，我按照建文件的顺序给大家来，<br />
+	首先需要有一个对象，对象根据数据库建</p>
+<p>
+	<strong>user.java</strong></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package com.fanyafeng.model;
+
+import java.util.Date;
+/**
+* Author： fanyafeng
+* Data： 16/10/11 14:56
+* Email: fanyafeng@live.cn
+*/
+public class User {
+private int id;
+private String username;
+private Date birthday;
+private String sex;
+private String address;
+public int getId() {
+return id;
+}
+public void setId(int id) {
+this.id = id;
+}
+public String getUsername() {
+return username;
+}
+public void setUsername(String username) {
+this.username = username;
+}
+public Date getBirthday() {
+return birthday;
+}
+public void setBirthday(Date birthday) {
+this.birthday = birthday;
+}
+public String getSex() {
+return sex;
+}
+public void setSex(String sex) {
+this.sex = sex;
+}
+public String getAddress() {
+return address;
+}
+public void setAddress(String address) {
+this.address = address;
+}
+@Override
+public String toString() {
+return &quot;User{&quot; +
+&quot;id=&quot; + id +
+&quot;, username=&#39;&quot; + username + &#39;\&#39;&#39; +
+&quot;, birthday=&quot; + birthday +
+&quot;, sex=&#39;&quot; + sex + &#39;\&#39;&#39; +
+&quot;, address=&#39;&quot; + address + &#39;\&#39;&#39; +
+&#39;}&#39;;
+}
+}</pre>
+</div>
+<p>
+	<strong>iuserdao.java</strong></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package com.fanyafeng.dao;
+import com.fanyafeng.model.User;
+import java.util.List;
+/**
+* Author： fanyafeng
+* Data： 16/10/11 14:55
+* Email: fanyafeng@live.cn
+*/
+public interface IUserDao {
+public List&lt;User&gt; queryUserByName(String name);
+public User selectUserById(int id);
+public void add();
+public void del(int id);
+public void alter(int id);
+}</pre>
+</div>
+<p>
+	<strong>user.xml</strong></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;!--resultType 指定单条记录返回的类型--&gt;
+&lt;mapper namespace=&quot;com.fanyafeng.dao.IUserDao&quot;&gt;
+&lt;select id=&quot;selectUserById&quot; parameterType=&quot;int&quot; resultType=&quot;com.fanyafeng.model.User&quot;&gt;
+select * from user where id = #{id}
+&lt;/select&gt;
+&lt;!--&#39;%${value}&#39; 表示拼接sql串,只能使用value,有可能会引起sql注入的情况--&gt;
+&lt;select id=&quot;queryUserByName&quot; parameterType=&quot;String&quot; resultType=&quot;com.fanyafeng.model.User&quot;&gt;
+SELECT * FROM user WHERE username LIKE #{name}
+&lt;/select&gt;
+&lt;!--INSERT INTO USER (id,username,sex,address) VALUE (null,&quot;陈潇然&quot;,&quot;女&quot;,&quot;大学同学&quot;)--&gt;
+&lt;insert id=&quot;add&quot; parameterType=&quot;com.fanyafeng.model.User&quot;&gt;
+insert into user (id,username,birthday,sex,address) values (#{id},#{username},#{birthday},#{sex},#{address})
+&lt;/insert&gt;
+&lt;/mapper&gt;</pre>
+</div>
+<p>
+	<strong>usertest.java</strong></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package com.fanyafeng.test;
+import com.fanyafeng.model.User;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Date;
+import java.util.List;
+/**
+* Author： fanyafeng
+* Data： 16/10/11 14:58
+* Email: fanyafeng@live.cn
+*/
+public class UserTest {
+private static SqlSessionFactory sqlSessionFactory;
+private static Reader reader;
+static {
+try {
+reader = Resources.getResourceAsReader(&quot;Configuration.xml&quot;);
+sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+} catch (IOException e) {
+e.printStackTrace();
+}
+}
+public static void main(String[] args) {
+SqlSession sqlSession = sqlSessionFactory.openSession();
+try {
+// User user = (User) sqlSession.selectOne(&quot;com.fanyafeng.dao.IUserDao.selectUserById&quot;, 2);
+// System.out.println(user.getAddress() + user.getSex() + user.getBirthday());
+// System.out.println(user.getId() + user.getUsername());
+//
+//
+List&lt;User&gt; userList = sqlSession.selectList(&quot;com.fanyafeng.dao.IUserDao.queryUserByName&quot;, &quot;%李宁%&quot;);
+for (int i = 0; i &lt; userList.size(); i++) {
+System.out.println(userList.get(i).toString());
+}
+User user = new User();
+user.setId(100);
+user.setBirthday(new Date());
+user.setUsername(&quot;李宁&quot;);
+user.setSex(&quot;女&quot;);
+user.setAddress(&quot;家里蹲&quot;);
+int isAdd = sqlSession.insert(&quot;com.fanyafeng.dao.IUserDao.add&quot;, user);
+sqlSession.commit();//不要忘记
+} finally {
+sqlSession.close();
+}
+}
+}</pre>
+</div>
+<p>
+	<strong>configration.xml</strong></p>
+<div class="jb51code">
+	<pre class="brush:java;">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+&lt;!--如果在mapper中进行配置了,此处可以省略配置--&gt;
+&lt;!--&lt;typeAliases&gt;--&gt;
+&lt;!--&lt;typeAlias alias=&quot;User&quot; type=&quot;com.fanyafeng.model.User&quot;/&gt;--&gt;
+&lt;!--&lt;/typeAliases&gt;--&gt;
+&lt;!-- 和spring整合后 environments配置将废除--&gt;
+&lt;environments default=&quot;development&quot;&gt;
+&lt;environment id=&quot;development&quot;&gt;
+&lt;!-- 使用jdbc事务管理--&gt;
+&lt;transactionManager type=&quot;JDBC&quot;/&gt;
+&lt;!-- 数据库连接池--&gt;
+&lt;dataSource type=&quot;POOLED&quot;&gt;
+&lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8&quot;/&gt;
+&lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+&lt;property name=&quot;password&quot; value=&quot;&quot;/&gt;
+&lt;/dataSource&gt;
+&lt;/environment&gt;
+&lt;/environments&gt;
+&lt;mappers&gt;
+&lt;mapper resource=&quot;com/fanyafeng/model/User.xml&quot;/&gt;
+&lt;/mappers&gt;
+&lt;/configuration&gt;</pre>
+</div>
+<p>
+	log4j的话大家根据自己的爱好添加就好了，代码中注释写的很详细了，我就不细讲了，这里有个地方让我很憋屈，问了个大神才知道咋回事，截图中有target目录吧，这是编译好文件的存放位置，可是，问题来了，java文件给我编译好放在哪里了，可是非resource得xml文件没有给我放进去，丢出来了一个异常，查了好多资料答非所问，然后是这样解决的<br />
+	看一下pom.xml文件，我更改后的，加了build标签中了</p>
+<p>
+	&nbsp;</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+&lt;groupId&gt;com.fanyafeng&lt;/groupId&gt;
+&lt;artifactId&gt;mybatisdemo&lt;/artifactId&gt;
+&lt;packaging&gt;war&lt;/packaging&gt;
+&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;name&gt;mybatisdemo Maven Webapp&lt;/name&gt;
+&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+&lt;build&gt;
+&lt;finalName&gt;mybatisdemo&lt;/finalName&gt;
+&lt;resources&gt;
+&lt;resource&gt;
+&lt;directory&gt;src/main/resources&lt;/directory&gt;
+&lt;includes&gt;
+&lt;include&gt;**/*.xml&lt;/include&gt;
+&lt;include&gt;**/*.properties&lt;/include&gt;
+&lt;/includes&gt;
+&lt;/resource&gt;
+&lt;resource&gt;
+&lt;directory&gt;src/main/java&lt;/directory&gt;
+&lt;includes&gt;
+&lt;include&gt;**/*.xml&lt;/include&gt;
+&lt;/includes&gt;
+&lt;/resource&gt;
+&lt;/resources&gt;
+&lt;/build&gt;
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;junit&lt;/groupId&gt;
+&lt;artifactId&gt;junit&lt;/artifactId&gt;
+&lt;version&gt;3.8.1&lt;/version&gt;
+&lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;mysql&lt;/groupId&gt;
+&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+&lt;version&gt;5.1.38&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+&lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+&lt;version&gt;3.2.8&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+&lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+&lt;version&gt;1.7.21&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+&lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+&lt;version&gt;1.7.21&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/log4j/log4j --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;log4j&lt;/groupId&gt;
+&lt;artifactId&gt;log4j&lt;/artifactId&gt;
+&lt;version&gt;1.2.17&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+&lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+&lt;version&gt;2.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+&lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
+&lt;version&gt;2.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.javassist/javassist --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.javassist&lt;/groupId&gt;
+&lt;artifactId&gt;javassist&lt;/artifactId&gt;
+&lt;version&gt;3.18.1-GA&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/commons-logging/commons-logging --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;commons-logging&lt;/groupId&gt;
+&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+&lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/cglib/cglib --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;cglib&lt;/groupId&gt;
+&lt;artifactId&gt;cglib&lt;/artifactId&gt;
+&lt;version&gt;2.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/asm/asm --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;asm&lt;/groupId&gt;
+&lt;artifactId&gt;asm&lt;/artifactId&gt;
+&lt;version&gt;3.3.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;/project&gt;</pre>
+</div>
+<p>
+	这就可以了，我这里实现了查，增，别的正在学习中。</p>
+<p>
+	以上所述是小编给大家介绍的Intellij Mybatis连接Mysql数据库，希望对大家有所帮助，如果大家有任何疑问请给我留言，小编会及时回复大家的。在此也非常感谢大家对鹏鹏电脑知识网的支持！<br />
+	&nbsp;</p>
+<h3 style="box-sizing: border-box; font-family: 'Microsoft YaHei'; font-weight: 500; line-height: 1.1; color: rgb(51, 51, 51); margin-top: 20px; margin-bottom: 10px; font-size: 24px;">
+	<a href="http://www.flypeng.com/bcsj/java/2016/0930/1527.html" style="box-sizing: border-box; color: rgb(66, 139, 202); text-decoration: none; background: 0px 0px;">谈谈mybatis优缺点</a></h3>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

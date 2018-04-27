@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL5.6,数据库,主从,Master,Slave,同" />
+  <meta name="description" content="安装环境 操作系统 ：CentOS 6.5 数据库版本：MySQL 5.6.27主机A：192.168.1.1 （Master）主机B：192.168.1.2 （Slave） 这里强调的数据库的版本，是因为MySQL在5.6之前和之后的安装方式是不一样的。" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div> MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：26次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1609" class="art_content"><h2 id="安装环境" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	安装环境</h2>
+<pre name="code">
+操作系统 ：CentOS 6.5 
+数据库版本：MySQL 5.6.27
+主机A：192.168.1.1 （Master）
+主机B：192.168.1.2 （Slave）</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	这里强调的数据库的版本，是因为MySQL在5.6之前和之后的安装方式是不一样的。&nbsp; 本人在进行配置的时候，也遇到了这个坑，这里提前说明，希望大家不要采坑。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	注：这里有一篇CentOS安装mysql的文章，在这里引出，过程亲测，希望对大家有帮助：http://blog.csdn.net/xlgen157387/article/details/49964557</p>
+<h2 id="基本环境配置" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	基本环境配置</h2>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	首先，要保证防火墙对3306端口的开启，（开启方式，请参考：[http://blog.csdn.net/xlgen157387/article/details/49964557]），如果只是为了学习数据库的主从配置，可以使用<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">service iptables stop</code>&nbsp;命令直接关闭防火墙。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	然后可以在两台机子之间进行 ping操作，确保两台机器之间能够相同。</p>
+<h2 id="master的配置" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	Master的配置</h2>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	在Linux环境下MySQL的配置文件的位置是在&nbsp;<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">/etc/my.cnf</code>&nbsp;，在该文件下指定Master的配置如下：</p>
+<pre name="code">
+log-bin=mysql-bin
+server-id=2
+binlog-ignore-db=information_schema
+binlog-ignore-db=cluster
+binlog-ignore-db=mysql
+binlog-do-db=ufind_db </pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	这里的server-id用于标识唯一的数据库，这里设置为2，在设置从库的时候就需要设置为其他值。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	binlog-ignore-db：表示同步的时候ignore的数据库&nbsp; binlog-do-db：指定需要同步的数据库</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	完整配置截图如下：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506162226567" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	1、然后重启mysql：<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">service mysqld restart</code></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	2、进入mysql：<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">[root@VM_221_4_centos ~]# mysql -u root -p</code>&nbsp;回车，输入mysql密码进入。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	3、 赋予从库权限帐号，允许用户在主库上读取日志，赋予192.168.1.2也就是Slave机器有File权限，只赋予Slave机器有File权限还不行，还要给它REPLICATION SLAVE的权限才可以。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	在Master数据库命令行中输入：</p>
+<pre name="code">
+ &gt;GRANT FILE ON *.* TO &#39;root&#39;@&#39;192.168.1.2&#39; IDENTIFIED BY &#39;mysql password&#39;;
+
+ &gt;GRANT REPLICATION SLAVE ON *.* TO &#39;root&#39;@&#39;192.168.1.2&#39; IDENTIFIED BY &#39;mysql password&#39;;
+&gt;FLUSH PRIVILEGES</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	这里使用的仍是 root 用户作为同步的时候使用到的用户，可以自己设定。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	4、重启mysql，登录mysql，显示主库信息</p>
+<pre name="code">
+mysql&gt; show master status;</pre>
+<ul class="pre-numbering" style="box-sizing: border-box; position: absolute; width: 50px; background-color: rgb(238, 238, 238); top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right: 1px solid rgb(221, 221, 221); list-style: none; text-align: right; opacity: 0.0487737;">
+	<li style="box-sizing: border-box; padding: 0px 5px;">
+		1</li>
+</ul>
+<pre name="code">
+mysql&gt; show master status;
++------------------+----------+--------------+----------------------------------+-------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB                 | Executed_Gtid_Set |
++------------------+----------+--------------+----------------------------------+-------------------+
+| mysql-bin.000004 |    28125 | ufind_db     | information_schema,cluster,mysql |                   |
++------------------+----------+--------------+----------------------------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql&gt; </pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506163637963" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	这里的 File 、Position 是在配置Salve的时候要使用到的，Binlog_Do_DB表示要同步的数据库，Binlog_Ignore_DB 表示Ignore的数据库，这些都是在配置的时候进行指定的。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	另外：如果执行这个步骤始终为<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">Empty set(0.00 sec)</code>，那说明前面的my.cnf没配置对。</p>
+<h2 id="slave的配置" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	Slave的配置</h2>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	1、从库的配置，首先也是修改配置文件：/etc/my.cnf 如下：</p>
+<pre name="code">
+log-bin=mysql-bin
+server-id=3
+binlog-ignore-db=information_schema
+binlog-ignore-db=cluster
+binlog-ignore-db=mysql
+replicate-do-db=ufind_db
+replicate-ignore-db=mysql
+log-slave-updates
+slave-skip-errors=all
+slave-net-timeout=60</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506164102886" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	2、这里可以看到，在MySQL5.6之后的版本中没有指定：</p>
+<pre name="code">
+master-host=192.168.1.1 #Master的主机IP
+master-user=root
+master-password=mysql password #Master的MySQL密码</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	3、这也是在网上很多搜索的配置过程，他们也都指定了数据库的版本，但是并没有说出来新版本的配置这种方式是不适用的。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	4、如果，你在MySQL5.6和之后的版本中配置从库的时候，设置到了上边的内容，即指定了master-host、master-user等信息的话，重启MySQL的时候就回报错，错误信息如下：</p>
+<pre name="code">
+[root@VM_128_194_centos bin]# service mysqld restart
+Shutting down MySQL... SUCCESS! 
+Starting MySQL... ERROR! The server quit without updating PID file (/data/mysqldb/VM_128_194_centos.pid).
+[root@VM_128_194_centos bin]# </pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	此时，查看数据库的报错信息（数据库的目录, /data/mysqldb/VM_128_194_centos.err ），可以看到：</p>
+<pre name="code">
+2016-05-06 13:12:04 13345 [Note] InnoDB: Waiting for purge to start
+2016-05-06 13:12:04 13345 [Note] InnoDB: 5.6.27 started; log sequence number 2850211
+2016-05-06 13:12:04 13345 [ERROR] /data/home/server/mysql-5.6.27/bin/mysqld: unknown variable &#39;master-host=192.168.1.1&#39;
+2016-05-06 13:12:04 13345 [ERROR] Aborting
+</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	可以看出<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">master-host</code>&nbsp;被检测数是一个未知的变量，因此会出现错误。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	5、在5.6以及后续版本的配置如下：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	修改完/etc/my.cnf 文件之后，重启一下MySQL（service mysqld restart）</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	进入Slave mysql控制台，执行：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506165720330" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<pre name="code">
+
+mysql&gt; stop slave;  #关闭Slave
+mysql&gt; change master to master_host=&#39;192.168.1.1&#39;,master_user=&#39;root&#39;,master_password=&#39;123456&#39;,master_log_file=&#39;mysql-bin.000004&#39;, master_log_pos=28125;
+
+mysql&gt; start slave;  #开启Slave</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	在这里指定Master的信息，master_log_file是在配置Master的时候的File选项， master_log_pos是在配置Master的Position 选项，这里要进行对应。</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	然后可以通过<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">mysql&gt; show slave status;</code>&nbsp;查看配置的信息：</p>
+<pre name="code">
+mysql&gt; show slave status \G;
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.167.1.1
+                  Master_User: root
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: mysql-bin.000004
+          Read_Master_Log_Pos: 28125
+               Relay_Log_File: VM_128_194_centos-relay-bin.000004
+                Relay_Log_Pos: 26111
+        Relay_Master_Log_File: mysql-bin.000004
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB: ufind_db
+          Replicate_Ignore_DB: mysql
+           Replicate_Do_Table: 
+       Replicate_Ignore_Table: 
+      Replicate_Wild_Do_Table: 
+  Replicate_Wild_Ignore_Table: 
+                   Last_Errno: 0
+                   Last_Error: 
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 28125
+              Relay_Log_Space: 26296
+              Until_Condition: None
+               Until_Log_File: 
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File: 
+           Master_SSL_CA_Path: 
+              Master_SSL_Cert: 
+            Master_SSL_Cipher: 
+               Master_SSL_Key: 
+        Seconds_Behind_Master: 0
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error: 
+               Last_SQL_Errno: 0
+               Last_SQL_Error: 
+  Replicate_Ignore_Server_Ids: 
+             Master_Server_Id: 2
+                  Master_UUID: 8ac3066a-9680-11e5-a2ec-5254007529fd
+             Master_Info_File: /data/mysqldb/master.info
+                    SQL_Delay: 0
+          SQL_Remaining_Delay: NULL
+      Slave_SQL_Running_State: Slave has read all relay log; waiting for the slave I/O thread to update it
+           Master_Retry_Count: 86400
+                  Master_Bind: 
+      Last_IO_Error_Timestamp: 
+     Last_SQL_Error_Timestamp: 
+               Master_SSL_Crl: 
+           Master_SSL_Crlpath: 
+           Retrieved_Gtid_Set: 
+            Executed_Gtid_Set: 
+                Auto_Position: 0
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql&gt; 
+</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	可以看到，已经配置成功。</p>
+<h2 id="添加需要同步的从库slave" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	添加需要同步的从库Slave</h2>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	由于种种原因，测试的时候使用test库，这里我按照上述的方式，修改Master的my.cnf的配置文件，新增同步的数据库test，重启MySQL,执行Master的：<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">show master status</code>如下：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506171559128" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	相应的,要修改Slave从库的信息在my.cnf 增加&nbsp;<code style="box-sizing: border-box; font-family: &quot;Source Code Pro&quot;, monospace; padding: 2px 4px; font-size: 13.5px; background-color: rgba(128, 128, 128, 0.075); white-space: nowrap; border-radius: 0px;">replicate-do-db=test</code>，重启Mysql，根据上述的show master status，在Slave从库中执行下边的内容：</p>
+<pre name="code">
+
+&gt;stop slave
+&gt;change master to master_host=&#39;192.168.1.1&#39;,master_user=&#39;root&#39;,master_password=&#39;123456&#39;,master_log_file=&#39;mysql-bin.000005&#39;, master_log_pos=120;
+&gt;start slave</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	然后使用：show slave status；</p>
+<pre name="code">
+mysql&gt; show slave status\G;
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.1.1
+                  Master_User: root
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: mysql-bin.000005
+          Read_Master_Log_Pos: 1422
+               Relay_Log_File: VM_128_194_centos-relay-bin.000004
+                Relay_Log_Pos: 283
+        Relay_Master_Log_File: mysql-bin.000005
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB: ufind_db,test
+          Replicate_Ignore_DB: mysql
+           Replicate_Do_Table: 
+       Replicate_Ignore_Table: 
+      Replicate_Wild_Do_Table: 
+  Replicate_Wild_Ignore_Table: 
+                   Last_Errno: 0
+                   Last_Error: 
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 1422
+              Relay_Log_Space: 468
+              Until_Condition: None
+               Until_Log_File: 
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File: 
+           Master_SSL_CA_Path: 
+              Master_SSL_Cert: 
+            Master_SSL_Cipher: 
+               Master_SSL_Key: 
+        Seconds_Behind_Master: 0
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error: 
+               Last_SQL_Errno: 0
+               Last_SQL_Error: 
+  Replicate_Ignore_Server_Ids: 
+             Master_Server_Id: 2
+                  Master_UUID: 8ac3066a-9680-11e5-a2ec-5254007529fd
+             Master_Info_File: /data/mysqldb/master.info
+                    SQL_Delay: 0
+          SQL_Remaining_Delay: NULL
+      Slave_SQL_Running_State: Slave has read all relay log; waiting for the slave I/O thread to update it
+           Master_Retry_Count: 86400
+                  Master_Bind: 
+      Last_IO_Error_Timestamp: 
+     Last_SQL_Error_Timestamp: 
+               Master_SSL_Crl: 
+           Master_SSL_Crlpath: 
+           Retrieved_Gtid_Set: 
+            Executed_Gtid_Set: 
+                Auto_Position: 0
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql&gt; 
+</pre>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	已经新增加了test。</p>
+<h2 id="真正的测试" style="margin: 0.8em 0px; padding: 0px; box-sizing: border-box; font-weight: 100; line-height: 1.3em; font-size: 2.13em; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;;">
+	真正的测试</h2>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	在主库中新增数据库表，user，观察从库变化如下：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	创建数据库的时候：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506174112818" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	新增数据的时候：</p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506175740091" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	删除Master数据库表的时候：&nbsp;<br />
+	<img alt="这里写图片描述" src="http://img.blog.csdn.net/20160506174908673" style="border: none; box-sizing: border-box; max-width: 602px; max-height: 100%; height: auto;" title="" /></p>
+<p style="margin: 0px 0px 1.1em; padding: 0px; box-sizing: border-box; color: rgb(63, 63, 63); font-family: &quot;microsoft yahei&quot;; font-size: 15px;">
+	配置过程，到此为止，希望能够帮助大家，如有疑问 欢迎留言。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

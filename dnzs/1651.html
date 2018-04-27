@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>php中json_decode()和json_encode()的使用方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="json_decode,json_encode" />
+  <meta name="description" content="1.json_decode() json_decode (PHP 5 = 5.2.0, PECL json = 1.2.0) json_decode 对 JSON 格式的字符串进行编码 说明 mixed json_decode ( string $json [, bool $assoc ] ) 接受一个 JSON 格式的字符串并且把它转换为 PHP 变量" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>php中json_decode()和json_encode()的使用方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1651" class="art_content"><p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<strong>1.json_decode()&nbsp;</strong><br />
+	<br />
+	json_decode&nbsp;<br />
+	(PHP 5 &gt;= 5.2.0, PECL json &gt;= 1.2.0)&nbsp;<br />
+	<br />
+	json_decode &mdash; 对 JSON 格式的字符串进行编码&nbsp;<br />
+	<br />
+	说明&nbsp;<br />
+	mixed json_decode ( string $json [, bool $assoc ] )&nbsp;<br />
+	接受一个 JSON 格式的字符串并且把它转换为 PHP 变量&nbsp;<br />
+	<br />
+	参数&nbsp;<br />
+	<br />
+	json&nbsp;<br />
+	待解码的 json string 格式的字符串。&nbsp;<br />
+	<br />
+	assoc&nbsp;<br />
+	当该参数为 TRUE 时，将返回 array 而非 object 。&nbsp;<br />
+	<br />
+	<br />
+	返回值&nbsp;<br />
+	Returns an object or if the optional assoc parameter is TRUE, an associative array is instead returned.&nbsp;<br />
+	<br />
+	范例&nbsp;<br />
+	<br />
+	Example #1 json_decode() 的例子&nbsp;</p>
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code21255" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	&lt;?php&nbsp;<br />
+	$json = &#39;{&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3,&quot;d&quot;:4,&quot;e&quot;:5}&#39;;&nbsp;<br />
+	var_dump(json_decode($json));&nbsp;<br />
+	var_dump(json_decode($json, true));&nbsp;<br />
+	?&gt;&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">上例将输出：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code12969" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	object(stdClass)#1 (5) {&nbsp;<br />
+	[&quot;a&quot;] =&gt; int(1)&nbsp;<br />
+	[&quot;b&quot;] =&gt; int(2)&nbsp;<br />
+	[&quot;c&quot;] =&gt; int(3)&nbsp;<br />
+	[&quot;d&quot;] =&gt; int(4)&nbsp;<br />
+	[&quot;e&quot;] =&gt; int(5)&nbsp;<br />
+	}&nbsp;<br />
+	<br />
+	array(5) {&nbsp;<br />
+	[&quot;a&quot;] =&gt; int(1)&nbsp;<br />
+	[&quot;b&quot;] =&gt; int(2)&nbsp;<br />
+	[&quot;c&quot;] =&gt; int(3)&nbsp;<br />
+	[&quot;d&quot;] =&gt; int(4)&nbsp;<br />
+	[&quot;e&quot;] =&gt; int(5)&nbsp;<br />
+	}&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code90942" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	$data=&#39;[{&quot;Name&quot;:&quot;a1&quot;,&quot;Number&quot;:&quot;123&quot;,&quot;Contno&quot;:&quot;000&quot;,&quot;QQNo&quot;:&quot;&quot;},{&quot;Name&quot;:&quot;a1&quot;,&quot;Number&quot;:&quot;123&quot;,&quot;Contno&quot;:&quot;000&quot;,&quot;QQNo&quot;:&quot;&quot;},{&quot;Name&quot;:&quot;a1&quot;,&quot;Number&quot;:&quot;123&quot;,&quot;Contno&quot;:&quot;000&quot;,&quot;QQNo&quot;:&quot;&quot;}]&#39;;&nbsp;<br />
+	echo json_decode($data);&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">结果为：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code30463" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	Array ( [0] =&gt; stdClass Object ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) [1] =&gt; stdClass Object ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) [2] =&gt; stdClass Object ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) )&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">可以看出经过json_decode()编译出来的是对象,现在输出json_decode($data,true)试下&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code11901" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	echo json_decode($data,true);&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">结果：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code94147" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	Array ( [0] =&gt; Array ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) [1] =&gt; Array ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) [2] =&gt; Array ( [Name] =&gt; a1 [Number] =&gt; 123 [Contno] =&gt; 000 [QQNo] =&gt; ) )&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">可以看出 json_decode($data,true)输出的一个关联数组,由此可知json_decode($data）输出的是对象,而json_decode(&quot;$arr&quot;,true)是把它强制生成PHP关联数组.&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<strong style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">2.json_encode()&nbsp;</strong><br />
+<br />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">json_encode&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">(PHP 5 &gt;= 5.2.0, PECL json &gt;= 1.2.0)&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">json_encode &mdash; 对变量进行 JSON 编码&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Report a bug 说明&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">string json_encode ( mixed $value [, int $options = 0 ] )&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">返回 value 值的 JSON 形式&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Report a bug 参数&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">value&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">待编码的 value ，除了resource 类型之外，可以为任何数据类型&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">该函数只能接受 UTF-8 编码的数据&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">options&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">由以下常量组成的二进制掩码： JSON_HEX_QUOT, JSON_HEX_TAG, JSON_HEX_AMP, JSON_HEX_APOS, JSON_NUMERIC_CHECK, JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, JSON_FORCE_OBJECT, JSON_UNESCAPED_UNICODE.&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Report a bug 返回值&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">编码成功则返回一个以 JSON 形式表示的 string 或者在失败时返回 FALSE 。&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Report a bug 更新日志&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">版本 说明&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">5.4.0 options 参数增加常量： JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, 和 JSON_UNESCAPED_UNICODE。&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">5.3.3 options 参数增加常量：JSON_NUMERIC_CHECK。&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">5.3.0 增加 options 参数.&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Report a bug 范例&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Example #1 A json_encode() 的例子&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code20850" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	&lt;?php&nbsp;<br />
+	$arr = array (&#39;a&#39;=&gt;1,&#39;b&#39;=&gt;2,&#39;c&#39;=&gt;3,&#39;d&#39;=&gt;4,&#39;e&#39;=&gt;5);&nbsp;<br />
+	<br />
+	echo json_encode($arr);&nbsp;<br />
+	?&gt;&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">以上例程会输出：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code40740" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	{&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3,&quot;d&quot;:4,&quot;e&quot;:5}&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Example #2 json_encode() 函数中 options 参数的用法&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code7628" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	&lt;?php&nbsp;<br />
+	$a = array(&#39;&lt;foo&gt;&#39;,&quot;&#39;bar&#39;&quot;,&#39;&quot;baz&quot;&#39;,&#39;&amp;blong&amp;&#39;, &quot;\xc3\xa9&quot;);&nbsp;<br />
+	<br />
+	echo &quot;Normal: &quot;, json_encode($a), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Tags: &quot;, json_encode($a, JSON_HEX_TAG), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Apos: &quot;, json_encode($a, JSON_HEX_APOS), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Quot: &quot;, json_encode($a, JSON_HEX_QUOT), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Amp: &quot;, json_encode($a, JSON_HEX_AMP), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Unicode: &quot;, json_encode($a, JSON_UNESCAPED_UNICODE), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;All: &quot;, json_encode($a, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE), &quot;\n\n&quot;;&nbsp;<br />
+	<br />
+	$b = array();&nbsp;<br />
+	<br />
+	echo &quot;Empty array output as array: &quot;, json_encode($b), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Empty array output as object: &quot;, json_encode($b, JSON_FORCE_OBJECT), &quot;\n\n&quot;;&nbsp;<br />
+	<br />
+	$c = array(array(1,2,3));&nbsp;<br />
+	<br />
+	echo &quot;Non-associative array output as array: &quot;, json_encode($c), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Non-associative array output as object: &quot;, json_encode($c, JSON_FORCE_OBJECT), &quot;\n\n&quot;;&nbsp;<br />
+	<br />
+	$d = array(&#39;foo&#39; =&gt; &#39;bar&#39;, &#39;baz&#39; =&gt; &#39;long&#39;);&nbsp;<br />
+	<br />
+	echo &quot;Associative array always output as object: &quot;, json_encode($d), &quot;\n&quot;;&nbsp;<br />
+	echo &quot;Associative array always output as object: &quot;, json_encode($d, JSON_FORCE_OBJECT), &quot;\n\n&quot;;&nbsp;<br />
+	?&gt;&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">以上例程会输出：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code6964" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	Normal: [&quot;&lt;foo&gt;&quot;,&quot;&#39;bar&#39;&quot;,&quot;\&quot;baz\&quot;&quot;,&quot;&amp;blong&amp;&quot;,&quot;\u00e9&quot;]&nbsp;<br />
+	Tags: [&quot;\u003Cfoo\u003E&quot;,&quot;&#39;bar&#39;&quot;,&quot;\&quot;baz\&quot;&quot;,&quot;&amp;blong&amp;&quot;,&quot;\u00e9&quot;]&nbsp;<br />
+	Apos: [&quot;&lt;foo&gt;&quot;,&quot;\u0027bar\u0027&quot;,&quot;\&quot;baz\&quot;&quot;,&quot;&amp;blong&amp;&quot;,&quot;\u00e9&quot;]&nbsp;<br />
+	Quot: [&quot;&lt;foo&gt;&quot;,&quot;&#39;bar&#39;&quot;,&quot;\u0022baz\u0022&quot;,&quot;&amp;blong&amp;&quot;,&quot;\u00e9&quot;]&nbsp;<br />
+	Amp: [&quot;&lt;foo&gt;&quot;,&quot;&#39;bar&#39;&quot;,&quot;\&quot;baz\&quot;&quot;,&quot;\u0026blong\u0026&quot;,&quot;\u00e9&quot;]&nbsp;<br />
+	Unicode: [&quot;&lt;foo&gt;&quot;,&quot;&#39;bar&#39;&quot;,&quot;\&quot;baz\&quot;&quot;,&quot;&amp;blong&amp;&quot;,&quot;&eacute;&quot;]&nbsp;<br />
+	All: [&quot;\u003Cfoo\u003E&quot;,&quot;\u0027bar\u0027&quot;,&quot;\u0022baz\u0022&quot;,&quot;\u0026blong\u0026&quot;,&quot;&eacute;&quot;]&nbsp;<br />
+	<br />
+	Empty array output as array: []&nbsp;<br />
+	Empty array output as object: {}&nbsp;<br />
+	<br />
+	Non-associative array output as array: [[1,2,3]]&nbsp;<br />
+	Non-associative array output as object: {&quot;0&quot;:{&quot;0&quot;:1,&quot;1&quot;:2,&quot;2&quot;:3}}&nbsp;<br />
+	<br />
+	Associative array always output as object: {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;long&quot;}&nbsp;<br />
+	Associative array always output as object: {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;long&quot;}&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">Example #3 连续与非连续数组示例&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code82397" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	&lt;?php&nbsp;<br />
+	echo &quot;连续数组&quot;.PHP_EOL;&nbsp;<br />
+	$sequential = array(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;, &quot;blong&quot;);&nbsp;<br />
+	var_dump(&nbsp;<br />
+	$sequential,&nbsp;<br />
+	json_encode($sequential)&nbsp;<br />
+	);&nbsp;<br />
+	<br />
+	echo PHP_EOL.&quot;非连续数组&quot;.PHP_EOL;&nbsp;<br />
+	$nonsequential = array(1=&gt;&quot;foo&quot;, 2=&gt;&quot;bar&quot;, 3=&gt;&quot;baz&quot;, 4=&gt;&quot;blong&quot;);&nbsp;<br />
+	var_dump(&nbsp;<br />
+	$nonsequential,&nbsp;<br />
+	json_encode($nonsequential)&nbsp;<br />
+	);&nbsp;<br />
+	<br />
+	echo PHP_EOL.&quot;删除一个连续数组值的方式产生的非连续数组&quot;.PHP_EOL;&nbsp;<br />
+	unset($sequential[1]);&nbsp;<br />
+	var_dump(&nbsp;<br />
+	$sequential,&nbsp;<br />
+	json_encode($sequential)&nbsp;<br />
+	);&nbsp;<br />
+	?&gt;&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">以上例程会输出：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code56099" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	连续数组&nbsp;<br />
+	array(4) {&nbsp;<br />
+	[0]=&gt;&nbsp;<br />
+	string(3) &quot;foo&quot;&nbsp;<br />
+	[1]=&gt;&nbsp;<br />
+	string(3) &quot;bar&quot;&nbsp;<br />
+	[2]=&gt;&nbsp;<br />
+	string(3) &quot;baz&quot;&nbsp;<br />
+	[3]=&gt;&nbsp;<br />
+	string(5) &quot;blong&quot;&nbsp;<br />
+	}&nbsp;<br />
+	string(27) &quot;[&quot;foo&quot;,&quot;bar&quot;,&quot;baz&quot;,&quot;blong&quot;]&quot;&nbsp;<br />
+	<br />
+	非连续数组&nbsp;<br />
+	array(4) {&nbsp;<br />
+	[1]=&gt;&nbsp;<br />
+	string(3) &quot;foo&quot;&nbsp;<br />
+	[2]=&gt;&nbsp;<br />
+	string(3) &quot;bar&quot;&nbsp;<br />
+	[3]=&gt;&nbsp;<br />
+	string(3) &quot;baz&quot;&nbsp;<br />
+	[4]=&gt;&nbsp;<br />
+	string(5) &quot;blong&quot;&nbsp;<br />
+	}&nbsp;<br />
+	string(43) &quot;{&quot;1&quot;:&quot;foo&quot;,&quot;2&quot;:&quot;bar&quot;,&quot;3&quot;:&quot;baz&quot;,&quot;4&quot;:&quot;blong&quot;}&quot;&nbsp;<br />
+	<br />
+	删除一个连续数组值的方式产生的非连续数组&nbsp;<br />
+	array(3) {&nbsp;<br />
+	[0]=&gt;&nbsp;<br />
+	string(3) &quot;foo&quot;&nbsp;<br />
+	[2]=&gt;&nbsp;<br />
+	string(3) &quot;baz&quot;&nbsp;<br />
+	[3]=&gt;&nbsp;<br />
+	string(5) &quot;blong&quot;&nbsp;<br />
+	}&nbsp;<br />
+	string(33) &quot;{&quot;0&quot;:&quot;foo&quot;,&quot;2&quot;:&quot;baz&quot;,&quot;3&quot;:&quot;blong&quot;}&quot;&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code8437" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	$obj-&gt;Name= &#39;a1&#39;;$obj-&gt;Number =&#39;123&#39;;&nbsp;<br />
+	$obj-&gt;Contno= &#39;000&#39;;&nbsp;<br />
+	echo json_encode($obj);&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">结果为：&nbsp;</span><br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<div class="codetitle" style="margin: 3px auto 0px; padding: 0px 3px; background: rgb(242, 246, 251); width: 640px; clear: both; font-size: 14px; border-top: 1px solid rgb(0, 153, 204); border-right: 1px solid rgb(0, 153, 204); border-left: 1px solid rgb(0, 153, 204); line-height: 25.2px; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<span style="line-height: 21.6px; font-size: 12px; float: right;"><u>复制代码</u></span>代码如下:</div>
+<div class="codebody" id="code51421" style="margin: 0px auto 3px; padding: 0px 3px 0px 5px; line-height: 25.2px; font-size: 14px; background: rgb(221, 237, 251); border: 1px solid rgb(0, 153, 204); width: 638px; clear: both; color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体;">
+	<br />
+	{&quot;Name&quot;:&quot;a1&quot;,&nbsp;<br />
+	&quot;Number&quot;:&quot;123&quot;,&nbsp;<br />
+	&quot;Contno&quot;:&quot;000&quot;&nbsp;<br />
+	}&nbsp;</div>
+<br style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;" />
+<span style="color: rgb(0, 0, 0); font-family: tahoma, arial, 宋体; font-size: 14px;">可以看出json_encode()和json_decode()是编译和反编译过程，注意json只接受utf-8编码的字符，所以json_encode()的参数必须是utf-8编码，否则会得到空字符或者null。</span></div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

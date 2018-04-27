@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linux下实现Web数据同步的四种方式</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Linux,下,实现,Web,数据,同步,的,四种,方式,实" />
+  <meta name="description" content="实现web数据同步的四种方式 1、nfs实现web数据共享 2、rsync +inotify实现web数据同步 3、rsync+sersync更快更节约资源实现web数据同步 4、unison+inotify实现web数据双向同步 一、nfs实现web数据共享" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Linux下实现Web数据同步的四种方式</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：497次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="243" class="art_content"><p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	实现web数据同步的四种方式</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1、nfs实现web数据共享</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2、rsync +inotify实现web数据同步</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3、rsync+sersync更快更节约资源实现web数据同步</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　4、unison+inotify实现web数据双向同步</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: 'Microsoft YaHei'; color: rgb(85, 85, 85); line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　一、nfs实现web数据共享</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="" src="/uploads/allimg/150318/1330262153-0.PNG" style="border: none;" title="20150316142458" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　nfs能实现数据同步是通过NAS(网络附加存储)，在服务器上共享一个文件，且服务器需要设置文件系统的权限和配置文件设置的权限，权限两者之间取交集，然后客户端把共享的文件挂载到本地，客户端对文件有读写权限，则实现数据的同步。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　nfs+web:服务器端的配置：</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、安装相关软件，httpd提供web服务，nfs-utils提供nfs服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# yum -y install httpd nfs-utils</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、设置web的相关配置，使得web能够提供web服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.1:80 
+#DocumentRoot &quot;/var/www/html&quot;   #提供虚拟主机，注释默认存放网页文件的路径 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /web/htdocs
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie1 ~]# mkdir -pv /web/htdocs   #创建存放网页的目录 
+[root@jie1 ~]# cd /web/htdocs/ 
+[root@jie1 htdocs]# touch index.html test.html test.php 
+[root@jie1 htdocs]# ls 
+index.html  test.html  test.php 
+[root@jie1 htdocs]# echo &quot;This is Jie1 Web+nfs Server&quot; &gt;index.html 
+[root@jie1 htdocs]# httpd -t         #检查web的配置文件是否有语法错误 
+Syntax OK 
+[root@jie1 htdocs]# service httpd start  #开启web服务 
+Starting httpd:                                            [  OK  ]</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3）、设置nfs的相关配置，共享网页文件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 htdocs]# id apache #安装httpd软件后，系统会创建apache用户，查看apache的id号 
+uid=48(apache) gid=48(apache) groups=48(apache) 
+[root@jie1 htdocs]# vim /etc/exports 
+###################################### 
+/web/htdocs  172.16.22.3(rw,sync,root_squash,anonuid=48,anongid=48) 
+#nfs是以id号来确定是否能访问共享的文件的，因为两个服务器都安装了httpd软件，都会有apache用户，所以apache用户的id号能访问共享的文件 
+#/web/htdocs 共享的目录 
+#172.16.22.3 指定客户端能共享此文件，多个客户端用逗号隔开 
+#rw,读写权限 
+#sync,同步方式 
+#root_squash,压缩root用户的权限 
+#anonuid=48,指定此用户的id能访问共享文件 
+#anongid=48指定此组的id能访问共享文件 
+###################################### 
+[root@jie1 htdocs]# service nfs start  #开启nfs服务 
+Starting NFS services:                                     [  OK  ] 
+Starting NFS quotas:                                       [  OK  ] 
+Starting NFS mountd:                                       [  OK  ] 
+Stopping RPC idmapd:                                       [  OK  ] 
+Starting RPC idmapd:                                       [  OK  ] 
+Starting NFS daemon:                                       [  OK  ] 
+[root@jie1 htdocs]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　web:客户端的配置</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、安装httpd的软件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 /]# yum -y install httpd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、设置web的相关配置，使得web能够提供web服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 /]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.3:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /website   #存放网页文件的路径 
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie3 /]# mkdir /website 
+[root@jie3 /]# httpd -t 
+Syntax OK 
+[root@jie3 /]# service httpd start 
+Starting httpd:                                            [  OK  ] 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# ls   #现在查看是没有任何文件 
+[root@jie3 website]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　实现同步：</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）服务器端设置apache用户对共享的文件有读写权限</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 htdocs]#setfacl -R -m u:apache:rwx /web/ #设置apache用户对此中所有文件有读写可执行权限</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）客户端挂载服务器的共享文件，查看客户端是否已经同步服务器端的文件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 website]#cd /root 
+[root@jie3 ~]# mount -t nfs 172.16.22.1:/web/htdocs /website/ #通过nfs挂载服务器端的文件 
+[root@jie3 /]#echo &quot;172.16.22.1:/web/htdocs  /website       nfs    defaults,_netdev 0 0&quot; &gt;&gt;/etc/fstab  #实现开机挂载 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# ls  #查看文件已经同步过来 
+index.html  test.html  test.php 
+[root@jie3 website]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3）客户端在共享的文件中新增文件，查看服务器端是否同步文件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# ls 
+index.html  test.html  test.php 
+[root@jie3 website]# touch website.html  #在客户端创建此文件 
+[root@jie3 website]# ls 
+index.html  test.html  test.php  website.html
+[root@jie1 htdocs]# ls  #服务器端，可以查看来着客户端上传的文件 
+index.html  test.html  test.php  website.html</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　所有的数据其实都保存到了nfs服务器，不论用户访问哪台Web服务器，都要来nfs服务器获取数据，这样势必照成nfs服务器的性能下降，而且客户端对nfs服务器的依赖性较大，如果nfs服务器down掉之后，客户端的web服务器就无法工作了。（动态的那种数据，而且数据量很大的数据，就不要用nfs服务器来实现数据共享了，一般适应于，静态页面和数据较小的文件)</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: 'Microsoft YaHei'; color: rgb(85, 85, 85); line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　二、rsync +inotify实现web数据同步</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="" src="/uploads/allimg/150318/1330262G4-1.PNG" style="border: none;" title="20150316142553" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync(remote sync)的特性：</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　可以镜像保存整个目录树和文件系统</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　可以同步增量同步数据，文件传输效率高，因而同步时间很短</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　可以保持原有文件的权限、时间等属性</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　加密传输数据，保证了数据的安全性</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　支持匿名传输</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync也能实现同步，但是需要自己手动的去同步数据，当数据量非常的频繁时，无疑是加大了运维人员的工作，inotify是一种强大的、细粒度的、异步的文件系统事件监控机制，inotify-tools工具的出现，解决了这种工作，安装inotify软件的主机会监听服务器端的主机是否数据和本机不一样，(因为在上传数据时，运维人员先上传到安装inotify主机上)，不一样就用rsync命令直接把数据传输过去。客户端安装rsync软件是为了调用rsync的命令，安装inotify软件是监听和数据是否发生改变，服务器端安装rsync软件时为了提供rsync服务。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync+web服务端的配置：</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、安装相关软件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# yum -y install rsync xinetd httpd 
+#rsync服务通常基于超级守护进程xinetd管理的方式来实现，因此需要事先安装rysnc和xinetd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、web的相关配置，使得web能够提供服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.1:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /web/htdocs
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie1 ~]# mkdir -pv /web/htdocs 
+[root@jie1 ~]# cd /web/htdocs   #服务器端，没有任何的网页文件 
+[root@jie1 ~]# ls 
+[root@jie1 ~]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3）、rsync服务的相关配置</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　*****建立rsync的配置文件和密码文件************</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　touch /etc/rsyncd.conf(rsync的配置文件)</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　touch /etc/rsyncd.pwd(用户的密码文件)</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　chmod 600 /etc/rsyncd.pwd(权限要设置为600，否则无法备份成功)</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# vim /etc/rsyncd.conf 
+############vim /etc/rsyncd.conf######################################## 
+uid = nobody                    #备份以什么身份进行，用户ID 
+gid = nobody                    #备份以什么身份进行，组ID 
+use chroot = no                 #禁锢在源目录 
+max connections = 3             #最大连接数，0代表没有限制 
+strict modes = yes              #是否检查口令文件的权限 
+pid file = /var/run/rsyncd.pid  #运行进程的pid文件 
+log file = /var/log/rsyncd.log  #日志记录文件 
+[htdocs]                        #指定认证的备份模块名 
+path = /web/htdocs              #需要备份的目录的路径 
+ignore errors = yes             #忽略一些无关的IO错误 
+read only = no                  #设置为no，即可以传至服务器的相应目录。 
+write only = no                 #设置为no，表示客户端可以下载文件 
+hosts allow = 172.16.22.3       #可以连接rsync服务器的主机的IP地址 
+hosts deny = *                  #设置禁止连接rsync服务器的主机地址，*表示  拒绝所有除了hosts allow定义的 
+uid = root 
+gid = root 
+auth users = backuper            #连接模块的用户名 
+secrets file = /etc/rsyncd.pwd   #连接模块用户名的密码文件存放路径 
+##################################################################### 
+[root@jie1 ~]#vim  /etc/rsyncd.pwd  #用户的密码文件 
+##################################################################### 
+backuper:pwd123        #用户名:密码 
+##################################################################### 
+[root@jie1 ~]# chmod 600  /etc/rsyncd.pwd   #权限给600 
+[root@jie1 ~]# chkconfig rsync on 
+[root@jie1 ~]# chkconfig xinetd on 
+[root@jie1 ~]# service  xinetd start 
+Starting xinetd:                                           [  OK  ] 
+[root@jie1 ~]# netstat -pant | grep 873 
+tcp        0      0 :::873                      :::*                        LISTEN      19876/xinetd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync+inotify+web客户端的配置：</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、inotify-tools软件的安装及设置</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 ~]#wget http://cloud.github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz             #下载inotify-tools软件 
+[root@jie3 ~]# ls 
+anaconda-ks.cfg            install.log     
+inotify-tools-3.14.tar.gz  install.log.syslog 
+[root@jie3 ~]# tar xf inotify-tools-3.14.tar.gz          #解压软件 
+[root@jie3 ~]# cd inotify-tools-3.14 
+[root@jie3 inotify-tools-3.14]# ./configure --prefix=/usr/local/inotify &amp;&amp; make &amp;&amp; make install                 #编译安装软件 
+[root@jie3 ~]#cd /usr/local/inotify/ 
+[root@jie3 inotify]# echo &quot;PATH=/usr/local/inotify/bin:$PATH&quot; &gt;&gt;/etc/profile.d/inotify.sh             #设置能与系统关联的path路径 
+[root@jie3 inotify]# source /etc/profile.d/inotify.sh 
+[root@jie3 inotify]# echo &quot;/usr/local/inotify/lib&quot; &gt;/etc/ld.so.conf.d/inotify.conf         #设置系统能识别软件的库文件 
+[root@jie3 inotify]# ldconfig -v | grep inotify 
+/usr/local/inotify/lib: 
+    libinotifytools.so.0 -&gt; libinotifytools.so.0.4.1 
+[root@jie3 inotify]# ln -sv /usr/local/inotify/include/ /usr/include/inotify                      #链接头文件到系统能识别的路径下 
+`/usr/include/inotify&#39; -&gt; `/usr/local/inotify/include/&#39;
+[root@jie3 inotify]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、web的相关配置，使得web能够提供服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 /]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.3:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /website
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie3 /]# mkdir /website 
+[root@jie3 /]# httpd -t 
+Syntax OK 
+[root@jie3 /]# service httpd start 
+Starting httpd:                                            [  OK  ] 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]#  ls 
+[root@jie3 website]# 
+[root@jie3 ~]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3)、配置能连接rsync的密码文件和传输数据的脚本</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 ~]# vim /etc/rsyncd.pwd 
+############################################# 
+pwd123  #密码与rsync服务器的密码相同 
+############################################### 
+[root@jie3 ~]# chmod 600 /etc/rsyncd.pwd 
+[root@jie3 ~]# vim  rsync.sh 
+##################################################################### 
+#!/bin/bash 
+host=172.16.22.1 
+src=/website
+des=htdocs 
+inotifywait -mrq --timefmt &#39;%d/%m/%y %H:%M&#39; --format &#39;%T %w%f%e&#39; -e modify,delete,create,attrib $src \ 
+| while read files 
+  do
+/usr/bin/rsync -vzrtopg  --progress --password-file=/etc/rsyncd.secrets $src backuper@$host::$des 
+echo &quot;${files} was rsynced&quot; &gt;&gt;/tmp/rsync.log 2&gt;&amp;1 
+done
+####################################################################</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　验证实现同步：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+##1、先开启监控的脚本(inotify主机上） 
+[root@jie3 ~]# bash -x rsync.sh &amp; 
+#不放在后台可以查看同步的详细过程，生成环境中，建议把此脚本放到后台执行，此脚本会监控客户端数据是否方式变化，如果变化脚本就运行，数据不变化，脚本就会等待着用户的输入 
+##2、在开一个终端，在此目录创建文件（inotify主机上） 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# touch index.html test.php testdb.php  inotify.php 
+[root@jie3 website]# ls 
+index.html  testdb.php  test.php inotify.php 
+[root@jie3 website]# 
+##3、看服务器端，数据是否已经同步过去 
+[root@jie1 ~]# cd /web/htdocs/ 
+[root@jie1 htdocs]# ls 
+index.html  testdb.php  test.php inotify.php  #数据已经被同步过来 
+[root@jie1 htdocs]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync +inotify这种能实现数据的同步，但是当网络很繁忙，且文件变化比较频繁时，而且需要同步的rsync服务器端比较多时，rsync+inotify肯定是满足不了需求的，于是rsync+sersync这种更快更节约资源实现web数据同步可以弥补rsync+inotify带来的不足，rsync+inotify还有一个重大的缺点就是数据传输只是单向的，当运维人员由于&ldquo;粗心&rdquo;把数据直接传输rsync服务器端时，inotify主机是得不到rsync服务器端的数据，于是unison+inotify实现web数据双向同步，解决了rsync+inotify的这一缺点。</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: 'Microsoft YaHei'; color: rgb(85, 85, 85); line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　三、rsync+sersync更快更节约资源实现web数据同步</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="" src="/uploads/allimg/150318/13302C213-2.PNG" style="border: none;" title="20150316142701" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　sersync与inotify相比有以下优点：</p>
+<ul style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(http://www.admin10000.com/Skin/list-style.gif) 0% 0% no-repeat;">
+		sersync是使用c++编写，而且对linux系统文件系统产生的临时文件和重复的文件操作进行过滤，所以在结合rsync同步的时候，节省了运行时耗和网络资源。因此更快。</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(http://www.admin10000.com/Skin/list-style.gif) 0% 0% no-repeat;">
+		sersync配置起来很简单，其中bin目录下已经有基本上静态编译的2进制文件，配合bin目录下的xml配置文件直接使用即可。</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(http://www.admin10000.com/Skin/list-style.gif) 0% 0% no-repeat;">
+		sersync使用多线程进行同步，尤其在同步较大文件时，能够保证多个服务器实时保持同步状态。</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(http://www.admin10000.com/Skin/list-style.gif) 0% 0% no-repeat;">
+		sersync有出错处理机制，通过失败队列对出错的文件重新同步，如果仍旧失败，则按设定时长对同步失败的文件重新同步。</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(http://www.admin10000.com/Skin/list-style.gif) 0% 0% no-repeat;">
+		sersync自带crontab功能，只需在xml配置文件中开启，即可按您的要求，隔一段时间整体同步一次。无需再额外配置crontab功能。</li>
+</ul>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　rsync+web服务器端的配置:</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、安装相关软件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# yum -y install rsync xinetd httpd 
+#rsync服务通常基于超级守护进程xinetd管理的方式来实现，因此需要事先安装rysnc和xinetd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、web的相关配置，使得web能够提供服务</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.1:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+ServerName www.jie.com 
+DocumentRoot  /web/htdocs
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie1 ~]# mkdir -pv /web/htdocs 
+[root@jie1 ~]# cd /web/htdocs   #服务器端，没有任何的网页文件 
+[root@jie1 ~]# ls 
+[root@jie1 ~]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3）、rsync服务的相关配置</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+###====此配置文件的解释，在rsync+inotify中已经解释了=====#### 
+[root@jie1 ~]# vim /etc/rsyncd.conf 
+############vim /etc/rsyncd.conf############### 
+uid = nobody 
+gid = nobody 
+use chroot = no 
+max connections = 3 
+strict modes = yes
+pid file= /var/run/rsyncd.pid 
+log file= /var/log/rsyncd.log 
+[htdocs] 
+path = /web/htdocs
+ignore errors = yes
+readonly = no 
+write only = no 
+hosts allow = 172.16.22.3 
+hosts deny = * 
+list = false
+uid = root 
+gid = root 
+auth users= backuper 
+secrets file= /etc/rsyncd.pwd
+############################################## 
+[root@jie1 ~]#vim /etc/rsyncd.pwd 
+backuper:pwd123 
+[root@jie1 ~]# chmod 600 /etc/rsyncd.pwd 
+[root@jie1 ~]# chkconfig rsync on 
+[root@jie1 ~]# chkconfig xinetd on 
+[root@jie1 ~]# service  xinetd start 
+Starting xinetd:                                           [  OK  ] 
+[root@jie1 ~]# netstat -pant | grep 873 
+tcp        0      0 :::873                      :::*                        LISTEN      19876/xinetd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　sersync+web客户端的配置:</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、先下载安装sersync软件，做初始设置</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 ~]#wget --no-check-certificate https://sersync.googlecode.com/files/sersync2.5_64bit_binary_stable_final.tar.gz 
+[root@jie3 ~]# ls 
+anaconda-ks.cfg  install.log.syslog 
+install.log      sersync2.5_64bit_binary_stable_final.tar.gz 
+ mkdir /usr/local/sersync
+[root@jie3 ~]#mkdir -pv /usr/local/sersync/{conf,bin,log} 
+mkdir: created directory `/usr/local/sersync&#39; 
+mkdir: created directory `/usr/local/sersync/conf&#39; 
+mkdir: created directory `/usr/local/sersync/bin&#39; 
+mkdir: created directory `/usr/local/sersync/log&#39; 
+[root@jie3 ~]# tar xf sersync2.5_64bit_binary_stable_final.tar.gz 
+[root@jie3 ~]# cd GNU-Linux-x86/ 
+[root@jie3 GNU-Linux-x86]# ls 
+confxml.xml  sersync2 
+[root@jie3 GNU-Linux-x86]# mv confxml.xml /usr/local/sersync/conf/ 
+[root@jie3 GNU-Linux-x86]# mv sersync2  /usr/local/sersync/bin/ 
+[root@jie3 GNU-Linux-x86]# cd /usr/local/sersync/ 
+[root@jie3 sersync]# echo &quot;PATH=/usr/local/sersync/bin:$PATH&quot; &gt;&gt;/etc/profile.d/sersync.sh 
+[root@jie3 sersync]# source /etc/profile.d/sersync.sh 
+[root@jie3 sersync]# echo &quot;pwd123&quot; &gt;/usr/local/sersync/sersync.pwd 
+[root@jie3 sersync]# chmod 600 /usr/local/sersync/sersync.pwd</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、修改sersync的配置文件</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie3 sersync]# vim /usr/local/sersync/conf/confxml.xml 
+#########################################################################&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; 
+&lt;head version=&quot;2.5&quot;&gt; 
+  #设置本地的ip地址和监听的端口 
+    &lt;host hostip=&quot;172.16.22.3&quot; port=&quot;8008&quot;&gt;&lt;/host&gt; 
+  #debug模式是否开启 
+    &lt;debug start=&quot;false&quot;/&gt; 
+  #xfs文件系统是否开启 
+    &lt;fileSystem xfs=&quot;false&quot;/&gt; 
+  #同步时，是否支持正则表达式，默认关闭 
+    &lt;filter start=&quot;false&quot;&gt; 
+    &lt;exclude expression=&quot;(.*)\.svn&quot;&gt;&lt;/exclude&gt; 
+    &lt;exclude expression=&quot;(.*)\.gz&quot;&gt;&lt;/exclude&gt; 
+    &lt;exclude expression=&quot;^info/*&quot;&gt;&lt;/exclude&gt; 
+    &lt;exclude expression=&quot;^static/*&quot;&gt;&lt;/exclude&gt; 
+    &lt;/filter&gt; 
+  # 设置要监控的事件 
+    &lt;inotify&gt; 
+    &lt;delete start=&quot;true&quot;/&gt; 
+    &lt;createFolder start=&quot;true&quot;/&gt; 
+    &lt;createFile start=&quot;false&quot;/&gt; 
+    &lt;closeWrite start=&quot;true&quot;/&gt; 
+    &lt;moveFrom start=&quot;true&quot;/&gt; 
+    &lt;moveTo start=&quot;true&quot;/&gt; 
+    &lt;attrib start=&quot;false&quot;/&gt; 
+    &lt;modify start=&quot;false&quot;/&gt; 
+    &lt;/inotify&gt; 
+  #同步的设置 
+    &lt;sersync&gt; 
+  #同步的路径，本地的目录 
+    &lt;localpath watch=&quot;/website&quot;&gt; 
+  #rsync服务器的ip地址和rsync配置文件里面定义的模块 
+        &lt;remote ip=&quot;172.16.22.1&quot; name=&quot;htdocs&quot;/&gt; 
+  #&lt;!-- --&gt;括起来表示注释 
+        &lt;!--&lt;remote ip=&quot;192.168.8.39&quot; name=&quot;tongbu&quot;/&gt;--&gt; 
+        &lt;!--&lt;remote ip=&quot;192.168.8.40&quot; name=&quot;tongbu&quot;/&gt;--&gt; 
+    &lt;/localpath&gt; 
+    &lt;rsync&gt; 
+  #rsync指令参数 
+        &lt;commonParams params=&quot;-artuz&quot;/&gt; 
+  #rsync同步认证设置的内容，user指定用户名，password指定存放密码的文件路径 
+        &lt;auth start=&quot;true&quot; users=&quot;backuper&quot; passwordfile=&quot;/usr/local/sersync/sersync.pwd&quot;/&gt; 
+  #设置rsync远程服务端口 
+        &lt;userDefinedPort start=&quot;false&quot; port=&quot;874&quot;/&gt;&lt;!-- port=874 --&gt; 
+  #设置超时时间 
+       &lt;timeout start=&quot;true&quot; time=&quot;100&quot;/&gt;&lt;!-- timeout=100 --&gt; 
+  #设置ssh加密传输模式，默认关闭 
+        &lt;ssh start=&quot;false&quot;/&gt; 
+    &lt;/rsync&gt; 
+  #设置sersync传输失败日志脚本路径 
+    &lt;failLog path=&quot;/tmp/rsync_fail_log.sh&quot; timeToExecute=&quot;60&quot;/&gt;&lt;!--default every 60mins execute once--&gt; 
+  #设置rsync+crontab定时传输，默认关闭 
+    &lt;crontab start=&quot;false&quot; schedule=&quot;600&quot;&gt;&lt;!--600mins--&gt; 
+        &lt;crontabfilter start=&quot;false&quot;&gt; 
+        &lt;exclude expression=&quot;*.php&quot;&gt;&lt;/exclude&gt; 
+        &lt;exclude expression=\&#39;#\&#39;&quot; /*&quot;&gt;&lt;/exclude&gt; 
+        &lt;/crontabfilter&gt; 
+    &lt;/crontab&gt; 
+  #设置sersync传输后调用name指定的插件脚本，默认关闭 
+    &lt;plugin start=&quot;false&quot; name=&quot;command&quot;/&gt; 
+    &lt;/sersync&gt; 
+  #插件脚本范例 
+    &lt;plugin name=&quot;command&quot;&gt; 
+    &lt;param prefix=&quot;/bin/sh&quot; suffix=&quot;&quot; ignoreError=&quot;true&quot;/&gt;    &lt;!--prefix /opt/tongbu/mmm.sh suffix--&gt; 
+    &lt;filter start=&quot;false&quot;&gt; 
+        &lt;include expression=&quot;(.*)\.php&quot;/&gt; 
+        &lt;include expression=&quot;(.*)\.sh&quot;/&gt; 
+    &lt;/filter&gt; 
+    &lt;/plugin&gt; 
+&lt;/head&gt; 
+#######################################################################</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　验证实现同步：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+###sersync客户端的，开启同步机制，进行监控，然后创建文件 
+[root@jie3 website]# sersync2 -r -d &amp; 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# touch index.html  testdb.php  test.html  test.php 
+###rsync服务器端，查看可以来着sersync客户端的同步文件 
+[root@jie1 ~]# cd /web/htdocs/ 
+[root@jie1 htdocs]# ls 
+index.html  testdb.php  test.html  test.php 
+[root@jie1 htdocs]#</pre>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: 'Microsoft YaHei'; color: rgb(85, 85, 85); line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　四、unison+inotify实现web数据双向同步</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="" src="/uploads/allimg/150318/13302AT3-3.PNG" style="border: none;" title="20150316142754" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　Unison是一款跨平台的文件同步对象，不仅支撑本地对本地同步，也支撑经由过程SSH、RSH和Socket等收集和谈进行同步。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　Unison支撑双向同步操纵，你既可以从A同步到B，也可以从B同步到A，这些都不须要额外的设定。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　1）、两个服务器都编译安装这三个源码包：（在此我只写一台服务器的编译安装过程）</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+[root@jie1 ~]#wget ftp://distro.ibiblio.org/slitaz/sources/packages-2.0/o/ocaml-3.10.2.tar.gz 
+[root@jie1~]#wget  http://freebsd.ntu.edu.tw/FreeBSD/ports/distfiles/unison-2.32.52/unison-2.32.52.tar.gz 
+[root@jie1~]#wget http://cloud.github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz 
+[root@jie1 ~]# ls 
+anaconda-ks.cfg            install.log         ocaml-3.10.2.tar.gz 
+inotify-tools-3.14.tar.gz  install.log.syslog  unison-2.32.52.tar.gz 
+[root@jie1 ~]# tar xf inotify-tools-3.14.tar.gz 
+[root@jie1 ~]# tar xf ocaml-3.10.2.tar.gz 
+[root@jie1 ~]# tar xf unison-2.32.52.tar.gz 
+##编译安装inotify 
+[root@jie1 ~]# cd inotify-tools-3.14 
+[root@jie1 inotify-tools-3.14]# ./configure --prefix=/usr/local/inotify &amp;&amp; make &amp;&amp; make install 
+[root@jie1 inotify-tools-3.14]# cd /usr/local/inotify/ 
+##修改PATH环境变量 
+[root@jie1 inotify]# echo &quot;PATH=/usr/local/inotify/bin:$PATH&quot; &gt;/etc/profile.d/inotify.sh 
+[root@jie1 inotify]# source /etc/profile.d/inotify.sh 
+##添加库文件到系统识别的路径 
+[root@jie1 inotify]# echo &quot;/usr/local/inotify/lib&quot; &gt;/etc/ld.so.conf.d/inotify.conf 
+[root@jie1 inotify]# ldconfig -v | grep inotify 
+/usr/local/inotify/lib: 
+    libinotifytools.so.0 -&gt; libinotifytools.so.0.4.1 
+##链接库文件到系统识别的路径 
+[root@jie1 inotify]# ln -sv /usr/local/inotify/include/ /usr/include/inotify 
+`/usr/include/inotify&#39; -&gt; `/usr/local/inotify/include/&#39;
+##编译安装ocaml，unison依赖于ocaml 
+[root@jie1 inotify]#cd /root/ocaml-3.10.2 
+[root@jie1 ocaml-3.10.2]#./configure 
+[root@jie1 ocaml-3.10.2]#make world opt 
+[root@jie1 ocaml-3.10.2]#make install 
+##编译安装unison 
+[root@jie1 ocaml-3.10.2]# cd /root/unison-2.32.52 
+##安装依赖性包 
+[root@jie1 unison-2.32.52]#yum -y install ctags-etags 
+[root@jie1 unison-2.32.52]# make UISTYLE=text 
+##make install会提示错误，此错误就是要你cp unison /usr/local/bin，复制即可 
+[root@jie1 unison-2.32.52]# make install 
+[root@jie1 unison-2.32.52]# cp unison /usr/local/bin</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　2）、服务器A生成的公钥传到服务器B上：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+##把服务器A生成的公钥传到服务器B上#### 
+[root@jie1 ~]# ssh-keygen -t rsa   #生成ssh的密钥对 
+[root@jie1 ~]# scp ~/.ssh/id_rsa.pub  172.16.22.3:/root  #生成的密钥在家目录的ssh文件中，ssh文件为隐藏文件，通过scp复制到服务器B上 
+[root@jie3 ~]# mv id_rsa.pub .ssh/authorized_keys  #在服务器B上把服务器A传来的公钥文件改名并存放到ssh目录下 
+[root@jie3 ~]# chmod 600 .ssh/authorized_keys  #给公钥文件改权限为600 
+[root@jie1 ~]# service sshd restart  #重启sshd服务 
+Stopping sshd:                                             [  OK  ] 
+Starting sshd:                                             [  OK  ] 
+[root@jie1 ~]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　3）、服务器B生成的公钥传到服务器A上：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+##把服务器B生成的公钥传到服务器A上#### 
+[root@jie3 ~]# ssh-keygen -t rsa   #生成ssh的密钥对 
+[root@jie3 ~]# scp ~/.ssh/id_rsa.pub  172.16.22.1:/root  #生成的密钥在家目录的ssh文件中，ssh文件为隐藏文件，通过scp复制到服务器B上 
+[root@jie1 ~]# mv id_rsa.pub .ssh/authorized_keys  #在服务器A上把服务器B传来的公钥文件改名并存放到ssh目录下 
+[root@jie1 ~]# chmod 600 .ssh/authorized_keys  #给公钥文件改权限为600 
+[root@jie3 ~]# service sshd restart  #重启sshd服务 
+Stopping sshd:                                             [  OK  ] 
+Starting sshd:                                             [  OK  ] 
+[root@jie3 ~]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　4）、分别搭建web服务，服务器A的网页文件存放路径为/web/htdocs，服务器B的网页存放路径为/website</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+##服务器A搭建web的配置 
+[root@jie1 /]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.1:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /web/htdocs
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie1 ~]# mkdir -pv /web/htdocs 
+[root@jie1 ~]# cd /web/htdocs/ 
+[root@jie1 htdocs]# ls 
+[root@jie1 htdocs]# 
+##服务器B搭建web的配置 
+[root@jie3 /]# vim /etc/httpd/conf/httpd.conf 
+######################################## 
+ServerName 172.16.22.3:80 
+#DocumentRoot &quot;/var/www/html&quot; 
+&lt;VirtualHost *:80&gt; 
+   ServerName www.jie.com 
+   DocumentRoot  /website
+&lt;/VirtualHost&gt; 
+####################################### 
+[root@jie3 /]# mkdir /website 
+[root@jie3 /]# httpd -t 
+Syntax OK 
+[root@jie3 /]# service httpd start 
+Starting httpd:                                            [  OK  ] 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# ls 
+[root@jie3 website]#</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.7999992370605px; background-color: rgb(249, 249, 249);">
+	　　5）、编unison同步的脚本进行测试</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.7999992370605px; background: rgb(243, 243, 243);">
+##服务器A的脚本 
+[root@jie1 ~]# vim serA.sh 
+###################################################################### 
+#/bin/bash 
+ipB=&quot;172.16.22.3&quot;
+srcA=&quot;/web/htdocs&quot;
+dstB=&quot;/website&quot;
+/usr/local/inotify/bin/inotifywait -mrq -e create,delete,modify,move $srcA | while read line; do
+/usr/local/bin/unison -batch $srcA ssh://$ipB/$dstB 
+echo -n &quot;$line &quot; &gt;&gt; /var/log/inotify.log 
+echo `date | cut -d &quot; &quot; -f1-4` &gt;&gt; /var/log/inotify.log 
+done
+##################################################################### 
+##服务器B的脚本 
+[root@jie3 ~]# vim serB.sh 
+##################################################################### 
+#/bin/bash 
+ipA=&quot;172.16.22.1&quot;
+srcB=&quot;/website&quot;
+dstA=&quot;/web/htdocs&quot;
+/usr/local/inotify/bin/inotifywait -mrq -e create,delete,modify,move $srcB | while read line; do
+/usr/local/bin/unison -batch $srcB ssh://$ipA/$dstA 
+echo -n &quot;$line &quot; &gt;&gt; /var/log/inotify.log 
+echo `date | cut -d &quot; &quot; -f1-4` &gt;&gt; /var/log/inotify.log 
+done
+##################################################################### 
+##服务器A的测试 
+[root@jie1 ~]# sh -x serA.sh  #先运行unison同步脚本，查看过程 
+[root@jie1 ~]# cd /web/htdocs/ 
+[root@jie1 htdocs]# touch serA.txt SerA.html SerA.php  #然后创建文件 
+[root@jie1 htdocs]# ls 
+SerA.html  SerA.php  serA.txt  SerB.html  SerB.php  SerB.txt 
+##服务器B的测试 
+[root@jie3 ~]# sh -x serB.sh 
+[root@jie3 ~]# cd /website/ 
+[root@jie3 website]# touch SerB.txt SerB.html SerB.php 
+[root@jie3 website]# ls 
+SerA.html  SerA.php  serA.txt  SerB.html  SerB.php  SerB.txt 
+###=====可以把脚本设置开机自启，放到rc.local文件中，且放在后台运行</pre>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

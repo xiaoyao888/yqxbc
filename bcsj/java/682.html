@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java程序员面试需要知道的的32个问题</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,Java程序员,面试" />
+  <meta name="description" content=" 第一，谈谈final， finally， finalize的区别。 第二，Anonymous Inner Class （匿名内部类） 是否可以extends（继承）其它类，是否可以implements（实现）interface（接口）？ 第三，Static Nested Class 和" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java程序员面试需要知道的的32个问题</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：2次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="682" class="art_content"><p>
+	<strong>第一，谈谈final， finally， finalize的区别。</strong></p>
+<p>
+	<strong>第二，Anonymous Inner Class （匿名内部类） 是否可以extends（继承）其它类，是否可以implements（实现）interface（接口）？</strong></p>
+<p>
+	<strong>第三，Static Nested Class 和 Inner Class的不同，说得越多越好（面试题有的很笼统）。</strong></p>
+<p>
+	<strong>第四，&amp;和&amp;&amp;的区别。</strong></p>
+<p>
+	<strong>第五，HashMap和Hashtable的区别。</strong></p>
+<p>
+	<strong>第六，Collection 和 Collections的区别。</strong></p>
+<p>
+	<strong>第七，什么时候用assert.　　</strong></p>
+<p>
+	<strong>第八，GC是什么？ 为什么要有GC？</strong></p>
+<p>
+	<strong>第九，String s = new String（&quot;xyz&quot;）；创建了几个String Object？</strong></p>
+<p>
+	<strong>第十，Math.round（11.5）等於多少？ Math.round（-11.5）等於多少？</strong></p>
+<p>
+	<strong>第十一，short s1 = 1； s1 = s1 + 1；有什么错？ short s1 = 1； s1 +=1；有什么错？</strong></p>
+<p>
+	<strong>第十二，sleep（） 和 wait（） 有什么区别？</strong></p>
+<p>
+	<strong>第十三，Java有没有goto？</strong></p>
+<p>
+	<strong>第十四，数组有没有length（）这个方法？ String有没有length（）这个方法？</strong></p>
+<p>
+	<strong>第十五，Overload和Override的区别。Overloaded的方法是否可以改变返回值的类型？</strong></p>
+<p>
+	<strong>第十六，Set里的元素是不能重复的，那么用什么方法来区分重复与否呢？ 是用==还是equals（）？ 它们有何区别？</strong></p>
+<p>
+	<strong>第十七，给我一个你最常见到的runtime exception.</strong></p>
+<p>
+	<strong>第十八，error和exception有什么区别？</strong></p>
+<p>
+	<strong>第十九，List， Set， Map是否继承自Collection接口？</strong></p>
+<p>
+	<strong>第二十，abstract class和interface有什么区别？</strong></p>
+<p>
+	<strong>第二十一，abstract的method是否可同时是static，是否可同时是native，是否可同时是synchronized？</strong></p>
+<p>
+	<strong>第二十二，接口是否可继承接口？ 抽象类是否可实现（implements）接口？ 抽象类是否可继承实体类（concrete class）？</strong></p>
+<p>
+	<strong>第二十三，启动一个线程是用run（）还是start（）？</strong></p>
+<p>
+	<strong>第二十四，构造器Constructor是否可被override？</strong></p>
+<p>
+	<strong>第二十五，是否可以继承String类？</strong></p>
+<p>
+	<strong>第二十六，当一个线程进入一个对象的一个synchronized方法后，其它线程是否可进入此对象的其它方法？</strong></p>
+<p>
+	<strong>第二十七，try {}里有一个return语句，那么紧跟在这个try后的finally {}里的code会不会被执行，什么时候被执行，在return前还是后？</strong></p>
+<p>
+	<strong>第二十八，编程题： 用最有效率的方法算出2乘以8等於几？</strong></p>
+<p>
+	<strong>第二十九，两个对象值相同（x.equals（y） == true），但却可有不同的hash code，这句话对不对？</strong></p>
+<p>
+	<strong>第三十，当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递？</strong></p>
+<p>
+	<strong>第三十一，swtich是否能作用在byte上，是否能作用在long上，是否能作用在String上？</strong></p>
+<p>
+	<strong>第三十二，编程题： 写一个Singleton出来。</strong></p>
+<p>
+	以下是答案</p>
+<p>
+	　　第一，谈谈final， finally， finalize的区别。</p>
+<p>
+	　　final？修饰符（关键字）如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract的，又被声明为final的。将变量或方法声明为final，可以保证它们在使用中不被改变。被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载finally？再异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块（如果有的话）。象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。它是在 Object 类中定义的，因此所有的类都继承了它。子类覆盖 finalize（） 方法以整理系统资源或者执行其他清理工作。finalize（） 方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
+<p>
+	　　第二，Anonymous Inner Class （匿名内部类） 是否可以extends（继承）其它类，是否可以implements（实现）interface（接口）？</p>
+<p>
+	　　匿名的内部类是没有名字的内部类。不能extends（继承） 其它类，但一个内部类可以作为一个接口，由另一个内部类实现。有的很笼统）。</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 第三，Nested Class （一般是C++的说法），Inner Class （一般是J***A的说法）。</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Java内部类与C++嵌套类最大的不同就在于是否有指向外部的引用上。具体可见http： //www.frontfree.net/articles/services/view.asp？id=704&amp;page=1</p>
+<p>
+	　　注： 静态内部类（Inner Class）意味着1创建一个static内部类的对象，不需要一个外部类对象，2不能从一个static内部类的一个对象访问一个外部类对象</p>
+<p>
+	<br />
+	　　第四，&amp;和&amp;&amp;的区别。</p>
+<p>
+	　　&amp;是位运算符。&amp;&amp;是布尔逻辑运算符。</p>
+<p>
+	　　第五，HashMap和Hashtable的区别。</p>
+<p>
+	　　都属于Map接口的类，实现了将惟一键映射到特定的值上。</p>
+<p>
+	　　HashMap 类没有分类或者排序。它允许一个 null 键和多个 null 值。</p>
+<p>
+	　　Hashtable 类似于 HashMap，但是不允许 null 键和 null 值。它也比 HashMap 慢，因为它是同步的。</p>
+<p>
+	　　第六，Collection 和 Collections的区别。</p>
+<p>
+	　　Collections是个java.util下的类，它包含有各种有关集合操作的静态方法。</p>
+<p>
+	<br />
+	　　Collection是个java.util下的接口，它是各种集合结构的父接口。</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 第七，什么时候用assert。</p>
+<p>
+	　　断言是一个包含布尔表达式的语句，在执行这个语句时假定该表达式为 true。如果表达式计算为 false，那么系统会报告一个 AssertionError。它用于调试目的：</p>
+<p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assert(a &gt; 0); // throws an AssertionError if a &lt;= 0</p>
+<p>
+	　　断言可以有两种形式：</p>
+<p>
+	　　assert Expression1 ;</p>
+<p>
+	　　assert Expression1 : Expression2 ;</p>
+<p>
+	　　Expression1 应该总是产生一个布尔值。</p>
+<p>
+	　　Expression2 可以是得出一个值的任意表达式。这个值用于生成显示更多调试<br />
+	信息的 String 消息。</p>
+<p>
+	断言在默认情况下是禁用的。要在编译时启用断言，需要使用 source 1.4 标记：<br />
+	&nbsp;</p>
+<p>
+	　　javac -source 1.4 Test.java</p>
+<p>
+	　　要在运行时启用断言，可使用 -enableassertions 或者 -ea 标记。</p>
+<p>
+	　　要在运行时选择禁用断言，可使用 -da 或者 -disableassertions 标记。</p>
+<p>
+	　　要系统类中启用断言，可使用 -esa 或者 -dsa 标记。还可以在包的基础上启<br />
+	用或者禁用断言。</p>
+<p>
+	　　可以在预计正常情况下不会到达的任何位置上放置断言。断言可以用于验证传<br />
+	递给私有方法的参数。不过，断言不应该用于验证传递给公有方法的参数，因为不<br />
+	管是否启用了断言，公有方法都必须检查其参数。不过，既可以在公有方法中，也<br />
+	可以在非公有方法中利用断言测试后置条件。另外，断言不应该以任何方式改变程<br />
+	序的状态。</p>
+<p>
+	　　第八，GC是什么? 为什么要有GC? (基础)。</p>
+<p>
+	　　GC是垃圾收集器。Java 程序员不用担心内存管理，因为垃圾收集器会自动进行<br />
+	管理。要请求垃圾收集，可以调用下面的方法之一：</p>
+<p>
+	　　System.gc()</p>
+<p>
+	　　Runtime.getRuntime().gc()</p>
+<p>
+	　　第九，String s = new String(&quot;xyz&quot;);创建了几个String Object?</p>
+<p>
+	　　两个对象，一个是&ldquo;xyx&rdquo;,一个是指向&ldquo;xyx&rdquo;的引用对象s。</p>
+<p>
+	　　第十，Math.round(11.5)等於多少? Math.round(-11.5)等於多少?</p>
+<p>
+	　　Math.round(11.5)返回（long）12，Math.round(-11.5)返回（long）-11;</p>
+<p>
+	　　第十一，short s1 = 1; s1 = s1 + 1;有什么错? short s1 = 1; s1 += 1;有<br />
+	什么错?</p>
+<p>
+	　　short s1 = 1; s1 = s1 + 1;有错，s1是short型，s1+1是int型,不能显式转化<br />
+	为short型。可修改为s1 =(short)(s1 + 1) 。short s1 = 1; s1 += 1正确。</p>
+<p>
+	　　第十二，sleep() 和 wait() 有什么区别? 搞线程的最爱</p>
+<p>
+	　　sleep()方法是使线程停止一段时间的方法。在sleep 时间间隔期满后，线程不<br />
+	一定立即恢复执行。这是因为在那个时刻，其它线程可能正在运行而且没有被调度<br />
+	为放弃执行，除非(a)&ldquo;醒来&rdquo;的线程具有更高的优先级，(b)正在运行的线程因为<br />
+	其它原因而阻塞。</p>
+<p>
+	　　wait()是线程交互时，如果线程对一个同步对象x 发出一个wait()调用，该线<br />
+	程会暂停执行，被调对象进入等待状态，直到被唤醒或等待时间到。</p>
+<p>
+	　　第十三，Java有没有goto?</p>
+<p>
+	　　Goto?java中的保留字，现在没有在java中使用。</p>
+<p>
+	　　第十四，数组有没有length()这个方法? String有没有length()这个方法？</p>
+<p>
+	<br />
+	　　数组没有length()这个方法，有length的属性。</p>
+<p>
+	　　String有有length()这个方法。</p>
+<p>
+	　　第十五，Overload和Override的区别。Overloaded的方法是否可以改变返回值<br />
+	的类型?</p>
+<p>
+	　　方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Ove<br />
+	rriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性<br />
+	的一种表现。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方<br />
+	法被重写 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它<br />
+	而言，父类中的定义如同被&ldquo;屏蔽&rdquo;了。如果在一个类中定义了多个同名的方法，<br />
+	它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。<br />
+	Overloaded的方法是可以改变返回值的类型。</p>
+<p>
+	　　第十六，Set里的元素是不能重复的，那么用什么方法来区分重复与否呢? 是用<br />
+	==还是equals()? 它们有何区别?</p>
+<p>
+	　　Set里的元素是不能重复的，那么用iterator()方法来区分重复与否。equals(<br />
+	)是判读两个Set是否相等。</p>
+<p>
+	　　==决定引用值是否指向同一对象,equals()在类中被覆盖，为的<br />
+	是当两个分离的对象的内容和类型相配的话，返回真值。</p>
+<p>
+	　　第十七，给我一个你最常见到的runtime exception。</p>
+<p>
+	　　ArithmeticException, ArrayStoreException, BufferOverflowException, BufferUnderflowException,&nbsp; CannotRedoException, CannotUndoException, ClassCastException, CMMException, ConcurrentModificationException, DOMException, EmptyStackException, IllegalArgumentException, IllegalMonitorStateException, IllegalPathStateException, IllegalStateException, ImagingOpException, IndexOutOfBoundsException, MissingResourceException, NegativeArraySizeException, NoSuchElementException, NullPointerException, ProfileDataException, ProviderException, RasterFormatException, SecurityException, SystemException, UndeclaredThrowableException, UnmodifiableSetException, UnsupportedOperationException</p>
+<p>
+	　　第十八，error和exception有什么区别?</p>
+<p>
+	　　error 表示恢复不是不可能但很困难的情况下的一种严重问题。比如说内存溢出。不可能指望程序能处理这样的情况。</p>
+<p>
+	　　exception 表示一种设计或实现问题。也就是说，它表示如果程序运行正常，从不会发生的情况。</p>
+<p>
+	　　第十九，List, Set, Map是否继承自Collection接口?</p>
+<p>
+	　　List，Set是</p>
+<p>
+	　　Map不是</p>
+<p>
+	　　第二十，abstract class和interface有什么区别?</p>
+<p>
+	　　声明方法的存在而不去实现它的类被叫做抽象类（abstract class），它用于要创建一个体现某些基本行为的类，并为该类声明方法，但不能在该类中实现该类的情况。不能创建abstract 类的实例。然而可以创建一个变量，其类型是一个抽象类，并让它指向具体子类的一个实例。不能有抽象构造函数或抽象静态方法。Abstract 类的子类为它们父类中的所有抽象方法提供实现，否则它们也是抽象类为。取而代之，在子类中实现该方法。知道其行为的其它类可以在类中实现这些方法。</p>
+<p>
+	&nbsp;&nbsp;&nbsp; 类不能从接口定义中继承行为。当类实现特殊接口时，它定义（即将程序体给予）所有这种接口的方法。然后，它可以在实现了该接口的类的任何对象上调用接口的方法。由于有抽象类，它允许使用接口名作为引用变量的类型。通常的动态联编将生效。引用可以转换到接口类型或从接口类型转换，instanceof 运算符可以用来决定某对象的类是否实现了接口。</p>
+<p>
+	　　第二十一，abstract的method是否可同时是static,是否可同时是native，是否可同时是synchronized?</p>
+<p>
+	　　都不能</p>
+<p>
+	　　第二十二，接口是否可继承接口? 抽象类是否可实现(implements)接口? 抽象类是否可继承实体类(concrete class)?</p>
+<p>
+	　　接口可以继承接口。抽象类可以实现(implements)接口，抽象类是否可继承实体类，但前提是实体类必须有明确的构造函数。</p>
+<p>
+	　　第二十三，启动一个线程是用run()还是start()?<br />
+	`<br />
+	　　启动一个线程是调用start()方法，使线程所代表的虚拟处理机处于可运行状态，这意味着它可以由JVM调度并执行。这并不意味着线程就会立即运行。run()方法可以产生必须退出的标志来停止一个线程。</p>
+<p>
+	　　第二十四，构造器Constructor是否可被override?</p>
+<p>
+	　　构造器Constructor不能被继承，因此不能重写Overriding，但可以被重载Overloading。</p>
+<p>
+	　　第二十五，是否可以继承String类?</p>
+<p>
+	　　String类是final类故不可以继承。</p>
+<p>
+	　　第二十六，当一个线程进入一个对象的一个synchronized方法后，其它线程是否可进入此对象的其它方法?</p>
+<p>
+	　　不能，一个对象的一个synchronized方法只能由一个线程访问。</p>
+<p>
+	　　第二十七，try {}里有一个return语句，那么紧跟在这个try后的finally {}里的code会不会被执行，什么时候被执行，在return前还是后?</p>
+<p>
+	　　会执行，在return前执行。</p>
+<p>
+	　　第二十八，编程题: 用最有效率的方法算出2乘以8等於几?</p>
+<p>
+	　　有C背景的程序员特别喜欢问这种问题。</p>
+<p>
+	　　2 &lt;&lt; 3</p>
+<p>
+	　　第二十九，两个对象值相同(x.equals(y) == true)，但却可有不同的hash code，这句话对不对?</p>
+<p>
+	　　不对，有相同的hash code。</p>
+<p>
+	　　第三十，当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?</p>
+<p>
+	　　是值传递。Java 编程语言只由值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是对该对象的引用。对象的内容可以在被调用的方法中改变，但对象的引用是永远不会改变的。</p>
+<p>
+	　　第三十一，swtich是否能作用在byte上，是否能作用在long上，是否能作用在String上?</p>
+<p>
+	　　switch（expr1）中，expr1是一个整数表达式。因此传递给 switch 和 case 语句的参数应该是 int、 short、 char 或者 byte。long,string 都不能作用于swtich。</p>
+<p>
+	　　第三十二，编程题: 写一个Singleton出来。</p>
+<p>
+	　　Singleton模式主要作用是保证在Java应用程序中，一个类Class只有一个实例存在。</p>
+<p>
+	　　一般Singleton模式通常有几种种形式:</p>
+<p>
+	　　第一种形式: 　　定义一个类，它的构造函数为private的，它有一个static的private的该类变量，在类初始化时实例话，通过一个public的getInstance方法获取对它的引用,继而调用其中的方法。</p>
+<p>
+	public class Singleton {</p>
+<p>
+	　　private Singleton(){}</p>
+<p>
+	　　//在自己内部定义自己一个实例，是不是很奇怪？</p>
+<p>
+	　　//注意这是private 只供内部调用</p>
+<p>
+	　　private static Singleton instance = new Singleton();</p>
+<p>
+	　　//这里提供了一个供外部访问本class的静态方法，可以直接访问　　</p>
+<p>
+	　　public static Singleton getInstance() {</p>
+<p>
+	　　　　return instance; 　　</p>
+<p>
+	　　 }</p>
+<p>
+	}</p>
+<p>
+	　　第二种形式:</p>
+<p>
+	public class Singleton {</p>
+<p>
+	　　private static Singleton instance = null;</p>
+<p>
+	　　public static synchronized Singleton getInstance() {</p>
+<p>
+	　　//这个方法比上面有所改进，不用每次都进行生成对象，只是第一次　　　 　<br />
+	&nbsp;</p>
+<p>
+	　　//使用时生成实例，提高了效率！</p>
+<p>
+	　　if (instance==null)</p>
+<p>
+	　　　　instance＝new Singleton();</p>
+<p>
+	&nbsp;&nbsp;&nbsp; return instance; 　　}</p>
+<p>
+	}</p>
+<p>
+	　　其他形式:</p>
+<p>
+	　　定义一个类，它的构造函数为private的，所有方法为static的。</p>
+<p>
+	　　一般认为第一种形式要更加安全些</p>
+<p>
+	　　第三十三 Hashtable和HashMap</p>
+<p>
+	　　Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现</p>
+<p>
+	　　HashMap允许将null作为一个entry的key或者value，而Hashtable不允许</p>
+<p>
+	　　还有就是，HashMap把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解。</p>
+<p>
+	　　最大的不同是，Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap就必须为之提供外同步。</p>
+<p>
+	　　Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

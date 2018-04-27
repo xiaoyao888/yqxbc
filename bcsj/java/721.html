@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>26个提升java性能需要注意的地方 .</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,性能" />
+  <meta name="description" content="最近的机器内存又爆满了，除了新增机器内存外，还应该好好review一下我们的代码，有很多代码编写过于随意化，这些不好的习惯或对程序语言的不了解是应该好好打压打压了。 下面是" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>26个提升java性能需要注意的地方 .</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：26次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="721" class="art_content"><p>
+	最近的机器内存又爆满了，除了新增机器内存外，还应该好好review一下我们的代码，有很多代码编写过于随意化，这些不好的习惯或对程序语言的不了解是应该好好打压打压了。</p>
+<p>
+	　　下面是参考网络资源总结的一些在Java编程中尽可能要做到的一些地方。</p>
+<h2>
+	　　1. 尽量在合适的场合使用单例</h2>
+<p>
+	　　使用单例可以减轻加载的负担，缩短加载的时间，提高加载的效率，但并不是所有地方都适用于单例，简单来说，单例主要适用于以下三个方面：</p>
+<ol>
+	<li>
+		控制资源的使用，通过线程同步来控制资源的并发访问；</li>
+	<li>
+		控制实例的产生，以达到节约资源的目的；</li>
+	<li>
+		控制数据共享，在不建立直接关联的条件下，让多个不相关的进程或线程之间实现通信。</li>
+</ol>
+<h2>
+	　　2. 尽量避免随意使用静态变量</h2>
+<p>
+	　　要知道，当某个对象被定义为stataic变量所引用，那么gc通常是不会回收这个对象所占有的内存，如</p>
+<pre>
+public class A{      static B b = new B();  }</pre>
+<p>
+	　　此时静态变量b的生命周期与A类同步，如果A类不会卸载，那么b对象会常驻内存，直到程序终止。</p>
+<h2>
+	　　3. 尽量避免过多过常的创建Java对象</h2>
+<p>
+	　　尽量避免在经常调用的方法，循环中new对象，由于系统不仅要花费时间来创建对象，而且还要花时间对这些对象进行垃圾回收和处理，在我们可以控制的范围内，最大限度的重用对象，最好能用基本的数据类型或数组来替代对象。</p>
+<h2>
+	　　4. 尽量使用final修饰符</h2>
+<p>
+	　　带有final修饰符的类是不可派生的。</p>
+<p>
+	　　在Java核心API中，有许多应用final的例子，例如java.lang.String。为String类指定final防止了使用者覆盖length()方法。</p>
+<p>
+	　　另外，如果一个类是final的，则该类所有方法都是final的。Java编译器会寻找机会内联（inline）所有的final方法（这和具体的编译器实现有关）。此举能够使性能平均提高50%。</p>
+<h2>
+	　　5. 尽量使用局部变量</h2>
+<p>
+	　　调用方法时传递的参数以及在调用中创建的临时变量都保存在栈（Stack）中，速度较快。</p>
+<p>
+	其他变量，如静态变量、实例变量等，都在堆（Heap）中创建，速度较慢。</p>
+<h2>
+	　　6. 尽量处理好包装类型和基本类型两者的使用场所</h2>
+<p>
+	　　虽然包装类型和基本类型在使用过程中是可以相互转换，但它们两者所产生的内存区域是完全不同的，基本类型数据产生和处理都在栈中处理，包装类型是对象，是在堆中产生实例。</p>
+<p>
+	　　在集合类对象，有对象方面需要的处理适用包装类型，其他的处理提倡使用基本类型。</p>
+<h2>
+	　　7. 慎用synchronized，尽量减小synchronize的方法</h2>
+<p>
+	　　都知道，实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。</p>
+<p>
+	　　synchronize方法被调用时，直接会把当前对象锁 了，在方法执行完之前其他线程无法调用当前对象的其他方法。</p>
+<p>
+	　　所以synchronize的方法尽量小，并且应尽量使用方法同步代替代码块同步。</p>
+<h2>
+	　　8. 尽量使用StringBuilder和StringBuffer进行字符串连接</h2>
+<p>
+	　　这个就不多讲了。</p>
+<h2>
+	　　9. 尽量不要使用finalize方法</h2>
+<p>
+	　　实际上，将资源清理放在finalize方法中完成是非常不好的选择，由于GC的工作量很大，尤其是回收Young代内存时，大都会引起应用程序暂停，所以再选择使用finalize方法进行资源清理，会导致GC负担更大，程序运行效率更差。</p>
+<h2>
+	　　10. 尽量使用基本数据类型代替对象</h2>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_346633">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">　　String str = </code><code class="java string">&quot;hello&quot;</code><code class="java plain">;</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　上面这种方式会创建一个&ldquo;hello&rdquo;字符串，而且JVM的字符缓存池还会缓存这个字符串；</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_349241">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">　　String str = </code><code class="java keyword">new</code></font> <font face="NSimsun"><code class="java plain">String(</code><code class="java string">&quot;hello&quot;</code><code class="java plain">);</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　此时程序除创建字符串外，str所引用的String对象底层还包含一个char数组，这个char数组依次存放了h,e,l,l,o</p>
+<h2>
+	　　11. 单线程应尽量使用HashMap、ArrayList</h2>
+<p>
+	　　HashTable、Vector等使用了同步机制，降低了性能。</p>
+<h2>
+	　　12. 尽量合理的创建HashMap</h2>
+<p>
+	　　当你要创建一个比较大的hashMap时，充分利用另一个构造函数 public HashMap(int initialCapacity, float loadFactor) 避免HashMap多次进行了hash重构,扩容是一件很耗费性能的事，在默认中initialCapacity只有16，而loadFactor是 0.75，需要多大的容量，你最好能准确的估计你所需要的最佳大小，同样的Hashtable，Vectors也是一样的道理。</p>
+<h2>
+	　　13. 尽量减少对变量的重复计算</h2>
+<p>
+	　　如</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_163327">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java keyword">for</code><code class="java plain">(</code><code class="java keyword">int</code></font> <font face="NSimsun"><code class="java plain">i=</code><code class="java value">0</code><code class="java plain">;i&lt;list.size();i++)</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　应该改为</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_206221">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java keyword">for</code><code class="java plain">(</code><code class="java keyword">int</code></font> <font face="NSimsun"><code class="java plain">i=</code><code class="java value">0</code><code class="java plain">,len=list.size();i&lt;len;i++)</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　并且在循环中应该避免使用复杂的表达式，在循环中，循环条件会被反复计算，如果不使用复杂表达式，而使循环条件值不变的话，程序将会运行的更快。</p>
+<h2>
+	　　14. 尽量避免不必要的创建</h2>
+<p>
+	　　如</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_608642">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">A a = </code><code class="java keyword">new</code></font> <code class="java plain"><font face="NSimsun">A(); </font></code></p>
+				<p class="line number2 index1 alt1">
+					<font face="NSimsun"><code class="java keyword">if</code><code class="java plain">(i==</code><code class="java value">1</code><code class="java plain">){list.add(a);}</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　应该改为</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_441005">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+				<p class="line number3 index2 alt2">
+					3</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java keyword">if</code><code class="java plain">(i==</code><code class="java value">1</code><code class="java plain">){ </code></font></p>
+				<p class="line number2 index1 alt1">
+					<font face="NSimsun"><code class="java plain">A a = </code><code class="java keyword">new</code></font> <code class="java plain"><font face="NSimsun">A(); </font></code></p>
+				<p class="line number3 index2 alt2">
+					<code class="java plain"><font face="NSimsun">list.add(a);}</font></code></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<h2>
+	　　15. 尽量在finally块中释放资源</h2>
+<p>
+	　　程序中使用到的资源应当被释放，以避免资源泄漏。</p>
+<p>
+	　　这最好在finally块中去做。不管程序执行的结果如何，finally块总是会执行的，以确保资源的正确关闭。</p>
+<h2>
+	　　16. 尽量使用移位来代替&rsquo;a/b&rsquo;的操作</h2>
+<p>
+	　　&rdquo;/&rdquo;是一个代价很高的操作，使用移位的操作将会更快和更有效</p>
+<p>
+	　　如</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_805526">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a / </code><code class="java value">4</code><code class="java plain">; </code></font></p>
+				<p class="line number2 index1 alt1">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a / </code><code class="java value">8</code><code class="java plain">;</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　应该改为</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_950762">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a &gt;&gt; </code><code class="java value">2</code><code class="java plain">; </code></font></p>
+				<p class="line number2 index1 alt1">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a &gt;&gt; </code><code class="java value">3</code><code class="java plain">;</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　但注意的是使用移位应添加注释，因为移位操作不直观，比较难理解</p>
+<h2>
+	　　17.尽量使用移位来代替&rsquo;a*b&rsquo;的操作</h2>
+<p>
+	　　同样的，对于&rsquo;*&rsquo;操作，使用移位的操作将会更快和更有效</p>
+<p>
+	　　如</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_11936">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a * </code><code class="java value">4</code><code class="java plain">; </code></font></p>
+				<p class="line number2 index1 alt1">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a * </code><code class="java value">8</code><code class="java plain">;</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　应该改为</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_940686">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a &lt;&lt; </code><code class="java value">2</code><code class="java plain">; </code></font></p>
+				<p class="line number2 index1 alt1">
+					<code class="java keyword"><font face="NSimsun">int</font></code> <font face="NSimsun"><code class="java plain">num = a &lt;&lt; </code><code class="java value">3</code><code class="java plain">;</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<h2>
+	　　18. 尽量确定StringBuffer的容量</h2>
+<p>
+	　　StringBuffer 的构造器会创建一个默认大小（通常是16）的字符数组。在使用中，如果超出这个大小，就会重新分配内存，创建一个更大的数组，并将原先的数组复制过来，再 丢弃旧的数组。</p>
+<p>
+	　　在大多数情况下，你可以在创建 StringBuffer的时候指定大小，这样就避免了在容量不够的时候自动增长，以提高性能。</p>
+<p>
+	如：</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_569694">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">StringBuffer buffer = </code><code class="java keyword">new</code></font> <font face="NSimsun"><code class="java plain">StringBuffer(</code><code class="java value">1000</code><code class="java plain">);</code></font></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<h2>
+	　　19. 尽量早释放无用对象的引用</h2>
+<p>
+	　　大部分时，方法局部引用变量所引用的对象 会随着方法结束而变成垃圾，因此，大部分时候程序无需将局部，引用变量显式设为null。</p>
+<p>
+	　　例如：</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_304788">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+				<p class="line number3 index2 alt2">
+					3</p>
+				<p class="line number4 index3 alt1">
+					4</p>
+				<p class="line number5 index4 alt2">
+					5</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">Public </code><code class="java keyword">void</code></font> <code class="java plain"><font face="NSimsun">test(){&nbsp;&nbsp; </font></code></p>
+				<p class="line number2 index1 alt1">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Object obj = </code><code class="java keyword">new</code></font> <code class="java plain"><font face="NSimsun">Object();&nbsp;&nbsp; </font></code></p>
+				<p class="line number3 index2 alt2">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&hellip;&hellip;&nbsp;&nbsp; </code></font></p>
+				<p class="line number4 index3 alt1">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Obj=</code><code class="java keyword">null</code><code class="java plain">;&nbsp;&nbsp; </code></font></p>
+				<p class="line number5 index4 alt2">
+					<code class="java plain"><font face="NSimsun">}</font></code></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　上面这个就没必要了，随着方法test()的执行完成，程序中obj引用变量的作用域就结束了。</p>
+<p>
+	　　但是如果是改成下面：</p>
+<p>
+	&nbsp;</p>
+<p class="syntaxhighlighter  java ie" id="highlighter_698984">
+	&nbsp;</p>
+<p class="toolbar">
+	<span><a class="toolbar_item command_help help" href="http://www.admin10000.com/document/1070.html#">?</a></span></p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td class="gutter">
+				<p class="line number1 index0 alt2">
+					1</p>
+				<p class="line number2 index1 alt1">
+					2</p>
+				<p class="line number3 index2 alt2">
+					3</p>
+				<p class="line number4 index3 alt1">
+					4</p>
+				<p class="line number5 index4 alt2">
+					5</p>
+				<p class="line number6 index5 alt1">
+					6</p>
+				<p class="line number7 index6 alt2">
+					7</p>
+			</td>
+			<td class="code">
+				<p class="container">
+					&nbsp;</p>
+				<p class="line number1 index0 alt2">
+					<font face="NSimsun"><code class="java plain">Public </code><code class="java keyword">void</code></font> <code class="java plain"><font face="NSimsun">test(){&nbsp;&nbsp; </font></code></p>
+				<p class="line number2 index1 alt1">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Object obj = </code><code class="java keyword">new</code></font> <code class="java plain"><font face="NSimsun">Object();&nbsp;&nbsp; </font></code></p>
+				<p class="line number3 index2 alt2">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&hellip;&hellip;&nbsp;&nbsp; </code></font></p>
+				<p class="line number4 index3 alt1">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Obj=</code><code class="java keyword">null</code><code class="java plain">;&nbsp;&nbsp; </code></font></p>
+				<p class="line number5 index4 alt2">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">//执行耗时，耗内存操作；或调用耗时，耗内存的方法&nbsp;&nbsp; </code></font></p>
+				<p class="line number6 index5 alt1">
+					<font face="NSimsun"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&hellip;&hellip;&nbsp;&nbsp; </code></font></p>
+				<p class="line number7 index6 alt2">
+					<code class="java plain"><font face="NSimsun">}</font></code></p>
+				<p>
+					&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　这时候就有必要将obj赋值为null，可以尽早的释放对Object对象的引用。</p>
+<h2>
+	　　20. 尽量避免使用二维数组</h2>
+<p>
+	　　二维数据占用的内存空间比一维数组多得多，大概10倍以上。</p>
+<h2>
+	　　21. 尽量避免使用split</h2>
+<p>
+	　　除非是必须的，否则应该避免使用split，split由于支持正则表达式，所以效率比较低，如果是频繁的几十，几百万的调用将会耗费大量资源，如果确实需 要频繁的调用split，可以考虑使用apache的StringUtils.split(string,char)，频繁split的可以缓存结果。</p>
+<h2>
+	　　22. ArrayList &amp; LinkedList</h2>
+<p>
+	　　一个是线性表，一个是链表，一句话，随机查询尽量使用ArrayList，ArrayList优于LinkedList，LinkedList还要移动指 针，添加删除的操作LinkedList优于ArrayList，ArrayList还要移动数据，不过这是理论性分析，事实未必如此，重要的是理解好2 者得数据结构，对症下药。</p>
+<h2>
+	　　23. 尽量使用System.arraycopy ()代替通过来循环复制数组</h2>
+<p>
+	　　System.arraycopy() 要比通过循环来复制数组快的多</p>
+<h2>
+	　　24. 尽量缓存经常使用的对象</h2>
+<p>
+	　　尽可能将经常使用的对象进行缓存，可以使用数组，或HashMap的容器来进行缓存，但这种方式可能导致系统占用过多的缓存，性能下降，推荐可以使用一些第三方的开源工具，如EhCache，Oscache进行缓存，他们基本都实现了FIFO/FLU等缓存算法。</p>
+<h2>
+	　　25. 尽量避免非常大的内存分配</h2>
+<p>
+	　　有时候问题不是由当时的堆状态造成的，而是因为分配失败造成的。分配的内存块都必须是连续的，而随着堆越来越满，找到较大的连续块越来越困难。</p>
+<h2>
+	　　26. 慎用异常</h2>
+<p>
+	　　当创建一个异常时，需要收集一个栈跟踪(stack track)，这个栈跟踪用于描述异常是在何处创建的。 构建这些栈跟踪时需要为运行时栈做一份快照，正是这一部分开销很大。</p>
+<p>
+	　　当需要创建一个 Exception 时，JVM 不得不说：先别动，我想就您现在的样子存一份快照，所以暂时停止入栈和出栈操作。 栈跟踪不只包含运行时栈中的一两个元素，而是包含这个栈中的每一个元素。</p>
+<p>
+	　　如果您创建一个 Exception ，就得付出代价。好在捕获异常开销不大，因此可以使用 try-catch 将核心内容包起来。 从技术上讲，您甚至可以随意地抛出异常，而不用花费很大的代价。 招致性能损失的并不是 throw 操作&mdash;&mdash;尽管在没有预先创建异常的情况下就抛出异常是有点不寻常。 真正要花代价的是创建异常。</p>
+<p>
+	　　幸运的是，好的编程习惯已教会我们，不应该不管三七二十一就抛出异常。</p>
+<p>
+	　　异常是为异常的情况而设计的，使用时也应该牢记这一原则。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>扩展Hibernate对各类数据源的支持</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="扩展Hibernate对各类数据源" />
+  <meta name="description" content="Hibernate内嵌了对C3P0,Proxool,JNDI数据源等数据库连接池的支持。但当我们需要使用除了这几个数据源外的其他数据源的时候就有问题了，例如我们需要用Apache的开源连接池项目DBCP，或者说" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>扩展Hibernate对各类数据源的支持</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：37次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="614" class="art_content">　　Hibernate内嵌了对C3P0,Proxool,JNDI数据源等数据库连接池的支持。但当我们需要使用除了这几个数据源外的其他数据源的时候就有问题了，例如我们需要用Apache的开源连接池项目DBCP，或者说我们想要使用多数JDBC驱动程序中自带的XxxxDataSource时，Hibernate就没有提供对这方面的支持。庆幸的是Hibernate做为一个强大的数据持久层组件，它在实现数据库连接方面的扩展性也是非常强大的。本文将介绍两种如何在Hibernate项目中使用自定义数据源的方法。&nbsp;<br />
+<br />
+　　本文假设你已经有Hibernate的开发经验。<br />
+<br />
+　　在开始之前应该先明确你的项目中的具体情况，也就是确认Hibernate内嵌的组件是否真的无法支持你的应用需要。例如C3P0或者Proxool已经可以满足大部分数据库的需要，又或者你的数据源是在应用服务器中配置的，那么你也没有必要进行扩展，你可以直接使用DatasourceConnectionProvider来让Hibernate使用你所定义的数据源。<br />
+<br />
+　　那么什么时候你需要扩展Hibernate对数据源的支持呢？可能你永远也用不上，但我一直在用。我用的原因可能不能成为正当的理由，因为C3P0或者Proxool总有些小地方的不足让我不爽，个人更偏向于DBCP连接池。或许本文应该改名为《让Hibernate支持DBCP数据源》，其实DBCP只不过是我的一个具体的例子，本文具有更普遍的应用意义。下面我们具体介绍两种不同的扩展思路。<br />
+<br />
+　　思路一：使用外部定义数据源<br />
+<br />
+　　假设我们已经有了一个WEB项目，该项目采用了Struts框架，而且我们已经在Struts中配置了数据源，也有不少的代码是依赖这个数据源运行的。现在我们需要给项目中加入对Hibernate的支持，但又不想去修改旧的已经成功稳定运行的代码了。那我们该怎么办？如果同样在Hibernate配置一个数据源指到同一个数据库，相信你也不乐意这样干，因为一旦配置上有修改那么Struts和Hibernate的配置都需要修改，这个也只是麻烦一点而已，最要命的是没法让原有的代码和Hibernate共用一个数据库连接，因此事务处理也就无从谈起。<br />
+<br />
+　　说那么多理由，无非就是为了让Hibernate可以使用Struts中配置的数据源，而我们暂且不去考虑这是否是最好的解决方法。<br />
+<br />
+　　在Hibernate中有一个UserSuppliedConnectionProvider类，其实这个类什么也不干，你一旦让它干点啥吧，它还净出异常，搞得你很是恼火。在Hibernate中，这个类的含义是要求用户自己来提供数据库连接的获取方法，同时当然也要自己负责关闭连接。<br />
+<br />
+　　为了使用Struts中配置的数据源，我们就不能直接调用SessionFactory.openSession()方法来获取Session实例，因为你如果没有在Hibernate中配置任何的数据库连接，那Hibernate会默认让UserSuppliedConnectionProvider类来跟你捣乱，你会收到很多异常信息，反复提醒我们必须自己提供数据库连接！我们要做还是调用openSession方法，不同的是需要先从Struts的数据源中获取数据库连接，然后传递该连接给openSession方法（参照&nbsp;SessionFactory.openSession(Connection)&nbsp;方法）。<br />
+<br />
+　　下面是代码片断<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				//获取Session实例<br />
+				public&nbsp;Session&nbsp;getSession(){<br />
+				　ServletContext&nbsp;contxt&nbsp;=&nbsp;....<br />
+				　SessionFactory&nbsp;sessions&nbsp;=&nbsp;....<br />
+				<br />
+				　DataSource&nbsp;ds&nbsp;=&nbsp;(DataSource)context.getAttribute(Globals.DATA_SOURCE_KEY);<br />
+				　final&nbsp;Connection&nbsp;conn&nbsp;=&nbsp;ds.getConnection();<br />
+				　return&nbsp;sessions.openSession(conn);<br />
+				}<br />
+				<br />
+				//释放Session<br />
+				public&nbsp;void&nbsp;closeSession(Session&nbsp;ssn){<br />
+				　ssn.connection().close();<br />
+				　ssn.close();<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　需要提醒大家注意的是closeSession方法，在该方法中我们必须手工去关闭session对应的数据库连接，我们前面已经提到了，UserSuppliedConnectionProvider类就是要求用户自己提供数据库连接已经连接的关闭。如果没有调用ssn.connection().close()方法，这会导致Struts的数据源的连接没有被释放。<br />
+<br />
+　　同理，上面提到的Struts只是一个应用普遍的例子，实际中你可以使用任何的外部连接池，你只需要将获取到的数据库连接传递给openSession方法，并自行负责释放数据库连接即可。应该说这是一种最简单的思路，好处是对系统的变动最小，兼容原来的代码。<br />
+<br />
+　　思路二：扩展ConnectionProvider<br />
+<br />
+　　Hibernate本身是通过ConnectionProvider接口来实现管理数据库连接的。例如其自带的C3P0ConnectionProvider，ProxoolConnectionProvider等。<br />
+<br />
+　　在这个思路中，我们希望可以直接在Hibernate的配置文件中配置数据库连接，也就是让Hibernate独揽数据库的管理，真正做到各司其职。为了更了解该接口的使用，你不妨阅读一下Hibernate提供的上面几个类的源码。<br />
+<br />
+　　接下来我们需要编写一个实现了ConnectionProvider接口的类，要求这个类能支持任何的符合DataSource接口规范的数据源，同时在Hibernate的配置文件中进行参数的设定。首先我们假定我们的类名是DataSourceConnProvider，那我们的配置信息在hibernate.cfg.xml中看起来应该像下面一样<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				＜!--&nbsp;Connection&nbsp;Pool&nbsp;settings&nbsp;--＞<br />
+				＜property&nbsp;name=&quot;connection.provider_class&quot;＞<br />
+				com.liusoft.dlog4j.db.DataSourceConnProvider＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.datasource&quot;＞org.apache.commons.dbcp.BasicDataSource＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.driverClassName&quot;＞sun.jdbc.odbc.JdbcOdbcDriver＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.url&quot;＞jdbc:odbc:dlog4j＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.username&quot;＞admin＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.password&quot;＞＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.initialSize&quot;＞1＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.maxActive&quot;＞200＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.maxWait&quot;＞2000＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.defaultAutoCommit&quot;＞false＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.defaultReadOnly&quot;＞false＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.removeAbandoned&quot;＞true＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.removeAbandonedTimeout&quot;＞120＜/property＞<br />
+				＜!--<br />
+				＜property&nbsp;name=&quot;dscp.defaultTransactionIsolation&quot;＞1＜/property＞<br />
+				--＞<br />
+				＜property&nbsp;name=&quot;dscp.poolPreparedStatements&quot;＞true＜/property＞<br />
+				＜property&nbsp;name=&quot;dscp.maxOpenPreparedStatements&quot;＞1000＜/property＞</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　在上面的配置信息中，connection.provider_class是Hibernate本身用来指定不同ConnectionProvider实现类。接下来我们规定了我们的扩展所使用的配置键值都是以dscp.开头，同时我们使用dscp.datasource来指定具体实现了DataSource接口的类名，例如如果使用DBCP这个连接池，那么这个类名应该是org.apache.commons.dbcp.BasicDataSource。对于其他以dscp.开头的且不是dscp.datasource的配置信息都会直接赋值给DataSource的实现类。例如上面的配置中，driverClassName、url、username、password等配置信息都是BasicDataSource类的属性。&nbsp;下面是我们所实现的DataSourceConnProvider类的源码。<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				package&nbsp;com.liusoft.dlog4j.db;<br />
+				<br />
+				import&nbsp;java.lang.reflect.Method;<br />
+				import&nbsp;java.sql.Connection;<br />
+				import&nbsp;java.sql.SQLException;<br />
+				import&nbsp;java.util.Iterator;<br />
+				import&nbsp;java.util.Properties;<br />
+				<br />
+				import&nbsp;javax.sql.DataSource;<br />
+				<br />
+				import&nbsp;org.apache.commons.beanutils.BeanUtils;<br />
+				import&nbsp;org.hibernate.HibernateException;<br />
+				import&nbsp;org.hibernate.connection.ConnectionProvider;<br />
+				<br />
+				import&nbsp;com.liusoft.dlog4j.Globals;<br />
+				import&nbsp;com.liusoft.dlog4j.util.StringUtils;<br />
+				<br />
+				/**<br />
+				*&nbsp;让Hibernate支持各种数据源<br />
+				*&nbsp;@author&nbsp;Winter&nbsp;Lau<br />
+				*/<br />
+				public&nbsp;class&nbsp;DataSourceConnProvider&nbsp;implements&nbsp;ConnectionProvider&nbsp;{<br />
+				<br />
+				private&nbsp;final&nbsp;static&nbsp;String&nbsp;BASE_KEY&nbsp;=&nbsp;&quot;dscp.&quot;;<br />
+				private&nbsp;final&nbsp;static&nbsp;String&nbsp;ENCODING_KEY&nbsp;=&nbsp;&quot;dscp.encoding&quot;;<br />
+				private&nbsp;final&nbsp;static&nbsp;String&nbsp;DATASOURCE_KEY&nbsp;=&nbsp;&quot;dscp.datasource&quot;;<br />
+				<br />
+				protected&nbsp;DataSource&nbsp;dataSource;<br />
+				<br />
+				/*&nbsp;(non-Javadoc)<br />
+				*&nbsp;@see&nbsp;org.hibernate.connection.ConnectionProvider#configure(java.util.Properties)<br />
+				*/<br />
+				public&nbsp;void&nbsp;configure(Properties&nbsp;props)&nbsp;throws&nbsp;HibernateException&nbsp;{<br />
+				　String&nbsp;dataSourceClass&nbsp;=&nbsp;null;<br />
+				　Properties&nbsp;new_props&nbsp;=&nbsp;new&nbsp;Properties();<br />
+				　Iterator&nbsp;keys&nbsp;=&nbsp;props.keySet().iterator();<br />
+				　while(keys.hasNext()){<br />
+				　　String&nbsp;key&nbsp;=&nbsp;(String)keys.next();<br />
+				　　if(DATASOURCE_KEY.equalsIgnoreCase(key)){<br />
+				　　　dataSourceClass&nbsp;=&nbsp;props.getProperty(key);<br />
+				　　}<br />
+				　　else&nbsp;if(key.startsWith(BASE_KEY)){<br />
+				　　　String&nbsp;value&nbsp;=&nbsp;props.getProperty(key);<br />
+				　　　value&nbsp;=&nbsp;StringUtils.replace(value,&nbsp;&quot;{DLOG4J}&quot;,&nbsp;Globals.WEBAPP_PATH);<br />
+				　　　new_props.setProperty(key.substring(BASE_KEY.length()),&nbsp;value);<br />
+				　　}<br />
+				　}<br />
+				　if(dataSourceClass&nbsp;==&nbsp;null)<br />
+				　　throw&nbsp;new&nbsp;HibernateException(&quot;Property&nbsp;朙dscp.datasource朙&nbsp;no&nbsp;defined.&quot;);<br />
+				　　try&nbsp;{<br />
+				　　　dataSource&nbsp;=&nbsp;(DataSource)Class.forName(dataSourceClass).newInstance();<br />
+				　　　BeanUtils.populate(dataSource,&nbsp;new_props);<br />
+				　　}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{<br />
+				　　　throw&nbsp;new&nbsp;HibernateException(e);<br />
+				　　}<br />
+				}<br />
+				<br />
+				/*&nbsp;(non-Javadoc)<br />
+				*&nbsp;@see&nbsp;org.hibernate.connection.ConnectionProvider#getConnection()<br />
+				*/<br />
+				public&nbsp;Connection&nbsp;getConnection()&nbsp;throws&nbsp;SQLException&nbsp;{&nbsp;<br />
+				　final&nbsp;Connection&nbsp;conn&nbsp;=&nbsp;dataSource.getConnection();<br />
+				　if(useProxy&nbsp;&amp;&amp;&nbsp;conn!=null){<br />
+				　　return&nbsp;(new&nbsp;_Connection(conn,encoding)).getConnection();<br />
+				　}<br />
+				　return&nbsp;conn;<br />
+				}<br />
+				<br />
+				/*&nbsp;(non-Javadoc)<br />
+				*&nbsp;@see&nbsp;org.hibernate.connection.ConnectionProvider#closeConnection(java.sql.Connection)<br />
+				*/<br />
+				public&nbsp;void&nbsp;closeConnection(Connection&nbsp;conn)&nbsp;throws&nbsp;SQLException&nbsp;{<br />
+				　if(conn!=null&nbsp;&amp;&amp;&nbsp;!conn.isClosed())<br />
+				　　conn.close();<br />
+				}<br />
+				<br />
+				/*&nbsp;(non-Javadoc)<br />
+				*&nbsp;@see&nbsp;org.hibernate.connection.ConnectionProvider#close()<br />
+				*/<br />
+				public&nbsp;void&nbsp;close()&nbsp;throws&nbsp;HibernateException&nbsp;{<br />
+				　if(dataSource&nbsp;!=&nbsp;null)<br />
+				　　try&nbsp;{<br />
+				　　　Method&nbsp;mClose&nbsp;=&nbsp;dataSource.getClass().getMethod(&quot;close&quot;,null);<br />
+				　　　mClose.invoke(dataSource,&nbsp;null);<br />
+				　　}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{<br />
+				　　　throw&nbsp;new&nbsp;HibernateException(e);<br />
+				　　}<br />
+				　　dataSource&nbsp;=&nbsp;null;<br />
+				}<br />
+				<br />
+				/*&nbsp;(non-Javadoc)<br />
+				*&nbsp;@see&nbsp;org.hibernate.connection.ConnectionProvider#supportsAggressiveRelease()<br />
+				*/<br />
+				public&nbsp;boolean&nbsp;supportsAggressiveRelease()&nbsp;{<br />
+				　return&nbsp;false;<br />
+				}<br />
+				<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　在DataSourceConnProvider类中，configure方法会在Hibernate进行初始化的过程中被调用，我们根据配置的DataSource类名创建数据源实例，并将配置参数赋值给该实例后即完成了数据源的初始化。接下来就是实现了getConnection和closeConnection方法分别是获取数据库连接和关闭连接的方法。方法close用来关闭整个数据源，该方法会在Hibernate释放时被调用。<br />
+　<br />
+　　你也可以使用其他一些不同的数据源而不一定非是DBCP数据源。配置完毕后接下来的事情就简单了，直接调用SessionFactory.openSession()方法获取Session实例，直接调用session.close()释放该实例，无需再手工去关闭session所封装的connection接口。<br />
+<br />
+　　相比较上面两种思路而言，各有千秋。如果你真的有必要扩展Hibernate对数据源的支持，如果你没有兼容旧代码这个问题需要考虑的话，那我更倾向于第二种思路。因为它使得整个项目的各个层次分工非常清晰，而且除了ConnectionProvider&nbsp;类以外应用的代码也相对简单。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

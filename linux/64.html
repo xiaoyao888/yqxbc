@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>linux系统查看硬件配置命令是什么</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="linux,硬件配置命令" />
+  <meta name="description" content="系统 # uname -a # 查看内核/操作系统/CPU信息 # head -n 1 /etc/issue # 查看操作系统版本 # cat /proc/cpuinfo # 查看CPU信息 # hostname # 查看计算机名 # lspci -tv # 列出所有PCI设备 # lsusb -tv # 列出所有US" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>linux系统查看硬件配置命令是什么</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：28次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="64" class="art_content"><p>
+	系统</p>
+<blockquote>
+	<p>
+		　　# uname -a # 查看内核/操作系统/CPU信息<br />
+		　　# head -n 1 /etc/issue # 查看操作系统版本<br />
+		　　# cat /proc/cpuinfo # 查看CPU信息<br />
+		　　# hostname # 查看计算机名<br />
+		　　# lspci -tv # 列出所有PCI设备<br />
+		　　# lsusb -tv # 列出所有USB设备<br />
+		　　# lsmod # 列出加载的内核模块<br />
+		　　# env # 查看环境变量</p>
+</blockquote>
+<p>
+	资源</p>
+<blockquote>
+	<p>
+		　　# free -m # 查看内存使用量和交换区使用量<br />
+		　　# df -h # 查看各分区使用情况<br />
+		　　# du -sh &lt;目录名&gt; # 查看指定目录的大小<br />
+		　　# grep MemTotal /proc/meminfo # 查看内存总量<br />
+		　　# grep MemFree /proc/meminfo # 查看空闲内存量<br />
+		　　# uptime # 查看系统运行时间、用户数、负载<br />
+		　　# cat /proc/loadavg # 查看系统负载</p>
+</blockquote>
+<p>
+	磁盘和分区</p>
+<blockquote>
+	<p>
+		　　# mount | column -t # 查看挂接的分区状态<br />
+		　　# fdisk -l # 查看所有分区<br />
+		　　# swapon -s # 查看所有交换分区<br />
+		　　# hdparm -i /dev/hda # 查看磁盘参数（仅适用于IDE设备）<br />
+		　　# dmesg | grep IDE # 查看启动时IDE设备检测状况</p>
+</blockquote>
+<p>
+	网络</p>
+<blockquote>
+	<p>
+		&nbsp; &nbsp; &nbsp; &nbsp; # ifconfig # 查看所有网络接口的属性<br />
+		　　# iptables -L # 查看防火墙设置<br />
+		　　# route -n # 查看路由表<br />
+		　　# netstat -lntp # 查看所有监听端口<br />
+		　　# netstat -antp # 查看所有已经建立的连接<br />
+		　　# netstat -s # 查看网络统计信息</p>
+</blockquote>
+<p>
+	进程</p>
+<blockquote>
+	<p>
+		# ps -ef # 查看所有进程<br />
+		　　# top # 实时显示进程状态</p>
+</blockquote>
+<p>
+	用户</p>
+<blockquote>
+	<p>
+		# w # 查看活动用户<br />
+		　　# id &lt;用户名&gt; # 查看指定用户信息<br />
+		　　# last # 查看用户登录日志<br />
+		　　# cut -d: -f1 /etc/passwd # 查看系统所有用户<br />
+		　　# cut -d: -f1 /etc/group # 查看系统所有组<br />
+		　　# crontab -l # 查看当前用户的计划任务</p>
+</blockquote>
+<p>
+	服务</p>
+<blockquote>
+	<p>
+		# chkconfig --list # 列出所有系统服务<br />
+		　　# chkconfig --list | grep on # 列出所有启动的系统服务</p>
+</blockquote>
+<p>
+	程序</p>
+<blockquote>
+	<p>
+		# rpm -qa # 查看所有安装的软件包</p>
+</blockquote>
+<p>
+	其他常用命令整理如下：</p>
+<p>
+	查看主板的序列号：dmidecode | grep -i &#39;serial number&#39;<br />
+	<br />
+	　　用硬件检测程序kuduz探测新硬件：service kudzu start （ or restart）<br />
+	<br />
+	　　查看CPU信息：cat /proc/cpuinfo [dmesg | grep -i &#39;cpu&#39;][dmidecode -t processor]<br />
+	<br />
+	　　查看内存信息：cat /proc/meminfo [free -m][vmstat]<br />
+	<br />
+	　　查看板卡信息：cat /proc/pci<br />
+	<br />
+	　　查看显卡/声卡信息：lspci |grep -i &#39;VGA&#39;[dmesg | grep -i &#39;VGA&#39;]<br />
+	<br />
+	　　查看网卡信息：dmesg | grep -i &#39;eth&#39;[cat /etc/sysconfig/hwconf | grep -i eth][lspci | grep -i &#39;eth&#39;]<br />
+	<br />
+	　　查看PCI信息：lspci （相比cat /proc/pci更直观）<br />
+	<br />
+	　　查看USB设备：cat /proc/bus/usb/devices<br />
+	<br />
+	　　查看键盘和鼠标：cat /proc/bus/input/devices<br />
+	<br />
+	　　查看系统硬盘信息和使用情况：fdisk &amp; disk &ndash; l &amp; df<br />
+	<br />
+	　　查看各设备的中断请求（IRQ）：cat /proc/interrupts<br />
+	<br />
+	　　查看系统体系结构：uname -a<br />
+	<br />
+	　　查看及启动系统的32位或64位内核模式：isalist &ndash;v [isainfo &ndash;v][isainfo &ndash;b]<br />
+	<br />
+	　　查看硬件信息，包括bios、cpu、内存等信息：dmidecode<br />
+	<br />
+	　　测定当前的显示器刷新频率：/usr/sbin/ffbconfig &ndash;rev \?<br />
+	<br />
+	　　查看系统配置：/usr/platform/sun4u/sbin/prtdiag &ndash;v<br />
+	<br />
+	　　查看当前系统中已经应用的补丁：showrev &ndash;p<br />
+	<br />
+	　　显示当前的运行级别：who &ndash;rH<br />
+	<br />
+	　　查看当前的bind版本信息：nslookup &ndash;class=chaos &ndash;q=txt version.bind<br />
+	<br />
+	　　查看硬件信息：dmesg | more<br />
+	<br />
+	　　显示外设信息， 如usb，网卡等信息：lspci<br />
+	<br />
+	　　查看已加载的驱动：lsnod &nbsp; &nbsp; &nbsp;lshw</p>
+<p>
+	查看当前处理器的类型和速度（主频）：psrinfo -v<br />
+	<br />
+	　　打印当前的OBP版本号：prtconf -v<br />
+	<br />
+	　　查看硬盘物理信息（vendor， RPM， Capacity）：iostat &ndash;E<br />
+	<br />
+	　　查看磁盘的几何参数和分区信息：prtvtoc /dev/rdsk/c0t0d0s<br />
+	<br />
+	　　显示已经使用和未使用的i-node数目：</p>
+<blockquote>
+	<p>
+		df &ndash;F ufs &ndash;o i<br />
+		　　isalist &ndash;v</p>
+</blockquote>
+<p>
+	对于&ldquo;/proc&rdquo;中文件可使用文件查看命令浏览其内容，文件中包含系统特定信息：</p>
+<blockquote>
+	<p>
+		主机CPU信息：Cpuinfo<br />
+		　　主机DMA通道信息：Dma<br />
+		　　文件系统信息：Filesystems<br />
+		　　主机中断信息：Interrupts<br />
+		　　主机I/O端口号信息：Ioprots<br />
+		　　主机内存信息：Meninfo<br />
+		　　Linux内存版本信息：Version</p>
+</blockquote>
+<p>
+	备注： proc &ndash; process information pseudo-filesystem 进程信息伪装文件系统</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

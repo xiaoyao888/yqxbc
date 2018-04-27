@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java String 的十大常见问题</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="String,Java,常见问题,Java S" />
+  <meta name="description" content="　以下是Java字符串经常被问到的排名前十的问题。
+
+　　1、如何比较字符串？使用 “==”  还是 “equals()”？" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java String 的十大常见问题</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：10次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="585" class="art_content"><p>
+	　以下是<u><strong>Java</strong></u>字符串经常被问到的排名前十的问题。</p>
+<p>
+	　<b>　1、如何比较字符串？使用 &ldquo;==&rdquo; &nbsp;还是 &ldquo;equals()&rdquo;？</b></p>
+<p>
+	　　简单来讲，&ldquo;==&rdquo;比较的是引用（对象的内存地址），&ldquo;equals()&rdquo; 比较值是否相等。除非你想检测两个字符串是否是同一对象，否则都用equals()。</p>
+<p>
+	　　当然了解字符串池的概念更好。</p>
+<p>
+	　<b>　2、为什么对于安全敏感的信息使用char[] 优于String ？</b></p>
+<p>
+	　　Java 中字符串是不可变的，这就意味着一旦他被创建，在垃圾回收器收集之前都是一样的。使用数组你可以明确的修改它的元素，以这种方式，安全敏感的信息（如：密码）将不存在于系统的任何地方。</p>
+<p>
+	　　<b>3、switch 语句中是否可以用String ？</b></p>
+<p>
+	　　在jdk7中是可以的。在jdk6以前的版本都不可以。</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom-color: rgb(153, 153, 153); border-bottom-style: solid; border-left-color: rgb(153, 153, 153); border-left-style: solid; background-color: rgb(221, 221, 221); width: 98%; font-size: 12px; border-top-color: rgb(153, 153, 153); border-top-style: solid; border-right-color: rgb(153, 153, 153); border-right-style: solid; ">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					// java 7 only!</p>
+				<p>
+					switch (str.toLowerCase()) {</p>
+				<p>
+					case &quot;a&quot;:</p>
+				<p>
+					value = 1;</p>
+				<p>
+					break;</p>
+				<p>
+					case &quot;b&quot;:</p>
+				<p>
+					value = 2;</p>
+				<p>
+					break;</p>
+				<p>
+					}</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　<b>4、如何将String 转换为 int ？</b></p>
+<p>
+	　　int n = Integer.parseInt(&quot;10&quot;);</p>
+<p>
+	　　很简单、很常用以至于有些时候都忽略了她。</p>
+<p>
+	　　<b>5、如何使用空白字符拆分字符串？</b></p>
+<p>
+	　　只需要简单的使用正则表达式&ldquo;\s&rdquo; 。 &ldquo;\s&rdquo; 代表着空白字符有&ldquo; &rdquo; ， &ldquo;\n&rdquo; , &quot; \r&quot; , &quot;\t&quot; 。</p>
+<p>
+	　　String[] strArray = aString.split(&quot;\\s+&quot;);</p>
+<p>
+	　<b>　6、substring()真正做了些什么？</b></p>
+<p>
+	　　在Jdk6 中substring()方法提供了一个表示目前字符数组（该字符数组表示当前字符串）的窗口，但是并没有创建一个新的字符串。为了创建一个新的字符串，可以在substring()后面添加一个空字符串，如下所示：</p>
+<p>
+	　　str.substring(m, n) + &quot;&quot;</p>
+<p>
+	　　以上代码会创建一个字符数组表示新的字符串。以上方法在有些时候可以提高代码的效率，因为垃圾回收器可以回收大的String ，而只保存很少的子字符串。</p>
+<p>
+	　　在oracle的JDK7中，创建了一个新的char数组，而不是使用原来的char数组。关于该部分内容可以参见JDK6和JDK7中substring的区别</p>
+<p>
+	&nbsp;</p>
+<p>
+	　<b>7、String VS StringBuilder VS StringBuffer</b></p>
+<p>
+	　　String VS StringBuiler ： StringBuiler是可变的，这意味着创建以后还可以改变他的内容。</p>
+<p>
+	　　StringBuiler VS StringBuffer : StringBuffer 是同步的（线程安全），但是比StringBuiler慢。</p>
+<p>
+	　<b>　8、如何重复字符串？</b></p>
+<p>
+	　　在python中我们是需要对字符串乘以一个数就可以表示重复字符串。在Java中可以使用Apache Commons Lang package 中StringUtils 的repeat方法。</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom-color: rgb(153, 153, 153); border-bottom-style: solid; border-left-color: rgb(153, 153, 153); border-left-style: solid; background-color: rgb(221, 221, 221); width: 98%; font-size: 12px; border-top-color: rgb(153, 153, 153); border-top-style: solid; border-right-color: rgb(153, 153, 153); border-right-style: solid; ">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					String str = &quot;abcd&quot;;</p>
+				<p>
+					String repeated = StringUtils.repeat(str,3);</p>
+				<p>
+					//abcdabcdabcd</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　<b>　9、如何将字符串转换为Date对象</b></p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom-color: rgb(153, 153, 153); border-bottom-style: solid; border-left-color: rgb(153, 153, 153); border-left-style: solid; background-color: rgb(221, 221, 221); width: 98%; font-size: 12px; border-top-color: rgb(153, 153, 153); border-top-style: solid; border-right-color: rgb(153, 153, 153); border-right-style: solid; ">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					String str = &quot;Sep 17, 2013&quot;;</p>
+				<p>
+					Date date = new SimpleDateFormat(&quot;MMMM d, yy&quot;, Locale.ENGLISH).parse(str);</p>
+				<p>
+					System.out.println(date);</p>
+				<p>
+					//Tue Sep 17 00:00:00 EDT 2013</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　<b>10、如何计数一个字符在字符串中出现的次数</b></p>
+<p>
+	　　使用Apache Commons Lang package 中StringUtils类。</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom-color: rgb(153, 153, 153); border-bottom-style: solid; border-left-color: rgb(153, 153, 153); border-left-style: solid; background-color: rgb(221, 221, 221); width: 98%; font-size: 12px; border-top-color: rgb(153, 153, 153); border-top-style: solid; border-right-color: rgb(153, 153, 153); border-right-style: solid; ">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					int n = StringUtils.countMatches(&quot;11112222&quot;, &quot;1&quot;);</p>
+				<p>
+					System.out.println(n);</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

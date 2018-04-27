@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>路由器PPPoE拨号失败的几个原因</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="路由器,PPPoE,拨号,失,败的,几个,原因,可能,会," />
+  <meta name="description" content="可能会经常性的遇到PPPoE拨不上号的问题，致使您无法上网，遇到这样的问题您可以参考下面的文章来查找原因： 1、无法获取WAN口IP 当你设置了PPPOE拨号后，无法获取WAN口IP时，可进入" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>路由器PPPoE拨号失败的几个原因</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：458次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="258" class="art_content"><p>
+	可能会经常性的遇到PPPoE拨不上号的问题，致使您无法上网，遇到这样的问题您可以参考下面的文章来查找原因：</p>
+<p>
+	1、无法获取WAN口IP</p>
+<p>
+	当你设置了PPPOE拨号后，无法获取WAN口IP时，可进入管理界面――系统工具――系统日志，如果你看到的日志是：</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="14" loaded="true" original="/uploads/allimg/150323/0932004W7-0.jpg" src="/uploads/allimg/150323/0932004W7-0.jpg" /></p>
+<p>
+	图1 密码验证失败</p>
+<p>
+	如日志中的描述，&ldquo;密码验证失败&rdquo;，这种情况的可能原因是：</p>
+<p>
+	1、帐号错误:</p>
+<p>
+	请确认用户名和密码是否正确，注意大小础⒆帜负褪?秩?SPAN lang=EN-US&gt;&ldquo;0&rdquo;和&ldquo;o&rdquo;、忘记填写后缀如&ldquo;@adsl&rdquo;、&ldquo;@163.gd&rdquo;等问题。可尝试在单机上输入该帐号来确认是否可以正常拨号或联系ISP以确认帐号的正确性。</p>
+<p>
+	2、ISP绑定了电脑网卡的MAC地址:</p>
+<p>
+	部分ISP会在给用户安装宽带服务时绑定用户的电脑网卡的物理地址（即MAC地址），只有被绑定的电脑才能通过PPPOE拨号上网，其他电脑或路由器都无法拨号</p>
+<p>
+	在路由器上，这个问题的解决办法是：用单机可以拨号上网的电脑管理路由器，进入路由器管理界面&rarr;网络参数&rarr;MAC地址克隆，将被绑定的电脑（单机可拨号的电脑）的网卡的MAC克隆到路由器上即可,如图2。</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="16" loaded="true" original="/uploads/allimg/150323/093200B32-1.jpg" src="/uploads/allimg/150323/093200B32-1.jpg" /></p>
+<p>
+	图2 克隆MAC地址</p>
+<p>
+	3、用户接入方式为非标准的PPPoE：如星空极速软件或宽带我世界。</p>
+<p>
+	除了上面的密码验证失败，你看到的日志还有可能如图3。</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="18" loaded="true" original="/uploads/allimg/150323/093200C40-2.jpg" src="/uploads/allimg/150323/093200C40-2.jpg" /></p>
+<p>
+	图3 请求建立连接超时</p>
+<p>
+	日志中显示路由器发出的PPPOE拨号请求没有回应，这种情况的可能原因有：</p>
+<p>
+	1、物理链路不通，包括的原因线路连接错误、物理端口损坏、网线没有插好、网线质量问题、MODEM还未同步成功、MODEM故障等，请确认连线是否正确（比如忘记接线）、MODEM出来的线是接到路由器的WAN口（比如误将MODEM出来的线接到了路由器LAN口）、对应的指示灯MODEM的LAN指示灯灯和路由器的WAN口指示灯都亮了吗？MODEM的DSL灯是常亮的吗？首先建议单机去拨号看看是否可以正常上网？如果可以，再接好线路，待物理链路连接正常时，再去尝试拨号看看。</p>
+<p>
+	2、前一次非正常断线，如在正常上网的过程中突然给MODEM或路由器断电，这属于非正常断线，从客户端来看是断线了，但此时服务器并未发觉，再次拨号的话，需要等待几分钟的时间才可以拨号成功，等待时间根据各地线路状态而异，一般为3－5分钟。非正常断线后的拨号日志还有可能是如下图4。</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="20" loaded="true" original="/uploads/allimg/150323/093200EN-3.jpg" src="/uploads/allimg/150323/093200EN-3.jpg" /></p>
+<p>
+	图4 无法正常PPPOE拨号</p>
+<p>
+	出现图4的日志时也只需要设置路由器自动拨号，等待一段时间即可自动拨号成功。</p>
+<p>
+	2、上网过程中断线</p>
+<p>
+	如果你已经拨号成功，并且电脑都可以正常上网，但是上网过程中突然出现断线，这时登陆路由器的管理界面，如果你看到的日志是图5的这种日志，原因是前端的线路断开，可能是网线连接的接口处有松动、MODEM出现故障、线路故障等。出现这种日志时请首先确认你的路由器的软件是不是最新的？如果不是，先升级。如果是，注意看看此时线路是否连好，重启下MODEM是否正常？另一种出现这种日志的情况是设置连接模式为按需连接，我司宽带路由器的默认连接模式为按需连接，在这种模式下，如果路由器下面的用户没有任何网络应用的话，等待一段时间后（默认为15分钟），网络会自动断开，提示的日志是&ldquo;因无数据请求而自动断开连接&rdquo;，但它不会是在正常上网过程中突然断线，只会在无网络应用后等待一段时间才会，并且有新的网络连接时路由器是会自动连接到网络的，对用户来说，基本感觉不到断线的过程的。如果是包月的宽带服务，建议设置为自动连接；其它方式的建议设置为手动连接。</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="24" loaded="true" original="/uploads/allimg/150323/0932004T4-4.jpg" src="/uploads/allimg/150323/0932004T4-4.jpg" /></p>
+<p>
+	图5 PPPOE断开连接</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="23" loaded="true" original="/uploads/allimg/150323/0932003I7-5.jpg" src="/uploads/allimg/150323/0932003I7-5.jpg" /></p>
+<p>
+	图6 按需连接模式</p>
+<p>
+	还有一种断线日志为&ldquo;接受PADT，服务端请求断开本次连接&rdquo;，如图7（该图片来源于TP-LINK在线帮助用户的帖子）。路由器的每条系统日志由一个编号和内容组成，内容的前部数字为路由器开机后运行的时间参数，单位为秒（s），可先后记录接受PADT的时间为X，此日志前面的最相近的显示成功获取IP的日志的时间为Y，（X-Y）/3600即得出多长时间断线。一般情况下看到的现象是24（86400s）或48（172800s）小时会自动断线，然后自动拨号，如图7的用户分别在86400，172800，这种情况是由于ISP会在一个帐号认证了24或48小时后获取的动态IP的地址租期达到了设定的时间，因此会收回原有IP资源，再重新分配的过程，属于正常的行为，使用路由器的情况下只要设置连接模式为&ldquo;自动连接&rdquo;即可。</p>
+<p>
+	<img alt="" border="0" jquery1400826558943="26" loaded="true" original="/uploads/allimg/150323/0932005G2-6.jpg" src="/uploads/allimg/150323/0932005G2-6.jpg" /></p>
+<p>
+	图7 接收PADT掉线</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

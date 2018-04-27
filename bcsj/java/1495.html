@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java内存模型</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,内存,模型,Java,内存,模型,规范,了,虚拟机" />
+  <meta name="description" content="Java内存模型规范了Java虚拟机与计算机内存是如何协同工作的。Java虚拟机是一个完整的计算机的一个模型，因此这个模型自然也包含一个内存模型又称为Java内存模型。 如果你想设计表" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java内存模型</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：17次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1495" class="art_content"><p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	Java内存模型规范了Java虚拟机与计算机内存是如何协同工作的。Java虚拟机是一个完整的计算机的一个模型，因此这个模型自然也包含一个内存模型&mdash;&mdash;又称为Java内存模型。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	如果你想设计表现良好的并发程序，理解Java内存模型是非常重要的。Java内存模型规定了如何和何时可以看到由其他线程修改过后的共享变量的值，以及在必须时如何同步的访问共享变量。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	原始的Java内存模型存在一些不足，因此Java内存模型在Java1.5时被重新修订。这个版本的Java内存模型在Java8中人在使用。</p>
+<h3 style="margin: 0px 0px 0.5em; font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; line-height: 1.6em; color: rgb(51, 51, 51); text-rendering: optimizeLegibility; font-size: 18px; text-indent: 1em; background-color: rgb(254, 254, 254);">
+	Java内存模型内部原理</h3>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	Java内存模型把Java虚拟机内部划分为线程栈和堆。这张图演示了Java内存模型的逻辑视图。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<img class="alignCenter" src="/uploads/allimg/160509/1525264229-0.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	每一个运行在Java虚拟机里的线程都拥有自己的线程栈。这个线程栈包含了这个线程调用的方法当前执行点相关的信息。一个线程仅能访问自己的线程栈。一个线程创建的本地变量对其它线程不可见，仅自己可见。即使两个线程执行同样的代码，这两个线程任然在在自己的线程栈中的代码来创建本地变量。因此，每个线程拥有每个本地变量的独有版本。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	所有原始类型的本地变量都存放在线程栈上，因此对其它线程不可见。一个线程可能向另一个线程传递一个原始类型变量的拷贝，但是它不能共享这个原始类型变量自身。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	堆上包含在Java程序中创建的所有对象，无论是哪一个对象创建的。这包括原始类型的对象版本。如果一个对象被创建然后赋值给一个局部变量，或者用来作为另一个对象的成员变量，这个对象任然是存放在堆上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	下面这张图演示了调用栈和本地变量存放在线程栈上，对象存放在堆上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<img class="alignCenter" src="/uploads/allimg/160509/15252Cc4-1.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个本地变量可能是原始类型，在这种情况下，它总是&ldquo;呆在&rdquo;线程栈上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个本地变量也可能是指向一个对象的一个引用。在这种情况下，引用（这个本地变量）存放在线程栈上，但是对象本身存放在堆上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个对象可能包含方法，这些方法可能包含本地变量。这些本地变量任然存放在线程栈上，即使这些方法所属的对象存放在堆上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个对象的成员变量可能随着这个对象自身存放在堆上。不管这个成员变量是原始类型还是引用类型。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	静态成员变量跟随着类定义一起也存放在堆上。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	存放在堆上的对象可以被所有持有对这个对象引用的线程访问。当一个线程可以访问一个对象时，它也可以访问这个对象的成员变量。如果两个线程同时调用同一个对象上的同一个方法，它们将会都访问这个对象的成员变量，但是每一个线程都拥有这个本地变量的私有拷贝。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	下图演示了上面提到的点：</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<img class="alignCenter" src="/uploads/allimg/160509/15252642A-2.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	两个线程拥有一些列的本地变量。其中一个本地变量（Local Variable 2）执行堆上的一个共享对象（Object 3）。这两个线程分别拥有同一个对象的不同引用。这些引用都是本地变量，因此存放在各自线程的线程栈上。这两个不同的引用指向堆上同一个对象。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	注意，这个共享对象（Object 3）持有Object2和Object4一个引用作为其成员变量（如图中Object3指向Object2和Object4的箭头）。通过在Object3中这些成员变量引用，这两个线程就可以访问Object2和Object4。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	这张图也展示了指向堆上两个不同对象的一个本地变量。在这种情况下，指向两个不同对象的引用不是同一个对象。理论上，两个线程都可以访问Object1和Object5，如果两个线程都拥有两个对象的引用。但是在上图中，每一个线程仅有一个引用指向两个对象其中之一。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	因此，什么类型的Java代码会导致上面的内存图呢？如下所示：</p>
+<pre class="prettyprint java" style="padding: 0.3em; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; color: rgb(51, 51, 51); border-radius: 4px; margin-top: 0px; margin-bottom: 1.5em; line-height: 1.5em; word-break: break-all; word-wrap: break-word; white-space: pre-wrap; border: 1px solid rgba(0, 0, 0, 0.14902); overflow-y: auto; background-color: rgb(246, 246, 246);">
+<span class="keyword" style="font-weight: bold;">public</span> <span class="class" style="color: rgb(68, 85, 136); font-weight: bold;"><span class="keyword" style="color: rgb(51, 51, 51);">class</span> <span class="title">MyRunnable</span> <span class="keyword" style="color: rgb(51, 51, 51);">implements</span> <span class="title">Runnable</span>() {</span>
+
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">void</span> run() {
+        methodOne();
+    }
+
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">void</span> methodOne() {
+        <span class="keyword" style="font-weight: bold;">int</span> localVariable1 = <span class="number" style="color: rgb(0, 153, 153);">45</span>;
+
+        MySharedObject localVariable2 =
+            MySharedObject.sharedInstance;
+
+        <span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//... do more with local variables.</span>
+
+        methodTwo();
+    }
+
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">void</span> methodTwo() {
+        Integer localVariable1 = <span class="keyword" style="font-weight: bold;">new</span> Integer(<span class="number" style="color: rgb(0, 153, 153);">99</span>);
+
+        <span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//... do more with local variable.</span>
+    }
+}
+
+<span class="keyword" style="font-weight: bold;">public</span> <span class="class" style="color: rgb(68, 85, 136); font-weight: bold;"><span class="keyword" style="color: rgb(51, 51, 51);">class</span> <span class="title">MySharedObject</span> {</span>
+
+    <span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//static variable pointing to instance of MySharedObject</span>
+
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">static</span> <span class="keyword" style="font-weight: bold;">final</span> MySharedObject sharedInstance =
+        <span class="keyword" style="font-weight: bold;">new</span> MySharedObject();
+
+    <span class="comment" style="color: rgb(153, 153, 136); font-style: italic;">//member variables pointing to two objects on the heap</span>
+
+    <span class="keyword" style="font-weight: bold;">public</span> Integer object2 = <span class="keyword" style="font-weight: bold;">new</span> Integer(<span class="number" style="color: rgb(0, 153, 153);">22</span>);
+    <span class="keyword" style="font-weight: bold;">public</span> Integer object4 = <span class="keyword" style="font-weight: bold;">new</span> Integer(<span class="number" style="color: rgb(0, 153, 153);">44</span>);
+
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">long</span> member1 = <span class="number" style="color: rgb(0, 153, 153);">12345</span>;
+    <span class="keyword" style="font-weight: bold;">public</span> <span class="keyword" style="font-weight: bold;">long</span> member1 = <span class="number" style="color: rgb(0, 153, 153);">67890</span>;
+}</pre>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	如果两个线程同时执行&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">run()</code>&nbsp;方法，就会出现上图所示的情景。&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">run()</code>&nbsp;方法调用<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodOne()</code>&nbsp;方法，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodOne()</code>&nbsp;调用&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodTwo()</code>&nbsp;方法。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodOne()</code>&nbsp;声明了一个原始类型的本地变量和一个引用类型的本地变量。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	每个线程执行&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodOne()</code>&nbsp;都会在它们对应的线程栈上创建&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable1</code>&nbsp;和<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable2</code>&nbsp;的私有拷贝。&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable1</code>&nbsp;变量彼此完全独立，仅&ldquo;生活&rdquo;在每个线程的线程栈上。一个线程看不到另一个线程对它的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable1</code>&nbsp;私有拷贝做出的修改。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	每个线程执行&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodOne()</code>&nbsp;时也将会创建它们各自的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable2</code>&nbsp;拷贝。然而，两个&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable2</code>&nbsp;的不同拷贝都指向堆上的同一个对象。代码中通过一个静态变量设置&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable2</code>&nbsp;指向一个对象引用。仅存在一个静态变量的一份拷贝，这份拷贝存放在堆上。因此，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable2</code>&nbsp;的两份拷贝都指向由<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">MySharedObject</code>&nbsp;指向的静态变量的同一个实例。&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">MySharedObject</code>&nbsp;实例也存放在堆上。它对应于上图中的Object3。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	注意，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">MySharedObject</code>&nbsp;类也包含两个成员变量。这些成员变量随着这个对象存放在堆上。这两个成员变量指向另外两个&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象。这些&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象对应于上图中的Object2和Object4.</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	注意，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodTwo()</code>&nbsp;创建一个名为&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable</code>&nbsp;的本地变量。这个成员变量是一个指向一个&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象的对象引用。这个方法设置&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable1</code>&nbsp;引用指向一个新的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;实例。在执行&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodTwo</code>&nbsp;方法时，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">localVariable1</code>&nbsp;引用将会在每个线程中存放一份拷贝。这两个&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象实例化将会被存储堆上，但是每次执行这个方法时，这个方法都会创建一个新的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象，两个线程执行这个方法将会创建两个不同的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;实例。&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">methodTwo</code>&nbsp;方法创建的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">Integer</code>&nbsp;对象对应于上图中的Object1和Object5。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	还有一点，&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">MySharedObject</code>&nbsp;类中的两个&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">long</code>&nbsp;类型的成员变量是原始类型的。因为，这些变量是成员变量，所以它们任然随着该对象存放在堆上，仅有本地变量存放在线程栈上。</p>
+<h3 style="margin: 0px 0px 0.5em; font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; line-height: 1.6em; color: rgb(51, 51, 51); text-rendering: optimizeLegibility; font-size: 18px; text-indent: 1em; background-color: rgb(254, 254, 254);">
+	硬件内存架构</h3>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	现代硬件内存模型与Java内存模型有一些不同。理解内存模型架构以及Java内存模型如何与它协同工作也是非常重要的。这部分描述了通用的硬件内存架构，下面的部分将会描述Java内存是如何与它&ldquo;联手&rdquo;工作的。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	下面是现代计算机硬件架构的简单图示：</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<img class="alignCenter" src="/uploads/allimg/160509/15252A512-3.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个现代计算机通常由两个或者多个CPU。其中一些CPU还有多核。从这一点可以看出，在一个有两个或者多个CPU的现代计算机上同时运行多个线程是可能的。每个CPU在某一时刻运行一个线程是没有问题的。这意味着，如果你的Java程序是多线程的，在你的Java程序中每个CPU上一个线程可能同时（并发）执行。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	每个CPU都包含一系列的寄存器，它们是CPU内内存的基础。CPU在寄存器上执行操作的速度远大于在主存上执行的速度。这是因为CPU访问寄存器的速度远大于主存。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	每个CPU可能还有一个CPU缓存层。实际上，绝大多数的现代CPU都有一定大小的缓存层。CPU访问缓存层的速度快于访问主存的速度，但通常比访问内部寄存器的速度还要慢一点。一些CPU还有多层缓存，但这些对理解Java内存模型如何和内存交互不是那么重要。只要知道CPU中可以有一个缓存层就可以了。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	一个计算机还包含一个主存。所有的CPU都可以访问主存。主存通常比CPU中的缓存大得多。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	通常情况下，当一个CPU需要读取主存时，它会将主存的部分读到CPU缓存中。它甚至可能将缓存中的部分内容读到它的内部寄存器中，然后在寄存器中执行操作。当CPU需要将结果写回到主存中去时，它会将内部寄存器的值刷新到缓存中，然后在某个时间点将值刷新回主存。</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	当CPU需要在缓存层存放一些东西的时候，存放在缓存中的内容通常会被刷新回主存。CPU缓存可以在某一时刻将数据局部写到它的内存中，和在某一时刻局部刷新它的内存。它不会再某一时刻读/写整个缓存。通常，在一个被称作&ldquo;cache lines&rdquo;的更小的内存块中缓存被更新。一个或者多个缓存行可能被读到缓存，一个或者多个缓存行可能再被刷新回主存。</p>
+<h3 style="margin: 0px 0px 0.5em; font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; line-height: 1.6em; color: rgb(51, 51, 51); text-rendering: optimizeLegibility; font-size: 18px; text-indent: 1em; background-color: rgb(254, 254, 254);">
+	Java内存模型和硬件内存架构之间的桥接</h3>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	上面已经提到，Java内存模型与硬件内存架构之间存在差异。硬件内存架构没有区分线程栈和堆。对于硬件，所有的线程栈和堆都分布在主内中。部分线程栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器中。如下图所示：</p>
+<p style="margin: 0px 0px 0.75em; font-size: 16px; line-height: 27.2px; text-indent: 1em; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<img class="alignCenter" src="/uploads/allimg/160509/15252AU2-4.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+<div style="font-size: 16px; line-height: 27.2px; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		当对象和变量被存放在计算机中各种不同的内存区域中时，就可能会出现一些具体的问题。主要包括如下两个方面：</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		-线程对共享变量修改的可见性-当读，写和检查共享变量时出现race conditions</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		下面我们专门来解释以下这两个问题。</p>
+</div>
+<div style="font-size: 16px; line-height: 27.2px; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; background-color: rgb(254, 254, 254);">
+	<h4 style="margin: 0px 0px 0.5em; font-family: inherit; line-height: 1.7em; color: inherit; text-rendering: optimizeLegibility; text-indent: 1em;">
+		共享对象可见性</h4>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		如果两个或者更多的线程在没有正确的使用&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">volatile</code>&nbsp;声明或者同步的情况下共享一个对象，一个线程更新这个共享对象可能对其它线程来说是不接见的。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		想象一下，共享对象被初始化在主存中。跑在CPU上的一个线程将这个共享对象读到CPU缓存中。然后修改了这个对象。只要CPU缓存没有被刷新会主存，对象修改后的版本对跑在其它CPU上的线程都是不可见的。这种方式可能导致每个线程拥有这个共享对象的私有拷贝，每个拷贝停留在不同的CPU缓存中。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		下图示意了这种情形。跑在左边CPU的线程拷贝这个共享对象到它的CPU缓存中，然后将count变量的值修改为2。这个修改对跑在右边CPU上的其它线程是不可见的，因为修改后的count的值还没有被刷新回主存中去。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		<img class="alignCenter" src="/uploads/allimg/160509/1525261a6-5.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		解决这个问题你可以使用Java中的&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">volatile</code>&nbsp;关键字。&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">volatile</code>&nbsp;关键字可以保证直接从主存中读取一个变量，如果这个变量被修改后，总是会被写回到主存中去。</p>
+	<h4 style="margin: 0px 0px 0.5em; font-family: inherit; line-height: 1.7em; color: inherit; text-rendering: optimizeLegibility; text-indent: 1em;">
+		Race Conditions</h4>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		如果两个或者更多的线程共享一个对象，多个线程在这个共享对象上更新变量，就有可能发生&nbsp;<a href="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html" rel="nofollow,noindex" style="color: rgb(148, 148, 148); text-decoration: none; transition: 0.25s; outline: none 0px; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(148, 148, 148); font-style: italic; font-weight: bold;" target="_blank">race conditions</a>&nbsp;。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		想象一下，如果线程A读一个共享对象的变量count到它的CPU缓存中。再想象一下，线程B也做了同样的事情，但是往一个不同的CPU缓存中。现在线程A将&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">count</code>加1，线程B也做了同样的事情。现在&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">count</code>&nbsp;已经被增在了两个，每个CPU缓存中一次。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		如果这些增加操作被顺序的执行，变量&nbsp;<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">count</code>&nbsp;应该被增加两次，然后原值+2被写回到主存中去。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		然而，两次增加都是在没有适当的同步下并发执行的。无论是线程A还是线程B将<code style="padding: 2px 4px; font-family: Monaco, Menlo, Consolas, 'Courier New', monospace; border-radius: 3px; border: none; background-color: rgb(247, 247, 249);">count</code>&nbsp;修改后的版本写回到主存中取，修改后的值仅会被原值大1，尽管增加了两次。</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		下图演示了上面描述的情况：</p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		<img class="alignCenter" src="/uploads/allimg/160509/15252B558-6.png!web" style="max-width: 96%; height: auto; vertical-align: middle; border: 0px none; margin: 0px auto 10px; text-align: center; display: block;" /></p>
+	<p style="margin: 0px 0px 0.75em; line-height: 1.7em; text-indent: 1em;">
+		解决这个问题可以使用&nbsp;<a href="http://tutorials.jenkov.com/java-concurrency/synchronized.html" rel="nofollow,noindex" style="color: rgb(148, 148, 148); text-decoration: none; transition: 0.25s; outline: none 0px; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(148, 148, 148); font-style: italic; font-weight: bold;" target="_blank">Java同步块</a>&nbsp;。一个同步块可以保证在同一时刻仅有一个线程可以进入代码的临界区。同步块还可以保证代码块中所有被访问的变量将会从主存中读入，当线程退出同步代码块时，所有被更新的变量都会被刷新回主存中去，不管这个变量是否被声明为volatile。</p>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>如何配置Log4j日志(很详细)，log4j配置方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="如何,配置,Log4j,日志,很,详细,log4j,方法,L" />
+  <meta name="description" content="Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key=value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。 1. 配置文件 Log4" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>如何配置Log4j日志(很详细)，log4j配置方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：35次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="869" class="art_content"><p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-size: x-small;">Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key=value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。<br />
+	<br />
+	<strong>1. 配置文件</strong><br />
+	Log4J配置文件的基本格式如下：</span></p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /></span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">#配置根Logger<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.rootLogger&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">[</span>&nbsp;<span style="color: rgb(128, 0, 0);">level</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">]</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;appenderName1</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;appenderName2</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;&hellip;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />#配置日志信息输出目的地Appender<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.appenderName&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;fully.qualified.name.of.appender.class&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　log4j.appender.appenderName.option1&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;value1&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　&hellip;&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　log4j.appender.appenderName.optionN&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;valueN&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />#配置日志信息的格式（布局）<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.appenderName.layout&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;fully.qualified.name.of.layout.class&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　log4j.appender.appenderName.layout.option1&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;value1&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　&hellip;&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　log4j.appender.appenderName.layout.optionN&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;valueN&nbsp;</span></span></div>
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<br />
+	<span style="font-size: x-small;">其中&nbsp;<strong>[level]&nbsp;</strong>是日志输出级别，共有5级：</span></p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<strong><span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><span style="color: rgb(0, 0, 0);">FATAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span style="color: rgb(0, 0, 0);">0</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />ERROR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">3</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />WARN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">4</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />INFO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span style="color: rgb(0, 0, 0);">6</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />DEBUG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">7</span>&nbsp;</span><br />
+	<span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /></span></span></strong></div>
+<br />
+<strong style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;"><span style="font-size: x-small;">Appender&nbsp;</span></strong><span style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; font-size: x-small;">为日志输出目的地，Log4j提供的appender有以下几种：</span><br />
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /></span><span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;">org.apache.log4j.ConsoleAppender（控制台），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.FileAppender（文件），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span></span></div>
+<br style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;"><span style="font-size: x-small;"><strong>Layout</strong>：日志输出格式，Log4j提供的layout有以下几种：</span></span><br />
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /></span><span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;">org.apache.log4j.HTMLLayout（以HTML表格形式布局），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.PatternLayout（可以灵活地指定布局模式），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</span></span></div>
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<br />
+	<span style="font-size: x-small;"><strong>打印参数:&nbsp;</strong>Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下:</span></p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">　&nbsp;&nbsp;<strong>%m</strong>&nbsp;&nbsp; 输出代码中指定的消息<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%p</strong>&nbsp;&nbsp; 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%r</strong>&nbsp;&nbsp; 输出自应用启动到输出该log信息耗费的毫秒数&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%c</strong>&nbsp;&nbsp; 输出所属的类目，通常就是所在类的全名&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%t</strong>&nbsp;&nbsp; 输出产生该日志事件的线程名&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%n&nbsp;</strong>&nbsp; 输出一个回车换行符，Windows平台为&ldquo;/r/n&rdquo;，Unix平台为&ldquo;/n&rdquo;&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%d</strong>&nbsp;&nbsp; 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy&nbsp;MMM&nbsp;dd&nbsp;HH:mm:ss</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span><span style="color: rgb(0, 0, 0);">SSS}，输出类似：2002年10月18日&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">22</span>&nbsp;<span style="color: rgb(0, 0, 0);">：</span>&nbsp;<span style="color: rgb(0, 0, 0);">10</span>&nbsp;<span style="color: rgb(0, 0, 0);">：</span>&nbsp;<span style="color: rgb(0, 0, 0);">28</span>&nbsp;<span style="color: rgb(0, 0, 0);">，</span>&nbsp;<span style="color: rgb(0, 0, 0);">921</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />　　<strong>%l&nbsp;</strong>&nbsp; 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:</span>&nbsp;<span style="color: rgb(0, 0, 0);">10</span>&nbsp;<span style="color: rgb(0, 0, 0);">)&nbsp;<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /></span></span></div>
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<br />
+	<span style="font-size: x-small;"><strong>2. 在代码中初始化Logger:</strong>&nbsp;<br />
+	1）在程序中调用<strong>BasicConfigurator.configure()</strong>方法：给根记录器增加一个ConsoleAppender，输出格式通过PatternLayout设为<strong>&quot;%-4r [%t] %-5p %c %x - %m%n&quot;</strong>，还有根记录器的默认级别是<strong>Level.DEBUG</strong>.&nbsp;<br />
+	2）配置放在文件里，通过命令行参数传递文件名字，通过<strong>PropertyConfigurator.configure(args[x])</strong>解析并配置；<br />
+	3）配置放在文件里，通过环境变量传递文件名等信息，利用log4j默认的初始化过程解析并配置；<br />
+	4）配置放在文件里，通过应用服务器配置传递文件名等信息，利用一个特殊的servlet来完成配置。<br />
+	<br />
+	<strong>3. 为不同的 Appender 设置日志输出级别：</strong><br />
+	当调试系统时，我们往往注意的只是异常级别的日志输出，但是通常所有级别的输出都是放在一个文件里的，如果日志输出的级别是BUG！？那就慢慢去找吧。<br />
+	这时我们也许会想要是能把异常信息单独输出到一个文件里该多好啊。当然可以，Log4j已经提供了这样的功能，我们只需要在配置中修改<strong>Appender</strong>的<span style="color: rgb(153, 0, 0);"><strong>Threshold</strong></span></span>&nbsp;<span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;">就能实现,比如下面的例子：<br />
+	<br />
+	<strong>[配置文件]</strong></span></span></p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">###&nbsp;set&nbsp;log&nbsp;levels&nbsp;###<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.rootLogger</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">debug</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;stdout</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;D</span>&nbsp;<span style="color: rgb(0, 0, 0);">,</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;E<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />###&nbsp;输出到控制台&nbsp;###<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.stdout</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.ConsoleAppender<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.stdout.Target</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">System.out<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.stdout.layout</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.PatternLayout<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.stdout.layout.ConversionPattern</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;%d{ABSOLUTE}&nbsp;%5p&nbsp;%c{</span>&nbsp;<span style="color: rgb(0, 0, 0);">1</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">}:%L&nbsp;-&nbsp;%m%n<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />###&nbsp;输出到日志文件&nbsp;###<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.DailyRollingFileAppender<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.File</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">logs/log.log<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.Append</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">true<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.<strong><span style="color: rgb(153, 0, 0);">Threshold</span></strong></span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">DEBUG&nbsp;<strong>##&nbsp;输出DEBUG级别以上的日志</strong><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.layout</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.PatternLayout<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.layout.ConversionPattern</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">%-d{yyyy-MM-dd&nbsp;HH:mm:ss}&nbsp;</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">[</span>&nbsp;<span style="color: rgb(128, 0, 0);">%t:%r</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">]</span>&nbsp;<span style="color: rgb(0, 0, 0);">-</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">[</span>&nbsp;<span style="color: rgb(128, 0, 0);">%p</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">]</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">&nbsp;%m%n<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" /><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />###&nbsp;保存异常信息到单独文件&nbsp;###<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.DailyRollingFileAppender<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.File</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">logs/error.log&nbsp;##&nbsp;异常日志文件名<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.Append</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">true<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.<strong><span style="color: rgb(153, 0, 0);">Threshold</span></strong></span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">ERROR<strong>&nbsp;##&nbsp;只输出ERROR级别以上的日志!!!</strong><br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.layout</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">org.apache.log4j.PatternLayout<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5543M2-0.gif" style="border: none; max-width: 100%;" />log4j.appender.D.layout.ConversionPattern</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">%-d{yyyy-MM-dd&nbsp;HH:mm:ss}&nbsp;</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">[</span>&nbsp;<span style="color: rgb(128, 0, 0);">%t:%r</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">]</span>&nbsp;<span style="color: rgb(0, 0, 0);">-</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">[</span>&nbsp;<span style="color: rgb(128, 0, 0);">%p</span>&nbsp;<span style="font-weight: bold; color: rgb(128, 0, 0);">]</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;%m%n</span></span></div>
+<br style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;"><span style="font-size: x-small;"><strong>[代码中使用]</strong>&nbsp;</span></span><br />
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</p>
+<div style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px; border: 1px solid rgb(204, 204, 204); padding: 4px 5px 4px 4px; font-size: 13px; width: 693.828125px; background-color: rgb(238, 238, 238);">
+	<span style="font-size: x-small;"><img align="top" alt="" id="Codehighlighter1_23_240_Open_Image" src="/uploads/allimg/150523/0Q5541429-62.gif" style="border: none; max-width: 100%;" />&nbsp;<span style="color: rgb(0, 0, 255);">public</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 255);">class</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;TestLog4j&nbsp;</span>&nbsp;</span><span id="Codehighlighter1_23_240_Open_Text"><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">{<br />
+	<img align="top" alt="" id="Codehighlighter1_65_238_Open_Image" src="/uploads/allimg/150523/0Q55433S-63.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 255);">public</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 255);">static</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 255);">void</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;main(String[]&nbsp;args)&nbsp;</span>&nbsp;</span><span id="Codehighlighter1_65_238_Open_Text"><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">{<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5544R7-64.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PropertyConfigurator.configure(</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;<span style="color: rgb(0, 0, 0);">D:/Code/conf/log4j.properties</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">);<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5544R7-64.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logger&nbsp;logger&nbsp;</span>&nbsp;<span style="color: rgb(0, 0, 0);">=</span>&nbsp;<span style="color: rgb(0, 0, 0);">&nbsp;Logger.getLogger(TestLog4j.</span>&nbsp;<span style="color: rgb(0, 0, 255);">class</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">);<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5544R7-64.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.debug(</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;<span style="color: rgb(0, 0, 0);">debug</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;</span><span style="font-size: x-small;"><span style="color: rgb(0, 0, 0);">);<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q5544R7-64.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.error(</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;<span style="color: rgb(0, 0, 0);">error</span>&nbsp;<span style="color: rgb(0, 0, 0);">&quot;</span>&nbsp;</span><span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;">);<br />
+	<img align="top" alt="" src="/uploads/allimg/150523/0Q55411b-68.gif" style="border: none; max-width: 100%;" />&nbsp;&nbsp;&nbsp;&nbsp;}</span>&nbsp;</span></span><br />
+	<span style="color: rgb(0, 0, 0);"><span style="font-size: x-small;"><img align="top" alt="" src="/uploads/allimg/150523/0Q55454Z-69.gif" style="border: none; max-width: 100%;" />}</span></span></span></div>
+<p style="color: rgb(51, 51, 51); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<br />
+	<span style="font-size: x-small;">运行一下，看看异常信息是不是保存在了一个单独的文件error.log中</span></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

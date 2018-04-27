@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memcache接口介绍以及协议分析</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Memcache接口介绍" />
+  <meta name="description" content="Memcache客户端包含两组接口，一组是面向过程的接口，一组是面向对象的接口，具体可以参考PHP手册 MemCacheLXXV. Memcache Functions 这章。 Memcache面向对象的常用接口包括： Memcache::connect --" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Memcache接口介绍以及协议分析</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：19次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1519" class="art_content"><p label-module="para">
+	Memcache客户端包含两组接口，一组是面向过程的接口，一组是面向对象的接口，具体可以参考PHP手册</p>
+<p label-module="para">
+	MemCache&ldquo;LXXV. Memcache Functions&rdquo; 这章。</p>
+<p label-module="para">
+	Memcache面向对象的常用接口包括：</p>
+<p label-module="para">
+	Memcache::connect -- 打开一个到Memcache的连接</p>
+<p label-module="para">
+	Memcache::pconnect -- 打开一个到Memcache的长连接</p>
+<p label-module="para">
+	Memcache::close -- 关闭一个Memcache的连接</p>
+<p label-module="para">
+	Memcache::set -- 保存数据到Memcache服务器上</p>
+<p label-module="para">
+	Memcache::get --提取一个保存在Memcache服务器上的数据</p>
+<p label-module="para">
+	Memcache::replace --替换一个已经存在Memcache服务器上的项目（功能类似Memcache::set）</p>
+<p label-module="para">
+	Memcache::delete -- 从Memcache服务器上删除一个保存的项目</p>
+<p label-module="para">
+	Memcache::flush -- 刷新所有Memcache服务器上保存的项目（类似于删除所有的保存的项目）</p>
+<p label-module="para">
+	Memcache::getStats -- 获取当前Memcache服务器运行的状态</p>
+<div label-module="para-title">
+	<p>
+		<strong>协议分析</strong></p>
+</div>
+<p label-module="para">
+	如果你不喜欢 php_memcache.dll 扩展或者服务器目前不支持这个扩展，那么就可以考虑自己构建.</p>
+<p label-module="para">
+	Memcahe的客户端，要先了解Memcache协议的交互，这样才能开发自己的客户端，这里简单的分析一下Memcache的协议。（更详细的协议内容请在Memcache服务器端的源码的 doc/protocol.txt文件中）</p>
+<p label-module="para">
+	Memcache既支持TCP协议，也支持UDP协议，不过我们这里是以TCP协议的协议作为主要考虑对象，想了解UDP协议的过程，请参考 doc/protocol.txt文件。</p>
+<p label-module="para">
+	[ 错误指令]</p>
+<p label-module="para">
+	Memcache的协议的错误部分主要是三个错误提示指令：</p>
+<p label-module="para">
+	普通错误信息，比如指令错误之类的</p>
+<p label-module="para">
+	ERROR</p>
+<p label-module="para">
+	客户端错误</p>
+<p label-module="para">
+	CLIENT_ERROR &lt;错误信息&gt;</p>
+<p label-module="para">
+	服务器端错误</p>
+<p label-module="para">
+	SERVER_ERROR &lt;错误信息&gt;</p>
+<p label-module="para">
+	[ 数据保存指令]</p>
+<p label-module="para">
+	数据保存是基本的功能，就是客户端通过命令把数据返回过来，服务器端接收后进行处理。</p>
+<p label-module="para">
+	指令格式：</p>
+<p label-module="para">
+	&lt;命令&gt; &lt;键&gt; &lt;标记&gt; &lt;有效期&gt; &lt;数据长度&gt;</p>
+<p label-module="para">
+	&lt;命令&gt; - command name</p>
+<p label-module="para">
+	主要是三个储存数据的三个命令， set, add, replace</p>
+<p label-module="para">
+	set 命令是保存一个叫做key的数据到服务器上</p>
+<p label-module="para">
+	add 命令是添加一个数据到服务器，但是服务器必须保证这个key是不存在的，能够保证数据不会被覆盖</p>
+<p label-module="para">
+	replace 命令是替换一个已经存在的数据，如果数据不存在，就是类似set功能</p>
+<p label-module="para">
+	&lt;键&gt; - key</p>
+<p label-module="para">
+	就是保存在服务器上唯一的一个表示符，必须是跟其他的key不冲突，否则会覆盖掉原来的数据，这个key是为了能够准确的存取一个数据项目</p>
+<p label-module="para">
+	&lt;标记&gt; - flag</p>
+<p label-module="para">
+	标记是一个16位的无符号整形数据，用来设置服务器端跟客户端一些交互的操作</p>
+<p label-module="para">
+	&lt;有效期&gt; - expiration time</p>
+<p label-module="para">
+	是数据在服务器上的有效期限，如果是0，则数据永远有效，单位是秒，Memcache服务器端会把一个数据的有效期设置为当前Unix时间+设置的有效时间</p>
+<p label-module="para">
+	&lt;数据长度&gt; - bytes</p>
+<p label-module="para">
+	数据的长度，block data 块数据的长度，一般在这个个长度结束以后下一行跟着block data数据内容，发送完数据以后，客户端一般等待服务器端的返回。</p>
+<p label-module="para">
+	数据保存成功</p>
+<p label-module="para">
+	STORED</p>
+<p label-module="para">
+	数据保存失败，一般是因为服务器端这个数据key已经存在了</p>
+<p label-module="para">
+	NOT_STORED</p>
+<p label-module="para">
+	[ 数据提取命令]</p>
+<p label-module="para">
+	从服务器端提取数据主要是使用get指令，格式是：</p>
+<p label-module="para">
+	get &lt;键&gt;*</p>
+<p label-module="para">
+	&lt;键&gt;* -key</p>
+<p label-module="para">
+	key是一个不为空的字符串组合，发送这个指令以后，等待服务器的返回。如果服务器端没有任何数据，则是返回：</p>
+<p label-module="para">
+	END</p>
+<p label-module="para">
+	证明没有不存在这个key，没有任何数据，如果存在数据，则返回指定格式：</p>
+<p label-module="para">
+	VALUE &lt;键&gt; &lt;标记&gt; &lt;数据长度&gt;</p>
+<p label-module="para">
+	&lt;数据块&gt;</p>
+<p label-module="para">
+	返回的数据是以VALUE开始的，后面跟着key和flags，以及数据长度，第二行跟着数据块。</p>
+<p label-module="para">
+	&lt;键&gt; -key</p>
+<p label-module="para">
+	是发送过来指令的key内容</p>
+<p label-module="para">
+	&lt;标记&gt; - flags</p>
+<p label-module="para">
+	是调用set指令保存数据时候的flags标记</p>
+<p label-module="para">
+	&lt;数据长度&gt; - bytes</p>
+<p label-module="para">
+	是保存数据时候定位的长度</p>
+<p label-module="para">
+	&lt;数据块&gt; - data block</p>
+<p label-module="para">
+	数据长度下一行就是提取的数据块内容</p>
+<p label-module="para">
+	[ 数据删除指令]</p>
+<p label-module="para">
+	数据删除指令也是比较简单的，使用delete指令，格式是：</p>
+<p label-module="para">
+	delete &lt;键&gt; &lt;超时时间&gt;</p>
+<p label-module="para">
+	&lt;键&gt; - key</p>
+<p label-module="para">
+	key是你希望在服务器上删除数据的key键</p>
+<p label-module="para">
+	&lt;超时时间&gt; - timeout</p>
+<p label-module="para">
+	按照秒为单位，这个是个可选项，如果你没有指定这个值，那么服务器上key数据将马上被删除，如果设置了这个值，那么数据将在超时时间后把数据清除，该项缺省值是0，表示永不过期。</p>
+<p label-module="para">
+	删除数据后，服务器端会返回：</p>
+<p label-module="para">
+	DELETED</p>
+<p label-module="para">
+	删除数据成功</p>
+<p label-module="para">
+	NOT_FOUND</p>
+<p label-module="para">
+	这个key没有在服务器上找到</p>
+<p label-module="para">
+	如果要删除所有服务器上的数据，可以使用flush_all指令，格式：</p>
+<p label-module="para">
+	flush_all</p>
+<p label-module="para">
+	这个指令执行后，服务器上所有缓存的数据都被删除，并且返回：</p>
+<p label-module="para">
+	OK</p>
+<p label-module="para">
+	这个指令一般不要轻易使，除非你确实想把所有数据都干掉，删除完以后可以无法恢复的。</p>
+<p label-module="para">
+	[其他指令]</p>
+<p label-module="para">
+	如果想了解当前Memcache服务器的状态和版本等信息，可以使用状态查询指令和版本查询指令。</p>
+<p label-module="para">
+	如果想了解当前所有Memcache服务器运行的状态信息，可以使用stats指令，格式</p>
+<p label-module="para">
+	stats</p>
+<p label-module="para">
+	服务器将返回每行按照 STAT开始的状态信息，包括20行，20项左右的信息，包括守护进程的pid、版本、保存的项目数量、内存占用、最大内存限制等等信息。</p>
+<p label-module="para">
+	如果只是想获取部分项目的信息，可以指定参数，格式：</p>
+<p label-module="para">
+	stats &lt;参数&gt;</p>
+<p label-module="para">
+	这个指令将只返回指定参数的项目状态信息。</p>
+<p label-module="para">
+	如果只是想单独了解当前版本信息，可以使用version指令，格式：</p>
+<p label-module="para">
+	version</p>
+<p label-module="para">
+	将返回以 VERSION 开头的版本信息</p>
+<p label-module="para">
+	如果想结束当前连接，使用quit指令，格式：</p>
+<p label-module="para">
+	quit</p>
+<p label-module="para">
+	将断开当前连接</p>
+<p label-module="para">
+	另外还有其他指令，包括incr, decr 等，我也不太了解作用，就不做介绍了，如果感兴趣，可以自己去研究。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

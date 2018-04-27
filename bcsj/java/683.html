@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java中关于异常处理的10个最佳实践</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,异常处理" />
+  <meta name="description" content=" 异常处理是书写强健Java应用的一个重要部分。它是关乎每个应用的一个非功能性需求，是为了优雅的处理任何错误状况，比如资源不可访问，非法输入，空输入等等。Java提供了几个异" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java中关于异常处理的10个最佳实践</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：11次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="683" class="art_content"><p>
+	　　异常处理是书写强健Java应用的一个重要部分。它是关乎每个应用的一个非功能性需求，是为了优雅的处理任何错误状况，比如资源不可访问，非法输入，空输入等等。Java提供了几个异常处理特性，以try,catch和 finally 关键字的形式内建于语言自身之中。Java编程语言也允许你创建新的异常，并通过使用 throw 和 throws关键字抛出它们。事实上，异常处理不仅仅是知道语法。书写一个强健的代码更多的是一门艺术而不仅仅是一门科学，这里我们将讨论一些关于异常处理的Java最佳实践。这些 Java 最佳实践 甚至被标准JDK库，以及一些开源代码所追随，以更好的处理错误与异常。这也成为了Java程序员书写强健代码的手册。</p>
+<p>
+	　<strong>Java 编程中异常处理的最佳实践</strong><br />
+	　　这里是我收集的10个Java编程中进行异常处理的10最佳实践。在Java编程中对于检查异常有褒有贬，强制处理异常是一门语言的功能。在本文中，我们将尽量减少使用检查型异常，同时学会在Java编程中使用检查型VS非检查型异常。<br />
+	<br />
+	　　<strong>1.为可恢复的错误使用检查型异常，为编程错误使用非检查型错误</strong>　　选择检查型还是非检查型异常，对于Java编程人员来说，总是让人感到困惑。检查型异常保证你对错误条件提供异常处理代码，这是一种从语言到强制你编写健壮的代码的一种方式，但同时会引入大量杂乱的代码并导致其不可读。当然，如果你有替代品和恢复策略的话，捕捉异常并做些什么看起来似乎也在理。在Java编程中选择检查型异常还是运行时异常。<br />
+	<br />
+	　　<strong>2.在finally程序块中关闭或者释放资源</strong>　　这在Java编程中，是一个广为人知的最佳实践，在处理网络和IO类的时候，相当于一个标准。在finally块中关闭资源， 在正常和异常执行的情况下，保证之前和稀缺资源的合理释放，这由y finally块保证。从Java7开始，该语言有了一项更有趣的功能：资源管理自动化或者ARM块能实现这一功能。尽管如此，我们仍然要记住在finally块中关闭资源，这是对于释放像FileDescriptors这类，应用在socket和文件编程的情况下的有限资源很重要的。<br />
+	<br />
+	　　<strong>3.在堆栈跟踪中包含引起异常的原因</strong><br />
+	　　很多时候，当一个由另一个异常导致的异常被抛出的时候，Java库和开放源代码会将一种异常包装成另一种异常。日志记录和打印根异常就变得非常重要。Java异常类提供了 getCause()方法来检索导致异常的原因，这些(原因)可以对异常的根层次的原因提供更多的信息。该Java实践对在进行调试或排除故障大有帮助。时刻记住，如果你将一个异常包装成另一种异常时，构造一个新异常要传递源异常。<br />
+	<br />
+	　　<strong>4.始终提供关于异常的有意义的完整的信息</strong>　　异常信息是最重要的地方，因为这是程序员首先看到的第一个地方，这里你能找到问题产生的根本原因。这里始终提供精确的真实的信息。例如，对比IllegalArgumentException 异常的两条异常信息：<br />
+	　　消息 1: &quot;Incorrect argument for method&quot;<br />
+	　　消息 2: &quot;Illegal value for ${argument}: ${value}<br />
+	　　第一条消息仅说明了参数是非法的或者不正确，但第二条消息包括了参数名和非法值，而这对于找到错误的原因是很重要的。在用Java编程中编写异常处理代码的时候，始终遵循该Java最佳实践。<br />
+	<br />
+	　　<strong>5.避免过度使用检查型异常</strong><br />
+	　　检查型异常在强制执行方面有一定的优势，但同时它也破坏了代码，通过掩盖业务逻辑使代码可读性降低。只要你不过度使用检查型异常，你可以最大限度的减少这类情况，这样做的结果是你会得到更清洁的代码。你同样可以使用Java7的新功能，像one catch block for multiple exceptions 和 automatic resource management以移除重复项。<br />
+	<br />
+	　<strong>　6.将检查型异常转为运行时异常</strong>　　这是在像Spring之类的多数框架中用来限制使用检查型异常的技术之一，大部分出自于JDBC的检查型异常，都被包装进DataAccessException中，而(DataAccessException)异常是一种非检查型异常。这是Java最佳实践带来的好处，特定的异常限制到特定的模块，像 SQLException 放到DAO层，将意思明确的运行时异常抛到客户层。<br />
+	<br />
+	<strong>　　7.记住对性能而言，异常代价高昂</strong>　　需要记住的一件事是异常代价高昂，同时让你的代码运行缓慢。假如你有方法从ResultSet(结果集)中进行读取，这时常会抛出SQLException异常而不会移到下一元素，这将会比不抛出异常的正常代码执行的慢的多。因此最大限度的减少不必要的异常捕捉和移动，那里没有什么固定的原因。不要仅仅是抛出和捕捉异常，如果你能使用boolean变量去表示执行结果，可能会得到更整洁，更高性能的解决方案。修正错误的根源，避免不必须要的异常捕捉。<br />
+	<br />
+	　　<strong>8.避免catch块为空</strong>　　没有什么比空的catch块更糟糕的了，因为它不仅隐藏了错误和异常，同时可能导致你的对象处于不可使用或者脏的状态。空的catch块只能变得无意义，如果你非常肯定异常不会继续以任何方式影响对象状态，但在程序执行期间，用日志记录错误依然是最好的(方法)。对于在Java编程中编写异常处理代码，这不仅仅是一个Java最佳实践，而是一个最通用的实践。<br />
+	<br />
+	　　<strong>9.使用标准异常</strong><br />
+	　　我们的第九条最佳实践建议使用标准和内置的Java异常。使用标准异常而不是每次创建我们自己的异常，对于维护性和一致性，不管是现在还是以后，都是最好的选择。重用标准异常使代码更具可读性，因为大部分Java开发人员对标准的像源自于JDK的RuntimeException 异常，IllegalStateException 异常，IllegalArgumentException 异常或者 NullPointerException异常，(开发者)他们能一眼就知道每种异常的目的，而不是在代码里查找或者在文档里查找用户定义的异常的目的。<br />
+	<br />
+	　　<strong>10.记录任何方法抛出的异常</strong><br />
+	　　Java提供了throw和throws关键字来抛出异常，在javadoc中用 @throw记录任何方法可能会抛出的异常。如果你编写API或者公共接口，这就变得非常重要。任何方法抛出的异常都有相应的文档记录，这样你就能下意识的提醒任何使用(该方法)的人。<br />
+	　　这些就是所有在Java编程中在处理异常的时候需要遵循的最佳实践。让我们知道了什么是在Java编程中编写异常处理代码时需要遵循的实践。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

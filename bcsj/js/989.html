@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>10个最常用的Javascript自定义函数</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Javascript,函数,自定义函数" />
+  <meta name="description" content="如果不使用类库或者没有自己的类库，储备一些常用函数总是有好处的。 1、$() 实至名归，最值钱的函数，可以节省多少流量啊。最先由Prototype.js实现的，那个洪荒时代遗留下来的珍兽" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>10个最常用的Javascript自定义函数</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：4次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="989" class="art_content"><p>
+	如果不使用类库或者没有自己的类库，储备一些常用函数总是有好处的。<br />
+	<br />
+	1、$()<br />
+	<br />
+	实至名归，最值钱的函数，可以节省多少流量啊。最先由Prototype.js实现的，那个洪荒时代遗留下来的珍兽，现在有许多变种：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;$()&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;elements&nbsp;=&nbsp;[];&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;arguments.length;&nbsp;i++)&nbsp;{&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;element&nbsp;=&nbsp;arguments[i];&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(typeof&nbsp;element&nbsp;==&nbsp;&#39;string&#39;)&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;element&nbsp;=&nbsp;document.getElementById(element);&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(arguments.length&nbsp;==&nbsp;1)&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;element;&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.push(element);&nbsp;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;elements;&nbsp;<br />
+				12.}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	2、getStyle()与setStyle()<br />
+	<br />
+	所有UI控件都应该存在的函数，动态设置样式与获取样式。这个可以写得很短，也可以写得很长，但要精确取得样式，一个字：难！但我发现许多问题都是发端于IE，微软的开发人员好像从来不打算给出getComputedStyle这样的函数，与之相近的currentStyle会返回auto、inhert、&lsquo;&nbsp;&rsquo;等让你哭笑不得的值，这还没有算上IE怪癖模式带来的难度呢！各类库的实现是非常长与难分离出来的，下面是我实现的版本：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;setStyle(el,prop,value){&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;if(prop&nbsp;==&nbsp;&quot;opacity&quot;&nbsp;&amp;&amp;&nbsp;!+&quot;\\v1&quot;){&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//IE7&nbsp;bug:filter&nbsp;滤镜要求&nbsp;hasLayout=true&nbsp;方可执行（否则没有效果）&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!el.currentStyle&nbsp;||&nbsp;!el.currentStyle.hasLayout)&nbsp;el.style.zoom&nbsp;=&nbsp;1;&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prop&nbsp;=&nbsp;&quot;filter&quot;;&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!!window.XDomainRequest){&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;=&quot;progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=&quot;+value*100+&quot;)&quot;;&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;=&quot;alpha(opacity=&quot;+value*100+&quot;)&quot;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				12.&nbsp;&nbsp;&nbsp;el.style.cssText&nbsp;+=&nbsp;&#39;;&#39;&nbsp;+&nbsp;(prop+&quot;:&quot;+value);&nbsp;<br />
+				13.&nbsp;}&nbsp;<br />
+				14.&nbsp;function&nbsp;getStyle(el,&nbsp;style){&nbsp;<br />
+				15.&nbsp;&nbsp;&nbsp;if(!+&quot;\\v1&quot;){&nbsp;<br />
+				16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style&nbsp;=&nbsp;style.replace(/\\-(\\w)/g,&nbsp;function(all,&nbsp;letter){&nbsp;<br />
+				17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;letter.toUpperCase();&nbsp;<br />
+				18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;<br />
+				19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;el.currentStyle[style];&nbsp;<br />
+				20.&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;document.defaultView.getComputedStyle(el,&nbsp;null).getPropertyValue(style)&nbsp;<br />
+				22.&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				23.&nbsp;}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	有关setStyle还可以看我另一篇博文，毕竟现在设置的样式都是内联样式，与html混杂在一起。<br />
+	<br />
+	3、getCookie()、setCookie()及deleteCookie()<br />
+	<br />
+	做BBS与商业网站的应该经常用到，无理由每次都要让用户输入密码登录吧。我们需要借助cookie实现自动登录功能：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;getCookie(&nbsp;name&nbsp;)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;start&nbsp;=&nbsp;document.cookie.indexOf(&nbsp;name&nbsp;+&nbsp;&quot;=&quot;&nbsp;);&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;len&nbsp;=&nbsp;start&nbsp;+&nbsp;name.length&nbsp;+&nbsp;1;&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;(&nbsp;!start&nbsp;)&nbsp;&amp;&amp;&nbsp;(&nbsp;name&nbsp;!=&nbsp;document.cookie.substring(&nbsp;0,&nbsp;name.length&nbsp;)&nbsp;)&nbsp;)&nbsp;{&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;start&nbsp;==&nbsp;-1&nbsp;)&nbsp;return&nbsp;null;&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;end&nbsp;=&nbsp;document.cookie.indexOf(&nbsp;&#39;;&#39;,&nbsp;len&nbsp;);&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;end&nbsp;==&nbsp;-1&nbsp;)&nbsp;end&nbsp;=&nbsp;document.cookie.length;&nbsp;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;unescape(&nbsp;document.cookie.substring(&nbsp;len,&nbsp;end&nbsp;)&nbsp;);&nbsp;<br />
+				11.}&nbsp;<br />
+				12.function&nbsp;setCookie(&nbsp;name,&nbsp;value,&nbsp;expires,&nbsp;path,&nbsp;domain,&nbsp;secure&nbsp;)&nbsp;{&nbsp;<br />
+				13.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;today&nbsp;=&nbsp;new&nbsp;Date();&nbsp;<br />
+				14.&nbsp;&nbsp;&nbsp;&nbsp;today.setTime(&nbsp;today.getTime()&nbsp;);&nbsp;<br />
+				15.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;expires&nbsp;)&nbsp;{&nbsp;<br />
+				16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expires&nbsp;=&nbsp;expires&nbsp;*&nbsp;1000&nbsp;*&nbsp;60&nbsp;*&nbsp;60&nbsp;*&nbsp;24;&nbsp;<br />
+				17.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				18.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;expires_date&nbsp;=&nbsp;new&nbsp;Date(&nbsp;today.getTime()&nbsp;+&nbsp;(expires)&nbsp;);&nbsp;<br />
+				19.&nbsp;&nbsp;&nbsp;&nbsp;document.cookie&nbsp;=&nbsp;name+&#39;=&#39;+escape(&nbsp;value&nbsp;)&nbsp;+&nbsp;<br />
+				20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;expires&nbsp;)&nbsp;?&nbsp;&#39;;expires=&#39;+expires_date.toGMTString()&nbsp;:&nbsp;&#39;&#39;&nbsp;)&nbsp;+&nbsp;//expires.toGMTString()&nbsp;<br />
+				21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;path&nbsp;)&nbsp;?&nbsp;&#39;;path=&#39;&nbsp;+&nbsp;path&nbsp;:&nbsp;&#39;&#39;&nbsp;)&nbsp;+&nbsp;<br />
+				22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;domain&nbsp;)&nbsp;?&nbsp;&#39;;domain=&#39;&nbsp;+&nbsp;domain&nbsp;:&nbsp;&#39;&#39;&nbsp;)&nbsp;+&nbsp;<br />
+				23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;secure&nbsp;)&nbsp;?&nbsp;&#39;;secure&#39;&nbsp;:&nbsp;&#39;&#39;&nbsp;);&nbsp;<br />
+				24.}&nbsp;<br />
+				25.function&nbsp;deleteCookie(&nbsp;name,&nbsp;path,&nbsp;domain&nbsp;)&nbsp;{&nbsp;<br />
+				26.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;getCookie(&nbsp;name&nbsp;)&nbsp;)&nbsp;document.cookie&nbsp;=&nbsp;name&nbsp;+&nbsp;&#39;=&#39;&nbsp;+&nbsp;<br />
+				27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;path&nbsp;)&nbsp;?&nbsp;&#39;;path=&#39;&nbsp;+&nbsp;path&nbsp;:&nbsp;&#39;&#39;)&nbsp;+&nbsp;<br />
+				28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;domain&nbsp;)&nbsp;?&nbsp;&#39;;domain=&#39;&nbsp;+&nbsp;domain&nbsp;:&nbsp;&#39;&#39;&nbsp;)&nbsp;+&nbsp;<br />
+				29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;;expires=Thu,&nbsp;01-Jan-1970&nbsp;00:00:01&nbsp;GMT&#39;;&nbsp;<br />
+				30.}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;<br />
+	<br />
+	4、inArray()<br />
+	<br />
+	用于判断检查数组中是否存在某个值，下面方法取自Prototype类库：</p>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				1.Array.prototype.inArray&nbsp;=&nbsp;function&nbsp;(value)&nbsp;{&nbsp;<br />
+				2.&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i=0,l&nbsp;=&nbsp;this.length&nbsp;;&nbsp;i&nbsp;<l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this[i]&nbsp;===&nbsp;value)&nbsp;{&nbsp;<br />
+				4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;&nbsp;<br />
+				5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				6.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				7.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;&nbsp;<br />
+				8.};</l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<el.length;i++){&nbsp;<br><el.length;i++){&nbsp;<br> </el.length;i++){&nbsp;<br></el.length;i++){&nbsp;<br></p>
+<p>
+	<l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br>&nbsp;<br />
+	<br />
+	5、insertAfter()<br />
+	<br />
+	DOM只提供了insertBefore，我们很有必要自己实现insertAfter。不过我认为&nbsp;insertAdjacentElement是更好的选择，现在除了火狐其他浏览器都实现这个方法。下面是Jeremy&nbsp;Keith的版本：</l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br><br />
+	&nbsp;</p>
+<l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br>
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				1.function&nbsp;insertAfter(parent,&nbsp;node,&nbsp;referenceNode)&nbsp;{&nbsp;<br />
+				2.&nbsp;&nbsp;&nbsp;&nbsp;parent.insertBefore(node,&nbsp;referenceNode.nextSibling);&nbsp;<br />
+				3.}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+6、toggle()<br />
+<br />
+用来显示或隐藏一个DOM元素：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;toggle(obj)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;el&nbsp;=&nbsp;document.getElementById(obj);&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;el.style.display&nbsp;!=&nbsp;&#39;none&#39;&nbsp;)&nbsp;{&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el.style.display&nbsp;=&nbsp;&#39;none&#39;;&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el.style.display&nbsp;=&nbsp;&#39;&#39;;&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				09.}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+7、cssQuery()<br />
+<br />
+别名为getElementsBySeletor，由Dean&nbsp;Edwards最先实现，Prototype.js、JQuery等类库都有相应实现，其中JQuery把它整合到$()选择器中，名声盖过其前辈。不过IE8等新锐浏览器已经实现querySelector与querySelectorAll方法，待到IE6与IE7报废之日，它就无用了。无忧里有它的实现原理讲解。由于太长，就不粘出来了，具体可到原作者网站看看。<br />
+<br />
+8、getElementsByClass()<br />
+<br />
+我有收集癖，手头上拥有许多版本，最后集思广益自己实现了一个。下面是我的实现：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.var&nbsp;getElementsByClassName&nbsp;=&nbsp;function&nbsp;(searchClass,&nbsp;node,tag)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;&nbsp;if(document.getElementsByClassName){&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;document.getElementsByClassName(searchClass)&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;=&nbsp;node&nbsp;||&nbsp;document;&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;=&nbsp;tag&nbsp;||&nbsp;&quot;*&quot;;&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;classes&nbsp;=&nbsp;searchClass.split(&quot;&nbsp;&quot;),&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements&nbsp;=&nbsp;(tag&nbsp;===&nbsp;&quot;*&quot;&nbsp;&amp;&amp;&nbsp;node.all)?&nbsp;node.all&nbsp;:&nbsp;node.getElementsByTagName(tag),&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;patterns&nbsp;=&nbsp;[],&nbsp;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnElements&nbsp;=&nbsp;[],&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current,&nbsp;<br />
+				12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match;&nbsp;<br />
+				13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;i&nbsp;=&nbsp;classes.length;&nbsp;<br />
+				14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(--i&nbsp;&gt;=&nbsp;0){&nbsp;<br />
+				15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;patterns.push(new&nbsp;RegExp(&quot;(^|\\\\s)&quot;&nbsp;+&nbsp;classes[i]&nbsp;+&nbsp;&quot;(\\\\s|$)&quot;));&nbsp;<br />
+				16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;j&nbsp;=&nbsp;elements.length;&nbsp;<br />
+				18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(--j&nbsp;&gt;=&nbsp;0){&nbsp;<br />
+				19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current&nbsp;=&nbsp;elements[j];&nbsp;<br />
+				20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;=&nbsp;false;&nbsp;<br />
+				21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;k=0,&nbsp;kl=patterns.length;&nbsp;k<kl;&nbsp;k++){&nbsp;<br>22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;=&nbsp;patterns[k].test(current.className);&nbsp;<br />
+				23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!match)&nbsp;&nbsp;break;&nbsp;<br />
+				24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(match)&nbsp;&nbsp;returnElements.push(current);&nbsp;<br />
+				26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;returnElements;&nbsp;<br />
+				28.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				29.}</kl;&nbsp;k++){&nbsp;<br></td>
+		</tr>
+	</tbody>
+</table>
+<kl;&nbsp;k++){&nbsp;<br>&nbsp;<br />
+<br />
+9、addLoadEvent()<br />
+<br />
+我以前讨论过这函数，不细说，就是慢了一点，各大类库基本无视它，自行实现domReady版本。下面是Simon&nbsp;Willison&nbsp;的实现：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.var&nbsp;addLoadEvent&nbsp;=&nbsp;function(fn)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;var&nbsp;oldonload&nbsp;=&nbsp;window.onload;&nbsp;<br />
+				03.&nbsp;&nbsp;if&nbsp;(typeof&nbsp;window.onload&nbsp;!=&nbsp;&#39;function&#39;)&nbsp;{&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;window.onload&nbsp;=&nbsp;fn;&nbsp;<br />
+				05.&nbsp;&nbsp;}else&nbsp;{&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;window.onload&nbsp;=&nbsp;function()&nbsp;{&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oldonload();&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn();&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				10.&nbsp;&nbsp;}&nbsp;<br />
+				11.}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+10、addEvent<br />
+<br />
+网上最流行的版本是Scott&nbsp;Andrew的，据说Javascript界曾举行一场比赛（此事件我们可以在Pro&nbsp;Javascript&nbsp;Techniques第100页看到）或浏览PPK的网站，征求添加事件与移除事件的函数，他就是其获奖者。下面就是他的实现：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;addEvent(elm,&nbsp;evType,&nbsp;fn,&nbsp;useCapture)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;if&nbsp;(elm.addEventListener)&nbsp;{&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;elm.addEventListener(evType,&nbsp;fn,&nbsp;useCapture);//DOM2.0&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;&nbsp;<br />
+				05.&nbsp;&nbsp;}&nbsp;<br />
+				06.&nbsp;&nbsp;else&nbsp;if&nbsp;(elm.attachEvent)&nbsp;{&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;r&nbsp;=&nbsp;elm.attachEvent(&#39;on&#39;&nbsp;+&nbsp;evType,&nbsp;fn);//IE5+&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;r;&nbsp;<br />
+				09.&nbsp;&nbsp;}&nbsp;<br />
+				10.&nbsp;&nbsp;else&nbsp;{&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;elm[&#39;on&#39;&nbsp;+&nbsp;evType]&nbsp;=&nbsp;fn;//DOM&nbsp;0&nbsp;<br />
+				12.&nbsp;&nbsp;}&nbsp;<br />
+				13.}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+下面是Dean&nbsp;Edwards&nbsp;的版本：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.function&nbsp;addEvent(elm,&nbsp;evType,&nbsp;fn,&nbsp;useCapture)&nbsp;{&nbsp;<br />
+				02.&nbsp;&nbsp;if&nbsp;(elm.addEventListener)&nbsp;{&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;elm.addEventListener(evType,&nbsp;fn,&nbsp;useCapture);//DOM2.0&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;&nbsp;<br />
+				05.&nbsp;&nbsp;}&nbsp;<br />
+				06.&nbsp;&nbsp;else&nbsp;if&nbsp;(elm.attachEvent)&nbsp;{&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;r&nbsp;=&nbsp;elm.attachEvent(&#39;on&#39;&nbsp;+&nbsp;evType,&nbsp;fn);//IE5+&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;r;&nbsp;<br />
+				09.&nbsp;&nbsp;}&nbsp;<br />
+				10.&nbsp;&nbsp;else&nbsp;{&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;elm[&#39;on&#39;&nbsp;+&nbsp;evType]&nbsp;=&nbsp;fn;//DOM&nbsp;0&nbsp;<br />
+				12.&nbsp;&nbsp;}&nbsp;<br />
+				13.}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+下面是Dean&nbsp;Edwards&nbsp;的版本：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.//addEvent/removeEvent&nbsp;written&nbsp;by&nbsp;Dean&nbsp;Edwards,&nbsp;2005&nbsp;<br />
+				02.//with&nbsp;input&nbsp;from&nbsp;Tino&nbsp;Zijdel&nbsp;<br />
+				03.//http://dean.edwards.name/weblog/2005/10/add-event/&nbsp;<br />
+				04.function&nbsp;addEvent(element,&nbsp;type,&nbsp;handler)&nbsp;{&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;//为每一个事件处理函数分派一个唯一的ID&nbsp;<br />
+				06.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!handler.$$guid)&nbsp;handler.$$guid&nbsp;=&nbsp;addEvent.guid++;&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;//为元素的事件类型创建一个哈希表&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!element.events)&nbsp;element.events&nbsp;=&nbsp;{};&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;//为每一个&quot;元素/事件&quot;对创建一个事件处理程序的哈希表&nbsp;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;handlers&nbsp;=&nbsp;element.events[type];&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!handlers)&nbsp;{&nbsp;<br />
+				12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handlers&nbsp;=&nbsp;element.events[type]&nbsp;=&nbsp;{};&nbsp;<br />
+				13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//存储存在的事件处理函数(如果有)&nbsp;<br />
+				14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(element[&quot;on&quot;&nbsp;+&nbsp;type])&nbsp;{&nbsp;<br />
+				15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handlers[0]&nbsp;=&nbsp;element[&quot;on&quot;&nbsp;+&nbsp;type];&nbsp;<br />
+				16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				17.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				18.&nbsp;&nbsp;&nbsp;&nbsp;//将事件处理函数存入哈希表&nbsp;<br />
+				19.&nbsp;&nbsp;&nbsp;&nbsp;handlers[handler.$$guid]&nbsp;=&nbsp;handler;&nbsp;<br />
+				20.&nbsp;&nbsp;&nbsp;&nbsp;//指派一个全局的事件处理函数来做所有的工作&nbsp;<br />
+				21.&nbsp;&nbsp;&nbsp;&nbsp;element[&quot;on&quot;&nbsp;+&nbsp;type]&nbsp;=&nbsp;handleEvent;&nbsp;<br />
+				22.};&nbsp;<br />
+				23.//用来创建唯一的ID的计数器&nbsp;<br />
+				24.addEvent.guid&nbsp;=&nbsp;1;&nbsp;<br />
+				25.function&nbsp;removeEvent(element,&nbsp;type,&nbsp;handler)&nbsp;{&nbsp;<br />
+				26.&nbsp;&nbsp;&nbsp;&nbsp;//从哈希表中删除事件处理函数&nbsp;<br />
+				27.&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(element.events&nbsp;&amp;&amp;&nbsp;element.events[type])&nbsp;{&nbsp;<br />
+				28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;element.events[type][handler.$$guid];&nbsp;<br />
+				29.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				30.};&nbsp;<br />
+				31.function&nbsp;handleEvent(event)&nbsp;{&nbsp;<br />
+				32.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;returnValue&nbsp;=&nbsp;true;&nbsp;<br />
+				33.&nbsp;&nbsp;&nbsp;&nbsp;//抓获事件对象(IE使用全局事件对象)&nbsp;<br />
+				34.&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;=&nbsp;event&nbsp;||&nbsp;fixEvent(window.event);&nbsp;<br />
+				35.&nbsp;&nbsp;&nbsp;&nbsp;//取得事件处理函数的哈希表的引用&nbsp;<br />
+				36.&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;handlers&nbsp;=&nbsp;this.events[event.type];&nbsp;<br />
+				37.&nbsp;&nbsp;&nbsp;&nbsp;//执行每一个处理函数&nbsp;<br />
+				38.&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i&nbsp;in&nbsp;handlers)&nbsp;{&nbsp;<br />
+				39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$$handleEvent&nbsp;=&nbsp;handlers[i];&nbsp;<br />
+				40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this.$$handleEvent(event)&nbsp;===&nbsp;false)&nbsp;{&nbsp;<br />
+				41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnValue&nbsp;=&nbsp;false;&nbsp;<br />
+				42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				43.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				44.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;returnValue;&nbsp;<br />
+				45.};&nbsp;<br />
+				46.//为IE的事件对象添加一些&ldquo;缺失的&rdquo;函数&nbsp;<br />
+				47.function&nbsp;fixEvent(event)&nbsp;{&nbsp;<br />
+				48.&nbsp;&nbsp;&nbsp;&nbsp;//添加标准的W3C方法&nbsp;<br />
+				49.&nbsp;&nbsp;&nbsp;&nbsp;event.preventDefault&nbsp;=&nbsp;fixEvent.preventDefault;&nbsp;<br />
+				50.&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation&nbsp;=&nbsp;fixEvent.stopPropagation;&nbsp;<br />
+				51.&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;event;&nbsp;<br />
+				52.};&nbsp;<br />
+				53.fixEvent.preventDefault&nbsp;=&nbsp;function()&nbsp;{&nbsp;<br />
+				54.&nbsp;&nbsp;&nbsp;&nbsp;this.returnValue&nbsp;=&nbsp;false;&nbsp;<br />
+				55.};&nbsp;<br />
+				56.fixEvent.stopPropagation&nbsp;=&nbsp;function()&nbsp;{&nbsp;<br />
+				57.&nbsp;&nbsp;&nbsp;&nbsp;this.cancelBubble&nbsp;=&nbsp;true;&nbsp;<br />
+				58.};</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+功能非常强悍，解决IE的this指向问题，event总是作为第一个参数传入，跨浏览器就更不在话下。<br />
+<br />
+另，我还珍藏了一个HTML5工作组的版本：<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				01.var&nbsp;addEvent=(function(){&nbsp;<br />
+				02.&nbsp;&nbsp;&nbsp;&nbsp;if(document.addEventListener){&nbsp;<br />
+				03.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;function(el,type,fn){&nbsp;<br />
+				04.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(el.length){&nbsp;<br />
+				05.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;i=0;i<el.length;i++){&nbsp;<br>06.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEvent(el[i],type,fn);&nbsp;<br />
+				07.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				08.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				09.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el.addEventListener(type,fn,false);&nbsp;<br />
+				10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};&nbsp;<br />
+				12.&nbsp;&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;function(el,type,fn){&nbsp;<br />
+				14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(el.length){&nbsp;<br />
+				15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;i=0;i<el.length;i++){&nbsp;<br>16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addEvent(el[i],type,fn);&nbsp;<br />
+				17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{&nbsp;<br />
+				19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el.attachEvent(&#39;on&#39;+type,function(){&nbsp;<br />
+				20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;fn.call(el,window.event);&nbsp;<br />
+				21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;<br />
+				22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};&nbsp;<br />
+				24.&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+				25.})();</el.length;i++){&nbsp;<br></el.length;i++){&nbsp;<br></td>
+		</tr>
+	</tbody>
+</table>
+</kl;&nbsp;k++){&nbsp;<br></l&nbsp;;&nbsp;i++)&nbsp;{&nbsp;<br>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

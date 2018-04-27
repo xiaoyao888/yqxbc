@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>java面试题，面试秘籍（二）</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,面试题,面试秘籍" />
+  <meta name="description" content=" 50、Java中的异常处理机制的简单原理和应用。 当JAVA 程序违反了JAVA的语义规则时，JAVA虚拟机就会将发生的错误表示为一个异常。违反语义规则包括2种情况。一种是JAVA类库内置的语义检" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>java面试题，面试秘籍（二）</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：17次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="810" class="art_content"><p>
+	<strong>50、Java中的异常处理机制的简单原理和应用。&nbsp;</strong></p>
+<p>
+	当JAVA 程序违反了JAVA的语义规则时，JAVA虚拟机就会将发生的错误表示为一个异常。违反语义规则包括2种情况。一种是JAVA类库内置的语义检查。例如数组下标越界,会引发IndexOutOfBoundsException;访问null的对象时会引发NullPointerException。另一种情况就是JAVA允许程序员扩展这种语义检查，程序员可以创建自己的异常，并自由选择在何时用throw关键字引发异常。所有的异常都是 java.lang.Thowable的子类。&nbsp;<br />
+	<br />
+	<strong>51、垃圾回收的优点和原理。并考虑2种回收机制。&nbsp;</strong></p>
+<p>
+	Java语言中一个显著的特点就是引入了垃圾回收机制，使c++程序员最头疼的内存管理的问题迎刃而解，它使得Java程序员在编写程序的时候不再需要考虑内存管理。由于有个垃圾回收机制， Java中的对象不再有&quot;作用域&quot;的概念，只有对象的引用才有&quot;作用域&quot;。垃圾回收可以有效的防止内存泄露，有效的使用可以使用的内存。垃圾回收器通常是作为一个单独的低级别的线程运行，不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清楚和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收。回收机制有分代复制垃圾回收和标记垃圾回收，增量垃圾回收。&nbsp;<br />
+	<br />
+	<strong>52、请说出你所知道的线程同步的方法。</strong>&nbsp;<br />
+	wait():使一个线程处于等待状态，并且释放所持有的对象的lock。&nbsp;<br />
+	sleep():使一个正在运行的线程处于睡眠状态，是一个静态方法，调用此方法要捕捉InterruptedException异常。&nbsp;<br />
+	notify():唤醒一个处于等待状态的线程，注意的是在调用此方法的时候，并不能确切的唤醒某一个等待状态的线程，而是由JVM确定唤醒哪个线程，而且不是按优先级。&nbsp;<br />
+	Allnotity():唤醒所有处入等待状态的线程，注意并不是给所有唤醒线程一个对象的锁，而是让它们竞争。&nbsp;<br />
+	<br />
+	<strong>53、你所知道的集合类都有哪些？主要方法？&nbsp;</strong><br />
+	　最常用的集合类是 List 和 Map。 List 的具体实现包括 ArrayList 和 Vector，它们是可变大小的列表，比较适合构建、存储和操作任何类型对象的元素列表。 List 适用于按数值索引访问元素的情形。&nbsp;<br />
+	Map 提供了一个更通用的元素存储方法。 Map 集合类用于存储元素对（称作&quot;键&quot;和&quot;值&quot;），其中每个键映射到一个值。&nbsp;<br />
+	<br />
+	<strong>54、描述一下JVM加载class文件的原理机制?&nbsp;</strong><br />
+	　JVM中类的装载是由ClassLoader和它的子类来实现的,Java ClassLoader 是一个重要的Java运行时系统组件。它负责在运行时查找和装入类文件的类。&nbsp;<br />
+	<br />
+	<strong>55、char型变量中能不能存贮一个中文汉字?为什么?&nbsp;</strong><br />
+	　能够定义成为一个中文的，因为java中以unicode编码，一个char占16个字节，所以放一个中文是没问题的&nbsp;<br />
+	<br />
+	56、多线程有几种实现方法,都是什么?同步有几种实现方法,都是什么?&nbsp;<br />
+	多线程有两种实现方法，分别是继承Thread类与实现Runnable接口&nbsp;<br />
+	同步的实现方面有两种，分别是synchronized,wait与notify&nbsp;<br />
+	<br />
+	<strong>57、JSP的内置对象及方法。&nbsp;</strong><br />
+	　request表示HttpServletRequest对象。它包含了有关浏览器请求的信息，并且提供了几个用于获取cookie, header, 和session数据的有用的方法。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; response表示HttpServletResponse对象，并提供了几个用于设置送回浏览器的响应的方法（如cookies,头信息等）&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; out对象是javax.jsp.JspWriter的一个实例，并提供了几个方法使你能用于向浏览器回送输出结果。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; pageContext表示一个javax.servlet.jsp.PageContext对象。它是用于方便存取各种范围的名字空间、servlet相关的对象的API，并且包装了通用的servlet相关功能的方法。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; session表示一个请求的javax.servlet.http.HttpSession对象。Session可以存贮用户的状态信息&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; applicaton 表示一个javax.servle.ServletContext对象。这有助于查找有关servlet引擎和servlet环境的信息&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; config表示一个javax.servlet.ServletConfig对象。该对象用于存取servlet实例的初始化参数。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; page表示从该页面产生的一个servlet实例&nbsp;<br />
+	<strong>58、线程的基本概念、线程的基本状态以及状态之间的关系&nbsp;</strong><br />
+	　线程指在程序执行过程中，能够执行程序代码的一个执行单位，每个程序至少都有一个线程，也就是程序本身。&nbsp;<br />
+	Java中的线程有四种状态分别是：运行、就绪、挂起、结束。&nbsp;<br />
+	<br />
+	<strong>59、JSP的常用指令&nbsp;</strong><br />
+	&lt;%@page language=&quot;java&quot; contenType=&quot;text/html;charset=gb2312&quot; session=&quot;true&quot; buffer=&quot;64kb&quot; autoFlush=&quot;true&quot; isThreadSafe=&quot;true&quot; info=&quot;text&quot; errorPage=&quot;error.jsp&quot; isErrorPage=&quot;true&quot; isELIgnored=&quot;true&quot; pageEncoding=&quot;gb2312&quot; import=&quot;java.sql.*&quot;%&gt;&nbsp;<br />
+	isErrorPage(是否能使用Exception对象)，isELIgnored(是否忽略表达式)&nbsp;<br />
+	&lt;%@include file=&quot;filename&quot;%&gt;&nbsp;<br />
+	&lt;%@taglib prefix=&quot;c&quot;uri=&quot;http://......&quot;%&gt;&nbsp;<br />
+	<br />
+	<strong>60、什么情况下调用doGet()和doPost()？&nbsp;</strong><br />
+	　Jsp页面中的form标签里的method属性为get时调用doGet()，为post时调用doPost()。&nbsp;<br />
+	<br />
+	<strong>61、servlet的生命周期&nbsp;</strong><br />
+	　web容器加载servlet，生命周期开始。通过调用servlet的init()方法进行servlet的初始化。通过调用service()方法实现，根据请求的不同调用不同的do***()方法。结束服务，web容器调用servlet的destroy()方法。&nbsp;<br />
+	<br />
+	<strong>62、如何现实servlet的单线程模式&nbsp;</strong><br />
+	&lt;%@ page isThreadSafe=&quot;false&quot;%&gt;&nbsp;<br />
+	<br />
+	<strong>63、页面间对象传递的方法&nbsp;</strong><br />
+	request，session，application，cookie等&nbsp;<br />
+	<br />
+	<strong>64、JSP和Servlet有哪些相同点和不同点，他们之间的联系是什么？&nbsp;</strong><br />
+	　JSP 是Servlet技术的扩展，本质上是Servlet的简易方式，更强调应用的外表表达。JSP编译后是&quot;类servlet&quot;。Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且完全从表示层中的HTML里分离开来。而JSP的情况是Java和HTML可以组合成一个扩展名为.jsp的文件。JSP侧重于视图，Servlet主要用于控制逻辑。&nbsp;<br />
+	<br />
+	<strong>65、四种会话跟踪技术&nbsp;</strong><br />
+	会话作用域ServletsJSP 页面描述&nbsp;<br />
+	page否是代表与一个页面相关的对象和属性。一个页面由一个编译好的 Java servlet 类（可以带有任何的 include 指令，但是没有 include 动作）表示。这既包括 servlet 又包括被编译成 servlet 的 JSP 页面&nbsp;<br />
+	request是是代表与 Web 客户机发出的一个请求相关的对象和属性。一个请求可能跨越多个页面，涉及多个 Web 组件（由于 forward 指令和 include 动作的关系）&nbsp;<br />
+	session是是代表与用于某个 Web 客户机的一个用户体验相关的对象和属性。一个 Web 会话可以也经常会跨越多个客户机请求&nbsp;<br />
+	application是是代表与整个 Web 应用程序相关的对象和属性。这实质上是跨越整个 Web 应用程序，包括多个页面、请求和会话的一个全局作用域&nbsp;<br />
+	<br />
+	<strong>66、Request对象的主要方法：&nbsp;</strong><br />
+	setAttribute(String name,Object)：设置名字为name的request的参数值&nbsp;<br />
+	getAttribute(String name)：返回由name指定的属性值&nbsp;<br />
+	getAttributeNames()：返回request对象所有属性的名字集合，结果是一个枚举的实例&nbsp;<br />
+	getCookies()：返回客户端的所有Cookie对象，结果是一个Cookie数组&nbsp;<br />
+	getCharacterEncoding()：返回请求中的字符编码方式&nbsp;<br />
+	getContentLength()：返回请求的Body的长度&nbsp;<br />
+	getHeader(String name)：获得HTTP协议定义的文件头信息&nbsp;<br />
+	getHeaders(String name)：返回指定名字的request Header的所有值，结果是一个枚举的实例&nbsp;<br />
+	getHeaderNames()：返回所以request Header的名字，结果是一个枚举的实例&nbsp;<br />
+	getInputStream()：返回请求的输入流，用于获得请求中的数据&nbsp;<br />
+	getMethod()：获得客户端向服务器端传送数据的方法&nbsp;<br />
+	getParameter(String name)：获得客户端传送给服务器端的有name指定的参数值&nbsp;<br />
+	getParameterNames()：获得客户端传送给服务器端的所有参数的名字，结果是一个枚举的实例&nbsp;<br />
+	getParameterValues(String name)：获得有name指定的参数的所有值&nbsp;<br />
+	getProtocol()：获取客户端向服务器端传送数据所依据的协议名称&nbsp;<br />
+	getQueryString()：获得查询字符串&nbsp;<br />
+	getRequestURI()：获取发出请求字符串的客户端地址&nbsp;<br />
+	getRemoteAddr()：获取客户端的IP地址&nbsp;<br />
+	getRemoteHost()：获取客户端的名字&nbsp;<br />
+	getSession([Boolean create])：返回和请求相关Session&nbsp;<br />
+	getServerName()：获取服务器的名字&nbsp;<br />
+	getServletPath()：获取客户端所请求的脚本文件的路径&nbsp;<br />
+	getServerPort()：获取服务器的端口号&nbsp;<br />
+	removeAttribute(String name)：删除请求中的一个属性&nbsp;<br />
+	<br />
+	<strong>67、J2EE是技术还是平台还是框架？&nbsp;</strong><br />
+	&nbsp;&nbsp;&nbsp; J2EE本身是一个标准，一个为企业分布式应用的开发提供的标准平台。&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; J2EE也是一个框架，包括JDBC、JNDI、RMI、JMS、EJB、JTA等技术。&nbsp;<br />
+	<br />
+	<strong>68、我们在web应用开发过程中经常遇到输出某种编码的字符，如iso8859-1等，如何输出一个某种编码的字符串？&nbsp;</strong><br />
+	&nbsp; Public String translate (String str) {&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; String tempStr = &quot;&quot;;&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; try {&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempStr = new String(str.getBytes(&quot;ISO-8859-1&quot;), &quot;GBK&quot;);&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempStr = tempStr.trim();&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; }&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; catch (Exception e) {&nbsp;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println(e.getMessage());&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; }&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; return tempStr;&nbsp;<br />
+	&nbsp; }&nbsp;<br />
+	<br />
+	<br />
+	<strong>69、简述逻辑操作(&amp;,|,^)与条件操作(&amp;&amp;,||)的区别。&nbsp;</strong><br />
+	　区别主要答两点：&nbsp;<br />
+	a.条件操作只能操作布尔型的,而逻辑操作不仅可以操作布尔型,而且可以操作数值型&nbsp;<br />
+	b.逻辑操作不会产生短路&nbsp;<br />
+	<br />
+	<strong>70、XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？&nbsp;</strong><br />
+	a: 两种形式 dtd&nbsp; schema，b: 本质区别:schema本身是xml的，可以被XML解析器解析(这也是从DTD上发展schema的根本目的)，c:有DOM,SAX,STAX等&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; DOM:处理大型文件时其性能下降的非常厉害。这个问题是由DOM的树结构所造成的，这种结构占用的内存较多，而且DOM必须在解析文件之前把整个文档装入内存,适合对XML的随机访问&nbsp;<br />
+	SAX:不现于DOM,SAX是事件驱动型的XML解析方式。它顺序读取XML文件，不需要一次全部装载整个文件。当遇到像文件开头，文档结束，或者标签开头与标签结束时，它会触发一个事件，用户通过在其回调事件中写入处理代码来处理XML文件，适合对XML的顺序访问&nbsp;<br />
+	&nbsp;&nbsp;&nbsp; STAX:Streaming API for XML (StAX)&nbsp;<br />
+	<br />
+	<strong>71、简述synchronized和java.util.concurrent.locks.Lock的异同？&nbsp;</strong><br />
+	主要相同点：Lock能完成synchronized所实现的所有功能&nbsp;<br />
+	主要不同点：Lock有比synchronized更精确的线程语义和更好的性能。synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。&nbsp;</p>
+<p>
+	<strong>72、EJB的角色和三个对象</strong>&nbsp;<br />
+	　一个完整的基于EJB的分布式计算结构由六个角色组成，这六个角色可以由不同的开发商提供，每个角色所作的工作必须遵循Sun公司提供的EJB规范，以保证彼此之间的兼容性。这六个角色分别是EJB组件开发者（Enterprise Bean Provider） 、应用组合者（Application Assembler）、部署者（Deployer）、EJB 服务器提供者（EJB Server Provider）、EJB 容器提供者（EJB Container Provider）、系统管理员（System Administrator）&nbsp;<br />
+	三个对象是Remote（Local）接口、Home（LocalHome）接口，Bean类&nbsp;<br />
+	<br />
+	<strong>73、EJB容器提供的服务&nbsp;</strong><br />
+	主要提供声明周期管理、代码产生、持续性管理、安全、事务管理、锁和并发行管理等服务。&nbsp;<br />
+	<br />
+	<strong>74、EJB规范规定EJB中禁止的操作有哪些？&nbsp;</strong><br />
+	1.不能操作线程和线程API(线程API指非线程对象的方法如notify,wait等)，&nbsp;<br />
+	2.不能操作awt，&nbsp;<br />
+	3.不能实现服务器功能，&nbsp;<br />
+	4.不能对静态属生存取，&nbsp;<br />
+	5.不能使用IO操作直接存取文件系统，&nbsp;<br />
+	6.不能加载本地库.，&nbsp;<br />
+	7.不能将this作为变量和返回，&nbsp;<br />
+	8.不能循环调用。&nbsp;<br />
+	<br />
+	<strong>75、remote接口和home接口主要作用&nbsp;</strong><br />
+	remote接口定义了业务方法，用于EJB客户端调用业务方法。&nbsp;<br />
+	home接口是EJB工厂用于创建和移除查找EJB实例&nbsp;<br />
+	<br />
+	<strong>76、bean 实例的生命周期&nbsp;</strong><br />
+	　对于Stateless Session Bean、Entity Bean、Message Driven Bean一般存在缓冲池管理，而对于Entity Bean和Statefull Session Bean存在Cache管理，通常包含创建实例，设置上下文、创建EJB Object（create）、业务方法调用、remove等过程，对于存在缓冲池管理的Bean，在create之后实例并不从内存清除，而是采用缓冲池调度机制不断重用实例，而对于存在Cache管理的Bean则通过激活和去激活机制保持Bean的状态并限制内存中实例数量。&nbsp;<br />
+	<br />
+	<strong>77、EJB的激活机制&nbsp;</strong><br />
+	　以Stateful Session Bean 为例：其Cache大小决定了内存中可以同时存在的Bean实例的数量，根据MRU或NRU算法，实例在激活和去激活状态之间迁移，激活机制是当客户端调用某个EJB实例业务方法时，如果对应EJB Object发现自己没有绑定对应的Bean实例则从其去激活Bean存储中（通过序列化机制存储实例）回复（激活）此实例。状态变迁前会调用对应的 ejbActive和ejbPassivate方法。&nbsp;<br />
+	<br />
+	<strong>78、EJB的几种类型</strong>&nbsp;<br />
+	会话（Session）Bean ，实体（Entity）Bean 消息驱动的（Message Driven）Bean&nbsp;<br />
+	会话Bean又可分为有状态（Stateful）和无状态（Stateless）两种&nbsp;<br />
+	实体Bean可分为Bean管理的持续性（BMP）和容器管理的持续性（CMP）两种&nbsp;<br />
+	<br />
+	<strong>79、客服端调用EJB对象的几个基本步骤</strong>&nbsp;<br />
+	设置JNDI服务工厂以及JNDI服务地址系统属性，查找Home接口，从Home接口调用Create方法创建Remote接口，通过Remote接口调用其业务方法。&nbsp;<br />
+	<br />
+	<strong>80、如何给weblogic指定大小的内存?&nbsp;</strong><br />
+	　在启动Weblogic的脚本中（位于所在Domian对应服务器目录下的startServerName），增加set MEM_ARGS=-Xms32m -Xmx200m，可以调整最小内存为32M，最大200M&nbsp;<br />
+	81、如何设定的weblogic的热启动模式(开发模式)与产品发布模式?&nbsp;<br />
+	可以在管理控制台中修改对应服务器的启动模式为开发或产品模式之一。或者修改服务的启动文件或者commenv文件，增加set PRODUCTION_MODE=true。&nbsp;<br />
+	<br />
+	<strong>82、如何启动时不需输入用户名与密码?&nbsp;</strong><br />
+	　修改服务启动文件，增加 WLS_USER和WLS_PW项。也可以在boot.properties文件中增加加密过的用户名和密码.&nbsp;<br />
+	<br />
+	<strong>83、在weblogic管理制台中对一个应用域(或者说是一个网站,Domain)进行jms及ejb或连接池等相关信息进行配置后,实际保存在什么文件中?&nbsp;</strong><br />
+	　保存在此Domain的config.xml文件中，它是服务器的核心配置文件。&nbsp;<br />
+	<br />
+	<strong>84、说说weblogic中一个Domain的缺省目录结构?比如要将一个简单的helloWorld.jsp放入何目录下,然的在浏览器上就可打入 http://主机:端口号//helloword.jsp就可以看到运行结果了? 又比如这其中用到了一个自己写的javaBean该如何办?&nbsp;</strong><br />
+	　Domain 目录服务器目录applications，将应用目录放在此目录下将可以作为应用访问，如果是Web应用，应用目录需要满足Web应用目录要求，jsp文件可以直接放在应用目录中，Javabean需要放在应用目录的WEB-INF目录的classes目录中，设置服务器的缺省应用将可以实现在浏览器上无需输入应用名。&nbsp;<br />
+	<br />
+	<strong>85、在weblogic中发布ejb需涉及到哪些配置文件&nbsp;</strong><br />
+	　不同类型的EJB涉及的配置文件不同，都涉及到的配置文件包括ejb-jar.xml,weblogic-ejb-jar.xmlCMP实体Bean一般还需要weblogic-cmp-rdbms-jar.xml&nbsp;<br />
+	<br />
+	<strong>86、如何在weblogic中进行ssl配置与客户端的认证配置或说说j2ee(标准)进行ssl的配置&nbsp;</strong><br />
+	　缺省安装中使用DemoIdentity.jks和DemoTrust.jks&nbsp; KeyStore实现SSL，需要配置服务器使用Enable SSL，配置其端口，在产品模式下需要从CA获取私有密钥和数字证书，创建identity和trust keystore，装载获得的密钥和数字证书。可以配置此SSL连接是单向还是双向的。&nbsp;<br />
+	<br />
+	<strong>87、如何查看在weblogic中已经发布的EJB?&nbsp;</strong><br />
+	可以使用管理控制台，在它的Deployment中可以查看所有已发布的EJB&nbsp;<br />
+	<br />
+	<strong>88、CORBA是什么?用途是什么?&nbsp;</strong><br />
+	　CORBA 标准是公共对象请求代理结构(Common Object Request Broker Architecture)，由对象管理组织 (Object Management Group，缩写为 OMG)标准化。它的组成是接口定义语言(IDL), 语言绑定(binding:也译为联编)和允许应用程序间互操作的协议。其目的为：用不同的程序设计语言书写在不同的进程中运行，为不同的操作系统开发。&nbsp;<br />
+	<br />
+	<strong>89、说说你所熟悉或听说过的j2ee中的几种常用模式?及对设计模式的一些看法&nbsp;</strong><br />
+	Session Facade Pattern：使用SessionBean访问EntityBean&nbsp;<br />
+	Message Facade Pattern：实现异步调用&nbsp;<br />
+	EJB Command Pattern：使用Command JavaBeans取代SessionBean，实现轻量级访问&nbsp;<br />
+	Data Transfer Object Factory：通过DTO Factory简化EntityBean数据提供特性&nbsp;<br />
+	Generic Attribute Access：通过AttibuteAccess接口简化EntityBean数据提供特性&nbsp;<br />
+	Business Interface：通过远程（本地）接口和Bean类实现相同接口规范业务逻辑一致性&nbsp;<br />
+	EJB架构的设计好坏将直接影响系统的性能、可扩展性、可维护性、组件可重用性及开发效率。项目越复杂，项目队伍越庞大则越能体现良好设计的重要性。&nbsp;<br />
+	<br />
+	<strong>90、说说在weblogic中开发消息Bean时的persistent与non-persisten的差别</strong>&nbsp;<br />
+	　persistent方式的MDB可以保证消息传递的可靠性,也就是如果EJB容器出现问题而JMS服务器依然会将消息在此MDB可用的时候发送过来，而non－persistent方式的消息将被丢弃。&nbsp;<br />
+	<br />
+	<strong>91、Servlet执行时一般实现哪几个方法？</strong>&nbsp;<br />
+	public void init(ServletConfig config)&nbsp;<br />
+	public ServletConfig getServletConfig()&nbsp;<br />
+	public String getServletInfo()&nbsp;<br />
+	public void service(ServletRequest request,ServletResponse response)&nbsp;<br />
+	public void destroy()&nbsp;<br />
+	<br />
+	<strong>92、j2ee常用的设计模式？说明工厂模式。&nbsp;</strong><br />
+	Java中的23种设计模式：&nbsp;<br />
+	Factory（工厂模式），&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Builder（建造模式），&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Factory Method（工厂方法模式），&nbsp;<br />
+	Prototype（原始模型模式），Singleton（单例模式），&nbsp;&nbsp;&nbsp; Facade（门面模式），&nbsp;<br />
+	Adapter（适配器模式），&nbsp;&nbsp;&nbsp; Bridge（桥梁模式），&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Composite（合成模式），&nbsp;<br />
+	Decorator（装饰模式），&nbsp;&nbsp;&nbsp; Flyweight（享元模式），&nbsp;&nbsp;&nbsp;&nbsp; Proxy（代理模式），&nbsp;<br />
+	Command（命令模式），&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Interpreter（解释器模式）， Visitor（访问者模式），&nbsp;<br />
+	Iterator（迭代子模式），&nbsp;&nbsp; Mediator（调停者模式），&nbsp;&nbsp;&nbsp; Memento（备忘录模式），&nbsp;<br />
+	Observer（观察者模式），&nbsp;&nbsp; State（状态模式），&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Strategy（策略模式），&nbsp;<br />
+	Template Method（模板方法模式）， Chain Of Responsibleity（责任链模式）&nbsp;<br />
+	工厂模式：工厂模式是一种经常被使用到的模式，根据工厂模式实现的类可以根据提供的数据生成一组类中某一个类的实例，通常这一组类有一个公共的抽象父类并且实现了相同的方法，但是这些方法针对不同的数据进行了不同的操作。首先需要定义一个基类，该类的子类通过不同的方法实现了基类中的方法。然后需要定义一个工厂类，工厂类可以根据条件生成不同的子类实例。当得到子类的实例后，开发人员可以调用基类中的方法而不必考虑到底返回的是哪一个子类的实例。&nbsp;<br />
+	<br />
+	<strong>93、EJB需直接实现它的业务接口或Home接口吗，请简述理由。&nbsp;</strong><br />
+	　远程接口和Home接口不需要直接实现，他们的实现代码是由服务器产生的，程序运行中对应实现类会作为对应接口类型的实例被使用。&nbsp;</p>
+<p>
+	<strong>94、排序都有哪几种方法？请列举。用JAVA实现一个快速排序。</strong>&nbsp;<br />
+	排序的方法有：插入排序（直接插入排序、希尔排序），交换排序（冒泡排序、快速排序），选择排序（直接选择排序、堆排序），归并排序，分配排序（箱排序、基数排序）&nbsp;<br />
+	快速排序的伪代码。&nbsp;<br />
+	/ /使用快速排序方法对a[ 0 :n- 1 ]排序&nbsp;<br />
+	从a[ 0 :n- 1 ]中选择一个元素作为m i d d l e，该元素为支点&nbsp;<br />
+	把余下的元素分割为两段left 和r i g h t，使得l e f t中的元素都小于等于支点，而right 中的元素都大于等于支点&nbsp;<br />
+	递归地使用快速排序方法对left 进行排序&nbsp;<br />
+	递归地使用快速排序方法对right 进行排序&nbsp;<br />
+	所得结果为l e f t + m i d d l e + r i g h t&nbsp;<br />
+	<br />
+	<strong>95、请对以下在J2EE中常用的名词进行解释(或简单描述)&nbsp;</strong><br />
+	web 容器：给处于其中的应用程序组件（JSP，SERVLET）提供一个环境，使JSP,SERVLET直接更容器中的环境变量接口交互，不必关注其它系统问题。主要有WEB服务器来实现。例如：TOMCAT,WEBLOGIC,WEBSPHERE等。该容器提供的接口严格遵守J2EE规范中的WEB APPLICATION 标准。我们把遵守以上标准的WEB服务器就叫做J2EE中的WEB容器。&nbsp;<br />
+	EJB容器：Enterprise java bean 容器。更具有行业领域特色。他提供给运行在其中的组件EJB各种管理功能。只要满足J2EE规范的EJB放入该容器，马上就会被容器进行高效率的管理。并且可以通过现成的接口来获得系统级别的服务。例如邮件服务、事务管理。&nbsp;<br />
+	JNDI：（Java Naming &amp; Directory Interface）JAVA命名目录服务。主要提供的功能是：提供一个目录系统，让其它各地的应用程序在其上面留下自己的索引，从而满足快速查找和定位分布式应用程序的功能。&nbsp;<br />
+	JMS：（Java Message Service）JAVA消息服务。主要实现各个应用程序之间的通讯。包括点对点和广播。&nbsp;<br />
+	JTA：（Java Transaction API）JAVA事务服务。提供各种分布式事务服务。应用程序只需调用其提供的接口即可。&nbsp;<br />
+	JAF：（Java Action FrameWork）JAVA安全认证框架。提供一些安全控制方面的框架。让开发者通过各种部署和自定义实现自己的个性安全控制策略。&nbsp;<br />
+	RMI/IIOP: （Remote Method Invocation /internet对象请求中介协议）他们主要用于通过远程调用服务。例如，远程有一台计算机上运行一个程序，它提供股票分析服务，我们可以在本地计算机上实现对其直接调用。当然这是要通过一定的规范才能在异构的系统之间进行通信。RMI是JAVA特有的。&nbsp;<br />
+	<br />
+	<strong>96、JAVA语言如何进行异常处理，关键字：throws,throw,try,catch,finally分别代表什么意义？在try块中可以抛出异常吗？&nbsp;</strong><br />
+	Java 通过面向对象的方法进行异常处理，把各种不同的异常进行分类，并提供了良好的接口。在Java中，每个异常都是一个对象，它是Throwable类或其它子类的实例。当一个方法出现异常后便抛出一个异常对象，该对象中包含有异常信息，调用这个对象的方法可以捕获到这个异常并进行处理。Java的异常处理是通过5个关键词来实现的：try、catch、throw、throws和finally。一般情况下是用try来执行一段程序，如果出现异常，系统会抛出（throws）一个异常，这时候你可以通过它的类型来捕捉（catch）它，或最后（finally）由缺省处理器来处理。&nbsp;<br />
+	用try来指定一块预防所有&quot;异常&quot;的程序。紧跟在try程序后面，应包含一个catch子句来指定你想要捕捉的&quot;异常&quot;的类型。&nbsp;<br />
+	throw语句用来明确地抛出一个&quot;异常&quot;。&nbsp;<br />
+	throws用来标明一个成员函数可能抛出的各种&quot;异常&quot;。&nbsp;<br />
+	Finally为确保一段代码不管发生什么&quot;异常&quot;都被执行一段代码。&nbsp;<br />
+	可以在一个成员函数调用的外面写一个try语句，在这个成员函数内部写另一个try语句保护其他代码。每当遇到一个try语句，&quot;异常&quot;的框架就放到堆栈上面，直到所有的try语句都完成。如果下一级的try语句没有对某种&quot;异常&quot;进行处理，堆栈就会展开，直到遇到有处理这种&quot;异常&quot;的try语句。&nbsp;<br />
+	<br />
+	<strong>97、一个&quot;.java&quot;源文件中是否可以包括多个类（不是内部类）？有什么限制？</strong>&nbsp;<br />
+	可以。必须只有一个类名与文件名相同。&nbsp;<br />
+	<br />
+	<strong>98、MVC的各个部分都有那些技术来实现?如何实现?&nbsp;</strong><br />
+	MVC 是Model－View－Controller的简写。&quot;Model&quot; 代表的是应用的业务逻辑（通过JavaBean，EJB组件实现）， &quot;View&quot; 是应用的表示面（由JSP页面产生），&quot;Controller&quot; 是提供应用的处理过程控制（一般是一个Servlet），通过这种设计模型把应用逻辑，处理过程和显示逻辑分成不同的组件实现。这些组件可以进行交互和重用。&nbsp;<br />
+	<br />
+	<strong>99、java中有几种方法可以实现一个线程？用什么关键字修饰同步方法? stop()和suspend()方法为何不推荐使用？</strong>&nbsp;<br />
+	有两种实现方法，分别是继承Thread类与实现Runnable接口&nbsp;<br />
+	用synchronized关键字修饰同步方法&nbsp;<br />
+	反对使用stop()，是因为它不安全。它会解除由线程获取的所有锁定，而且如果对象处于一种不连贯状态，那么其他线程能在那种状态下检查和修改它们。结果很难检查出真正的问题所在。suspend()方法容易发生死锁。调用suspend()的时候，目标线程会停下来，但却仍然持有在这之前获得的锁定。此时，其他任何线程都不能访问锁定的资源，除非被&quot;挂起&quot;的线程恢复运行。对任何线程来说，如果它们想恢复目标线程，同时又试图使用任何一个锁定的资源，就会造成死锁。所以不应该使用suspend()，而应在自己的Thread类中置入一个标志，指出线程应该活动还是挂起。若标志指出线程应该挂起，便用 wait()命其进入等待状态。若标志指出线程应当恢复，则用一个notify()重新启动线程。&nbsp;<br />
+	<br />
+	<strong>100、java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？&nbsp;</strong><br />
+	　字节流，字符流。字节流继承于InputStream OutputStream，字符流继承于InputStreamReader OutputStreamWriter。在java.io包中还有许多其他的流，主要是为了提高性能和使用方便。&nbsp;<br />
+	<br />
+	<strong>101、java中会存在内存泄漏吗，请简单描述。</strong>&nbsp;<br />
+	会。如：int i,i2;&nbsp; return (i-i2);&nbsp;&nbsp; //when i为足够大的正数,i2为足够大的负数。结果会造成溢位，导致错误。&nbsp;<br />
+	<br />
+	<strong>102、java中实现多态的机制是什么？&nbsp;</strong><br />
+	　方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。&nbsp;<br />
+	<br />
+	<strong>103、垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？&nbsp;</strong><br />
+	　对于GC来说，当程序员创建对象时，GC就开始监控这个对象的地址、大小以及使用情况。通常，GC采用有向图的方式记录和管理堆(heap)中的所有对象。通过这种方式确定哪些对象是&quot;可达的&quot;，哪些对象是&quot;不可达的&quot;。当GC确定一些对象为&quot;不可达&quot;时，GC就有责任回收这些内存空间。可以。程序员可以手动执行System.gc()，通知GC运行，但是Java语言规范并不保证GC一定会执行。&nbsp;<br />
+	<br />
+	<strong>104、静态变量和实例变量的区别？&nbsp;</strong><br />
+	static i = 10; //常量&nbsp;<br />
+	&nbsp;&nbsp; class A a;&nbsp; a.i =10;//可变&nbsp;<br />
+	<br />
+	<strong>105、什么是java序列化，如何实现java序列化？&nbsp;</strong><br />
+	　序列化就是一种用来处理对象流的机制，所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输于网络之间。序列化是为了解决在对对象流进行读写操作时所引发的问题。&nbsp;<br />
+	　序列化的实现：将需要被序列化的类实现Serializable接口，该接口没有需要实现的方法，implements Serializable只是为了标注该对象是可被序列化的，然后使用一个输出流(如：FileOutputStream)来构造一个 ObjectOutputStream(对象流)对象，接着，使用ObjectOutputStream对象的writeObject(Object obj)方法就可以将参数为obj的对象写出(即保存其状态)，要恢复的话则用输入流。&nbsp;<br />
+	<br />
+	<strong>106、是否可以从一个static方法内部发出对非static方法的调用？&nbsp;</strong><br />
+	不可以,如果其中包含对象的method()；不能保证对象初始化.&nbsp;<br />
+	<br />
+	<strong>107、写clone()方法时，通常都有一行代码，是什么？&nbsp;</strong><br />
+	Clone 有缺省行为，super.clone();他负责产生正确大小的空间，并逐位复制。&nbsp;<br />
+	<br />
+	<strong>108、在JAVA中，如何跳出当前的多重嵌套循环？&nbsp;</strong><br />
+	用break; return 方法。&nbsp;<br />
+	<br />
+	<strong>109、List、Map、Set三个接口，存取元素时，各有什么特点？&nbsp;</strong><br />
+	List 以特定次序来持有元素，可有重复元素。Set 无法拥有重复元素,内部排序。Map 保存key-value值，value可多值。&nbsp;</p>
+<p>
+	<strong>110、J2EE是什么？&nbsp;</strong><br />
+	J2EE 是Sun公司提出的多层(multi-diered),分布式(distributed),基于组件(component-base)的企业级应用模型 (enterpriese application model).在这样的一个应用系统中，可按照功能划分为不同的组件，这些组件又可在不同计算机上，并且处于相应的层次(tier)中。所属层次包括客户层(clietn tier)组件,web层和组件,Business层和组件,企业信息系统(EIS)层。&nbsp;<br />
+	<br />
+	<strong>111、UML方面&nbsp;</strong><br />
+	标准建模语言UML。用例图,静态图(包括类图、对象图和包图),行为图,交互图(顺序图,合作图),实现图。&nbsp;<br />
+	<br />
+	<strong>112、说出一些常用的类，包，接口，请各举5个&nbsp;</strong><br />
+	常用的类：BufferedReader&nbsp; BufferedWriter&nbsp; FileReader&nbsp; FileWirter&nbsp; String&nbsp; Integer&nbsp;<br />
+	常用的包：java.lang&nbsp; java.awt&nbsp; java.io&nbsp; java.util&nbsp; java.sql&nbsp;<br />
+	常用的接口：Remote&nbsp; List&nbsp; Map&nbsp; Document&nbsp; NodeList&nbsp;<br />
+	<br />
+	<strong>113、开发中都用到了那些设计模式?用在什么场合?&nbsp;</strong><br />
+	每个模式都描述了一个在我们的环境中不断出现的问题，然后描述了该问题的解决方案的核心。通过这种方式，你可以无数次地使用那些已有的解决方案，无需在重复相同的工作。主要用到了MVC的设计模式。用来开发JSP/Servlet或者J2EE的相关应用。简单工厂模式等。&nbsp;<br />
+	<br />
+	<strong>114、jsp有哪些动作?作用分别是什么?&nbsp;</strong><br />
+	　JSP 共有以下6种基本动作 jsp:include：在页面被请求的时候引入一个文件。 jsp:useBean：寻找或者实例化一个JavaBean。 jsp:setProperty：设置JavaBean的属性。 jsp:getProperty：输出某个JavaBean的属性。 jsp:forward：把请求转到一个新的页面。 jsp:plugin：根据浏览器类型为Java插件生成OBJECT或EMBED标记。&nbsp;<br />
+	<br />
+	<strong>115、Anonymous Inner Class (匿名内部类) 是否可以extends(继承)其它类，是否可以implements(实现)interface(接口)?&nbsp;</strong><br />
+	可以继承其他类或完成其他接口，在swing编程中常用此方式。&nbsp;<br />
+	<strong>116、应用服务器与WEB SERVER的区别？&nbsp;</strong><br />
+	应用服务器：Weblogic、Tomcat、Jboss&nbsp;<br />
+	WEB SERVER：IIS、 Apache&nbsp;<br />
+	<br />
+	<strong>117、BS与CS的联系与区别。&nbsp;</strong><br />
+	　C/S是Client/Server的缩写。服务器通常采用高性能的PC、工作站或小型机，并采用大型数据库系统，如Oracle、Sybase、Informix或 SQL Server。客户端需要安装专用的客户端软件。&nbsp;<br />
+	　B/Ｓ是Brower/Server的缩写，客户机上只要安装一个浏览器（Browser），如Netscape Navigator或Internet Explorer，服务器安装Oracle、Sybase、Informix或 SQL Server等数据库。在这种结构下，用户界面完全通过WWW浏览器实现，一部分事务逻辑在前端实现，但是主要事务逻辑在服务器端实现。浏览器通过Ｗeb Server 同数据库进行数据交互。&nbsp;<br />
+	C/S 与 B/S 区别：&nbsp;<br />
+	1．硬件环境不同:&nbsp;<br />
+	　　C/S 一般建立在专用的网络上, 小范围里的网络环境, 局域网之间再通过专门服务器提供连接和数据交换服务.&nbsp;<br />
+	　　B/S 建立在广域网之上的, 不必是专门的网络硬件环境,例与电话上网, 租用设备. 信息自己管理. 有比C/S更强的适应范围, 一般只要有操作系统和浏览器就行&nbsp;<br />
+	2．对安全要求不同&nbsp;<br />
+	　　C/S 一般面向相对固定的用户群, 对信息安全的控制能力很强. 一般高度机密的信息系统采用C/S 结构适宜. 可以通过B/S发布部分可公开信息.&nbsp;<br />
+	　　B/S 建立在广域网之上, 对安全的控制能力相对弱, 可能面向不可知的用户。&nbsp;<br />
+	3．对程序架构不同&nbsp;<br />
+	　　C/S 程序可以更加注重流程, 可以对权限多层次校验, 对系统运行速度可以较少考虑.&nbsp;<br />
+	　　B/S 对安全以及访问速度的多重的考虑, 建立在需要更加优化的基础之上. 比C/S有更高的要求 B/S结构的程序架构是发展的趋势, 从MS的.Net系列的BizTalk 2000 Exchange 2000等, 全面支持网络的构件搭建的系统. SUN 和IBM推的JavaBean 构件技术等,使 B/S更加成熟.&nbsp;<br />
+	4．软件重用不同&nbsp;<br />
+	　　C/S 程序可以不可避免的整体性考虑, 构件的重用性不如在B/S要求下的构件的重用性好.&nbsp;<br />
+	　　B/S 对的多重结构,要求构件相对独立的功能. 能够相对较好的重用.就入买来的餐桌可以再利用,而不是做在墙上的石头桌子&nbsp;<br />
+	5．系统维护不同&nbsp;&nbsp;<br />
+	　　C/S 程序由于整体性, 必须整体考察, 处理出现的问题以及系统升级. 升级难. 可能是再做一个全新的系统&nbsp;<br />
+	　　B/S 构件组成,方面构件个别的更换,实现系统的无缝升级. 系统维护开销减到最小.用户从网上自己下载安装就可以实现升级.&nbsp;<br />
+	6．处理问题不同&nbsp;<br />
+	　　C/S 程序可以处理用户面固定, 并且在相同区域, 安全要求高需求, 与操作系统相关. 应该都是相同的系统&nbsp;<br />
+	　　B/S 建立在广域网上, 面向不同的用户群, 分散地域, 这是C/S无法作到的. 与操作系统平台关系最小.&nbsp;<br />
+	7．用户接口不同&nbsp;<br />
+	　　C/S 多是建立的Window平台上,表现方法有限,对程序员普遍要求较高&nbsp;<br />
+	　　B/S 建立在浏览器上, 有更加丰富和生动的表现方式与用户交流. 并且大部分难度减低,减低开发成本.&nbsp;<br />
+	8．信息流不同&nbsp;<br />
+	　　C/S 程序一般是典型的中央集权的机械式处理, 交互性相对低&nbsp;<br />
+	　　B/S 信息流向可变化, B-B B-C B-G等信息、流向的变化, 更像交易中心。&nbsp;<br />
+	<br />
+	<strong>118、LINUX下线程，GDI类的解释。</strong>&nbsp;<br />
+	　LINUX实现的就是基于核心轻量级进程的&quot;一对一&quot;线程模型，一个线程实体对应一个核心轻量级进程，而线程之间的管理在核外函数库中实现。&nbsp;<br />
+	GDI类为图像设备编程接口类库。&nbsp;<br />
+	<br />
+	<strong>119、STRUTS的应用(如STRUTS架构)&nbsp;</strong><br />
+	　Struts 是采用Java Servlet/JavaServer Pages技术，开发Web应用程序的开放源码的framework。采用Struts能开发出基于MVC(Model-View-Controller)设计模式的应用构架。 Struts有如下的主要功能：一.包含一个controller servlet，能将用户的请求发送到相应的Action对象。二.JSP自由tag库，并且在controller servlet中提供关联支持，帮助开发员创建交互式表单应用。三.提供了一系列实用对象：XML处理、通过Java reflection APIs自动处理JavaBeans属性、国际化的提示和消息。&nbsp;<br />
+	<br />
+	<strong>120、Jdo是什么?&nbsp;</strong><br />
+	　JDO 是Java对象持久化的新的规范，为java data object的简称,也是一个用于存取某种数据仓库中的对象的标准化API。JDO提供了透明的对象存储，因此对开发人员来说，存储数据对象完全不需要额外的代码（如JDBC API的使用）。这些繁琐的例行工作已经转移到JDO产品提供商身上，使开发人员解脱出来，从而集中时间和精力在业务逻辑上。另外，JDO很灵活，因为它可以在任何数据底层上运行。JDBC只是面向关系数据库（RDBMS）JDO更通用，提供到任何数据底层的存储功能，比如关系数据库、文件、XML以及对象数据库（ODBMS）等等，使得应用可移植性更强。&nbsp;<br />
+	<br />
+	<strong>121、内部类可以引用他包含类的成员吗？有没有什么限制？&nbsp;</strong><br />
+	一个内部类对象可以访问创建它的外部类对象的内容&nbsp;<br />
+	<br />
+	<strong>122、WEB SERVICE名词解释。JSWDL开发包的介绍。JAXP、JAXM的解释。SOAP、UDDI,WSDL解释。&nbsp;</strong><br />
+	　Web ServiceWeb Service是基于网络的、分布式的模块化组件，它执行特定的任务，遵守具体的技术规范，这些规范使得Web Service能与其他兼容的组件进行互操作。&nbsp;<br />
+	　JAXP(Java API for XML Parsing) 定义了在Java中使用DOM, SAX, XSLT的通用的接口。这样在你的程序中你只要使用这些通用的接口，当你需要改变具体的实现时候也不需要修改代码。&nbsp;<br />
+	　JAXM(Java API for XML Messaging) 是为SOAP通信提供访问方法和传输机制的API。&nbsp;<br />
+	　WSDL是一种 XML 格式，用于将网络服务描述为一组端点，这些端点对包含面向文档信息或面向过程信息的消息进行操作。这种格式首先对操作和消息进行抽象描述，然后将其绑定到具体的网络协议和消息格式上以定义端点。相关的具体端点即组合成为抽象端点（服务）。&nbsp;<br />
+	　SOAP即简单对象访问协议(Simple Object Access Protocol)，它是用于交换XML编码信息的轻量级协议。&nbsp;<br />
+	　UDDI 的目的是为电子商务建立标准；UDDI是一套基于Web的、分布式的、为Web Service提供的、信息注册中心的实现标准规范，同时也包含一组使企业能将自身提供的Web Service注册，以使别的企业能够发现的访问协议的实现标准。&nbsp;</p>
+<p>
+	<strong>123、设计4个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序。&nbsp;</strong><br />
+	以下程序使用内部类实现线程，对j增减的时候没有考虑顺序问题。&nbsp;<br />
+	<br />
+	public class ThreadTest1{&nbsp;<br />
+	&nbsp; private int j;&nbsp;<br />
+	&nbsp; public static void main(String args[]){&nbsp;<br />
+	ThreadTest1 tt=new ThreadTest1();&nbsp;<br />
+	Inc inc=tt.new Inc();&nbsp;<br />
+	Dec dec=tt.new Dec();&nbsp;<br />
+	for(int i=0;i&lt;2;i++){&nbsp;<br />
+	Thread t=new Thread(inc);&nbsp;<br />
+	t.start();&nbsp;<br />
+	t=new Thread(dec);&nbsp;<br />
+	t.start();&nbsp;<br />
+	}&nbsp;<br />
+	}&nbsp;<br />
+	&nbsp; private synchronized void inc(){&nbsp;<br />
+	j++;&nbsp;<br />
+	System.out.println(Thread.currentThread().getName()+&quot;-inc:&quot;+j);&nbsp;<br />
+	&nbsp; }&nbsp;<br />
+	&nbsp; private synchronized void dec(){&nbsp;<br />
+	j--;&nbsp;<br />
+	System.out.println(Thread.currentThread().getName()+&quot;-dec:&quot;+j);&nbsp;<br />
+	&nbsp; }&nbsp;<br />
+	&nbsp; class Inc implements Runnable{&nbsp;<br />
+	public void run(){&nbsp;<br />
+	for(int i=0;i&lt;100;i++){&nbsp;<br />
+	inc();&nbsp;<br />
+	}&nbsp;<br />
+	}&nbsp;<br />
+	&nbsp; }&nbsp;<br />
+	&nbsp; class Dec implements Runnable{&nbsp;<br />
+	public void run(){&nbsp;<br />
+	for(int i=0;i&lt;100;i++){&nbsp;<br />
+	dec();&nbsp;<br />
+	}&nbsp;<br />
+	}&nbsp;<br />
+	&nbsp; }&nbsp;<br />
+	}&nbsp;<br />
+	<br />
+	<strong>124、Java有没有goto?&nbsp;</strong><br />
+	java中的保留字，现在没有在java中使用。&nbsp;<br />
+	<br />
+	<strong>125、启动一个线程是用run()还是start()?&nbsp;</strong><br />
+	　启动一个线程是调用start()方法，使线程所代表的虚拟处理机处于可运行状态，这意味着它可以由JVM调度并执行。这并不意味着线程就会立即运行。run()方法可以产生必须退出的标志来停止一个线程。&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

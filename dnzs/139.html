@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>电脑故障排除的10种方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="电脑,故障,排除,的,10种,方法,电脑,故障,排除," />
+  <meta name="description" content="电脑故障排除方法主要有观察法、最小系统法、逐步添加\去除法、隔离法、替换法、比较法、升降温法、敲击法、插拔法、清洁法十种。通过这些方法可以容易地解决一些常见的电脑故" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>电脑故障排除的10种方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：115次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="139" class="art_content"><p>
+	电脑故障排除方法主要有观察法、最小系统法、逐步添加\去除法、隔离法、替换法、比较法、升降温法、敲击法、插拔法、清洁法十种。通过这些方法可以容易地解决一些常见的电脑故障。</p>
+<p>
+	一、观察法</p>
+<p>
+	观察法就是通过看、听、闻、摸等方式检查比较典型或比较明显的故障。例如，观察电脑内部是否有火花、声音异常、插头松动、电缆损坏、断线或碰线，插件板上的元件是否发烫、烧焦或损坏，管脚是否断裂、接触不良、虚焊等。对于一些时隐时现瞬时性故障，除直接观察外，也可以用橡皮榔头轻敲有关元件，看故障现象有何变化，以确定故障位置。</p>
+<p>
+	二、最小系统法</p>
+<p>
+	最小系统法就是拔去怀疑有故障的板上和设备，对此电脑此前和此后的运行情况，判断并定位故障所在。拔插板卡和设备的基本要求保留系统工作的最小配置，以便缩小故障的范围。通常是先只安装主板、内存、CPU、电源，然后开机检测，如果正常，那么再加上键盘、显示卡和显示器，如果正常，那么依次加装硬盘、扩展卡等。拔去板卡和设备的顺序正好相反。对拔下的板卡和设备的连接插头还要进行清洁处理，以排除因连接不良引起的故障。</p>
+<p style="text-align: center;">
+	<img alt="最小系统法" data-bd-imgshare-binded="1" src="/uploads/allimg/150305/1511543030-0.jpg" /></p>
+<p>
+	最小系统系统分为3类，具体如下：</p>
+<p>
+	1、启动型（电源+主板+CPU）。</p>
+<p>
+	2、点亮型（电源+主板+CPU+内存+显卡+显示器）。</p>
+<p>
+	3、进入系统型（电源+主板+CPU+内存+显卡+显示器+硬盘+键盘），这个时候其实已经是完整的电脑了，不过光驱、打印机、电视卡、鼠标、网卡、摄像头、手柄等还没有。</p>
+<p>
+	三、逐步添加\去除法</p>
+<p>
+	逐步添加法以最小系统法为基础，每次只向系统添加一个部件/设备或软件，来检查故障现象是否消失或发生变化，以此来判断并定位故障部位。</p>
+<p>
+	注：逐步添加\去除法一般要与替换法配合，这样才能较为准确的定位故障部位。</p>
+<p>
+	四、隔离法</p>
+<p>
+	隔离法是将可能妨碍故障判断的硬件或软件屏蔽的一种判断方法。它可用来将怀疑相互冲突的硬件、软件隔离开以判断故障是否发生变化的一种方法。</p>
+<p>
+	以上提到的软硬件屏蔽，对于软件来说，就是将其运行或卸载；对于硬件来说，是在设备管理器中，禁用设备、卸载驱动，或者干脆从系统中去除。</p>
+<p>
+	五、替换法</p>
+<p>
+	替换法是指用相同规格的电脑部件替换可能存在故障的电脑部件。如果替换后故障排除，那么说明故障原因是在被替换下来的部件中。</p>
+<p>
+	注：在替换之前，首先必须确认来进行替换的配件必须完好，能正常使用。</p>
+<p>
+	六、比较法</p>
+<p>
+	比较法与替换法相似，用好的部件与怀疑有故障的部件进行外观、配置、运行现象等方面的比较，也可在两台电脑间进行比较，以判断故障电脑在环境设置，硬件配置方面的不同，从页找出故障部位。</p>
+<p>
+	七、升降温法</p>
+<p>
+	在上门服务过程中，由于工具的限制，可以使用升降温法，其使用与维修车间是不同的，上门服务中的升温法可在用户同意的情况下，设法降低电脑的通风能力，增加电脑自身的发热来升温。</p>
+<p>
+	降温法一般通过以下几种方法来实现。</p>
+<p>
+	1、一般选择环境温度较低的时候，如清早或较晚的时候。</p>
+<p>
+	2、使电脑停机12--24小时以上。</p>
+<p>
+	3、用电风扇对故障机吹。</p>
+<p>
+	八、敲击法</p>
+<p>
+	敲击法一般在怀疑电脑中的某个部件有接触不良的故障时使用，通过振动、适当的扭曲，或用橡胶锤敲打部件或设备特定部件来使故障复现，从而判断故障部位的一种维修方法。</p>
+<p>
+	九、插拔法</p>
+<p>
+	插拔法就通过将插件或芯片插入或拔出来寻找故障原因的方法。此方法虽然简单，但却是一种非常有效常用的方法。如电脑在某时刻出现了&ldquo;死机&rdquo;现象，很难确定故障原因。从理论上分析故障的原因是很困难的，有时甚至是不可能的。采用插拔法一有可能迅速查找到故障的原因。依次拔出插件，每拔出一块，测试一次电脑当前状态。一旦拔出某块插件后，电脑工作正常了，那么说明故障原因就在这块插件上。</p>
+<p>
+	十、清洁法</p>
+<p>
+	有些电脑故障，往往是由于机器内灰尘较多引起的。这就要求在维修过程中，注意观察故障机内、外部是否有较多的灰尘，如果是，那么应该先除尘，然后再进行后续的判断维修。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

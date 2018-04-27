@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>30分钟Git命令入门到放弃</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="30分钟,Git,命令,入门,到,放弃,这是,一篇,给," />
+  <meta name="description" content="这是一篇给像我这样的新手或者是熟悉图形工具的老鸟看的。仅作为快速入门的教程。 learn-git git 现在的火爆程度非同一般，它被广泛地用在大型开源项目，团队开发，以及独立开发者" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>30分钟Git命令入门到放弃</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：27次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1511" class="art_content"><p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	这是一篇给像我这样的新手或者是熟悉图形工具的老鸟看的。仅作为快速入门的教程。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="learn-git" src="/uploads/allimg/160629/1624515011-0.JPG" style="border: none;" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	learn-git</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git 现在的火爆程度非同一般，它被广泛地用在大型开源项目，团队开发，以及独立开发者，甚至学生之中。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	&nbsp;</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	初学者非常容易被各种命令，参数吓哭。但实际上刚上手你并不需要了解所有命令的用途。你可以从掌握一些简单，强大的命令开始，逐步去学习。（这就是这篇文章要讲的）。好了，上来！</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	基本了解</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git命令是一些命令行工具的集合，它可以用来跟踪，记录文件的变动。比如你可以进行保存，比对，分析，合并等等。这个过程被称之为版本控制。已经有一系列的版本控制系统，比如SVN, Mercurial, Perforce, CVS, Bitkeepe等等。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	Git是分布式的，这意味着它并不依赖于中心服务器，任何一台机器都可以有一个本地版本的控制系统，我们称之为仓库。如果是多人协作的话，你需要还需要一个线上仓库，用来同步信息。这就是GitHub, BitBucket的工作。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	1.安装Git</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	安装git非常直接：</p>
+<ul style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		<p style="margin: 10px 0px; padding: 0px;">
+			Linux - 打开控制台，然后通过包管理安装，在Ubuntu上命令是：</p>
+		<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background: rgb(243, 243, 243);">
+sudo apt-get install git-all
+</pre>
+	</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		<p style="margin: 10px 0px; padding: 0px;">
+			Windows - 推荐使用git for windows，它包括了图形工具以及命令行模拟器。</p>
+	</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		OS X - 最简单的方式是使用homebrew安装，命令行执行
+		<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); background: rgb(243, 243, 243);">
+brew install git
+</pre>
+	</li>
+</ul>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果你是在是先用图形工具的话，那么推荐你使用Github desktop,Sourcetree。但我还是推荐你使用命令行，下面的内容就都是命令行的。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	2.配置Git</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	安装完git,首要任务是配置我们的信息，最重要的是用户名及邮箱，打开终端，执行以下命令。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	<br />
+	&nbsp;</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git config --global user.name &quot;My Name&quot;
+$ git config --global user.email myEmail@example.com
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	配置好这两项，用户就能知道谁做了什么，并且一切都更有组织性了不是吗？</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	3.创建一个新仓库 - git init</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git 会把所有文件以及历史记录保存在你的项目中，创建一个新的仓库，首先要去到项目路径，执行 git init。然后git会创建一个隐藏的文件夹.git，所有的信息都储存在其中。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	在桌面创建一个联系文件夹 git_exercise, 打开终端：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ cd Desktop/git_exercise/
+$ git init
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	OK，现在项目还什么都没有，新建一个 hello.txt 文件试试~</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	4.检查状态 - git status</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git status 是另一个非常重要的命令，它会告诉我们创库的当前状态：是否为最新代码，有什么更新等等执行git status:</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git status
+
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use &quot;git add ...&quot; to include in what will be committed)
+
+	hello.txt
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git 告诉我们，hello.txt尚未跟踪，这是因为这个文件是新的，git不知道是应该跟踪它的变动呢，还是直接忽略不管呢。为了跟踪我们的新文件，我们需要暂存它。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	5.暂存 - git add</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git 有个概念叫 暂存区，你可以把它看成一块空白帆布，包裹着所有你可能会提交的变动。它一开始为空，你可以通过 git add 命令添加内容，并使用 git commit 提交。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	这个例子中只有一个文件：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git add hello.txt
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果需要提交目录下的所有内容，可以这样：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git add -A
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	再次使用git status查看：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git status
+
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use &quot;git rm --cached ...&quot; to unstage)
+
+	new file:   hello.txt
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	我们的文件已经提交了。状态信息还会告诉我们暂存区文件发生了什么变动，不过这里我们提交的是一个全新文件。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	6.提交 - git commit</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	一次提交代表着我们的仓库到了一个交付状态，通常是完成了某一块小功能。它就像是一个快照，允许我们像使用时光机一样回到旧时光。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	创建提交，需要我们提交东西到暂存区（git add），然后：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git commit -m &quot;Initial commit.&quot;
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	这就创建了一次提交，-m &ldquo;Initial commit.&rdquo;表示对这次提交的描述，建议使用有意义的描述性信息。</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	远端仓库</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	到目前为止，我们的操作都是在本地的，它存在于.git文件中。为了能够协同开发，我们需要把代码发布到远端仓库上。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	1.链接远端仓库 - git remote add</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	为了能够上传到远端仓库，我们需要先建立起链接，这篇教程中，远端仓库的地址为：https://github.com/tutorialzine/awesome-project,但你应该自己在Github, BitBucket上搭建仓库，自己一步一步尝试。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	添加测试用的远端仓库</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git remote add origin https://github.com/tutorialzine/awesome-project.git
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	一个项目可以同时拥有好几个远端仓库为了能够区分，通常会起不同的名字。通常主远端仓库被称为origin。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	2.上传到服务器 - git push</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	每次我们要提交代码到服务器上时，都会使用到git push。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git push命令会有两个参数，远端仓库的名字，以及分支的名字：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git push origin master
+
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 212 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/tutorialzine/awesome-project.git
+ * [new branch]      master -&gt; master
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	取决于你使用的服务器，push过程你可能需要验证身份。如果没有出差错，现在使用浏览器去你的远端分支上看，hello.txt已经在那里等着你了。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	3.克隆仓库 - git clone</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	放在Github上的开源项目，人们可以看到你的代码。可以使用 git clone进行下载到本地。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git clone https://github.com/tutorialzine/awesome-project.git
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	本地也会创建一个新的仓库，并自动将github上的分支设为远端分支。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	4.从服务器上拉取代码 - git pull</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果你更新了代码到仓库上，其他人可以通过git pull命令拉取你的变动：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git pull origin master
+From https://github.com/tutorialzine/awesome-project
+ * branch            master     -&gt; FETCH_HEAD
+Already up-to-date.
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	因为暂时没有其他人提交，所有没有任何变动</p>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	分支</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; text-align: center; background-color: rgb(249, 249, 249);">
+	<img alt="branchs" src="/uploads/allimg/160629/16245140P-1.JPG" style="border: none; width: 660px;" /></p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	branchs</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	当你在做一个新功能的时候，最好是在一个独立的区域上开发，通常称之为分支。分支之间相互独立，并且拥有自己的历史记录。这样做的原因是：</p>
+<ul style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		稳定版本的代码不会被破坏</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		不同的功能可以由不同开发者同时开发。</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		开发者可以专注于自己的分支，不用担心被其他人破坏了环境</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		在不确定之前，同一个特性可以拥有几个版本，便于比较</li>
+</ul>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	1.创建新分支 - git branch</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	每一个仓库的默认分支都叫master, 创建新分支可以这样：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git branch amazing_new_feature
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	创建了一个名为amazing_new_feature的新分支，它跟当前分支同一起点</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	2.切换分支 - git checkout</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	单独使用git branch，可以查看分支状态：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git branch
+  amazing_new_feature
+* master
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	* 号表示当前活跃分支为master，使用git checkout切换分支。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git checkout amazing_new_feature
+</pre>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	3.合并分支 - git merge</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	我们的 amazing_new_feature 分支的任务是增加一个featuer.txt。我们来创建，添加到暂存区，提交。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git add feature.txt
+$ git commit -m &quot;New feature complete.&quot;
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	新分支任务完成了，回到master分支</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git checkout master
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	现在去查看文件，你会发现，之前创建的feature.txt文件不见了，因为master分支上并没有feature.txt。使用git merge 把 amazing_new_feature 分支合并到master上。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git merge amazing_new_feature
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	ok! 然后再把amazing_new_feature 分支删掉吧。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git branch -d amazing_new_feature
+</pre>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	高级</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	这篇文章的最后一节，我们来说些比较高级并且使用的技巧。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	1.比对两个不同提交之间的差别</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	每次提交都有一个唯一id，查看所有提交和他们的id，可以使用 git log:</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git log
+
+commit ba25c0ff30e1b2f0259157b42b9f8f5d174d80d7
+Author: Tutorialzine
+Date:   Mon May 30 17:15:28 2016 +0300
+
+    New feature complete
+
+commit b10cc1238e355c02a044ef9f9860811ff605c9b4
+Author: Tutorialzine
+Date:   Mon May 30 16:30:04 2016 +0300
+
+    Added content to hello.txt
+
+commit 09bd8cc171d7084e78e4d118a2346b7487dca059
+Author: Tutorialzine
+Date:   Sat May 28 17:52:14 2016 +0300
+
+    Initial commit
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	id 很长，但是你并不需要复制整个字符串，前一小部分就够了。<br />
+	查看某一次提交更新了什么，使用 git show:</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git show b10cc123
+
+commit b10cc1238e355c02a044ef9f9860811ff605c9b4
+Author: Tutorialzine
+Date:   Mon May 30 16:30:04 2016 +0300
+
+    Added content to hello.txt
+
+diff --git a/hello.txt b/hello.txt
+index e69de29..b546a21 100644
+--- a/hello.txt
++++ b/hello.txt
+@@ -0,0 +1 @@
++Nice weather today, isn&#39;t it?
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	查看两次提交的不同，可以使用git diff [commit-from]..[commit-to] 语法：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git diff 09bd8cc..ba25c0ff
+
+diff --git a/feature.txt b/feature.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/hello.txt b/hello.txt
+index e69de29..b546a21 100644
+--- a/hello.txt
++++ b/hello.txt
+@@ -0,0 +1 @@
++Nice weather today, isn&#39;t it?
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	比较首次提交和最后一次提交，我们可以看到所有的更改。当然使用git difftool命令更加方便。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	2.回滚某个文件到之前的版本</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	git 允许我们将某个特定的文件回滚到特定的提交，使用的也是 git checkout。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	下面的例子，我们将hello.txt回滚到最初的状态，需要指定回滚到哪个提交，以及文件的全路径。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git checkout 09bd8cc1 hello.txt
+</pre>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	3.回滚提交</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果你发现最新的一次提交完了加某个文件，你可以通过 git commit &mdash;amend来修复，它会把最新的提交打回暂存区，并尝试重新提交。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果是更复杂的情况，比如不是最新的提交了。那你可以使用git revert。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	最新的一次提交别名也叫HEAD。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git revert HEAD
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	其他提交可以使用id:</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git revert b10cc123
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	混滚提交时，发生冲突是非常频繁的。当文件被后面的提交修改了以后，git不能正确回滚。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	4.解决合并冲突</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	冲突经常出现在合并分支或者是拉去别人的代码。有些时候git能自动处理冲突，但大部分需要我们手动处理。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	比如John 和 Tim 分别在各自的分支上写了两部分代码。<br />
+	John 喜欢 for:</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	// Use a for loop to console.log contents.<br />
+	for(var i=0; i&lt;arr.length; i++) {<br />
+	console.log(arr[i]);<br />
+	}<br />
+	Tim 喜欢 forEach:</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	// Use forEach to console.log contents.<br />
+	arr.forEach(function(item) {<br />
+	console.log(item);<br />
+	});</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	假设John 现在去拉取 Tim的代码:</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git merge tim_branch
+
+Auto-merging print_array.js
+CONFLICT (content): Merge conflict in print_array.js
+Automatic merge failed; fix conflicts and then commit the result.
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	这时候git并不知道如何解决冲突，因为他不知道John和Tim谁写得更好。</p>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	于是它就在代码中插入标记。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+// Use a for loop to console.log contents.
+for(var i=0; i&lt;arr.length; i++) {
+    console.log(arr[i]);
+}
+=======
+// Use forEach to console.log contents.
+arr.forEach(function(item) {
+    console.log(item);
+});
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Tim s commit.
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	==== 号上方是当前最新一次提交，下方是冲突的代码。我们需要解决这样的冲突，经过组委会成员讨论，一致认定，在座的各位都是垃圾！两个都不要。改成下面的代码。</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+// Not using for loop or forEach.
+// Use Array.toString() to console.log contents.
+console.log(arr.toString());
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	好了，再提交一下：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+$ git add -A
+$ git commit -m &quot;Array printing conflict resolved.&quot;
+</pre>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	如果在大型项目中，这个过程可能容易出问题。你可以使用GUI 工具来帮助你。使用 git mergetool。</p>
+<h3 style="margin: 14px 0px; padding: 0px; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	5.配置 .gitignore</h3>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	大部分项目中，会有写文件，文件夹是我们不想提交的。为了防止一不小心提交，我们需要gitignore文件：</p>
+<ol style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	<li style="margin: 0px 0px 0px 30px; padding: 0px; list-style: decimal;">
+		在项目根目录创建.gitignore文件</li>
+	<li style="margin: 0px 0px 0px 30px; padding: 0px; list-style: decimal;">
+		在文件中列出不需要提交的文件名，文件夹名，每个一行</li>
+	<li style="margin: 0px 0px 0px 30px; padding: 0px; list-style: decimal;">
+		.gitignore文件需要提交，就像普通文件一样</li>
+</ol>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	通常会被ignore的文件有：</p>
+<ul style="margin: 8px 0px 8px 30px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		log文件</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		task runner builds</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		node_modules等文件夹</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		IDEs生成的文件</li>
+	<li style="margin: 0px; padding: 0px 0px 0px 24px; list-style: none; background: url(&quot;list-style.gif&quot;) left top no-repeat;">
+		个人笔记</li>
+</ul>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	例如：</p>
+<pre style="margin-top: 8px; margin-bottom: 8px; padding: 8px; font-family: Arial; border: 1px solid rgb(204, 204, 204); color: rgb(85, 85, 85); font-size: 14px; line-height: 23.8px; background: rgb(243, 243, 243);">
+*.log
+build/
+node_modules/
+.idea/
+my_notes.txt
+</pre>
+<h2 style="margin: 14px 0px; padding: 0px; font-size: 20px; font-family: &quot;Microsoft YaHei&quot;; color: rgb(85, 85, 85); line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	总结</h2>
+<p style="margin: 10px 0px; padding: 0px; color: rgb(85, 85, 85); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 23.8px; background-color: rgb(249, 249, 249);">
+	教程结束~(撒花)<br />
+	git有点复杂，并且有一大堆特性和技巧等着你去挖掘，这篇文章只是提供冰山一角，希望你不要因为太多繁琐的命令而停下前进的脚步！ 怀挺！</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

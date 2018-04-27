@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java  队列实现原理及简单实现代码</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,队列实现原理,Java,队列" />
+  <meta name="description" content="这篇文章主要介绍了Java 队列实现原理及简单实现代码的相关资料,需要的朋友可以参考下" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java  队列实现原理及简单实现代码</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：43次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1540" class="art_content"><p>
+	<strong>Java 队列实现原理</strong></p>
+<p>
+	&ldquo;队列&rdquo;这个单词是英国人说的&ldquo;排&rdquo;。在英国&ldquo;排队&rdquo;的意思就是站到一排当中去。计算机科学中，队列是一种数据结构，有点类似栈，只是在队列中第一个插入的数据项也会最先被移除，而在栈中，最后插入的数据项最先移除。队列的作用就像电影院前的人们站成的排一样：第一个进入附属的人将最先到达队头买票。最后排队的人最后才能买到票。</p>
+<p>
+	队列和栈一样也被用作程序员的工具。它也可以用于模拟真实世界的环境，例如模拟人们在银行里排队等待，飞机等待起飞，或者因特网络上数据包等待传送。</p>
+<p>
+	在计算机操作系统里，有各种队列在安静地工作着。打印作业在打印队列中等待打印。当在键盘上敲击时，也有一个存储键入内容的队列。同样，如果使用文字处理程序敲击一个键，而计算机又暂时要做其它的事，敲击的内容不会丢失，它会排在队列中等待，直到文字处理程序有时间来读取它。利用队列保证了键入内容在处理时其顺序不会改变。</p>
+<p>
+	<strong>队列的基本操作</strong></p>
+<p>
+	队列的两个基本操作是inserting(插入)一个数据项，即把一个数据项放入队尾，另一个是removing(移除)一个数据项，即移除队头的数据项。这类似于电影爱好者排队买票时先排到队尾，然后到达队头买票后离开队列。</p>
+<p>
+	栈中的插入和移除数据项方法的命名是很标准，称为push和pop。队列的方法至今没有标准化的命名。&ldquo;插入&rdquo;可以称为put、add或 enque，而&ldquo;删除&rdquo;可以叫delete、get或deque。插入数据项的队尾，也可以叫作back、tail或end。而移除数据项的队头，也可以叫head。下面将使用insert、remove、front和rear。</p>
+<p>
+	插入将值插入队尾，同时队尾箭头增加一，指向新的数据项。</p>
+<p>
+	数据项被移除后，同时队头指针增加一。通常实现队列时，删除的数据项还会保存在内存中，只是它不能被访问了，因为队头指针已经移到它的下一个位置了。</p>
+<p>
+	和栈中的情况不同，队列中的数据项不总是从数组的0下标处开始。移除了一些数据项后，队头指针会指向一个较高的下标位置。</p>
+<p>
+	查看操作返回队头数据项的值，然而并不从队中删除这个数据项。</p>
+<p>
+	要是想从空队列中移除一个数据项或想在已经满的队列中插入一个数据项，应用程序都要提示出错消息。</p>
+<p>
+	<strong>循环队列</strong></p>
+<p>
+	当在队列中插入一个新数据项，队头的Rear箭头向上移动，移向数组下标大的位置。移除数据项时，队尾Front指针也会向上移动。这种设计可能和人们直观察觉相反，因为人们在买电影票排队时，队伍总是向前移动的，当前面的人买完票离开队伍后，其他人都向前移动。计算机中在队列里删除一个数据项后，也可以将其他数据项都向前移动，但这样做的效率很差。相反，我们通过队列中队头和队尾指针的移动保持所有数据项的位置不变。</p>
+<p>
+	这样设计的问题是队尾指针很快就会移到数组的末端。虽然在数组的开始部分有空的数据项单元，这是移除的数据项的位置，但是由于因为队尾指针不能再向后移动了，因此也不能再插入新的数据项，这该怎么办？</p>
+<p>
+	<strong>环绕式处理</strong></p>
+<p>
+	为了避免队列不满却不能插入新数据项的问题，可以让队头队尾指针绕回到数组开始的位置。这就是循环队列（有时也称为&ldquo;缓冲环&rdquo;）。</p>
+<p>
+	指针回绕的过程：在队列中插入足够多的数据项，使队尾指针指向数组的未端。再删除几个数组前端的数据项。现在插入一个新的数据项。就会看到队尾指针从未端回绕到开始处的位置。新的数据项将插入这个位置。</p>
+<p>
+	插入更多的数据项。队尾指针如预计的那样向上移动。注意在队尾指针回绕之后， 它现在处在队头指针的下面，这就颠倒了初始的位置。这可以称为&ldquo;折断的序列&rdquo;：队列中的数据项存在数组两个不同的序列中。</p>
+<p>
+	删除足够多的数据项后，队头指针也回绕。这时队列的指针回到了初始运行时的位置状态，队头指针在队尾指针的下面。数据项也恢复为单一的连续的序列。</p>
+<p>
+	<strong>队列的Java代码</strong></p>
+<p>
+	<span style="color: #0000ff">Queue.java程序创建了一个Queue类，它有insert()、remove()、peek()、isEmpty()和size()方法。</span></p>
+<p>
+	&nbsp;package 栈和队列;</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+class Queue{
+
+    private int maxSize;
+
+    private long[] queArray;
+
+    private int front;
+
+    private int rear;
+
+    private int nItems;
+
+    public Queue(int s){
+
+       maxSize=s;
+
+       queArray=new long[maxSize];
+
+       front=0;
+
+       rear=-1;
+
+       nItems=0;
+
+    }
+
+    public void insert(long j){
+
+       if(rear==maxSize-1)
+
+           rear=-1;
+
+       queArray[++rear]=j; 
+
+       nItems++; 
+
+    }
+
+ 
+    public long remove(){
+
+       long temp=queArray[front++];
+
+       if(front==maxSize)
+
+            front=0;
+
+       nItems--;
+
+       return temp;
+
+     }
+
+    public long peekFront(){
+
+        return queArray[front];
+
+    }
+
+
+    public boolean isEmpty(){
+
+       return (nItems==0);
+
+    }
+
+    public boolean ifFull(){
+
+       return (nItems==maxSize);
+
+    }
+
+    public int size(){
+
+        return nItems;
+
+    }
+
+}
+
+ 
+
+</pre>
+</div>
+<p>
+	程序实现的Queue类中不但有front(队头)和rear(队尾)字段，还有队列中当前数据项的个数：nItems。</p>
+<p>
+	<strong>Insert()方法</strong>运行的前提条件是队列不满。在Main()中没有显示这个方法，不过通常应该先调用isFull()方法并且返回false 后，才调用insert()方法。（更通用的做法是在insert()方法中加入检查队列是否满的判定，如果出现向已满队列里插入数据项的情况就抛出异常。）&nbsp;</p>
+<p>
+	一般情况，插入操作是rear（队尾指针）加一后，在队尾指针所指的位置处插入新的数据。但是，当rear指针指向数组的顶端，即 maxSize-1位置的时候，在插入数据项之前，它必须回绕到数组的底端。回绕操作把rear设置为-1，因此当rear加1后，它等于0，是数组底端的下标值，最后nItem加一。</p>
+<p>
+	<strong>Remove()方法</strong>运行的前提条件是队列不空，在调用这个方法之前应该调用isEmpty()方法确保队列不空，或者在remove()方法里加入这种出错检查的机制。</p>
+<p>
+	<strong>移除（remove）</strong>操作总是由front指针得到队头数据项的值，然后将front加一。但是，如果这样做使front的值超过数组的顶端，front就必须绕回到数组下标为0的位置上。作这种检验的同时，先将返回值临时存储起来。最后nItem减一。</p>
+<p>
+	<strong>Peek()方法</strong>简单易懂：它返回front指针所指数据项的值。有些队列的实现也允许查看队列队尾数据项的值；比如这些方法可称为peekFront()、peekRear()、或者只是front()和rear()。</p>
+<p>
+	<strong>isEmpty()、isFull()和size()方法</strong>的实现都依赖于nItems字段，它们分别返回nItems是否等于0，是否等于maxSize，或者返回它本身值。</p>
+<p>
+	在Queue类中包含数据项计数字段nItems会使insert()和remove()方法增加一点额外的操作，因为insert()和 remove()方法必须分别递增和递减这个变量值。这可能算不上额外的开销，但是如果处理大量的插入和移除操作，这就可能会影响性能了。</p>
+<p>
+	因为，一些队列的实现不使用数据项计数的字段，而是通过front和rear来计算出队列是否空或者满以及数据项的个数。如果这样做，isEmpty()、ifFull()和size()例程会相当复杂，因为就像前面讲过的那样，数据项的序列或者被折成两段，或者是连续的一段。</p>
+<p>
+	而且，一个奇怪的问题出现了。当队列满的时候，front和rear指针取一定的位置，但是当队列为空时，也可能呈现相同的位置关系。于是在同一时间，队列似乎可能是满的，也可能是空的。这个问题的解决方法是：让数组容量比队列数据项个数的最大值学要大一。</p>
+<p>
+	感谢阅读，希望能帮助到大家，谢谢大家对本站的支持！</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS的IE和FF兼容性问题汇总</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JS,IE,FF,兼容性问题" />
+  <meta name="description" content="你对IE和Firefox兼容性是否熟悉，这里和大家分享一下Javascript的IE和Firefox兼容性问题以及解决方法，相信本文介绍一定会让你有所收获。以下以 IE 代替 Internet Explorer，以 MF 代替 Mozzila F" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>JS的IE和FF兼容性问题汇总</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：23次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1108" class="art_content"><p>
+	你对IE和Firefox兼容性是否熟悉，这里和大家分享一下Javascript的IE和Firefox兼容性问题以及解决方法，相信本文介绍一定会让你有所收获。</p>
+<p>
+	以下以 IE 代替 Internet Explorer，以 MF 代替 Mozzila FF</p>
+<h4>
+	1. document.form.item 问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	现有代码中存在许多 document.formName.item(&quot;itemName&quot;) 这样的语句，不能在 MF 下运行</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	改用 document.formName.elements[&quot;elementName&quot;]</p>
+<p>
+	<strong>其它</strong><br />
+	参见 2</p>
+<h4>
+	2. 集合类对象问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	现有代码中许多集合类对象取用时使用 ()，IE 能接受，MF 不能。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	改用 [] 作为下标运算。如：document.forms(&quot;formName&quot;) 改为 document.forms[&quot;formName&quot;]。<br />
+	又如：document.getElementsByName(&quot;inputName&quot;)(1) 改为 document.getElementsByName(&quot;inputName&quot;)[1]</p>
+<h4>
+	3. window.event</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	使用 window.event 无法在 MF 上运行</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	MF 的 event 只能在事件发生的现场使用，此问题暂无法解决。可以这样变通：<br />
+	原代码(可在IE中运行)：</p>
+<p>
+	<span class="code"><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;button&quot; name=&quot;someButton&quot; value=&quot;提交&quot; onclick=&quot;javascript:gotoSubmit()&quot;/&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;script language=&quot;javascript&quot;&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function gotoSubmit() {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(window.event);&nbsp;&nbsp;&nbsp; // use window.event<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/script&gt;</font></span></p>
+<p>
+	新代码(可在IE和MF中运行)：</p>
+<p>
+	<span class="code"><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;button&quot; name=&quot;someButton&quot; value=&quot;提交&quot; onclick=&quot;javascript:gotoSubmit(event)&quot;/&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;script language=&quot;javascript&quot;&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function gotoSubmit(evt) {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; evt = evt ? evt : (window.event ? window.event : null);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(evt);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // use evt<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/script&gt;</font></span></p>
+<p>
+	此外，如果新代码中第一行不改，与老代码一样的话(即 gotoSubmit 调用没有给参数)，则仍然只能在IE中运行，但不会出错。所以，这种方案 tpl 部分仍与老代码兼容。</p>
+<h4>
+	4. HTML 对象的 id 作为对象名的问题</h4>
+<p>
+	<strong>现有问题：</strong><br />
+	在 IE 中，HTML 对象的 ID 可以作为 document 的下属对象变量名直接使用。在 MF 中不能。</p>
+<p>
+	<strong>解决方法：</strong><br />
+	用 getElementById(&quot;idName&quot;) 代替 idName 作为对象变量使用。</p>
+<h4>
+	5. 用idName字符串取得对象的问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在IE中，利用 eval(idName) 可以取得 id 为 idName 的 HTML 对象，在MF 中不能。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	用 getElementById(idName) 代替 eval(idName)。</p>
+<h4>
+	6. 变量名与某 HTML 对象 id 相同的问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在 MF 中，因为对象 id 不作为 HTML 对象的名称，所以可以使用与 HTML 对象 id 相同的变量名，IE 中不能。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	在声明变量时，一律加上 var ，以避免歧义，这样在 IE 中亦可正常运行。<br />
+	此外，最好不要取与 HTML 对象 id 相同的变量名，以减少错误。</p>
+<p>
+	<strong>其它</strong>：<br />
+	参见 问题4</p>
+<h4>
+	7. event.x 与 event.y 问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在IE 中，event 对象有 x, y 属性，MF中没有。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	在MF中，与event.x 等效的是 event.pageX。但event.pageX IE中没有。<br />
+	故采用 event.clientX 代替 event.x。在IE 中也有这个变量。<br />
+	event.clientX 与 event.pageX 有微妙的差别（当整个页面有滚动条的时候），不过大多数时候是等效的。</p>
+<p>
+	如果要完全一样，可以稍麻烦些：<br />
+	mX = event.x ? event.x : event.pageX;<br />
+	然后用 mX 代替 event.x</p>
+<p>
+	<strong>其它</strong>：<br />
+	event.layerX 在 IE 与 MF 中都有，具体意义有无差别尚未试验。</p>
+<h4>
+	8. 关于frame</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在 IE中 可以用window.testFrame取得该frame，mf中不行</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	在frame的使用方面mf和ie的最主要的区别是：<br />
+	如果在frame标签中书写了以下属性：</p>
+<p>
+	<span class="code"><font color="#000000">&lt;frame src=&quot;xx.htm&quot; id=&quot;frameId&quot; name=&quot;frameName&quot; /&gt;</font></span></p>
+<p>
+	那么ie可以通过id或者name访问这个frame对应的window对象<br />
+	而mf只可以通过name来访问这个frame对应的window对象<br />
+	例如如果上述frame标签写在最上层的window里面的htm里面，那么可以这样访问<br />
+	ie： window.top.frameId或者window.top.frameName来访问这个window对象<br />
+	mf： 只能这样window.top.frameName来访问这个window对象</p>
+<p>
+	另外，在mf和ie中都可以使用window.top.document.getElementById(&quot;frameId&quot;)来访问frame标签<br />
+	并且可以通过window.top.document.getElementById(&quot;testFrame&quot;).src = &#39;xx.htm&#39;来切换frame的内容<br />
+	也都可以通过window.top.frameName.location = &#39;xx.htm&#39;来切换frame的内容</p>
+<p>
+	&nbsp;</p>
+<h4>
+	9. 在mf中，自己定义的属性必须getAttribute()取得</h4>
+<h4>
+	10.在mf中没有 parentElement parement.children 而用 parentNode parentNode.childNodes</h4>
+<p>
+	childNodes的下标的含义在IE和MF中不同，MF使用DOM规范，childNodes中会插入空白文本节点。<br />
+	一般可以通过node.getElementsByTagName()来回避这个问题。<br />
+	当html中节点缺失时，IE和MF对parentNode的解释不同，例如</p>
+<p>
+	<span class="code"><font color="#000000">&nbsp;&nbsp; &lt;form&gt;<br />
+	&nbsp;&nbsp; &lt;table&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input/&gt;<br />
+	&nbsp;&nbsp; &lt;/table&gt;<br />
+	&nbsp;&nbsp; &lt;/form&gt;</font></span></p>
+<p>
+	MF中input.parentNode的值为form, 而IE中input.parentNode的值为空节点</p>
+<p>
+	MF中节点没有removeNode方法，必须使用如下方法 node.parentNode.removeChild(node)</p>
+<h4>
+	11.const 问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在 IE 中不能使用 const 关键字。如 const constVar = 32; 在IE中这是语法错误。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	不使用 const ，以 var 代替。</p>
+<h4>
+	12. body 对象</h4>
+<p>
+	MF的body在body标签没有被浏览器完全读入之前就存在，而IE则必须在body完全被读入之后才存在</p>
+<h4>
+	13. url encoding在js中如果书写url就直接写&amp;不要写&amp;</h4>
+<p>
+	例如var url = &#39;xx.jsp?objectName=xx&amp;objectEvent=xxx&#39;;<br />
+	frm.action = url那么很有可能url不会被正常显示以至于参数没有正确的传到服务器<br />
+	一般会服务器报错参数没有找到<br />
+	当然如果是在tpl中例外，因为tpl中符合xml规范，要求&amp;书写为&amp;<br />
+	一般MF无法识别js中的&amp;</p>
+<h4>
+	14. nodeName 和 tagName 问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在MF中，所有节点均有 nodeName 值，但 textNode 没有 tagName 值。在 IE 中，nodeName 的使用好象<br />
+	有问题（具体情况没有测试，但我的IE已经死了好几次）。</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	使用 tagName，但应检测其是否为空。</p>
+<h4>
+	15. 元素属性</h4>
+<p>
+	IE下 input.type属性为只读，但是MF下可以修改</p>
+<h4>
+	16. document.getElementsByName() 和 document.all[name] 的问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在 IE 中，getElementsByName()、document.all[name] 均不能用来取得 p 元素（是否还有其它不能取的元素还不知道）。</p>
+<h4>
+	17. DOM 数据岛的问题</h4>
+<p>
+	<strong>现有问题</strong>：<br />
+	在IE中, &lt;xml&gt;标签具有特殊意义, 可以内含XML DOM, 并能实现与HTML组件的数据&nbsp;&nbsp;&nbsp;&nbsp; 绑定. 在MF中,&lt;xml&gt;则仅仅是一个未知的标记而已.&nbsp;&nbsp;&nbsp;&nbsp; 另外, 对 IE 来说, &lt;xml&gt;实际意味着这里是一个ActiveX对象, 但它却挂在HTML本&nbsp;&nbsp;&nbsp;&nbsp; 身的DOM树下作为一个节点, 因而会对DOM树的遍历造成严重影响.</p>
+<p>
+	<strong>解决方法</strong>：<br />
+	IE的数据绑定机制是可以用JS来模拟的, 但是太麻烦, 建议不使用数据绑定机制或者&nbsp;&nbsp;&nbsp;&nbsp; 寻找实现这种模拟的库来做. 我们只讨论如何实现DOM的兼容.&nbsp;&nbsp;&nbsp;&nbsp; 在MF中无论已知的HTML标记还是其它符合XML规范的标记, 都是用统一的DOM树来处理的, 因此, MF事实上完全可以使用DOM数据岛, 但与IE小小的不同在于: 在IE中&lt;xml&gt;&nbsp;&nbsp;&nbsp;&nbsp; 是个 DOM document, 而在MF只是 DOM node. 这个差别通常不足为患.&nbsp;&nbsp;&nbsp;&nbsp; 但是有一个小小的细节, 为了兼容HTML相当随意的语法, MF无法识别简写的空标记.&nbsp;&nbsp;&nbsp;&nbsp; 如: &lt;xml id=&quot;xx&quot;&gt;&lt;book&gt;&lt;title&gt;xxxx&lt;/title&gt;&lt;content/&gt;&lt;index/&gt;&lt;/book&gt;&lt;/xml&gt;,&nbsp;&nbsp;&nbsp;&nbsp; 这其中&lt;content/&gt;和&lt;index/&gt;是简写形式的, 会使MF无法识别, 应当写成:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;content&gt;&lt;/content&gt;&lt;index&gt;&lt;/index&gt;&nbsp;&nbsp;&nbsp;&nbsp; 不过, 我怀疑如果用XHTML, 可能就没有这种问题. 但我还没有试过.&nbsp;&nbsp;&nbsp;&nbsp; 对于IE中&lt;xml&gt;干扰HTML的DOM结构问题, 我现在的方法是处理完毕后把它从HTML的 DOM中删除. 不知道还有没有更好的解.</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

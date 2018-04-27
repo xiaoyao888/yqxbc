@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java对象的序列化和反序列化实践</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,java序列化,java反序列化" />
+  <meta name="description" content="当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个 " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java对象的序列化和反序列化实践</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：30次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="664" class="art_content"><p>
+	当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个<a href="javascript:;" onclick="javascript:tagshow(event, 'Java');" target="_self"><u><strong>Java</strong></u></a>对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。</p>
+<p>
+	　　把Java对象转换为字节序列的过程称为对象的序列化。</p>
+<p>
+	　　把字节序列恢复为Java对象的过程称为对象的反序列化。</p>
+<p>
+	　　对象的序列化主要有两种用途：</p>
+<p>
+	　　1）把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；</p>
+<p>
+	　　2）在网络上传送对象的字节序列。</p>
+<p>
+	<strong>　　一、JDK类库中的序列化API</strong></p>
+<p>
+	　　java.io.ObjectOutputStream代表对象输出流，它的writeObject(Object obj)方法可对参数指定的obj对象进行序列化，把得到的字节序列写到一个目标输出流中。</p>
+<p>
+	　　java.io.ObjectInputStream代表对象输入流，它的readObject()方法从一个源输入流中读取字节序列，再把它们反序列化为一个对象，并将其返回。</p>
+<p>
+	　　只有实现了Serializable和Externalizable接口的类的对象才能被序列化。Externalizable接口继承自Serializable接口，实现Externalizable接口的类完全由自身来控制序列化的行为，而仅实现Serializable接口的类可以采用默认的序列化方式 。</p>
+<p>
+	　　对象序列化包括如下步骤：</p>
+<p>
+	　　1）创建一个对象输出流，它可以包装一个其他类型的目标输出流，如文件输出流；</p>
+<p>
+	　　2）通过对象输出流的writeObject()方法写对象。</p>
+<p>
+	　　对象反序列化的步骤如下：</p>
+<p>
+	　　1）创建一个对象输入流，它可以包装一个其他类型的源输入流，如文件输入流；</p>
+<p>
+	　　2）通过对象输入流的readObject()方法读取对象。</p>
+<p>
+	　　下面让我们来看一个对应的例子，类的内容如下：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<p>
+					import java.io.*;<br />
+					import java.util.Date;</p>
+				<p>
+					public class ObjectSaver {</p>
+				<p>
+					<br />
+					public static void main(String[] args) throws Exception {<br />
+					　ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(&quot;D:&quot;&quot;objectFile.obj&quot;));</p>
+				<p>
+					　//序列化对象<br />
+					　Customer customer = new Customer(&quot;阿蜜果&quot;, 24);<br />
+					　out.writeObject(&quot;你好!&quot;);<br />
+					　out.writeObject(new Date());<br />
+					　out.writeObject(customer);<br />
+					　out.writeInt(123);<br />
+					　out.close();</p>
+				<p>
+					　//反序列化对象<br />
+					　ObjectInputStream in = new ObjectInputStream(new FileInputStream(&quot;D:&quot;&quot;objectFile.obj&quot;));<br />
+					　System.out.println(&quot;obj1=&quot; + (String) in.readObject());<br />
+					　System.out.println(&quot;obj2=&quot; + (Date) in.readObject());<br />
+					　Customer obj3 = (Customer) in.readObject();<br />
+					　System.out.println(&quot;obj3=&quot; + obj3);<br />
+					　int obj4 = in.readInt();<br />
+					　System.out.println(&quot;obj4=&quot; + obj4);<br />
+					　in.close();<br />
+					}<br />
+					}</p>
+				<p>
+					class Customer implements Serializable {<br />
+					private String name;<br />
+					private int age;<br />
+					public Customer(String name, int age) {<br />
+					this.name = name;<br />
+					this.age = age;<br />
+					}</p>
+				<p>
+					public String toString() {<br />
+					return &quot;name=&quot; + name + &quot;, age=&quot; + age;<br />
+					}<br />
+					}</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<strong>二、实现Serializable接口</strong>
+<p>
+	&nbsp;</p>
+<p>
+	　　ObjectOutputStream只能对Serializable接口的类的对象进行序列化。默认情况下，ObjectOutputStream按照默认方式序列化，这种序列化方式仅仅对对象的非transient的实例变量进行序列化，而不会序列化对象的transient的实例变量，也不会序列化静态变量。</p>
+<p>
+	　　当ObjectOutputStream按照默认方式反序列化时，具有如下特点：</p>
+<p>
+	　　1）如果在内存中对象所属的类还没有被加载，那么会先加载并初始化这个类。如果在classpath中不存在相应的类文件，那么会抛出ClassNotFoundException；</p>
+<p>
+	　　2）在反序列化时不会调用类的任何构造方法。</p>
+<p>
+	　　如果用户希望控制类的序列化方式，可以在可序列化类中提供以下形式的writeObject()和readObject()方法。</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				private void writeObject(java.io.ObjectOutputStream out) throws IOException<br />
+				private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException;</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　当ObjectOutputStream对一个Customer对象进行序列化时，如果该对象具有writeObject()方法，那么就会执行这一方法，否则就按默认方式序列化。在该对象的writeObjectt()方法中，可以先调用ObjectOutputStream的defaultWriteObject()方法，使得对象输出流先执行默认的序列化操作。同理可得出反序列化的情况，不过这次是defaultReadObject()方法。</p>
+<p>
+	　　有些对象中包含一些敏感信息，这些信息不宜对外公开。如果按照默认方式对它们序列化，那么它们的序列化数据在网络上传输时，可能会被不法份子窃取。对于这类信息，可以对它们进行加密后再序列化，在反序列化时则需要解密，再恢复为原来的信息。</p>
+<p>
+	　　默认的序列化方式会序列化整个对象图，这需要递归遍历对象图。如果对象图很复杂，递归遍历操作需要消耗很多的空间和时间，它的内部数据结构为双向列表。</p>
+<p>
+	　　在应用时，如果对某些成员变量都改为transient类型，将节省空间和时间，提高序列化的性能。</p>
+<p>
+	<strong>　　三、实现Externalizable接口</strong></p>
+<p>
+	　　Externalizable接口继承自Serializable接口，如果一个类实现了Externalizable接口，那么将完全由这个类控制自身的序列化行为。Externalizable接口声明了两个方法：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				public void writeExternal(ObjectOutput out) throws IOException<br />
+				public void readExternal(ObjectInput in) throws IOException , ClassNotFoundException</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　前者负责序列化操作，后者负责反序列化操作。</p>
+<p>
+	　　在对实现了Externalizable接口的类的对象进行反序列化时，会先调用类的不带参数的构造方法，这是有别于默认反序列方式的。如果把类的不带参数的构造方法删除，或者把该构造方法的访问权限设置为private、默认或protected级别，会抛出java.io.InvalidException: no valid constructor异常。</p>
+<p>
+	<strong>　　四、可序列化类的不同版本的序列化兼容性</strong></p>
+<p>
+	　　凡是实现Serializable接口的类都有一个表示序列化版本标识符的静态变量：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				private static final long serialVersionUID;</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　以上serialVersionUID的取值是Java运行时环境根据类的内部细节自动生成的。如果对类的源代码作了修改，再重新编译，新生成的类文件的serialVersionUID的取值有可能也会发生变化。</p>
+<p>
+	　　类的serialVersionUID的默认值完全依赖于Java编译器的实现，对于同一个类，用不同的Java编译器编译，有可能会导致不同的serialVersionUID，也有可能相同。为了提高哦啊serialVersionUID的独立性和确定性，强烈建议在一个可序列化类中显示的定义serialVersionUID，为它赋予明确的值。显式地定义serialVersionUID有两种用途：</p>
+<p>
+	　　1）在某些场合，希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有相同的serialVersionUID；</p>
+<p>
+	　　2）在某些场合，不希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有不同的serialVersionUID</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

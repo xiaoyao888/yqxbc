@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linux centos下安装、配置、启动Apache</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Linux,centos,下,安装,、,配置,启动,Apac" />
+  <meta name="description" content="安装Apache前准备： 1、检查该环境中是否已经存在httpd服务的配置文件，默认存储路径： /etc/httpd/httpd.conf（这是centos预装的Apache的一个ent版本，一般我们安装源代码版的Apache）。 如果已" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Linux centos下安装、配置、启动Apache</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：46次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1304" class="art_content"><p style="margin: 0px; padding: 0px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	安装Apache前准备：</p>
+<p style="margin: 0px; padding: 0px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	1、检查该环境中是否已经存在httpd服务的配置文件，默认存储路径：<span style="color: rgb(68, 68, 68); font-family: Tahoma, 'Microsoft Yahei', Simsun; line-height: 21px;">/etc/httpd/httpd.conf（这是centos预装的Apache的一个ent版本，一般我们安装源代码版的Apache）。<span style="color: rgb(51, 51, 51); font-family: Arial; line-height: 26px;">如果已经存在<span style="color: rgb(68, 68, 68); font-family: Tahoma, 'Microsoft Yahei', Simsun; line-height: 21px;">/etc/httpd/httpd.conf，请先卸载或者关闭centos系统自带的web服务，执行命令：<strong>chkconfig &nbsp;httpd off</strong>，再或者把centos自带的httpd服务的80端口改为其他端口，只要不与我们安装的Apache服务的端口冲突就可以啦。</span></span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">停止并卸载Linux系统自带的httpd服务：</span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">1、service httpd stop</span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">2、ps -ef | grep httpd</span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">3、kill -9 pid号（逐个删除）</span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">4、rpm -qa |grep httpd</span></span></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	<span style="font-family: Tahoma, 'Microsoft Yahei', Simsun; color: rgb(68, 68, 68);"><span style="line-height: 21px;">5、rpm -e httpd软件包</span></span></p>
+<p style="margin: 0px; padding: 0px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	&nbsp;</p>
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 761px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">[root@localhost&nbsp;bin]#&nbsp;find&nbsp;/&nbsp;-name&nbsp;httpd.conf&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;bin]#&nbsp;&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">2、下载Apache安装包（httpd-2.4.3.tar.gz或httpd-2.2.23.tar.gz），下载地址：http://httpd.apache.org/</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">在安装Apache时，我分别针对不同版本进行了安装，在编译时是不同的，configure后跟的参数不同。</span>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; font-family: Arial; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51);">
+	<span style="color: rgb(68, 68, 68); font-family: Tahoma, 'Microsoft Yahei', Simsun; line-height: 21px;">httpd-2.2.23版本编译命令：</span></p>
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 939px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">./configure&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--prefix</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apache2&nbsp;（安装目录参数后面可以不加任何参数，直接安装即可）&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">make&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">make&nbsp;install&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">httpd-2.4.3版本编译命令：</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 1088px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">./configure&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--prefix</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apache2&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--with-apr</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apr&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--with-apr-util</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apr-util/&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--with-pcre</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/pcre&nbsp;（除了指定Apache的安装目录外，还要安装apr、apr-util、pcre，并指定参数）&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">make&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">make&nbsp;install&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">在编译Apache(在安装httpd-2.4.3时遇到的问题)时分别出现了apr not found、APR-util not found、pcre-config for libpcre not found的问题，下面就httpd-2.4.3的这些问题解决来实际操作一把。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">http://apr.apache.org/download.cgi &nbsp;下载apr-1.4.5.tar.gz、apr-util-1.3.12.tar.gz</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">http://sourceforge.net/projects/pcre/files/latest/download 下载pcre-8.31.zip</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">1.解决apr not found问题</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 1359px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">[root@localhost&nbsp;bin]#&nbsp;tar&nbsp;-zxf&nbsp;apr-1.4.5.tar.gz&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-1.4.5]#&nbsp;./configure&nbsp;<span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--prefix</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apr&nbsp;&nbsp;</span></span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-1.4.5]#&nbsp;make&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-1.4.5]#&nbsp;make&nbsp;install&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">2.解决APR-util not found问题</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 1526px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">[root@localhost&nbsp;bin]#&nbsp;tar&nbsp;-zxf&nbsp;apr-util-1.3.12.tar.gz&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-util-1.3.12]#&nbsp;./configure&nbsp;<span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--prefix</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apr-util&nbsp;</span><span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">-with-apr</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/apr/bin/apr-1-config&nbsp;&nbsp;</span></span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-util-1.3.12]#&nbsp;make&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;apr-util-1.3.12]#&nbsp;make&nbsp;install&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">3、解决pcre-config for libpcre not found问题</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_html" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 850.03125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<b>[html]</b>&nbsp;<a class="ViewSource" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_plain.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="view plain">view plain</a><a class="CopyToClipboard" href="http://blog.csdn.net/wy3552128/article/details/8143875#" style="color: rgb(160, 160, 160); text-decoration: none; border: none; padding: 1px; margin: 0px 10px 0px 0px; font-size: 9px; display: inline-block; width: 16px; height: 16px; text-indent: -2000px; background-image: url(http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/images/default/ico_copy.gif); background-attachment: initial; background-color: inherit; background-size: initial; background-origin: initial; background-clip: initial; background-position: 0% 0%; background-repeat: no-repeat;" title="copy">copy</a>
+			<div style="position: absolute; left: 390px; top: 1693px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol class="dp-xml" start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">[root@localhost&nbsp;~]#&nbsp;unzip&nbsp;pcre-8.31.zip&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;~]#&nbsp;cd&nbsp;pcre-8.31&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;pcre-8.31]#&nbsp;./configure&nbsp;<span class="attribute" style="margin: 0px; padding: 0px; border: none; color: red; background-color: inherit;">--prefix</span><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">=/usr/local/pcre&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">[root@localhost&nbsp;pcre-8.31]#&nbsp;make[root@localhost&nbsp;pcre-8.31]#&nbsp;make&nbsp;install&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">如果已经存在/etc/httpd/httpd.conf，请先卸载或者关闭centos系统自带的web服务，执行命令：chkconfig &nbsp;httpd off，再或者把centos自带的httpd服务的80端口改为其他端口，只要不与我们安装的Apache服务的端口冲突就可以啦。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">&bull;</span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px; white-space: pre;"> </span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">启动Apache：/usr/local/apache2/bin/apachectl start</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">&bull;</span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px; white-space: pre;"> </span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">停止Apache：/usr/local/apache2/bin/apachectl stop</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">&bull;</span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px; white-space: pre;"> </span><span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">重启Apache：/usr/local/apache2/bin/apachectl restart</span>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">
+	网站放在/usr/local/apache2/htdocs目录下</p>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">在IE中通过http://localhost:80，如果看到页面中显示&ldquo;It works!&rdquo;字样，则代表Apache验证通过。如果网站的index后缀是PHP格式的，则要修改httpd.conf配置文件（/usr/local/apache2/conf），在DirectoryIndex增加 index.php。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div>
+	<ol start="1">
+		<li>
+			#&nbsp;&nbsp;</li>
+		<li>
+			#&nbsp;DirectoryIndex:&nbsp;sets&nbsp;the&nbsp;file&nbsp;that&nbsp;Apache&nbsp;will&nbsp;serve&nbsp;if&nbsp;a&nbsp;directory&nbsp;&nbsp;</li>
+		<li>
+			#&nbsp;is&nbsp;requested.&nbsp;&nbsp;</li>
+		<li>
+			#&nbsp;&nbsp;</li>
+		<li>
+			&lt;IfModule&nbsp;dir_module&gt;&nbsp;&nbsp;</li>
+		<li>
+			&nbsp;&nbsp;&nbsp;&nbsp;DirectoryIndex&nbsp;index.html&nbsp;index.php&nbsp;&nbsp;</li>
+		<li>
+			&lt;/IfModule&gt;&nbsp;&nbsp;</li>
+	</ol>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

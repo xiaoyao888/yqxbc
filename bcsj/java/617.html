@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linux环境下整合Tomcat与Apache Web服务器</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Linux环境下整合Tomcat,Apache Web服务器" />
+  <meta name="description" content="1、引言 基于Web技术的Internet/Intranet近年来已经得到了广泛的应用，Intranet是以TCP/IP协议为基础、以Web为核心的企业内部网，用户通过低成本、简单易用的客户浏览器就能随时随地到企业" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Linux环境下整合Tomcat与Apache Web服务器</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：10次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="617" class="art_content">1、引言<br />
+<br />
+基于Web技术的Internet/Intranet近年来已经得到了广泛的应用，Intranet是以TCP/IP协议为基础、以Web为核心的企业内部网，用户通过低成本、简单易用的客户浏览器就能随时随地到企业的Web站点上查阅自己所需的数据。浏览器客户端操作界面的一致性避免了C/S模式客户端程序的多样性，而服务器端的开放和基于标准的连接方案使企业很方便地通过Internet同外界联系；同时，Web信息动态的、交互式的发布方式从根本上改变了企业的服务质量，增加了企业的商业机会。<br />
+<br />
+在许多用户看来，一个Web网站的成败主要在于它所提供的内容和功能，而支持这些内容和功能的Web服务器起着非常重要的作用。<br />
+<br />
+2、Tomcat容器<br />
+<br />
+Tomcat是一个免费的开源的Serlvet容器，它是Apache基金会的Jakarta项目中的一个核心项目，由Apache，Sun和其它一些公司及个人共同开发而成。由于有了Sun的参与和支持，最新的Servlet和Jsp规范总能在Tomcat中得到体现。<br />
+<br />
+Tomcat是稳固的独立的Web服务器与Servlet&nbsp;Container，不过，其Web服务器的功能则不如许多更健全的Web服务器完整，如Apache&nbsp;Web服务器（举例来说，Tomcat没有大量的选择性模块）。不过，Tomcat是自由的开源软件，而且有许多高手致力于其发展。<br />
+<br />
+2.1&nbsp;Linux下安装Tomcat<br />
+<br />
+在安装Tomcat之前需要安装j2sdk（Java&nbsp;2&nbsp;Software&nbsp;Development&nbsp;Kit），安装j2sdk的步骤如下：<br />
+<br />
+1）到http://www.java.sun.com下载j2sdk&nbsp;，如j2sdk-1_4_2_04-linux-i586-rpm.bin。<br />
+<br />
+2）在终端中转到j2sdk-1_4_2_04-linux-i586-rpm.bin所在的目录，输入命令chmod&nbsp;+x&nbsp;j2sdk-1_4_2_04-linux-i586-rpm.bin,添加执行的权限。<br />
+<br />
+3）执行命令./j2sdk-1_4_2_04-linux-i586-rpm.bin，生成j2sdk-1_4_2_04-linux-i586.rpm的文件。<br />
+<br />
+4）执行命令chmod&nbsp;+x&nbsp;j2sdk-1_4_2_04-linux-i586.rpm，给j2sdk-1_4_2_04-linux-i586.rpm添加执行的权限。<br />
+<br />
+5）执行命令&nbsp;rpm&nbsp;&ndash;ivh&nbsp;j2sdk-1_4_2_04-linux-i586.rpm&nbsp;,安装j2sdk。<br />
+<br />
+6）安装界面会出现授权协议，按Enter键接受，把j2sd安装在/usr/java/j2sdk1.4.2_04。<br />
+<br />
+7）设置环境变量，在&nbsp;/etc/profile.d/目录下建立文件java.sh，文件的内容如下：<br />
+#set&nbsp;java&nbsp;environment<br />
+export&nbsp;JAVA_HOME=/usr/java/j2sdk1.4.2_04<br />
+export&nbsp;CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:/usr/java/jdbc<br />
+export&nbsp;PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH<br />
+<br />
+8）执行命令chmod&nbsp;755&nbsp;/etc/profile.d/java.sh，给java.sh分配权限。<br />
+<br />
+9）在终端中分别执行命令javac&nbsp;&ndash;help和java&nbsp;&ndash;version，如果看到有关的信息，则表示j2sdk已成功安装。<br />
+<br />
+接下来安装tomcat，安装tomcat的步骤如下：<br />
+<br />
+1）访问http://jakarta.apache.org/tomcat/index.html，下载二进制版的tomcat，如jakarta-tomcat-5.5.10.tar.gz，解压到/usr/local目录：<br />
+cd&nbsp;/usr/local<br />
+gzip&nbsp;&ndash;zxvf&nbsp;jakarta-tomcat-5.5.10.tar.gz<br />
+<br />
+2）修改$tomcat/bin/startup.sh和shutdown.sh文件,<br />
+export&nbsp;JAVA_HOME=/usr/java/j2sdk1.4.2_04<br />
+export&nbsp;CATALINA_HOME=/usr/local/tomcat-5.5.10<br />
+export&nbsp;CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:/usr/java/jdbc<br />
+export&nbsp;PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH<br />
+<br />
+3）执行startup.sh即可在http://localhost:8080/&nbsp;访问到tomcat的缺省面页.<br />
+<br />
+2.2单独运行Tomcat的优点<br />
+<br />
+1）容易架设。下载Tomcat，设定一些配置，就完成了。不需要花费时间将Web服务器的连接器整合至其它的Web服务器中。<br />
+<br />
+2）不需要担心连接器。永远不需要排除在其它Web服务器与Tomcat之间的任何性能或联机方面的问题。<br />
+<br />
+3）有较佳的安全防护。相对于其它以C、C＋＋所编写的Web服务器，Tomcat比较能忍受远程缓冲区溢位的攻击。因为Tomcat的Java虚拟机是位于网络及操作系统之间，它可以防止几乎所有类型的缓冲区溢位攻击。使用Tomcat的安全防护领域，可以指定对各个资源的访问。<br />
+<br />
+4）容易移植。可以将Tomcat服务器（以及应用程序）移植到不同的服务器、操作系统甚至架构上。因为Tomcat是以Java编写的，因此可以将其整个目录结构的内容复制到其它计算机上运行，而完全不需要任何改变，甚至于新的计算机的架构与原来的不同也一样。<br />
+<br />
+2.3单独运行Tomcat的缺点<br />
+<br />
+1）Tomcat的支持软件比较少。Tomcat内建Web服务器的支持软件比Apache&nbsp;httpd&nbsp;Web服务器少。<br />
+<br />
+2）Tomcat的Web服务器功能少。相对于Tomcat&nbsp;Web服务器，Apache&nbsp;httpd服务器有更完整的功能。<br />
+<br />
+3）虽然Tomcat运行速度快，但还没有Apache&nbsp;httpd快。Tomcat服务器比Apache&nbsp;httpd慢，不过，它还在改进中，而且仍然非常快，快到足以运行今日大多数的企业网站，只是在提供静态页面内容上没有Apache快。<br />
+<br />
+3、Apache&nbsp;Web服务器<br />
+<br />
+Apache是根据NCSA的服务器发展而来的，NCSA是最早出现的Web服务器程序之一，由伊利诺斯大学Urbana-Champaign分校的美国国家超级计算应用中心开发。在发展初期，Apache主要是一个基于UNIX系统的服务器，它的宗旨就是建成一个基于UNIX系统的、功能更强、效率更高并且速度更快的WWW服务器，这就决定了它是从其他的服务器演变而来的，并且添加了大量补丁来增强它在某一方面的性能，所以它就被命名为&ldquo;APA＋CHy&nbsp;Server（一个补丁组成的服务器）&rdquo;。发展到今天，Apache已经被移植到很多平台上了。<br />
+Apache的开发遵循GPL协议，由全球的志愿者一起开发和维护。在保持强大的功能及不断更新的同时，它仍然是免费的，并且公开源代码。<br />
+<br />
+3.1&nbsp;安装Apache服务器<br />
+<br />
+可以通过以下三种方法安装Apache服务器。&nbsp;<br />
+<br />
+1）如果安装的Linux版本中带用Apache的话，就在选择所要安装的服务器的时候，将httpd这个服务选上，Linux安装程序将自动完成Apache的安装工作，并做好基本的配置。&nbsp;<br />
+<br />
+2）使用可执行文件软件包，这比较适合那些对编译工作不是太熟悉的初级用户，因为它相对比较简单。下载软件包apache_1.2.4.e.tar.gz&nbsp;，执行命令tar&nbsp;xvzf&nbsp;apache_1.2.4.e.tar.gz&nbsp;完成安装工作。如果使用的是RedHat&nbsp;Linux的话，也可以下载apache_1.2.4.rpm软件安装包，然后使用rpm&nbsp;&ndash;ivh&nbsp;apache_1.2.4.rpm命令安装。&nbsp;<br />
+<br />
+3）如果想把Apache服务器充分利用起来的话，就一定要自己编译Apache&nbsp;定制其功能。&nbsp;下载包含Apache源代码的软件包apache_1.2.4.tar.gz；然后用tar命令将它解开；将当前目录改变为Apache源代码发行版的src目录；将配置样本文件（Configuration.tmpl）复制为Configuration文件；编辑Configuration文件中的配置选项：&nbsp;<br />
+Makefile配置选项：一些编译选项：<br />
+.&nbsp;&ldquo;CC=&rdquo;一行指定用什么编译软件编译，一般为&ldquo;CC=gcc&rdquo;；如果需要将额外的标志（参数）指定给C编译软件，可以使用：&nbsp;<br />
+EXTRA_CFLAGS=&nbsp;<br />
+EXTRA_LFLAGS=&nbsp;<br />
+如果系统需要特殊的库和包含文件，可以在这里指定它们：&nbsp;<br />
+EXTRA_LIBS=&nbsp;<br />
+EXTRA_INCLUDES=&nbsp;<br />
+如果要改变代码优化设置的话，须将下面一句去掉注释，然后改成所需要的值：&nbsp;<br />
+#OPTIM=-O2&nbsp;<br />
+<br />
+Rule配置选项：用来决定需要什么功能，一般情况下无需改变。&nbsp;<br />
+<br />
+模块配置：模块是Apache的组成部分，它为Apache内核增加新功能。通过使用模块配置，可以自定义在Apache服务器中需要什么功能，这个部分也是Apache灵活性的表现。模块配置行如下所示：&nbsp;<br />
+<br />
+AddModule&nbsp;modules/standard/mod_env.o&nbsp;<br />
+如果需要Apache服务器具备什么功能，就将那个模块用AddModule语句加到配置文件Configuration中去。&nbsp;<br />
+下面列出了Apache的模块功能：&nbsp;<br />
+<br />
+模块名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;缺省&nbsp;<br />
+mod_access&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供基于主机的访问控制命令&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能够运行基于MIME类型的CGI脚本或HTTP请求方法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_alias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能执行URL重定向服务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_asis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使文档能在没有HTTP头标的情况下被发送到客户端&nbsp;&nbsp;y&nbsp;<br />
+mod_auth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用存储在文本文件中的用户名、口令实现认证&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_auth_dbm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用DBM文件存储基本HTTP认证&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_auth_mysql&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用MySQL数据库实现基本HTTP认证&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_auth_anon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许以匿名方式访问需要认证的区域&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_auth_external&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用第三方认证&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_autoindex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当缺少索引文件时，自动生成动态目录列表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_cern_meta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供对元信息的支持&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_cgi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持CGI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_dir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能够重定向任何对不包括尾部斜杠字符命令的请求&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使你能够将环境变量传递给CGI或SSI脚本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_expires&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;让你确定Apache在服务器响应请求时如何处理Expires&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y<br />
+mod_headers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能够操作HTTP应答头标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_imap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供图形映射支持&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使支持SSI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对服务器配置提供了全面的描述&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_log_agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许在单独的日志文件中存储用户代理的信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_log_config&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持记录日志&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_log_referer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供了将请求中的Referer头标写入日志的功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_mime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用来向客户端提供有关文档的元信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_negotiation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供了对内容协商的支持&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_setenvif&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使你能够创建定制环境变量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_speling&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使你能够处理含有拼写错误或大小写错误的URL请求&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+mod_status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许管理员通过WEB管理Apache&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;<br />
+mod_unique_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为每个请求提供在非常特殊的条件下保证是唯一的标识&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<br />
+在src目录下执行：&ldquo;.&nbsp;/configure&rdquo;；&nbsp;<br />
+编译Apache：执行命令&ldquo;make&rdquo;；&nbsp;<br />
+<br />
+将编译好的可执行文件httpd复制到/etc/httpd/bin目录下；将Apache发行版的配置文件：access.conf、httpd.conf、mime.types、srm.conf文件复制到/etc/httpd/conf目录下。到此为止，安装完成。&nbsp;<br />
+<br />
+3.1单独运行Apache&nbsp;httpd的优点<br />
+<br />
+1）Apache&nbsp;httpd比Tomcat内建的Web服务器快。<br />
+2）较多的软件支持。Apache&nbsp;httpd有庞大的支持软件链接库。<br />
+3）启动与停止快。一般来说，Apache&nbsp;httpd的启动与停止时间都比Tomcat短。<br />
+<br />
+3.2单独运行Apache&nbsp;httpd的缺点<br />
+<br />
+1）架设比较困难。比起单独运行Tomcat，安装Apache&nbsp;Web服务器并让它与Tomcat协同运行要复杂很多。<br />
+2）会拖慢动态网页内容的服务。<br />
+3）安全漏洞。Apache&nbsp;httpd比较容易受到缓冲区溢位的攻击。<br />
+4）升级比较复杂。<br />
+<br />
+4、Tomcat与Apache的整合<br />
+<br />
+有几种将Tomcat整合到Apache&nbsp;httpd&nbsp;Web服务器的方法：<br />
+<br />
+1）架使用不同的端口号分担负载。<br />
+<br />
+该方法是最容易实现的，只需要在现成的网页目录中假如URL以连接到在同一台Web服务器机器上的Tomcat&nbsp;Web服务器端口（如8080）。实际上还是执行两个完整的Web服务器程序，彼此之间并没有真正的整合。<br />
+<br />
+2）从Apache将请求发送至Tomcat的代理服务器。<br />
+<br />
+该方法会在主服务器中使用HTTP的代理机制。代理机制常会用来将来自网关上运行的Web服务器的Web信息流重新路由至外部因特网上的网站。不过，也可以用来将网站区域或目录的信息流重导至Tomcat&nbsp;Web服务器。<br />
+<br />
+3）使用mod_jk2连接器。<br />
+<br />
+该方法使用运行于现有的Apache&nbsp;httpd&nbsp;Web服务器之内的连接器模块（如mod_jk），并经由特定的协议快速地将请求转送至Tomcat。这是将Tomcat连接至Apache&nbsp;httpd的标准方式。<br />
+<br />
+4）单一进程中执行两个程序。<br />
+<br />
+该方法通过让JVM在Apache&nbsp;httpd的进程空间中运行的方式，可以提供&ldquo;完全整合&rdquo;的功能。这是最有效的办法，但也是最依赖于服务器的实现。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

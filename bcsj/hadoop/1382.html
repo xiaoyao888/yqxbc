@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hadoop集群（第3期）_VSFTP安装配置</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Hadoop集群,VSFTP安装配置" />
+  <meta name="description" content="1、VSFTP简介 VSFTP 是一个基于GPL发布的类Unix系统上使用的 FTP服务器 软件，它的全称是Very Secure FTP 从此名称可以看出来，编制者的初衷是代码的安全。 安全性是编写VSFTP的初衷，除了这" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Hadoop集群（第3期）_VSFTP安装配置</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：虾皮工作室 浏览：41次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1382" class="art_content"><h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	1、VSFTP简介</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">　　VSFTP</span>是一个基于GPL发布的类Unix系统上使用的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">FTP服务器</span>软件，它的全称是Very Secure FTP 从此名称可以看出来，编制者的初衷是代码的安全。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　安全性是编写VSFTP的初衷，除了这与生俱来的安全特性以外，高速与高稳定性也是VSFTP的两个重要特点。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在速度方面，使用ASCII代码的模式下载数据时，VSFTP的速度是Wu-FTP的两倍，如果Linux主机使用2.4.*的内核，在千兆以太网上的下载速度可达86MB/S。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在稳定方面，VSFTP就更加的出色，VSFTP在单机（非集群）上支持4000个以上的并发用户同时连接，根据Red Hat的Ftp服务器(ftp.redhat.com)的数据，VSFTP服务器可以支持15000个并发用户。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	2、VSFTP安装及配置</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; 安装该软件需要使用最高用户（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">root</strong></span>）进行安装，否则不能进行。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341152340-0.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.1 安装</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　首先用命令检查VSFTP是否已经安装。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig &ndash;list | grep vsftpd</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　显示结果如下，<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">没有任何反应</strong></span>，说明没有安装VSFTP。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341152359-1.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　接着使用<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">yum</strong></span>命令直接安装</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum &ndash;y install vsftpd</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341152294-2.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　上图中表示正在下载，需要耐心等一下，如果网络不畅通，也可能需要下载失败，不过不要担心，只要在重新提交一次命令就行。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341154323-3.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　从上面的结果中看出，已经成功安装。然后为它创建日志文件：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		touch /var/log/vsftpd.log</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341156407-4.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　这样简单的两个命令就完成了vsftp的安装，但是如果你现在想这样ftp://your_ip来访问的话，那还不行，还需要配置权限！</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.2 启动与配置自启动</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　再次使用&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">chkconfig &ndash;list | grep vsfpd</strong></span>&quot;来查看vsftpd服务启动项情况；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如果看到的是如下显示的结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341155643-5.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　服务全部都是关闭（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">off</strong></span>）的，注意这里的关闭（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">off</strong></span>）表示的是服务器启动的时候是否会自启动服务，我们使用如下命令来配置其自启动：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig vsftpd on</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　或者</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig &ndash;level 2345 vsftpd on</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　执行结果如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341155N3-6.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　查看与管理ftp服务：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">启动</strong></span>ftp服务：<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">service vsftpd start</strong></span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">查看</strong></span>ftp服务状态：<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">service vsftpd status</strong></span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">重启</strong></span>ftp服务：<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">service vsftpd restart</strong></span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">关闭</strong></span>ftp服务：<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">service vsftpd stop</strong></span></p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.3 配置vsfpd服务</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　编辑/etc/vsftpd/vsftpd.conf文件，配置vsftp服务：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		vim /etc/vsftpd/vsftpd.conf</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/13411525Z-7.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　上图中先显示出&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">/etc/vsftpd</strong></span>&quot;下面有哪些文件，然后在用&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">vim</strong></span>&quot;编辑器进行修改。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　&nbsp;先按键盘上的&quot;a&quot;就可以进行编辑了，按照下面进行操作。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		anonymous_enable=YES --&gt; anonymous_enable=NO //不允许匿名用户访问，默认是允许</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		xferlog_file=/var/log/vsftpd.log #设定vsftpd的服务日志保存路径。注意，该文件默认不存在。必须要手动touch出来</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#idle_session_timeout=600 --&gt; idle_session_timeout=600 //会话超时，客户端连接到ftp但未操作，默认被注释掉，可根据个人情况修改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#async_abor_enable=YES --&gt; async_abor_enable=YES //支持异步传输功能，默认是注释掉的，去掉注释</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#ascii_upload_enable=YES --&gt; ascii_upload_enable=YES //支持ASCII模式的下载功能，默认是注释掉的，去掉注释</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#ascii_download_enable=YES --&gt; ascii_download_enable=YES //支持ASCII模式的上传功能，默认是注释掉的，去掉注释</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#ftpd_banner=Welcome to blah FTP service //FTP的登录欢迎语，本身是被注释掉的，去不去都行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#chroot_local_user=YES --&gt;&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">chroot_local_user=YES</span></p>
+	<p style="margin: 10px auto; padding: 0px;">
+		//禁止本地用户登出自己的FTP主目录，本身被注释掉，去掉注释</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　下面几个都是已经去掉的，只是写出来，明白其用意。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		local_enable=YES //允许本地用户访问，默认就是YES，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		write_enable=YES //允许写入，默认是YES，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		local_umask=022 //上传后文件的权限掩码，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		dirmessage_enable=YES //开启目录标语，默认是YES，开不开无所谓，我是默认就行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		xferlog_enable=YES //开启日志，默认是YES，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		connect_from_port_20=YES //设定连接端口20</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		xferlog_std_format=YES //设定vsftpd的服务日志保存路径，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		pam_service_name=vsftpd //设定pam服务下vsftpdd的验证配置文件名，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		userlist_enable=YES //拒绝登录用户名单，不用改</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		TCP_wrappers=YES //限制主机对VSFTP服务器的访问，不用改（通过/etc/hosts.deny和/etc/hosts.allow这两个文件来配置）</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;&nbsp;&nbsp; 按照上面修改完之后，按键盘&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">Esc</strong></span>&quot;退出编辑，再按&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">:</strong></span>&quot;，并在后面输入&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">wq</strong></span>&quot;，进行保存并退出。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.4 配置iptables防火墙</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按照以上步骤还不能运行，用下面命令可以查看一下防火墙允许的端口号，我们知道ftp的端口号是&quot;20、21&quot;，从结果中可以看出，并没有。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		service ipstables status</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341152T9-8.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　&nbsp;这时需要对&quot;/etc/sysconfig/iptables&quot;进行配置：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		vim /etc/sysconfig/iptables</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341154W6-9.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　上图中先列出以&quot;iptables&quot;模糊比配的文件，然后在用上面的命名对&quot;iptables&quot;文件进行添加下面的内容。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-A INPUT -m state --state NEW -m tcp -p tcp --dport 20 -j ACCEPT</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　具体的添加操作命令和前面对&quot;/etc/vsftpd/vsftpd.conf&quot;的操作一样。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/134115H00-10.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.5 设置selinux问题</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　SELinux</strong></span>(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux史上最杰出的新安全子系统。SELinux 是 2.6 版本的 Linux 内核中提供的强制访问控制 (MAC)系统。对于目前可用的 Linux 安全模块来说，SELinux 是功能最全面，而且测试最充分的，它是在 20 年的 MAC 研究基础上建立的。SELinux 在类型强制服务器中合并了多级安全性或一种可选的多类策略，并采用了基于角色的访问控制概念SELinux提供了比传统的UNIX权限更好的访问控制。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　正式如此，所以此时还不能访问FTP服务器。用下面命令查询：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		getsebool -a | grep ftp</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/134115O53-11.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　可以通过下面命令把上图中<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">红色圈住</strong></span>的两个的值设置为&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">on</strong></span>&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		setsebool -P ftp_home_dir 1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		setsebool -P allow_ftpd_full_access 1</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341151201-12.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	2.6 重启相关服务</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　最后就是把&quot;vsftpd&quot;和&quot;iptables&quot;两个服务重新启动一下。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		service vsftpd restart</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/134115B06-13.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　如果出现下图，说明刚才没有把vsftpd服务启动起来。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		service vsftpd start</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/13411521U-14.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　最后把防火墙重新启动一下。</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		service iptables restart</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341151112-15.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　到此为止FTP服务器就搭建完毕了，下面可以通过&quot;FlashFXP.exe&quot;软件进行访问了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	3、FlashFXP使用</h2>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.1 FlashFXP简介</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img align="left" alt="" src="/uploads/allimg/151124/1341152635-16.png" style="margin: 0px; padding: 0px; border: 0px;" />　　FlashFXP是一款功能强大的FXP/FTP软件，集成了其它优秀的FTP软件的优点，如CuteFTP的目录比较，支持彩色文字显示；如BpFTP支持多目录选择文件，暂存目录；又如LeapFTP的界面设计。支持目录(和子目录)的文件传输，删除；支持上传，下载，以及第三方文件续传；可以跳过指定的文件类型，只传送需要的本件；可自定义不同文件类型的显示颜色；暂存远程目录列表，支持FTP代理及Socks 3&amp;4；有避免闲置断线功能，防止被FTP平台踢出；可显示或隐藏具有&quot;隐藏&quot;属性的文档和目录；支持每个平台使用被动模式等。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/1341155249-17.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　上图为FlashFXP开启界面，左面是显示的&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">本地文件系统</strong></span>&quot;，后面是显示&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">服务器文件系统</strong></span>&quot;，点击<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">右侧</strong></span>上面的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">闪电</strong></span>图标<img alt="" src="/uploads/allimg/151124/1341155246-18.png" style="margin: 0px; padding: 0px; border: 0px;" />，按照下图选择&quot;Quick Connect&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/134115L05-19.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　点击之后出现下图，并按照下图进行填写。例如：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/13411511D-20.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	3.2 示例上传</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	<img alt="" src="/uploads/allimg/151124/134115N46-21.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: center;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　&nbsp;链接成功后，会显示上面的内容，可以尝试把左边的一个文件拖到右边，就能上传了，我们现在试一下。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341155253-22.png" style="margin: 0px auto; padding: 0px; border: 0px; display: block;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　最后登录一下看看是否在linux下面有这个文件。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<img alt="" src="/uploads/allimg/151124/1341152Q6-23.png" style="margin: 0px; padding: 0px; border: 0px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　&nbsp;从上图中发现了我们刚才上传的文件&quot;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">SqlHelper1.cs</strong></span>&quot;文件，好了，到此为止，我们的Linux下的FTP服务器基本完成了， 但是离真正的FTP服务器还差的很远，因为我们只是用于&quot;远程上传&quot;点文件，所以基本能满足我们的需要。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h2 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 21px; border-radius: 4px; clear: both; line-height: 1.8; background: rgb(25, 163, 213);">
+	4、用到的Linux命令</h2>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	4.1 chkconfig命令详解</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　chkconfig</strong></span>命令主要用来<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">更新</strong></span>（<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">启动</strong></span>或<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">停止</strong></span>）和<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">查询<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;">系统服务</span></strong>的运行级信息。谨记</span>chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　使用语法：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig [--add][--del][--list][系统服务] 或 chkconfig [--level &lt;等级代号&gt;][系统服务][on/off/reset]</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　chkconfig在没有参数运行时，显示用法。如果加上服务名，那么就检查这个服务是否在当前运行级启动。如果是，返回true，否则返回false。如果在服务名后面指定了on，off或者reset，那么chkconfig会改变指定服务的启动信息。on和off分别指服务被启动和停止，reset指重置服务的启动信息，无论有问题的初始化脚本指定了什么。on和off开关，系统默认只对运行级3，4，5有效，但是reset可以对所有运行级有效。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　参数用法：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		--add 增加所指定的系统服务，让chkconfig指令得以管理它，并同时在系统启动的叙述文件内增加相关数据。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		--del 删除所指定的系统服务，不再由chkconfig指令管理，并同时在系统启动的叙述文件内删除相关数据。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		--level&lt;等级代号&gt; 指定读系统服务要在哪一个执行等级中开启或关毕。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		等级0表示：表示关机</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级1表示：单用户模式</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级2表示：无网络连接的多用户命令行模式</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级3表示：有网络连接的多用户命令行模式</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级4表示：不可用</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级5表示：带图形界面的多用户模式</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		等级6表示：重新启动</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　需要说明的是，level选项可以指定要查看的运行级而不一定是当前运行级。对于每个运行级，只能有一个启动脚本或者停止脚本。当切换运行级时，init不会重新启动已经启动的服务，也不会再次去停止已经停止的服务。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --list [name]：显示所有运行级系统服务的运行状态信息（on或off）。如果指定了name，那么只显示指定的服务在不同运行级的状态。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --add name：增加一项新的服务。chkconfig确保每个运行级有一项启动(S)或者杀死(K)入口。如有缺少，则会从缺省的init脚本自动建立。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --del name：删除服务，并把相关符号连接从/etc/rc[0-6].d删除。</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig [--level levels] name：设置某一服务在指定的运行级是被启动，停止还是重置。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　运行级文件：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　每个被chkconfig管理的服务需要在对应的init.d下的脚本加上两行或者更多行的注释。第一行告诉chkconfig缺省启动的运行级以及启动和停止的优先级。如果某服务缺省不在任何运行级启动，那么使用 - 代替运行级。第二行对服务进行描述，可以用\ 跨行注释。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　例如，random.init包含三行：</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		# chkconfig: 2345 20 80</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		# description: Saves and restores system entropy pool for \</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		# higher quality random number generation.</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　使用范例：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --list #列出所有的系统服务</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --add httpd #增加httpd服务</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --del httpd #删除httpd服务</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --level httpd 2345 on #设置httpd在运行级别为2、3、4、5的情况下都是on（开启）的状态</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --list #列出系统所有的服务启动情况</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --list mysqld #列出mysqld服务设置情况</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig --level 35 mysqld on #设定mysqld在等级3和5为开机运行服务，--level 35表示操作只在等级3和5执行，on表示启动，off表示关闭</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		chkconfig mysqld on #设定mysqld在各等级为on，&quot;各等级&quot;包括2、3、4、5等级</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　如何增加一个服务：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		1.服务脚本必须存放在/etc/ini.d/目录下；</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		2.chkconfig --add servicename</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		在chkconfig工具服务列表中增加此服务，此时服务会被在/etc/rc.d/rcN.d中赋予K/S入口了；</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		3.chkconfig --level 35 mysqld on</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		修改服务的默认启动等级。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	4.2 yum命令详解</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　yum</strong></span>（全称为 Yellow dog Updater, Modified）是一个在Fedora和RedHat以及SUSE中的<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">Shell前端软件包管理器</strong></span>。基於RPM包管理，能够从<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">指定</strong></span>的服务器<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">自动下载</strong></span>RPM包并且安装，可以<span style="margin: 0px; padding: 0px; line-height: 1.8; color: blue;"><strong style="margin: 0px; padding: 0px;">自动处理依赖性</strong></span>关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　yum的命令形式一般是如下：yum [options] [command] [package ...]</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为&quot;yes&quot;），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package ...]是操作的对象。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　概括了部分常用的命令包括：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　自动搜索最快镜像插件： yum install yum-fastestmirror</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　安装yum图形窗口插件： yum install yumex</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　查看可能批量安装的列表： yum grouplist</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1 安装</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum install 全部安装</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum install package1 安装指定的安装包package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum groupinsall group1 安装程序组group1</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2 更新和升级</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum update 全部更新</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum update package1 更新指定程序包package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum check-update 检查可更新的程序</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum upgrade package1 升级指定程序包package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum groupupdate group1 升级程序组group1</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　3 查找和显示</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum info package1 显示安装包信息package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum list 显示所有已经安装和可以安装的程序包</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum list package1 显示指定程序包安装情况package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum groupinfo group1 显示程序组group1信息yum search string 根据关键字string查找安装包</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　4 删除程序</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum remove package1 删除程序包package1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum groupremove group1 删除程序组group1</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum deplist package1 查看程序package1依赖情况</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　5 清除缓存</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		yum clean packages 清除缓存目录下的软件包</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum clean headers 清除缓存目录下的 headers</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum clean oldheaders 清除缓存目录下旧的 headers</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yum clean, yum clean all (= yum clean packages; yum clean oldheaders) 清除缓存目录下的软件包及旧的headers</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　比如，要安装游戏程序组，首先进行查找：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　＃：yum grouplist</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　可以发现，可安装的游戏程序包名字是&quot;Games and Entertainment&quot;，这样就可以进行安装：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　＃：yum groupinstall &quot;Games and Entertainment&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　所 有的游戏程序包就自动安装了。在这里Games and Entertainment的名字必须用双引号选定，因为linux下面遇到空格会认为文件名结束了，因此必须告诉系统安装的程序包的名字是&quot;Games and Entertainment&quot;而不是&quot;Games&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　此外，还可以修改配置文件/etc/yum.conf选择安装源。可见yum进行配置程序有多方便了吧。更多详细的选项和命令，当然只要在命令提示行下面：man yum</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	4.3 SELinux两个命令</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　getsebool与setsebool工具</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　说明：SELinux规范了许多boolean数值清单档案，提供开启或关闭功能存取项目，而这些值都存放在/selinux/booleans/目录内相关档案，这些档案里的值只有两种：1（启用）或 0（关闭）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1）getsebool</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　说明：列出所有selinux bool数值清单表与内容</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　使用方式：getsebool [ -a ]</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　例如以下范例：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		#getsebool ftpd_disable_trans</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		ftpd_disable_trans &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#getsebool -a</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		NetworkManager_disable_trans &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_cvs_read_shadow &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_daemons_dump_core &ndash;&gt; on</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_daemons_use_tty &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_execheap &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_execmem &ndash;&gt; on</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		allow_execmod &ndash;&gt; off</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		&hellip;&hellip;&hellip;</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">2）setsebool</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　说明：设定selinux bool数值清单表与内容</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　使用方式：setsebool [ -P ] boolean value | bool1=val1 bool2=val2 bool3=val3&hellip;&hellip;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　参数配置： -P表示设定该项目永久套用</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　使用范例：</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		setsebool ftpd_disable_trans=on ( on 或者 1 )</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		setsebool -P ftpd_disable_trans=off ( off 或者 0 )</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	4.4 vim命令详解</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的用法和一小部分指令。由于对Unix及Linux系统的任何版本，vi编辑器是完全相同的，因此您可以在其他任何介绍vi的地方进一步了解它。Vi也是Linux中最基本的文本编辑器，学会它后，您将在Linux的世界里畅行无阻。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　1、vi的基本概念</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　基本上vi可以分为三种状态，分别是命令模式（command mode）、插入模式（Insert mode）和底行模式（last line mode），各模式的功能区分如下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　1) 命令行模式command mode）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode下，或者到 last line mode。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　2) 插入模式（Insert mode）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　只有在Insert mode下，才可以做文字输入，按「ESC」键可回到命令行模式。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　3) 底行模式（last line mode）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　将文件保存或退出vi，也可以设置编辑环境，如寻找字符串、列出行号&hellip;&hellip;等。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　不过一般我们在使用时把vi简化成两个模式，就是将底行模式（last line mode）也算入命令行模式command mode）。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">2、vi的基本操作</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　a) 进入vi</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在系统提示符号输入vi及文件名称后，就进入vi全屏幕编辑画面：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		$ vi myfile</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　不过有一点要特别注意，就是您进入vi之后，是处于「命令行模式（command mode）」，您要切换到「插入模式（Insert mode）」才能够输入文字。初次使用vi的人都会想先用上下左右键移动光标，结果电脑一直哔哔叫，把自己气个半死，所以进入vi后，先不要乱动，转换到「插入模式（Insert mode）」再说吧！</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　b) 切换至插入模式（Insert mode）编辑文件</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　c) Insert 的切换</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　您目前处于「插入模式（Insert mode）」，您就只能一直输入文字，如果您发现输错了字！想用光标键往回移动，将该字删除，就要先按一下「ESC」键转到「命令行模式（command mode）」再删除文字。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　d) 退出vi及保存文件</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		: w filename （输入 「w filename」将文章以指定的文件名filename保存）</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		: wq (输入「wq」，存盘并退出vi)</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		: q! (输入q!， 不存盘强制退出vi)</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">3、命令行模式（command mode）功能键</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　1）插入模式</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「i」切换进入插入模式「insert mode」，按&quot;i&quot;进入插入模式后是从光标当前位置开始输入文件；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「a」进入插入模式后，是从目前光标所在位置的下一个位置开始输入文字；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「o」进入插入模式后，是插入新的一行，从行首开始输入文字。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　2）从插入模式切换为命令行模式</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「ESC」键。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　3）移动光标</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　vi可以直接用键盘上的光标来上下左右移动，但正规的vi是用小写英文字母「h」、「j」、「k」、「l」，分别控制光标左、下、上、右移一格。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「ctrl」+「b」：屏幕往&quot;后&quot;移动一页。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「ctrl」+「f」：屏幕往&quot;前&quot;移动一页。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「ctrl」+「u」：屏幕往&quot;后&quot;移动半页。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「ctrl」+「d」：屏幕往&quot;前&quot;移动半页。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按数字「0」：移到文章的开头。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「G」：移动到文章的最后。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「$」：移动到光标所在行的&quot;行尾&quot;。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「^」：移动到光标所在行的&quot;行首&quot;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「w」：光标跳到下个字的开头</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「e」：光标跳到下个字的字尾</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「b」：光标回到上个字的开头</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　按「#l」：光标移到该行的第#个位置，如：5l,56l。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　4）删除文字</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「x」：每按一次，删除光标所在位置的&quot;后面&quot;一个字符。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#x」：例如，「6x」表示删除光标所在位置的&quot;后面&quot;6个字符。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「X」：大写的X，每按一次，删除光标所在位置的&quot;前面&quot;一个字符。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#X」：例如，「20X」表示删除光标所在位置的&quot;前面&quot;20个字符。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「dd」：删除光标所在行。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#dd」：从光标所在行开始删除#行</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　5）复制</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「yw」：将光标所在之处到字尾的字符复制到缓冲区中。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#yw」：复制#个字到缓冲区</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「yy」：复制光标所在行到缓冲区。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#yy」：例如，「6yy」表示拷贝从光标所在的该行&quot;往下数&quot;6行文字。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「p」：将缓冲区内的字符贴到光标所在位置。注意：所有与&quot;y&quot;有关的复制命令都必须与&quot;p&quot;配合才能完成复制与粘贴功能。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　6）替换</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「r」：替换光标所在处的字符。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「R」：替换光标所到之处的字符，直到按下「ESC」键为止。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　7）回复上一次操作</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「u」：如果您误执行一个命令，可以马上按下「u」，回到上一个操作。按多次&quot;u&quot;可以执行多次回复。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　8）更改</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「cw」：更改光标所在处的字到字尾处</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「c#w」：例如，「c3w」表示更改3个字</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　9）跳至指定的行</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「ctrl」+「g」列出光标所在行的行号。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#G」：例如，「15G」，表示移动光标至文章的第15行行首。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　4、Last line mode下命令简介</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　在使用「last line mode」之前，请记住先按「ESC」键确定您已经处于「command mode」下后，再按「：」冒号即可进入「last line mode」。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　A) 列出行号</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「set nu」：输入「set nu」后，会在文件中的每一行前面列出行号。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　B) 跳到文件中的某一行</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「#」：「#」号表示一个数字，在冒号后输入一个数字，再按回车键就会跳到该行了，如输入数字15，再回车，就会跳到文章的第15行。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　C) 查找字符</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「/关键字」：先按「/」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往后寻找到您要的关键字为止。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「?关键字」：先按「?」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往前寻找到您要的关键字为止。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　D) 保存文件</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「w」：在冒号输入字母「w」就可以将文件保存起来。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　E) 离开vi</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「q」：按「q」就是退出，如果无法离开vi，可以在「q」后跟一个「!」强制离开vi。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　「qw」：一般建议离开时，搭配「w」一起使用，这样在退出的时候还可以保存文件。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">　　5、vi命令列表</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　1、下表列出命令模式下的一些键的功能：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 左移光标一个字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 右移光标一个字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 光标上移一行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		j&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 光标下移一行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 光标移动至行首</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数字&quot;0&quot;，光标移至文章的开头</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 光标移至文章的最后</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 光标移动至行尾</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Ctrl+f&nbsp;&nbsp;&nbsp;&nbsp; 向前翻屏</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Ctrl+b&nbsp;&nbsp;&nbsp;&nbsp; 向后翻屏</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Ctrl+d&nbsp;&nbsp;&nbsp;&nbsp; 向前翻半屏</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		Ctrl+u&nbsp;&nbsp;&nbsp;&nbsp; 向后翻半屏</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在光标位置前插入字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在光标所在位置的后一个字符开始增加</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 插入新的一行，从行首开始输入</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		ESC&nbsp;&nbsp;&nbsp;&nbsp; 从输入状态退至命令状态</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除光标后面的字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除光标后的＃个字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (大写X)，删除光标前面的字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除光标前面的#个字符</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除光标所在的行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#dd&nbsp;&nbsp;&nbsp;&nbsp; 删除从光标所在行数的#行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 复制光标所在位置的一个字</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#yw&nbsp;&nbsp;&nbsp;&nbsp; 复制光标所在位置的#个字</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		yy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 复制光标所在位置的一行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#yy&nbsp;&nbsp;&nbsp;&nbsp; 复制从光标所在行数的#行</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		p&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 粘贴</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 取消操作</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		cw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 更改光标所在位置的一个字</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		#cw&nbsp;&nbsp;&nbsp;&nbsp; 更改光标所在位置的#个字</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　2、下表列出行命令模式下的一些指令</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">w</span>&nbsp;filename&nbsp;&nbsp;&nbsp;&nbsp; 储存正在编辑的文件为filename</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">wq</span>&nbsp;filename&nbsp;&nbsp;&nbsp;&nbsp; 储存正在编辑的文件为filename，并退出vi</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">q!</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 放弃所有修改，退出vi</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">set</span>&nbsp;nu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 显示行号</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">/</span>或?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查找，在/后输入要查找的内容</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;">n</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与/或?一起使用，如果查找的内容不是想要找的关键字，按n或向后（与/联用）或向前（与?联用）继续查找，直到找到为止。</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　对于<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">第一次</strong></span>用vi，有几点注意要提醒一下：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　1、用vi打开文件后，是处于「命令行模式（command mode）」，您要切换到「插入模式（Insert mode）」才能够输入文字。切换方法：在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　2、编辑好后，需从插入模式切换为命令行模式才能对文件进行保存，切换方法：按「ESC」键。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　3、保存并退出文件：在命令模式下输入<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">:wq</strong></span>即可！（别忘了wq前面的:）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; text-align: justify;">
+	&nbsp;</p>
+<h3 style="margin: 10px 0px; padding: 6px 20px; color: rgb(255, 255, 255); font-family: 'Microsoft Yahei'; font-size: 16px; border-radius: 4px; clear: both; background: rgb(61, 188, 223);">
+	4.5 touch命令详解</h3>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　linux中新建文件命令touch用法详解：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　linux中的touch命令一般用来修改文件的时间，或者新建一个不存在的文件。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　语法如下：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		touch [-acm][-r ref_file(参照文件)|-t time(时间值)] file(文件名)</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　例子：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		touch file1.txt 更新file1.txt的存取和修改时间</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		touch -c file1.txt 如果file1.txt不存在，不创建文件</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		touch -r ref_file file1.txt 更新file1.txt的时间戳和ref+file相同</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		touch -t 0911252234.40 file1.txt 设定文件的时间为09年11月25日22点34分40秒</p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 102, 255);"><strong style="margin: 0px; padding: 0px;">　　个参数说明如下：</strong></span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	&nbsp;</p>
+<blockquote style="margin: 10px 0px; padding: 5px 10px; border: 2px dotted rgb(57, 154, 178); color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+	<p style="margin: 10px auto; padding: 0px;">
+		-a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 修改文件 file 的存取时间．</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 不创建文件 file.</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 修改文件 file 的修改时间</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-r ref_file 将参照文件 ref_file 相应的时间戳记的数值作为指定文件 file 时间戳记的新值．</p>
+	<p style="margin: 10px auto; padding: 0px;">
+		-t time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 使用指定的时间值 time 作为指定文件 file 相应时间戳记的新值．此处的 time 规定为如下形式的十进制数∶&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.8; color: red;"><strong style="margin: 0px; padding: 0px;">[[CC]YY]MMDDhhmm[.SS]</strong></span></p>
+</blockquote>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	　　这里，CC为年数中的前两位，即&quot;世纪数&quot;；YY为年数的后两位，即某世纪中的年数．如果不给出CC的值，则touch 将把年数CCYY限定在1969--2068之内．MM为月数，DD为天将把年数CCYY限定在1969--2068之内．MM为月数，DD为天数，hh 为小时数(几点)，mm为分钟数，SS为秒数．此处秒的设定范围是0--61，这样可以处理闰秒．这些数字组成的时间是环境变量TZ指定的时区中的一个时 间．由于系统的限制，早于1970年1月1日的时间是错误的。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 25.2px;">
+	原文链接http://www.cnblogs.com/xia520pi/archive/2012/05/16/2503864.html</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

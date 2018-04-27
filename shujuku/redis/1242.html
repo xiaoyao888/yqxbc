@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redis键</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Redis,键,Redis,的,keys,命令,用于,管理," />
+  <meta name="description" content="Redis的keys命令用于管理键。使用Redis的keys命令语法如下所示： 语法 redis 127.0.0.1:6379 COMMAND KEY_NAME 例子 redis 127.0.0.1:6379 SET yiibai redis OK redis 127.0.0.1:6379 DEL yiibai (integer) 1 在上面的例子中" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Redis键</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：13次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1242" class="art_content"><p style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 16px; margin: 0px 0px 10px; color: rgb(83, 91, 96); line-height: 22px;">
+	Redis的keys命令用于管理键。使用Redis的keys命令语法如下所示：</p>
+<h2 style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 14pt; line-height: 1.5em; color: rgb(83, 85, 92); margin-top: 0px; margin-bottom: 10px; padding-left: 0px; border-bottom-style: none; float: left; width: 720.609375px; padding-top: 14px;">
+	语法</h2>
+<pre class="prettyprint prettyprinted" style="box-sizing: border-box; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; overflow: auto; padding: 0.5em; line-height: 16px; word-break: break-all; word-wrap: break-word; color: rgb(49, 49, 49); border-width: 1px 1px 1px 3px; border-style: solid; border-color: rgb(204, 204, 204); border-radius: 0px; white-space: pre-wrap; width: 604px; background-color: rgb(245, 245, 245);">
+<span class="pln" style="box-sizing: border-box; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: rgb(0, 0, 0);">redis 127.0.0.1:6379&gt; COMMAND KEY_NAME</span>
+</pre>
+<h3 style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 14pt; line-height: 1.5em; color: rgb(83, 85, 92); margin-top: 0px; margin-bottom: 10px; border-bottom-style: none; padding-left: 0px; float: left; width: 720.609375px; padding-top: 14px;">
+	例子</h3>
+<pre class="prettyprint prettyprinted" style="box-sizing: border-box; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; overflow: auto; padding: 0.5em; line-height: 16px; word-break: break-all; word-wrap: break-word; color: rgb(49, 49, 49); border-width: 1px 1px 1px 3px; border-style: solid; border-color: rgb(204, 204, 204); border-radius: 0px; white-space: pre-wrap; width: 604px; background-color: rgb(245, 245, 245);">
+<span class="pln" style="box-sizing: border-box; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: rgb(0, 0, 0);">redis 127.0.0.1:6379&gt; SET yiibai redis</span>
+<span class="pln" style="box-sizing: border-box; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: rgb(0, 0, 0);">OK</span>
+<span class="pln" style="box-sizing: border-box; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: rgb(0, 0, 0);">redis 127.0.0.1:6379&gt; DEL yiibai</span>
+<span class="pln" style="box-sizing: border-box; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: rgb(0, 0, 0);">(integer) 1</span>
+</pre>
+<p style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 16px; margin: 0px 0px 10px; color: rgb(83, 91, 96); line-height: 22px;">
+	在上面的例子中DEL是命令，而yiibai是键。如果键被删除那么输出该命令将是 (integer) 1，否则它是 (integer) 0</p>
+<h2 style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 14pt; line-height: 1.5em; color: rgb(83, 85, 92); margin-top: 0px; margin-bottom: 10px; padding-left: 0px; border-bottom-style: none; float: left; width: 720.609375px; padding-top: 14px;">
+	Redis的键命令</h2>
+<p style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 16px; margin: 0px 0px 10px; color: rgb(83, 91, 96); line-height: 22px;">
+	如下表显示键的一些基本命令：</p>
+<table class="src" style="box-sizing: border-box; font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; border-collapse: collapse; border-spacing: 0px; max-width: 100%; margin: 8px 0px; padding: 0px; border-color: rgb(214, 214, 214); vertical-align: top; color: rgb(49, 49, 49); line-height: 22px; width: 604px; background-color: rgb(247, 247, 247);">
+	<tbody style="box-sizing: border-box; font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif, sans-serif; font-size: 16px;">
+		<tr style="box-sizing: border-box;">
+			<th style="box-sizing: border-box; font-size: 11pt; padding: 5px; margin: 0px; border-collapse: collapse; border-style: solid; border-color: rgb(214, 214, 214); line-height: 1.42857143; vertical-align: top; width: 38px; background: rgb(238, 238, 238);">
+				S.N.</th>
+			<th style="box-sizing: border-box; font-size: 11pt; padding: 5px; margin: 0px; border-collapse: collapse; border-style: solid; border-color: rgb(214, 214, 214); line-height: 1.42857143; vertical-align: top; background: rgb(238, 238, 238);">
+				命令 &amp; 描述</th>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				1</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				DEL key<br style="box-sizing: border-box; font-size: 16px;" />
+				此命令删除键，如果存在</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				2</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				DUMP key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				该命令返回存储在指定键的值的序列化版本。</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				3</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				EXISTS key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				此命令检查该键是否存在。</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				4</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				EXPIRE key&nbsp;seconds<br style="box-sizing: border-box; font-size: 16px;" />
+				指定键的过期时间</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				5</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				EXPIREAT key timestamp&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				指定的键过期时间。在这里，时间是在Unix时间戳格式</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				6</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				PEXPIRE key milliseconds&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				设置键以毫秒为单位到期</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				7</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				PEXPIREAT key milliseconds-timestamp&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				设置键在Unix时间戳指定为毫秒到期</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				8</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				KEYS pattern&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				查找与指定模式匹配的所有键</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				9</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				MOVE key db&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				移动键到另一个数据库</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				10</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				PERSIST key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				移除过期的键</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				11</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				PTTL key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				以毫秒为单位获取剩余时间的到期键。</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				12</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				TTL key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				获取键到期的剩余时间。</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				13</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				RANDOMKEY&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				从Redis返回随机键</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				14</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				RENAME key newkey&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				更改键的名称</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				15</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				RENAMENX key newkey&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				重命名键，如果新的键不存在</td>
+		</tr>
+		<tr style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				16</td>
+			<td style="box-sizing: border-box; font-size: 11pt; padding: 8px; line-height: 1.42857143; vertical-align: top; border-style: solid; border-color: rgb(221, 221, 221);">
+				TYPE key&nbsp;<br style="box-sizing: border-box; font-size: 16px;" />
+				返回存储在键的数据类型的值。<br />
+				&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

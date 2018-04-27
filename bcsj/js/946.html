@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript实现图片幻灯片效果</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JavaScript实现图片幻灯片效" />
+  <meta name="description" content="源程序： !DOCTYPEhtmlPUBLIC-//W3C//DTDXHTML1.0Transitional//ENhttp://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd htmlxmlns=http://www.w3.org/1999/xhtml head metahttp-equ" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>JavaScript实现图片幻灯片效果</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：5次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="946" class="art_content">源程序：<br />
+&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;<br />
+&lt;html&nbsp;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;<br />
+&lt;head&gt;<br />
+&lt;meta&nbsp;http-equiv=&quot;Content-Type&quot;&nbsp;content=&quot;text/html;&nbsp;charset=gb2312&quot;&nbsp;/&gt;<br />
+&lt;meta&nbsp;http-equiv=&quot;expires&quot;&nbsp;content=&quot;0&quot;&gt;<br />
+&lt;title&gt;JavaScript幻灯片效果&lt;/title&gt;<br />
+&lt;style&nbsp;type=&quot;text/css&quot;&gt;<br />
+&lt;!--<br />
+body&nbsp;{&nbsp;font-size:12px;<br />
+}<br />
+input&nbsp;{&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;border-right:&nbsp;#7b9ebd&nbsp;1px&nbsp;solid;<br />
+&nbsp;padding-right:&nbsp;2px;<br />
+&nbsp;border-top:&nbsp;#7b9ebd&nbsp;1px&nbsp;solid;<br />
+&nbsp;padding-left:&nbsp;2px;<br />
+&nbsp;font-size:&nbsp;12px;<br />
+&nbsp;filter:&nbsp;progid:DXImageTransform.Microsoft.Gradient(GradientType=0,&nbsp;StartColorStr=#ffffff,&nbsp;EndColorStr=#cecfde);<br />
+&nbsp;border-left:&nbsp;#7b9ebd&nbsp;1px&nbsp;solid;<br />
+&nbsp;cursor:&nbsp;hand;<br />
+&nbsp;color:&nbsp;black;<br />
+&nbsp;padding-top:&nbsp;2px;<br />
+&nbsp;border-bottom:&nbsp;#7b9ebd&nbsp;1px&nbsp;solid;<br />
+}<br />
+.img&nbsp;{<br />
+&nbsp;filter:alpha(opacity=1,enabled=1)&nbsp;&nbsp;blendtrans(duration=1);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;border:1px&nbsp;solid&nbsp;#CCCCCC;<br />
+}<br />
+--&gt;<br />
+&lt;/style&gt;<br />
+&lt;script&nbsp;language=&quot;javascript&quot;&gt;<br />
+var&nbsp;l=0;<br />
+var&nbsp;sum=0;<br />
+var&nbsp;_c&nbsp;=&nbsp;0;<br />
+var&nbsp;_i&nbsp;=&nbsp;0;<br />
+var&nbsp;_v&nbsp;=&nbsp;0;<br />
+var&nbsp;_l&nbsp;=&nbsp;0;<br />
+var&nbsp;_fi&nbsp;=&nbsp;0;<br />
+var&nbsp;_sf&nbsp;=&nbsp;3000;<br />
+var&nbsp;_html&nbsp;=&nbsp;null;<br />
+var&nbsp;_image&nbsp;=&nbsp;null;<br />
+var&nbsp;_mycars=&nbsp;new&nbsp;Array();<br />
+var&nbsp;_w&nbsp;=&nbsp;new&nbsp;Array();<br />
+var&nbsp;_h&nbsp;=&nbsp;new&nbsp;Array();<br />
+var&nbsp;imgs=new&nbsp;Array();<br />
+var&nbsp;limg=new&nbsp;Array();<br />
+<br />
+/*&nbsp;渐隐渐现&nbsp;*/<br />
+function&nbsp;&nbsp;transImg(enable){<br />
+&nbsp;document.getElementById(&quot;showimg&quot;).filters.blendtrans.Apply();<br />
+&nbsp;document.getElementById(&quot;showimg&quot;).filters[0].enabled=enable;<br />
+&nbsp;document.getElementById(&quot;showimg&quot;).filters.blendtrans.Play();<br />
+}<br />
+<br />
+/*&nbsp;加载图片&nbsp;*/<br />
+<br />
+function&nbsp;chk(){<br />
+&nbsp;&nbsp;l--;<br />
+&nbsp;&nbsp;document.getElementById(&quot;rotatorPlayer&quot;).innerHTML=&#39;&lt;img&nbsp;src=&#39;+limg[0].src+&#39;&gt;&lt;br&gt;&lt;br&gt;&#39;&nbsp;+&nbsp;&#39;照片已加载：&#39;&nbsp;+&nbsp;parseInt(((sum-<br />
+<br />
+l)*100/sum)).toString()&nbsp;+&nbsp;&#39;%&#39;<br />
+&nbsp;&nbsp;if&nbsp;(l==0){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adRotator.play();<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;stops&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;next&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;}<br />
+}<br />
+<br />
+if&nbsp;(document.images){<br />
+&nbsp;&nbsp;limg[0]=new&nbsp;Image();<br />
+&nbsp;&nbsp;limg[0].src=&quot;loading.gif&quot;;<br />
+&nbsp;&nbsp;for(var&nbsp;i=0;i&lt;13;i++)<br />
+&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;imgs[i]=new&nbsp;Image();<br />
+&nbsp;imgs[i].src=parseInt(i+1)+&quot;.jpg&quot;;<br />
+&nbsp;&nbsp;}<br />
+}<br />
+<br />
+function&nbsp;adRotator()&nbsp;{}<br />
+<br />
+function&nbsp;adRotator.add(p,w,h)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;_mycars[_c]&nbsp;=&nbsp;p;<br />
+&nbsp;&nbsp;&nbsp;_w[_c]&nbsp;=&nbsp;w;<br />
+&nbsp;&nbsp;&nbsp;_h[_c]&nbsp;=&nbsp;h;<br />
+&nbsp;&nbsp;&nbsp;_c&nbsp;=&nbsp;_c&nbsp;+&nbsp;1;<br />
+}<br />
+<br />
+/*&nbsp;播放设置&nbsp;*/<br />
+function&nbsp;&nbsp;adRotator.loads()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;if&nbsp;(_i&nbsp;&lt;&nbsp;_mycars.length&nbsp;&amp;&amp;&nbsp;_l&nbsp;&lt;&nbsp;1)<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_html&nbsp;=&nbsp;&#39;&lt;img&nbsp;id=&quot;showimg&quot;&nbsp;src=&quot;&#39;&nbsp;+&nbsp;_mycars[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;width=&quot;&#39;&nbsp;+&nbsp;_w[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;height=&quot;&#39;&nbsp;+&nbsp;_h[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;class=&quot;img&quot;&gt;&#39;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_v&nbsp;&lt;&nbsp;1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;image&#39;).value&nbsp;=&nbsp;_html&nbsp;+&nbsp;&#39;,&#39;&nbsp;+&nbsp;_i;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;rotatorPlayer&#39;).innerHTML&nbsp;=&nbsp;_html;<br />
+&nbsp;&nbsp;transImg(0);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_i&nbsp;=&nbsp;_i&nbsp;+&nbsp;1;<br />
+&nbsp;&nbsp;document.getElementById(&#39;backs&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;transImg(1);<br />
+&nbsp;&nbsp;transImg(0);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.setTimeout(&quot;adRotator.loads(&quot;+_i+&quot;)&quot;,_sf);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_html&nbsp;=&nbsp;&#39;&lt;img&nbsp;id=&quot;showimg&quot;&nbsp;src=&quot;&#39;&nbsp;+&nbsp;_mycars[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;width=&quot;&#39;&nbsp;+&nbsp;_w[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;height=&quot;&#39;&nbsp;+&nbsp;_h[_i]&nbsp;+&nbsp;&#39;&quot;&nbsp;class=&quot;img&quot;&gt;&#39;<br />
+&nbsp;&nbsp;document.getElementById(&#39;image&#39;).value&nbsp;=&nbsp;_html&nbsp;+&nbsp;&#39;,&#39;&nbsp;+&nbsp;_i;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;rotatorPlayer&#39;).innerHTML&nbsp;=&nbsp;_html;<br />
+&nbsp;&nbsp;transImg(0);<br />
+&nbsp;&nbsp;transImg(1);<br />
+&nbsp;&nbsp;transImg(0);<br />
+&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;if&nbsp;(_i+1&nbsp;&gt;&nbsp;_mycars.length)<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;stops&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;play&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;backs&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;next&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;_i&nbsp;=&nbsp;0;<br />
+&nbsp;&nbsp;&nbsp;_v&nbsp;=&nbsp;1;<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/*&nbsp;播放&nbsp;*/<br />
+function&nbsp;&nbsp;adRotator.play()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;_v&nbsp;=&nbsp;0;<br />
+&nbsp;&nbsp;&nbsp;_l&nbsp;=&nbsp;0;<br />
+&nbsp;&nbsp;&nbsp;adRotator.loads();<br />
+}<br />
+<br />
+/*&nbsp;下一张&nbsp;*/<br />
+function&nbsp;adRotator.next()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;_l&nbsp;=&nbsp;1;<br />
+&nbsp;&nbsp;&nbsp;if(_i+1&nbsp;&lt;&nbsp;_mycars.length)<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_i&nbsp;=&nbsp;_i&nbsp;+&nbsp;1;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;play&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;stops&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;backs&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;adRotator.loads();<br />
+&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;next&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/*&nbsp;上一张&nbsp;*/<br />
+function&nbsp;adRotator.backs()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;_l&nbsp;=&nbsp;1;<br />
+&nbsp;&nbsp;&nbsp;if(_i-1&nbsp;&lt;&nbsp;0)<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;backs&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_i&nbsp;=&nbsp;_i&nbsp;-&nbsp;1;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;play&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;stops&#39;).disabled=&#39;True&#39;;<br />
+&nbsp;&nbsp;&nbsp;document.getElementById(&#39;next&#39;).disabled=&#39;&#39;;<br />
+&nbsp;&nbsp;&nbsp;adRotator.loads();<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/*&nbsp;间隔时间&nbsp;*/<br />
+function&nbsp;adRotator.set()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;var&nbsp;_sfc&nbsp;=&nbsp;document.getElementById(&#39;second&#39;).value;<br />
+&nbsp;&nbsp;&nbsp;if&nbsp;(isInteger(_sfc))<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_sf&nbsp;=&nbsp;_sfc&nbsp;*&nbsp;1000;<br />
+&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;提示：只能输入数字！&#39;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;second&#39;).value=1;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&#39;second&#39;).select();<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/*&nbsp;字符检测&nbsp;*/<br />
+function&nbsp;isInteger(str)<br />
+{&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var&nbsp;regu&nbsp;=&nbsp;/^[-]{0,1}[0-9]{1,}$/;<br />
+&nbsp;&nbsp;return&nbsp;regu.test(str);<br />
+}<br />
+<br />
+/*&nbsp;暂停&nbsp;*/<br />
+function&nbsp;adRotator.stops()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;_v&nbsp;=&nbsp;1;<br />
+}<br />
+<br />
+/*&nbsp;添加图片&nbsp;*/<br />
+for&nbsp;(var&nbsp;i=0;i&lt;imgs.length;i++)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;adRotator.add(imgs[i].src,400,300);<br />
+}<br />
+<br />
+&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+<br />
+&lt;body&gt;<br />
+&lt;table&nbsp;width=&quot;420&quot;&nbsp;border=&quot;0&quot;&nbsp;align=&quot;center&quot;&nbsp;cellpadding=&quot;0&quot;&nbsp;cellspacing=&quot;0&quot;&gt;<br />
+&nbsp;&nbsp;&lt;tr&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&nbsp;align=&quot;center&quot;&gt;<br />
+&lt;p&nbsp;id=&quot;rotatorPlayer&quot;&nbsp;style=&quot;text-align:center&quot;&gt;&lt;img&nbsp;src=&quot;loading.gif&quot;&gt;&lt;br&gt;&lt;br&gt;照片已加载：0%&lt;/p&gt;<br />
+&lt;br&gt;&lt;br&gt;<br />
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;name=&quot;play&quot;&nbsp;value=&quot;开始播放&quot;&nbsp;onClick=&quot;adRotator.play();this.disabled=&#39;true&#39;;document.getElementById<br />
+<br />
+(&#39;stops&#39;).disabled=&#39;&#39;&quot;&nbsp;disabled=&quot;True&quot;/&gt;<br />
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;name=&quot;stops&quot;&nbsp;value=&quot;暂停&quot;&nbsp;onClick=&quot;adRotator.stops();this.disabled=&#39;true&#39;;document.getElementById<br />
+<br />
+(&#39;play&#39;).disabled=&#39;&#39;&quot;&nbsp;disabled=&quot;True&quot;/&gt;<br />
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;name=&quot;backs&quot;&nbsp;value=&quot;上一张&quot;&nbsp;onClick=&quot;adRotator.backs();&quot;&nbsp;disabled=&quot;True&quot;/&gt;<br />
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;name=&quot;next&quot;&nbsp;value=&quot;下一张&quot;&nbsp;onClick=&quot;adRotator.next();&quot;&nbsp;disabled=&quot;True&quot;/&gt;&nbsp;&nbsp;&nbsp;<br />
+&lt;input&nbsp;type=&quot;text&quot;&nbsp;id=&quot;second&quot;&nbsp;value=&quot;3&quot;&nbsp;size=&quot;3&quot;&nbsp;maxlength=&quot;2&quot;&gt;<br />
+秒<br />
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;value=&quot;设置时间&quot;&nbsp;onClick=&quot;adRotator.set()&quot;&nbsp;/&gt;<br />
+&lt;br&gt;&lt;br&gt;<br />
+&lt;input&nbsp;name=&quot;image&quot;&nbsp;type=&quot;text&quot;&nbsp;size=&quot;65&quot;/&gt;<br />
+&lt;/td&gt;<br />
+&nbsp;&nbsp;&lt;/tr&gt;<br />
+&lt;/table&gt;<br />
+&lt;script&nbsp;language=&quot;javascript&quot;&gt;<br />
+sum=l=imgs.length;<br />
+for&nbsp;(var&nbsp;i=0;i&lt;l;i++){<br />
+&nbsp;&nbsp;imgs[i].onload=chk;<br />
+&nbsp;&nbsp;imgs[i].onerror=chk;//无论图片是否加载成功，都执行指定方法<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

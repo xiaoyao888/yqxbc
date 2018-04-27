@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java 类加载机制详解</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,类,加载,机制,详解,一,、,类,加载,器," />
+  <meta name="description" content="一、类加载器 类加载器（ClassLoader），顾名思义，即加载类的东西。在我们使用一个类之前，JVM需要先将该类的字节码文件（.class文件）从磁盘、网络或其他来源加载到内存中，并对字" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java 类加载机制详解</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：46次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1499" class="art_content"><h4>
+	一、类加载器</h4>
+<p>
+	类加载器（ClassLoader），顾名思义，即加载类的东西。在我们使用一个类之前，JVM需要先将该类的字节码文件（.class文件）从磁盘、网络或其他来源加载到内存中，并对字节码进行解析生成对应的Class对象，这就是类加载器的功能。我们可以利用类加载器，实现类的动态加载。</p>
+<h4>
+	二、类的加载机制</h4>
+<p>
+	在Java中，采用双亲委派机制来实现类的加载。那什么是双亲委派机制？在Java Doc中有这样一段描述：</p>
+<pre>
+The ClassLoader class uses a delegation model to search for classes and resources. Each instance of ClassLoader has an associated parent class loader. When requested to find a class or resource, a ClassLoader instance will delegate the search for the class or resource to its parent class loader before attempting to find the class or resource itself. The virtual machine&#39;s built-in class loader, called the &quot;bootstrap class loader&quot;, does not itself have a parent but may serve as the parent of a ClassLoader instance.</pre>
+<p>
+	从以上描述中，我们可以总结出如下四点：</p>
+<p>
+	1、类的加载过程采用委托模式实现</p>
+<p>
+	2、每个 ClassLoader 都有一个父加载器。</p>
+<p>
+	3、类加载器在加载类之前会先递归的去尝试使用父加载器加载。</p>
+<p>
+	4、虚拟机有一个内建的启动类加载器（bootstrap ClassLoader），该加载器没有父加载器，但是可以作为其他加载器的父加载器。</p>
+<p>
+	Java 提供三种类型的系统类加载器。第一种是启动类加载器，由C++语言实现，属于JVM的一部分，其作用是加载 &lt;Java_Runtime_Home&gt;/lib 目录中的文件，并且该类加载器只加载特定名称的文件（如 rt.jar），而不是该目录下所有的文件。另外两种是 Java 语言自身实现的类加载器，包括扩展类加载器（ExtClassLoader）和应用类加载器（AppClassLoader），扩展类加载器负责加载&lt;Java_Runtime_Home&gt;\lib\ext目录中或系统变量 java.ext.dirs 所指定的目录中的文件。应用程序类加载器负责加载用户类路径中的文件。用户可以直接使用扩展类加载器或系统类加载器来加载自己的类，但是用户无法直接使用启动类加载器，除了这两种类加载器以外，用户也可以自定义类加载器，加载流程如下图所示：</p>
+<p style="text-align: center;">
+	　　<img alt="" src="/uploads/allimg/160510/0912153J0-0.PNG" /></p>
+<p>
+	注意：这里父类加载器并不是通过继承关系来实现的，而是采用组合实现的。</p>
+<p>
+	我们可以通过一段程序来验证这个过程：</p>
+<pre>
+public class Test {
+
+}
+
+
+
+public class TestMain {
+
+    public static void main(String[] args) {
+
+
+
+        ClassLoader loader = Test.class.getClassLoader();
+
+        while (loader!=null){
+
+            System.out.println(loader);
+
+            loader = loader.getParent();
+
+        }
+
+    }
+
+}							
+						
+</pre>
+<p>
+	上面程序的运行结果如下所示:　　</p>
+<p>
+	<img alt="" src="/uploads/allimg/160510/091215J29-1.PNG" /></p>
+<p>
+	从结果我们可以看出，默认情况下，用户自定义的类使用 AppClassLoader 加载，AppClassLoader 的父加载器为 ExtClassLoader，但是 ExtClassLoader 的父加载器却显示为空，这是什么原因呢？究其缘由，启动类加载器属于 JVM 的一部分，它不是由 Java 语言实现的，在 Java 中无法直接引用，所以才返回空。但如果是这样，该怎么实现&nbsp;ExtClassLoader 与 启动类加载器之间双亲委派机制？我们可以参考一下源码：</p>
+<pre>
+protected Class<!--?--> loadClass(String name, boolean resolve)
+
+       throws ClassNotFoundException
+
+   {
+
+       synchronized (getClassLoadingLock(name)) {
+
+           // First, check if the class has already been loaded
+
+           Class<!--?--> c = findLoadedClass(name);
+
+           if (c == null) {
+
+               long t0 = System.nanoTime();
+
+               try {
+
+                   if (parent != null) {
+
+                       c = parent.loadClass(name, false);
+
+                   } else {
+
+                       c = findBootstrapClassOrNull(name);
+
+                   }
+
+               } catch (ClassNotFoundException e) {
+
+                   // ClassNotFoundException thrown if class not found
+
+                   // from the non-null parent class loader
+
+               }
+
+
+
+               if (c == null) {
+
+                   // If still not found, then invoke findClass in order
+
+                   // to find the class.
+
+                   long t1 = System.nanoTime();
+
+                   c = findClass(name);
+
+
+
+                   // this is the defining class loader; record the stats
+
+                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+
+                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+
+                   sun.misc.PerfCounter.getFindClasses().increment();
+
+               }
+
+           }
+
+           if (resolve) {
+
+               resolveClass(c);
+
+           }
+
+           return c;
+
+       }
+
+   }
+</pre>
+<p>
+	从源码可以看出，ExtClassLoader 和 AppClassLoader都继承自 ClassLoader 类，ClassLoader 类中通过 loadClass 方法来实现双亲委派机制。整个类的加载过程可分为如下三步：</p>
+<p>
+	1、查找对应的类是否已经加载。</p>
+<p>
+	2、若未加载，则判断当前类加载器的父加载器是否为空，不为空则委托给父类去加载，否则调用启动类加载器加载（findBootstrapClassOrNull 再往下会调用一个 native 方法）。</p>
+<p>
+	3、若第二步加载失败，则调用当前类加载器加载。</p>
+<p>
+	通过上面这段程序，可以很清楚的看出扩展类加载器与启动类加载器之间是如何实现委托模式的。</p>
+<p>
+	现在，我们再验证另一个问题。我们将刚才的Test类打成jar包，将其放置在&nbsp;&lt;Java_Runtime_Home&gt;\lib\ext 目录下，然后再次运行上面的代码，结果如下：</p>
+<p>
+	<img alt="" src="/uploads/allimg/160510/0912156064-2.PNG" /></p>
+<p>
+	现在，该类就不再通过 AppClassLoader 来加载，而是通过 ExtClassLoader 来加载了。如果我们试图把jar包拷贝到&lt;Java_Runtime_Home&gt;\lib，尝试通过启动类加载器加载该类时，我们会发现编译器无法识别该类，因为启动类加载器除了指定目录外，还必须是特定名称的文件才能加载。</p>
+<h4>
+	三、自定义类加载器</h4>
+<p>
+	通常情况下，我们都是直接使用系统类加载器。但是，有的时候，我们也需要自定义类加载器。比如应用是通过网络来传输 Java 类的字节码，为保证安全性，这些字节码经过了加密处理，这时系统类加载器就无法对其进行加载，这样则需要自定义类加载器来实现。自定义类加载器一般都是继承自 ClassLoader 类，从上面对 loadClass 方法来分析来看，我们只需要重写 findClass 方法即可。下面我们通过一个示例来演示自定义类加载器的流程：</p>
+<pre>
+package com.paddx.test.classloading;
+
+
+
+import java.io.*;
+
+
+
+/**
+
+ * Created by liuxp on 16/3/12.
+
+ */
+
+public class MyClassLoader extends ClassLoader {
+
+
+
+    private String root;
+
+
+
+    protected Class<!--?--> findClass(String name) throws ClassNotFoundException {
+
+        byte[] classData = loadClassData(name);
+
+        if (classData == null) {
+
+            throw new ClassNotFoundException();
+
+        } else {
+
+            return defineClass(name, classData, 0, classData.length);
+
+        }
+
+    }
+
+
+
+    private byte[] loadClassData(String className) {
+
+        String fileName = root + File.separatorChar
+
+                + className.replace(&#39;.&#39;, File.separatorChar) + &quot;.class&quot;;
+
+        try {
+
+            InputStream ins = new FileInputStream(fileName);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            int bufferSize = 1024;
+
+            byte[] buffer = new byte[bufferSize];
+
+            int length = 0;
+
+            while ((length = ins.read(buffer)) != -1) {
+
+                baos.write(buffer, 0, length);
+
+            }
+
+            return baos.toByteArray();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+
+    }
+
+
+
+    public String getRoot() {
+
+        return root;
+
+    }
+
+
+
+    public void setRoot(String root) {
+
+        this.root = root;
+
+    }
+
+
+
+    public static void main(String[] args)  {
+
+
+
+        MyClassLoader classLoader = new MyClassLoader();
+
+        classLoader.setRoot(&quot;/Users/liuxp/tmp&quot;);
+
+
+
+        Class<!--?--> testClass = null;
+
+        try {
+
+            testClass = classLoader.loadClass(&quot;com.paddx.test.classloading.Test&quot;);
+
+            Object object = testClass.newInstance();
+
+            System.out.println(object.getClass().getClassLoader());
+
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (InstantiationException e) {
+
+            e.printStackTrace();
+
+        } catch (IllegalAccessException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
+	
+</pre>
+<p>
+	运行上面的程序，输出结果如下：</p>
+<p>
+	<img alt="" src="/uploads/allimg/160510/091215F54-3.PNG" />　　</p>
+<p>
+	自定义类加载器的核心在于对字节码文件的获取，如果是加密的字节码则需要在该类中对文件进行解密。由于这里只是演示，我并未对class文件进行加密，因此没有解密的过程。这里有几点需要注意：</p>
+<p>
+	1、这里传递的文件名需要是类的全限定性名称，即com.paddx.test.classloading.Test格式的，因为 defineClass 方法是按这种格式进行处理的。</p>
+<p>
+	2、最好不要重写loadClass方法，因为这样容易破坏双亲委托模式。</p>
+<p>
+	3、这类 Test 类本身可以被 AppClassLoader 类加载，因此我们不能把 com/paddx/test/classloading/Test.class 放在类路径下。否则，由于双亲委托机制的存在，会直接导致该类由 AppClassLoader 加载，而不会通过我们自定义类加载器来加载。</p>
+<h4>
+	四、总结</h4>
+<p>
+	双亲委派机制能很好地解决类加载的统一性问题。对一个 Class 对象来说，如果类加载器不同，即便是同一个字节码文件，生成的 Class 对象也是不等的。也就是说，类加载器相当于 Class 对象的一个命名空间。双亲委派机制则保证了基类都由相同的类加载器加载，这样就避免了同一个字节码文件被多次加载生成不同的 Class 对象的问题。但双亲委派机制仅仅是Java 规范所推荐的一种实现方式，它并不是强制性的要求。近年来，很多热部署的技术都已不遵循这一规则，如 OSGi 技术就采用了一种网状的结构，而非双亲委派机制。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

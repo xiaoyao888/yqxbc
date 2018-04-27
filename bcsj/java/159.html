@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSP如何提高数据库访问效率</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JSP,如何,提高,数据库,访问,效率,从,服务器,端," />
+  <meta name="description" content="从服务器端促进程序快速开发的JavaServerPages(JSP)决定它成为一种广为流行的工具。虽然呆板的一面仍然存在，然而无论它包含多少缺点，JSP能够为Web程序设计者提供很多东西，尤其是与" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>JSP如何提高数据库访问效率</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：42次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="159" class="art_content"><p>
+	从服务器端促进程序快速开发的Java&nbsp;Server&nbsp;Pages&nbsp;(JSP)决定它成为一种广为流行的工具。虽然呆板的一面仍然存在，然而无论它包含多少缺点，JSP能够为Web程序设计者提供很多东西，尤其是与数据库的输入和输出操作与数据的处理。&nbsp;</p>
+<p>
+	通过JSP来进行数据库访问不需要太多的引导。问题是如何使开发者能够接受Web程序的数据库访问比传统的本地OLAP系统的数据库访问更加具有吸引力，并且使他们认识到，整洁和简要的数据访问方法才是关键的。在这一点上，JSP可以很好地解决。</p>
+<p>
+	你能够做哪些？&nbsp;</p>
+<p>
+	如果你正在编写高数据量、数据密度大的Web程序时，你的数据库访问应该具备哪一方面的要求？如果你正在使用JSP，那么你必须处理大量的服务器端的数据。程序也许需要大量的数据，或者很多用户，或者这二者的结合。你所考虑的可能范围还会包括：性能的优化，可检测性，每一用户的多个查询的影响，查询的复杂性，以及当单一的会话处理大量数据时，高等级的类型转换。</p>
+<p>
+	这其中包含大规模的处理。但是，JSP能够帮助你很好地处理，因为它能够与Java&nbsp;Database&nbsp;Connectivity&nbsp;API&nbsp;(JDBC)很好的兼容。你可以将JDBC包含在JSP代码中，并且JDBC能够传递声明执行类似数据库的命令，只要你能够正确地使用JDBC驱动程序。</p>
+<p>
+	开始&nbsp;</p>
+<p>
+	这里是一个通常的、抽象的JSP程序执行的体系。首选的JSP设计模式为模型-视图-控制器(MVCModel-View-Controller)，即传统三层体系的一种变异，以更好的适合于服务器程序。在JSP的MVC设计模式中，Model指的是程序的逻辑与数据，View为查看，以及Controller为请求处理。</p>
+<p>
+	当你设计一个JSP程序时，在客户端与服务器交互之间建立第一步骤的页面，这是最好的一个过程。例如，在一个典型程序中，在数据交换中的每一个特定步骤都会有页面：一个数据入口页面，一个验证请求页面，一个数据库响应页面，以及这些页面的子页面(一个更改记录的页面，一个删除记录的页面，等等)。</p>
+<p>
+	你可以将JDBC嵌入到每一页面中，以完成被请求的数据库操作。然而，这一操作也会冒很大的风险，因为由于混合了JSP和JDBC而混合了整个程序──JDBC是基于SQL。这也就是SQL被封装在JDBC，而JDBC也被封装在JSP──这也足够让你晕头转向的。如果你选择这一方法，你将会获得你想要的功能，但一定要保证你的程序逻辑与数据库访问代码的关系非常清晰，这一点格外小心。</p>
+<p>
+	嵌入式JDBC&nbsp;</p>
+<p>
+	JDBC&nbsp;API不会直接地与数据库进行交流。其中的驱动程序完成的实际的连接，你可以在卖方的Web站点上下载这些驱动程序。除此之外，还有四种JDBC的驱动程序类型，如果你决定使用JDBC，你需要正确地选择最为适合你需要的那种类型。你将使用一个DriverManager类来处理基于驱动程序的连接。</p>
+<p>
+	你可以使用一个名为getConnection的DriverManager方法来建立你的数据库连接。你还可以使用它的URL参数来识别数据库：</p>
+<p>
+	public&nbsp;static&nbsp;Connection&nbsp;getConnection(jdbc:odbc:nameOfDatabase)</p>
+<p>
+	现在，告诉DriverManager有关驱动程序的信息(应该在你的classpath中)：</p>
+<p>
+	Class.forName(&ldquo;sun.jdbc.odbc.nameOfJDBCDriver&rdquo;);</p>
+<p>
+	你已经将数据库连接到JSP程序，但你仍然不能够执行一个数据库命令。解决这一点，你可以在JSP代码中生成声明以建立数据库命令，如下所示：</p>
+<p>
+	public&nbsp;Statement&nbsp;createStatement(intresultSetType,&nbsp;intresultSetConcurrency)</p>
+<p>
+	其中的参数能够让你控制从数据库查询得到的结果。当使用第一个参数时，可以在程序中看到结果；当使用第二个参数时，你可以通过查询来更新数值(这是一个难以相信的功能，在以后的文章中值得进一步讨论)。</p>
+<p>
+	表A显示列举了下两种方法的复杂性。</p>
+<p>
+	声明(Statement)就是SQL命令。PreparedStatement就是SQL的声明，你可以通过其中的参数来控制程序的过程。CallableStatement是用于访问SQL存储程序。你是否开始意识到，如果你没有看到这些说明，你是否觉得这些声明很复杂？请注意到，通过调用rollback方法，你可以撤除交易过程。</p>
+<p>
+	如果你想完全使用这些数据库访问的方法，你唯一遗漏的还有：</p>
+<p>
+	ResultSetexecuteQuery(string&nbsp;sqlQuery)&nbsp;</p>
+<p>
+	(你可以使用executeQuery来完成以上过程。你也可以使用一个executeUpdate来完成更新、插入和删除)。你以上的声明接口使你可以使用一些方法来执行SQL声明。ResultSet所做的就是访问从查询得到的数据，所以你可以在JSP程序中使用这些数据。</p>
+<p>
+	通过将JSP程序分解成单一的、功能明显的页面，以及在任何给定页面中执行一个单一的数据库操作，可以很大程度地简化你的数据库操作，以及建立可以用于以后程序开发的页面，即使你将SQL嵌入到这些页面的JDBC中。</p>
+<p>
+	但是你还可以做更多的事情，以使得你的JSP数据库访问更加整洁和容易维护。在JSP代码中嵌入JDBC，以及通过发送SQL命令与数据库通讯，这些过程都很好。但是，它要求在不能增加代码复杂程度下，建立通过接口的SQL命令的程序。当你的SQL处理需要提高灵活性的时候，你可以进一步地分离你的数据库接口代码，以清洁你的JSP程序。在下面的文章中，我将告诉你如何实现这些过程。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

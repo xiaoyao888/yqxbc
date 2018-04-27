@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>直击Redis持久化磁盘IO痛点，让存储不再有负担！</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="持久化磁盘,IO,redis" />
+  <meta name="description" content="Redis 常用数据类型 Redis 最为常用的数据类型主要有以下五种： String Hash List Set Sorted set 在具体描述这几种数据类型之前，我们先通过一张图了解下 Redis 内部内存管理中是如何描述这些" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>直击Redis持久化磁盘IO痛点，让存储不再有负担！</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：475次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1625" class="art_content"><section data-id="88252" data-tools="135编辑器">
+	<section>
+		<section>
+			<section>
+				<h3>
+					Redis 常用数据类型</h3>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	Redis 最为常用的数据类型主要有以下五种：</p>
+<ul>
+	<li>
+		<p>
+			String</p>
+	</li>
+	<li>
+		<p>
+			Hash</p>
+	</li>
+	<li>
+		<p>
+			List</p>
+	</li>
+	<li>
+		<p>
+			Set</p>
+	</li>
+	<li>
+		<p>
+			Sorted set</p>
+	</li>
+</ul>
+<p>
+	&nbsp;</p>
+<p>
+	在具体描述这几种数据类型之前，我们先通过一张图了解下 Redis 内部内存管理中是如何描述这些不同数据类型的：</p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/170926/1-1F926155642.png" /></p>
+<p>
+	&nbsp;</p>
+<p>
+	首先 Redis 内部使用一个 redisObject 对象来表示所有的 key 和 value，redisObject 最主要的信息如上图所示。type 代表一个 value 对象具体是何种数据类型，encoding是不同数据类型在Redis内部的存储方式，比如：type=string 代表 value 存储的是一个普通字符串，那么对应的 encoding 可以是 raw 或者是 int，如果是 int 则代表实际 Redis 内部是按数值型类存储和表示这个字符串的，当然前提是这个字符串本身可以用数值表示，比如：&quot;123&quot; &quot;456&quot;这样的字符串。</p>
+<p>
+	这里需要特殊说明一下 vm 字段，只有打开了 Redis 的虚拟内存功能，此字段才会真正的分配内存，该功能默认是关闭状态的，该功能会在后面具体描述。</p>
+<p>
+	通过上图我们可以发现 ，Redis 使用 redisObject 来表示所有的 key/value 数据是比较浪费内存的，当然这些内存管理成本的付出主要也是为了给 Redis 不同数据类型提供一个统一的管理接口，实际作者也提供了多种方法帮助我们尽量节省内存使用，随后会具体讨论。</p>
+<p>
+	下面我们先逐一分析这五种数据类型的使用和内部实现方式：</p>
+<section data-id="88092" data-tools="135编辑器">
+	<section>
+		<section data-width="92.0721%">
+			<section data-brushtype="text">
+				<h3>
+					String</h3>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	常用命令：</p>
+<p>
+	Set、get、decr、incr、mget 等。</p>
+<p>
+	&nbsp;</p>
+<p>
+	应用场景：</p>
+<p>
+	String 是最常用的一种数据类型，普通的 key/value 存储都可以归为此类，这里就不所做解释了。</p>
+<p>
+	实现方式：</p>
+<p>
+	String 在 Redis 内部存储默认就是一个字符串，被 redisObject 所引用，当遇到 incr、decr 等操作时会转成数值型进行计算，此时 redisObject 的 encoding 字段为int。</p>
+<h3>
+	Hash</h3>
+<p>
+	常用命令：</p>
+<p>
+	Hget、hset、hgetall 等。</p>
+<p>
+	应用场景：</p>
+<p>
+	我们简单举个实例来描述下 Hash 的应用场景，比如我们要存储一个用户信息对象数据，包含以下信息：</p>
+<p>
+	用户 ID 为查找的 key，存储的 value 用户对象包含姓名，年龄，生日等信息，如果用普通的 key/value 结构来存储，主要有以下2种存储方式：</p>
+<p>
+	&nbsp;</p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/170926/1-1F926155642-50.png" /></p>
+<p>
+	第一种方式将用户 ID 作为查找 key，把其它信息封装成一个对象以序列化的方式存储，这种方式的缺点是，增加了序列化/反序列化的开销，并且在需要修改其中一项信息时，需要把整个对象取回，并且修改操作需要对并发进行保护，引入CAS等复杂问题。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/170926/1-1F926155642-51.png" /></p>
+<p>
+	第二种方法是这个用户信息对象有多少成员就存成多少个 key-value 对儿，用用户 ID +对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户 ID 为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的。</p>
+<p>
+	那么 Redis 提供的 Hash 很好地解决了这个问题，Redis 的 Hash 实际是内部存储的 Value 为一个 HashMap，并提供了直接存取这个 Map 成员的接口，如下图：</p>
+<p>
+	&nbsp;</p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/170926/1-1F926155642-52.png" /></p>
+<p>
+	也就是说，Key 仍然是用户 ID，value 是一个 Map，这个 Map 的 key 是成员的属性名，value 是属性值，这样对数据的修改和存取都可以直接通过其内部 Map 的 Key（Redis 里称内部 Map 的 key 为 field），也就是通过 key（用户 ID） + field（属性标签）就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题，很好地解决了问题。</p>
+<p>
+	这里同时需要注意，Redis 提供了接口（hgetall）可以直接取到全部的属性数据，但是如果内部 Map 的成员很多，那么涉及到遍历整个内部 Map 的操作，由于 Redis 单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应，这点需要格外注意。</p>
+<p>
+	实现方式：</p>
+<p>
+	上面已经说到 Redis Hash 对应 Value 内部实际就是一个 HashMap，实际这里会有2种不同实现，这个 Hash 的成员比较少时 Redis 为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的 HashMap 结构，对应的 value redisObject 的 encoding 为 zipmap，当成员数量增大时会自动转成真正的 HashMap，此时 encoding 为 ht。</p>
+<section data-id="88092" data-tools="135编辑器">
+	<section>
+		<section data-width="92.0721%">
+			<section data-brushtype="text">
+				<h3>
+					List</h3>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	常用命令：</p>
+<p>
+	Lpush、rpush、lpop、rpop、lrange等。</p>
+<p>
+	应用场景：</p>
+<p>
+	Redis list 的应用场景非常多，也是 Redis 最重要的数据结构之一，比如 twitter 的关注列表，粉丝列表等都可以用 Redis 的 list 结构来实现，比较好理解，这里不再重复。</p>
+<p>
+	实现方式：</p>
+<p>
+	Redis list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构。</p>
+<h3>
+	Set</h3>
+<p>
+	常用命令：</p>
+<p>
+	Sadd、spop、smembers、sunion 等。</p>
+<p>
+	应用场景：</p>
+<p>
+	Redis set 对外提供的功能与 list 类似是一个列表的功能，特殊之处在于 set 是可以自动排重的，当你需要存储一个列表数据，又不希望出现重复数据时，set 是一个很好的选择，并且 set 提供了判断某个成员是否在一个 set 集合内的重要接口，这个也是 list 所不能提供的。</p>
+<p>
+	实现方式：</p>
+<p>
+	set 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 hash 的方式来快速排重的，这也是 set 能提供判断一个成员是否在集合内的原因。</p>
+<h3>
+	Sorted set</h3>
+<p>
+	常用命令：</p>
+<p>
+	zadd、zrange、zrem、zcard等。</p>
+<p>
+	使用场景：</p>
+<p>
+	Redis sorted set的使用场景与 set 类似，区别是set不是自动有序的，而 sorted set 可以通过用户额外提供一个优先级（score）的参数来为成员排序，并且是插入有序的，即自动排序。当你需要一个有序的并且不重复的集合列表，那么可以选择 sorted set 数据结构，比如 twitter 的 public timeline 可以以发表时间作为 score 来存储，这样获取时就是自动按时间排好序的。</p>
+<p>
+	实现方式：</p>
+<p>
+	Redis sorted set 的内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序，HashMap 里放的是成员到 score 的映射，而跳跃表里存放的是所有的成员，排序依据是 HashMap 里存的 score，使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单。</p>
+<p>
+	常用内存优化手段与参数</p>
+<p>
+	通过我们上面的一些实现上的分析可以看出 Redis 实际上的内存管理成本非常高，即占用了过多的内存，作者对这点也非常清楚，所以提供了一系列的参数和手段来控制和节省内存，我们分别来讨论下。</p>
+<p>
+	首先最重要的一点是不要开启 Redis 的 VM 选项，即虚拟内存功能，这个本来是作为 Redis 存储超出物理内存数据的一种数据在内存与磁盘换入换出的一个持久化策略，但是其内存管理成本也非常的高，并且我们后续会分析此种持久化策略并不成熟，所以要关闭 VM 功能，请检查你的 redis.conf 文件中 vm-enabled 为 no。</p>
+<p>
+	其次最好设置下 redis.conf 中的 maxmemory 选项，该选项是告诉 Redis 当使用了多少物理内存后就开始拒绝后续的写入请求，该参数能很好地保护好你的 Redis 不会因为使用了过多的物理内存而导致 swap，最终严重影响性能甚至崩溃。</p>
+<p>
+	另外 Redis 为不同数据类型分别提供了一组参数来控制内存使用，我们在前面详细分析过 Redis Hash 是 value 内部为一个 HashMap，如果该 Map 的成员数比较少，则会采用类似一维线性的紧凑格式来存储该 Map，即省去了大量指针的内存开销，这个参数控制对应在 redis.conf 配置文件中下面2项：</p>
+<section data-color="rgb(245, 245, 244)" data-custom="rgb(245, 245, 244)" data-id="88286" data-tools="135编辑器">
+	<section>
+		<section data-width="100%">
+			<section>
+				<pre>
+hash-max-zipmap-entries 64</pre>
+			</section>
+		</section>
+		<section>
+			<section>
+				<pre>
+hash-max-zipmap-value 512
+
+hash-max-zipmap-entries</pre>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	含义是当 value 这个 Map 内部不超过多少个成员时会采用线性紧凑格式存储，默认是64，即 value 内部有64个以下的成员就是使用线性紧凑存储，超过该值自动转成真正的 HashMap。</p>
+<p>
+	hash-max-zipmap-value 含义是当 value 这个 Map 内部的每个成员值长度不超过多少字节就会采用线性紧凑存储来节省空间。</p>
+<p>
+	以上2个条件任意一个条件超过设置值都会转换成真正的 HashMap，也就不会再节省内存了，那么这个值是不是设置的越大越好呢，答案当然是否定的，HashMap 的优势就是查找和操作的时间复杂度都是 O(1) 的，而放弃 Hash 采用一维存储则是 O(n) 的时间复杂度，如果成员数量很少，则影响不大，否则会严重影响性能，所以要权衡好这个值的设置，总体上还是最根本的时间成本和空间成本上的权衡。</p>
+<p>
+	同样类似的参数还有：</p>
+<section data-id="88286" data-tools="135编辑器">
+	<section>
+		<section data-width="100%">
+			<section>
+				<pre>
+list-max-ziplist-entries 512</pre>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	说明：list 数据类型多少节点以下会采用去指针的紧凑存储格式。</p>
+<section data-id="88286" data-tools="135编辑器">
+	<section>
+		<section data-width="100%">
+			<section>
+				<pre>
+list-max-ziplist-value 64</pre>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	说明：list 数据类型节点值大小小于多少字节会采用紧凑存储格式。</p>
+<section data-id="88286" data-tools="135编辑器">
+	<section>
+		<section data-width="100%">
+			<section>
+				<pre>
+set-max-intset-entries 512</pre>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	注：set 数据类型内部数据如果全部是数值型，且包含多少节点以下会采用紧凑格式存储。</p>
+<p>
+	最后想说的是Redis内部实现没有对内存分配方面做过多的优化，在一定程度上会存在内存碎片，不过大多数情况下这个不会成为Redis的性能瓶 颈，不过如果在Redis内部存储的大部分数据是数值型的话，Redis内部采用了一个 shared integer 的方式来省去分配内存的开销，即在系统启动时先分配一个从 1~n，那么多个数值对象放在一个池子中，如果存储的数据恰好是这个数值范围内的数据，则直接从池子里取出该对象，并且通过引用计数的方式来共享，这样在系统存储了大量数值下，也能一定程度上节省内存并且提高性能，这个参数值 n 的设置需要修改源代码中的一行宏定义 REDIS_SHARED_INTEGERS，该值 默认是 10000，可以根据自己的需要进行修改，修改后重新编译就可以了。</p>
+<h3>
+	Redis 的持久化机制</h3>
+<section data-id="88252" data-tools="135编辑器">
+	<section>
+		<section>
+			<section>
+				Redis 由于支持非常丰富的内存数据结构类型，如何把这些复杂的内存组织方式持久化到磁盘上是一个难题，所以 Redis 的持久化方式与传统数据库的方式有比较多的差别，Redis 一共支持四种持久化方式，分别是：</section>
+		</section>
+	</section>
+</section>
+<ul>
+	<li>
+		<p>
+			定时快照方式（snapshot）</p>
+	</li>
+	<li>
+		<p>
+			基于语句追加文件的方式（aof）</p>
+	</li>
+	<li>
+		<p>
+			虚拟内存（vm）</p>
+	</li>
+	<li>
+		<p>
+			Diskstore 方式</p>
+	</li>
+</ul>
+<p>
+	&nbsp;</p>
+<p>
+	在设计思路上，前两种是基于全部数据都在内存中，即小数据量下提供磁盘落地功能，而后两种方式则是作者在尝试存储数据超过物理内存时，即大数据量的数据存储，截止到本文，后两种持久化方式仍然是在实验阶段，并且 vm 方式基本已经被作者放弃，所以实际能在生产环境用的只有前两种，换句话说 Redis 目前还只能作为小数据量存储（全部数据能够加载在内存中），海量数据存储方面并不是 Redis 所擅长的领域。下面分别介绍下这几种持久化方式：</p>
+<h4>
+	定时快照方式（snapshot）：</h4>
+<p>
+	该持久化方式实际是在 Redis 内部一个定时器事件，每隔固定时间去检查当前数据发生的改变次数与时间是否满足配置的持久化触发的条件，如果满足则通过操作系统 fork 调用来创建出一个子进程，这个子进程默认会与父进程共享相同的地址空间，这时就可以通过子进程来遍历整个内存来进行存储操作，而主进程则仍然可以提供服务，当有写入时由操作系统按照内存页（page）为单位来进行 copy-on-write 保证父子进程之间不会互相影响。</p>
+<p>
+	&nbsp;</p>
+<p>
+	该持久化的主要缺点是定时快照只是代表一段时间内的内存映像，所以系统重启会丢失上次快照与重启之间所有的数据。</p>
+<p>
+	&nbsp;</p>
+<h4>
+	基于语句追加方式（aof）：</h4>
+<p>
+	&nbsp;</p>
+<p>
+	aof 方式实际类似MySQL基于语句的 binlog 方式，即每条会使 Redis 内存数据发生改变的命令都会追加到一个 log 文件中，也就是说这个 log 文件就是 Redis 的持久化数据。</p>
+<p>
+	&nbsp;</p>
+<p>
+	aof 的方式的主要缺点是追加 log 文件可能导致体积过大，当系统重启恢复数据时如果是 aof 的方式则加载数据会非常慢，几十G的数据可能需要几小时才能加载完，当然这个耗时并不是因为磁盘文件读取速度慢，而是由于读取的所有命令都要在内存中执行一遍。另外由于每条命令都要写 log，所以使用 aof 的方式，Redis 的读写性能也会有所下降。</p>
+<h4>
+	虚拟内存方式：</h4>
+<p>
+	虚拟内存方式是 Redis 来进行用户空间的数据换入换出的一个策略，此种方式在实现的效果上比较差，主要问题是代码复杂、重启慢、复制慢等等，目前已经被作者放弃。</p>
+<h4>
+	diskstore&nbsp;方式：</h4>
+<p>
+	diskstore 方式是作者放弃了虚拟内存方式后选择的一种新的实现方式，也就是传统的 B-tree 的方式，目前仍在实验阶段，后续是否可用我们可以拭目以待。</p>
+<section data-id="88252" data-tools="135编辑器">
+	<section>
+		<section>
+			<section>
+				<section>
+					<section>
+						<p>
+							Redis持久化磁盘IO方式及其带来的问题</p>
+					</section>
+				</section>
+			</section>
+		</section>
+	</section>
+</section>
+<p>
+	有 Redis 线上运维经验的人会发现 Redis 在物理内存使用比较多，但还没有超过实际物理内存总容量时就会发生不稳定甚至崩溃的问题，有人认为是基于快照方式持久化的 fork 系统调用造成内存占用加倍而导致的，这种观点是不准确的，因为 fork 调用的 copy-on-write 机制是基于操作系统页这个单位的，也就是只有有写入的脏页会被复制，但是一般你的系统不会在短时间内所有的页都发生了写入而导致复制，那是什么原因导致 Redis 崩溃呢？</p>
+<p>
+	答案是 Redis 的持久化使用了 Buffer IO 造成的，所谓 Buffer IO 是指 Redis 对持久化文件的写入和读取操作都会使用物理内存的 Page Cache，而大多数数据库系统会使用 Direct IO 来绕过这层 Page Cache 并自行维护一个数据的 Cache，而当 Redis 的持久化文件过大（尤其是快照文件），并对其进行读写时，磁盘文件中的数据都会被加载到物理内 存中作为操作系统对该文件的一层 Cache，而这层 Cache 的数据与 Redis 内存中管理的数据实际是重复存储的，虽然内核在物理内存紧张时会做 Page Cache 的剔除工作，但内核很可能认为某块 Page Cache 更重要，而让你的进程开始 Swap，这时你的系统就会开始出现不稳定或者崩溃了。我们的经验是当你的 Redis 物理内存使用超过内存总容量的3/5时就会开始比较危险了。</p>
+<p>
+	下图是 Redis 在读取或者写入快照文件 dump.rdb 后的内存数据图：</p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/170926/1-1F926155643.png" /></p>
+<p>
+	总结</p>
+<ol>
+	<li>
+		<p>
+			根据业务需要选择合适的数据类型，并为不同的应用场景设置相应的紧凑存储参数。</p>
+	</li>
+	<li>
+		<p>
+			当业务场景不需要数据持久化时，关闭所有的持久化方式可以获得最佳的性能以及最大的内存使用量。</p>
+	</li>
+	<li>
+		<p>
+			如果需要使用持久化，根据是否可以容忍重启丢失部分数据在快照方式与语句追加方式之间选择其一，不要使用虚拟内存以及 diskstore 方式。</p>
+	</li>
+	<li>
+		<p>
+			不要让你的 Redis 所在机器物理内存使用超过实际内存总量的3/5。</p>
+	</li>
+</ol>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

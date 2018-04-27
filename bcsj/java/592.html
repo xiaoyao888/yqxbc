@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java集合框架 Map和泛型</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,Java集合框架,Map,Map和泛" />
+  <meta name="description" content=" " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java集合框架 Map和泛型</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：4次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="592" class="art_content"><p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<b style="line-height: normal !important; word-break: break-all">　Map集合</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　1.特点：该集合存储键值对。一对一对往里存。而且要保证键的唯一性。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　2.常用方法：</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　1.添加：v &nbsp;put(k key , v value); 将数据以键值对的方式存进集合中。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　void putAll(Map&lt;? extends k,? extends v&gt; m) ;从指定映射中将所有映射关系复制到此映射中</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　2.删除：void clear(); &nbsp;清空集合</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　v remove(Object key); 将集合中的元素以键的形式移除。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　3.判断：containsKey(Object key) 判断集合中是否有key。如果有，则返回true。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　contaninValue(Object value) 判断集合中是否有value</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　4.查询：get(Object key);</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　size();</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　values();</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　entrySet();</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　keySet();</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">Map有三个常见子类：</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　|---Hashtable：此类实现一个哈希表，该哈希表将映射到相应的值。任何非null对象都可以用作键或值。该集合是线程同步的。 Jdk1.0 效率低</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　|--HashMap：底层是哈希表数据结构，允许使用null值和null键，该集合是不同步的。 Jdk1.2 效率高</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　|--TreeMap：底层是二叉树数据结构。线程不同步。可以用于给map集合中的键进行排序。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　和Set很像。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　其实Set底层就是使用了Map集合。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　注：如果添加相同的键，那么后添加的值会覆盖原来键对应值。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">map集合的两种取出方式：</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　1.keySet：将map中所有的键存入到Set集合。因为set具备迭代器。所以可以用迭代的方式取出所有的键，在根据get方法。获取每一个键对应的值。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　Map集合的取出原理：将map集合转成set集合。再通过迭代器取出。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　2.Set&lt;Map.Entry&lt;k,v&gt;&gt; &nbsp;entrySet：将map集合中德映射关系存入到了set集合中，而这个关系的数据类型就是：map.entry.</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　Map.Entry &nbsp;其实Entry也是一个接口，它是Map接口中的一个内部接口。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　<b style="line-height: normal !important; word-break: break-all">　为何要定义在其内部呢？</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<b style="line-height: normal !important; word-break: break-all">　　原因：</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　a.Map集合中存的是映射关系这样的两个数据，是先有Map这个集合，才可有映射关系的存在，而且此类关系是集合的内部事务。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　b.并且这个映射关系可以直接访问Map集合中的内部成员，所以定义在内部。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					package Collection;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import<span class="Apple-converted-space">&nbsp;</span><a href="javascript:;" onclick="javascript:tagshow(event, 'java');" style="line-height: normal !important; color: rgb(32,40,89); word-break: break-all; text-decoration: none" target="_self"><u style="line-height: normal !important; word-break: break-all"><strong style="line-height: normal !important; word-break: break-all">java</strong></u></a>.util.HashMap;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Iterator;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Set;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Map.Entry;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public class HashMapDemo {</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/**</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					* @param args</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args) {</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					// TODO Auto-generated method stub</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					entrySetMethod();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//利用keySet这个方法取出map集合中的值。</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void keySetMethod(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//创建一个HashMap集合，并添加了泛型。键值都是String类型的。</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					HashMap&lt;String,String&gt; hm = new HashMap&lt;String,String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;01&quot;,&quot;zhangsan01&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;02&quot;,&quot;zhangsan02&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;03&quot;,&quot;zhangsan03&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;04&quot;,&quot;zhangsan04&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Set&lt;String&gt; keyset = hm.keySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					for(Iterator&lt;String&gt; it =keyset.iterator();it.hasNext();){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String key =it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String value = hm.get(key);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;key: &quot;+key+&quot; &quot;+&quot;value:&quot;+value);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void entrySetMethod(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					HashMap&lt;String,String&gt; hm = new HashMap&lt;String,String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;01&quot;,&quot;zhangsan01&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;02&quot;,&quot;zhangsan02&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;03&quot;,&quot;zhangsan03&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(&quot;04&quot;,&quot;zhangsan04&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Set&lt;Entry&lt;String, String&gt;&gt; entry=hm.entrySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					for(Iterator&lt;Entry&lt;String, String&gt;&gt; it =entry.iterator();it.hasNext();){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Entry&lt;String, String&gt; en = it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(en.getKey()+&quot; &nbsp;&quot;+en.getValue());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<b style="line-height: normal !important; word-break: break-all">　Map练习</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　1.描述学生。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　2.定义map容器。将学生作为键，地址作为值。存入。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　3.获取map集合中的元素。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					package Collection;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.HashMap;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Iterator;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Map;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.Set;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public class MapTest {</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/**</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					* @param args</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args) {</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					// TODO Auto-generated method stub</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					entrySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//第一种取出方式keySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void keySet(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					HashMap&lt;Students,String&gt; hm &nbsp; = new HashMap&lt;Students,String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi1&quot;,21), &quot;beijing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi1&quot;,21), &quot;tianjing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi4&quot;,33), &quot;nanjing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi8&quot;,44), &quot;ganzhou&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi5&quot;,80), &quot;hengyang&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Set&lt;Students&gt; keyset &nbsp;=hm.keySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					for(Iterator&lt;Students&gt; it = keyset.iterator();it.hasNext();){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Students key =it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String addrv =hm.get(key);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(key+&quot;:::&quot;+addrv);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void entrySet(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					HashMap&lt;Students,String&gt; hm &nbsp; = new HashMap&lt;Students,String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi1&quot;,21), &quot;beijing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi1&quot;,21), &quot;tianjing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi4&quot;,33), &quot;nanjing&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi8&quot;,44), &quot;ganzhou&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					hm.put(new Students(&quot;lisi5&quot;,80), &quot;hengyang&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Set&lt;Map.Entry&lt;Students, String&gt;&gt; entryset = hm.entrySet();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					for(Iterator&lt;Map.Entry&lt;Students, String&gt;&gt; it =entryset.iterator();it.hasNext();){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Map.Entry&lt;Students, String&gt; entry = it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Students s = entry.getKey();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String addr = entry.getValue();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(s+&quot;:::&quot;+addr);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<b style="line-height: normal !important; word-break: break-all">　　泛型</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	<b style="line-height: normal !important; word-break: break-all">　　泛型概述</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的&ldquo;任意化&rdquo;，&ldquo;任意化&rdquo;带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　类的后面跟着&lt;E&gt;这样的标识，如ArrayList&lt;E&gt;，这个&lt;E&gt;就代表泛型，E就是泛型类型，表示ArrayList集合里面只能存储E类型的元素。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　其本质就是实现参数化类型，也就是说所操作的数据类型被指定为一种类型。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">好处：</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　1、将运行时期出现的问题ClassCastException转移到了编译时期，方便程序员解决，让运行时期问题减少。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　2、避免了强制转换麻烦。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　示例</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.*;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//定义了一个String类型的数组列表</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ArrayList&lt;String&gt; al = new ArrayList&lt;String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					al.add(&quot;abc002&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					al.add(&quot;abc013&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					al.add(&quot;abc256&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					al.add(&quot;abc028&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//al.add(4);//al.add(new Integer(5));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//迭代器要使用泛型</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Iterator&lt;String&gt; it = al.iterator();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					while(it.hasNext()){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String s = it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(s);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					abc002</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					abc013</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					abc256</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					abc028</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　<b style="line-height: normal !important; word-break: break-all">　泛型使用</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　泛型格式：通过&lt;&gt;来定义要操作的引用数据类型。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　在使用java提供的对象时，什么时候使用泛型呢？</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　通常在集合框架中创建，只要见到&lt;&gt;就要定义泛型。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　其实&lt;&gt;就是用来接收类型的，当使用集合时，</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　将集合中要存储的数据类型作为参数传递到&lt;&gt;中即可。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">示例</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.*;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class TreeSetTest{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					TreeSet&lt;String&gt; ts = new TreeSet&lt;String&gt;(new LenComparator());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;abcd&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;cc&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;cba&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;z&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;a&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(&quot;sdcvrt&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Iterator&lt;String&gt; it = ts.iterator();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					while(it.hasNext()){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					String s = it.next();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(s);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//自定义比较器，实现Comparator接口并使用泛型</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class LenComparator implements Comparator&lt;String&gt; {</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public int compare(String s1,String s2){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//升序</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					int num = new Integer(s1.length()).compareTo(new Integer(s2.length()));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					if(num==0)</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return s1.compareTo(s2);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return num;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//降序</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					int num = new Integer(s2.length()).compareTo(new Integer(s1.length()));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					if(num==0)</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return s2.compareTo(s1);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return num;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					sdcvrt</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					abcd</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					cba</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					cc</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					z</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					a</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">泛型类</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　什么时候定义泛型类？</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　当类中要操作的引用数据类型不确定的时候，</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　早期定义Object来完成扩展。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　现在定义泛型来扩展。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Worker{}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Student{}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//泛型以前的做法</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Tool{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					private Object obj;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public void setObject(Object obj){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					this.obj = obj;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public Object getObject(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return obj;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//泛型类</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Utils&lt;QQ&gt;{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					private QQ q;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public void setObject(QQ q){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					this.q = q;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public QQ getObject(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return q;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Utils&lt;Worker&gt; u = new Utils&lt;Worker&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					u.setObject(new Worker());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker w = u.getObject();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Tool t = new Tool();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					t.setObject(new Worker());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker w = (Worker)t.getObject();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">泛型方法</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　为了让不同方法可以操作不同类型，而且类型还不确定，那么可以将</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　泛型定义在方法上。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Demo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//类型定义在方法上</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public &lt;T&gt; void show(T t){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;show:&quot;+t);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public &lt;Q&gt; void print(Q q){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;print:&quot;+q);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class &nbsp;GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Demo d = new Demo();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.show(5);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.show(new Integer(5));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.show(&quot;haha&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(8);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(new Integer(5));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(&quot;heihei&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					show:5</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					show:5</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					show:haha</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:8</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:5</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:heihei</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　<b style="line-height: normal !important; word-break: break-all">静态方法泛型</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　特殊之处：</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　静态方法不可以访问类上定义的泛型。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　如果静态方法操作的引用数据类型不确定，可以将泛型定义在方法上。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Demo&lt;T&gt;{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//show()方法的类型由类的类型决定</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public void show(T t){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;show:&quot;+t);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//print()方法的类型由自己决定</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public &lt;Q&gt; void print(Q q){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;print:&quot;+q);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//静态方法泛型</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static &lt;W&gt; void method(W w){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(&quot;methld:&quot;+w);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class &nbsp;GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Demo&lt;String&gt; d = new Demo&lt;String&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(8);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(new Integer(5));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.print(&quot;heihei&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.show(&quot;haha&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//d.show(5);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					d.method(&quot;Hello&quot;);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:8</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:5</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					print:heihei</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					show:haha</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					methld:Hello</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					　　泛型限定</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					　　上限：&lt;? extends E&gt; 可以接受E类型或者E的子类型。</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					　　下限：&lt;? super E&gt; 可以接收E类型或者E的父类型。</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.*;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Person{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					private String name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Person(String name){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					this.name=name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public String getName(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Student extends Person{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student(String name){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					super(name);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ArrayList&lt;Person&gt; arr1 = new ArrayList&lt;Person&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr1.add(new Person(&quot;Person01&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr1.add(new Person(&quot;Person02&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr1.add(new Person(&quot;Person03&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ArrayList&lt;Student&gt; arr2 = new ArrayList&lt;Student&gt;();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr2.add(new Student(&quot;Student01&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr2.add(new Student(&quot;Student02&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					arr2.add(new Student(&quot;Student03&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					printColl(arr2);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void printColl(ArrayList&lt;? extends Person&gt; arr1){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//泛型限定在Person或者Person的子类，就是继承Person类</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Iterator&lt;? extends Person&gt; it = arr1.iterator();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					while(it.hasNext()){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(it.next().getName());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student01</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student02</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student03</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　<b style="line-height: normal !important; word-break: break-all">泛型扩展</b></p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	　　泛型限定是用于泛型扩展用的。</p>
+<p style="text-align: left; widows: 2; text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; margin: 10px 0px; font: 12px/21px Arial, Helvetica, sans-serif; white-space: normal; orphans: 2; letter-spacing: normal; color: rgb(51,51,51); word-break: break-all; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px">
+	&nbsp;</p>
+<table align="center" style="border-bottom: rgb(153,153,153) 1px solid; border-left: rgb(153,153,153) 1px solid; line-height: normal !important; background-color: rgb(221,221,221); width: 612px; font-size: 12px; word-break: break-all; border-top: rgb(153,153,153) 1px solid; border-right: rgb(153,153,153) 1px solid">
+	<tbody style="line-height: normal !important; word-break: break-all">
+		<tr style="line-height: normal !important; word-break: break-all">
+			<td style="line-height: normal !important; word-break: break-all">
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					import java.util.*;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class GenericDemo{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public static void main(String[] args){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//指定为Student类型，传递一个比较器</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					TreeSet&lt;Student&gt; ts = new TreeSet&lt;Student&gt;(new Comp());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(new Student(&quot;Student01&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(new Student(&quot;Student05&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(new Student(&quot;Student09&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					ts.add(new Student(&quot;Student08&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Iterator&lt;Student&gt; it = ts.iterator();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					while(it.hasNext()){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(it.next().getName());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//指定为Worker类型，传递一个比较器</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					TreeSet&lt;Worker&gt; wo = new TreeSet&lt;Worker&gt;(new Comp());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					wo.add(new Worker(&quot;Worker01&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					wo.add(new Worker(&quot;Worker05&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					wo.add(new Worker(&quot;Worker09&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					wo.add(new Worker(&quot;Worker08&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					wo.add(new Worker(&quot;Worker07&quot;));</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Iterator&lt;Worker&gt; it1 = wo.iterator();</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					while(it1.hasNext()){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					System.out.println(it1.next().getName());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//学生比较器</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class StudentComp implements Comparator&lt;Student&gt;{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public int compare(Student s1,Student s2){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return s1.getName().compareTo(s2.getName());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//工人比较器</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class WorkerComp implements Comparator&lt;Worker&gt;{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public int compare(Worker s1,Worker s2){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return s1.getName().compareTo(s2.getName());</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//对上面两个比较器进行优化如下，指定为父类型Person</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Comp implements Comparator&lt;Person&gt;{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public int compare(Person s1,Person s2){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					//return s1.getName().compareTo(s2.getName());//正序打印</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return s2.getName().compareTo(s1.getName());//倒序打印</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Person{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					private String name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Person(String name){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					this.name = name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public String getName(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					public String toString(){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					return &quot;person:&quot;+name;</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Student extends Person{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student(String name){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					super(name);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					class Worker extends Person{</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker(String name){</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					super(name);</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					}</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					/*</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					结果</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student09</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student08</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student05</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Student01</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker09</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker08</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker07</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker05</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					Worker01</p>
+				<p style="line-height: normal !important; margin: 10px 0px; word-break: break-all">
+					*/</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

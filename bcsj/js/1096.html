@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>仿Google和Windows Live的拖拽自动交换位置表格框</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Google,Windows Live,拖拽,交换" />
+  <meta name="description" content=" HTML HEAD TITLE New Document /TITLE style type=text/css body { margin:10px; }#dragHelper { position:absolute;/*重要*/ border:2px dashed #0" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>仿Google和Windows Live的拖拽自动交换位置表格框</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：8次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1096" class="art_content"><pre>
+</pre>
+<p>
+	&lt;HTML&gt; &lt;HEAD&gt; &lt;TITLE&gt; New Document &lt;/TITLE&gt; &lt;style type=&quot;text/css&quot;&gt; body { &nbsp;&nbsp;&nbsp; margin:10px; }</p>
+<p>
+	#dragHelper { &nbsp;&nbsp;&nbsp; position:absolute;/*重要*/ &nbsp;&nbsp;&nbsp; border:2px dashed #000000; &nbsp;&nbsp;&nbsp; background-color:#FFFFFF; &nbsp;filter: alpha(opacity=30); }</p>
+<p>
+	.normal { &nbsp;&nbsp;&nbsp; position:absolute;/*重要*/ &nbsp;&nbsp;&nbsp; width:300px; &nbsp;&nbsp;&nbsp; #height:10px; &nbsp;&nbsp;&nbsp; border:1px solid #666666; &nbsp;&nbsp;&nbsp; background-color:#FFFFFF; }</p>
+<p>
+	.over { &nbsp;&nbsp;&nbsp; position:absolute;/*重要*/ &nbsp;&nbsp;&nbsp; width:300px; &nbsp;&nbsp;&nbsp; #height:10px; &nbsp;&nbsp;&nbsp; border:1px solid #666666; &nbsp;&nbsp;&nbsp; background-color:#f3f3f3; &nbsp;filter: alpha(opacity=50); }</p>
+<p>
+	.dragArea { &nbsp;CURSOR: move; }</p>
+<p>
+	&lt;/style&gt; &lt;/HEAD&gt;</p>
+<p>
+	&lt;BODY oncontextmenu=&quot;window.event.returnValue=false&quot;&gt; &lt;input type=&quot;text&quot; id=&quot;evt&quot; name=&quot;eventValue&quot; size=&quot;40&quot; /&gt; &lt;p id=&quot;dragHelper&quot; style=&quot;display:none&quot;&gt;&lt;/p&gt; &lt;p class=&quot;normal&quot; overClass=&quot;over&quot; dragClass=&quot;normal&quot;&gt; &nbsp;&lt;table width=&quot;100%&quot;&gt; &nbsp; &lt;tbody&gt; &nbsp;&nbsp; &lt;tr bgcolor=&quot;#CCCCCC&quot; bar=&quot;yes&quot;&gt;&lt;td&gt;&lt;a href=&quot;#&quot;&gt;Cobao&lt;/a&gt;&lt;/td&gt;&lt;td dragArea=&quot;yes&quot; class=&quot;dragArea&quot;&gt;........&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot; onclick=&quot;openClose(this)&quot;&gt;-&lt;/a&gt; x&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;地址:http://www.cobao.cn&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;关键字:&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;说明:&lt;/td&gt;&lt;/tr&gt; &nbsp; &lt;/tbody&gt; &nbsp;&lt;/table&gt; &lt;/p&gt; &lt;p class=&quot;normal&quot; overClass=&quot;over&quot; dragClass=&quot;normal&quot;&gt; &nbsp;&lt;table width=&quot;100%&quot;&gt; &nbsp; &lt;tbody&gt; &nbsp;&nbsp; &lt;tr bgcolor=&quot;#CCCCCC&quot; bar=&quot;yes&quot;&gt;&lt;td&gt;新浪&lt;/td&gt;&lt;td dragArea=&quot;yes&quot; class=&quot;dragArea&quot;&gt;........&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot; onclick=&quot;openClose(this)&quot;&gt;-&lt;/a&gt; x&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;地址:http://www.sina.com.cn&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;关键字:&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;说明:&lt;/td&gt;&lt;/tr&gt; &nbsp; &lt;/tbody&gt; &nbsp;&lt;/table&gt; &lt;/p&gt; &lt;p class=&quot;normal&quot; overClass=&quot;over&quot; dragClass=&quot;normal&quot;&gt; &nbsp;&lt;table width=&quot;100%&quot;&gt; &nbsp; &lt;tbody&gt; &nbsp;&nbsp; &lt;tr bgcolor=&quot;#CCCCCC&quot; bar=&quot;yes&quot;&gt;&lt;td&gt;网易&lt;/td&gt;&lt;td dragArea=&quot;yes&quot; class=&quot;dragArea&quot;&gt;........&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot; onclick=&quot;openClose(this)&quot;&gt;-&lt;/a&gt; x&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;地址:http://www.163.com&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;关键字:&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;说明:&lt;/td&gt;&lt;/tr&gt; &nbsp; &lt;/tbody&gt; &nbsp;&lt;/table&gt; &lt;/p&gt; &lt;p class=&quot;normal&quot; overClass=&quot;over&quot; dragClass=&quot;normal&quot;&gt; &nbsp;&lt;table width=&quot;100%&quot;&gt; &nbsp; &lt;tbody&gt; &nbsp;&nbsp; &lt;tr bgcolor=&quot;#CCCCCC&quot; bar=&quot;yes&quot;&gt;&lt;td&gt;QQ&lt;/td&gt;&lt;td dragArea=&quot;yes&quot; class=&quot;dragArea&quot;&gt;........&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot; onclick=&quot;openClose(this)&quot;&gt;-&lt;/a&gt; x&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;地址:http://www.qq.com&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;关键字:&lt;/td&gt;&lt;/tr&gt; &nbsp;&nbsp; &lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;说明:&lt;/td&gt;&lt;/tr&gt; &nbsp; &lt;/tbody&gt; &nbsp;&lt;/table&gt; &lt;/p&gt;</p>
+<p>
+	&lt;/BODY&gt; &lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt; &lt;!-- var dragObjs = [];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //可以拖拽的元素数组 var dragObjTops = [];</p>
+<p>
+	var dragHelper = document.getElementById(&quot;dragHelper&quot;);&nbsp;&nbsp;&nbsp;&nbsp; //拖拽时位置框 var dragObj = null;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //拖拽对象元素 var dragObjPos = 0;</p>
+<p>
+	var dragObjOffset = {left:0,top:0};&nbsp; //拖拽对象原始位置 var mouseInDragObjOffset = {x:0,y:0}; //鼠标在拖拽对象中的相对位置</p>
+<p>
+	var initHeight = 40;</p>
+<p>
+	Number.prototype.NaN0=function(){return isNaN(this)?0:this;}</p>
+<p>
+	function getPosition(e){&nbsp; //获取元素相对文档的绝对位置 &nbsp;var left = 0; &nbsp;var top&nbsp; = 0; &nbsp;while (e.offsetParent){ &nbsp; left += e.offsetLeft; &nbsp; top&nbsp; += e.offsetTop; &nbsp; e&nbsp;&nbsp;&nbsp;&nbsp; = e.offsetParent; &nbsp;}</p>
+<p>
+	&nbsp;left += e.offsetLeft; &nbsp;top&nbsp; += e.offsetTop;</p>
+<p>
+	&nbsp;return {x:left, y:top};</p>
+<p>
+	}</p>
+<p>
+	function mouseCoords(ev){&nbsp; //获取鼠标相对文档的绝对位置 &nbsp;if(ev.pageX || ev.pageY){ &nbsp; return {x:ev.pageX, y:ev.pageY}; &nbsp;} &nbsp;return { &nbsp; x:ev.clientX + document.body.scrollLeft - document.body.clientLeft, &nbsp; y:ev.clientY + document.body.scrollTop&nbsp; - document.body.clientTop &nbsp;}; }</p>
+<p>
+	function getMouseOffset(target, ev){&nbsp; // 获取鼠标相对元素的相对位置 &nbsp;ev = ev || window.event;</p>
+<p>
+	&nbsp;var elementPos&nbsp;&nbsp;&nbsp; = getPosition(target); &nbsp;var mousePos&nbsp; = mouseCoords(ev); &nbsp;return {x:mousePos.x - elementPos.x, y:mousePos.y - elementPos.y}; }</p>
+<p>
+	function mouseDown(ev){ &nbsp;ev = ev || window.event; &nbsp;target = ev.srcElement || ev.target;</p>
+<p>
+	&nbsp;if(dragObj){ &nbsp; return; &nbsp;}</p>
+<p>
+	&nbsp;var dragArea = false; &nbsp;if(target.getAttribute(&quot;dragArea&quot;)){ &nbsp; dragArea = true; &nbsp;}</p>
+<p>
+	&nbsp;while(!target.getAttribute(&quot;isDragObj&quot;)){ &nbsp; if(target.tagName==&quot;HTML&quot;) &nbsp;&nbsp; break; &nbsp; target = target.parentNode; &nbsp;}</p>
+<p>
+	&nbsp;if(dragArea &amp;&amp; target.getAttribute(&quot;isDragObj&quot;)){ &nbsp; dragObj = target; &nbsp; //重写的目的是让当前对象在最上层 &nbsp; document.body.removeChild(dragObj); &nbsp; document.body.appendChild(dragObj);</p>
+<p>
+	&nbsp; //记录下拖拽对象原始位置 &nbsp; dragObjOffset.left = dragObj.style.left; &nbsp; dragObjOffset.top = dragObj.style.top;</p>
+<p>
+	&nbsp; dragObj.className = dragObj.getAttribute(&quot;overClass&quot;); &nbsp; //鼠标在拖拽对象中的相对位置 &nbsp; mouseInDragObjOffset = getMouseOffset(dragObj, ev);</p>
+<p>
+	&nbsp; dragHelper.style.left = dragObj.style.left; &nbsp; dragHelper.style.top = dragObj.style.top; &nbsp; dragHelper.style.width = dragObj.offsetWidth; &nbsp; dragHelper.style.height = dragObj.offsetHeight; &nbsp; dragHelper.style.display = &quot;&quot;;</p>
+<p>
+	&nbsp; //alert(dragObj.offsetWidth+&quot;:&quot;+dragObj.clientWidth); &nbsp;} }</p>
+<p>
+	function mouseUp(ev){ &nbsp;ev = ev || window.event; &nbsp;target = ev.srcElement || ev.target;</p>
+<p>
+	&nbsp;if(dragObj){ &nbsp; dragObj.style.left = dragHelper.style.left; &nbsp; dragObj.style.top = dragHelper.style.top;</p>
+<p>
+	&nbsp; dragHelper.style.display = &quot;none&quot;; &nbsp; dragObj.className = dragObj.getAttribute(&quot;dragClass&quot;); &nbsp; dragObj = null; &nbsp;}</p>
+<p>
+	}</p>
+<p>
+	function mouseMove(ev){ &nbsp;ev = ev || window.event;</p>
+<p>
+	&nbsp;if(dragObj) { &nbsp; var mousePos = mouseCoords(ev); &nbsp; &nbsp; /*dragHelper.style.left = dragObjOffset.left; &nbsp; dragHelper.style.top = dragObjOffset.top; &nbsp; dragHelper.style.width = dragObj.offsetWidth; &nbsp; dragHelper.style.height = dragObj.offsetHeight; &nbsp; dragHelper.style.display = &quot;&quot;;*/</p>
+<p>
+	&nbsp; var windowWidth = document.body.offsetWidth;&nbsp; //窗口宽度 &nbsp; var windowHeight = document.body.offsetHeight;&nbsp; //窗口高度</p>
+<p>
+	&nbsp; //拖拽对象应该所在当前位置 &nbsp; var dragObjLeft = mousePos.x - mouseInDragObjOffset.x; &nbsp; var dragObjTop&nbsp; = mousePos.y - mouseInDragObjOffset.y;</p>
+<p>
+	&nbsp; //增加判断，不然拖拽对象拖出浏览器窗口 &nbsp; if(dragObjLeft &gt;= 0 &amp;&amp; dragObjLeft &lt;= windowWidth - dragObj.offsetWidth - 20) &nbsp;&nbsp; dragObj.style.left = dragObjLeft;</p>
+<p>
+	&nbsp; if(dragObjTop &gt;=0) &nbsp;&nbsp; dragObj.style.top = dragObjTop;</p>
+<p>
+	&nbsp; repaint(); &nbsp;} }</p>
+<p>
+	//克隆对象 function cloneObject(srcObj, destObj){ &nbsp;destObj = srcObj.cloneNode(true); }</p>
+<p>
+	function makeDraggable(element){ &nbsp;element.setAttribute(&quot;isDragObj&quot;, &quot;y&quot;); }</p>
+<p>
+	function repaint(){ &nbsp;for(i=0; i&lt;dragObjs.length; i++){ &nbsp; if(dragObjs[i] == dragObj){ &nbsp;&nbsp; dragObjPos = i; &nbsp;&nbsp; dragObjs[i] = dragHelper; &nbsp;&nbsp; break; &nbsp; } &nbsp;}</p>
+<p>
+	&nbsp;if(dragObjPos&gt;0 &amp;&amp; parseInt(dragObj.style.top)&lt;parseInt(dragObjs[dragObjPos-1].style.top)){ &nbsp; dragObjs[dragObjPos] = dragObjs[dragObjPos-1]; &nbsp; dragObjs[dragObjPos-1] = dragHelper; &nbsp; dragObjPos = dragObjPos - 1; &nbsp;}</p>
+<p>
+	&nbsp;if(dragObjPos&lt;dragObjs.length-1 &amp;&amp; parseInt(dragObj.style.top)&gt;parseInt(dragObjs[dragObjPos+1].style.top)){ &nbsp; dragObjs[dragObjPos] = dragObjs[dragObjPos+1]; &nbsp; dragObjs[dragObjPos+1] = dragHelper; &nbsp; dragObjPos = dragObjPos + 1; &nbsp;} &nbsp;paintDragObjs(); &nbsp;dragObjs[dragObjPos] = dragObj;</p>
+<p>
+	}</p>
+<p>
+	function paintDragObjs(){ &nbsp;var h = 40; &nbsp;for(i=0; i&lt;dragObjs.length; i++){ &nbsp; dragObjs[i].style.left = 20; &nbsp; dragObjs[i].style.top = h; &nbsp; h += dragObjs[i].offsetHeight + 10; &nbsp;} }</p>
+<p>
+	function openClose(obj){ &nbsp;obj.innerHTML = obj.innerHTML==&quot;-&quot;?&quot;+&quot;:&quot;-&quot;; &nbsp;while(obj.tagName != &quot;TBODY&quot;){ &nbsp; obj = obj.parentNode; &nbsp;}</p>
+<p>
+	&nbsp;for(i=0; i&lt;obj.childNodes.length; i++){ &nbsp; if(obj.childNodes[i].nodeName == &quot;#text&quot; &nbsp;&nbsp; || obj.childNodes[i].getAttribute(&quot;bar&quot;)){ continue; } &nbsp; obj.childNodes[i].style.display=obj.childNodes[i].style.display==&quot;&quot;?&quot;none&quot;:&quot;&quot;; &nbsp;}</p>
+<p>
+	&nbsp;paintDragObjs(); }</p>
+<p>
+	document.onmousedown = mouseDown; document.onmouseup = mouseUp; document.onmousemove = mouseMove;</p>
+<p>
+	window.onload = function(){ &nbsp;var objs = document.getElementsByTagName(&quot;Div&quot;); &nbsp;for(i=0; i&lt;objs.length; i++){ &nbsp; var item = objs.item(i); &nbsp; //if(i==1)item.style.height=150; &nbsp; if(item.getAttribute(&quot;overClass&quot;)){ &nbsp;&nbsp; makeDraggable(item); &nbsp;&nbsp; dragObjs.push(item); &nbsp;&nbsp; item.style.left = 20; &nbsp;&nbsp; item.style.top = initHeight; &nbsp;&nbsp; dragObjTops.push(initHeight); &nbsp;&nbsp; initHeight += item.offsetHeight + 10; &nbsp; } &nbsp;}</p>
+<p>
+	// dragHelper = document.createElement(&#39;DIV&#39;); // dragHelper.style.cssText = &#39;position:absolute;display:none;&#39;; // document.body.appendChild(dragHelper); } //--&gt; &lt;/SCRIPT&gt; &lt;/HTML&gt;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

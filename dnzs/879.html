@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>svchost.exe病毒查杀:SVCHOST.EXE病毒清除及专杀工具</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="您好,请,不要,挂机,您拨,打的,电话,正在,通," />
+  <meta name="description" content="您好！请不要挂机，您拨打的电话正在通话中”哈哈原来英文是这么说，还有好多打电话中遇到的英文答录下" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>svchost.exe病毒查杀:SVCHOST.EXE病毒清除及专杀工具</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：745次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="879" class="art_content"><p>
+	一、手工清除SVCHOST.EXE病毒</p>
+<p>
+	　　查看：svchost.exe进程是什么</p>
+<p>
+	　　在开始菜单的运行中输入cmd，出现命令行提示，输入命令&ldquo;tasklist /svc &gt;c:.txt&rdquo;(例如：C:Documents and SettingsAdministrator&gt;tasklist /svc &gt;c:.txt)，就会在C盘根目录生成1.txt文档，打开1.txt能够看到如下内容：</p>
+<p>
+	　　查找svchost.exe的PID值和服务名称。</p>
+<p>
+	　　******************************************************************************</p>
+<p>
+	　　图像名 PID 服务</p>
+<p>
+	　　========================= ====== =============================================</p>
+<p>
+	　　System Idle Process 0 暂缺</p>
+<p>
+	　　System 4 暂缺</p>
+<p>
+	　　smss.exe 1168 暂缺</p>
+<p>
+	　　csrss.exe 1228 暂缺</p>
+<p>
+	　　winlogon.exe 1260 暂缺</p>
+<p>
+	　　services.exe 1308 Eventlog, PlugPlay</p>
+<p>
+	　　lsass.exe 1320 PolicyAgent, ProtectedStorage, SamSs</p>
+<p>
+	　　ibmpmsvc.exe 1484 IBMPMSVC</p>
+<p>
+	　　ati2evxx.exe 1520 Ati HotKey Poller</p>
+<p>
+	　　svchost.exe 1544 DcomLaunch, TermService</p>
+<p>
+	　　svchost.exe 1684 RpcSs</p>
+<p>
+	　　svchost.exe 380 AudioSrv, BITS, Browser, CryptSvc, Dhcp,</p>
+<p>
+	　　EventSystem, FastUserSwitchingCompatibility,</p>
+<p>
+	　　helpsvc, lanmanserver, lanmanworkstation,</p>
+<p>
+	　　Netman, Nla, RasMan, Schedule, seclogon,</p>
+<p>
+	　　SENS, SharedAccess, ShellHWDetection,</p>
+<p>
+	　　TapiSrv, Themes, TrkWks, W32Time, winmgmt,</p>
+<p>
+	　　wscsvc, wuauserv, WZCSVC</p>
+<p>
+	　　btwdins.exe 420 btwdins</p>
+<p>
+	　　ati2evxx.exe 456 暂缺</p>
+<p>
+	　　EvtEng.exe 624 EvtEng</p>
+<p>
+	　　S24EvMon.exe 812 S24EventMonitor</p>
+<p>
+	　　svchost.exe 976 Dnscache</p>
+<p>
+	　　svchost.exe 1192 Alerter, LmHosts, RemoteRegistry, SSDPSRV,</p>
+<p>
+	　　WebClient</p>
+<p>
+	　　spoolsv.exe 1852 Spooler</p>
+<p>
+	　　IPSSVC.EXE 272 IPSSVC</p>
+<p>
+	　　AcPrfMgrSvc.exe 288 AcPrfMgrSvc</p>
+<p>
+	　　guard.exe 1064 AVG Anti-Spyware Guard</p>
+<p>
+	　　avp.exe 1124 AVP</p>
+<p>
+	　　mDNSResponder.exe 1284 Bonjour Service</p>
+<p>
+	　　inetinfo.exe 1848 IISADMIN, W3SVC</p>
+<p>
+	　　ibguard.exe 3464 InterBaseGuardian</p>
+<p>
+	　　RegSrvc.exe 3556 RegSrvc</p>
+<p>
+	　　svchost.exe 3596 stisvc</p>
+<p>
+	　　SUService.exe 3968 SUService</p>
+<p>
+	　　TPHDEXLG.exe 3788 TPHDEXLGSVC</p>
+<p>
+	　　TpKmpSvc.exe 3804 TpKmpSVC</p>
+<p>
+	　　tvtsched.exe 3836 TVT Scheduler</p>
+<p>
+	　　wdfmgr.exe 3920 UMWdf</p>
+<p>
+	　　vmware-authd.exe 3956 VMAuthdService</p>
+<p>
+	　　vmount2.exe 3576 vmount2</p>
+<p>
+	　　vmnat.exe 4112 VMware NAT Service</p>
+<p>
+	　　vmnetdhcp.exe 4360 VMnetDHCP</p>
+<p>
+	　　AcSvc.exe 4388 AcSvc</p>
+<p>
+	　　ibserver.exe 4684 InterBaseServer</p>
+<p>
+	　　explorer.exe 5416 暂缺</p>
+<p>
+	　　alg.exe 5704 ALG</p>
+<p>
+	　　SynTPEnh.exe 3776 暂缺</p>
+<p>
+	　　SvcGuiHlpr.exe 4912 暂缺</p>
+<p>
+	　　TPHKMGR.exe 5088 暂缺</p>
+<p>
+	　　UNavTray.exe 5120 暂缺</p>
+<p>
+	　　TpShocks.exe 5136 暂缺</p>
+<p>
+	　　TPONSCR.exe 4532 暂缺</p>
+<p>
+	　　avp.exe 4648 暂缺</p>
+<p>
+	　　TpScrex.exe 4412 暂缺</p>
+<p>
+	　　CRavgas.exe 5196 暂缺</p>
+<p>
+	　　ctfmon.exe 5284 暂缺</p>
+<p>
+	　　VStart.exe 6020 暂缺</p>
+<p>
+	　　QQ.exe 6124 暂缺</p>
+<p>
+	　　TXPlatform.exe 5584 暂缺</p>
+<p>
+	　　dllhost.exe 4164 COMSysApp</p>
+<p>
+	　　davcdata.exe 1232 暂缺</p>
+<p>
+	　　Maxthon.exe 2212 暂缺</p>
+<p>
+	　　EmEditor.exe 2004 暂缺</p>
+<p>
+	　　cmd.exe 6360 暂缺</p>
+<p>
+	　　conime.exe 2928 暂缺</p>
+<p>
+	　　wmiprvse.exe 5552 暂缺</p>
+<p>
+	　　tasklist.exe 1900 暂缺</p>
+<p>
+	　　******************************************************************************</p>
+<p>
+	　　假如看到哪个Svchost.exe进程后面提示的服务信息是&ldquo;暂缺&rdquo;，而不是个具体的服务名，那么他就是病毒进程了，记下这个病毒进程对应的PID数值(进程标识符)，即可在任务管理器的进程列表中找到他，结束进程后，在C盘搜索Svchost.exe文档，也能够用第三方进程工具直接查看该进程的路径，正常的Svchost.exe文档是位于%systemroot%System32目录中的，而假冒的Svchost.exe病毒或木马文档则会在其他目录，例如&ldquo;w32.welchina.worm&rdquo;病毒假冒的Svchost.exe就隐藏在WindowsSystem32Wins目录中，将其删除，并完全清除病毒的其他数据即可。</p>
+<p>
+	　　二、SVCHOST.EXE病毒高级骗术</p>
+<p>
+	　　一些高级病毒则采用类似系统服务启动的方式，通过真正的Svchost.exe进程加载病毒程式，而Svchost.exe是通过注册表数据来决定要装载的服务列表的，所以病毒通常会在注册表中采用以下方法进行加载： 添加一个新的服务组，在组里添加病毒服务名在现有的服务组里直接添加病毒服务名 修改现有服务组里的现有服务属性，修改其&ldquo;ServiceDll&rdquo;键值指向病毒程式判断方法:病毒程式要通过真正的Svchost.exe进程加载，就必须要修改相关的注册表数据，能够打开[HKEY_LOCAL_MACHINESoftwareMicrosoftWindowsNT CurrentVersionSvchost]，观察有没有增加新的服务组，同时要留意服务组中的服务列表，观察有没有可疑的服务名称。</p>
+<p>
+	　　通常来说，病毒不会在只有一个服务名称的组中添加，往往会选择LocalService和netsvcs这两个加载服务较多的组，以干扰分析，更有通过修改服务属性指向病毒程式的，通过注册表判断起来都比较困难，这时能够利用前面介绍的服务管理专家，分别打开LocalService和netsvcs分支，逐个检查右边服务列表中的服务属性，尤其要注意服务描述信息全部为英文的，很可能是第三方安装的服务，同时要结合他的文档描述、版本、公司等相关信息，进行综合判断。</p>
+<p>
+	　　例如这个名为PortLess BackDoor的木马程式，在服务列表中能够看到他的服务描述为&ldquo;Intranet Services&rdquo;，而他的文档版本、公司、描述信息更全部为空，假如是微软的系统服务程式是绝对不可能出现这种现象的。从启动信息&ldquo;C:WINDOWSSystem32svchost.exe -k netsvcs&rdquo;中能够看出这是一款典型的利用Svchost.exe进程加载运行的木马，知道了其原理，清除方法也很简单了：先用服务管理专家停止该服务的运行，然后运行regedit.exe打开&ldquo;注册表编辑器&rdquo;，删除[HKEY_LOCAL_MACHINESystemCurrentControlSet</p>
+<p>
+	　　ServicesIPRIP]主键，重新启动电脑，再删除%systemroot%System32目录中的木马源程式&ldquo;svchostdll.dll&rdquo;，通过按时间排序，又发现了时间完全相同的木马安装程式&ldquo;PortlessInst.exe&rdquo;，一并删除即可。 svchost.exe是nt核心系统的很重要的进程，对于2000、xp来说，不可或缺。很多病毒、木马也会调用他。</p>
+<p>
+	　　三、SVCHOST.EXE病毒专杀工具</p>
+<p>
+	　　SVCHOST.EXE病毒专杀工具下载：Autorun病毒防御者/AutoGuarder2下载</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

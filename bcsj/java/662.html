@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>不用静态类型函数式编程语言的十大理由</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="静态类型函数式,编程语言" />
+  <meta name="description" content="你厌烦函数式编程么？我也烦，我真想呼吁那些想我一样明智的人远离这种语言。 这里要澄清一点，我指的这种静态类型函数式编程语言，包括那种类型推断或者静态缺省等等。实际上" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>不用静态类型函数式编程语言的十大理由</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：19次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="662" class="art_content"><p>
+	你厌烦函数式编程么？我也烦，我真想呼吁那些想我一样明智的人远离这种语言。</p>
+<p>
+	　　这里要澄清一点，我指的这种静态类型函数式编程语言，包括那种类型推断或者静态缺省等等。实际上，就是Haskell和ML&mdash;family（包括Ocaml和F# ）</p>
+<p>
+	<strong>　　理由一：不想跟潮流</strong></p>
+<p>
+	　　像大多数程序员一样，我怀旧且讨厌学习新东西。</p>
+<p>
+	　　这是我选择混IT这行的原因。</p>
+<p>
+	　　我不跟风的原因跟其它&ldquo;程序猿&ldquo;一样，静观其变，等该产品差不多了且能看到其前景。</p>
+<p>
+	　　对我来说，函数式编程这东西太新了，我讨厌新东西。</p>
+<p>
+	　　是的，有些家伙已经把ML和Haskell跟他们之前最喜欢的Java&amp;PHP作比较了。</p>
+<p>
+	　　但最近我只听说过Haskell，他们所说的对我都是废话。</p>
+<p>
+	　　看看新宠F#语言。已经有七年了，彼得的大作。当然，这在业界来说已经生存不少时间了，但相对于互联网的历史，七年只是一眨眼。</p>
+<p>
+	　　所以，像我所说的那样，我会谨慎的小心的观察每个internet潮流，函数式式编程或许只是浮云。</p>
+<p>
+	<strong>　　原因2：我按代码行数算工资</strong></p>
+<p>
+	　　你怎么想的我不知道，但是随着我写的代码越多，我就越有成就感，效率很高。如果一天能快速完成500行代码，那就可以说你干的漂亮。每天的任务很繁重，而且boss眼里你也总是忙忙碌碌的。</p>
+<p>
+	　　但是当我拿函数式编程语言和那些老牌语言例如C去比较时，代码少的让我吃惊。</p>
+<p>
+	　　就拿下面这段代码为例：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">static</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;SumOfSquaresHelper&nbsp;</span></span></li>
+					<li>
+						<span>{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">static</span><span>&nbsp;</span><span class="keyword">int</span><span>&nbsp;Square(</span><span class="keyword">int</span><span>&nbsp;i)&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;i&nbsp;*&nbsp;i;&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;}&nbsp;</span></li>
+					<li class="alt">
+						&nbsp;</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">static</span><span>&nbsp;</span><span class="keyword">int</span><span>&nbsp;SumOfSquares(</span><span class="keyword">int</span><span>&nbsp;n)&nbsp;</span></span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;{&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span><span>&nbsp;sum&nbsp;=&nbsp;</span><span class="number">0</span><span>;&nbsp;</span></span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(</span><span class="keyword">int</span><span>&nbsp;i&nbsp;=&nbsp;</span><span class="number">1</span><span>;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum&nbsp;+=&nbsp;Square(i);&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;sum;&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;}&nbsp;</span></li>
+					<li class="alt">
+						<span>}</span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　比比下面的：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span>let&nbsp;square&nbsp;x&nbsp;=&nbsp;x&nbsp;*&nbsp;x&nbsp;</span></span></li>
+					<li>
+						<span>let&nbsp;sumOfSquares&nbsp;n&nbsp;=&nbsp;[<span class="number">1</span><span>..n]&nbsp;|&gt;&nbsp;List.map&nbsp;square&nbsp;|&gt;&nbsp;List.sum</span></span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　十七行的代码只剩下2行了，想想如果这种变化发生在整个工程里面会有什么后果。</p>
+<p>
+	　　如果我们使用这种方法，估计我的代码产量会直线下降--这不是我能忍受的。</p>
+<p>
+	<strong>理由三：我喜欢大括号</strong></p>
+<p>
+	　　还有一点使我不想喜欢这种语言的原因是，我不明白这些与语言要把大括号去掉。去掉大括号还能叫编程语言么？看下我的意思。这是带大括号的代码：</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;Squarer&nbsp;</span></span></li>
+					<li>
+						<span>{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">int</span><span>&nbsp;Square(</span><span class="keyword">int</span><span>&nbsp;input)&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;result&nbsp;=&nbsp;input&nbsp;*&nbsp;input;&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;result;&nbsp;</span></span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span></li>
+					<li>
+						<span>&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;PrintSquare(</span><span class="keyword">int</span><span>&nbsp;input)&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;result&nbsp;=&nbsp;<span class="keyword">this</span><span>.Square(input);&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(<span class="string">&quot;Input={0}.&nbsp;Result={1}&quot;</span><span>,&nbsp;input,&nbsp;result);&nbsp;</span></span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span></li>
+					<li>
+						<span>}</span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　这个则是去掉大括号的相同的代码：</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span>type&nbsp;Squarer()&nbsp;=&nbsp;&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;Square&nbsp;input&nbsp;=&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;result&nbsp;=&nbsp;input&nbsp;*&nbsp;input&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;</span></li>
+					<li>
+						<span>&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;PrintSquare&nbsp;input&nbsp;=&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;result&nbsp;=&nbsp;Square&nbsp;input&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf&nbsp;<span class="string">&quot;Input=%i.&nbsp;Result=%i&quot;</span><span>&nbsp;input&nbsp;result</span></span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　看看差别吧，你怎么想我不知道，但是我真心觉得第二种语言有点像垃圾，就像漏掉了什么东西似得。</p>
+<p>
+	　　实话说，如果没有大括号给我指引，我总觉得少了些东西。</p>
+<p>
+	<strong>　　理由四：我喜欢看到明确的类型</strong></p>
+<p>
+	　　函数式语言的支持者声称，类型推断使代码更清洁，因为任何时候你都无须用类型声明干扰您的代码。</p>
+<p>
+	　　好吧，碰巧，我喜欢看类型声明。如果我不知道每个参数的精确类型，我会觉得不舒服。这就是为什么Java 是我最喜欢的语言。</p>
+<p>
+	　　这是一个某些ML-ish代码的函数签名。不需要类型声明，所有类型自动推断。</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span>let&nbsp;GroupBy&nbsp;source&nbsp;keySelector&nbsp;=&nbsp;&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;...</span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　这是C#的类似功能代码的函数签名，带有明确的类型声明。</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span class="keyword">public</span><span>&nbsp;IEnumerable&lt;IGrouping&lt;TKey,&nbsp;TSource&gt;&gt;&nbsp;GroupBy&lt;TSource,&nbsp;TKey&gt;(&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;IEnumerable&lt;TSource&gt;&nbsp;source,&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;Func&lt;TSource,&nbsp;TKey&gt;&nbsp;keySelector&nbsp;</span></li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;...</span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　在这方面我或许是属于少数派，但我更喜欢第二个版本的说法。知道返回值的类型是IEnumerable&lt;IGrouping&lt;TKey， TSource&gt;&gt;对我而言极为重要。</p>
+<p>
+	　　确实，编译器会为你检查它的类型，并在类型不匹配的时候提醒你。但为什么要让编译器代替你做你能做的工作呢？</p>
+<p>
+	　　好吧，我承认如果你使用了泛型，匿名，返回值为函数的函数，以及其它一切新奇的东西，那么你的类型声明将变得复杂又难以理解。而这使得正确判断类型变得非常困难。</p>
+<p>
+	　　但对此我有个简单的弥补办法&mdash;&mdash;不使用泛型而且不要传递函数，你的签名将变得简单许多。</p>
+<p>
+	<strong>原因5：喜欢修复bug</strong></p>
+<p>
+	　　对我来说，找出bug调试bug，就想狩猎一样刺激。如果在产品系统中存在这个bug，我更兴奋，因为那使我有一种我是英雄的错觉。但是当我看了这种静态类型函数式编程之后，寻找bug就变得困难多了。太不爽了。</p>
+<p>
+	<strong>　　理由六： 我生活于调试程序之中</strong></p>
+<p>
+	　　论及修复bug，我可是花费每天的大部分时间在调试程序、代码单步执行中的。没错，我知道应该使用单元测试，但说起来容易做起来难，对不？</p>
+<p>
+	　　不管怎样，通过这些静态类型的函数式语言，如果你的代码编译通过了，一般它就能正常运行 。</p>
+<p>
+	　　我听说你不得不耗费许多时间在类型匹配上面，但一旦完成它又编译成功，就没有什么需要调试的了。这里面哪里有乐趣呢？</p>
+<p>
+	　　这使我转向到&hellip;&hellip;</p>
+<p>
+	<strong>　　理由七：我不想死扣每个细节</strong></p>
+<p>
+	　　确保所有的类型匹配合适听起来就让我觉得累</p>
+<p>
+	　　事实上，我知道你得被迫去考虑各种可能出现的情况，所有可能的错误，所有别的可能出错的事情。而且你得至始至终去做这些&mdash;&mdash;决不能偷懒也不能推脱到到后面。</p>
+<p>
+	　　我更喜欢在一个相对愉快的环境下工作，然后再屁颠屁颠的去修复bug</p>
+<p>
+	<strong>　　理由八：我喜欢检查空值</strong></p>
+<p>
+	　　我十分乐意为每个方法检查空值。那会给我很大的安全感，我知道我的代码运行结果是安全的</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<ol>
+					<li class="alt">
+						<span><span class="keyword">void</span><span>&nbsp;someMethod(SomeClass&nbsp;x)&nbsp;</span></span></li>
+					<li>
+						<span>{&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(x&nbsp;==&nbsp;</span><span class="keyword">null</span><span>)&nbsp;{&nbsp;</span><span class="keyword">throw</span><span>&nbsp;</span><span class="keyword">new</span><span>&nbsp;NullArgumentException();&nbsp;}&nbsp;</span></span></li>
+					<li>
+						<span>&nbsp;</span></li>
+					<li class="alt">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;x.doSomething();&nbsp;</span></li>
+					<li>
+						<span>}</span></li>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　哈哈！开个玩笑！当然我不能总是要在每个地方都要放置检查空值的代码这种事情来打断我。这点我从来没有落到实处。</p>
+<p>
+	　　我是仅去处理由NPE造成的灾难，而且即使我是在产品发布之后几个星期后才发现那些问题，对业务也没有影响。所以我不懂为啥这也算是个大问题。</p>
+<p>
+	<strong>　　原因九：我喜欢用设计模式</strong></p>
+<p>
+	　　第一次接触到设计模式是在《Design Pattern book》（由于一些原因，被称为&ldquo;四人帮&rdquo;，我实在搞不懂），自从那以后我就费劲心机用它来解决各种问题。这确实能使我的代码看起来严谨并且有团队性，给我的boss留下了很深的印象。</p>
+<p>
+	　　但是我没有丝毫注意在函数设计中的这种模式。如果没有策略、工厂模式、装饰者模式、代理模式等，你怎么能整理好有用的材料。</p>
+<p>
+	　　也许函数式编程没有注意到这些！</p>
+<p>
+	<strong>　　理由十：它太数学范了</strong></p>
+<p>
+	　　这儿有更多关于计算平方和的代码。这个方法太难理解了，因为其中都是怪异的符号。</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				<span><span>ss=:&nbsp;+/&nbsp;@:&nbsp;*:</span></span></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　哎呀，抱歉！搞错了。那是 J语言代码。</p>
+<p>
+	　　可我确实听说有些函数功能程序使用奇怪的符号，像&lt;*&gt;和&gt;&gt;=以及晦涩的概念&ldquo;单元&rdquo;(monads)和&ldquo;仿函式&rdquo;(functors)。</p>
+<p>
+	　　我不知道为什么写函数的人不能坚持用我已经知道的东西&mdash;&mdash;明白的符号如++和!=以及简单的概念&ldquo;继承&rdquo;和&ldquo;多态&rdquo;。</p>
+<p>
+	<strong>　　后记：我不理解</strong></p>
+<p>
+	　　你知道么，我理解不了它！我不懂为什么这种函数式编程语言会有用！</p>
+<p>
+	　　现在我读到一些帖子如&ldquo;你需要了解的事情都在一个网页上&rdquo;。但是对我来说那太简短了。</p>
+<p>
+	　　我一直在找更深层次的一些东西&mdash;能够让我啃的知识。</p>
+<p>
+	　　不，不要说我应该读一些教科书或者去看一些经典的例子，然后写下代码。我想不通过那些方法来体验一下。</p>
+<p>
+	　　我不想仅仅是为了学习新的范例而改变我自己我自己的道路</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

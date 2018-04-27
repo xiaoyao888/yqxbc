@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>优化、分析、检查及修复MySQL数据库的说明</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="优化,分析,检查,修复,MyS" />
+  <meta name="description" content=" 对MySQL数据库的管理常规就是进行预防性的维护，以及修复那些出现问题的内容。 进行检查和修复通常具有四个主要的任务： 1、对表进行优化 2、对表进行分析（分析并存储MyISAM和BD" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>优化、分析、检查及修复MySQL数据库的说明</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：7次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="391" class="art_content"><p>
+	　　对MySQL数据库的管理常规就是进行预防性的维护，以及修复那些出现问题的内容。&nbsp;<br />
+	<br />
+	　　进行检查和修复通常具有四个主要的任务：<br />
+	<br />
+	　　1、对表进行优化<br />
+	<br />
+	　　2、对表进行分析（分析并存储MyISAM和BDB表中键的分布）<br />
+	<br />
+	　　3、对表进行检查（检查表的错误，并且为MyISAM更新键的统计内容）<br />
+	<br />
+	　　4、对表进行修复（修复被破坏的MyISAM表）<br />
+	<br />
+	　　一、对表进行优化<br />
+	<br />
+	　　优化表有很多方式实现：&nbsp;OPTIMIZE&nbsp;TABLE语句、mysqlcheck工具（服务器要运行）或myisamchk（服务器没有运行或表中没有交互）<br />
+	<br />
+	　　为什么优化？随着MySQL的使用，包括BLOB和VARCHAR字节的表将变得比较繁冗，因为这些字段长度不同，对记录进行插入、更新或删除时，会占有不同大小的空间，记录就会变成碎片，且留下空闲的空间。像具有碎片的磁盘，会降低性能，需要整理，因此要优化。<br />
+	<br />
+	　　1、利用OPTIMIZE语句对表进行优化<br />
+	<br />
+	　　#&nbsp;mysql&gt;OPTIMIZE&nbsp;TABLE&nbsp;表名<br />
+	<br />
+	　　这样就对表名进行了优化。<br />
+	<br />
+	　　2、利用mysqlcheck对表进行优化<br />
+	<br />
+	　　mysqlcheck可进行优化外，还可执行大量的检查和修复任务。<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;表名&nbsp;-uroot&nbsp;-p111111（一张表）<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;表名1&nbsp;表名2&nbsp;-uroot&nbsp;-p111111（多张表）<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-o&nbsp;数据库名&nbsp;-uroot&nbsp;-p111111（对整个数据库）<br />
+	<br />
+	　　3、利用myisamchk对表进行优化<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;--quick&nbsp;--check-only-changed&nbsp;--sort-index&nbsp;--analyze&nbsp;表名<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-r&nbsp;表名（参数-r表示对表进行修复，同时也删去了浪费的空间）<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-r&nbsp;/usr/local/mysql/data/testblog/article（指定表所在的路径）<br />
+	<br />
+	　　以上操作需在服务器关闭或没有与服务器互操作的时候，可以使用myisamchk命令行工具（如果服务器正在运行，那么在运行这条语句之前利用mysqladmin&nbsp;flush-tables对表进行刷新；需确保服务器没有与表进行互操作，否则会出现故障）。myisamchk是最老的方法。必须在正确位置上运行myisamchk，或者指定表所在的路径。<br />
+	<br />
+	　　注意：在优化过程中，表会被锁住，因此不要在忙时进行优化操作。同样，需要有足够的空间才能进行OPTIMIZE&nbsp;TABLE。如果没有磁盘空间，MySQL将不能进行优化，表也无法使用。<br />
+	<br />
+	　　优化是对包含MyISAM表的数据库的常规管理事务中一个重要环节，应该定期进行。<br />
+	<br />
+	　　二、对表进行分析<br />
+	<br />
+	　　对表的定期分析可以改善性能，且应该成为常规维护工作的一部分。因为通过更新表的索引信息对表进行分析，可改善数据库性能。<br />
+	<br />
+	　　有三种方法可以对表进行分析：<br />
+	<br />
+	　　1、连接到MySQL时，使用ANALYZE&nbsp;TABLE语句<br />
+	<br />
+	　　2、利用mysqlcheck命令行工具（服务器需要运行，并且只对MyISAM表起作用）<br />
+	<br />
+	　　3、利用myisamchk命令行工具（服务器不应该运行，或无对所操作的表发生互操作）<br />
+	<br />
+	　　#&nbsp;ANALYZE&nbsp;TABLE&nbsp;表名;<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-a&nbsp;数据库名&nbsp;表名&nbsp;-uroot&nbsp;-p111111<br />
+	<br />
+	　　#&nbsp;mysqlcheck&nbsp;-a&nbsp;数据库名&nbsp;表名1&nbsp;表名2&nbsp;-uroot&nbsp;-p111111<br />
+	<br />
+	　　如果试图对不支持分析操作的表进行分析（如InnoDB），那操作将无法进行。<br />
+	<br />
+	　　#&nbsp;myisamchk&nbsp;-a&nbsp;/usr/local/mysql/data/数据库/表名</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

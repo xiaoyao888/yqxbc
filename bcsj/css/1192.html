@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS实现垂直三栏自适应等高布局</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS,垂直三栏自适应等高" />
+  <meta name="description" content=" 首先，三栏等高布局，顾名思义，可以概括为以下特征： 1、3列（白痴也知道）； 2、这3列高等相等； 3、这3列的高度不是固定不变，而是随着内容的变化而变化。 Step1: xhtml代码： " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CSS实现垂直三栏自适应等高布局</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：20次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1192" class="art_content"><p>
+	　　首先，三栏等高布局，顾名思义，可以概括为以下特征：<br />
+	<br />
+	　　1、3列（白痴也知道）；<br />
+	<br />
+	　　2、这3列高等相等；<br />
+	<br />
+	　　3、这3列的高度不是固定不变，而是随着内容的变化而变化。<br />
+	<br />
+	　　Step&nbsp;1:<br />
+	<br />
+	　　xhtml代码：</p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				&lt;p&nbsp;id=&quot;header&quot;&gt;#header&lt;/p&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				&lt;p&nbsp;id=&quot;container&quot;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;id=&quot;main&quot;&nbsp;class=&quot;column&quot;&gt;#main&lt;/p&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;id=&quot;left&quot;&nbsp;class=&quot;column&quot;&gt;#left&lt;/p&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;id=&quot;right&quot;&nbsp;class=&quot;column&quot;&gt;#right&lt;/p&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+				&lt;/p&gt;<br />
+				&lt;p&nbsp;id=&quot;footer&quot;&gt;#footer&lt;/p&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	　　主要结构式#container的p，至于#header和#footer，完全是为了让它能够更像网页一些，回到#container，它内部包含三列，其中main里包含的是一个网页最核心，最主要的内容，所以我们不能怠慢，在纯xhtml的流文档中，浏览器是从上到下解析的，故重要的内容应该放在比较靠前的位置，这是由搜索引擎的权重决定的吧，但是视觉上，我们待会儿会把它放到中间。<br />
+	<br />
+	　　思考一下：这三列怎么可能在没有写死高度的时候还智能的齐头并进呢？<br />
+	<br />
+	　　其实不写死高度的确不能办到智能的齐头并进，那怎么写死高等呢，答案就是，利用盒模型，写它的padding，这是一种变态的方法，但挺奏效，就好比一个人只有实际只有170cm，但是算上20cm的头发，天啊，他已经是190cm了，还是先给出解决方法吧：就是利用padding-bottom和margin-bottom。<br />
+	<br />
+	　　Step2:</p>
+<p>
+	&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				#container{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;background-image:&nbsp;url(&#39;bg.gif&#39;);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;960px;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0&nbsp;auto;<br />
+				}<br />
+				#main{float:&nbsp;left:&nbsp;width:&nbsp;500px;&nbsp;background-color:&nbsp;#e5e5e5;}<br />
+				#left{float:&nbsp;left:&nbsp;width:&nbsp;300px;&nbsp;background-color:&nbsp;#7bd;}<br />
+				#right{float:&nbsp;right:&nbsp;width:&nbsp;160px;&nbsp;background-color:&nbsp;#f63;}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+　　Step3:
+<p>
+	&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				#container&nbsp;.column{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;padding-bottom:&nbsp;32767px;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;margin-bottom:&nbsp;-32767px;<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;　　这一步应该算是本主题的核心，至于32767这个数你可以理解成&ldquo;足够大&rdquo;，以便于有足够的空间去扩展它的盒子，这么高应该是巨人症吧，没关系，我们可以用margin-bottom的负值去隐藏它，这个技巧，在我看来，我真的解释不清楚，有句古话：&nbsp;意会，言传！你只要试试看，就会领会到其中的奥妙。下边这幅图对你的理解应该有帮助：<br />
+	<br />
+	　　到了这步，你会发现这3列的盒模型为32767px，此时你要在父元素上加：overflow:&nbsp;hidden，当然IE6.0是：zoom:1。<br />
+	<br />
+	#container{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;background-image:&nbsp;url(&#39;bg.gif&#39;);<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;960px;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0&nbsp;auto;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;overflow:&nbsp;hidden;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	}<br />
+	<br />
+	　　Step4:<br />
+	<br />
+	　　现在#main的视觉效果是在最左栏，我们要想办法把它搞成中间。<br />
+	<br />
+	　　思路：先把#main排到中间，我们可以#main{margin-left:300}，这时，#left被挤到800px的位置，在#left{margin-left:-800px;}就能搞定，可惜啊，IE6这个贱货，实在是无语，只得重新思考了。<br />
+	<br />
+	　　一般的，在css做布局时，有几种思路，一种是float，一种是定位，关于定位的话，不熟悉的google一下就行，提一下：position:&nbsp;relative的这个属性，如果不指明top和left的话，它的视觉效果不会改变。<br />
+	<br />
+	　　所以，为了让#main在视觉效果上有所突破，那么必须指明top或者left，在这里只需要指明left就行了。</p>
+<p>
+	&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				#main{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#e5e5e5;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;500px;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;300px;<br />
+				}<br />
+				#left{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#7bd;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;300px;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;-500px;<br />
+				}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　其实在这中间，还有一个概念是比较重要的，#main和#left有了position:relative以后，就有了层的概念，所以当#main{left:300px}后，#left已经独立出来了，不会被挤到800px的位置了，故：只需要left:-500px就能达到左边，500是#main的宽。<br />
+<br />
+　　最后考虑的是向下兼容。<br />
+<br />
+　　虽然写了这么多，但是你能够做，并不代表你应该这么做，这是一个战术和战略的问题，以下是我个人想知道的：<br />
+<br />
+　　我觉得一开始：
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				padding-bottom:&nbsp;32767px;<br />
+				margin-bottom:&nbsp;-32767px;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　这么大的值，在reflow阶段会不会很耗资源，而采用js来控制他们的高度，会不会来得更轻松一些呢？<br />
+<br />
+　　第一次写这种东东，感到很棘手，不管是构思上还是在语言表达上都还是很晦涩的，希望大家积极的指正，希望能和更多的朋友来进行交流，一方面是提高自己，另一方面是促进社区的和谐和共享，尽一份自己微薄的力量。
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

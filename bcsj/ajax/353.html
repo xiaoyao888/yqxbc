@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ajax忧虑与启发</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Ajax忧虑与启发,XML教程" />
+  <meta name="description" content="对Ajax的研究有了一段时间了，从最初的远观，到近看，再到实际动手实现，认识越来越深，想法也越来越多。特别是曾经有一阵子跑去研究web2.0，更是体会到Ajax背后的伟大，暗自为其庆" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Ajax忧虑与启发</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：29次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="353" class="art_content"><p>
+	对Ajax的研究有了一段时间了，从最初的远观，到近看，再到实际动手实现，认识越来越深，想法也越来越多。特别是曾经有一阵子跑去研究web2.0，更是体会到Ajax背后的伟大，暗自为其庆幸，也越来越看好Web。</p>
+<p>
+	不过Ajax在我心中却有些怎么也摆脱不了的阴影。</p>
+<p>
+	忽如一夜春风来，Ajax就这么很突兀的就突然流行起来。同时流行的还有Web2.0，这些词汇现在都无比的有鼓动力，任何事物，只要沾上这两者的边，便变得神秘无比，无法遏制。</p>
+<p>
+	但也有人说Ajax是噱头，因为他是新瓶装旧酒。</p>
+<p>
+	其实Ajax之所以风行，就在于它新瓶装旧酒。Ajax所代表的3个概念，异步、Javascript、XML，应该说都不是新东西。</p>
+<p>
+	异步？在操作系统中我们早已经学过，那时的名字叫多线程。</p>
+<p>
+	Javascript？想当年的DHTML他就已经红遍大江南北。</p>
+<p>
+	XML？瞧瞧那些名词，SOAP、RSS、WAP等，这些名词哪个离开得了XML？</p>
+<p>
+	这些名词结合在一起之所以产生强大的力量，就在于他们的设计不同，而隐藏在设计背后的思想不同。</p>
+<p>
+	而这些名词之所以可以红火，就在于他们本身已经应用非常普遍，已经深入到世界中的每个角落。</p>
+<p>
+	即便是Ajax中稍微新鲜点的XMLHttpRequest，之前也不是没有替代品。IFrame时代我们就已经实现了同样的功能，只是XMLHttpRequest可以比我们做的更好，帮助我们做的更多而已。</p>
+<p>
+	Javascript是将Ajax所有技术糅合在一起的黏着剂。所谓的Ajax应用程序，其实就是一个运行在客户端浏览器环境中的应用程序。这个应用程序通过DOM操作HTML将信息展示给用户，通过事件机制相应用户操作，通过XMLHttpRequest与服务器沟通，使用的协议是HTTP，数据的载体是XML，而这个应用程序就是由Javascript构成的。</p>
+<p>
+	Javascript是一种非常强大的语言，换句术语，是通用语言（general&nbsp;language）。Javascript有很多方便的并且强大的特性，使得我们可以开发功能丰富的产品。不过Javascript是脚本，还是脚本，这是他永远逃不开的厄运。</p>
+<p>
+	脚本有很多的问题，比如本身不够严格，执行缓慢的特点等，这里只讨论一下代码重用问题。</p>
+<p>
+	当应用越来越复杂，代码越来越多时，代码重用就会变得很重要。最低级的代码重用就是源代码级的代码重用，灵活，但却代价很高。比较先进的平台，比如java和.net都已经提供了更高级的代码重用，中间代码级的，甚至目标代码级的。甚至，在.net平台，按照微软的伟大设想，不同语言的代码都可以统一起来，一起运行。可想而知，这会为.net平台带来多大的战斗力。</p>
+<p>
+	不同语言，不同的平台的代码都可以在这里施展拳脚。整合是现在的主旋律，.net有着更美好的未来（按照设想）。</p>
+<p>
+	相比之下，作为脚本的Javascript这方面就要差距好多。在我们之前应用程序规模不大时，没有人会在意。但是，当我们实现大量的Ajax应用时，当我们逐渐丰富我们的客户端时，我们就会发现Javascript的硬伤，也就是脚本的硬伤。当然，我们可以改造Javascript，让他适应我们的需求，但是那时，你会突然发现，Javascript（如果那个时候还叫这个名字的话）已经不再是脚本了。</p>
+<p>
+	换句话说，脚本的特点就是灵活，所以它是用来处理一些灵活，但是开发成本低的情况。而传统的程序语言比较严格，开发成本高，但是他的运行和维护成本会低。</p>
+<p>
+	于是，当我们意识到Ajax背后是一种客户段能力的提高，服务器端相应功能向客户端转移之时，我们便不得不重新审视一下Javascript在其中的尴尬位置。Javascript之所以在Ajax应用中如此受宠，便在于它的灵活。灵活的Javascript获得大众的喜爱，逐渐成为标准。Ajax采用Javascript才能迅速的得以应用，成为今天的宠儿。反过来说，正式因为Javascript的灵活，决定它注定无法大型化，也就决定了Ajax的明天不会乐观。（如果他还依靠Javascript，还叫Ajax，而不是AC（#）ax的话。）</p>
+<p>
+	&nbsp;看看Ajax背后的竞争者，micromedia的flash，java的web&nbsp;&nbsp;start，甚至.net都有可能成为他的强大敌人。微软在宣传它下一代操作系统的时候，着重讲到了他的表现层。想象一下，当所有的IE都支持微软最新的表现层技术时，谁还用Javascript？谁还用Ajax？</p>
+<p>
+	不过即使Ajax倒下，不过不要紧，它本身就是一个过渡性技术。不过，Ajax所要做的，就是给我们洗脑：</p>
+<p>
+	Ajax告诉我们，重视脚本，因为他们灵活。</p>
+<p>
+	Ajax告诉我们，重视用户，因为他们掏钱。</p>
+<p>
+	Ajax告诉我们，重视交互，因为软件就是服务。</p>
+<p>
+	Ajax告诉我们，重视Web，因为方便比什么都重要。</p>
+<p>
+	Ajax告诉我们，摘下眼罩，换种方式思考问题吧。当你背过脸无视世界的变化时，是世界抛弃了你，而不是你以为的掩耳盗铃。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

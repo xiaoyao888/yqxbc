@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用Java实现全国天气预报的api接口调用示例</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="api调用示例,天气预报接口" />
+  <meta name="description" content="查询天气预报在APP中常用的一个常用功能，本文实例讲述了java调用中国天气网api获得天气预报信息的方法。分享给大家供大家参考。" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>用Java实现全国天气预报的api接口调用示例</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：33次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1538" class="art_content"><p>
+	<strong>step1:</strong>选择本文所示例的接口&quot;全国天气预报接口&quot; 聚合数据<a href="http://www.juhe.cn/docs/api/id/39/aid/87">url:http://www.juhe.cn/docs/api/id/39/aid/87</a></p>
+<p>
+	<strong>step2:</strong>每个接口都需要传入一个参数key,相当于用户的令牌,所以第一步你需要申请一个key.</p>
+<p>
+	<strong>step3:</strong>学过java的同学们都知道,当我们对一个类或者方法不明白其意图和思想时,我们可以去查看文档,这里也不例外,而且对于英文不是特别好的同学来说很幸运的是,聚合网站上的文档都是中文版本的,比起阅读java源码里的英文文档应该轻松很多.全国天气预报接口下面有六个子接口,打开第一个接口链接,看文档发现需要传入一个城市名或者城市ID参数,这个参数我们可以通过第六个子接口获取(接口之间参数的调用类似于java中方法之间的调用),即支持城市列表获取.所以示例中我们先调用这个接口.调用接口涉及到请求网络资源的问题,这里我封装了一个工具类,包含GET和POST两种方法.</p>
+<p>
+	<strong>step4:代码如下：</strong></p>
+<p>
+	Demo1:网络访问工具类(封装get和post方法)</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package juheAPI;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
+/**
+ * 网络访问工具类
+ * @author silk
+ *
+ */
+public class PureNetUtil {
+ /**
+  * get方法直接调用post方法
+  * @param url 网络地址
+  * @return 返回网络数据
+  */
+ public static String get(String url){
+  return post(url,null);
+ }
+ /**
+  * 设定post方法获取网络资源,如果参数为null,实际上设定为get方法
+  * @param url 网络地址
+  * @param param 请求参数键值对
+  * @return 返回读取数据
+  */
+ public static String post(String url,Map param){
+  HttpURLConnection conn=null;
+  try {
+   URL u=new URL(url);
+   conn=(HttpURLConnection) u.openConnection();
+   StringBuffer sb=null;
+   if(param!=null){//如果请求参数不为空
+    sb=new StringBuffer();
+    /*A URL connection can be used for input and/or output. Set the DoOutput
+     * flag to true if you intend to use the URL connection for output,
+     * false if not. The default is false.*/
+    //默认为false,post方法需要写入参数,设定true
+    conn.setDoOutput(true);
+    //设定post方法,默认get
+    conn.setRequestMethod(&quot;POST&quot;);
+    //获得输出流
+    OutputStream out=conn.getOutputStream();
+    //对输出流封装成高级输出流
+    BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+    //将参数封装成键值对的形式
+    for(Map.Entry s:param.entrySet()){
+     sb.append(s.getKey()).append(&quot;=&quot;).append(s.getValue()).append(&quot;&amp;&quot;);
+    }
+    //将参数通过输出流写入
+    writer.write(sb.deleteCharAt(sb.toString().length()-1).toString());
+    writer.close();//一定要关闭,不然可能出现参数不全的错误
+    sb=null;
+   }
+   conn.connect();//建立连接
+   sb=new StringBuffer();
+   //获取连接状态码
+   int recode=conn.getResponseCode();
+   BufferedReader reader=null;
+   if(recode==200){
+    //Returns an input stream that reads from this open connection
+    //从连接中获取输入流
+    InputStream in=conn.getInputStream();
+    //对输入流进行封装
+    reader=new BufferedReader(new InputStreamReader(in));
+    String str=null;
+    sb=new StringBuffer();
+    //从输入流中读取数据
+    while((str=reader.readLine())!=null){
+     sb.append(str).append(System.getProperty(&quot;line.separator&quot;));
+    }
+    //关闭输入流
+    reader.close();
+    if (sb.toString().length() == 0) {
+     return null;
+    }
+    return sb.toString().substring(0,
+      sb.toString().length() - System.getProperty(&quot;line.separator&quot;).length());
+   }
+  } catch (Exception e) {
+   e.printStackTrace();
+   return null;
+  }finally{
+   if(conn!=null)//关闭连接
+    conn.disconnect();
+  }
+  return null;
+ }
+ 
+}</pre>
+</div>
+<p>
+	Demo2:调用获取城市列表接口示例</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package juheAPI;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+/**
+ * 获取城市列表
+ * 全国天气预报接口调用JAVA示例
+ *  dtype  string N 返回数据格式：json或xml,默认json 
+ *  key  string  Y 你申请的key 
+ * @author silk
+ *
+ */
+public class GetCityList {
+ /**
+  * 调用获取城市列表接口,返回所有数据
+  * @return 返回接口数据
+  */
+ public static String excute(){
+  String url=&quot;http://v.juhe.cn/weather/citys?key=***a7558b2e0bedaa19673f74a6809ce&quot;;//接口URL
+  //PureNetUtil是一个封装了get和post方法获取网络请求数据的工具类
+  return PureNetUtil.get(url);//使用get方法
+ }
+ /**
+  * 调用接口返回数据后,解析数据,根据输入城市名得到对应ID
+  * @param cityName 城市名称
+  * @return 返回对应ID
+  */
+ public static String getIDBycityName(String cityName) {
+  String result=excute();//返回接口结果,得到json格式数据
+  if(result!=null){
+   JSONObject obj=JSONObject.fromObject(result);
+   result=obj.getString(&quot;resultcode&quot;);//得到返回状态码
+   if(result!=null&amp;&amp;result.equals(&quot;200&quot;)){//200表示成功返回数据
+    result=obj.getString(&quot;result&quot;);//得到城市列表的json格式字符串数组
+    JSONArray arr=JSONArray.fromObject(result);
+    for(Object o:arr){//对arr进行遍历
+     //将数组中的一个json个数字符串进行解析
+     obj=JSONObject.fromObject(o.toString());
+     /*此时obj如 {&quot;id&quot;:&quot;2&quot;,&quot;province&quot;:&quot;北京&quot;,&quot;city&quot;:&quot;北京&quot;,&quot;district&quot;:&quot;海淀&quot;}*/
+     //以city这个key为线索判断所需要寻找的这条记录
+     result=obj.getString(&quot;district&quot;);
+     //防止输入城市名不全,如苏州市输入为苏州,类似与模糊查询
+     if(result.equals(cityName)||result.contains(cityName)){
+      result=obj.getString(&quot;id&quot;);//得到ID
+      return result;
+     }
+    }
+   }
+  }
+  return result;
+ }
+ public static void main(String[] args) {
+  System.out.println(getIDBycityName(&quot;香港&quot;));
+ }
+}
+</pre>
+</div>
+<p>
+	Demo3:调用根据城市名/id查询天气</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package juheAPI;
+ 
+import net.sf.json.JSONObject; 
+/**
+ * 根据城市名/id查询天气
+ * @author silk
+ *
+ */
+public class WeatherReportByCity {
+ /**
+  * 根据城市名获取
+  * @param cityName
+  * @return
+  */
+ public static String excute(String cityName){
+  String url=//此处以返回json格式数据示例,所以format=2,以根据城市名称为例,cityName传入中文
+    &quot;http://v.juhe.cn/weather/index?cityname=&quot;+cityName+&quot;&amp;key=***a7558b2e0bedaa19673f74a6809ce&quot;;
+  return PureNetUtil.get(url);//通过工具类获取返回数据
+ }
+ /**
+  * 获取返回数据中的一个属性示例,此处以获取今日温度为例
+  * &quot;temperature&quot;: &quot;8℃~20℃&quot;  今日温度
+  * @param args
+  * @return 
+  */
+ public static String GetTodayTemperatureByCity(String city) {
+  String result=excute(city);
+  if(result!=null){
+   JSONObject obj=JSONObject.fromObject(result);
+   /*获取返回状态码*/
+   result=obj.getString(&quot;resultcode&quot;);
+   /*如果状态码是200说明返回数据成功*/
+   if(result!=null&amp;&amp;result.equals(&quot;200&quot;)){
+    result=obj.getString(&quot;result&quot;);
+    //此时result中数据有多个key,可以对其key进行遍历,得到对个属性
+    obj=JSONObject.fromObject(result);
+    //今日温度对应的key是today
+    result=obj.getString(&quot;today&quot;);
+    obj=JSONObject.fromObject(result);
+    //今日温度对应当key是temperature
+    result=obj.getString(&quot;temperature&quot;);
+    return result;
+   }
+  }
+  return result;
+ }
+ public static void main(String[] args) {
+  System.out.println(GetTodayTemperatureByCity(&quot;苏州&quot;));
+ }
+}</pre>
+</div>
+<p>
+	Demo4:调用天气种类及表示列表接口示例</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+package juheAPI;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+/**
+ * 天气种类及标识列表接口调用JAVA示例
+ * @author silk
+ */
+public class GetWeatherSignAndTypeList {
+ //接口地址,因为只需要传入一个固定的key为参数,所以设为常量
+ private static final String URL= &quot;http://v.juhe.cn/weather/uni?key=***a7558b2e0bedaa19673f74a6809ce&quot;;
+ /**
+  * 通过工具类获取数据
+  * @return
+  */
+ public static String excute(){
+  return PureNetUtil.get(URL);//调用工具类获取接口数据
+ }
+ /**
+  * 利用遍历数组的方式获取
+  * @param wid天气对应id
+  * @return 天气名称
+  */
+ public static String getWeatherByWid(String wid) {
+  String result=excute();//获取接口数据
+  if(result!=null){
+   JSONObject obj=JSONObject.fromObject(result);
+   result=obj.getString(&quot;resultcode&quot;);
+   /*获取返回状态码*/
+   if(result!=null&amp;&amp;result.equals(&quot;200&quot;)){
+    /*获取数组数据*/
+    result=obj.getString(&quot;result&quot;);
+    JSONArray arr=JSONArray.fromObject(result);
+    for(Object o:arr){//遍历数组
+     obj=JSONObject.fromObject(o.toString());
+     //如果遍历到需要的数据后直接返回结果,根据key(wid)得到value判断是否等于传入参数
+     if(obj.getString(&quot;wid&quot;).equals(wid)){
+      result=obj.getString(&quot;weather&quot;);
+      return result;
+     }
+    }
+   }
+  }
+  return result;
+ }
+ public static void main(String[] args) {
+  System.out.println(getWeatherByWid(&quot;10&quot;));
+ }
+}
+</pre>
+</div>
+<p>
+	&nbsp;&nbsp;&nbsp;step5:调用接口时候如果状态码不是200,仔细参考文档说明,也就是返回step3:看文档!</p>
+<p>
+	以上就是本文的全部内容，希望对大家的学习有所帮助，也希望大家多多支持鹏鹏电脑知识网。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

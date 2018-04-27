@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySQL增加用户的两种方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL增加用户的两种方法" />
+  <meta name="description" content="MySQL增加用户的两种方法" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL增加用户的两种方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：25次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="229" class="art_content">　　MySQL有两种不同的方法增加用户：通过使用GRANT语句或通过直接操作MySQL授权表。比较好的方法是使用GRANT语句，因为他们是更简明并且好像错误少些。<br />
+<br />
+　　下面的例子显示出如何使用MySQL客户安装新用户。这些例子假定权限已缺省被安装。这意味着为了改变，您必须在MySQL正在运行同一台机器上，您必须作为MySQL&nbsp;root用户连接，并且root用户必须对MySQL数据库有insert权限和reload管理权限。另外，如果您改变了root用户口令，您必须如下的MySQL命令指定它。<br />
+<br />
+　　您可以通过发出GRANT语句增加新用户：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				shell&gt;&nbsp;mysql&nbsp;--user=root&nbsp;mysql<br />
+				mysql&gt;&nbsp;GRANT&nbsp;ALL&nbsp;PRIVILEGES&nbsp;ON&nbsp;*.*&nbsp;TO&nbsp;monty@localhost<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;something&#39;&nbsp;WITH&nbsp;GRANT&nbsp;OPTION;<br />
+				mysql&gt;&nbsp;GRANT&nbsp;ALL&nbsp;PRIVILEGES&nbsp;ON&nbsp;*.*&nbsp;TO&nbsp;monty@&quot;%&quot;<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;something&#39;&nbsp;WITH&nbsp;GRANT&nbsp;OPTION;<br />
+				mysql&gt;&nbsp;GRANT&nbsp;RELOAD,PROCESS&nbsp;ON&nbsp;*.*&nbsp;TO&nbsp;admin@localhost;<br />
+				mysql&gt;&nbsp;GRANT&nbsp;USAGE&nbsp;ON&nbsp;*.*&nbsp;TO&nbsp;dummy@localhost;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　这些GRANT语句安装3个新用户：<br />
+<br />
+　　monty：可以从任何地方连接服务器的一个完全的超级用户，但是必须使用一个口令&#39;something&#39;做这个。注意，我们必须对monty@localhost和monty@&quot;%&quot;发出GRANT语句。如果我们增加localhost条目，对localhost的匿名用户条目在我们从本地主机连接接时由mysql_install_db创建的条目将优先考虑，因为它有更特定的Host字段值，所以以user表排列顺序看更早到来。<br />
+<br />
+　　admin：可以从localhost没有一个口令进行连接并且被授予reload和process管理权限的用户。这允许用户执行mysqladmin&nbsp;reload、mysqladmin&nbsp;refresh和mysqladmin&nbsp;flush-*命令，还有mysqladmin&nbsp;processlist。没有授予数据库有关的权限。他们能在以后通过发出另一个GRANT语句授权。<br />
+<br />
+　　dummy：可以不用一个口令连接的一个用户，但是只能从本地主机。全局权限被设置为&#39;N&#39;--USAGE权限类型允许您无需权限就可设置一个用户。它假定您将在以后授予数据库相关的权限。<br />
+<br />
+　　您也可以直接通过发出INSERT语句增加同样的用户存取信息，然后告诉服务器再次装入授权表：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				shell&gt;&nbsp;mysql&nbsp;--user=root&nbsp;mysql<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;VALUES(&#39;localhost&#39;,&#39;monty&#39;,PASSWORD(&#39;something&#39;),<br />
+				&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;)<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;VALUES(&#39;%&#39;,&#39;monty&#39;,PASSWORD(&#39;something&#39;),<br />
+				&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;)<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;SET&nbsp;Host=&#39;localhost&#39;,User=&#39;admin&#39;,<br />
+				Reload_priv=&#39;Y&#39;,&nbsp;Process_priv=&#39;Y&#39;;<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;(Host,User,Password)<br />
+				VALUES(&#39;localhost&#39;,&#39;dummy&#39;,&#39;&#39;);<br />
+				mysql&gt;&nbsp;FLUSH&nbsp;PRIVILEGES;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　取决于您的MySQL版本，对上述，您可能必须使用一个不同数目&#39;Y&#39;值（在3.22.11以前的版本有更少的权限列）。对admin用户，只用在3.22.11开始的版本具有的更加可读的INSERT扩充的语法。<br />
+<br />
+　　注意，为了设置一个超级用户，您只需创造一个user表条目，其权限字段设为&#39;Y&#39;。不需要db或host表的条目。<br />
+<br />
+　　在user表中的权限列不是由最后一个INSERT语句明确设置的（对dummy用户），因此那些列被赋予缺省值&#39;N&#39;。这是GRANT&nbsp;USAGE做的同样的事情。<br />
+<br />
+　　下列例子增加一个用户custom，他能从主机localhost、server.domain和whitehouse.gov连接。他只想要从localhost存取bankaccount数据库，从whitehouse.gov存取expenses数据库和从所有3台主机存取customer数据库。他想要从所有3台主机上使用口令stupid。<br />
+<br />
+　　为了使用GRANT语句设置个用户的权限，运行这些命令：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				shell&gt;&nbsp;mysql&nbsp;--user=root<br />
+				mysql&nbsp;mysql&gt;&nbsp;GRANT&nbsp;SELECT,INSERT,UPDATE,DELETE,CREATE,DROP<br />
+				ON&nbsp;bankaccount.*<br />
+				TO&nbsp;custom@localhost<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;stupid&#39;;<br />
+				mysql&gt;&nbsp;GRANT&nbsp;SELECT,INSERT,UPDATE,DELETE,CREATE,DROP<br />
+				ON&nbsp;expenses.*<br />
+				TO&nbsp;custom@whitehouse.gov<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;stupid&#39;;<br />
+				mysql&gt;&nbsp;GRANT&nbsp;SELECT,INSERT,UPDATE,DELETE,CREATE,DROP<br />
+				ON&nbsp;customer.*<br />
+				TO&nbsp;custom@&#39;%&#39;<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;stupid&#39;;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　通过直接修改授权表设置用户权限，运行这些命令（注意，在结束时FLUSH&nbsp;PRIVILEGES）：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				shell&gt;&nbsp;mysql&nbsp;--user=root<br />
+				mysql&nbsp;mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;(Host,User,Password)<br />
+				VALUES(&#39;localhost&#39;,&#39;custom&#39;,PASSWORD(&#39;stupid&#39;));<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;(Host,User,Password)<br />
+				VALUES(&#39;server.domain&#39;,&#39;custom&#39;,PASSWORD(&#39;stupid&#39;));<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;(Host,User,Password)<br />
+				VALUES(&#39;whitehouse.gov&#39;,&#39;custom&#39;,PASSWORD(&#39;stupid&#39;));<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;db<br />
+				(Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,<br />
+				Create_priv,Drop_priv)<br />
+				VALUES<br />
+				(&#39;localhost&#39;,&#39;bankaccount&#39;,&#39;custom&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;);<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;db<br />
+				(Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,<br />
+				Create_priv,Drop_priv)<br />
+				VALUES<br />
+				(&#39;whitehouse.gov&#39;,&#39;expenses&#39;,&#39;custom&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;);<br />
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;db<br />
+				(Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,<br />
+				Create_priv,Drop_priv)<br />
+				VALUES(&#39;%&#39;,&#39;customer&#39;,&#39;custom&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;,&#39;Y&#39;);<br />
+				mysql&gt;&nbsp;FLUSH&nbsp;PRIVILEGES;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　头3个INSERT语句增加user表条目，允许用户custom用给定口令从不同的主机进行连接，但是没有授予任何许可（所有权限被设置为缺省值&#39;N&#39;）。后3个INSERT语句增加db表条目，授予custom以bankaccount、expenses和customer数据库权限，但是只能在从正确的主机存取时。通常，在授权表直接被修改时，服务器必须被告知再次装入他们（用FLUSH&nbsp;PRIVILEGES）以便使权限修改生效。&nbsp;如果您想要给特定的用户从一个给定的域上的任何机器上存取权限，您可以发出一个如下的GRANT语句：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				mysql&gt;&nbsp;GRANT&nbsp;...<br />
+				ON&nbsp;*.*<br />
+				TO&nbsp;myusername@&quot;%.mydomainname.com&quot;<br />
+				IDENTIFIED&nbsp;BY&nbsp;&#39;mypassword&#39;;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　为了通过直接修改授权表做同样的事情，这样做：<br />
+<br />
+<table border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td>
+				mysql&gt;&nbsp;INSERT&nbsp;INTO&nbsp;user&nbsp;VALUES&nbsp;(&#39;%.mydomainname.com&#39;,&nbsp;&#39;myusername&#39;,<br />
+				PASSWORD(&#39;mypassword&#39;),...);<br />
+				mysql&gt;&nbsp;FLUSH&nbsp;PRIVILEGES;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　您也可以使用xmysqladmin、mysql_webadmin甚至xmysql在授权表中插入、改变和更新值。您可以在MySQL的Contrib目录找到这些实用程序。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

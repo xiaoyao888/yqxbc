@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>将SQL Server表变成txt文件</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="将SQL Server表变成txt文件" />
+  <meta name="description" content="方法－：用BCP命令 bcp实用工具 bcp实用工具在MicrosoftSQLServer2000实例和数据文件之间以用户指定的格式复数据。 语法 " />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>将SQL Server表变成txt文件</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：12次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="376" class="art_content">方法－：用BCP命令&nbsp;<br />
+<br />
+bcp&nbsp;实用工具&nbsp;<br />
+<br />
+bcp&nbsp;实用工具在&nbsp;Microsoft&reg;&nbsp;SQL&nbsp;Server&trade;&nbsp;2000&nbsp;实例和数据文件之间以用户指定的格式复数据。&nbsp;<br />
+<br />
+语法&nbsp;<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				bcp&nbsp;{[[database_name.][owner].]{table_name&nbsp;|&nbsp;view_name}&nbsp;|&nbsp;&quot;query&quot;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;{in&nbsp;|&nbsp;out&nbsp;|&nbsp;queryout&nbsp;|&nbsp;format}&nbsp;data_file<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-m&nbsp;max_errors]&nbsp;[-f&nbsp;format_file]&nbsp;[-e&nbsp;err_file]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-F&nbsp;first_row]&nbsp;[-L&nbsp;last_row]&nbsp;[-b&nbsp;batch_size]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-n]&nbsp;[-c]&nbsp;[-w]&nbsp;[-N]&nbsp;[-V&nbsp;(60&nbsp;|&nbsp;65&nbsp;|&nbsp;70)]&nbsp;[-6]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-q]&nbsp;[-C&nbsp;code_page]&nbsp;[-t&nbsp;field_term]&nbsp;[-r&nbsp;row_term]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-i&nbsp;input_file]&nbsp;[-o&nbsp;output_file]&nbsp;[-a&nbsp;packet_size]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-S&nbsp;server_name[\\instance_name]]&nbsp;[-U&nbsp;login_id]&nbsp;[-P&nbsp;password]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;[-T]&nbsp;[-v]&nbsp;[-R]&nbsp;[-k]&nbsp;[-E]&nbsp;[-h&nbsp;&quot;hint&nbsp;[,...n]&quot;]</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+参数database_name&nbsp;<br />
+<br />
+指定的表或视图所在数据库的名称。如果未指定，则为用户默认数据库。&nbsp;<br />
+<br />
+owner&nbsp;<br />
+<br />
+表或视图所有者的名称。如果执行大容量复制操作的用户拥有指定的表或视图，则&nbsp;owner&nbsp;是可选的。如果没有指定&nbsp;owner&nbsp;并且执行大容量复制操作的用户不拥有指定的表或视图，则&nbsp;Microsoft&reg;&nbsp;SQL&nbsp;Server&trade;&nbsp;2000&nbsp;将返回错误信息并取消大容量复制操作。&nbsp;<br />
+<br />
+table_name&nbsp;<br />
+<br />
+是将数据复制到&nbsp;SQL&nbsp;Server&nbsp;时&nbsp;(in)&nbsp;的目的表名，以及从&nbsp;SQL&nbsp;Server&nbsp;复制数据时&nbsp;(out)&nbsp;的源表名。&nbsp;<br />
+<br />
+view_name&nbsp;<br />
+<br />
+是将数据复制到&nbsp;SQL&nbsp;Server&nbsp;时&nbsp;(in)&nbsp;的目的视图名，以及从&nbsp;SQL&nbsp;Server&nbsp;复制数据时&nbsp;(out)&nbsp;的源视图名。只有其中所有列都引用同一个表的视图才能用作目的视图。有关将数据复制到视图的限制的更多信息，请参见&nbsp;INSERT。&nbsp;<br />
+<br />
+Query&nbsp;<br />
+<br />
+是返回一个结果集的&nbsp;Transact-SQL&nbsp;查询。如果查询返回多个结果集，例如指定&nbsp;COMPUTE&nbsp;子句的&nbsp;SELECT&nbsp;语句，只有第一个结果集将复制到数据文件，随后的结果集被忽略。使用双引号引起查询语句，使用单引号引起查询语句中嵌入的任何内容。在从查询中大容量复制数据时，还必须指定&nbsp;queryout。&nbsp;<br />
+<br />
+in&nbsp;|&nbsp;out&nbsp;|&nbsp;queryout&nbsp;|&nbsp;format&nbsp;<br />
+<br />
+指定大容量复制的方向。in&nbsp;是从文件复制到数据库表或视图，out&nbsp;是指从数据库表或视图复制到文件。只有从查询中大容量复制数据时，才必须指定&nbsp;queryout。根据指定的选项（-n、-c、-w、-6&nbsp;或&nbsp;-N）以及表或视图分隔符，format&nbsp;将创建一个格式文件。如果使用&nbsp;format，则还必须指定&nbsp;-f&nbsp;选项。&nbsp;<br />
+<br />
+说明&nbsp;Microsoft&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;中的&nbsp;bcp&nbsp;实用工具不支持大容量复制到包含&nbsp;sql_variant&nbsp;或&nbsp;bigint&nbsp;数据类型的表。&nbsp;<br />
+<br />
+data_file&nbsp;<br />
+<br />
+大容量复制表或视图到磁盘（或者从磁盘复制）时所用数据文件的完整路径。当将数据大容量复制到&nbsp;SQL&nbsp;Server&nbsp;时，此数据文件包含将复制到指定表或视图的数据。当从&nbsp;SQL&nbsp;Server&nbsp;大容量复制数据时，该数据文件包含从表或视图复制的数据。路径可以有&nbsp;1&nbsp;到&nbsp;255&nbsp;个字符。&nbsp;<br />
+<br />
+-m&nbsp;max_errors&nbsp;<br />
+<br />
+指定在大容量复制操作取消之前可能产生的错误的最大数目。bcp&nbsp;无法复制的每一行都将被忽略并计为一个错误。如果没有包括该选项，则默认为&nbsp;10。&nbsp;<br />
+<br />
+-f&nbsp;format_file&nbsp;<br />
+<br />
+指定格式文件的完整路径，该格式文件包含以前在同一个表或视图上使用&nbsp;bcp&nbsp;时的存储响应。当使用由&nbsp;format&nbsp;选项所创建的格式文件大容量复制入或复制出数据时，使用此选项。格式文件的创建是可选的。在提示几个格式问题之后，bcp&nbsp;将提示是否在格式文件中保存回答。默认文件名为&nbsp;Bcp.fmt。大容量复制数据时，bcp&nbsp;可引用一个格式文件，因此不必重新交互输入以前的回答。如果未使用此选项，也没有指定&nbsp;&ndash;n、-c、-w、-6&nbsp;或&nbsp;-N，则&nbsp;bcp&nbsp;将提示输入格式信息。&nbsp;<br />
+<br />
+-e&nbsp;err_file&nbsp;<br />
+<br />
+指定错误文件的完整路径，此错误文件用于存储&nbsp;bcp&nbsp;无法从文件传输到数据库的所有行。来自&nbsp;bcp&nbsp;的错误信息将发送到用户工作站。如果未使用此选项，则不创建错误文件。&nbsp;<br />
+<br />
+-F&nbsp;first_row&nbsp;<br />
+<br />
+指定要大容量复制的第一行的序数。默认值是&nbsp;1，表示在指定数据文件的第一行。&nbsp;<br />
+<br />
+-L&nbsp;last_row&nbsp;<br />
+<br />
+指定要大容量复制的最后一行的序数。默认值是&nbsp;0，表示指定数据文件中的最后一行。&nbsp;<br />
+<br />
+-b&nbsp;batch_size&nbsp;<br />
+<br />
+指定所复制的每批数据中的行数。每个批处理作为一个事务复制至服务器。SQL&nbsp;Server&nbsp;提交或回滚（在失败时）每个批处理的事务。默认情况下，指定的数据文件中的所有数据都作为一批复制。请不要与&nbsp;-h&nbsp;&quot;ROWS_PER_BATCH&nbsp;=&nbsp;bb&quot;&nbsp;选项一起使用。&nbsp;<br />
+<br />
+-n&nbsp;<br />
+<br />
+使用数据的本机（数据库）数据类型执行大容量复制操作。此选项不提示输入每一字段，它将使用本机值。&nbsp;<br />
+<br />
+-c&nbsp;<br />
+<br />
+使用字符数据类型执行大容量复制操作。此选项不提示输入每一字段；它使用&nbsp;char&nbsp;作为存储类型，不带前缀，\\t（制表符）作为字段分隔符，\\n（换行符）作为行终止符。&nbsp;<br />
+<br />
+-w&nbsp;<br />
+<br />
+使用&nbsp;Unicode&nbsp;字符执行大容量复制操作。此选项不提示输入每一字段；它使用&nbsp;nchar&nbsp;作为存储类型，不带前缀，\\t（制表符）作为字段分隔符，\\n（换行符）作为行终止符。不能在&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;版或更早版本中使用。&nbsp;<br />
+<br />
+-N&nbsp;<br />
+<br />
+对非字符数据使用数据的本机（数据库）数据类型和对字符数据使用&nbsp;Unicode&nbsp;字符类型执行大容量复制操作。这是可替代&nbsp;-w&nbsp;选项的性能更高的选项，其目的是使用数据文件将数据从一个&nbsp;SQL&nbsp;Server&nbsp;传输到另一个&nbsp;SQL&nbsp;Server&nbsp;中。它不提示输入每一字段。在需要传输包含&nbsp;ANSI&nbsp;扩展字符的数据以及想利用本机模式的性能时，可以使用这一选项。不能在&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;版或更早版本中使用&nbsp;-N&nbsp;选项。&nbsp;<br />
+<br />
+-V&nbsp;(60&nbsp;|&nbsp;65&nbsp;|&nbsp;70)&nbsp;<br />
+<br />
+使用&nbsp;SQL&nbsp;Server&nbsp;早期版本中的数据类型执行大容量复制操作。此选项与字符&nbsp;(-c)&nbsp;或本机&nbsp;(-n)&nbsp;格式一起使用。此选项并不提示输入每一字段，它使用默认值。例如，若要将&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;中的&nbsp;bcp&nbsp;实用工具所支持（但&nbsp;ODBC&nbsp;不再支持）的日期格式大容量复制到&nbsp;SQL&nbsp;Server&nbsp;2000，可使用&nbsp;-V&nbsp;65&nbsp;参数。&nbsp;<br />
+<br />
+重要&nbsp;将数据从&nbsp;SQL&nbsp;Server&nbsp;大容量复制到数据文件时，即使指定了&nbsp;&ndash;V，bcp&nbsp;实用工具也不会为任何&nbsp;datetime&nbsp;或&nbsp;smalldatetime&nbsp;数据生成&nbsp;SQL&nbsp;Server&nbsp;6.0&nbsp;或&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;的日期格式。日期将始终以&nbsp;ODBC&nbsp;格式写入。另外，由于&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;版或更早版本不支持可为空的&nbsp;bit&nbsp;数据，因此&nbsp;bit&nbsp;列中的空值写为值&nbsp;0。&nbsp;<br />
+<br />
+-6&nbsp;<br />
+<br />
+使用&nbsp;SQL&nbsp;Server&nbsp;6.0&nbsp;或&nbsp;SQL&nbsp;Server&nbsp;6.5&nbsp;数据类型执行大容量复制操作。仅为保持向后兼容性。改为使用&nbsp;&ndash;V&nbsp;选项。&nbsp;<br />
+<br />
+-q&nbsp;<br />
+<br />
+在&nbsp;bcp&nbsp;实用工具和&nbsp;SQL&nbsp;Server&nbsp;实例的连接中执行&nbsp;SET&nbsp;QUOTED_IDENTIFIERS&nbsp;ON&nbsp;语句。使用该选项指定包含空格或引号的数据库、所有者、表或视图的名称。将由三部分组成的整个表名或视图名引在双引号&nbsp;(&quot;&nbsp;&quot;)&nbsp;中。<br />
+<br />
+-C&nbsp;code_page&nbsp;<br />
+<br />
+仅为保持向后兼容性。作为代替，请在格式文件或交互式&nbsp;bcp&nbsp;中为每一列指定一个排序规则名。&nbsp;<br />
+<br />
+指定数据文件中的数据代码页。只有当数据中包含字符值大于&nbsp;127&nbsp;或小于&nbsp;32&nbsp;的&nbsp;char、varchar&nbsp;或&nbsp;text&nbsp;列时，code_page&nbsp;才有用。&nbsp;<br />
+<br />
+代码页值&nbsp;描述&nbsp;<br />
+<br />
+ACP&nbsp;ANSI/Microsoft&nbsp;Windows&reg;&nbsp;(ISO&nbsp;1252)。&nbsp;<br />
+<br />
+OEM&nbsp;客户程序使用的默认代码页。如果未指定&nbsp;-C，则这是&nbsp;bcp&nbsp;使用的默认代码页。&nbsp;<br />
+<br />
+RAW&nbsp;不发生从一个代码页到另一个代码页的转换。因为不发生转换，所以这是最快的选项。&nbsp;<br />
+<br />
+&lt;值&gt;&nbsp;特定的代码页号码，例如&nbsp;850。&nbsp;<br />
+<br />
+-t&nbsp;field_term&nbsp;<br />
+<br />
+指定字段终止符。默认的字段终止符是&nbsp;\\t（制表符）。使用此参数替代默认字段终止符。&nbsp;<br />
+<br />
+-r&nbsp;row_term&nbsp;<br />
+<br />
+指定行终止符。默认的行终止符是&nbsp;\\n（换行符）。使用此参数替代默认行终止符。&nbsp;<br />
+<br />
+-i&nbsp;input_file&nbsp;<br />
+<br />
+指定响应文件的名称，使用交互模式（未指定&nbsp;&ndash;n、-c、-w、-6&nbsp;或&nbsp;-N）执行大容量复制时，响应文件包含对每一字段命令提示问题的响应。&nbsp;<br />
+<br />
+-o&nbsp;output_file&nbsp;<br />
+<br />
+指定接收&nbsp;bcp&nbsp;输出（从命令提示重定向）的文件的名称。&nbsp;<br />
+<br />
+-a&nbsp;packet_size&nbsp;<br />
+<br />
+指定发送到和发送自服务器的每个网络数据包的字节数。可以使用&nbsp;SQL&nbsp;Server&nbsp;企业管理器（或&nbsp;sp_configure&nbsp;系统存储过程）设置服务器配置选项。但是，使用此选项可以单个地替代服务器配置选项。packet_size&nbsp;可以设置为&nbsp;4096&nbsp;到&nbsp;65535&nbsp;字节，默认值为&nbsp;4096。&nbsp;<br />
+<br />
+数据包大小的增加能够提高大容量复制操作的性能。如果要求一个较大的数据包而得不到，则使用默认设置。bcp&nbsp;生成的性能统计显示出所使用数据包的大小。&nbsp;<br />
+<br />
+-S&nbsp;server_name[\\instance_name]&nbsp;<br />
+<br />
+指定要连接到的&nbsp;SQL&nbsp;Server&nbsp;实例。指定&nbsp;server_name&nbsp;以连接该服务器上的&nbsp;SQL&nbsp;Server&nbsp;默认实例。指定&nbsp;server_name\\instance_name&nbsp;以连接到该服务器上的&nbsp;SQL&nbsp;Server&nbsp;2000&nbsp;命名实例。如果未指定服务器，则&nbsp;bcp&nbsp;连接到本地计算机上的&nbsp;SQL&nbsp;Server&nbsp;默认实例。从网络上的远程计算机执行&nbsp;bcp&nbsp;时，要求此选项。&nbsp;<br />
+<br />
+-U&nbsp;login_id&nbsp;<br />
+<br />
+指定用于连接到&nbsp;SQL&nbsp;Server&nbsp;的登录&nbsp;ID。&nbsp;<br />
+<br />
+-P&nbsp;password&nbsp;<br />
+<br />
+指定登录&nbsp;ID&nbsp;的密码。如果未使用此选项，则&nbsp;bcp&nbsp;将提示输入密码。如果不带密码将此选项用于命令提示行末尾，则&nbsp;bcp&nbsp;将使用默认密码&nbsp;(NULL)。&nbsp;<br />
+<br />
+-T&nbsp;<br />
+<br />
+指定&nbsp;bcp&nbsp;使用网络用户的安全凭据，通过信任连接连接到&nbsp;SQL&nbsp;Server。不需要&nbsp;login_id&nbsp;和&nbsp;password。&nbsp;<br />
+<br />
+-v&nbsp;<br />
+<br />
+报告&nbsp;bcp&nbsp;实用工具的版本号和版权。&nbsp;<br />
+<br />
+-R&nbsp;<br />
+<br />
+指定使用为客户端计算机的区域设置定义的区域格式，将货币、日期和时间数据大容量复制到&nbsp;SQL&nbsp;Server&nbsp;中。默认情况下，将会忽略区域设置。&nbsp;<br />
+<br />
+-k&nbsp;<br />
+<br />
+指定在大容量复制操作中空列应保留一个空值，而不是对插入的列赋予默认值&nbsp;<br />
+<br />
+-E&nbsp;<br />
+<br />
+指定标识列的值出现在要导入的文件中。如果没有给出&nbsp;-E，则正导入的数据文件中此列的标识值将被忽略，而且&nbsp;SQL&nbsp;Server&nbsp;2000&nbsp;会根据创建表期间指定的种子值和增量值自动指派唯一的值。如果数据文件的表或视图中不包含标识列的值，则使用格式文件指定导入数据时应跳过表或视图中的标识列；SQL&nbsp;Server&nbsp;2000&nbsp;将自动为该列指派唯一值。有关详细信息，请参见&nbsp;DBCC&nbsp;CHECKIDENT。&nbsp;<br />
+<br />
+-h&nbsp;&quot;hint&nbsp;[,...n]&quot;&nbsp;<br />
+<br />
+指定在大容量复制数据到表或视图时所使用的提示。在大容量复制数据到&nbsp;SQL&nbsp;Server&nbsp;6.x&nbsp;或更早版本时，不能使用此选项。&nbsp;<br />
+<br />
+提示&nbsp;描述&nbsp;<br />
+<br />
+ORDER&nbsp;(column&nbsp;[ASC&nbsp;|&nbsp;DESC]&nbsp;[,...n])&nbsp;数据文件中数据的排序次序。如果要装载的数据已根据表中的聚集索引排序，则会提高大容量复制的性能。如果数据文件按不同次序排序，或者该表没有聚集索引，则将忽略&nbsp;ORDER&nbsp;提示。所提供的列名必须是目的表中的有效列。默认情况下，bcp&nbsp;假设数据文件没有排序。&nbsp;<br />
+<br />
+ROWS_PER_BATCH&nbsp;=&nbsp;bb&nbsp;每批中数据的行数（即&nbsp;bb）。在未指定&nbsp;-b&nbsp;时使用，这将使整个数据文件作为单个事务发送到服务器。服务器根据值&nbsp;bb&nbsp;优化大容量装载。默认情况下，ROWS_PER_BATCH&nbsp;未知。&nbsp;<br />
+<br />
+KILOBYTES_PER_BATCH&nbsp;=&nbsp;cc&nbsp;每批中数据的千字节&nbsp;(KB)&nbsp;近似数量（即&nbsp;cc）。默认情况下，KILOBYTES_PER_BATCH&nbsp;未知。&nbsp;<br />
+<br />
+TABLOCK&nbsp;大容量复制操作期间将获取表级锁。由于只在大容量复制操作期间才控制锁减少了表中锁的争夺，因此此提示可以显著提高性能。如果表没有索引并且指定了&nbsp;TABLOCK，则该表可以同时由多个客户端装载。默认情况下，锁定行为是由表选项&nbsp;table&nbsp;lock&nbsp;on&nbsp;bulk&nbsp;load&nbsp;决定的。&nbsp;<br />
+<br />
+CHECK_CONSTRAINTS&nbsp;大容量复制操作期间，将检查目的表上的所有约束。默认情况下，将会忽略约束。&nbsp;<br />
+<br />
+FIRE_TRIGGERS&nbsp;与&nbsp;in&nbsp;参数一起指定，在目的表上定义的任何插入触发器将在大容量复制操作期间执行。如果没有指定&nbsp;FIRE_TRIGGERS，则不执行插入触发器。对于&nbsp;out、queryout&nbsp;和&nbsp;format&nbsp;参数，将忽略&nbsp;FIRE_TRIGGERS。&nbsp;<br />
+<br />
+注释&nbsp;<br />
+<br />
+将忽略要导入的数据文件中计算列或&nbsp;timestamp&nbsp;列的值，SQL&nbsp;Server&nbsp;2000&nbsp;自动赋值。如果数据文件不包含表中的计算列或&nbsp;timestamp&nbsp;列的值，可用格式文件指定应在导入数据时跳过表中的计算列和&nbsp;timestamp&nbsp;列；SQL&nbsp;Server&nbsp;将自动为该列赋值。&nbsp;<br />
+<br />
+计算列和&nbsp;timestamp&nbsp;列照常会从&nbsp;SQL&nbsp;Server&nbsp;大容量复制到一个数据文件。&nbsp;<br />
+<br />
+SQL&nbsp;Server&nbsp;标识符（包括数据库名称、表名或视图名、登录和密码）可以包含诸如嵌入空格和引号等字符。当在命令提示符处指定包含空格或引号的标识符或文件名时，需要将该标识符引在双引号(&quot;&nbsp;&quot;)&nbsp;内。另外，对于包含嵌入空格或引号的所有者、表或视图的名称，可以指定&nbsp;-q&nbsp;选项，或者将所有者、表或视图的名称在双引号内用方括号&nbsp;([&nbsp;])&nbsp;括起来。<br />
+<br />
+例如，Northwind&nbsp;数据库内有表&nbsp;Jane朙s&nbsp;Orders，该表由用户&nbsp;Jane&nbsp;Doe&nbsp;所拥有。若要使用登录&nbsp;Jane&nbsp;Doe&nbsp;和密码&nbsp;go&nbsp;dba&nbsp;将该表从&nbsp;Northwind&nbsp;数据库大容量复制到&nbsp;Orders.txt&nbsp;文件，请执行下列命令之一：&nbsp;<br />
+<br />
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				bcp&nbsp;&quot;Northwind.Jane&nbsp;Doe.Jane朙s&nbsp;Orders&quot;&nbsp;out&nbsp;&quot;Jane朙s&nbsp;Orders.txt&quot;&nbsp;-c&nbsp;-q&nbsp;-U&quot;Jane&nbsp;Doe&quot;&nbsp;-P&quot;go&nbsp;dba&quot;/code]<br />
+				<br />
+				[code]bcp&nbsp;&quot;Northwind.[Jane&nbsp;Doe].[Jane朙s&nbsp;Orders]&quot;&nbsp;out&nbsp;&quot;Jane朙s&nbsp;Orders.txt&quot;&nbsp;-c&nbsp;-U&quot;Jane&nbsp;Doe&quot;&nbsp;-P&quot;go&nbsp;dba&quot;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+若要指定包含空格或引号的数据库名称，必须使用&nbsp;-q&nbsp;选项。&nbsp;<br />
+<br />
+有关此实用工具位置和运行方式的信息，请参见命令提示实用工具入门。&nbsp;<br />
+<br />
+请参见&nbsp;<br />
+<br />
+在不同排序规则间复制数据&nbsp;<br />
+<br />
+使用&nbsp;bcp&nbsp;和&nbsp;BULK&nbsp;INSERT&nbsp;<br />
+<br />
+并行数据装载&nbsp;<br />
+<br />
+SET&nbsp;QUOTED_IDENTIFIER&nbsp;<br />
+<br />
+sp_tableoption&nbsp;<br />
+<br />
+使用格式文件&nbsp;<br />
+<br />
+方法二：DTS&nbsp;导入/导出向导&nbsp;<br />
+<br />
+DTS&nbsp;导入/导出向导&nbsp;<br />
+<br />
+在所有的数据转换服务&nbsp;(DTS)&nbsp;工具中，DTS&nbsp;导入/导出向导为在&nbsp;OLE&nbsp;DB&nbsp;数据源之间复制数据提供了最简单的方法。&nbsp;<br />
+<br />
+在连接到源和目的之后，可以选择要导入或导出的数据，并可对要复制的数据应用各种转换（例如，通过选择列或使用&nbsp;Microsoft&reg;&nbsp;ActiveX&reg;&nbsp;脚本）。在大多数情况下，可以自动与源数据一起复制主键和外键约束。&nbsp;<br />
+<br />
+说明&nbsp;可以复制从&nbsp;SQL&nbsp;查询中获得的数据。SQL&nbsp;查询可以包含来自同一数据库或分布式查询中的多个表的联接。作为整个进程的一部分，如果不存在任何表，则&nbsp;DTS&nbsp;导入/导出向导会自动为您创建目的表。&nbsp;<br />
+<br />
+可用的数据源&nbsp;<br />
+<br />
+使用&nbsp;DTS&nbsp;导入/导出向导，可以连接到下列数据源：&nbsp;<br />
+<br />
+大多数的&nbsp;OLE&nbsp;DB&nbsp;和&nbsp;ODBC&nbsp;数据源以及用户指定的&nbsp;OLE&nbsp;DB&nbsp;数据源。&nbsp;<br />
+<br />
+文本文件。&nbsp;<br />
+<br />
+到一个或多个&nbsp;Microsoft&nbsp;SQL&nbsp;Server&trade;&nbsp;实例的其它连接。&nbsp;<br />
+<br />
+Oracle&nbsp;和&nbsp;Informix&nbsp;数据库。&nbsp;<br />
+<br />
+必须已经安装&nbsp;Oracle&nbsp;或&nbsp;Informix&nbsp;客户端软件。&nbsp;<br />
+<br />
+Microsoft&nbsp;Excel&nbsp;电子表格。&nbsp;<br />
+<br />
+Microsoft&nbsp;Access&nbsp;和&nbsp;Microsoft&nbsp;FoxPro&reg;&nbsp;数据库。&nbsp;<br />
+<br />
+dBase&nbsp;或&nbsp;Paradox&nbsp;数据库。&nbsp;<br />
+<br />
+有关更多信息，请参见&nbsp;DTS&nbsp;连接。&nbsp;<br />
+<br />
+转换数据&nbsp;<br />
+<br />
+除复制数据外，还可以用诸如&nbsp;Microsoft&nbsp;Visual&nbsp;Basic&reg;&nbsp;Scripting&nbsp;Edition&nbsp;(VBScript)&nbsp;或&nbsp;Microsoft&nbsp;JScript&reg;&nbsp;之类的&nbsp;ActiveX&nbsp;脚本语言转换列级数据。有关更多信息，请参见&nbsp;DTS&nbsp;转换、转换数据任务和在&nbsp;DTS&nbsp;中使用&nbsp;ActiveX&nbsp;脚本。&nbsp;<br />
+<br />
+复制数据库对象&nbsp;<br />
+<br />
+使用&nbsp;DTS&nbsp;导入/导出向导，可以转换索引、视图、角色、存储过程和引用完整性约束等数据库对象。有关更多信息，请参见复制&nbsp;SQL&nbsp;Server&nbsp;对象任务。&nbsp;<br />
+<br />
+保存&nbsp;DTS&nbsp;包&nbsp;<br />
+<br />
+完成&nbsp;DTS&nbsp;导入/导出向导之后，可以将连接、转换以及调度信息保存为&nbsp;DTS&nbsp;包。可以下列形式保存包：&nbsp;<br />
+<br />
+保存到&nbsp;SQL&nbsp;Server&nbsp;msdb&nbsp;数据库。&nbsp;<br />
+<br />
+保存到&nbsp;SQL&nbsp;Server&nbsp;2000&nbsp;Meta&nbsp;Data&nbsp;Services。&nbsp;<br />
+<br />
+保存存为结构化存储文件（.dts&nbsp;文件）。&nbsp;<br />
+<br />
+保存为&nbsp;Visual&nbsp;Basic&nbsp;文件。&nbsp;<br />
+<br />
+可以立即运行包或调度该包以供今后执行。&nbsp;<br />
+<br />
+有关更多信息，请参见保存&nbsp;DTS&nbsp;包和调度&nbsp;DTS&nbsp;包的执行。&nbsp;<br />
+<br />
+编辑包&nbsp;<br />
+<br />
+如果使用&nbsp;DTS&nbsp;导入/导出向导创建了一个包，然后保存了该包，则可以在&nbsp;DTS&nbsp;设计器中编辑这个包。使用&nbsp;DTS&nbsp;设计器，可以自定义在&nbsp;DTS&nbsp;导入/导出向导中创建的基本包，添加步骤、任务、转换、事件驱动逻辑以及配置工作流。有关更多信息，请参见&nbsp;DTS&nbsp;设计器。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>主板代码的识别</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="主板" />
+  <meta name="description" content="为了帮助大家认清主板，不被JS所欺骗，现将一些有关代码列出。 通常情况下，当显卡的信息过后，显示的便是系统信息了。主板的型号一般在第三行，例如：TRM-P5MVP-A4-V1.01（此例中T" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>主板代码的识别</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：21次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1060" class="art_content"><p>
+	&nbsp;为了帮助大家认清主板，不被JS所欺骗，现将一些有关代码列出。<br />
+	　　通常情况下，当显卡的信息过后，显示的便是系统信息了。主板的型号一般在第三行，例如：TRM-P5MVP-A4-V1.01（此例中TRM实际上是主板牌子的缩写，不过有时候也不一定），而最下面一行显示的则是主板的主要信息，例如：07/30/1998/-VP3-586B-W877-2A5LETGAC-00，其中W877是主板采用的I/O芯片型号，接下来的2A5LETGAC才是最重要的信息显示，2A5LE代表主板采用的是VIA Apollo MVP3芯片组，TG是主板厂商代码，此处代表Tekram（建邦），至于AC则代表主板型号。<br />
+	芯片组代码：<br />
+	2A69K：Intel 440BX 芯片组<br />
+	2A69J：Intel 440LX 芯片组<br />
+	2A69H: Intel 440FX 芯片组<br />
+	2A59C: Intel Triton FX 芯片组<br />
+	2A59F: Intel Triton II HX 芯片组<br />
+	2A59G: Intel Triton VX 芯片组<br />
+	2A59H: Intel Triton VX 芯片组<br />
+	2A59I: Intel Triton TX 芯片组<br />
+	2A59A: Intel Natoma (Neptune) 芯片组<br />
+	2A597: Intel Mercury 芯片组<br />
+	2A59B: Intel Mercury 芯片组<br />
+	2B59A: Intel Neptune EISA 芯片组<br />
+	2A5C7: VIA VT82C570 芯片组<br />
+	2A5G7: VLSI VL82C594 芯片组<br />
+	2A5GB: VLSI Lynx VL82C541/VL82C543<br />
+	2A5IA: SiS 501/02/03 芯片组<br />
+	2A5IC: SiS 5501/02/03 芯片组<br />
+	2A5ID: SiS 5511/12/13 芯片组<br />
+	2A5IE: SiS 5101-5103 芯片组<br />
+	2A5IF: SiS 5596 芯片组<br />
+	2A5IH: SiS 5571 芯片组<br />
+	2A5II: SiS 5598 芯片组<br />
+	2A5IK: SiS 5591 芯片组<br />
+	2A5KB: Ali 1449/61/51 芯片组<br />
+	2A5KC: 目前未知<br />
+	2A5KF: ALI 1521/23 芯片组<br />
+	2A5KI: ALI IV+ M1531/M1543 芯片组 (Super TX 芯片组)<br />
+	2A5LA: VIA Apollo VP1 芯片组 (VT82C580VP) ( VXPro 芯片组)<br />
+	2A5LC: VIA Apollo VP2 芯片组 (AMD640 芯片组) 2A5LD: VIA VPX 芯片组 ( VXPro+ 芯片组) 2A5LE: VIA Apollo (M)VP3<br />
+	2A5L7: VIA VT82C570 2A5L9: VIA VT82C570M<br />
+	2A5R5: Forex 601A-613 芯片组<br />
+	2A5UI: Opti 82C822/596/597 芯片组<br />
+	2A5UL: Opti 82C822/571/572 芯片组<br />
+	2A5UM: Opti 82C822/546/547 芯片组<br />
+	2A5UN: OptiViper-M82C556/557/558|Viper 82C556/557/558芯片组<br />
+	2A5X7: UMC 82C890 芯片组<br />
+	2A5X8: UMC UM8886BF/UM8891BF/UM8892BF 芯片组<br />
+	2A4H2: Contaq 82C596-9 芯片组<br />
+	2A4IB: SiS 496/497 芯片组<br />
+	2A4KC: Ali 1439/45/31 芯片组<br />
+	2A4KD: Ali 1489 芯片组<br />
+	2A4L4: VIA 486A/482/505 芯片组<br />
+	2A4L6: VIA 496/406/505 芯片组<br />
+	2A4UK: OPTI-802G-822 芯片组<br />
+	2A4X5: UMC 8881/8886 芯片组<br />
+	2C403: EFAR EC802G-B 芯片组<br />
+	2C4I8: SiS 471B/E 芯片组<br />
+	2C4I9: SIS 85C471B/E/G 芯片组<br />
+	2C4K9: ALI 14296 芯片组<br />
+	2C4J6: 目前未知<br />
+	2C4L2: VIA 82C486A 芯片组<br />
+	2C4L6: VIA VT496G 芯片组<br />
+	2C4UK: OPTI - 802G<br />
+	2C4X2: UMC UM82C491/82C493 芯片组<br />
+	2C4X6: UMC UM498F/496F<br />
+	2A431: Cyrix 5510 芯片组 (MediaGx) 　<br />
+	厂商代码：<br />
+	A0 ASUS（华硕）<br />
+	A1 Abit(Silicon Star)(升技)<br />
+	A2 Atrend (中凌)<br />
+	A3 ASI (Aquarius Systems Inc.)<br />
+	A7 Arima Twn AB Aopen (建基)<br />
+	AD Amaquest<br />
+	AM Mirage<br />
+	B0 Biostar (映泰)<br />
+	B3 BCM<br />
+	C1 Clevo<br />
+	C2 Chicony<br />
+	C3 Chaintech (承启)<br />
+	C5 Chaplet<br />
+	C9 Computrend<br />
+	CF Flagpoint<br />
+	D0 Dataexpert (联讯)<br />
+	D1 DTK (创宏)<br />
+	D2 Digital (DEC)<br />
+	D3 Digicom<br />
+	D4 DFI（钻石）<br />
+	E1 ECS (Elitegroup) (磐英)<br />
+	E3 EFA<br />
+	E4 ESPCo<br />
+	E6 Elonex<br />
+	EC ENPC<br />
+	F0 FIC (FICA) (大众)<br />
+	F2 Free Tech<br />
+	F3 Full Yes (福扬)<br />
+	F5 Fugutech<br />
+	F9 Fordlian<br />
+	FD DataExpert or Atima or GCT (联讯)<br />
+	FH Amptron<br />
+	FN Amptron<br />
+	G0 Giga-byte（技嘉）<br />
+	G3 Gemlight<br />
+	G9 Global Circuit Technology<br />
+	H0 Hsin-Tech<br />
+	H2 HOLCO (Shuttle)<br />
+	I3 Iwill （艾威）<br />
+	I4 Inventa<br />
+	I5 Informtech<br />
+	J1 Jetway (Jetboard, Acorp) (捷波)<br />
+	J2 Jamicon<br />
+	J3 J-Bond（捷波）<br />
+	J4 Jetta J6 Joss<br />
+	K0 Kapok<br />
+	K1 Kamei<br />
+	L1 Lucky Star<br />
+	M0 Matra<br />
+	M2 Mycomp (TMC) and Megastar (皇朝/麦肯)<br />
+	M3 Mitac<br />
+	M4 Micro-star（微星）<br />
+	M8 Mustek<br />
+	M9 MLE<br />
+	N5 NEC O0 Ocean (Octek)（海洋）<br />
+	P1 PC-Chips (明致)<br />
+	P4 Asus（华硕）<br />
+	P8 Azza<br />
+	P9 Powertech<br />
+	PA Epox (Pronix) (磐英)<br />
+	PC Pine<br />
+	Q0 Quanta (Twn)<br />
+	Q1 QDI（联想）<br />
+	R0 Mtech (Rise)<br />
+	R2 Rectron<br />
+	S2 Soyo (梅捷)<br />
+	S5 Shuttle (Holco)<br />
+	S9 Spring Circle<br />
+	SA Seanix<br />
+	SC Sukjung (Auhua Electronics Co. Ltd.)<br />
+	SE SMT (Sundance Multiprocessor Technology Ltd)<br />
+	SH SYE (Shing Yunn Technology Co., Ltd.)<br />
+	SM San-Li and Hope Vision SN Soltek (硕泰克)<br />
+	T0 Twinhead（伦飞）<br />
+	T1 Taemung or Fentech<br />
+	T4 Taken<br />
+	T5 Tyan<br />
+	T6 Trigen<br />
+	TB Totem<br />
+	TG Tekram（建邦）<br />
+	TJ Totem<br />
+	TP Commate, Ozzo<br />
+	U0 U-Board<br />
+	U2 AIR (UHC)<br />
+	U6 Unitron<br />
+	V3 Vtech (PCPartner)<br />
+	V5 Vision Top Technology<br />
+	V6 Vobis<br />
+	V7 YKM (distribution by Dayton Micron)<br />
+	W0 Wintec (Edom)<br />
+	Z1 Zida (Tomato boards) 　<br />
+	&nbsp;<br />
+	主板代码的识别</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

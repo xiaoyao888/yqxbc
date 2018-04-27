@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>编码风格不是编码规范</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="编码,编码风格,编码规范" />
+  <meta name="description" content=" 我并不认为程序员是一个情绪特别丰富的群体。但有一些事情却能很容易刺激程序员的神经，那就是代码格式和布局。如果看到一个函数的括弧在同一行上没有闭合，我的眼睛会喷血。" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>编码风格不是编码规范</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：40次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="565" class="art_content"><p>
+	我并不认为程序员是一个情绪特别丰富的群体。但有一些事情却能很容易刺激程序员的神经，那就是代码格式和布局。如果看到一个函数的括弧在同一行上没有闭合，我的眼睛会喷血。如果看到有人没有恰好的在两个函数间留一空行，我的小腿会抽筋。但重点在这里&mdash;&mdash;除非是在家里开发自己的业余爱好软件，我的这些个人喜好其实是无关紧要的。同样，作为一个团队中的一员，你的个人编程喜好也应该放到一边。</p>
+<p>
+	编码风格很容易会和编码规范混为一谈，因为这两个词经常会被人换着使用。我认为，编码规范同时包括了编码风格和其它规范，不仅仅指代码格式。例如，像&ldquo;返回成功/失败的函数应该用一个整数作为返回值&rdquo;，这样的规则不属于编码风格。在这篇文章中，编码风格简单的指一个描述如何格式化代码的说明。编码风格中的规则通常会涉及到下面这些主题：</p>
+<p>
+	缩进<br />
+	空格使用<br />
+	Tab使用<br />
+	注释<br />
+	命名习惯<br />
+	代码行长度<br />
+	语言特点风格，例如是否使用可有可无的分号<br />
+	编码风格都是为特定的编程语言制定的，可以把它们看作&ldquo;我们共同的约定&rdquo;。如果在你的公司里，在你在时，在这些事情正在制定完成，你可以提出你的喜好，那你是幸运。但通常情况是，一种编码风格在其生命期里看着无数的程序员来了又走了。在我的眼里，遵守编码风格有下面三个主要好处：</p>
+<p>
+	<strong>1. 遵守编码风格使代码更容易维护</strong></p>
+<p>
+	今天由这个程序员实现的软件，明天可能需要另外一个程序员维护。如果所有代码中大家使用同一种编码风格，这另外一个程序员快速的扫一眼陌生的代码，就能根据大家约定的编程习惯，推断出代码的作用。如果编码风格中指明常量应该全用大写字母表示，那么，当看到一个全是大写字母的变量时，你就能推断出它是常量。同样的，如果编码风格中规定包的引入要有顺序，那你立刻就能知道去哪里找这些包。这使得代码很容易维护。</p>
+<p>
+	<strong>2. 编码风格使形成代码集体所有制</strong></p>
+<p>
+	代码集体所有制意味着全体程序员要负责所有代码。集体所有制的作用很大，它能有效的增大巴士因子&mdash;&mdash;一个项目能承受多少个程序员被车撞了而不影响项目的正常进行。在整个代码库中坚持延用一种常用的编码风格，所以程序员都能更容易的理解、维护。</p>
+<p>
+	相反，如果在一个大型的软件项目中，每个程序员都使用自己的编码风格，最终会引起一场维护版图的战争，就像动物世界里我们的这些朋友：</p>
+<p>
+	气味记号(也称喷洒尿液或领土记号)是动物标记自己领土范围的一种行为。通常是通过留下具有强烈气味的物质来完成，很多时候是通过在领土中突出的物体上小便。-维基百科<br />
+	个人编码风格就像是狗撒尿，留下自己的势力记号。他们在代码中留下自己的符号，在程序员之间创造壁垒。</p>
+<p>
+	<strong>3. 编码风格能消除那些长久的纷争</strong></p>
+<p>
+	每个程序员都对编码风格有强烈的自我认同。这种感觉深植于每个人的自负中，每当和同事遇到是否应该在关键词周围使用空格时，这种讨论很容易升级而僵持不下。但是，静下来想想&mdash;&mdash;这真的无所谓。不管是不是在关键词周围使用了空格，只要能达成一致，大家都能从中获得易维护和集体所有制的好处。在这种情况中，闭着眼睛，遵循一种编码风格就行了。</p>
+<p>
+	你不需要喜欢这种编码风格。如果你不喜欢里面的某条规定，那就骂几句这个文档，只向文档发脾气，就像人类迁怒于上帝。然后还是按照约定做事。这样做更具有建设性，比无休无止的吵论这些不重要的事情好的多。</p>
+<p>
+	有了一套编码风格并不一定会给你带来好处&mdash;&mdash;除非大家都遵守。有些时候，你并不一定需要手工去调整代码。很多的程序编程器，例如Eclipse，能配置帮你格式化代码，使其符合编码风格。即使你的编辑器没有这种功能，很多其它工具也能够自动按照某种风格格式化一个文件。在我们的团队中，我们使用 indent 和 uncrustify 工具。我还听说过一些其它好东西，比如ReSharper。那些不能被自动实施的规则，例如命名习惯，可以在代码审查的过程中落实。</p>
+<p>
+	你有什么想法？你们团队中采用了什么标准和约定？它们带来了什么好处？请写在评论里。我会很高兴看到讨论。</p>
+<p>
+	[英文原文：The conventions we follow ]</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

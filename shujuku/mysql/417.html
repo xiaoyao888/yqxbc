@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>是时候放弃MySQL的五大理由</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL" />
+  <meta name="description" content=" MySQL目前仍然是受欢迎的开源数据库，但是近些年来它已经慢慢失宠了这很正常。下面来看看放弃使用MySQL数据库的五个较实际的理由。 追溯到2008年，当Sun Microsystems以大约一亿美元收购" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>是时候放弃MySQL的五大理由</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：26次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="417" class="art_content"><p>
+	　　MySQL目前仍然是受欢迎的开源数据库，但是近些年来它已经慢慢失宠了&mdash;&mdash;这很正常。下面来看看放弃使用MySQL数据库的五个较实际的理由。</p>
+<p>
+	　　追溯到2008年，当Sun Microsystems以大约一亿美元收购MySQL AB的时候，MySQL迅速成长为大受欢迎的数据库。然而第二年，Oracle接管了Sun，MySQL也是交易的一部分。MySQL的用户和开发者开始质疑开源数据库的命运，与此同时他们开始寻找替代品。</p>
+<p>
+	　　转眼到了2013年：Oracle并没有消灭这个昔日的竞争对手，MySQL仍然是最受欢迎的开源数据库。可是MySQL的知名度正在下滑，因为它已经失去了诱惑力，各种可行的数据库替代品也正在崭露头角。让我们来看看不再使用前开源数据库MySQL的五大理由。</p>
+<p>
+	　　1. MySQL不如其它关系型数据库管理系统那样成熟</p>
+<p>
+	　　MySQL起初并不是一个RDBMS（关系型数据库管理系统），只是后来改变方向添加了更多的功能。时间久的、更成熟的RDBMS仍然被认为比MySQL功能更丰富。如果你想要一个功能丰富的RDBMS，你可以选择PostgreSQL或者是一些闭源的数据库系统，例如Oracle或Microsoft SQL Server。</p>
+<p>
+	　　PostgreSQL的贡献者Selena Deckelmann表示：对于需要关系型数据库的Web开发人员来说，Postgres看起来是新项目的不二选择。&ldquo;通过加入JSON数据类型和PLV8特性，Postgres也可能成为NoSQL的默认选择&rdquo;Selena说。</p>
+<p>
+	　　2. MySQL是开源的...但只有近似而已</p>
+<p>
+	　　严格来说，MySQL是一个开源数据库，但是在实践当中，已经感觉不到了。在Oracle的保护伞下，MySQL现在有专利权和源模块。&ldquo;理论上，MySQL仍然很活跃，但是Oracle的脚步深陷开发进程之中，拒绝发布关于bug的测试案例，而且MySQL的安全补丁已经在代码上加强控制，并输送大量的开源开发人员到新的领域。&rdquo;Paula Rooney在她的ZDNet文章里作出解释。难道Oracle真的该把MySQL奉献给Apache吗？</p>
+<p>
+	其实有很多开源替代品可以选择。MariaDB是MySQL的一个分支，仍然是&ldquo;真正的开源。&rdquo;一位MariaDB的开发人员解释说：&ldquo;MariaDB的所有代码都是在GPL，LPGL或BSD下面发行的。MariaDB并没有如你在MySQL Enterprise Edition里所看到的那些闭源模块。事实上，在MySQL 5.5 Enterprise Edition里的所有的闭源特性都可以在MariaDB开源版本里找到。&rdquo;</p>
+<p>
+	　　3. MySQL的性能无法与竞争对手相提并论</p>
+<p>
+	　　MariaDB的博客为MySQL和MariaDB的对比提供了详细的基准测试结果，尽管对比结果很接近，但是MariaDB有绝对的优势。</p>
+<p>
+	　　PostgreSQL的贡献者Selena Deckelmann说Heroku Postgres让Postgres更有吸引力，原因有几个，其中包括缩放功能。&ldquo;可以说他们是Postgres最大的服务器托管环境，为你的Apps自动处理扩展，支持出色的附加组件，使你在找出DevOps本地情况之前更容易试用各种功能。&rdquo;她解释道，&ldquo;他们只宣布支持PVL8&mdash;&mdash;允许你在数据库里运行JavaScript，并能更好的利用9.2和更高版本的JSON datetype。&rdquo;</p>
+<p>
+	　　4. MySQL是Oracle所有的，而不是社区驱动的</p>
+<p>
+	　　很显然，在被Oracle接管之后，MySQL并没有改变发展方向，但是，因为目前属于Oracle的事实让一些开发者感到不安。&ldquo;可能最糟糕的是，技术社区不可能和在Oracle里的MySQL开发人员一起工作。&rdquo; MySQL和MariaDB创始人Michael &ldquo;Monty&rdquo; Widenius如是说。</p>
+<p>
+	　　Widenius指出，Oracle不会接受补丁或提供一个公共的路线图。他说，&ldquo;没办法和MySQL的开发人员讨论怎样执行一些事情或者怎样让当前的代码运作。&rdquo;如果一个开源项目的开发数据库和你有关，Widenius会向你推荐MariaDB，因为它是基于MySQL建立的，并且提供了更多新特性、速度和稳定性，而且更安全。</p>
+<p>
+	　　5. 越来越多的强劲对手</p>
+<p>
+	　　2013年6月在波士顿举行的峰会上，Red Hat宣布和MySQL分道扬镳。取而代之的是Red Hat将和MariaDB同上一条船。Slackware Linux 2013年3月宣布将MySQL转移向MariaDB，而且openSUSE在2013年1月也作出了相似的宣布。</p>
+<p>
+	　　在2013年4月，Wikimedia基金会宣布Wikipedia网站（全球最受欢迎的第七大网站）采用MariaDB。Wikimedia Foundation Site架构师Asher Feldman解释称，MariaDB的优化程序增强功能和Percona的XtraDB功能设置是作出改变的根本原因。&ldquo;作为自由文化运动的支持者，我认为这是同等重要的。&rdquo;Wikimedia Foundation强烈倾向于自由软件开发项目，包括一个在无偿授权和企业版本之间没有分叉代码库的项目。&rdquo;他补充到，&ldquo;我们欢迎并支持MariaDB Foundation作为一个非盈利组织，尤其是在自由和开放的MySQL数据库相关社区方面。&rdquo;</p>
+<p>
+	　　Steven J. Vaughan-Nichols是一个科技记者（这里作为SmartBear的贡献者），在2012年结束之际提到，不管你怎么看待Oracle或开源vs.专有软件，MariaDB在世界最繁忙的Web站点之一的优秀性能正在吸引人们的注意力，不管你正在使用的是Linux、Apache、MySQL还是PHP/Python/Perl（LAMP）软件堆栈。</p>
+<p>
+	　　这些海量数据有什么作用呢，技术型公司知道那些忠实的用户不会放弃MySQL的。MySQL不再是唯一的了不起的数据库解决方案。相比之下，MySQL正面临着巨大的挑战&mdash;&mdash;甲骨文免费版、真正的开源产物MariaDB、不断争宠的PostgreSQL RDBMS和不断膨胀的NoSQL市场。如果你还没有放弃MySQL，这里有充足的理由供你重新考虑。</p>
+<p>
+	　　如果你不支持放弃MySQL的观点，那么请阅读Andy Patrizio的文章继续使用MySQL的5个理由，然后再做决定也不迟。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

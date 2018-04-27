@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>显示故障，具体问题具体分析</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="电脑," />
+  <meta name="description" content=" 显示器屏幕为何颤抖 笔者的爱机是前年组装的兼容机。近几天，发现显示器画面上方颤抖，左上角颤抖的最厉害，用了几次显示器的消磁功能，效果还是不见好转。难道显示器坏了由于" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>显示故障，具体问题具体分析</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：28次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1070" class="art_content"><p>
+	　　显示器屏幕为何颤抖</p>
+<p>
+	　　笔者的爱机是前年组装的兼容机。近几天，发现显示器画面上方颤抖，左上角颤抖的最厉害，用了几次显示器的消磁功能，效果还是不见好转。难道显示器坏了由于附近没有维修公司，而且显示器的&ldquo;体重&rdquo;又比较大，所以决定先自行卸开检查！于是将显示器搬到邻近的桌子上，打开外壳没发现异常现象，只得重新安装好。没办法，再试试吧！</p>
+<p>
+	　　开机居然发现颤抖现象不见了。于是将显示器屏幕又放回到电脑桌上，开机后发现显示器屏幕的&ldquo;颤抖&rdquo;又出现了！那&ldquo;颤抖&rdquo;一定是外界干扰造成的！看看显示器周围的电器，心想应该是稳压器。前些天由于电压太低，计算机启动都很困难，于是用上了稳压器，将其放在电脑桌的上架上。我赶紧关机，将稳压器移走，再开机显示器屏幕颤抖现象没有了。事后咨询朋友得到的答案是：稳压器内有线圈，会产生电感，对显示器有感应，从而导致显示器屏幕的颤抖。</p>
+<p>
+	显示器互换无法显示</p>
+<p>
+	　　有网友问：我的计算机采用是i845主板，CPU为P4 2.0GHz，采用集成显卡声卡，连接17英寸显示器一切正常，但换成15英寸显示器则不能正常显示了，请问这是什么原因可以肯定：显示器没有坏，其他硬件也没有问题，因为我用这两台计算机和显示器都是正常的，难道是新的计算机不支持老显示器 其实这方面问题还可以在52硬件论坛查到</p>
+<p>
+	　　这是一个很典型的问题，这个问题也曾经困扰过笔者很长时间，此问题是显示器差异导致屏幕尺寸小的显示器超过默认分辨率而不能显示。17英寸显示器默认分辨率为1024&times;768；刷新率为85Hz，而15英寸显示器则为800&times;600，由于带宽问题，老的15英寸显示器很少能达到<a href="mailto:1024×768@85Hz">1024&times;768@85Hz</a>的水平，自然无法提供那么高的显示器分辨率和刷新率了。建议更换到17英寸显示器上将桌面分辨率设定为<a href="mailto:800×600@85Hz">800&times;600@85Hz</a>，再更换成15英寸显示器问题就可以得到圆满解决。还有一种解决方法是：重新开机，再自检到硬盘之后按F5键进入操作系统的安全模式，进入设备管理器将显卡驱动程序进行卸载，重新启动计算机时会提示安装显卡驱动程序，安装完显卡驱动程序之后，就可以正常显示了。</p>
+<p>
+	显卡电容爆浆导致的故障</p>
+<p>
+	　　最近，笔者的同学抱怨，他的显示器出问题了，老是花屏，让笔者帮忙修理。电脑的大体配置为：CPU是赛扬1.8GHz、显卡是GeForce4 MX440。第一次开机能顺利通过自检，然而在进入Windows XP操作系统界面前有很长一段时间黑屏。进入Windows界面后看上去没什么大问题，只是有细微的不明显的波纹。但是当拖动鼠标点击刷新和拖动网页滚动条时显示器就会产生大面积的花屏现象。</p>
+<p>
+	　　首先，笔者以为故障是显卡或内存接触不良导致的。于是拆下了显卡和内存。清洁了上面的灰尘，擦拭了金手指，并小心插入，防止接触不良。并且去除了BIOS，快速自检选项。希望系统自检能反映硬件故障在哪，可是重新开机后自检通过了，进入系统故障依旧。</p>
+<p>
+	　　难道是显示器出问题了于是笔者把显示器换到其他电脑上，然而一切正常。鉴于电脑系统是新装的，显卡驱动程序也是原来装机的时候安装的，于是排除系统故障和驱动程序故障。当笔者修改显卡设置时，发现取消显卡加速选项时，花屏现象就减轻了很多。于是打开机箱仔细观察，发现显卡上有一个电解电容头部鼓起，显然是电容爆浆了。于是取出显卡换了个新的同样规格的电容。重新装上，故障排除。</p>
+<p>
+	　　事后分析：主板和显卡上的电容是起滤波、稳定电压的作用。显卡电容坏了，供给显卡芯片的电压自然就不稳定，从而导致了显示器花屏。</p>
+<p>
+	自己动手做显卡散热风扇</p>
+<p>
+	　　一日，笔者使用的一台计算机频繁死机，重启后，运行没多久又出现死机现象。开始，认为是系统问题，于是&ldquo;Ghost&rdquo;了备份的系统，可刚进入桌面没多久还是死机。从此症状来看，笔者首先想到了CPU的散热问题，于是打开机箱，拆下CPU风扇，除尘、清理，再安装上，开机再试，可问题依旧；观察CPU的风扇，运行平稳、安静，用手试了一下散热片，也没感觉烫手；是不是内存条的问题，笔者找来一根在别的机子上正常使用的内存安装好，开机再试，运行了一会儿还是死机。于是笔者把目光转向了显卡，用手了试一下显卡的背面，感觉有一点烫，再开机观察，显卡上的散热风扇居然纹丝不动，用手轻轻拨了一下风扇，风扇还是不转动，电脑死机的原因找到了，是由于显卡散热不良引起的。&nbsp;</p>
+<p>
+	　　把显卡上的风扇拆下，找来万用表测试，是风扇上的电动机坏了，必需换一个显卡风扇，笔者使用是NVIDA GeForce2 MX400 64MB显存的显卡，由于身在小县城，没有大型的电脑城，只有几个很小的卖电脑的店铺，要找到这样的显卡风扇是不容易的，抱着试一试的心态跑遍了县城几家电脑商店，结果失望而归。难道为了这样一个小小的风扇要跑省城一趟不值！换一块显卡要花几百大洋呢，心疼呀，还是DIY一下吧！去电脑商店花二十元买来一个机箱散热风扇，由于机箱散热风扇使用的是标准的硬盘的电源接头，12V的电压，可直接接在机箱的电源上，下面就是怎样把风扇固定在显卡上了。笔者采用捆绑的方法，为了保证绝缘，找来一段双绞线，把外皮剥了，从中抽出有绝缘皮的细线，把风扇捆在显卡的散热片上，固定时要注意充分露出显卡的金手指，以风扇不晃动为宜。样子是难看了点，但散热效果是可想而知的；考虑到机箱风扇的转速太快，容易产生噪声，而且振动容易损坏显卡，笔者想把机箱风扇的电源从12V改到5V，让风扇的转速降下来，进入系统后，玩游戏、上网再也没有死机现象。</p>
+<p>
+	&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

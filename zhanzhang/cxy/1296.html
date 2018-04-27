@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>没有C语言之父，就没有乔布斯和Win10</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="没有,语言,之父,就,乔布斯,乔,布斯,和,Win10," />
+  <meta name="description" content="不知不觉，丹尼斯・里奇离开我们4周年了。2011年10月12日，和里奇共事20多年的同事Rob Pike从加州到新泽西去拜访他，才发现他已经去世了。由于是独居，当时无法知道准确的死亡时间，" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>没有C语言之父，就没有乔布斯和Win10</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：44次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1296" class="art_content"><p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	不知不觉，丹尼斯・里奇离开我们4周年了。2011年10月12日，和里奇共事20多年的同事Rob Pike从加州到新泽西去拜访他，才发现他已经去世了。由于是独居，当时无法知道准确的死亡时间，后来确定离世日期是10月9日。据他的兄弟透露，那几年丹尼斯・里奇的健康状况一直不好，他患有前列腺癌和心脏病。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<img src="/uploads/allimg/151015/1105461540-0.jpg" style="border: 1px solid rgb(217, 219, 221) !important; vertical-align: top; transition: opacity 0.2s; border-radius: 5px; max-width: 640px; display: inline-block !important; padding: 5px !important;" /></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	乔布斯和丹尼斯・里奇都是在同年同月离世。但之后每年的这段时间，很多媒体都会纪念乔布斯，但很少提到丹尼斯・里奇。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<strong>-----【下面是今年的纪念文章】-----</strong></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	如果没有丹尼斯・里奇（Dennis Ritchie），就不会有我们现在所熟知的现代计算。他是C语言之父和UNIX<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>的联合发明人。四年前我们失去了两位对业界有巨大影响的人。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<img class="lazy" data-original="http://img.ithome.com/newsuploadfiles/2015/10/20151014_065658_64.jpg" src="/uploads/allimg/151015/1105464W9-1.gif" style="border: 1px solid rgb(217, 219, 221) !important; vertical-align: top; transition: opacity 0.2s; border-radius: 5px; max-width: 640px; display: inline-block !important; padding: 5px !important;" /></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	▲其实Lisp之父约翰・麦卡锡也是在2011年10月离世。10月24日</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	不可否认，乔布斯带给我们世上从未见过的创新和标志性的产品，还有一大批对他顶礼膜拜的狂热消费者和终端用户。诸如此类的事情可能再也看不到了。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	尽管我对乔布斯和他的公司有看法是有据可查的，当他去世时，我和很多业界的人一样表达了我的敬意和对他的影响力的认可。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但是苹果和乔布斯以及很多其他公司所创造的&ldquo;神奇的&rdquo;产品，和所有现在我们了解和写在现代计算里的东西，都要归功于丹尼斯・里奇，他于2011年10月12号离开人世，享年70岁。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<span style="color: rgb(192, 0, 0);"><strong>丹尼斯・里奇何许人也？</strong></span></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	普通年轻人可能都要摇头。丹尼斯・里奇是谁？</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	丹尼斯・里奇不像某位来自硅谷，精致的和少年得志的亿万富翁，穿着简约黑色的高领毛衣在站满粉丝的屋子里，演示新酷产品和恶意攻击对手。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	不，丹尼斯・里奇是一位胡子有些凌乱的计算机科学家，他穿着羊毛衫坐在一间凌乱的办公室里。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<img class="lazy" data-original="http://img.ithome.com/newsuploadfiles/2015/10/20151014_065658_87.jpg" src="/uploads/allimg/151015/1105464W9-1.gif" style="border: 1px solid rgb(217, 219, 221) !important; vertical-align: top; transition: opacity 0.2s; border-radius: 5px; max-width: 640px; display: inline-block !important; padding: 5px !important;" /></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	和乔布斯在大学辍学不同，他毕业于哈佛大学，有物理学和应用数学的博士学位。他工作于新泽西的AT&amp;T贝尔实验室，而不是闪闪发光的硅谷。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	是的，就是&ldquo;What exit?&rdquo;的新泽西。（编注：&ldquo;What exit？&rdquo;是新泽西当地俚语，Garden State Parkway是一条南北走向的高速公路，它穿过整个新泽西州，所以是一个很有用的地标。新泽西当地人问地方都问从这条高速的哪个出口出来就可以到达。）</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	鉴于乔布斯古怪的个性又极富创造力，人们经常把他和爱迪生作比较。我不赞同这种比较，因为实际上我们错把乔布斯当做一个真正的技术专家和发明东西的人。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	有一件重要的事情我们必须要意识到：尽管乔布斯有他擅长的事情，而且他为技术和计算机业界做出很大的贡献，但事实上他并不是一个技术专家。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	他对于时尚和工业设计的确很有感觉，他理解用户想要什么，他还是一个营销大师和推销员。所有这些让他成为业界的巨人。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但是说到发明家？不，他不是。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但是丹尼斯・里奇发明了和共同发明了两个关键的软件技术，它们是构成每一款计算机软件产品的DNA，现在我们直接或间接都在使用这些软件产品。这听起来让人难以置信，但它确实是真的。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<span style="color: rgb(192, 0, 0);"><strong>首先，让我们从《C程序设计语言》开始</strong></span></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	C语言是里奇在1969-1973开发的，它被认为是第一个真正意义上可移植的现代编程语言。自它诞生差不多45年以来，它已经被移植到几乎每一个出现过的系统架构和<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>上。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	因为它是一种命令的、编译的和程序化的编程语言，它允许语法变量作用域和递归，允许内存的底层访问，还有复杂的I/O和字符串操作功能，这种语言变得相当通用。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	里奇和布莱恩・克尼汉（Brian Kernighan）对它进行了一定程度的优化，最终于1989年被美国国家标准协会的X3J11委员会进一步细化为ANSI C程序设计语言。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	1978年，克尼汉和里奇合著出版了《C程序设计语言》这本书。该书被很多人简称为&ldquo;K&amp;R C&rdquo;，是计算机科学的杰作，它也是解释现代程序设计概念的一个关键参考，甚至到今天，它还是计算机科学课程里学习程序设计的经典教材。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	直到今天，ANSI C作为一种编程语言还被大量地使用，后来它还发展出很多的姊妹语言，这些语言又都有很多的追随者。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	最流行的C++是由本贾尼・斯特劳斯特卢普（Bjarne Stroustrup）于1985年发明，它增加了面向对象编程和类的支持，用在各式各样的<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>上，包括像<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>和Mac这样的UNIX衍生品上，它作为微软Windows软件开发的主要编程语言长达20多年。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	Objective-C，是由达石软件（Stepstone，Lumesse（路敏思）的前身）的布莱德・考克斯（Brad Cox）和Todd Love在八十年代发明的，增加了Smalltalk消息传递功能，进一步拓展了这种语言面向对象和代码重用的特性。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	Objective-C很大程度上被认为是一个鲜为人知的C语言衍生品，直到它在八十年代末和九十年代初被广泛用于NeXT计算机系统公司的NeXTStep和OpenStep<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>上，NeXT是乔布斯在1985被赶出苹果公司后所创办的。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	&ldquo;下一个&rdquo;发生了什么就是一段计算机领域的传奇。NeXT于1996年被苹果公司收购，乔布斯在1997年重新回归苹果并出任公司的CEO。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	2001年苹果发布了Mac OS X，其中大量使用了Objective-C，以及NeXTStep和OpenStep所引入的面向对象技术。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	当C++也被大量应用在Mac上，Objective-C被用来在XCode IDE下编写本地面向对象的&ldquo;Cocoa&rdquo;API，这些API是iOS上手势识别和动画功能的核心，这些功能为iPhone和iPad增光不少。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	Objective-C还提供了Foundation Kit和Application Kit，用于构建本地的OS X和iOS应用程序。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	微软也有自己的C语言衍生品――C#（读作&ldquo;C Sharp&rdquo;），于2001年发明并作为.NET框架的编程基础。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	C#还是编写基于Windows运行时（WinRT）的现代应用程序的基础，WinRT在Windows 10上发展成统一的Windows平台（UWP，Universal Windows Platform）。作为开发Mono（一个.NET框架的可移植版本）的编程环境，它也被用在<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>和其他Unix衍生系统上。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但是C语言的影响并不仅局限在它的衍生品上。Java这样一个重要的企业级编程语言，在很大程度上也是基于C语言语法（本身也演变为Dalvik和Android运行时，它们是Android最基本的编程环境）。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	其它语言例如Ruby、Perl和PHP等，它们是构成动态现代网络的基础，也都使用了丹尼斯・里奇发明的C语言语法。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	所以说如果没有丹尼斯・里奇的工作，我们根本就不可能有现代的软件。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<span style="color: rgb(192, 0, 0);"><strong>除了C语言，他还有Unix</strong></span></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	只谈C语言对于现代计算的重要性和它对于每个人的影响，我其实就可以结束这篇文章。但这个人的工作生涯我才讲了一半而已。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	里奇还是UNIX<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>的共同发明人。当然UNIX的原型是用汇编语言编写，到七十年代早期就完全用C重写了。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	早在1969年，在一台DEC PDP-7上引导了第一个版本的&ldquo;Unics&rdquo;，从那开始UNIX已经演变出很多类似的<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>，并运行在各种各样的系统架构上。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	每一个主要的计算机供应商都曾经实现过自己的UNIX。甚至连微软也曾经拥有一个叫做XENIX的产品，后来卖给了SCO（已经不存在了）。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	你可点击和放大看这张图，可更好地理解这个&ldquo;家族&rdquo;。（编注：手机上无法查看大图）</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<img class="lazy" data-original="http://img.ithome.com/newsuploadfiles/2015/10/20151014_065658_102.jpg" src="/uploads/allimg/151015/1105464W9-1.gif" style="border: 1px solid rgb(217, 219, 221) !important; vertical-align: top; transition: opacity 0.2s; border-radius: 5px; max-width: 640px; display: inline-block !important; padding: 5px !important;" /></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<strong>UNIX本质上有三个主要分支：</strong></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	第一个分支是&ldquo;System V&rdquo;UNIX，现在我们知道的有IBM的AIX、Oracle的Solaris和惠普的HP-UX。这些被认为是&ldquo;大家伙&rdquo;的<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>被广泛应用于世界财富1000强的大企业里，驱动着关键的、面向交易的商业应用和数据库。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	没有System V UNIX，那些被财富杂志1000强的企业不可能完成任何事情。商业都几乎停滞了。它们也许只占任何特定企业百分之十到二十的计算能力，但是这百分之二十相当重要。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	第二个分支是BSD（伯克利系统发行版），包含FreeBSD、NetBSD和OpenBSD，这些都是Max OS X和iOS的基础。它们也被用于支持关键的基础设施骨干上，互联网就运行在上面。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	第三个分支甚至不能算作一个分支――GNU/<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>。<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>内核（Linus Torvalds开发的）加上GNU用户空间程序、工具和实用程序，提供了一个完全重新实现的&ldquo;类似UNIX&rdquo;，或者说&ldquo;兼容UNIX&rdquo;的<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	当然<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>也是所有UNIX<a class="infotextkey" href="http://www.dnjsb.com/xitong" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">操作系统</a>里最具破坏力的。从非常小的嵌入式微处理器到智能手机、到平板和桌面电脑，甚至强悍的超级计算机都可以看到它的身影。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	IBM的Watson就是这样一台<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>超级计算机，在《冒险吧！》的众目睽睽下甚至打败了Ken Jennings。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但我们还是要认识到<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>和GNU没有包含任何UNIX代码――因此有自由软件的递归短语&ldquo;GNU&rsquo;s not UNIX&rdquo;。（译者注：GNU是GNU&rsquo;s Not UNIX的缩写，GNU&rsquo;s not UNIX =&gt; (GNU&rsquo;s Not UNIX)&rsquo;s Not UNIX =&gt; ((GNU&rsquo;s Not UNIX)&rsquo;s Not UNIX)&rsquo;s Not UNIX =&gt;&hellip;，有兴趣的话还可以找找其它的，比如PHP、XNA等等）</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	但GNU/<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>在设计上表现得很像UNIX，可以说如果没有里奇和他在贝尔实验室的同事们（Brian Kernighan、Ken Thompson、Douglas Mcllroy和Joe Ossanna）一起率先开发出UNIX，也就不会有什么<a class="infotextkey" href="http://www.dnjsb.com/xitong/linux" style="color: rgb(51, 51, 51); text-decoration: none;" target="_blank">linux</a>或者任何一个开放源代码软件运动。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	从这个意义上说，自由软件基金会或者Richard Stallman很高兴看到乔布斯离开了。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<span style="color: rgb(192, 0, 0);"><strong>我们亏欠丹尼斯・里奇很多</strong></span></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	虽然存在宗教和意识形态的差异。但我们亏欠丹尼斯・里奇很多，超出我们的想象。没有他的贡献，现在我们没法用个人计算机，成熟的软件应用甚至是互联网。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	没有Android智能手机，没有昂贵的DVR和流媒设备，没有乔布斯和苹果创造令人惊叹的Mac和iPad。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	没有微软的Windows10和Surface Book。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	没有云计算、没有AWS（亚马逊网络服务，Amazon Web Services），没有Azure（微软云）。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	没有&ldquo;为XX而生的应用程序&rdquo;，也没有互联网这个东西。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	向丹尼奇・里奇致敬――感谢他带给我们这些技术，让我们可以成为今天的专家。</p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	<img class="lazy" data-original="http://img.ithome.com/newsuploadfiles/2015/10/20151014_065658_114.jpg" src="/uploads/allimg/151015/1105464W9-1.gif" style="border: 1px solid rgb(217, 219, 221) !important; vertical-align: top; transition: opacity 0.2s; border-radius: 5px; max-width: 640px; display: inline-block !important; padding: 5px !important;" /></p>
+<p style="margin: 14px 0px; padding: 0px; word-break: normal; word-wrap: break-word; line-height: 28px; color: rgb(51, 51, 51); text-indent: 2em; font-stretch: normal !important; font-size: 14px !important; font-family: 'Microsoft Yahei' !important;">
+	▲1972年，丹尼斯・里奇（左）与肯・汤姆森在一台PDP-12前的合影（照片来源：丹尼斯里奇的主页）</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XMLHTTP组件应用</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="XMLHTTP组件应用,XML教程,网" />
+  <meta name="description" content="一、数据库远程管理技术 基于互联网的广域网现代应用中的一个重要环节是数据库远程监控。首先简单回顾一下互联网上的数据库远程管理技术的发展过程和方式： 早期通过编写CGI-B" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>XMLHTTP组件应用</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：41次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="358" class="art_content">一、数据库远程管理技术&nbsp;<br />
+<br />
+基于互联网的广域网现代应用中的一个重要环节是数据库远程监控。首先简单回顾一下互联网上的数据库远程管理技术的发展过程和方式：&nbsp;<br />
+<br />
+早期通过编写CGI-BIN程序模块进行数据库远程管理。但CGI-BIN的运行速度慢，维护很不方便，现在已经基本被弃用。&nbsp;<br />
+<br />
+这几年使用组件对象模型(Component&nbsp;Object&nbsp;Model,&nbsp;COM)的应用非常多，效果也很好。但如果使用的是第三方服务器(笔者的网站就是建立在第三方的虚拟主机上)，服务器方往往因为保密或其它商业原因不允许用户注册自己的组件。&nbsp;<br />
+<br />
+近年来由微软公司推出的.NET平台和SUN公司的J2EE平台都是非常高档的数据库远程管理与服务平台。都能提供优质的多层(n-Tier)应用服务。&nbsp;其中，.NET的简单对象访问协议(Simple&nbsp;Object&nbsp;Access&nbsp;Protocol,&nbsp;SOAP)使用超文本传输协议(Hypertext&nbsp;Transfer&nbsp;Protocol,&nbsp;HTTP)和扩展标记语言(Extensible&nbsp;Markup&nbsp;Language,&nbsp;XML)技术实现跨系统(例如Windows&nbsp;-&nbsp;Linux)的通讯服务方式已经广为开发商接受和使用。许多大型应用，例如企业资源计划(Enterprise&nbsp;resource&nbsp;planning,&nbsp;ERP)等都建立在这样的大型平台之上。&nbsp;但对于中小型应用，比如一个网站的建设和维护，这种大型应用平台就显得有些尾大不掉，开销也过于庞大。&nbsp;<br />
+<br />
+曾经在互联网技术和Java技术方面一度落后的微软公司在XML应用开发则走在了前头。她的XML解析器(MSXML)中的XMLHTTP协议是一个非常方便实用的客户/服务通讯管道。综合运用XMLHTTP以及ActiveX数据对象(ActiveX&nbsp;Data&nbsp;Objects,&nbsp;ADO/ADOX)可以简单方便地实现数据库远程管理。<br />
+<br />
+二、数据库远程管理体系&nbsp;<br />
+<br />
+数据库远程管理的任务流程是：&nbsp;<br />
+<br />
+1、客户端向服务端发出数据库结构和数据的查询或修改指令。&nbsp;<br />
+<br />
+2、服务端接受并执行有关指令并向客户端返回结果。&nbsp;<br />
+<br />
+3、客户端接受并显示服务端返回的指令执行结果。&nbsp;<br />
+<br />
+实现数据库远程管理的二个主要关键环节是：&nbsp;<br />
+<br />
+1、客户端与服务端之间的指令上传和结果下传的数据通道，由XMLHTTP协议实现。&nbsp;<br />
+<br />
+2、服务端前沿与数据库之间的指令传送和结果返回，由起着中间层作用的ADO/ADOX接口完成。<br />
+<br />
+三、XMLHTTP的使用&nbsp;<br />
+<br />
+顾名思义，XMLHTTP是个传送XML格式数据的超文本传输协议。&nbsp;实际上，XMLHTTP的数据传输过程更为灵活一些：&nbsp;<br />
+<br />
+它上传的指令可以是XML格式数据，也可以是字符串，流，或者一个无符号整数数组。还可以是URL的参数。&nbsp;<br />
+<br />
+它下达的结果可以是XML格式数据，也可以是字符串，流，或者一个无符号整数数组。&nbsp;详情可参阅文末链接。&nbsp;客户端调用XMLHTTP的过程很简单，只有5个步骤：&nbsp;<br />
+<br />
+1、创建XMLHTTP对象&nbsp;<br />
+<br />
+2、打开与服务端的连接，同时定义指令发送方式，服务网页(URL)和请求权限等。&nbsp;<br />
+<br />
+客户端通过Open命令打开与服务端的服务网页的连接。与普通HTTP指令传送一样，可以用&quot;GET&quot;方法或&quot;POST&quot;方法指向服务端的服务网页。&nbsp;<br />
+<br />
+3、发送指令。&nbsp;<br />
+<br />
+4、等待并接收服务端返回的处理结果。&nbsp;<br />
+<br />
+5、释放XMLHTTP对象&nbsp;<br />
+<br />
+四、XMLHTTP方法<br />
+<br />
+Open&nbsp;bstrMethod,&nbsp;bstrUrl,&nbsp;varAsync,&nbsp;bstrUser,&nbsp;bstrPassword<br />
+<br />
+bstrMethod：数据传送方式，即GET或POST。&nbsp;<br />
+<br />
+bstrUrl：服务网页的URL。<br />
+<br />
+varAsync：是否同步执行。缺省为True，即同步执行，但只能在DOM中实施同步执行。应用中一般将其置为False，即异步执行。<br />
+<br />
+bstrUser：用户名，可省略。&nbsp;<br />
+<br />
+bstrPassword：用户口令，可省略。&nbsp;<br />
+<br />
+Send&nbsp;varBody&nbsp;<br />
+<br />
+varBody：指令集。可以是XML格式数据，也可以是字符串，流，或者一个无符号整数数组。也可以省略，让指令通过Open方法的URL参数代入。&nbsp;<br />
+<br />
+setRequestHeader&nbsp;bstrHeader,&nbsp;bstrValue&nbsp;<br />
+<br />
+bstrHeader：HTTP&nbsp;头(header)&nbsp;<br />
+<br />
+bstrValue：HTTP&nbsp;头(header)的值<br />
+<br />
+如果Open方法定义为POST，可以定义表单方式上传xmlhttp.setRequestHeader&nbsp;&quot;Content-Type&quot;,&nbsp;&quot;application/x-www-form-urlencoded&quot;&nbsp;<br />
+<br />
+五、XMLHTTP属性<br />
+<br />
+onreadystatechange：在同步执行方式下获得返回结果的事件句柄。只能在DOM中调用。&nbsp;<br />
+<br />
+responseBody：结果返回为无符号整数数组。&nbsp;<br />
+<br />
+responseStream：结果返回为IStream流。&nbsp;<br />
+<br />
+responseText&nbsp;：结果返回为字符串。&nbsp;<br />
+<br />
+responseXML：结果返回为XML格式数据。&nbsp;<br />
+<br />
+下面是本文附件源程序中的一个应用示例：&nbsp;<br />
+<br />
+Function&nbsp;GetResult(urlStr)&nbsp;<br />
+<br />
+Dim&nbsp;xmlHttp&nbsp;<br />
+<br />
+Dim&nbsp;retStr<br />
+<br />
+Set&nbsp;xmlHttp&nbsp;=&nbsp;CreateObject(&quot;Msxml2.XMLHTTP&quot;)&nbsp;&#39;创建对象<br />
+<br />
+On&nbsp;Error&nbsp;Resume&nbsp;Next&nbsp;&#39;出错处理&nbsp;<br />
+<br />
+xmlHttp.Open&nbsp;&quot;POST&quot;,&nbsp;urlStr,&nbsp;False&nbsp;&#39;用POST方式打开连接，异步执行。&nbsp;<br />
+<br />
+xmlHttp.setRequestHeader&nbsp;&quot;Content-Type&quot;,&nbsp;&quot;application/x-www-form-urlencoded&quot;&nbsp;&#39;上传表单<br />
+<br />
+xmlHttp.Send&nbsp;&#39;发送指令<br />
+<br />
+If&nbsp;Err.Number&nbsp;=&nbsp;0&nbsp;Then&nbsp;&#39;如果连接正确&nbsp;<br />
+<br />
+retStr&nbsp;=&nbsp;xmlHttp.responseText&nbsp;&#39;等待并获得服务端返回的结果字符串<br />
+<br />
+Else&nbsp;<br />
+<br />
+retStr&nbsp;=&nbsp;&quot;Url&nbsp;not&nbsp;found&quot;&nbsp;&#39;否则返回出错信息&nbsp;<br />
+<br />
+End&nbsp;If&nbsp;<br />
+<br />
+Set&nbsp;xmlHttp&nbsp;=&nbsp;nothing&nbsp;&#39;释放对象&nbsp;<br />
+<br />
+GetResult&nbsp;=&nbsp;retStr&nbsp;&#39;返回结果&nbsp;<br />
+<br />
+End&nbsp;Function&nbsp;<br />
+<br />
+GetResult()函数带入一个服务网页的URL参数，把上传的指令安放在URL后面的参数上，如：&nbsp;<br />
+<br />
+urlStr&nbsp;=&nbsp;&quot;server.asp?cmd=&quot;&nbsp;&amp;&nbsp;cmd&nbsp;&amp;&nbsp;&quot;&amp;db=&quot;&nbsp;&amp;&nbsp;db&nbsp;&amp;&nbsp;&quot;table=&quot;&nbsp;&amp;&nbsp;table&nbsp;<br />
+<br />
+cmd：执行方式，例如查询，修改，删除等等。&nbsp;<br />
+<br />
+db：服务端数据库名&nbsp;<br />
+<br />
+table：服务端表名&nbsp;<br />
+<br />
+然后提交指令，等待并接收返回的处理结果。结果以字符串方式返回。最后由函数调用者处理并显示结果。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

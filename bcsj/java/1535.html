@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>java的多线程用法编程总结</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="多线程编程,java多线程" />
+  <meta name="description" content="本文主要讲了java中多线程的使用方法、线程同步、线程数据传递、线程状态及相应的一些线程函数用法、概述等。" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>java的多线程用法编程总结</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：24次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1535" class="art_content"><p>
+	<strong>一、进程与线程</strong></p>
+<p>
+	1、进程是什么？</p>
+<p>
+	狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。</p>
+<p>
+	广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。</p>
+<p>
+	2、线程是什么？</p>
+<p>
+	线程，有时被称为轻量级进程(Lightweight Process，LWP），是程序执行流的最小单元。一个标准的线程由线程ID，当前指令指针(PC），寄存器集合和堆栈组成。另外，线程是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点儿在运行中必不可少的资源，但它可与同属一个进程的其它线程共享进程所拥有的全部资源。</p>
+<p>
+	3、进程和线程的区别？</p>
+<p>
+	进程和线程的主要差别在于它们是不同的操作系统资源管理方式。</p>
+<p>
+	进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。</p>
+<p>
+	线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</p>
+<p>
+	<strong>简言之，线程与进程的区别就是：</strong></p>
+<p>
+	（1）一个程序至少有一个进程,一个进程至少有一个线程；<br />
+	（2） 线程的划分尺度小于进程，使得多线程程序的并发性高。<br />
+	（3）进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。<br />
+	（4）线程在执行过程中与进程是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br />
+	（5）从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。</p>
+<p>
+	这就是进程和线程的重要区别。</p>
+<p>
+	<strong>二、线程的生命周期及五种基本状态</strong></p>
+<p style="text-align: center;">
+	<img alt="" src="/uploads/allimg/161015/1623011R5-0.png?2016913105127" /></p>
+<p>
+	<strong>Java线程具有五种基本状态：</strong></p>
+<p>
+	（1）新建状态（New）：当线程对象对创建后，即进入了新建状态，如：Thread t = new MyThread();</p>
+<p>
+	（2）就绪状态（Runnable）：当调用线程对象的start()方法（t.start();），线程即进入就绪状态。处于就绪状态的线程，只是说明此线程已经做好了准备，随时等待CPU调度执行，并不是说执行了t.start()此线程立即就会执行；</p>
+<p>
+	（3）运行状态（Running）：当CPU开始调度处于就绪状态的线程时，此时线程才得以真正执行，即进入到运行状态。注：就 绪状态是进入到运行状态的唯一入口，也就是说，线程要想进入运行状态执行，首先必须处于就绪状态中；</p>
+<p>
+	（4）阻塞状态（Blocked）：处于运行状态中的线程由于某种原因，暂时放弃对CPU的使用权，停止执行，此时进入阻塞状态，直到其进入到就绪状态，才 有机会再次被CPU调用以进入到运行状态。根据阻塞产生的原因不同，阻塞状态又可以分为三种：</p>
+<p>
+	①等待阻塞：运行状态中的线程执行wait()方法，使本线程进入到等待阻塞状态；</p>
+<p>
+	②同步阻塞：线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态；</p>
+<p>
+	③其他阻塞 ： 通过调用线程的sleep()或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。</p>
+<p>
+	（5）死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</p>
+<p>
+	<strong>三、Java多线程的实现</strong></p>
+<p>
+	在Java中，如果要实现多线程的程序，那么必须依靠一个线程的主体类（好比主类的概念一样，表示一个线程的主类），但是这个线程的主体类在定义的时候需要有一些特殊的要求，这个类可以继承Thread类或实现Runnable接口来完成定义。</p>
+<p>
+	1、继承Thread类实现多线程</p>
+<p>
+	java.lang.Thread是一个负责线程操作的类，任何的类继承了Thread类就可以成为一个线程的主类。既然是主类，必须有它的使用方法，而线程启动的主方法需要覆写Thread类中的run()方法才可以。</p>
+<p>
+	定义一个线程的主体类：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+class MyThread extends Thread { // 线程的主体类
+ private String title;
+
+ public MyThread(String title) {
+ this.title = title;
+ }
+
+ @Override
+ public void run() { // 线程的主方法
+ for (int x = 0; x &lt; 10; x++) {
+  System.out.println(this.title + &quot;运行，x = &quot; + x);
+ }
+ }
+}
+</pre>
+</div>
+<p>
+	现在已经有了线程类，并且里面也存在了相应的操作方法，那么就应该产生对象并调用里面的方法，于是编写出了下的程序：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public class TestDemo {
+ public static void main(String[] args) {
+ MyThread mt1 = new MyThread(&quot;线程A&quot;);
+ MyThread mt2 = new MyThread(&quot;线程B&quot;);
+ MyThread mt3 = new MyThread(&quot;线程C&quot;);
+ mt1.run();
+ mt2.run();
+ mt3.run();
+ }</pre>
+</div>
+<p>
+	&nbsp;运行结果：</p>
+<p>
+	线程A运行，x = 0<br />
+	线程A运行，x = 1<br />
+	线程A运行，x = 2<br />
+	线程A运行，x = 3<br />
+	线程A运行，x = 4<br />
+	线程A运行，x = 5<br />
+	线程A运行，x = 6<br />
+	线程A运行，x = 7<br />
+	线程A运行，x = 8<br />
+	线程A运行，x = 9<br />
+	线程B运行，x = 0<br />
+	线程B运行，x = 1<br />
+	线程B运行，x = 2<br />
+	线程B运行，x = 3<br />
+	线程B运行，x = 4<br />
+	线程B运行，x = 5<br />
+	线程B运行，x = 6<br />
+	线程B运行，x = 7<br />
+	线程B运行，x = 8<br />
+	线程B运行，x = 9<br />
+	线程C运行，x = 0<br />
+	线程C运行，x = 1<br />
+	线程C运行，x = 2<br />
+	线程C运行，x = 3<br />
+	线程C运行，x = 4<br />
+	线程C运行，x = 5<br />
+	线程C运行，x = 6<br />
+	线程C运行，x = 7<br />
+	线程C运行，x = 8<br />
+	线程C运行，x = 9</p>
+<p>
+	我们发现：以上的操作并没有真正的启动多线程，因为多个线程彼此之间的执行一定是交替的方式运行，而此时是顺序执行，每一个对象的代码执行完之后才向下继续执行。</p>
+<p>
+	如果要想在程序之中真正的启动多线程，必须依靠Thread类的一个方法：public void start()，表示真正启动多线程，调用此方法后会间接调用run()方法：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public class TestDemo {
+ public static void main(String[] args) {
+ MyThread mt1 = new MyThread(&quot;线程A&quot;);
+ MyThread mt2 = new MyThread(&quot;线程B&quot;);
+ MyThread mt3 = new MyThread(&quot;线程C&quot;);
+ mt1.start();
+ mt2.start();
+ mt3.start();
+ }
+
+}
+</pre>
+</div>
+<p>
+	&nbsp;运行结果:</p>
+<p>
+	线程C运行，x = 0<br />
+	线程A运行，x = 0<br />
+	线程B运行，x = 0<br />
+	线程A运行，x = 1<br />
+	线程C运行，x = 1<br />
+	线程A运行，x = 2<br />
+	线程B运行，x = 1<br />
+	线程A运行，x = 3<br />
+	线程A运行，x = 4<br />
+	线程A运行，x = 5<br />
+	线程C运行，x = 2<br />
+	线程C运行，x = 3<br />
+	线程C运行，x = 4<br />
+	线程C运行，x = 5<br />
+	线程C运行，x = 6<br />
+	线程C运行，x = 7<br />
+	线程C运行，x = 8<br />
+	线程C运行，x = 9<br />
+	线程A运行，x = 6<br />
+	线程A运行，x = 7<br />
+	线程A运行，x = 8<br />
+	线程A运行，x = 9<br />
+	线程B运行，x = 2<br />
+	线程B运行，x = 3<br />
+	线程B运行，x = 4<br />
+	线程B运行，x = 5<br />
+	线程B运行，x = 6<br />
+	线程B运行，x = 7<br />
+	线程B运行，x = 8<br />
+	线程B运行，x = 9</p>
+<p>
+	此时可以发现:多个线程之间彼此交替执行，但每次的执行结果是不一样的。通过以上的代码就可以得出结论：要想启动线程必须依靠Thread类的start()方法执行，线程启动之后会默认调用了run()方法。</p>
+<p>
+	在调用start()方法之后，发生了一系列复杂的事情：<br />
+	（1）启动新的执行线程（具有新的调用栈）；<br />
+	（2）该线程从新状态转移到可运行状态；<br />
+	（3）当该线程获得机会执行时，其目标run()方法将运行。<br />
+	注意：对Java来说，run()方法没有任何特别之处。像main()方法一样，它只是新线程知道调用的方法名称(和签名)。因此，在Runnable上或者Thread上调用run方法是合法的，但并不启动新的线程。</p>
+<p>
+	说明：为什么线程启动的时候必须调用start()而不是直接调用run()？</p>
+<p>
+	我们发现，在调用了start()之后，实际上它执行的还是覆写后的run()方法，那为什么不直接调用run()方法呢？为了解释此问题，下面打开Thread类的源代码，观察一下start()方法的定义：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+ public synchronized void start() {
+ if (threadStatus != 0)
+  throw new IllegalThreadStateException();
+ group.add(this);
+ boolean started = false;
+ try {
+  start0();
+  started = true;
+ } finally {
+  try {
+  if (!started) {
+   group.threadStartFailed(this);
+  }
+  } catch (Throwable ignore) {
+  }
+ }
+ }
+ private native void start0();</pre>
+</div>
+<p>
+	&nbsp;打开此方法的源代码首先可以发现：方法会抛出一个&ldquo;IllegalThreadStateException&rdquo;异常。一般来讲，如果一个方法中使用了throw抛出一个异常对象，那么这个异常应该使用try&hellip;catch捕获，或者是方法的声明上使用throws抛出，但是这块都没有，为什么呢？因为这个异常类是属于运行时异常（RuntimeException）的子类：</p>
+<p>
+	java.lang.Object<br />
+	&nbsp;&nbsp; |- java.lang.Throwable<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; |- java.lang.Exception<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |- java.lang.RuntimeException<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |- java.lang.IllegalArgumentException<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |- java.lang.IllegalThreadStateException</p>
+<p>
+	当一个线程对象被重复启动之后会抛出此异常，即：一个线程对象只能启动一次。</p>
+<p>
+	在start()方法之中有一个最为关键的部分就是start0()方法，而且这个方法上使用了一个native关键字的定义。</p>
+<p>
+	native关键字指的是Java本地接口调用（Java Native Interface），即：是使用Java调用本机操作系统的函数功能完成一些特殊的操作，而这样的代码开发在Java之中几乎很少出现，因为Java的最大特点是可移植性，如果一个程序只能在固定的操作系统上使用，那么可移植性就将彻底的丧失，所以，此操作一般不用。</p>
+<p>
+	多线程的实现一定需要操作系统的支持，那么以上的start0()方法实际上就和抽象方法很类似没有方法体，而这个方法体交给JVM去实现，即：在windows下的JVM可能使用A方法实现了start0()，而在Linux下的JVM可能使用了B方法实现了start0()，但是在调用的时候并不会去关心具体是何方式实现了start0()方法，只会关心最终的操作结果，交给JVM去匹配了不同的操作系统。</p>
+<p>
+	所以在多线程操作之中，使用start()方法启动多线程的操作是需要进行操作系统函数调用的。</p>
+<p>
+	2、实现Runnable接口实现多线程</p>
+<p>
+	使用Thread类的确是可以方便的进行多线程的实现，但是这种方式最大的缺点就是单继承的问题。为此，在java之中也可以利用Runnable接口来实现多线程。这个接口的定义如下：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public interface Runnable {
+ public void run();
+}</pre>
+</div>
+<p>
+	&nbsp;通过Runnable接口实现多线程：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+class MyThread implements Runnable { // 线程的主体类
+ private String title;
+
+ public MyThread(String title) {
+ this.title = title;
+ }
+
+ @Override
+ public void run() { // 线程的主方法
+ for (int x = 0; x &lt; 10; x++) {
+  System.out.println(this.title + &quot;运行，x = &quot; + x);
+ }
+ }
+}
+</pre>
+</div>
+<p>
+	&nbsp;这和之前继承Thread类的方式区别不大，但是有一个优点就是避免了单继承局限。</p>
+<p>
+	不过问题来了。之前说过，如果要启动多线程，需要依靠Thread类的start()方法完成，之前继承Thread类的时候可以将此方法直接继承过来使用，但现在实现的是Runable接口，没有这个方法可以继承了，怎么办？</p>
+<p>
+	要解决这个问题，还是需要依靠Thread类完成。在Thread类中定义了一个构造方法，接收Runnable接口对象：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public Thread(Runnable target);
+</pre>
+</div>
+<p>
+	利用Thread类启动多线程:</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public class TestDemo {
+ public static void main(String[] args) throws Exception {
+ MyThread mt1 = new MyThread(&quot;线程A&quot;);
+ MyThread mt2 = new MyThread(&quot;线程B&quot;);
+ MyThread mt3 = new MyThread(&quot;线程C&quot;);
+ new Thread(mt1).start();
+ new Thread(mt2).start();
+ new Thread(mt3).start();
+ }
+}</pre>
+</div>
+<p>
+	运行结果：</p>
+<p>
+	线程A运行，x = 0<br />
+	线程B运行，x = 0<br />
+	线程B运行，x = 1<br />
+	线程C运行，x = 0<br />
+	线程B运行，x = 2<br />
+	线程A运行，x = 1<br />
+	线程B运行，x = 3<br />
+	线程C运行，x = 1<br />
+	线程C运行，x = 2<br />
+	线程B运行，x = 4<br />
+	线程B运行，x = 5<br />
+	线程A运行，x = 2<br />
+	线程A运行，x = 3<br />
+	线程A运行，x = 4<br />
+	线程A运行，x = 5<br />
+	线程A运行，x = 6<br />
+	线程A运行，x = 7<br />
+	线程A运行，x = 8<br />
+	线程A运行，x = 9<br />
+	线程B运行，x = 6<br />
+	线程B运行，x = 7<br />
+	线程B运行，x = 8<br />
+	线程B运行，x = 9<br />
+	线程C运行，x = 3<br />
+	线程C运行，x = 4<br />
+	线程C运行，x = 5<br />
+	线程C运行，x = 6<br />
+	线程C运行，x = 7<br />
+	线程C运行，x = 8<br />
+	线程C运行，x = 9</p>
+<p>
+	此时，不但实现了多线程的启动，而且没有了单继承局限。</p>
+<p>
+	3、实现多线程的第三种方法：.使用Callable接口实现多线程</p>
+<p>
+	使用Runnable接口实现的多线程可以避免单继承局限，但是有一个问题，Runnable接口里面的run()方法不能返回操作结果。为了解决这个问题，提供了一个新的接口：Callable接口（java.util.concurrent.Callable）。</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public interface Callable&lt;V&gt;{
+ public V call() throws Exception;
+}</pre>
+</div>
+<p>
+	&nbsp;</p>
+<p>
+	执行完Callable接口中的call()方法会返回一个结果，这个返回结果的类型由Callable接口上的泛型决定。</p>
+<p>
+	实现Callable接口来实现多线程的具体操作是：<br />
+	创建Callable接口的实现类，并实现clall()方法；然后使用FutureTask类来包装Callable实现类的对象，且以此FutureTask对象作为Thread对象的target来创建线程。</p>
+<p>
+	定义一个线程主体类：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+import java.util.concurrent.Callable;
+
+class MyThread implements Callable&lt;String&gt;{
+
+ private int ticket = 10;
+ @Override
+ public String call() throws Exception {
+ for(int i = 0 ; i &lt; 20 ; i++){
+  if(this.ticket &gt; 0){
+  System.out.println(&quot;卖票，剩余票数为&quot;+ this.ticket --);
+  }
+ }
+ return &quot;票已卖光&quot;;
+ }
+
+}
+</pre>
+</div>
+<p>
+	&nbsp;</p>
+<p>
+	Thread类没有直接支持Callable接口。而在JDK1.5之后，提供了一个类：</p>
+<p>
+	java.util.concurrent.FutureTask&lt;V&gt;</p>
+<p>
+	这个类主要负责Callable接口对象操作。其定义结构如下：</p>
+<p>
+	public class FutureTask&lt;V&gt;<br />
+	extends Object<br />
+	implements RunnableFurture&lt;V&gt;</p>
+<p>
+	而RunnableFurture这个接口又有如下定义：</p>
+<p>
+	public interface RunnableFurture&lt;V&gt;<br />
+	extends Runnable,Future&lt;V&gt;</p>
+<p>
+	在FutureTask 类里面定义有如下构造方法：</p>
+<p>
+	public FutureTask(Callable&lt;V&gt; callable)</p>
+<p>
+	现在，终于可以通过FutureTask类来接收Callable接口对象了，接收的目的是为了取得call()方法的返回结果。</p>
+<p>
+	从上面分析我们可以发现：<br />
+	FutureTask类可以接收Callable接口对象，而FutureTask类实现了RunnableFurture接口，RunnableFurture接口又继承了Runnable接口。</p>
+<p>
+	于是，我们可以这样来启动多线程：</p>
+<div class="jb51code">
+	<pre class="brush:java;">
+public class TestDemo {
+ public static void main(String[] args) throws Exception {
+ MyThread mt1 = new MyThread();
+ MyThread mt2 = new MyThread();
+
+ FutureTask&lt;String&gt; task1 = new FutureTask&lt;String&gt;(mt1);//取得call()方法返回结果
+ FutureTask&lt;String&gt; task2 = new FutureTask&lt;String&gt;(mt2);//取得call()方法返回结果
+
+ //FutureTask是Runnable接口的子类，可以使用Thread类的构造来接收task对象
+ new Thread(task1).start();
+ new Thread(task2).start();
+
+ //多线程执行完毕后，可以使用FutureTask的父接口Future中的get()方法取得执行结果
+ System.out.println(&quot;线程1的返回结果：&quot;+task1.get());
+ System.out.println(&quot;线程2的返回结果：&quot;+task2.get());
+ }
+}
+
+</pre>
+</div>
+<p>
+	运行结果：</p>
+<p>
+	卖票，剩余票数为10<br />
+	卖票，剩余票数为10<br />
+	卖票，剩余票数为9<br />
+	卖票，剩余票数为8<br />
+	卖票，剩余票数为7<br />
+	卖票，剩余票数为9<br />
+	卖票，剩余票数为6<br />
+	卖票，剩余票数为8<br />
+	卖票，剩余票数为5<br />
+	卖票，剩余票数为7<br />
+	卖票，剩余票数为4<br />
+	卖票，剩余票数为6<br />
+	卖票，剩余票数为3<br />
+	卖票，剩余票数为5<br />
+	卖票，剩余票数为2<br />
+	卖票，剩余票数为4<br />
+	卖票，剩余票数为1<br />
+	卖票，剩余票数为3<br />
+	卖票，剩余票数为2<br />
+	卖票，剩余票数为1<br />
+	线程1的返回结果：票已卖光<br />
+	线程2的返回结果：票已卖光</p>
+<p>
+	小结：</p>
+<p>
+	上述讲解了三种实现多线程的方式，对于线程的启动而言，都是调用线程对象的start()方法，需要特别注意的是：不能对同一线程对象两次调用start()方法。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

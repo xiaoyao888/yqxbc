@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StringBuffer帮你减轻Java的负担</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="String,StringBuffer" />
+  <meta name="description" content=" 处理文本值是程序员的日常工作，通常用标准的Java String类来完成与文本有关的需求。它对于很多小任务确实很适用，但是如果处理的是大型任务，它会大量消耗系统资源。由于这个原" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>StringBuffer帮你减轻Java的负担</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：9次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="626" class="art_content"><p>
+	　　处理文本值是程序员的日常工作，通常用标准的Java String类来完成与文本有关的需求。它对于很多小任务确实很适用，但是如果处理的是大型任务，它会大量消耗系统资源。由于这个原因，JDK引入了StringBuffer类以提供一条处理字符串的有效路径。让我们来看看怎样用这个类来提升性能。</p>
+<p>
+	<strong>　　为什么不用标准的String？</strong></p>
+<p>
+	　　Java String对象是常量字符串。一旦被初始化和付值，它的值和所分配的内存就被固定了。如果硬要改变它的值，将会产生一个包含新值的新String对象。这就是String对象会消耗掉很多资源的原因。下面的代码创建了一个String对象并使用串联（+）符号来为它添加更多字符：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				　　String sample1=new String(&ldquo;Builder.com&rdquo;);<br />
+				　　<br />
+				　　sample1+=&rdquo;is&rdquo;;<br />
+				　　<br />
+				　　sample1+=&rdquo;the place&rdquo;;<br />
+				　　<br />
+				　　sample1+=&rdquo;to be.&rdquo;;</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　系统最终会创建四个String对象来完成上面的替换。其中第一个的文本是Builder.com。然后每次添加文本时都会创建一个新的对象。</p>
+<p>
+	　　这种方法的问题在于为了这么一个简单的过程而消耗了太多的资源。在这个例子中其影响也许很小（指给出了很少的代码），但是在一个拥有多得多操作的大型应用程序中这样做就会使性能下降。StringBuffer类所要解决的正是这个问题。</p>
+<p>
+	　<strong>　用StringBuffer处理字符串</strong></p>
+<p>
+	　　StringBuffer类被设计用与创建和操作动态字符串信息。为该对象分配的内存会自动扩展以容纳新增的文本。有三种方法来创建一个新的StringBuffer对象：使用初始化字符串、设定大小以及使用默认构造函数：</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				　　StringBuffer sb=new StringBuffer();<br />
+				　　<br />
+				　　StringBuffer sb=new StringBuffer(30);<br />
+				　　<br />
+				　　StringBuffer sb=new StringBuffer(&ldquo;Builder.com&rdquo;);</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	　　第一行创建了不包含任何文本的对象，默认的容量是16个字符。类的第二个实例也不包含文本，容量是30个字符，最后一行创建了一个拥有初始化值的对象。StringBuffer类位于java.lang基础包中，因此要使用它的话不需要特殊的引入语句。</p>
+<p>
+	　　一旦创建了StringBuffer类的对象，就可以使用StringBuffer类的大量方法和属性。最显著的方法是append，它将文本添加到当前StringBuffer对象内容的结尾。下面的代码示例了append方法的语法：</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				　　StringBuffer sb=new StringBuffer();<br />
+				　　<br />
+				　　sb.append(&ldquo;B&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;u&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;i&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;l&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;d&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;e&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;r&rdquo;);<br />
+				　　<br />
+				　　sb.append(&ldquo;.com&rdquo;);<br />
+				　　<br />
+				　　System.out.println(sb.toString());</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　这些代码创建了Builder.com字符串并将它送往标准输出，但是只创建了一个对象。如果使用String对象就需要八个以上的对象。注意代码利用了StringBuffer类的toString方法。这个方法将其内容转换成一个可以被用于输出的字符串对象。它允许操作对应的文本用于输出或数据存储。</p>
+<p>
+	　　append方法有十种重载形式，允许将各种类型的数据添加到对象的末尾。StringBuffer类还提供了处理对象内部数据的方法。</p>
+<p>
+	<strong>　　StringBuffer的容量</strong></p>
+<p>
+	　　可以使用capacity和length方法来设定对象内的字符数。capacity方法返回为对象分配的字符数（内存）。如果超过了容量，它会自动扩展以符合需求。length方法返回对象目前存储的字符数。可以通过setLength方法来增加其长度。另外，对象的容量可以通过ensureCapacity方法来扩展。它建立了对象的最小容量，因此如果超出则不会有任何问题。下面的代码用到了这些方法：</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				　　StringBuffer sb=new StringBuffer();<br />
+				　　<br />
+				　　sb.ensureCapacity(40);<br />
+				　　<br />
+				　　sb.append(&ldquo;Builder.com is awesome!&rdquo;);<br />
+				　　<br />
+				　　Systrm.out.println(sb.toString());<br />
+				　　<br />
+				　　sb.setLength(11);<br />
+				　　<br />
+				　　Systrm.out.println(sb.toString());</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　代码设置了字符串的容量并为其付值。length属性被重新设置了，因此文本被截断了。输入结果如下：</p>
+<p>
+	　　Builder.com is awesome!</p>
+<p>
+	　　Builder.com</p>
+<p>
+	　　<strong>操作字符串</strong></p>
+<p>
+	　　还有更多的方法来处理存储在StringBuffer对象内的字符串。以下列举了几个例子：</p>
+<p>
+	　　CharAt返回字符串中的单个字符。</p>
+<p>
+	　　SetCharAt为字符串中的单个字符付值或进行替换。</p>
+<p>
+	　　GetChars返回字符串的一个子字符串。</p>
+<p>
+	　　Insert在字符串指定位置插入值。它有多个重载版本以容纳各种数据类型。</p>
+<p>
+	　　Substring返回字符串的一个子集。</p>
+<p>
+	　　Reverse倒置StringBuffer的内容。</p>
+<p>
+	　　所有的方法对于操作值来说都是很有用的，但是reverse方法最酷了&mdash;&mdash;它使你只用一个调用就轻松地倒置了一个字符串。下面的代码和数出结果作了示范：</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<table align="center" style="border-bottom: #999 1px solid; border-left: #999 1px solid; background-color: #dddddd; width: 98%; font-size: 12px; border-top: #999 1px solid; border-right: #999 1px solid">
+	<tbody>
+		<tr>
+			<td>
+				　　StringBuffer sb=new StringBuffer();<br />
+				　　<br />
+				　　sb.ensureCapacity(100);<br />
+				　　<br />
+				　　sb.append(&ldquo;Builder.com!&rdquo;);<br />
+				　　<br />
+				　　System.out.println(sb.toString());<br />
+				　　<br />
+				　　sb.reverse();<br />
+				　　<br />
+				　　Systrm.out.println(sb.toString());</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　<strong>输出：</strong></p>
+<p>
+	　　Builder.com!</p>
+<p>
+	　　!moc.redliuB</p>
+<p>
+	　　StringBuffer的优势</p>
+<p>
+	　　字符串的使用贯穿于决大多数应用程序，不管是作为用户界面的标识或在后台处理从数据库取回的值。通常，这些值并不符合要求，需要处理。你可以使用String类，但是它并不是设计成处理动态值的。而StringBuffer类正好填补了这个需求并使得系统资源的利用更加有效。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

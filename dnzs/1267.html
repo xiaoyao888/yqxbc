@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>什么是串并口硬盘 串口与并口硬盘的区别</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="什么,是,串,并口,硬盘,串口,与,的,区别," />
+  <meta name="description" content="不经常接触电脑的朋友可能会很多一些电脑小知识不理解，今天编辑在电脑爱好者QQ群中就发现有朋友问了一个比较简单，但新手朋友一般不怎么会关注到的问题：什么是串口硬盘，什" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>什么是串并口硬盘 串口与并口硬盘的区别</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：78次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1267" class="art_content"><p>
+	不经常接触电脑的朋友可能会很多一些电脑小知识不理解，今天编辑在电脑爱好者QQ群中就发现有朋友问了一个比较简单，但新手朋友一般不怎么会关注到的问题：什么是串口硬盘，什么是并口硬盘。两者哪个速度快些等。笔者发现不少朋友一点不懂或知道的不全面，编辑这里发布一些硬盘串口与并口比较详细的介绍。希望对接触的朋友有帮助。</p>
+<p>
+	　为了便于大家理解，有朋友这样介绍串并口硬盘的区别：</p>
+<table border="0" cellpadding="6" cellspacing="0">
+	<tbody>
+		<tr>
+			<td bgcolor="#e1f3ff">
+				&nbsp;通俗的说，串口形容一下就是 一条车道，而并口就是有8个车道<br />
+				同一时刻能传送8位（一个字节）数据。<br />
+				但是并不是并口快，由于8位通道之间的互相干扰。传输受速度就受到了限制。而且当传输出错时，要同时重新传8个位的数据。串口没有干扰，传输出错后重发一位就可以了。所以快比并口快。串口硬盘就是这样被人们重视的。</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+<p>
+	下面我们来分享下串口硬盘与并口硬盘数据线的区别，如下图：</p>
+<div style="text-align: center;">
+	<img alt="串口与并口硬盘数据线对比" border="0" src="/uploads/allimg/150906/0Z63aO3-0.jpg" /></div>
+<div style="text-align: center;">
+	串口与并口硬盘数据线对比</div>
+<p>
+	&ldquo;串口硬盘&rdquo;与&ldquo;并口硬盘&rdquo; 区别<br />
+	　随着技术的成熟，越来越多的主板和硬盘都开始支持SATA(串行ATA)，SATA接口逐渐有取代传统的PATA(并行ATA)的趋势。那么SATA和PATA在传输模式上有何区别，SATA相对PATA又有何优势呢？这就正是本文需要讨论的话题。&nbsp;</p>
+<h3>
+	何谓并行ATA&nbsp;</h3>
+<p>
+	ATA其实是IDE设备的接口标准，大部分硬盘、光驱、软驱等等都使用的是ATA接口。譬如现在绝大部分的朋友用的都是并行ATA接口的硬盘，应该对它80针排线的接口是再熟悉不过了吧？平常我们说到硬盘接口，就不得不提到什么Ultra-ATA/100、Ultra-ATA/133，这表示什么呢？这告诉我们该硬盘接口的最大传输速率为100MB/s和133MB/s，且硬盘是以并行的方式进行数据传输，<a href="http://www.pc841.com/">wWw.PC841.CoM</a>所以我们也把这类硬盘称为并行ATA。&nbsp;</p>
+<h3>
+	何谓串行ATA&nbsp;</h3>
+<p>
+	串行ATA全称是Serial ATA，它是一种新的接口标准。与并行ATA的主要不同就在于它的传输方式。它和并行传输不同，它只有两对数据线，采用点对点传输，以比并行传输更高的速度将数据分组传输。现在的串行ATA接口传输速率为150MB/s，而且这个值将会迅速增长。&nbsp;</p>
+<h3>
+	串行ATA和并行ATA传输的区别&nbsp;</h3>
+<p>
+	　举个比较夸张的例子，A、B两支队伍在比赛搬运包裹，A代表并行ATA，B代表串行ATA。&nbsp;<br />
+	比赛开始，A派出了40个人用人力搬运包裹，而B只派出去了一辆货车来搬运。在一个来回里他们搬运的包裹数量都相同，大家可以很清楚最后的结果，当然是用货车搬运的B队先把包裹运完，因为货车的速度比人步行的速度快得多多了。同样，串行传输比并行传输的速率高就类似这个道理。&nbsp;<br />
+	回到现实中来，现在的并行ATA接口使用的是16位的双向总线，在1个数据传输周期内可以传输4个字节的数据；而串行ATA使用的8位总线，每个时钟周期能传送1个字节。这两种传输方式除了在每个时钟周期内传输速度不一样之外，在传输的模式上也有根本的区别，串行ATA数据是一个接着一个数据包进行传输，而并行ATA则是一次同时传送数个数据包，虽然表面上一个周期内并行ATA传送的数据更多，但是我们不要忘了，串行ATA的时钟频率要比并行的时钟频率高很多，也就是说，单位时间内，进行数据传输的周期数目更多，所以串行ATA的传输率高于并行ATA的传输率，并且未来还有更大的提升空间。&nbsp;</p>
+<h3>
+	为什么我们要采用串行ATA接口&nbsp;</h3>
+<p>
+	　这个回答很简单，当然是为了获得更高的数据传输率。随着当前设备需求的数据传输率越来越高，接口的工作频率也越来越高，并行ATA接口逐渐暴露出一些设计上的&ldquo;硬伤&rdquo;，其中最致命的就是并行线路的信号干扰。由于传统并行ATA采用并行的总线传输数据，必须要求各个线路上数据同步，如果数据不能同步，就会出现反复读取数据，导致性能的下降，甚至导致读取数据不稳定。&nbsp;<br />
+	而采用排线设计的数据线，正是数据读取无法更快的&ldquo;罪魁祸首&rdquo;。由于并排的高速信号在传输时，会在每条电缆的周围产生微弱的电磁场，进而影响到其他数据线中的数据传递，还会因为线缆的长度和电压的变化而不断变化，随着总线频率的提升，磁场的强度也越来越大，信号干扰的影响也越来越明显。&nbsp;<br />
+	从理论上说串行传输的工作频率可以无限提高，串行ATA就是通过提高工作频率来提升接口传输速率的。因此串行ATA可以实现更高的传输速率，而并行ATA在没有有效地解决信号串扰问题之前，则很难达到这样高的传输速率。&nbsp;<br />
+	并行ATA接口在总线频率方面受到其设计的制约，并不能一味地提升，而随着对数据传输率的要求越来越高，目前最快的并行ATA接口ATA133的频率为33MHz，这个几乎已经达到了并行接口的极限，再继续改造线路已不太现实。所以推出新的接口势在必行。&nbsp;<br />
+	除了传输率较高之外，SATA还有哪些优点呢？&nbsp;</p>
+<h4>
+	1.数据更可靠&nbsp;</h4>
+<p>
+	在校验方面，并行ATA总线只是简单的CRC校验，一旦接收方发现数据传输出现问题，就会自行将这些数据丢弃、然后要求重发，如果数据信号相互干扰过大，就会严重影响硬盘的性能。&nbsp;<br />
+	而串行ATA既对命令进行CRC校验，也对数据分组进行CRC校验，以此提高总线的可靠性。&nbsp;</p>
+<h4>
+	2.连线更简单&nbsp;</h4>
+<p>
+	在数据线方面，并行ATA采用80针的排线，串行ATA由于采用点对点方式传输数据，所以只需要4条线路即可完成发送和接收功能，加上另外的三条地线，一共只需要7条的物理连线就可满足数据传输的需要。由于传输数据线较少，使得SATA在物理线路的电气性能方面的干扰大大减小，这也保证了未来磁盘传输率进一步的提升。&nbsp;<br />
+	和并行ATA相比，串行ATA的数据线更细小，这也使得机箱内部的连线比较容易整理，有助于机箱内部空气的流通，使得机箱内部的散热更好。同样，串行ATA还有采用非排针脚设计的接口和支持热插拔功能等优点。&nbsp;<br />
+	串行ATA推出之后，并行ATA还会存在吗&nbsp;<br />
+	　总的说来，串行ATA的优势是很明显的。当然，目前还有一些相对比较低速的设备在使用并行ATA，如光驱、刻录机等设备，并行ATA的传输率已经可以满足的需要，所以，并行和串行会在很长一段时间内并存。当然，串行ATA支持所有的ATA设备，也可支持光驱等设备，但是串行ATA目前会先运用在硬盘上，未来将会支持更多的存储设备。</p>
+<h4>
+	写在最后</h4>
+<p>
+	　目前我们使用的硬盘绝大多数都是串口STA硬盘STA，在比较老的电脑中有时候还可以看到以前的并口硬盘，随着科学技术的发展，并口硬盘正逐渐的退出了我们的视线，所以大家在DIY<a href="http://www.pc841.com/zuzhuang/">组装电脑</a>的过程目前来讲可购买的都是串口硬盘，但作为电脑爱好者我们还是很有必要掌握串并口硬盘之间的关系。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

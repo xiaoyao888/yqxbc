@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eclipse自动生成作者、日期注释等功能设置</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Eclipse,自动生成,作者,、,日期,注释,等,功能," />
+  <meta name="description" content="在使用Eclipse 编写Java代码时，自动生成的注释信息都是按照预先设置好的格式生成的。 修改作者、日期注释格式：打开Windows-Preferences-Java-Code Style-Code Templates，点击右边窗口中的Commen" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Eclipse自动生成作者、日期注释等功能设置</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：25次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="913" class="art_content"><p>
+	在使用Eclipse 编写Java代码时，自动生成的注释信息都是按照预先设置好的格式生成的。</p>
+<p>
+	修改作者、日期注释格式：打开Windows-&gt;Preferences-&gt;Java-&gt;Code Style-&gt;Code Templates，点击右边窗口中的Comments，可以看到有很多选项，我们便可对此注释信息模板进行编辑。</p>
+<p>
+	如我们希望在一个Java文件的开头设置作者信息、日期信息。</p>
+<p>
+	选择Types，点击Edit，将</p>
+<p>
+	／**</p>
+<p>
+	* @author ${user}</p>
+<p>
+	* ${tags}</p>
+<p>
+	*／</p>
+<p>
+	将${user}删除，改成你希望显示的名字；将${tags}删除，点击Insert Variable，选择Date，这样就会自动生成日期信息。在你需要添加注释的地方点击Sources-&gt;Ganarate Element Comment,或者使用快捷键 Alt+Shift+J ，则 eclipse 自动在该类前面添加注释。</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	注释的规范如下：</p>
+<p>
+	文件注释标签：</p>
+<p>
+	／**</p>
+<p>
+	* &lt;p&gt;Title: ${file_name}&lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Description: &lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Copyright: Copyright (c) 2007&lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Company: LTGames&lt;／p&gt;</p>
+<p>
+	* @author linrz</p>
+<p>
+	* @date ${date}</p>
+<p>
+	* @version 1.0</p>
+<p>
+	*／<br />
+	类型注释标签（类的注释）：</p>
+<p>
+	&nbsp;<wbr /></p>
+<p>
+	／**</p>
+<p>
+	* &lt;p&gt;Title: ${type_name}&lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Description: &lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Company: LTGames&lt;／p&gt;&nbsp;<wbr /></p>
+<p>
+	* @author linrz</p>
+<p>
+	* @date ${date}</p>
+<p>
+	*／<br />
+	字段注释标签：</p>
+<p>
+	／** ${field}*／</p>
+<p>
+	构造函数标签：</p>
+<p>
+	／**</p>
+<p>
+	* &lt;p&gt;Title: &lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Description: &lt;／p&gt;</p>
+<p>
+	* ${tags}</p>
+<p>
+	*／</p>
+<p>
+	方法标签：</p>
+<p>
+	／**</p>
+<p>
+	* &lt;p&gt;Title: ${enclosing_method}&lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Description: &lt;／p&gt;</p>
+<p>
+	* ${tags}</p>
+<p>
+	*／</p>
+<p>
+	覆盖方法标签：</p>
+<p>
+	／* （非 Javadoc）</p>
+<p>
+	* &lt;p&gt;Title: ${enclosing_method}&lt;／p&gt;</p>
+<p>
+	* &lt;p&gt;Description: &lt;／p&gt;</p>
+<p>
+	* ${tags}</p>
+<p>
+	* ${see_to_overridden}</p>
+<p>
+	*／</p>
+<p>
+	代表方法标签：</p>
+<p>
+	／**</p>
+<p>
+	* ${tags}</p>
+<p>
+	* ${see_to_target}</p>
+<p>
+	*／</p>
+<p>
+	getter方法标签：</p>
+<p>
+	／**</p>
+<p>
+	* @return ${bare_field_name}</p>
+<p>
+	*／</p>
+<p>
+	setter方法标签：</p>
+<p>
+	／**</p>
+<p>
+	* @param ${param} 要设置的 ${bare_field_name}</p>
+<p>
+	*／<br />
+	<br />
+	环境说明：<br />
+	WindowsXP sp3<br />
+	Eclipse3.6 Helios Release<br />
+	<br />
+	一、.java 文件部分<br />
+	---------------------<br />
+	<br />
+	eclipse--&gt;windows--&gt;preferences--&gt;Java--&gt;Code Style--&gt;Code Templates--&gt;Code--&gt;New Java files--&gt;单击[edit]按钮<br />
+	<br />
+	在文件首行，添加如下内容：</p>
+<p>
+	Java代码</p>
+<p>
+	${filecomment} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${package_declaration} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	／** &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />创建时间：${date}&nbsp;<wbr />${time} &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />项目名称：${project_name} &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />@author&nbsp;<wbr />daniel &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />@version&nbsp;<wbr />1.0&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />@since&nbsp;<wbr />JDK&nbsp;<wbr />1.6.0_21 &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />文件名称：${file_name} &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />类说明： &nbsp;<wbr /></p>
+<p>
+	*／&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${typecomment} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${type_declaration}&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${filecomment}</p>
+<p>
+	${package_declaration}</p>
+<p>
+	／**</p>
+<p>
+	* 创建时间：${date} ${time}</p>
+<p>
+	* 项目名称：${project_name}</p>
+<p>
+	* @author daniel</p>
+<p>
+	* @version 1.0</p>
+<p>
+	* @since JDK 1.6.0_21</p>
+<p>
+	* 文件名称：${file_name}</p>
+<p>
+	* 类说明：</p>
+<p>
+	*／</p>
+<p>
+	${typecomment}</p>
+<p>
+	${type_declaration}</p>
+<p>
+	<br />
+	<br />
+	或者</p>
+<p>
+	Java代码</p>
+<p>
+	${filecomment} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${package_declaration} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	／**&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Filename:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />${file_name}&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Copyright:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />Copyright&nbsp;<wbr />(c)2010 &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Company:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />com &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />@version:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />1.0&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />@since:&nbsp;<wbr />&nbsp;<wbr />JDK&nbsp;<wbr />1.6.0_21 &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Create&nbsp;<wbr />at:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />${date}&nbsp;<wbr />${time}&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Description: &nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Modification&nbsp;<wbr />History:&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />Date&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />Author&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />Version&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />Description&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />-----------------------------------------------------------------&nbsp;<wbr /></p>
+<p>
+	*&nbsp;<wbr />${date}&nbsp;<wbr />daniel&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />1.0&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />1.0&nbsp;<wbr />Version&nbsp;<wbr />&nbsp;&nbsp;<wbr /></p>
+<p>
+	*／&nbsp;<wbr />&nbsp;<wbr />&nbsp;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${typecomment} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${type_declaration}&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	${filecomment}</p>
+<p>
+	${package_declaration}</p>
+<p>
+	／**</p>
+<p>
+	* Filename:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;${file_name}</p>
+<p>
+	* Copyright:&nbsp;<wbr />&nbsp;<wbr />&nbsp;Copyright (c)2010</p>
+<p>
+	* Company:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;com</p>
+<p>
+	* @version:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;1.0</p>
+<p>
+	* @since:&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;JDK 1.6.0_21</p>
+<p>
+	* Create at:&nbsp;<wbr />&nbsp;<wbr />&nbsp;${date} ${time}</p>
+<p>
+	* Description:</p>
+<p>
+	*</p>
+<p>
+	* Modification History:</p>
+<p>
+	* Date&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;Author&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;Version&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;Description</p>
+<p>
+	* ------------------------------------------------------------------</p>
+<p>
+	* ${date}&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;daniel&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;1.0&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr />&nbsp;1.0 Version</p>
+<p>
+	*／&nbsp;<wbr /></p>
+<p>
+	${typecomment}</p>
+<p>
+	${type_declaration}</p>
+<p>
+	<br />
+	<br />
+	二、.jsp 文件部分<br />
+	---------------------<br />
+	<br />
+	eclipse--&gt;windows--&gt;preferences--&gt;Web--&gt;JSP Files--&gt;Editer--&gt;Templates--&gt;New JSP File--&gt;单击[edit]按钮<br />
+	<br />
+	在文件首行，添加如下内容：</p>
+<p>
+	Java代码</p>
+<p>
+	&lt;%--&nbsp;<wbr />&nbsp;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	创建时间：${date}${time} &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	创&nbsp;<wbr />建&nbsp;<wbr />人：daniel &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	相关说明： &nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	JDK1.6.0_21&nbsp;<wbr />tomcat6.0.29&nbsp;<wbr />servlet2.5&nbsp;<wbr />&nbsp;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	--%&gt;&nbsp;<wbr />&nbsp;<wbr /></p>
+<p>
+	&lt;%--</p>
+<p>
+	创建时间：${date}${time}</p>
+<p>
+	创 建 人：daniel</p>
+<p>
+	相关说明：</p>
+<p>
+	JDK1.6.0_21 tomcat6.0.29 servlet2.5</p>
+<p>
+	--%&gt;</p>
+<p>
+	这样再创建 .java 或 .jsp 文件时，eclipse 就会为我们自动将注释写好。你还可以通过&ldquo;导出&rdquo;、&ldquo;导入&rdquo;功能，把自己的模板导出来,方便在其他机器上使用。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

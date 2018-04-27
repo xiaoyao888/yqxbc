@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>学习Java的30个基本概念</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="java,java语言学习,java语言设" />
+  <meta name="description" content=" 在我们学习Java的过程中,掌握其中的基本概念对我们的学习无论是J2SE,J2EE,J2ME都是很重要的,J2SE是Java的基础,所以有必要对其中的基本概念做以归纳,以便大家在以后的学习过程中更好的理" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>学习Java的30个基本概念</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：12次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="703" class="art_content"><p>
+	　　在我们学习Java的过程中,掌握其中的基本概念对我们的学习无论是J2SE,J2EE,J2ME都是很重要的,J2SE是Java的基础,所以有必要对其中的基本概念做以归纳,以便大家在以后的学习过程中更好的理解java的精髓,在此我总结了30条基本的概念.</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　Java概述:</p>
+<p>
+	　　目前Java主要应用于中间件的开发(middleware)---处理客户机于服务器之间的通信技术,早期的实践证明,Java不适合pc应用程序的开发,其发展逐渐变成在开发手持设备,互联网信息站,及车载计算机的开发.Java于其他语言所不同的是程序运行时提供了平台的独立性,称许可以在windows,solaris,linux其他操作系统上使用完全相同的代码.Java的语法与C++语法类似,C++/C程序员很容易掌握,而且Java是完全的彻底的面向对象的,其中提出了很好的GC(Garbage Collector)垃圾处理机制,防止内存溢出.</p>
+<p>
+	　　Java的白皮书为我们提出了Java语言的11个关键特性.</p>
+<p>
+	　　(1)Easy:Java的语法比C++的相对简单,另一个方面就是Java能使软件在很小的机器上运行,基础解释其和类库的支持的大小约为40kb,增加基本的标准库和线程支持的内存需要增加125kb.</p>
+<p>
+	　　(2)分布式:Java带有很强大的TCP/IP协议族的例程库,Java应用程序能够通过URL来穿过网络来访问远程对象,由于servlet机制的出现,使Java编程非常的高效,现在许多的大的web server都支持servlet.</p>
+<p>
+	　　(3)OO:面向对象设计是把重点放在对象及对象的接口上的一个编程技术.其面向对象和C++有很多不同,在与多重继承的处理及Java的原类模型.</p>
+<p>
+	　　(4)健壮特性:Java采取了一个安全指针模型,能减小重写内存和数据崩溃的可能性。</p>
+<p>
+	　　(5)安全:Java用来设计网路和分布系统,这带来了新的安全问题,Java可以用来构建防病毒和防攻击的System.事实证明Java在防毒这一方面做的比较好.<br />
+	(6)中立体系结构:Java编译其生成体系结构中立的目标文件格式可以在很多处理器上执行,编译器产生的指令字节码(Javabytecode)实现此特性,此字节码可以在任何机器上解释执行.</p>
+<p>
+	　　(7)可移植性:Java中对基本数据结构类型的大小和算法都有严格的规定所以可移植性很好.</p>
+<p>
+	　　(8)多线程:Java处理多线程的过程很简单,Java把多线程实现交给底下操作系统或线程程序完成.所以多线程是Java作为服务器端开发语言的流行原因之一</p>
+<p>
+	　　(9)Applet和servlet:能够在网页上执行的程序叫Applet,需要支持Java的浏览器很多,而applet支持动态的网页,这是很多其他语言所不能做到的.</p>
+<p>
+	　　基本概念:</p>
+<p>
+	　　1.OOP中唯一关系的是对象的接口是什么,就像计算机的销售商她不管电源内部结构是怎样的,他只关系能否给你提供电就行了,也就是只要知道can or not而不是how and why.所有的程序是由一定的属性和行为对象组成的,不同的对象的访问通过函数调用来完成,对象间所有的交流都是通过方法调用,通过对封装对象数据,很大限度上提高复用率.</p>
+<p>
+	　　2.OOP中最重要的思想是类,类是模板是蓝图,从类中构造一个对象,即创建了这个类的一个实例(instance)</p>
+<p>
+	　　3.封装:就是把数据和行为结合起在一个包中)并对对象使用者隐藏数据的实现过程,一个对象中的数据叫他的实例字段(instance field)</p>
+<p>
+	　　4.通过扩展一个类来获得一个新类叫继承(inheritance),而所有的类都是由Object根超类扩展而得,根超类下文会做介绍.</p>
+<p>
+	　　5.对象的3个主要特性<br />
+	　　behavior---说明这个对象能做什么.<br />
+	　　state---当对象施加方法时对象的反映.<br />
+	　　identity---与其他相似行为对象的区分标志.<br />
+	　　每个对象有唯一的indentity 而这3者之间相互影响.<br />
+	6.类之间的关系:<br />
+	　　use-a :依赖关系<br />
+	　　has-a :聚合关系<br />
+	　　is-a :继承关系--例:A类继承了B类,此时A类不仅有了B类的方法,还有其自己的方法.(个性存在于共性中)</p>
+<p>
+	　　7.构造对象使用构造器:构造器的提出,构造器是一种特殊的方法,构造对象并对其初始化.<br />
+	　　例:Data类的构造器叫Data<br />
+	　　new Data()---构造一个新对象,且初始化当前时间.<br />
+	　　Data happyday=new<br />
+	　　Data()---把一个对象赋值给一个变量happyday,从而使该对象能够多次使用,此处要声明的使变量与对象变量二者是不同的.new返回的值是一个引用.<br />
+	　　构造器特点:构造器可以有0个,一个或多个参数<br />
+	　　构造器和类有相同的名字<br />
+	　　一个类可以有多个构造器<br />
+	　　构造器没有返回值<br />
+	　　构造器总是和new运算符一起使用.</p>
+<p>
+	　　8.重载:当多个方法具有相同的名字而含有不同的参数时,便发生重载.编译器必须挑选出调用哪个方法.</p>
+<p>
+	　　9.包(package)Java允许把一个或多个类收集在一起成为一组,称作包,以便于组织任务,标准Java库分为许多包.java.lang java.util java,net等,包是分层次的所有的java包都在java和javax包层次内.</p>
+<p>
+	　　10.继承思想:允许在已经存在的类的基础上构建新的类,当你继承一个已经存在的类时,那么你就复用了这个类的方法和字段,同时你可以在新类中添加新的方法和字段.</p>
+<p>
+	　　11.扩展类:扩展类充分体现了is-a的继承关系. 形式为:class (子类) extends (基类).</p>
+<p>
+	　　12.多态:在java中,对象变量是多态的.而java中不支持多重继承.<br />
+	13.动态绑定:调用对象方法的机制.<br />
+	　　(1)编译器检查对象声明的类型和方法名.<br />
+	　　(2)编译器检查方法调用的参数类型.<br />
+	　　(3)静态绑定:若方法类型为priavte static final 编译器会准确知道该调用哪个方法.<br />
+	　　(4)当程序运行并且使用动态绑定来调用一个方法时,那么虚拟机必须调用x所指向的对象的实际类型相匹配的方法版本.<br />
+	　　(5)动态绑定:是很重要的特性,它能使程序变得可扩展而不需要重编译已存代码.</p>
+<p>
+	　　14.final类:为防止他人从你的类上派生新类,此类是不可扩展的.</p>
+<p>
+	　　15.动态调用比静态调用花费的时间要长,</p>
+<p>
+	　　16.抽象类:规定一个或多个抽象方法的类本身必须定义为abstract例: public abstract string getDescripition</p>
+<p>
+	　　17.Java中的每一个类都是从Object类扩展而来的.</p>
+<p>
+	　　18.object类中的equal和toString方法.equal用于测试一个对象是否同另一个对象相等.toString返回一个代表该对象的字符串,几乎每一个类都会重载该方法,以便返回当前状态的正确表示.(toString 方法是一个很重要的方法)</p>
+<p>
+	　　19.通用编程:任何类类型的所有值都可以同object类性的变量来代替.</p>
+<p>
+	　　20.数组列表:ArrayList动态数组列表,是一个类库,定义在java.uitl包中,可自动调节数组的大小.</p>
+<p>
+	　　21.class类 object类中的getclass方法返回ckass类型的一个实例,程序启动时包含在main方法的类会被加载,虚拟机要加载他需要的所有类,每一个加载的类都要加载它需要的类.</p>
+<p>
+	　　22.class类为编写可动态操纵java代码的程序提供了强大的功能反射,这项功能为JavaBeans特别有用,使用反射Java能支持VB程序员习惯使用的工具.能够分析类能力的程序叫反射器,Java中提供此功能的包叫Java.lang.reflect反射机制十分强大.<br />
+	　　1.在运行时分析类的能力.<br />
+	　　2.在运行时探察类的对象.<br />
+	　　3.实现通用数组操纵代码.<br />
+	　　4.提供方法对象.<br />
+	　　而此机制主要针对是工具者而不是应用及程序.<br />
+	　　反射机制中的最重要的部分是允许你检查类的结构.用到的API有:<br />
+	　　java.lang.reflect.Field 返回字段.<br />
+	　　java.reflect.Method 返回方法.<br />
+	　　java.lang.reflect.Constructor 返回参数.<br />
+	　　方法指针:java没有方法指针,把一个方法的地址传给另一个方法,可以在后面调用它,而接口是更好的解决方案.<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 23.接口(Interface)说明类该做什么而不指定如何去做,一个类可以实现一个或多个interface.</p>
+<p>
+	　　24.接口不是一个类,而是对符合接口要求的类的一套规范.若实现一个接口需要2个步骤:<br />
+	　　1.声明类需要实现的指定接口.<br />
+	　　2.提供接口中的所有方法的定义.<br />
+	　　声明一个类实现一个接口需要使用implements 关键字class actionB implements Comparable 其actionb需要提供CompareTo方法,接口不是类,不能用new实例化一个接口.</p>
+<p>
+	　　25.一个类只有一个超类,但一个类能实现多个接口.Java中的一个重要接口Cloneable</p>
+<p>
+	　　26.接口和回调.编程一个常用的模式是回调模式,在这种模式中你可以指定当一个特定时间发生时回调对象上的方法.例:ActionListener 接口监听.&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

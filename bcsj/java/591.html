@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java开发中常见的危险信号</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,危险信号,Java开发中常" />
+  <meta name="description" content=" Dustin Marx是一位专业软件开发者，从业已经有17年的时间，他拥有电子工程学士学位，还是一位MBA。Dustin维护着一个博客，专门介绍软件开发的各个主题。近日，他撰文谈到了Java开发中" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java开发中常见的危险信号</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：12次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="591" class="art_content"><p>
+	　　Dustin Marx是一位专业软件开发者，从业已经有17年的时间，他拥有电子工程学士学位，还是一位MBA。Dustin维护着一个博客，专门介绍软件开发的各个主题。近日，他撰文谈到了Java开发中常见的危险信号，提出了在日常的Java开发中我们需要尽力避免的一些不正确的做法。</p>
+<p>
+	　　经过多年的开发、阅读、回顾并维护了数万行的Java代码后，我经常会看到Java代码中出现的某些&ldquo;危险信号&rdquo;，这些信号经常（但也许并不总是）暗示着代码出现了某些问题。我这里所要谈的并不是那些总是错误的实践，而是想要谈谈在某些场景下可能是恰当，但通常却会导致问题的一些实践。这些&ldquo;危险信号&rdquo;有时可能并没有问题，但却会造成问题的积累，并最终导致问题的产生。这里我总结出了一些&ldquo;危险信号&rdquo;，并且谈谈在哪些情况下他们是没有问题的，在哪些情况下则会导致问题。</p>
+<p>
+	　　这里将要谈及的很多&ldquo;危险信号&rdquo;通常都会收到来自于FindBugs等代码分析工具所发出的警告信息，流行的Java IDE也会将它们标记出来。不过，我发现有不少开发者会忽略掉这些来自于工具与IDE的警告信息，要么是因为他们关掉了提示信息，要么是出于自身的开发习惯或是不理解与这些警告信息所关联的风险，因此会忽略掉警告信息。</p>
+<p>
+	　　对引用使用==（而不是.equals）</p>
+<p>
+	　　很多Java开发者都知道使用==比较原生类型数据，使用.equals比较引用类型数据。这是一条很容易记住的简单原则，Java开发者这么用也没什么问题。有时使用==来比较标准的Java类型引用（String、Integer、Long等等）也没问题，不过这要取决于被缓存的值的大小，因此这么做并不是一个好的做法。有时，我们需要检查标识的相等性而不是内容的相等性，在这种情况下使用==来比较引用就很适合了。相对而言，我更喜欢Groovy的处理方式，==类似于.equals，而===则是更加严格地比较标识。同理，使用!=来比较两个引用也是一个&ldquo;危险信号&rdquo;，因为如果待比较的两个对象不共享相同的标识（内存地址），即便他们拥有相同的内容也总是会返回true。</p>
+<p>
+	　　对枚举使用.equals（而不是==）</p>
+<p>
+	　　坦率地说，对于枚举，Java开发者使用==还是.equals都没有太大关系。不过，我更倾向于对枚举使用==。这么做最重要的原因就是对枚举使用==可以防止不小心将枚举与不相关的对象进行比较（永远不会相等）。Object.equals(Object)方法可以接收任意对象，这意味着编译器并不会强制限定传进来的对象要与被比较的对象是相同的类型。一般来说，我更喜欢静态的编译期问题检测而非动态运行期的问题检测，对枚举使用==可以满足这个要求。同理，在比较枚举时，!=与!.equals也是一样的。</p>
+<p>
+	　　魔数与字符串字面值</p>
+<p>
+	　　我经常会在Java代码中看到有人使用&ldquo;魔数&rdquo;和字符串字面值。他们对于未来的维护来说是一种&ldquo;危险信号&rdquo;，让我十分怀疑应用的正确性。在单个位置处将其标识为常量（如果可能用枚举来表示更佳），这么做可以改善未来的维护，并且让我可以更加自信地相信使用这些值的所有代码都在使用着相同的值。除此之外，在一个地方定义好常量与枚举可以更方便地使用IDE的&ldquo;查找使用&rdquo;特性来找到所有使用这些常量的地方。</p>
+<p>
+	　　字符串常量</p>
+<p>
+	　　在看到有限的相关字符串常量时，我就在想使用枚举应该更加适合。对于高度内聚的字符串常量的情况来说更是如此，因为枚举可以更好地表达出这些字符串所表示的概念。相比于字符串常量来说，枚举提供了编译期的静态类型安全与潜在的性能优势。对于程序的正确性来说，编译期的安全是最吸引我的地方。</p>
+<p>
+	　　使用Java的&ldquo;goto&rdquo;</p>
+<p>
+	　　很少有人会使用标签代码，如果使用了那也说明用法不当。换句话说，如果使用了也是滥用而已。在大多数情况下，使用Java的&ldquo;goto&rdquo;会造成代码的可读性极差。</p>
+<p>
+	　　根据作用域来确定恰当的变量引用</p>
+<p>
+	　　我认为这种方式永远都是不恰当的，但它却能运行，甚至有时是被某些Java开发者有意而为之。比如说，Java开发者将传递进方法的变量在方法执行时指向了另一个引用。该变量（临时指向方法参数）指向了另一个引用，直到方法结束为止，这时它脱离了作用域。在这种情况下，在方法签名的参数定义前加上final关键字会导致编译器错误，这也是我喜欢在方法参数前加上final的原因之一。对于我来说，在方法中声明一个新的局部变量是更加清晰且可读的方式，因为它只能在方法中使用。更为重要的是，作为代码的读者，我不知道是开发者有意希望该参数名只是指向一个不同的值还是引入了Bug，因为将参数重新指向新的引用实际上会改变调用端的值。如果我看到有人这么写，那么我就会找代码的编写者或是通过单元测试来验证代码的意图。</p>
+<p>
+	　　equals(Object)与hashCode()方法的不匹配</p>
+<p>
+	　　虽然我认为每个Java类都应该重写toString()方法，但对于equals(Object)与hashCode()方法来说却并不这么认为。我觉得只有在需要这些方法的场合下才应该重写类中的这两个方法，因为他们的存在暗示着其设计与开发某种程度上的完全改变。特别地，equals与hashCode方法要能满足其意图与契约（位于Object类的API文档），并且需要保持一致。大多数IDE与分析工具都会在其中一个方法重写而另一个没有重写的情况下给出提示。然而，我要确保equals与hashCode使用的是相同的属性，并且在这两个方法中属性的顺序要保持一致。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

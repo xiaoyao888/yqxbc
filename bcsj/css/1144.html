@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS代码的一些规范</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CSS代码的一些规范,CSS教程" />
+  <meta name="description" content=" CSS命名规范 一、文件命名规范 全局样式：global.css 框架布局：layout.css 字体样式：font.css 链接样式：link.css 打印样式：print.css 二、常用类/ID命名规范 页 眉：header 内 容：content 容 器：" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CSS代码的一些规范</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏电脑知识网 浏览：1次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1144" class="art_content">　　CSS命名规范&nbsp;<br />
+<br />
+　　一、文件命名规范&nbsp;<br />
+<br />
+　　全局样式：global.css&nbsp;<br />
+　　框架布局：layout.css&nbsp;<br />
+　　字体样式：font.css<br />
+　　链接样式：link.css<br />
+　　打印样式：print.css<br />
+<br />
+　　二、常用类/ID命名规范&nbsp;<br />
+<br />
+　　页　眉：header&nbsp;<br />
+　　内　容：content&nbsp;<br />
+　　容　器：container&nbsp;<br />
+　　页　脚：footer&nbsp;<br />
+　　版　权：copyright　&nbsp;<br />
+　　导　航：menu&nbsp;<br />
+　　主导航：mainMenu&nbsp;<br />
+　　子导航：subMenu&nbsp;<br />
+　　标　志：logo&nbsp;<br />
+　　标　语：banner&nbsp;<br />
+　　标　题：title&nbsp;<br />
+　　侧边栏：sidebar&nbsp;<br />
+　　图　标：Icon&nbsp;<br />
+　　注　释：note&nbsp;<br />
+　　搜　索：search&nbsp;<br />
+　　按　钮：btn&nbsp;<br />
+　　登　录：login&nbsp;<br />
+　　链　接：link&nbsp;<br />
+　　信息框：manage&nbsp;<br />
+　　&hellip;&hellip;&nbsp;<br />
+<br />
+　　常用类的命名应尽量以常见英文单词为准，做到通俗易懂，并在适当的地方加以注释。对于二级类/ID命名，则采用组合书写的模式，后一个单词的首字母应大写：诸如&ldquo;搜索框&rdquo;则应命名为&ldquo;searchInput&rdquo;、&ldquo;搜索图标&rdquo;命名这&ldquo;searchIcon&rdquo;、&ldquo;搜索按钮&rdquo;命名为&ldquo;searchBtn&rdquo;&hellip;&hellip;&nbsp;<br />
+<br />
+　　CSS书写规范及方法&nbsp;<br />
+<br />
+　　一、常规书写规范及方法&nbsp;<br />
+<br />
+　　1、选择DOCTYPE：&nbsp;<br />
+<br />
+　　XHTML&nbsp;1.0&nbsp;提供了三种DTD声明可供选择：&nbsp;<br />
+<br />
+　　过渡的(Transitional)：要求非常宽松的DTD，它允许你继续使用HTML4.01的标识（但是要符合xhtml的写法<br />
+）。完整代码如下：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　严格的(Strict)：要求严格的DTD，你不能使用任何表现层的标识和属性。完整代码如下：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Strict//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　框架的(Frameset)：专门针对框架页面设计使用的DTD，如果你的页面中包含有框架，需要采用这种DTD。完整代码如下：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Frameset//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　理想情况当然是严格的DTD，但对于我们大多数刚接触web标准的设计师来说，过渡的DTD(XHTML&nbsp;1.0&nbsp;Transitional)是目前理想选择（包括本站，使用的也是过渡型DTD）。因为这种DTD还允许我们使用表现层的标识、元素和属性，也比较容易通过W3C的代码校验。&nbsp;<br />
+<br />
+　　2、指定语言及字符集：&nbsp;<br />
+<br />
+　　为文档指定语言：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;html&nbsp;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&nbsp;lang=&quot;en&quot;&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　为了被浏览器正确解释和通过W3C代码校验，所有的XHTML文档都必须声明它们所使用的编码语言；常用的语言定义：&nbsp;<br />
+<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;meta&nbsp;http-equiv=&rdquo;Content-Type&rdquo;&nbsp;content=&rdquo;text/html;&nbsp;charset=utf-8&Prime;&nbsp;/&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　标准的XML文档语言定义：<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;?xml&nbsp;version=&quot;1.0&Prime;&nbsp;encoding=&quot;utf-8&Prime;?&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　针对老版本的浏览器的语言定义：<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;meta&nbsp;http-equiv=&quot;Content-Language&quot;&nbsp;content=&quot;utf-8&Prime;&nbsp;/&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　为提高字符集，建议采用&ldquo;utf-8&rdquo;。<br />
+<br />
+　　标准的XML文档语言定义：&nbsp;<br />
+　　&nbsp;<br />
+　　针对老版本的浏览器的语言定义：&nbsp;<br />
+　　&nbsp;<br />
+　　为提高字符集，建议采用&ldquo;utf-8&rdquo;。&nbsp;<br />
+<br />
+　　3、调用样式表：&nbsp;<br />
+<br />
+　　外部样式表调用：&nbsp;<br />
+<br />
+　　页面内嵌法：就是将样式表直接写在页面代码的head区。&nbsp;如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;style&nbsp;type=&quot;text/css&quot;&gt;&lt;!&ndash;&nbsp;body&nbsp;{background:white;color:black;}&nbsp;&ndash;&gt;&lt;/style&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　外部调用法：将样式表写在一个独立的.css文件中，然后在页面head区用类似以下代码调用。<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;link&nbsp;rel=&quot;stylesheet&quot;&nbsp;rev=&quot;stylesheet&quot;&nbsp;href=&quot;css/style.css&quot;&nbsp;type=&quot;text/css&quot;&nbsp;media=&quot;all&quot;&nbsp;/&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+　　&nbsp;<br />
+　　外部调用法：将样式表写在一个独立的.css文件中，然后在页面head区用类似以下代码调用。<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				&lt;link&nbsp;rel=&quot;stylesheet&quot;&nbsp;rev=&quot;stylesheet&quot;&nbsp;href=&quot;css/style.css&quot;&nbsp;type=&quot;text/css&quot;&nbsp;media=&quot;all&quot;&nbsp;/&gt;</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　在符合web标准的设计中，推荐使用外部调用法，可以不修改页面只修改.css文件而改变页面的样式。如果所有页面都调用同一个样式表文件，那么改一个样式表文件，可以改变所有文件的样式。&nbsp;<br />
+<br />
+　　4、选用恰当的元素：&nbsp;<br />
+<br />
+　　根据文档的结构来选择HTML元素，而不是根据HTML元素的样式来选择。例如，使用P元素来包含文字段落，而不是为了换行。如果在创建文档时找不到适当的元素，则可以考虑使用通用的p&nbsp;或者是span；&nbsp;<br />
+<br />
+　　避免过渡使用p和span。少量、适当的使用p和span元素可以使文档的结构更加清晰合理并且易于使用样式；&nbsp;<br />
+<br />
+　　尽可能少地使用标签和结构嵌套，这样不但可以使文档结构清晰，同时也可以保持文件的小巧，在提高用户下载速度的同时，也易于浏览器对文档的解释及呈视；&nbsp;<br />
+<br />
+　　5、派生选择器：&nbsp;<br />
+<br />
+　　可以使用派生选择器给一个元素里的子元素定义样式，在简化命名的同时也使结构更加的清晰化，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.mainMenu&nbsp;ul&nbsp;li&nbsp;{background:url(images/bg.gif;)}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　6、辅助图片用背影图处理：&nbsp;<br />
+<br />
+　　这里的&ldquo;辅助图片&rdquo;是指那些不是作为页面要表达的内容的一部分，而仅仅用于修饰、间隔、提醒的图片。将其做背影图处理，可以在不改动页面的情况下通过CSS样式来进行改动，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				#logo&nbsp;{background:url(images/logo.jpg)&nbsp;#FEFEFE&nbsp;no-repeat&nbsp;right&nbsp;bottom;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　7、结构与样式分离：&nbsp;<br />
+<br />
+　　在页面里只写入文档的结构，而将样式写于css文件中，通过外部调用CSS样式表来实现结构与样式的分离。<br />
+<br />
+　　8、文档的结构化书写：&nbsp;<br />
+<br />
+　　页面CSS文档都应采用结构化的书写方式，逻辑清晰易于阅读。如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				/*=====主导航=====*/&nbsp;<br />
+				　　#mainMenu&nbsp;{&nbsp;<br />
+				　　width:100%;&nbsp;<br />
+				　　height:30px;&nbsp;<br />
+				　　background:url(images/mainMenu_bg.jpg)&nbsp;repeat-x;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　#mainMenu&nbsp;ul&nbsp;li&nbsp;{&nbsp;<br />
+				　　float:left;&nbsp;<br />
+				　　line-height:30px;&nbsp;<br />
+				　　margin-right:1px;&nbsp;<br />
+				　　cursor:pointer;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　/*=====主导航结束=====*/<br />
+				　　&lt;p&nbsp;id=&quot;mainMenu&quot;&gt;<br />
+				　　&lt;ul&gt;<br />
+				　　&lt;li&gt;&lt;a&nbsp;href=&quot;#&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;<br />
+				　　&lt;li&gt;&lt;a&nbsp;href=&quot;#&quot;&gt;介绍&lt;/a&gt;&lt;/li&gt;<br />
+				　　&lt;li&gt;&lt;a&nbsp;href=&quot;#&quot;&gt;服务&lt;/a&gt;&lt;/li&gt;<br />
+				　　&lt;/ul&gt;<br />
+				　　&lt;/p</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　9、鼠标手势：&nbsp;<br />
+<br />
+　　在XHTML标准中，hand只被IE识别，当需要将鼠标手势转换为&ldquo;手形&rdquo;时，则将&quot;hand&quot;换为&quot;pointer&quot;，即&quot;cursor:pointer;&quot;<br />
+<br />
+　　二、注释书写规范&nbsp;<br />
+<br />
+　　1、行间注释：&nbsp;<br />
+<br />
+　　直接写于属性值后面，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.search{&nbsp;<br />
+				　　border:1px&nbsp;solid&nbsp;#fff;/*定义搜索输入框边框*/&nbsp;<br />
+				　　background:url(../images/icon.gif)&nbsp;no-report&nbsp;#333;/*定义搜索框的背景*/&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　2、整段注释：&nbsp;<br />
+<br />
+　　分别在开始及结束地方加入注释，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				/*=====搜索条=====*/&nbsp;<br />
+				　　.search&nbsp;{&nbsp;<br />
+				　　border:1px&nbsp;solid&nbsp;#fff;&nbsp;<br />
+				　　background:url(../images/icon.gif)&nbsp;no-repeat&nbsp;#333;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　/*=====搜索条结束=====*/</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　三、样式属性代码缩写&nbsp;<br />
+<br />
+　　1、不同类有相同属性及属性值的缩写：&nbsp;<br />
+<br />
+　　对于两个不同的类，但是其中有部分相同甚至是全部相同的属性及属性值时，应对其加以合并缩写，特别是当有多个不同的类而有相同的属性及属性值时，合并缩写可以减少代码量并易于控制。如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				#mainMenu&nbsp;{&nbsp;<br />
+				　　background:url(../images/bg.gif);&nbsp;<br />
+				　　border:1px&nbsp;solid&nbsp;#333;&nbsp;<br />
+				　　width:100%;&nbsp;<br />
+				　　height:30px;&nbsp;<br />
+				　　overflow:hidden;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　#subMenu&nbsp;{&nbsp;<br />
+				　　background:url(../images/bg.gif);&nbsp;<br />
+				　　border:1px&nbsp;solid&nbsp;#333;&nbsp;<br />
+				　　width:100%;&nbsp;<br />
+				　　height:20px;&nbsp;<br />
+				　　overflow:hidden;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　两个不同类的属性值有重复之处，刚可以缩写为：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				#mainMenu,#subMenu&nbsp;{&nbsp;<br />
+				　　background:url(../images/bg.gif);&nbsp;<br />
+				　　border:1px&nbsp;solid&nbsp;#333;&nbsp;<br />
+				　　width:100%;&nbsp;<br />
+				　　overflow:hidden;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　#mainMenu&nbsp;{height:30px;}&nbsp;<br />
+				　　#subMenu&nbsp;{height:20px;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　2、同一属性的缩写：&nbsp;<br />
+<br />
+　　同一属性根据它的属性值也可以进行简写，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.search&nbsp;{&nbsp;<br />
+				　　background-color:#333;&nbsp;<br />
+				　　background-image:url(../images/icon.gif);&nbsp;<br />
+				　　background-repeat:&nbsp;no-repeat;&nbsp;<br />
+				　　background-position:50%&nbsp;50%;&nbsp;<br />
+				　　}&nbsp;<br />
+				　　.search&nbsp;{&nbsp;<br />
+				　　background:#333&nbsp;url(../images/icon.gif)&nbsp;no-repeat&nbsp;50%&nbsp;50%;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　3、内外侧边框的缩写：&nbsp;<br />
+<br />
+　　在CSS中关于内外侧边框的距离是按照上、右、下、左的顺序来排列的，当这四个属性值不同时也可直接缩写，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn&nbsp;{&nbsp;<br />
+				　　margin-top:10px;&nbsp;<br />
+				　　margin-right:8px;&nbsp;<br />
+				　　margin-bottom:12px;&nbsp;<br />
+				　　margin-left:5px;&nbsp;<br />
+				　　padding-top:10px;&nbsp;<br />
+				　　padding-right:8px;&nbsp;<br />
+				　　padding-bottom:12px;&nbsp;<br />
+				　　padding-left:8px;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　则可缩写为：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn&nbsp;{&nbsp;<br />
+				　　Margin:10px&nbsp;8px&nbsp;12px&nbsp;5px;&nbsp;<br />
+				　　Padding:10px&nbsp;8px&nbsp;12px&nbsp;5px;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　而如果当上边与下边、左边与右边的边框属性值相同时，则属性值可以直接缩写为两个，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn&nbsp;{&nbsp;<br />
+				　　margin-top:10px;&nbsp;<br />
+				　　margin-right:5px;&nbsp;<br />
+				　　margin-bottom:10px;&nbsp;<br />
+				　　margin-left:5px;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　缩写为：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn&nbsp;{margin:10px&nbsp;5px;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　而当上下左右四个边框的属性值都相同时，则可以直接缩写成一个，如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn&nbsp;{&nbsp;<br />
+				　　margin-top:10px;&nbsp;<br />
+				　　margin-right:10px;&nbsp;<br />
+				　　margin-bottom:10px;&nbsp;<br />
+				　　margin-left:10px;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　缩写为：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.btn{margin:10px;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　4、颜色值的缩写：&nbsp;<br />
+<br />
+　　当RGB三个颜色值数值相同时，可缩写颜色值代码。如：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.menu&nbsp;{color:#ff3333;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　可缩写为:&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.menu&nbsp;{color:#f33;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　四、hack书写规范&nbsp;<br />
+<br />
+　　因为不同浏览器对W3C标准的支持不一样，各个浏览器对于页面的解释呈视也不尽相同，比如IE在很多情况下就与FF存在3px的差距，对于这些差异性，就需要利用css&nbsp;的hack来进行调整，当然在没有必要的情况下，最好不要写hack来进行调整，避免因为hack而导致页面出现问题。&nbsp;<br />
+<br />
+　　1、IE6、IE7、Firefox之间的兼容写法：&nbsp;<br />
+<br />
+　　写法一：&nbsp;<br />
+<br />
+　　IE都能识别*，标准浏览器(如FF)不能识别*；&nbsp;<br />
+　　IE6能识别*，但不能识别&nbsp;!important；&nbsp;<br />
+　　IE7能识别*，也能识别!important；&nbsp;<br />
+　　FF不能识别*，但能识别!important；&nbsp;<br />
+　　根据上述表达，同一类/ID下的CSS&nbsp;hack可写为：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.searchInput&nbsp;{&nbsp;<br />
+				　　background-color:#333;/*三者皆可*/&nbsp;<br />
+				　　*background-color:#666　!important;&nbsp;/*仅IE7*/&nbsp;<br />
+				　　*background-color:#999;&nbsp;/*仅IE6及IE6以下*/&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　一般三者的书写顺序为：FF、IE7、IE6。<br />
+<br />
+　　写法二：&nbsp;<br />
+<br />
+　　IE6可识别&ldquo;_&rdquo;，而IE7及FF皆不能识别，所以当只针对IE6与IE7及FF之间的区别时，可这样书写：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				.searchInput&nbsp;{&nbsp;<br />
+				　　background-color:#333;/*通用*/&nbsp;<br />
+				　　_background-color:#666;/*仅IE6可识别*/&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+　　写法三：&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				*+html&nbsp;与&nbsp;*html&nbsp;是IE特有的标签,&nbsp;Firefox暂不支持。&nbsp;<br />
+				　　.searchInput&nbsp;{background-color:#333;}&nbsp;<br />
+				　　*html&nbsp;.searchInput&nbsp;{background-color:#666;}/*仅IE6*/&nbsp;<br />
+				　　*+html&nbsp;.searchInput&nbsp;{background-color:#555;}/*仅IE7*/</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　屏蔽IE浏览器：&nbsp;<br />
+<br />
+　　select是选择符，根据情况更换，第二句是MAC上safari浏览器独有的。&nbsp;<br />
+　　[/code]*:lang(zh)&nbsp;select&nbsp;{font:12px&nbsp;!important;}&nbsp;/*FF的专用*/&nbsp;<br />
+　　select:empty&nbsp;{font:12px&nbsp;!important;}&nbsp;/*safari可见*/[/code]&nbsp;<br />
+<br />
+　　IE6可识别：&nbsp;<br />
+<br />
+　　这里主要是通过CSS注释分开一个属性与值，注释在冒号前。&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				select&nbsp;{&nbsp;display&nbsp;/*IE6不识别*/:none;}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;<br />
+<br />
+　　IE的if条件hack写法：&nbsp;<br />
+<br />
+　　所有的IE可识别：Only&nbsp;IE&nbsp;<br />
+　　只有IE5.0可以识别:&nbsp;Only&nbsp;IE&nbsp;5.0&nbsp;<br />
+　　IE5.0包换IE5.5都可以识别:&nbsp;Only&nbsp;IE&nbsp;5.0+&nbsp;<br />
+　　仅IE6可识别:&nbsp;Only&nbsp;IE&nbsp;6-&nbsp;<br />
+　　IE6以及IE6以下的IE5.x都可识别:&nbsp;Only&nbsp;IE&nbsp;6/+&nbsp;<br />
+　　仅IE7可识别:&nbsp;Only&nbsp;IE&nbsp;7/-&nbsp;<br />
+<br />
+　　2、清除浮动：&nbsp;<br />
+<br />
+　　在Firefox中，当子级都为浮动时，那么父级的高度就无法完全的包住整个子级，那么这时用这个清除浮动的HACK来对父级做一次定义，那么就可以解决这个问题。&nbsp;<br />
+　　
+<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
+	<tbody>
+		<tr>
+			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
+				select:after&nbsp;{&nbsp;<br />
+				　　content:&rdquo;.&rdquo;;&nbsp;<br />
+				　　display:block;&nbsp;<br />
+				　　height:0;&nbsp;<br />
+				　　clear:both;&nbsp;<br />
+				　　visibility:hidden;&nbsp;<br />
+				　　}</td>
+		</tr>
+	</tbody>
+</table>
+&nbsp;</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

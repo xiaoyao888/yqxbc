@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySQL5存储过程（二）</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL5存储过程（二）,数据" />
+  <meta name="description" content="什么MySQL语句在存储过程体中是合法的？ 什么样的SQL语句在Mysql存储过程中才是合法的呢？你可以创建一个包含INSERT,UPDATE,DELETE,SELECT,DROP,CREATE,REPLACE等的语句。你唯一需要记住的是如果代" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL5存储过程（二）</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：8次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="408" class="art_content">什么MySQL语句在存储过程体中是合法的？&nbsp;<br />
+<br />
+什么样的SQL语句在Mysql存储过程中才是合法的呢？你可以创建一个包含INSERT,&nbsp;UPDATE,DELETE,&nbsp;SELECT,&nbsp;DROP,&nbsp;CREATE,&nbsp;REPLACE等的语句。你唯一需要记住的是如果代码中包含MySQL扩充功能，那么代码将不能移植。在标准SQL语句中：任何数据库定义语言都是合法的，如：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p&nbsp;()&nbsp;DELETE&nbsp;FROM&nbsp;t;&nbsp;//&nbsp;<br />
+<br />
+SET、COMMIT以及ROLLBACK也是合法的，如：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p&nbsp;()&nbsp;SET&nbsp;@x&nbsp;=&nbsp;5;&nbsp;//&nbsp;<br />
+<br />
+MySQL的附加功能：任何数据操作语言的语句都将合法。&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p&nbsp;()&nbsp;DROP&nbsp;TABLE&nbsp;t;&nbsp;//&nbsp;<br />
+<br />
+MySQL扩充功能：直接的SELECT也是合法的：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p&nbsp;()&nbsp;SELECT&nbsp;&#39;a&#39;;&nbsp;//&nbsp;<br />
+<br />
+顺便提一下，我将存储过程中包括DDL语句的功能称为MySQL附加功能的原因是在SQL标准中把这个定义为非核心的，即可选组件。&nbsp;<br />
+<br />
+在过程体中有一个约束，就是不能有对例程或表操作的数据库操作语句。例如下面的例子就是非法的：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p1&nbsp;()&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;DELETE&nbsp;FROM&nbsp;t;&nbsp;//&nbsp;<br />
+<br />
+下面这些对MySQL&nbsp;5.0来说全新的语句，过程体中是非法的:&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE,&nbsp;ALTER&nbsp;PROCEDURE,&nbsp;DROP&nbsp;PROCEDURE,&nbsp;CREATE&nbsp;FUNCTION,&nbsp;<br />
+<br />
+DROP&nbsp;FUNCTION,&nbsp;CREATE&nbsp;TRIGGER,&nbsp;DROP&nbsp;TRIGGER.&nbsp;<br />
+<br />
+不过你可以使用&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;db5.p1&nbsp;()&nbsp;DROP&nbsp;DATABASE&nbsp;db5//&nbsp;<br />
+<br />
+但是类似&nbsp;<br />
+<br />
+&quot;USE&nbsp;database&quot;&nbsp;<br />
+<br />
+语句也是非法的，因为MySQL假定默认数据库就是过程的工作场所。&nbsp;<br />
+<br />
+Call&nbsp;the&nbsp;Procedure&nbsp;调用存储过程&nbsp;<br />
+<br />
+1.&nbsp;<br />
+<br />
+现在我们就可以调用一个存储过程了，你所需要输入的全部就是CALL和你过程名以及一个括号再一次强调，括号是必须的当你调用例子里面的p1过程时，结果是屏幕返回了t表的内容&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p1()&nbsp;//&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+|&nbsp;s1&nbsp;|&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+|&nbsp;5&nbsp;|&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.03&nbsp;sec)&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.03&nbsp;sec)&nbsp;<br />
+<br />
+因为过程中的语句是&nbsp;<br />
+<br />
+&quot;SELECT&nbsp;*&nbsp;FROM&nbsp;t;&quot;&nbsp;<br />
+<br />
+2.&nbsp;Let&nbsp;me&nbsp;say&nbsp;that&nbsp;again,&nbsp;another&nbsp;way.&nbsp;<br />
+<br />
+其他实现方式&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p1()&nbsp;//&nbsp;<br />
+<br />
+<br />
+和下面语句的执行效果一样：&nbsp;<br />
+<br />
+mysql&gt;&nbsp;SELECT&nbsp;*&nbsp;FROM&nbsp;t;&nbsp;//&nbsp;<br />
+<br />
+所以，你调用p1过程就相当于你执行了下面语句：&nbsp;<br />
+<br />
+&quot;SELECT&nbsp;*&nbsp;FROM&nbsp;t;&quot;&nbsp;<br />
+<br />
+好了，主要的知识点&quot;创建和调用过程方法&quot;已经清楚了。我希望你能对自己说这相当简单。但是很快我们就有一系列的练习，每次都加一条子句，或者改变已经存在的子句。那样在写复杂部件前我们将会有很多可用的子句。&nbsp;<br />
+<br />
+Characteristics&nbsp;Clauses&nbsp;特征子句&nbsp;<br />
+<br />
+1.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;&lt;--&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;&lt;--&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;&lt;--&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;Procedure&#39;&nbsp;&lt;--&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+这里我给出的是一些能反映存储过程特性的子句。子句内容在括号之后，主体之前。这些子句都是可选的，他们有什么作用呢？&nbsp;<br />
+<br />
+2.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;&lt;--&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;Procedure&#39;&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+很好，这个LANGUAGE&nbsp;SQL子句是没有作用的。仅是为了说明下面过程的主体使用SQL语言编写。这条是系统默认的，但你在这里声明是有用的，因为某些DBMS（IBM的DB2）需要它，如果你关注DB2的兼容问题最好还是用上。此外，今后可能会出现除SQL外的其他语言支持的存储过程。&nbsp;<br />
+<br />
+3.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;&lt;--&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;Procedure&#39;&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+下一个子句，NOT&nbsp;DETERMINISTIC，是传递给系统的信息。这里一个确定过程的定义就是那些每次输入一样输出也一样的程序。在这个案例中，既然主体中含有SELECT语句，那返回肯定是未知的因此我们称其NOT&nbsp;DETERMINISTIC。但是MySQL内置的优化程序不会注意这个，至少在现在不注意。&nbsp;<br />
+<br />
+4.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;&lt;--&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;Procedure&#39;&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+下一个子句是SQL&nbsp;SECURITY，可以定义为SQL&nbsp;SECURITY&nbsp;DEFINER或SQL&nbsp;SECURITY&nbsp;INVOKER。&nbsp;<br />
+<br />
+这就进入了权限控制的领域了，当然我们在后面将会有测试权限的例子。&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+<br />
+意味着在调用时检查创建过程用户的权限（另一个选项是SQLSECURITY&nbsp;INVOKER）。&nbsp;<br />
+<br />
+现在而言，使用&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+指令告诉MySQL服务器检查创建过程的用户就可以了，当过程已经被调用，就不检查执行调用过程的用户了。而另一个选项（INVOKER）则是告诉服务器在这一步仍然要检查调用者的权限。&nbsp;<br />
+<br />
+5.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;Procedure&#39;&nbsp;&lt;--&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;A&nbsp;procedure&#39;&nbsp;<br />
+<br />
+是一个可选的注释说明。&nbsp;<br />
+<br />
+最后，注释子句会跟过程定义存储在一起。这个没有固定的标准，我在文中会指出没有固定标准的语句，不过幸运的是这些在我们标准的SQL中很少。&nbsp;<br />
+<br />
+6.&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;<br />
+<br />
+NOT&nbsp;DETERMINISTIC&nbsp;<br />
+<br />
+SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;<br />
+<br />
+COMMENT&nbsp;&#39;&#39;&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+上面过程跟下面语句是等效的：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p2&nbsp;()&nbsp;<br />
+<br />
+SELECT&nbsp;CURRENT_DATE,&nbsp;RAND()&nbsp;FROM&nbsp;t&nbsp;//&nbsp;<br />
+<br />
+特征子句也有默认值，如果省略了就相当于：&nbsp;<br />
+<br />
+LANGUAGE&nbsp;SQL&nbsp;NOT&nbsp;DETERMINISTIC&nbsp;SQL&nbsp;SECURITY&nbsp;DEFINER&nbsp;COMMENT&nbsp;&#39;&#39;&nbsp;<br />
+<br />
+Digressions一些题外话&nbsp;<br />
+<br />
+Digression:&nbsp;<br />
+<br />
+调用p2()//的结果&nbsp;<br />
+<br />
+mysql&gt;&nbsp;call&nbsp;p2()&nbsp;//&nbsp;<br />
+<br />
++--------------+-----------------+&nbsp;<br />
+<br />
+|&nbsp;CURRENT_DATE&nbsp;|&nbsp;RAND()&nbsp;|&nbsp;<br />
+<br />
++--------------+-----------------+&nbsp;<br />
+<br />
+|&nbsp;2004-11-09&nbsp;|&nbsp;0.7822275075896&nbsp;|&nbsp;<br />
+<br />
++--------------+-----------------+&nbsp;<br />
+<br />
+1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.26&nbsp;sec)&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.26&nbsp;sec)&nbsp;<br />
+<br />
+当调用过程p2时，一个SELECT语句被执行返回我们期望获得的随机数。&nbsp;<br />
+<br />
+Digression:&nbsp;sql_mode&nbsp;unchanging&nbsp;<br />
+<br />
+不会改变的&nbsp;<br />
+<br />
+sql_mode&nbsp;<br />
+<br />
+mysql&gt;&nbsp;set&nbsp;sql_mode=&#39;ansi&#39;&nbsp;//&nbsp;<br />
+<br />
+mysql&gt;&nbsp;create&nbsp;procedure&nbsp;p3()select&#39;a&#39;||&#39;b&#39;//&nbsp;<br />
+<br />
+mysql&gt;&nbsp;set&nbsp;sql_mode=&#39;&#39;//&nbsp;<br />
+<br />
+mysql&gt;&nbsp;call&nbsp;p3()//&nbsp;<br />
+<br />
++------------+&nbsp;<br />
+<br />
+|&nbsp;&#39;a&#39;&nbsp;||&nbsp;&#39;b&#39;&nbsp;|&nbsp;<br />
+<br />
++------------+&nbsp;<br />
+<br />
+|&nbsp;ab&nbsp;|&nbsp;<br />
+<br />
++------------+&nbsp;<br />
+<br />
+MySQL在过程创建时会自动保持运行环境。例如：我们需要使用两条竖线来连接字符串但是这只有在sql&nbsp;mode为ansi的时候才合法。如果我们将sql&nbsp;mode改为non-ansi，不用担心，它仍然能工作，只要它第一次使用时能正常工作。&nbsp;<br />
+<br />
+Exercise&nbsp;练习&nbsp;<br />
+<br />
+Question&nbsp;<br />
+<br />
+问题&nbsp;<br />
+<br />
+如果你不介意练习一下的话，试能否不看后面的答案就能处理这些请求。&nbsp;<br />
+<br />
+创建一个过程，显示`Hello&nbsp;world`。用大约5秒时间去思考这个问题，既然你已经学到了这里，这个应该很简单。当你思考问题的时候，我们再随机选择一些刚才讲过的东西复习：&nbsp;<br />
+<br />
+DETERMINISTIC&nbsp;<br />
+<br />
+（确定性）子句是反映输出和输入依赖特性的子句&hellip;调用过程使用CALL过程名（参数列表）方式。好了，我猜时间也到了。&nbsp;<br />
+<br />
+Answer&nbsp;<br />
+<br />
+答案&nbsp;<br />
+<br />
+好的，答案就是在过程体中包含&nbsp;<br />
+<br />
+&quot;SELECT&nbsp;&#39;Hello,&nbsp;world&#39;&quot;&nbsp;<br />
+<br />
+语句&nbsp;<br />
+<br />
+MySQL&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p4&nbsp;()&nbsp;SELECT&nbsp;&#39;Hello,&nbsp;world&#39;&nbsp;//&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p4()//&nbsp;<br />
+<br />
++--------------+&nbsp;<br />
+<br />
+|&nbsp;Hello,&nbsp;world&nbsp;|&nbsp;<br />
+<br />
++--------------+&nbsp;<br />
+<br />
+|&nbsp;Hello,&nbsp;world&nbsp;|&nbsp;<br />
+<br />
++--------------+&nbsp;<br />
+<br />
+1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+Parameters&nbsp;参数&nbsp;<br />
+<br />
+让我们更进一步的研究怎么在存储过程中定义参数&nbsp;<br />
+<br />
+1.&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p5&nbsp;<br />
+<br />
+()&nbsp;...&nbsp;<br />
+<br />
+2.&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p5&nbsp;<br />
+<br />
+([IN]&nbsp;name&nbsp;data-type)&nbsp;...&nbsp;<br />
+<br />
+3.&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p5&nbsp;<br />
+<br />
+(OUT&nbsp;name&nbsp;data-type)&nbsp;...&nbsp;<br />
+<br />
+4.&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p5&nbsp;<br />
+<br />
+(INOUT&nbsp;name&nbsp;data-type)&nbsp;...&nbsp;<br />
+<br />
+回忆一下前面讲过的参数列表必须在存储过程名后的括号中。上面的第一个例子中的参数列表是空的，第二个例子中有一个输入参数。这里的词IN可选，因为默认参数为IN（input）。&nbsp;<br />
+<br />
+<br />
+第三个例子中有一个输出参数，第四个例子中有一个参数，既能作为输入也可以作为输出。&nbsp;<br />
+<br />
+IN&nbsp;example&nbsp;输入的例子&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p5(p&nbsp;INT)&nbsp;SET&nbsp;@x&nbsp;=&nbsp;p&nbsp;//&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p5(12345)//&nbsp;<br />
+<br />
+Query&nbsp;OK,&nbsp;0&nbsp;rows&nbsp;affected&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+mysql&gt;&nbsp;SELECT&nbsp;@x//&nbsp;<br />
+<br />
++-------+&nbsp;<br />
+<br />
+|&nbsp;@x&nbsp;|&nbsp;<br />
+<br />
++-------+&nbsp;<br />
+<br />
+|&nbsp;12345&nbsp;|&nbsp;<br />
+<br />
++-------+&nbsp;<br />
+<br />
+1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)&nbsp;<br />
+<br />
+这个IN的例子演示的是有输入参数的过程。在过程体中我将会话变量x设定为参数p的值。然后调用过程，将12345传入参数p。选择显示会话变量@x，证明我们已经将参数值12345传入。&nbsp;<br />
+<br />
+OUT&nbsp;example&nbsp;输出的例子&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CREATE&nbsp;PROCEDURE&nbsp;p6&nbsp;(OUT&nbsp;p&nbsp;INT)&nbsp;<br />
+<br />
+-&gt;&nbsp;SET&nbsp;p&nbsp;=&nbsp;-5&nbsp;//&nbsp;<br />
+<br />
+mysql&gt;&nbsp;CALL&nbsp;p6(@y)//&nbsp;<br />
+<br />
+mysql&gt;&nbsp;SELECT&nbsp;@y//&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+|&nbsp;@y&nbsp;|&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+|&nbsp;-5&nbsp;|&nbsp;<br />
+<br />
++------+&nbsp;<br />
+<br />
+这是另一个例子。这次的p是输出参数，然后在过程调用中将p的值传入会话变量@y中。&nbsp;<br />
+<br />
+在过程体中，我们给参数赋值-5，在调用后我们可以看出，OUT是告诉DBMS值是从过程中传出的。&nbsp;<br />
+<br />
+同样我们可以用语句&nbsp;<br />
+<br />
+&quot;SET&nbsp;@y&nbsp;=&nbsp;-5;&quot;&nbsp;<br />
+<br />
+来达到同样的效果&nbsp;<br />
+<br />
+Compound&nbsp;Statements&nbsp;复合语句&nbsp;<br />
+<br />
+现在我们展开的详细分析一下过程体：&nbsp;<br />
+<br />
+CREATE&nbsp;PROCEDURE&nbsp;p7&nbsp;()&nbsp;<br />
+<br />
+BEGIN&nbsp;<br />
+<br />
+SET&nbsp;@a&nbsp;=&nbsp;5;&nbsp;<br />
+<br />
+SET&nbsp;@b&nbsp;=&nbsp;5;&nbsp;<br />
+<br />
+INSERT&nbsp;INTO&nbsp;t&nbsp;VALUES&nbsp;(@a);&nbsp;<br />
+<br />
+SELECT&nbsp;s1&nbsp;*&nbsp;@a&nbsp;FROM&nbsp;t&nbsp;WHERE&nbsp;s1&nbsp;&gt;=&nbsp;@b;&nbsp;<br />
+<br />
+END;&nbsp;//&nbsp;/*&nbsp;I&nbsp;won&#39;t&nbsp;CALL&nbsp;this.&nbsp;<br />
+<br />
+这个语句将不会被调用&nbsp;<br />
+<br />
+*/&nbsp;<br />
+<br />
+完成过程体的构造就是BEGIN/END块。这个BEGIN/END语句块和Pascal语言中的BEGIN/END是基本相同的，和C语言的框架是很相似的。我们可以使用块去封装多条语句。在这个例子中，我们使用了多条设定会话变量的语句，然后完成了一些insert和select语句。如果你的过程体中有多条语句，那么你就需要BEGIN/END块了。BEGIN/END块也被称为复合语句，在这里你可以进行变量定义和流程控制。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

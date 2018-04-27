@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSP程序员必备的技巧</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="JSP,程序员,必备,的,技巧,任何,Web,开发,人员," />
+  <meta name="description" content="任何Web开发人员需要必备的技巧主要有以下这些技术。 开发Web应用程序的技术已经变得更成熟、更复杂了。现在，构建一个Web应用程序不仅仅需要简单的HTML技术了。数据库访问、脚本语" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>JSP程序员必备的技巧</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：1次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="155" class="art_content">任何Web开发人员需要必备的技巧主要有以下这些技术。<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;开发Web应用程序的技术已经变得更成熟、更复杂了。现在，构建一个Web应用程序不仅仅需要简单的HTML技术了。数据库访问、脚本语言和管理都是一个Web程序员需要具备的技术。让我们来看看要成为一个市场上受欢迎的Web开发人员都需要些什么技能吧。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;自从CERN（欧洲粒子物理研究所），日内瓦附近的高能物理研究中心，在1991年发布了Web以来，Web技术已经从静态的内容和Common&nbsp;Gateway&nbsp;Interface（CGI）发展成servlet技术和JavaServer&nbsp;Pages了。然而，在这个竞争更激烈的社会中，一个Web程序员需要更多的知识。例如，如果在面试中，你提到你熟悉XML并在JNDI方面有些经验（这两种技术初看似乎同Web编程没有很紧密的关系），那么你就会给你未来的老板留下更深的印象。设想你已经了解了Java编程语言和面向对象的编程，下面还有两组技术是一个Web开发人员日常工作中所需要的。第一组包括每个Web程序员必须具备的技术。第二组包含要想成为一个高级程序员所应该掌握的技术。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;基本技能<br />
+&nbsp;&nbsp;&nbsp;&nbsp;如果想称自己是个Web开发人员，下面就是必须具备的技术。
+<h3>
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;HTML（HyperText&nbsp;Markup&nbsp;Language）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;HTML几乎是显示在浏览器上所有内容的语言。难怪HTML就好像是一个Web程序员的生存本能一样。如果你仍需要在你的HTML中查找&lt;tr&gt;或&lt;b&gt;，那么你真的需要提高你的HTML技术了。HTML的当前版本是4.01，你可以从http://www.w3.org/TR/1999/REC-html401-19991224/了解更多关于它的内容。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Servlets和JSP</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Java&nbsp;servlet技术是开发Java&nbsp;Web应用程序的主要技术。它是由Sun&nbsp;Microsystems在1996年开发的，当前的版本是2.3，但人们正在为版本2.4做准备。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JSP是servlet技术的扩展，现在的版本是1.2（2.0版将很快定下来）。有人认为JSP是servlets的替代，但实际并不是这样的。Servlets和JSP是一起用于复杂的Web应用程序的。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;用Java进行Web编程的一个好的开端就是学习servlet技术。即使你打算在你的Web应用程序中只运用JSP页面，你仍需要学习servlet技术。在更复杂的Web应用程序中，JSP页面只用于显示，而JavaBeans和自定义标签库用来嵌入商业逻辑。即：你也必须精通JavaBeans和自定义标签库。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;JavaScript</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;JavaScript是运行于所有的主要的浏览器中的脚本语言。你用JavaScript来进行客户端的编程。客户端编程中最重要的工作就是确认用户输入。运用客户端输入验证的好处是减少服务器的工作量并提高响应时间。另外，JavaScript可以用于重新定向（redirection）、cookie处理、控制applets、创建导航树、打开一个浏览器的一个新的实例、等等。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;SQL（Strutured&nbsp;Query&nbsp;Language）和JDBC（Java&nbsp;Database&nbsp;Connectivity）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;如今，大多数Web应用程序都包括访问关系数据库中的数据。作为一个Web程序员，你需要知道如何存储、得到并操作数据库中的数据。有时侯，你也需要设计数据库，构建数据库中的表和其它结构。SQL就是用来操作数据库中数据的语言。你通常需要编写SQL语句（常常是动态的），把它们传递到数据库服务器，并得到返回的数据（如果有的话）。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;运用Java语言，你需要用JDBC来帮助Web应用程序和数据库服务器进行通讯。JDBC有两部分：JDBC&nbsp;Core&nbsp;API（Application&nbsp;Programming&nbsp;Interface)和JDBC&nbsp;Optional&nbsp;Package&nbsp;API。第一组用来执行基本的数据操作，如创建一个连接或读取、更新并删除一个表中的记录。第二组提供更高级的数据库连接功能，如连接池、事务和RowSet。JDBC的当前版本是3.0，API包含在J2SE&nbsp;v.&nbsp;1.4中。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Web&nbsp;Container管理和应用程序部署</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;你的servlets和JSP页面在一个叫做servlet/JSP&nbsp;container或Web&nbsp;container的引擎中运行。你至少需要知道如何为测试以及生产运行部署你的Web资源。例如，如果你运用Tomcat，你需要了解的一件事就是如何映射配置文件（server.xml）中的应用程序，使Tomcat知道如何调用你的JSP页面。另外，你需要知道在哪里保存你的库以及如何创建应用程序部署描述符。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;XML（eXtensible&nbsp;Markup&nbsp;Language）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;XML是计算机领域中一个成功的后起之秀。由World&nbsp;Wide&nbsp;Web&nbsp;Consortium在1996年开发，XML现在已经是用于数据交换和可扩展数据结构的一个广泛的、公认的标准了。XML在Java&nbsp;Web开发中扮演着一个重要的角色。例如，每个应用程序的部署描述符都是XML格式的。而且，如果你在开发Web&nbsp;servies，你就会用到SOAP（Simple&nbsp;Object&nbsp;Access&nbsp;Protocol），它主要是基于HTTP和XML的。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;另外，在Web应用程序中，XML也可能用于存储分等级的数据。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Model&nbsp;2结构</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;这种技术在该类别中是最先进的。建议用这种结构来构建相当复杂的Java&nbsp;Web应用程序。Model&nbsp;2结构是基于Model-View-Controller设计范例的。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;高级技术</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;下面这些技术可以将你同初学者区别开来。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;JSTL（JSP&nbsp;Standard&nbsp;Tag&nbsp;Libraries）、Jakarta&nbsp;Taglibs项目和其它库</h3>
+为了加速应用程序的开发，你应该经常重用代码。简单地说，代码重用就是，如果有人已经编写了用来执行某些功能的代码，你最好就去用那些代码，而不要自己编写了。因此，JSP可以让你运用自定义标签。你可以运用几个库，最受欢迎的是Apache的Jakarta&nbsp;Taglibs项目中的库。从http://jakarta.apache.org/taglibs/index.html可以下载这个包，你在开始创建新类前，可以运用在这个包中找到的任何现成的东西。<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JSTL最近已经成为了一个标准。其它标签库可以免费或以商业方式得到。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Apache的Struts项目</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Struts是一个Apache赞助的公共资源项目，它为构建Model&nbsp;2&nbsp;Java&nbsp;Web应用程序提供了一个构架。Struts为MVC结构提供它自己的Controller组件，将EJB、JDBC和JNDI用于Model，将JSP和其它技术用于View。你可以从它的网站找到更多关于这个项目的更详细的信息：http://jakarta.apache.org/struts/index.html。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;XHTML（Extensible&nbsp;HyperText&nbsp;Markup&nbsp;Language）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;XHTML是努力将HTML和XML结合起来的一种技术。你可以把XHTML当作下一代的HTML。其当前的版本是1.0（第二版是于2002年8月1日发布的），XHTML还没有像HTML那么流行，但它在将来会发挥更重要的作用。根据Web设计专家Molly&nbsp;Holzschlag的观点，推动各个公司转向XHTML的主要原因是美国的关于公开访问（accessibility）的法律。更多关于XHTML的信息，参阅Holzschlag访谈。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;DHTML（动态HTML）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;DHTML可以允许人们在你的网站上进行更多的交互。例如，运用DHTML，当用户移动鼠标到一个链接上时，你就可以很容易地创建并显示子菜单。运用DHTML的最大的挑战是创建跨浏览器的页面。的确，在理论上，页面设计应该是由美工处理的，其中动态的HTML是通过运用一个工具而产生的。然而，一个Web程序员通常要负责集成所有的部分，如果在页面中生成的代码被破坏了，你就需要了解DHTML来修理它。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Applet&nbsp;编程</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Applets曾经在提供交互性方面很重要，尤其在DHTML出现前。现在，applets的作用被削减了，更多的程序员已经不用applets了。Microsoft决定在它的新浏览器中不为applets提供缺省的支持极大地削减了applets在Web应用程序中的作用。然而，applets并没有消亡。对于某些任务，如显示新闻标题，applets仍然是不可替代的，而且applets不会产生另人头痛的跨浏览器兼容方面的问题。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;HTTP协议</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Java&nbsp;Web程序员通常运用比HTTP更高的协议，如运用servlet和JSP&nbsp;APIs。这些APIs隐藏了HTTP协议的复杂性。因此，你仍可以构建重要的应用程序而不需要知道多少关于HTTP协议的知识。只有当你需要处理原始数据，比如将文件作为附件上载或传送时，你才需要更多关于协议的知识。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;EJB（Enterprise&nbsp;JavaBeans）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;EJB是J2EE的一部分，当可扩展性和强大性是你的Web应用程序的主要需求时，EJB就很重要。在当前规范（EJB&nbsp;2.0）中有三种类型的EJBs：会话（session）EJBs、实体（entity）EJBs和消息驱动的（message&nbsp;driven）EJBs。新的规范，2.1版，正在设计中。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;JNDI（Java&nbsp;Naming&nbsp;and&nbsp;Directory&nbsp;Interface）</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;当你在开发企业beans时，JNDI很重要，因为对一个EJB的访问是通过JNDI的命名服务完成的。运用一个命名服务来查找与一个特定名字相关的一个对象。在EJB&nbsp;context中，一个命名服务找到一个企业bean，给定这个bean的名字。因此，了解JNDI在开发一个EJB应用程序中是至关重要的。另外，JDBC可以用JNDI来访问一个关系数据库。<br />
+<h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;其它工具</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;了解在哪里可以找到特定的支持工具通常有助于的你的事业的发展。例如，如果你碰巧被分配去做关于基准的任务，那么你如果知道你可以从Apache的Jakarta&nbsp;Project下载Jmeter，你就会很高兴。另外，如果你需要以PDF格式发送输出结果，建议你从http://www.lowagie.com/iText/运用可以免费下载的Java-PDF库。Internet技术范围很广而且发展很快。这就是说，作为一个Web程序员，你应该时时留心业界出现了什么新技术，发生了什么大事。在这个方面，没有什么比Internet本身更伟大的资源了。<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;关于作者:<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Java&nbsp;for&nbsp;the&nbsp;Web<br />
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;Servlet,&nbsp;JSP,&nbsp;and&nbsp;EJB&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Budi&nbsp;Kurniawan是位IT顾问，他专门从事Internet和面向对象的编程，并教授Java和Microsoft技术。他是销量很好的Java&nbsp;for&nbsp;the&nbsp;Web&nbsp;with&nbsp;Servlets,&nbsp;JSP,&nbsp;and&nbsp;EJB:&nbsp;a&nbsp;Developer&rsquo;s&nbsp;Guide&nbsp;to&nbsp;Scalable&nbsp;Solutions&nbsp;(New&nbsp;Riders)一书的作者，他还开发了最受欢迎的Java&nbsp;Upload&nbsp;Bean，你可以从BrainySoftware.com得到它，许多重要的公司都得到许可并将它用于项目中了。Budi的联系方式是budi@brainysoftware.com。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

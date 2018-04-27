@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spring定时任务的几种实现</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Spring,定时,任务,的,几种,实现,近日,项目开发," />
+  <meta name="description" content="近日项目开发中需要执行一些定时任务，比如需要在每天凌晨时候，分析一次前一天的日志信息，借此机会整理了一下定时任务的几种实现方式，由于项目采用spring框架，所以我都将结" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring定时任务的几种实现</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：45次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="868" class="art_content"><p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	近日项目开发中需要执行一些定时任务，比如需要在每天凌晨时候，分析一次前一天的日志信息，借此机会整理了一下定时任务的几种实现方式，由于项目采用spring框架，所以我都将结合</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	spring框架来介绍。</p>
+<h2 style="line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	一．分类</h2>
+<ul style="margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<li style="margin: 0px 0px 0.25em 30px; padding: 0px;">
+		<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px;">
+			从实现的技术上来分类，目前主要有三种技术（或者说有三种产品）：</h3>
+	</li>
+</ul>
+<ol style="font-size: 14px; line-height: 1.4em; margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		Java自带的java.util.Timer类，这个类允许你调度一个java.util.TimerTask任务。使用这种方式可以让你的程序按照某一个频度执行，但不能在指定时间运行。一般用的较少，这篇文章将不做详细介绍。</li>
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		使用Quartz，这是一个功能比较强大的的调度器，可以让你的程序在指定时间执行，也可以按照某一个频度执行，配置起来稍显复杂，稍后会详细介绍。</li>
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		Spring3.0以后自带的task，可以将它看成一个轻量级的Quartz，而且使用起来比Quartz简单许多，稍后会介绍。</li>
+</ol>
+<ul style="margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<li style="margin: 0px 0px 0.25em 30px; padding: 0px;">
+		<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px;">
+			从作业类的继承方式来讲，可以分为两类：</h3>
+	</li>
+</ul>
+<ol style="font-size: 14px; line-height: 1.4em; margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		作业类需要继承自特定的作业类基类，如Quartz中需要继承自org.springframework.scheduling.quartz.QuartzJobBean；java.util.Timer中需要继承自java.util.TimerTask。</li>
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		作业类即普通的java类，不需要继承自任何基类。</li>
+</ol>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	注:个人推荐使用第二种方式，因为这样所以的类都是普通类，不需要事先区别对待。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<ul style="margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<li style="margin: 0px 0px 0.25em 30px; padding: 0px;">
+		<h5 style="font-size: 1.1em; line-height: 1.3em; margin: 0px 0px 0.25em; padding: 0px;">
+			从任务调度的触发时机来分，这里主要是针对作业使用的触发器，主要有以下两种：</h5>
+	</li>
+</ul>
+<ol style="font-size: 14px; line-height: 1.4em; margin: 0px 0px 1.5em; padding-right: 0px; padding-left: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		每隔指定时间则触发一次，在Quartz中对应的触发器为：org.springframework.scheduling.quartz.SimpleTriggerBean</li>
+	<li style="font-size: 1em; margin: 0px 0px 0.25em 30px; padding: 0px;">
+		每到指定时间则触发一次，在Quartz中对应的调度器为：org.springframework.scheduling.quartz.CronTriggerBean</li>
+</ol>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	注：并非每种任务都可以使用这两种触发器，如java.util.TimerTask任务就只能使用第一种。Quartz和spring task都可以支持这两种触发条件。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<h2 style="line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	二．用法说明</h2>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	详细介绍每种任务调度工具的使用方式，包括Quartz和spring task两种。</p>
+<h2 style="line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	Quartz</h2>
+<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	第一种，作业类继承自特定的基类：org.springframework.scheduling.quartz.QuartzJobBean。</h3>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第一步：定义作业类</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.quartz.JobExecutionContext;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.quartz.JobExecutionException;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.springframework.scheduling.quartz.QuartzJobBean;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&nbsp;Job1&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">extends</span>&nbsp;QuartzJobBean&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">private</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">int</span>&nbsp;timeout;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">private</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">static</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">int</span>&nbsp;i&nbsp;=&nbsp;<span class="number" style="color: rgb(192, 0, 0);">0</span>;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">//调度工厂实例化后，经过timeout时间开始执行调度</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;setTimeout(<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">int</span>&nbsp;timeout)&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">this</span>.timeout&nbsp;=&nbsp;timeout;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">/**</span>&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">*&nbsp;要调度的具体任务</span>&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="comment" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">*/</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Override</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">protected</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;executeInternal(JobExecutionContext&nbsp;context)&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">throws</span>&nbsp;JobExecutionException&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;System.out.println(<span class="string" style="color: blue;">&quot;定时任务执行中&hellip;&quot;</span>);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>&nbsp;第二步：spring配置文件中配置作业类JobDetailBean</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;job1&quot;</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.JobDetailBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobClass&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;com.gy.Job1&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobDataAsMap&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">map</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">entry</span>&nbsp;<span class="attribute" style="color: red;">key</span>=<span class="attribute-value" style="color: blue;">&quot;timeout&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;0&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">map</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;说明：org.springframework.scheduling.quartz.JobDetailBean有两个属性，jobClass属性即我们在java代码中定义的任务类，jobDataAsMap属性即该任务类中需要注入的属性值。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第三步：配置作业调度的触发方式（触发器）</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	Quartz的作业触发器有两种，分别是</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.quartz.SimpleTriggerBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.quartz.CronTriggerBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	第一种SimpleTriggerBean，只支持按照一定频度调用任务，如每隔30分钟运行一次。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	配置方式如下：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;simpleTrigger&quot;</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.SimpleTriggerBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobDetail&quot;</span>&nbsp;<span class="attribute" style="color: red;">ref</span>=<span class="attribute-value" style="color: blue;">&quot;job1&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;startDelay&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;0&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span><span class="comments" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">&lt;!--&nbsp;调度工厂实例化后，经过0秒开始执行调度&nbsp;--&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;repeatInterval&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;2000&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span><span class="comments" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">&lt;!--&nbsp;每2秒调度一次&nbsp;--&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	第二种CronTriggerBean，支持到指定时间运行一次，如每天12:00运行一次等。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	配置方式如下：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;cronTrigger&quot;</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.CronTriggerBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobDetail&quot;</span>&nbsp;<span class="attribute" style="color: red;">ref</span>=<span class="attribute-value" style="color: blue;">&quot;job1&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!&mdash;每天12:00运行一次&nbsp;--<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;cronExpression&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;0&nbsp;0&nbsp;12&nbsp;*&nbsp;*&nbsp;?&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;关于cronExpression表达式的语法参见附录。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第四步：配置调度工厂&nbsp;</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.SchedulerFactoryBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;triggers&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">list</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">ref</span>&nbsp;<span class="attribute" style="color: red;">bean</span>=<span class="attribute-value" style="color: blue;">&quot;cronTrigger&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">list</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;说明：该参数指定的就是之前配置的触发器的名字。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第五步：启动你的应用即可，即将工程部署至tomcat或其他容器。</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	第二种，作业类不继承特定基类。</h3>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	Spring能够支持这种方式，归功于两个类：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	这两个类分别对应spring支持的两种实现任务调度的方式，即前文提到到java自带的timer task方式和Quartz方式。这里我只写MethodInvokingJobDetailFactoryBean的用法，使用该类的好处是,我们的任务类不再需要继承自任何类，而是普通的pojo。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第一步：编写任务类</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&nbsp;Job2&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;doJob2()&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">System.out.println(<span class="string" style="color: blue;">&quot;不继承QuartzJobBean方式-调度进行中...&quot;</span>);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;可以看出，这就是一个普通的类，并且有一个方法。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第二步：配置作业类</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;job2&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;targetObject&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;com.gy.Job2&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;targetMethod&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;doJob2&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;concurrent&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;false&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span><span class="comments" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">&lt;!--&nbsp;作业不并发调度&nbsp;--&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;说明：这一步是关键步骤，声明一个MethodInvokingJobDetailFactoryBean，有两个关键属性：targetObject指定任务类，targetMethod指定运行的方法。往下的步骤就与方法一相同了，为了完整，同样贴出。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第三步：配置作业调度的触发方式（触发器）</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	Quartz的作业触发器有两种，分别是</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.quartz.SimpleTriggerBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	org.springframework.scheduling.quartz.CronTriggerBean</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	第一种SimpleTriggerBean，只支持按照一定频度调用任务，如每隔30分钟运行一次。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	配置方式如下：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;simpleTrigger&quot;</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.SimpleTriggerBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobDetail&quot;</span>&nbsp;<span class="attribute" style="color: red;">ref</span>=<span class="attribute-value" style="color: blue;">&quot;job2&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;startDelay&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;0&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span><span class="comments" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">&lt;!--&nbsp;调度工厂实例化后，经过0秒开始执行调度&nbsp;--&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;repeatInterval&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;2000&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span><span class="comments" style="color: rgb(0, 130, 0); padding: 0px; margin: 0px; width: auto; border: 0px;">&lt;!--&nbsp;每2秒调度一次&nbsp;--&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;第二种CronTriggerBean，支持到指定时间运行一次，如每天12:00运行一次等。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	配置方式如下：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;cronTrigger&quot;</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.CronTriggerBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;jobDetail&quot;</span>&nbsp;<span class="attribute" style="color: red;">ref</span>=<span class="attribute-value" style="color: blue;">&quot;job2&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!&mdash;每天12:00运行一次&nbsp;--<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;cronExpression&quot;</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">&quot;0&nbsp;0&nbsp;12&nbsp;*&nbsp;*&nbsp;?&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	以上两种调度方式根据实际情况，任选一种即可。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第四步：配置调度工厂&nbsp;</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span>&nbsp;<span class="attribute" style="color: red;">class</span>=<span class="attribute-value" style="color: blue;">&quot;org.springframework.scheduling.quartz.SchedulerFactoryBean&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">&quot;triggers&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">list</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">ref</span>&nbsp;<span class="attribute" style="color: red;">bean</span>=<span class="attribute-value" style="color: blue;">&quot;cronTrigger&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">list</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">property</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">bean</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：该参数指定的就是之前配置的触发器的名字。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第五步：启动你的应用即可，即将工程部署至tomcat或其他容器。</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	到此，spring中Quartz的基本配置就介绍完了，当然了，使用之前，要导入相应的spring的包与Quartz的包，这些就不消多说了。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	其实可以看出Quartz的配置看上去还是挺复杂的，没有办法，因为Quartz其实是个重量级的工具，如果我们只是想简单的执行几个简单的定时任务，有没有更简单的工具，有！</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	请看我第下文Spring task的介绍。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<h2 style="line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	Spring-Task</h2>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	上节介绍了在Spring 中使用Quartz，本文介绍Spring3.0以后自主开发的定时任务工具，spring task，可以将它比作一个轻量级的Quartz，而且使用起来很简单，除spring相关的包外不需要额外的包，而且支持注解和配置文件两种</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	形式，下面将分别介绍这两种方式。</p>
+<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	第一种：配置文件方式</h3>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第一步：编写作业类</strong></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	即普通的pojo，如下：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.springframework.stereotype.Service;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Service</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&nbsp;TaskJob&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;job1()&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&ldquo;任务进行中。。。&rdquo;);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>&nbsp;第二步：在spring配置文件头中添加命名空间及描述</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">beans</span>&nbsp;<span class="attribute" style="color: red;">xmlns</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/beans&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xmlns:task</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/task&quot;</span>&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;。。。。。。&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xsi:schemaLocation</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/task&nbsp;http://www.springframework.org/schema/task/spring-task-3.0.xsd&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>&nbsp;第三步：spring配置文件中设置具体的任务</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">task:scheduled-tasks</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">task:scheduled</span>&nbsp;<span class="attribute" style="color: red;">ref</span>=<span class="attribute-value" style="color: blue;">&quot;taskJob&quot;</span>&nbsp;<span class="attribute" style="color: red;">method</span>=<span class="attribute-value" style="color: blue;">&quot;job1&quot;</span>&nbsp;<span class="attribute" style="color: red;">cron</span>=<span class="attribute-value" style="color: blue;">&quot;0&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;?&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;/</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">task:scheduled-tasks</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">context:component-scan</span>&nbsp;<span class="attribute" style="color: red;">base-package</span>=<span class="attribute-value" style="color: blue;">&quot;&nbsp;com.gy.mytask&nbsp;&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：ref参数指定的即任务类，method指定的即需要运行的方法，cron及cronExpression表达式，具体写法这里不介绍了，详情见上篇文章附录。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&lt;context:component-scan base-package=&quot;com.gy.mytask&quot; /&gt;这个配置不消多说了，spring扫描注解用的。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	到这里配置就完成了，是不是很简单。</p>
+<h3 style="font-size: 1.2em; line-height: 1.5em; margin: 0px 0px 0.5em; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	第二种：使用注解形式</h3>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	也许我们不想每写一个任务类还要在xml文件中配置下，我们可以使用注解@Scheduled，我们看看源文件中该注解的定义：</p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Target</span>({java.lang.annotation.ElementType.METHOD,&nbsp;java.lang.annotation.ElementType.ANNOTATION_TYPE})&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Retention</span>(RetentionPolicy.RUNTIME)&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Documented</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">@interface</span>&nbsp;Scheduled&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">abstract</span>&nbsp;String&nbsp;cron();&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">abstract</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">long</span>&nbsp;fixedDelay();&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">abstract</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">long</span>&nbsp;fixedRate();&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;可以看出该注解有三个方法或者叫参数，分别表示的意思是：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	cron：指定cron表达式</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	fixedDelay：官方文档解释：An interval-based trigger where the interval is measured from the completion time of the previous task. The time unit value is measured in milliseconds.即表示从上一个任务完成开始到下一个任务开始的间隔，单位是毫秒。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	fixedRate：官方文档解释：An interval-based trigger where the interval is measured from the start time of the previous task. The time unit value is measured in milliseconds.即从上一个任务开始到下一个任务开始的间隔，单位是毫秒。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	下面我来配置一下。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>第一步：编写pojo</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Java代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-j" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.springframework.scheduling.annotation.Scheduled;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">import</span>&nbsp;org.springframework.stereotype.Component;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="annotation" style="color: rgb(100, 100, 100);">@Component</span>(&ldquo;taskJob&rdquo;)&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">class</span>&nbsp;TaskJob&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color: rgb(100, 100, 100);">@Scheduled</span>(cron&nbsp;=&nbsp;<span class="string" style="color: blue;">&quot;0&nbsp;0&nbsp;3&nbsp;*&nbsp;*&nbsp;?&quot;</span>)&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: rgb(127, 0, 85); font-weight: bold;">void</span>&nbsp;job1()&nbsp;{&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&ldquo;任务进行中。。。&rdquo;);&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">}&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<strong>&nbsp;第二步：添加task相关的配置：</strong></p>
+<div class="dp-highlighter" id="" style="font-family: Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace; width: 679px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; color: rgb(0, 0, 0); line-height: 25.2000007629395px;">
+	<div class="bar">
+		<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">
+			Xml代码&nbsp;&nbsp;<a style="color: rgb(16, 138, 198); text-decoration: underline;" title="收藏这段代码"><img alt="收藏代码" class="star" src="/uploads/allimg/150522/1K2554645-0.png" style="border: 0px;" /></a></div>
+	</div>
+	<ol class="dp-xml" start="1" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid rgb(209, 215, 220); color: rgb(43, 145, 175);">
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;?</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">xml</span>&nbsp;<span class="attribute" style="color: red;">version</span>=<span class="attribute-value" style="color: blue;">&quot;1.0&quot;</span>&nbsp;<span class="attribute" style="color: red;">encoding</span>=<span class="attribute-value" style="color: blue;">&quot;UTF-8&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">?&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;"><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">beans</span>&nbsp;<span class="attribute" style="color: red;">xmlns</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/beans&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xmlns:xsi</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&nbsp;<span class="attribute" style="color: red;">xmlns:aop</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/aop&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xmlns:context</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/context&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xmlns:tx</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/tx&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xmlns:task</span>=<span class="attribute-value" style="color: blue;">&quot;http://www.springframework.org/schema/task&quot;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">xsi:schemaLocation</span>=&quot;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.springframework.org/schema/beans&nbsp;http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.springframework.org/schema/aop&nbsp;http://www.springframework.org/schema/aop/spring-aop-3.0.xsd&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.springframework.org/schema/context&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.springframework.org/schema/tx&nbsp;http://www.springframework.org/schema/tx/spring-tx-3.0.xsd&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.springframework.org/schema/task&nbsp;http://www.springframework.org/schema/task/spring-task-3.0.xsd&quot;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute" style="color: red;">default-lazy-init</span>=<span class="attribute-value" style="color: blue;">&quot;false&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">context:annotation-config</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!&mdash;spring扫描注解的配置&nbsp;&nbsp;&nbsp;--<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">context:component-scan</span>&nbsp;<span class="attribute" style="color: red;">base-package</span>=<span class="attribute-value" style="color: blue;">&quot;com.gy.mytask&quot;</span>&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&lt;!&mdash;开启这个配置，spring才能识别@Scheduled注解&nbsp;&nbsp;&nbsp;--<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">task:annotation-driven</span>&nbsp;<span class="attribute" style="color: red;">scheduler</span>=<span class="attribute-value" style="color: blue;">&quot;qbScheduler&quot;</span>&nbsp;<span class="attribute" style="color: red;">mode</span>=<span class="attribute-value" style="color: blue;">&quot;proxy&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+		<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(209, 215, 220); line-height: 18px; background-color: rgb(250, 250, 250);">
+			<span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">&lt;</span><span class="tag-name" style="color: rgb(0, 102, 153); font-weight: bold;">task:scheduler</span>&nbsp;<span class="attribute" style="color: red;">id</span>=<span class="attribute-value" style="color: blue;">&quot;qbScheduler&quot;</span>&nbsp;<span class="attribute" style="color: red;">pool-size</span>=<span class="attribute-value" style="color: blue;">&quot;10&quot;</span><span class="tag" style="color: rgb(0, 102, 153); font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	说明：理论上只需要加上&lt;task:annotation-driven /&gt;这句配置就可以了，这些参数都不是必须的。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;Ok配置完毕，当然spring task还有很多参数，我就不一一解释了，具体参考xsd文档http://www.springframework.org/schema/task/spring-task-3.0.xsd。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>附录：</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>cronExpression的配置说明，具体使用以及参数请百度google</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>字段 &nbsp; 允许值 &nbsp; 允许的特殊字符</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>秒 &nbsp; &nbsp;0-59 &nbsp; &nbsp;, - * /</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>分 &nbsp; &nbsp;0-59 &nbsp; &nbsp;, - * /</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>小时 &nbsp; &nbsp;0-23 &nbsp; &nbsp;, - * /</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>日期 &nbsp; &nbsp;1-31 &nbsp; &nbsp;, - * ? / L W C</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>月份 &nbsp; &nbsp;1-12 或者 JAN-DEC &nbsp; &nbsp;, - * /</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>星期 &nbsp; &nbsp;1-7 或者 SUN-SAT &nbsp; &nbsp;, - * ? / L C #</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>年（可选） &nbsp; &nbsp;留空, 1970-2099 &nbsp; &nbsp;, - * /&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>- 区间 &nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>* 通配符 &nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>? 你不想设置那个字段</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>下面只例出几个式子</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>CRON表达式 &nbsp; &nbsp;含义&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 0 12 * * ?&quot; &nbsp; &nbsp;每天中午十二点触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 15 10 ? * *&quot; &nbsp; &nbsp;每天早上10：15触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 15 10 * * ?&quot; &nbsp; &nbsp;每天早上10：15触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 15 10 * * ? *&quot; &nbsp; &nbsp;每天早上10：15触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 15 10 * * ? 2005&quot; &nbsp; &nbsp;2005年的每天早上10：15触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 * 14 * * ?&quot; &nbsp; &nbsp;每天从下午2点开始到2点59分每分钟一次触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 0/5 14 * * ?&quot; &nbsp; &nbsp;每天从下午2点开始到2：55分结束每5分钟一次触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 0/5 14,18 * * ?&quot; &nbsp; &nbsp;每天的下午2点至2：55和6点至6点55分两个时间段内每5分钟一次触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 0-5 14 * * ?&quot; &nbsp; &nbsp;每天14:00至14:05每分钟一次触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 10,44 14 ? 3 WED&quot; &nbsp; &nbsp;三月的每周三的14：10和14：44触发&nbsp;</em></p>
+<p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.2000007629395px;">
+	<em>&quot;0 15 10 ? * MON-FRI&quot; &nbsp; &nbsp;每个周一、周二、周三、周四、周五的10：15触发&nbsp;</em></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

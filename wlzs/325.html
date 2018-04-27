@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TP-Link 无线路由器设置图文教程 怎么设置TP-Link无线路由器图解</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="无线路由器,有线路由器" />
+  <meta name="description" content=" 如何设置无线路由器？WAN口和LAN口是关键 接触过宽带路由器的用户，大都了解宽带路由器上的端口有WAN口和LAN口之分。宽带路由器在工作过程中有这样一个特点：从LAN到WAN方向上的数据" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>TP-Link 无线路由器设置图文教程 怎么设置TP-Link无线路由器图解</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：1704次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="325" class="art_content"><p>
+	无线路由器的基础配置&nbsp;<br />
+	<br />
+	在我们第一次配置无线宽带路由器时，参照说明书找到无线宽带路由器默认的IP地址是192.168.1.1，默认子网掩码是255.255.255.0&nbsp;<br />
+	<br />
+	由于TP-LINK TL-WR541G的配置界面是基于浏览器的，所以我们要先建立正确的网络设置，我们已经将电脑A通过网卡连接到了无线宽带路由器的局域网端口，接下来我们有两种方法为电脑A设置IP地址。&nbsp;<br />
+	<br />
+	1、设置电脑A的IP地址为192.168.1.xxx（xxx范围是2至254）,例如我们可以输入192.168.1.6，子网掩码是255.255.255.0，默认网关为192.168.1.1。&nbsp;<br />
+	<br />
+	2、设置电脑A的TCP/IP协议为&ldquo;自动获取IP地址&rdquo;，然后关闭无线宽带路由器和电脑A的电源，首先打开无线宽带路由器电源，然后再启动电脑A，这样无线宽带路由器内置的DHCP服务器将自动为电脑A设置IP地址。&nbsp;<br />
+	<br />
+	在完成上面的步骤后，我们使用电脑A，打开一个IE浏览器的窗口，在地址栏上输入http://192.168.1.1(输入密码默认是admin,admin)即可进入配置界面。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0224527-0.gif" title="在新窗口打开图片" /></p>
+<p>
+	　　这个不必介绍了吧，登录后的初时界面，呵呵</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0224534-1.gif" /></p>
+<p>
+	　　登陆之后首先运行设置向导，我已经把登陆运行向导功能关闭，大家可以在左边栏点击设置向导。点击下一步出现如下图所示</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0223c9-2.gif" /></p>
+<p>
+	　　由于本人现在是在办公室，属于在局域网内建设局域网（道理一样），所以先介绍静态ip的设置。点击下一步出现如下图格式</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022OA-3.gif" /></p>
+<p>
+	　　大家现在可以设置你的外网IP等信息，这个仅供有固定ip用户使用</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0225N1-4.gif" /></p>
+<p>
+	　　如果大家在上面选择的是pppoe设置（宽带拨号），则会弹出如上图的窗口，把你的帐号和pw输入点击下一步即可</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0221062-5.gif" /></p>
+<p>
+	　　经过以上的设置之后，在前两个步骤点击下一步（如果选择的是动态ip则直接跳转到这里）都会跳转到如上图的窗口。在这里我们可以选择路由是否开启无线状态，默认是开启的。SSID是无线局域网用于身份验证的登录名，只有通过身份验证的用户才可以访问本无线网络</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0225201-6.gif" /></p>
+<p>
+	　　在模式这里可以选择带宽设置有11m、54m和108m共四个选项，只有11m和54m可以选择频段，共有1－13个频段供选择，可以有效的避免近距离的重复频段。</p>
+<p>
+	　　大家应该发现了108m模式有两个，一个是Static模式，另外一个是Dynamic模式。二者一个为静态的一个为动态的，注意如果选择了静态108m模式，必须是支持速展tm功能的无线网卡才可以连接，建议选择动态或54m自适应</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G02244W-7.gif" /></p>
+<p>
+	　　晚成后会出现如上图的所示，点击完成。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022B92-8.gif" /></p>
+<p>
+	　　现在进入了网络参数设置的LAN口设置即你想组建的局域网网段，IP地址即你将要使用的网关</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0223042-9.gif" /></p>
+<p>
+	　　IP地址设置好后，子网掩码有255.255.255.0和255.255.0.0可以选择.</p>
+<p>
+	　　如果选择了255.255.255.0的话，最多可以使用254个ip地址，按照我设置的ip地址项表述的话就是100.100.100.1-100.100.100.254可以使用，但是路由器本身占用了.1的地址，所以只有253个。</p>
+<p>
+	　　如果选择的是255.255.0.0，则可以使用100.100.0.1-100.100.255.254之间的除路由器占用的.1外的任意IP地址</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022OG-10.gif" /></p>
+<p>
+	　　呵呵，这个wan口设置就是刚才咱们使用设置向导设置好的广域网（相对本局域网）信息</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G02222W-11.gif" /></p>
+<p>
+	　　大家应该看到了上图wan口连接类型有7个可供选择，根据自己的需要选择即可，有不明白的pm我</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0225B3-12.gif" /></p>
+<p>
+	　　mac地址克隆就不需要详细介绍了吧，主要是外接设备需要绑定mac的时候，才需要更改为已允许的</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0222a0-13.gif" /></p>
+<p>
+	　　这个图片是无线参数的基本设置，这里主要说明的是安全设置，当然你要开启了才可以～～HOHO</p>
+<p>
+	　　这里需要介绍的知识比较多，等有时间了整理。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0223515-14.gif" /></p>
+<p>
+	　　在这里可以添加允许或禁止的mac地址访问本局域网络，一般的家庭用的话，主机不多，建议启用允许列表即可，记得添加允许的mac啊</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0222F9-15.gif" /></p>
+<p>
+	　　无论上一步选择的是允许还是禁止列表中的添加都会转到如上图的窗口，并且可以在这里设置是允许的还是禁止的，可以选择生效或失效，呵呵</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0222051-16.gif" /></p>
+<p>
+	　　这里就不需要说明了，主要显示连接到本路由器的电脑等设备的信息以及数据包大小</p>
+<p>
+	<br />
+	<br />
+	下面给大家介绍<a href="http://www.jb51.net/softjc/40807.html" target="_blank">tp link无线路由器设置</a>，示例中是以全新路由器进行演示的，如果不确定路由器之前是否被设置过，那么建议对TP-Link无线路由器进行复位操作。</p>
+<p>
+	&nbsp;</p>
+<p>
+	　　TP-Link无线路由器正确的复位方法：请在路由器通电的情况下，按住后面板上标识为QSS/RESET的按钮，持续5秒钟以上，保持按压的同时观察SYS灯，当SYS灯由缓慢闪烁变为快速闪烁状态时，表示路由器已成功恢复出厂设置，此时松开该按钮，路由器将重启。</p>
+<p>
+	　　一、硬件连接</p>
+<p>
+	　　1、用网线将计算机直接连接到路由器LAN口。也可以将路由器的LAN口和局域网中的集线器或交换机通过网线相连，如下图 所示。</p>
+<p>
+	　　2、用网线将路由器WAN口和xDSL/Cable Modem或以太网相连，如下图 所示。</p>
+<p>
+	　　3、连接好电源，路由器将自行启动。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G02229C-17.png" title="在新窗口打开图片" /></p>
+<p>
+	　　二、建立正确的网络连接</p>
+<p>
+	　　1、计算机IP地址的设置</p>
+<p>
+	　　右键点击桌面上的&ldquo;网上邻居&rdquo;图标，选择属性，在打开的&ldquo;网络连接&rdquo;页面中，右键点击&ldquo;本地连接&rdquo;，选择属性，在打开的&ldquo;本地连接 属性&rdquo;页面，选中&ldquo;Intelnet 协议(TCP/IP)&rdquo;点击属性，在&ldquo;Intelnet 协议(TCP/IP) 属性&rdquo;页面，选中&ldquo;自动获取IP地址&rdquo;后点击确定即可。具体的详细设置步骤图解参考：<a href="http://www.jb51.net/softjc/39398.html" target="_blank">fast无线路由器设置</a></p>
+<p>
+	　　2、使用Ping命令测试与路由器的连通</p>
+<p>
+	　　在Windows XP 环境中，点击开始－运行，在随后出现的运行窗口输入&ldquo;cmd&rdquo;命令，回车或点击确定进入下图所示界面。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022K63-18.jpg" title="在新窗口打开图片" /></p>
+<p>
+	　　输入命令：Ping 192.168.1.1，回车。</p>
+<p>
+	　　如果屏幕显示为：</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0224296-19.jpg" /></p>
+<p>
+	　　计算机已与路由器成功建立连接。</p>
+<p>
+	　　如果屏幕显示为：</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0221159-20.jpg" title="" /></p>
+<p>
+	　　这说明设备还未安装好，请按照下列顺序检查：</p>
+<p>
+	　　1、硬件连接是否正确？</p>
+<p>
+	　　路由器面板上对应局域网端口的Link/Act 指示灯和计算机上的网卡指示灯必须亮。</p>
+<p>
+	　　2、 计算机的TCP/IP 设置是否正确？</p>
+<p>
+	　　若计算机的IP 地址为前面介绍的自动获取方式，则无须进行设置。若手动设置IP，请注意如果路由器的IP 地址为192.168.1.1，那么计算机IP 地址必须为192.168.1.X（X 是2 到254之间的任意整数），子网掩码须设置为255.255.255.0，默认网关须设置为192.168.1.1。</p>
+<p>
+	　　三、TP-Link无线路由器的快速设置</p>
+<p>
+	　　打开网页浏览器，在浏览器的地址栏中输入路由器的IP地址：192.168.1.1，将会看到下图所示登录界面，输入用户名和密码（用户名和密码的出厂默认值均为admin），点击确定按钮。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0225191-21.jpg" title="" /></p>
+<p>
+	　　浏览器会弹出如下图所示的设置向导页面。如果没有自动弹出此页面，可以点击页面左侧的设置向导菜单将它激活。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022H18-22.jpg" title="" /></p>
+<p>
+	　　点击下一步，进入下图 所示的上网方式选择页面，这里根据我们的上网方式进行选择，一般家庭宽带用户是pppoe拨号用户。这里我们选择第一项让路由器自动选择。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022CZ-23.jpg" title="" /></p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G0226012-24.jpg" title="" /></p>
+<p>
+	　　设置完成后，点击下一步，将看到如下图 所示的基本无线网络参数设置页面。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G022F52-25.jpg" title="" /></p>
+<p>
+	　　无线状态：开启或者关闭路由器的无线功能</p>
+<p>
+	　　SSID：设置任意一个字符串来标识无线网络</p>
+<p>
+	　　信道：设置路由器的无线信号频段，推荐选择自动</p>
+<p>
+	　　模式：设置路由器的无线工作模式，推荐使用11bgn mixed 模式</p>
+<p>
+	　　频段带宽：设置无线数据传输时所占用的信道宽度，可选项有：20M、40M 和自动</p>
+<p>
+	　　最大发送速率：设置路由器无线网络的最大发送速率</p>
+<p>
+	　　关闭无线安全：关闭无线安全功能，即不对路由器的无线网络进行加密，此时其他人均可以加入该无线网络。</p>
+<p>
+	　　WPA-PSK/WPA2-PSK：路由器无线网络的加密方式，如果选择了该项，请在PSK 密码中输入密码，密码要求为8-63 个ASCII 字符或8-64 个16 进制字符。</p>
+<p>
+	　　不修改无线安全设置：选择该项，则无线安全选项中将保持上次设置的参数。如果从未更改过无线安全设置，则选择该项后，将保持出厂默认设置关闭无线安全。</p>
+<p>
+	　　设置完成后，单击下一步，将弹出下图所示的设置向导完成界面，单击重启使无线设置生效。</p>
+<p>
+	<img alt="" src="/uploads/allimg/150328/1G02235U-26.jpg" title="" /></p>
+<p>
+	　　重启以后我们的TP-Link无线路由器的基本设置就完成了。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

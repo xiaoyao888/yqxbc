@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>在tomcat中实现https安全连接的方法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="tomcat,安全连接,在tomcat中实" />
+  <meta name="description" content="SSL简介 SSL, 或者Secure Socket Layer，是一种允许web浏览器和web服务器通过一个安全的连接进行交流的技术。这意味着将被发送的数据在一端被翻译成密码，传送出去，然后在另一端解开密码" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>在tomcat中实现https安全连接的方法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：30次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="667" class="art_content"><p>
+	SSL简介<br />
+	SSL, 或者Secure Socket Layer，是一种允许web浏览器和web服务器通过一个安全的连接进行交流的技术。这意味着将被发送的数据在一端被翻译成密码，传送出去，然后在另一端解开密码，再进行处理。这是一个双向的过程，也就是浏览器和服务器都需要在发送数据之前对它们进行加密。<br />
+	SSL协定的另一个重要方面是认证(Authentication)。这就是说，在你开始试图通过一个安全连接与一个web服务器交流的时候，这个服务器会要求你的浏览器出示一组证件，通过&ldquo;鉴定&rdquo;的方式来证明这就是你所声明的网站。<br />
+	在某些情况下，服务器还会要求你的web浏览器的认证书，证明你就是你所说的那个人。这就是所知的&ldquo;客户认证&rdquo;，尽管实际情况中，更多地用在商务-对-商务(B2B)交易，而不是对个人用户。<br />
+	但大多数有SSL功能的web服务器不要求客户认证(Client Authentication)。</p>
+<p>
+	<br />
+	证书<br />
+	为了能实施SSL，一个web服务器对每个接受安全连接的外部接口(IP 地址)必须要有相应的证书(Certificate)。关于这个设计的理论是一个服务器必须提供某种合理的保证以证明这个服务器的主人就是你所认为的那个人。这个证书要陈述与这个网站相关联的公司，以及这个网站的所有者或系统管理员的一些基本联系信息。<br />
+	这个证书由所有人以密码方式签字，其他人非常难伪造。对于进行电子商务(e-commerce)的网站，或其他身份认证至关重要的任何商业交易，认证书要向大家所熟知的认证权威(Certificate Authority (CA))如VeriSign或Thawte来购买。这样的证书可用电子技术证明属实。实际上，认证权威单位会担保它发出的认证书的真实性，如果你信任发出认证书的认证权威单位的话，你就可以相信这个认证书是有效的。<br />
+	在许多情况下，认证并不是真正使人担忧的事。系统管理员或许只想要保证被服务器传送和接收的数据是秘密的，不会被连接线上的偷窃者盗窃到。庆幸的是，Java提供相对简单的被称为keytool的命令行工具，可以简单地产生&ldquo;自己签名&rdquo;的证书。自己签名的证书只是用户产生的证书，没有正式在大家所熟知的认证权威那里注册过，因此不能确保它的真实性。但却能保证数据传输的安全性。<br />
+	认证也许很重要，也许不重要，完全决定于网站的需要。</p>
+<p>
+	用Tomcat来配置SSL主要有下面这么两大步骤：</p>
+<p>
+	一、生成证书</p>
+<p>
+	1、 在命令行下执行：</p>
+<p>
+	%Java_home%\bin\keytool -genkey -alias tomcat -keyalg RSA</p>
+<p>
+	在此命令中，keytool是JDK自带的产生证书的工具。把RSA运算法则作为主要安全运算法则，这保证了与其它服务器和组件的兼容性。<br />
+	这个命令会在用户的home directory产生一个叫做&quot; .keystore &quot; 的新文件。在执行后，你首先被要求出示keystore密码。Tomcat使用的默认密码是&quot; changeit &quot;(全都是小写字母)，如果你愿意，你可以指定你自己的密码。你还需要在server.xml配置文件里指定自己的密码，这在以后会有描述。</p>
+<p>
+	2、 你会被要求出示关于这个认证书的一般性信息，如公司，联系人名称，等等。这些信息会显示给那些试图访问你程序里安全网页的用户，以确保这里提供的信息与他们期望的相对应。</p>
+<p>
+	3、 你会被要求出示密钥(key)密码，也就是这个认证书所特有的密码(与其它的储存在同一个keystore文件里的认证书不同)。你必须在这里使用与keystore密码相同的密码。(目前，keytool会提示你按ENTER键会自动帮你做这些)。</p>
+<p>
+	如果一切顺利，你现在就拥有了一个可以被你的服务器使用的有认证书的keystore文件。</p>
+<p>
+	二、配置tomcat</p>
+<p>
+	第二个大步骤是把secure socket配置在$CATALINA_HOME/conf/server.xml文件里。$CATALINA_HOME代表安装Tomcat的目录。一个例子是SSL连接器的&lt;Connector&gt;元素被包括在和Tomcat一起安装的缺省server.xml文件里。它看起来象是这样：</p>
+<p>
+	$CATALINA_HOME/conf/server.xml</p>
+<p>
+	<br />
+	&lt;-- Define a SSL Coyote HTTP/1.1 Connector on port 8443 --&gt;<br />
+	&lt;!--<br />
+	&lt;Connector<br />
+	port=&quot;8443&quot; minProcessors=&quot;5&quot; maxProcessors=&quot;75&quot;<br />
+	enableLookups=&quot;true&quot; disableUploadTimeout=&quot;true&quot;<br />
+	acceptCount=&quot;100&quot; debug=&quot;0&quot; scheme=&quot;https&quot; secure=&quot;true&quot;;<br />
+	clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot;/&gt;<br />
+	--&gt;</p>
+<p>
+	Connector元素本身，其默认形式是被注释掉的(commented out)，所以需要把它周围的注释标志删除掉。然后，可以根据需要客户化(自己设置)特定的属性。一般需要增加一下keystoreFile和keystorePass两个属性，指定你存放证书的路径（如：keystoreFile=&quot;C:/.keystore&quot;）和刚才设置的密码（如：keystorePass=&quot;123456&quot;）。关于其它各种选项的详细信息，可查阅Server Configuration Reference。</p>
+<p>
+	在完成这些配置更改后，必须象重新启动Tomcat，然后你就可以通过SSL访问Tomcat支持的任何web应用程序。只不过指令需要像下面这样：</p>
+<p>
+	https://localhost:8443</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

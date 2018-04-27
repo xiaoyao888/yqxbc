@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub 的 12 个实用技巧，你 get 了几个？</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="GitHub,的,个,实用技巧,你,get,了,几个,在," />
+  <meta name="description" content="1. 在 GitHub.com 上编辑代码 我要从一个我认为大多数人都知道的功能（即使一周之前我不知道）开始。 当你在 GitHub 中查看文件（任何文本文件、任何仓库）时，右上角都会呈现一个铅笔" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>GitHub 的 12 个实用技巧，你 get 了几个？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：4次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1638" class="art_content"><h2 id="1-在-githubcom-上编辑代码">
+	1. 在 GitHub.com 上编辑代码</h2>
+<p>
+	我要从一个我认为大多数人都知道的功能（即使一周之前我不知道）开始。</p>
+<p>
+	当你在 GitHub 中查看文件（任何文本文件、任何仓库）时，右上角都会呈现一个铅笔图标。 点击它即可编辑该文件。 编辑完成之后，点击&ldquo;Propose file change&rdquo;按钮，GitHub 将为你 fork 代码仓库并发起 pull request。</p>
+<p>
+	是不是很厉害？自动替你 fork 代码。</p>
+<p>
+	不需要自己手动将代码 fork 到本地，然后进行 pull、修改、push、pull request 等一系列操作。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b4b79a63.com/resource/attachment/1abd5d73e5a2df0e214778817b722f79" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	这对于修复拼写错误和代码的 bug 非常方便。</p>
+<h2 id="2-粘贴图片">
+	<a name="t1" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>2. 粘贴图片</h2>
+<p>
+	你不仅仅限于评论和问题说明中的文字。 你还可以直接从剪贴板粘贴图片。 当你粘贴时，就会看到推按被上传到云端，并在 markdown 中整齐的显示出来。</p>
+<h2 id="3-格式化代码">
+	<a name="t2" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>3. 格式化代码</h2>
+<p>
+	如果你想编写代码块，你可以从三个反引号开始 - 就像你在阅读&nbsp;<a href="https://guides.github.com/features/mastering-markdown/" rel="nofollow" target="_blank">Mastering Markdown</a>页面时学到的一样，而 GitHub 会自动识别你正在使用的编程语言种类。</p>
+<p>
+	但是，如果你提交类似 Vue、Typescript 或者 JSX 这样的代码片段时，你可以明确指定语言种类以获取正确的突出显示。&nbsp;<br />
+	请注意第一行中的 &ldquo;`jsx：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b4c5328e.com/resource/attachment/543af22d452480a94fa4c7310d4780eb" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	这样的结果就意味着代码片段呈现正确：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b4cb6f17.com/resource/attachment/764f12e68d087138afb24ee1066e33cb" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	（这扩展到 gists，顺便说一句，如果你给 gist 一个 .jsx 的扩展名，那么将可以得到 JSX 语法高亮。）</p>
+<p>
+	了解所有支持的语法：<a href="https://github.com/github/linguist/blob/fc1404985abb95d5bc33a0eba518724f1c3c252e/vendor/README.md" rel="nofollow" target="_blank">https://github.com/github/linguist/blob/fc1404985abb95d5bc33a0eba518724f1c3c252e/vendor/README.md</a></p>
+<h2 id="4在-pr-中使用魔术词关闭-issue">
+	<a name="t3" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>4.在 PR 中使用魔术词关闭 issue</h2>
+<p>
+	假设你正在创建一个解决问题 ＃234 的 pull 请求。 你可以将文字 &ldquo;fixes ＃234&rdquo; 放在你的 pull 请求描述中（或者在 pull 请求的任何评论中的任何地方）。</p>
+<p>
+	然后，合并 pull 请求就会自动关闭这个问题。 很酷对吧？</p>
+<p>
+	更深入的了解：<a href="https://help.github.com/articles/closing-issues-using-keywords/" rel="nofollow" target="_blank">https://help.github.com/articles/closing-issues-using-keywords/</a></p>
+<h2 id="5-链接评论">
+	<a name="t4" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>5. 链接评论</h2>
+<p>
+	你是否曾经想要链接到一个特定的评论，但是却不知道如何操作？ 此时你可以告别这样的日子了，因为我现在会告诉你点击名字旁边的日期/时间是如何链接到评论的。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b4d3b8c2.com/resource/attachment/29cd4e628b8dd751b9c6812debe76499" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<h2 id="6-链接代码">
+	<a name="t5" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>6. 链接代码</h2>
+<p>
+	你是否想要链接到一个特定的代码行？ 我知道怎么做。</p>
+<p>
+	试试这个操作：在查看文件时，点击所述代码旁边的行号。</p>
+<p>
+	哇，你看到了吗？URL 已更新为行号！ 如果你按住 Shift 键并单击另一行号，很快，该 URL 将再次更新，并且高亮这两行之间的所有代码段。</p>
+<p>
+	现在可以共享该 URL 了，但这些还是会指向当前分支。 如果文件改变了怎么办？ 当前状态下文件的永久链接（permalink ）即可解决该问题。</p>
+<p>
+	我很懒，所以我在一个屏幕截图中完成了上述所有操作：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b4e8afc6.com/resource/attachment/26fb1c190ac9bfb95c7f7c39468aaf04" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<h2 id="7-使用类似命令行的github-url">
+	<a name="t6" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>7. 使用类似命令行的GitHub URL</h2>
+<p>
+	使用 UI 浏览 GitHub 是很好的。 但是有时候，最快的方法就是在 URL 中输入。 例如，如果我想跳转到我正在处理的分支，并且查看它去主分支的区别，我可以在我的 repo名称之后键入/compare/分支名称。</p>
+<p>
+	这将显示当前分支与主分支的差异：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b511f2c3.com/resource/attachment/f6a3705409afa5d9b239caa02e185be5" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	如果我正处在一个 integration 分支，我需要输入/compare/integration-branch&hellip;名称。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b51c54a7.com/resource/attachment/7288ead5fb1d17201a387649ea9aec60" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	使用 ctrl L 或 cmd L 快捷键会将光标向上移动到 URL 中（至少在 Chrome 浏览器中是这样）。 在加上浏览器的自动完成功能，使得在分支之间跳转变得非常简单和方便。</p>
+<p>
+	专业提示：使用箭头键移动 Chrome 的自动完成建议，并按 Shift delete 从历史记录中删除项目（例如，一旦分支合并）。</p>
+<h2 id="8-在-issue-中创建-list">
+	<a name="t7" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>8. 在 issue 中创建 list</h2>
+<p>
+	你想查看问题的复选框列表吗？</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b5284629.com/resource/attachment/b9a0f330f2397e0e58447b5c27657d56" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	并且当你在 list 中查看问题时，是否希望将其显示为&ldquo;2/5&rdquo;栏。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b5305d08.com/resource/attachment/81eb319c70a0fcd3cd0440c2fd65dcc1" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	很棒！ 你可以使用如下语法创建交互式复选框：</p>
+<p>
+	- [ ] 屏幕宽度（整数）&nbsp;<br />
+	- [ x ]服务人员支持&nbsp;<br />
+	- [ x ]提取支持&nbsp;<br />
+	- [ ] CSS flexbox支持&nbsp;<br />
+	- [ ]自定义元素</p>
+<p>
+	输入内容依次是：一个空格，一个破折号，一个空格，一个左方括号和一个空格（或一个x）和一个右方括号，然后又一个空格，最后是一些描述语言。</p>
+<p>
+	实际上你可以选中/取消选中这些框！ 在我看来这种操作很神奇。 你可以勾选选择框，它会根据你的选择而更新文本显示选项！</p>
+<p>
+	如果你在项目板上有这个问题，它也会显示出来：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b53bdd1c.com/resource/attachment/458edc2ce78079f0bd9c4b00150004a8" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	如果你不懂我所说的 &ldquo;项目板&rdquo; 是什么意思，你可以通过下文进行了解。</p>
+<h2 id="9-github-项目板">
+	<a name="t8" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>9. GitHub 项目板</h2>
+<p>
+	我一直使用 Jira 来做大项目，而对于个人项目，我一直在使用 Trello，我非常喜欢它们。</p>
+<p>
+	几周之后，GitHub 有了自己的产品，就在我的仓库的 &ldquo;Project&rdquo; 选项卡上，我复制一些我已经在 Trello 上开展的任务。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b54243dd.com/resource/attachment/8535fde792b7cb64a06adc4bb6a779b6" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	在 GitHub 项目中也是如此：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b56580dc.com/resource/attachment/dd89ca314e10019f0e18d6e257c4deb4" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	为了方便，我将上述的项目都添加为&ldquo;笔记&rdquo; 。但是，在 GitHub 中管理任务的功能是与仓库的其余部分集成在一起，因此你可能希望将现有问题添加到备份库中。</p>
+<p>
+	你可以点击右上角的 Add Cards，找到要添加的内容。 此时特殊搜索语法就派上用场了，例如，输入 is：pr is ：open 便可以将任何公开的 pull 请求拖动到项目板上，或者输入 label：bug 即可粉碎一些 bug。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b570ac31.com/resource/attachment/217138678254420caaeedc1edd8c8e43" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	还可以将现有笔记转换为问题。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b57aad68.com/resource/attachment/fbcbcb254dac13a53de91785abd17762" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	也可以在现有问题的屏幕中，将其添加到右窗格的项目里面。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b57aad68.com/resource/attachment/fbcbcb254dac13a53de91785abd17762" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	将&ldquo;任务&rdquo;定义与实现该任务的代码存储在同一个仓库中非常有益。这意味着今后你可以在任意一行代码上进行 git 操作，能够根据更改记录找回历史代码，无需在 Jira 或者Trello 等其他地方进行跟踪。</p>
+<p>
+	缺点</p>
+<p>
+	我在过去三周里我不再使用 Jira，而是一直在 GitHub 上做所有的任务，这是一个我很喜欢的有点看板风格的小项目。</p>
+<p>
+	但是我无法想象在 Scrum 项目中使用它，无法对其进行适当的开发速度或者其他优点的估计和计算。</p>
+<p>
+	好消息是，GitHub 项目的&ldquo;功能&rdquo;很少，因此你不需要花很长时间来评估是否可以切换。所以尝试一下，看看你的想法。</p>
+<p>
+	不管怎样，我听说过 ZenHub，并在10分钟前首次打开了它。它有效地扩展了 GitHub，所以你可以估计你的问题并创建 epics 和依赖。还有速度和燃尽图，它看起来非常强大。&nbsp;<br />
+	进一步阅读：GitHub 项目帮助。</p>
+<h2 id="10-github-wiki">
+	<a name="t9" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>10. GitHub wiki</h2>
+<p>
+	对于非结构化的页面集合，就像维基百科，GitHub Wiki 产品（我以后将其称为Gwiki）是非常好的。</p>
+<p>
+	对于结构化的页面集合，例如你的文档则不是这样。没有办法说&ldquo;这个页面是另一页面的子页面&rdquo;，也没有诸如&ldquo;下一页&rdquo;和&ldquo;上一页&rdquo;这样的导航按钮。而 Hansel 和 Gretel 会因为没有面包屑而受到伤害（格林童话）。</p>
+<p>
+	（旁注，你读过这个故事吗？这是残酷的，两个混蛋孩子们在自己的烤箱里焚烧了这个可怜的老太太，我认为这就是为什么青年这些天是如此敏感的原因 - 睡衣故事现在不包含足够的暴力。）</p>
+<p>
+	继续 - 对 Gwiki 进行延伸，我从 NodeJS 文档中输入了几页作为 wiki 页面，然后创建了一个自定义侧边栏，以便我可以模拟一些实际的结构。侧边栏在任何时候都在，尽管它不突出显示你当前的页面。</p>
+<p>
+	链接必须手动维护，但总而言之，我认为它会工作正常。如果你有需要的话可以看看。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b58f151f.com/resource/attachment/1883f4783b932d5428843fe921c31f96" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	它不会与 GitBook（这是 Redux 文档使用的）或定制网站等竞争。 但是它 80％ 甚至所有的权利都在你的 repo 中。</p>
+<p>
+	我的建议：如果你的 README.md 文件超过一个，并且需要几个不同的页面为用户提供指南或者更详细的文档，那么你应该使用 Gwiki。</p>
+<h2 id="11-github-页面jekyll">
+	<a name="t10" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>11. GitHub 页面（Jekyll）</h2>
+<p>
+	你可能已经知道可以使用 GitHub 页面来托管静态网站。 如果你还不知道，可以查看资料自己掌握。 本节会特别介绍如何使用 Jekyll 构建站点。</p>
+<p>
+	最简单的是，GitHub 页面 Jekyll 将以漂亮的主题呈现你的 README.md。 例如，我们可以看一下 about-github 的 readme 页面：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b59b1f91.com/resource/attachment/23b221eb724e2e39a7046a3be99f4f7c" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	如果在 GitHub 中点击我的网站的&ldquo;设置&rdquo;标签，打开 GitHub 页面，然后选择一个 Jekyll主题&hellip;</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b5ad0260.com/resource/attachment/e6816bd858709a7e29d6d772369a7baa" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	我会得到一个 Jekyll 主题页面：</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b5cdf54d.com/resource/attachment/377e1640dbca56479aeaaaba2b2543da" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	这样我就可以建立一个整体静态网站，主要是围绕可以很容易编辑的 markdown 文件，可以把 GitHub 转变成 CMS。</p>
+<p>
+	我没有实际使用它，但是这是 React 和 Bootstrap 网站的制作方式。</p>
+<p>
+	注意，它需要 Ruby 在本地运行（Windows 用户将交换知道的视线，走向另一个方向，macOS 用户将会像&ldquo;有什么问题，你要去哪里？Ruby 是一个通用平台！GEMS！&rdquo;）。</p>
+<p>
+	（这里也值得一提的是，GitHub 页面不允许使用&ldquo;暴力威胁内容或活动&rdquo;，因此你无法促使 Hansel 和 Gretel 重新启动。）</p>
+<p>
+	我的观点：</p>
+<p>
+	我对 GitHub 页面 Jekyll（对于这篇文章）了解越多，就越感觉奇怪。</p>
+<p>
+	&ldquo;排除构建自己网站的复杂性&rsquo;的想法是伟大的。但是你仍然需要一个构建设置来实现本地运行。有很多 简单的 CLI 命令帮助你设置。</p>
+<p>
+	我刚刚在&ldquo;入门&rdquo;部分的七页中略过，我觉得它是这里唯一简单的事情。而且我还没有学习简单的&ldquo;前端&rdquo;语法，还没有学习简单的&ldquo;液体模板引擎&rdquo;的内容。我宁愿写一个网站。</p>
+<p>
+	说实话，我有点惊讶 Facebook 居然使用这个 来构建 React 文档，他们建立 React 的帮助文档并将其预渲染为静态 HTML 文件仅花了一天时间。</p>
+<p>
+	他们所需要做的只是定制其现有的 markdown 文件，就像它们来自 CMS 一样。</p>
+<h2 id="12-使用github作为cms">
+	<a name="t11" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>12. 使用GitHub作为CMS</h2>
+<p>
+	假设你的网站中包含一些文字，但你不想将该文本存储在实际的 HTML 标记中。</p>
+<p>
+	相反，你希望将文本块存储在某个地方，以便非开发者可以轻松编辑文本。也许用某种形式的版本控制。也许是一个审查过程。</p>
+<p>
+	这是我的建议：使用存储在仓库中的 markdown 文件来保存文本。然后用你的前端组件抓取这些文本块并将其呈现在页面上。</p>
+<p>
+	我是一个 React 开发者，这里给出一个 Markdown 组件的例子，给定一些 markdown 的路径，获取、解析和呈现为 HTML。</p>
+<pre name="code">
+class Markdown extends React.Component { constructor(props) { super(props); // replace with your URL, obviously this.baseUrl = &#39;https://raw.githubusercontent.com/davidgilbertson/about-github/master/text-snippets&#39;; this.state = { markdown: &#39;&#39;,
+      };
+    }
+    componentDidMount() {
+      fetch(`${this.baseUrl}/${this.props.url}`)
+        .then(response =&gt; response.text())
+        .then((markdown) =&gt; { this.setState({markdown});
+        });
+    } render() { return (
+        &lt;div dangerouslySetInnerHTML={{__html: marked(this.state.markdown)}} /&gt;
+      );
+    }
+}</pre>
+<p>
+	这是我的示例 repo，在 /text-snippets 中有一些 markdown 文件。</p>
+<p>
+	（你也可以使用 GiHub API 获取内容 - 但我不知道为什么会这样）</p>
+<p>
+	你会使用这样的组件：</p>
+<pre name="code">
+const Page = () =&gt; ( &lt;div className=&quot;page&quot;&gt; &lt;div className=&quot;about-us&quot;&gt; &lt;Markdown url=&quot;about-us.md&quot; /&gt; &lt;/div&gt; &lt;div className=&quot;disclaimer&quot;&gt; &lt;p&gt;A very important disclaimer:&lt;/p&gt; &lt;Markdown url=&quot;disclaimers/home-page-disclaimer.md&quot; /&gt; &lt;/div&gt; &lt;/div&gt; );</pre>
+<p>
+	所以现在，GitHub 就是你想要 CMS，用来管理你的文本块。</p>
+<p>
+	上述示例仅在组件已安装在浏览器中后才能获取 markdown。 如果你想要一个静态网站，那么你需要服务器对其进行渲染。</p>
+<p>
+	好消息！ 没有任何东西可以阻止你从服务器上获取所有的 markdown 文件（再加上适用于你的缓存策略）。 如果您沿着这条路走下去，你可能需要查看 GitHub API 以获取目录中所有的 markdown 文件的列表。</p>
+<h2 id="github-工具">
+	<a name="t12" rel="nofollow" style="color: rgb(79, 161, 219); outline: none; box-sizing: border-box; background-image: initial; background-position: initial; background-repeat: initial; margin: 0px; padding: 0px;"></a>GitHub 工具</h2>
+<p>
+	我已经使用了 Octotree Chrome 扩展程序一段时间了，因此我强烈推荐它。</p>
+<p>
+	它给你一个在左边的面板，通过树型视图显示你正在看的 repo。</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b5e84efe.com/resource/attachment/35846d28178d3588f9c302cd77a0a190" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	从这个视频我知道了 octobox，到目前为止似乎相当不错。 这是你的 GitHub 的问题收件箱。 必须推荐。</p>
+<p>
+	说到颜色，我把我的所有屏幕截图放在了轻主题中，以免让你吃惊。 但是真的，我看到的一切都是黑暗的主题，为什么要忍受一个苍白的 GitHub？</p>
+<p>
+	<img src="http://gadimg-10045137.image.myqcloud.com/20171102/59fa8b6222672.com/resource/attachment/8f4caef2e9b8ca92ac91857a9c9121f1" title="GitHub 的 12 个实用技巧，你 get 了几个？" /></p>
+<p>
+	这是 Stylish Chrome扩展程序（可以将主题应用到任何网站）和 GitHub Dark 风格的组合。为了完成外观，可以使用 Chrome DevTools 的黑色主题（内置的，在设置中打开）和 Chrome 的 Atom One Dark 主题。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

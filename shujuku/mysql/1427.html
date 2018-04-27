@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySQL数据库优化总结之备忘</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="MySQL,数据库,优化,总结,之,备忘,对于,一个以," />
+  <meta name="description" content="对于一个以数据为中心的应用，数据库的好坏直接影响到程序的性能，因此数据库性能至关重要。一般来说，要保证数据库的效率，要做好以下四个方面的工作：数据库设计、sql语句优" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>MySQL数据库优化总结之备忘</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：15次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1427" class="art_content"><div class="blog_content" id="blog_content" style="font-size: 14px; line-height: 1.8em; color: rgb(0, 0, 0); font-family: Helvetica, Tahoma, Arial, sans-serif;">
+	<p style="margin: 0px; padding: 0px;">
+		<span style="font-family: verdana; line-height: 22px;"><strong>对于一个以数据为中心的应用，数据库的好坏直接影响到程序的性能，因此数据库性能至关重要。一般来说，要保证数据库的效率，要做好以下四个方面的工作：数据库设计、sql语句优化、数据库参数配置、恰当的硬件资源和操作系统，这个顺序也表现了这四个工作对性能影响的大小。</strong></span></p>
+	<p style="margin: 0px; padding: 0px;">
+		&nbsp;</p>
+	<p style="margin: 0px; padding: 0px;">
+		<strong style="font-family: verdana; line-height: 22px;">&nbsp;一、数据库设计</strong></p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　适度的反范式,注意是适度的</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　我们都知道三范式，基于三范式建立的模型是最有效保存数 据的方式，也是最容易扩展的模式。我们在开发应用程序时，设计的数据库要最大程度的遵守三范式，特别是对于OLTP型的系统，三范式是必须遵守的规则。当 然，三范式最大的问题在于查询时通常需要join很多表，导致查询效率很低。所以有时候基于性能考虑，我们需要有意的违反三范式，适度的做冗余，以达到提 高查询效率的目的。注意这里的反范式是适度的，必须为这种做法提供充分的理由。下面就是一个糟糕的实例：　　</p>
+	<div style="font-family: verdana; line-height: 22px; text-align: center;">
+		<img alt="" border="0" src="http://image3.it168.com//2009/5/26/ed7e83a0-2bd3-45ba-b82b-acd491ac62f5.jpg" style="border: 0px;" /></div>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　 　在这里，为了提高学生活动记录的检索效率，把单位名称冗余到学生活动记录表里。单位信息有500条记录，而学生活动记录在一年内大概有200万数据量。 如果学生活动记录表不冗余这个单位名称字段，只包含三个int字段和一个timestamp字段，只占用了16字节，是一个很小的表。而冗余了一个 varchar(32)的字段后则是原来的3倍，检索起来相应也多了这么多的I/O。而且记录数相差悬殊，500 VS 2000000 ，导致更新一个单位名称还要更新4000条冗余记录。由此可见，这个冗余根本就是适得其反。</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　下面这个冗余就很好　　</p>
+	<div style="font-family: verdana; line-height: 22px; text-align: center;">
+		<img alt="" border="0" src="http://image3.it168.com//2009/5/26/b0f2c029-798d-49d3-b1dc-7b086aab2da6.jpg" style="border: 0px;" /></div>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　 　可以看到，[学生考试总分]是冗余的，这个分数完全可以通过[得分情况]汇总得到。在【学生考试总分】里，一次考试一个学生只有一条记录，而在【得分情 况】里，一个学生针对试卷里一个小题的一个小问一条记录，粗略的算一下比例大概是1：100。而且判卷子得分是不会轻易变的，更新的频率不高，所以说这个 冗余是比较好的。</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>适当建立索引</strong></p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　说起提高数据库性能，索引是最物美价廉的东西了。不用加<a href="http://product.it168.com/list/b/0205_1.shtml" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="内存">内存</a>，不用改程序，不用调sql，只要执行个正确的&rsquo;create index&rsquo;，查询速度就可能提高百倍千倍，这可真有诱惑力。可是天下没有免费的午餐，查询速度的提高是以插入、更新、删除的速度为代价的，这些写操作，增加了大量的I/O。由于索引的<a href="http://storage.it168.com/" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="存储">存储</a>结构不同于表的存储，一个表的索引所占空间比数据所占空间还大的情况经常发生。这意味着我们在写数据库的时候做了很多额外的工作，而这个工作只是为了提高读的效率。因此，我们建立一个索引，必须保证这个索引不会&ldquo;亏本&rdquo;。一般需要遵守这样的规则：</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　索引的字段必须是经常作为查询条件的字段;</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　如果索引多个字段，第一个字段要是经常作为查询条件的。如果只有第二个字段作为查询条件，这个索引不会起到作用;</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　索引的字段必须有足够的区分度;</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　Mysql 对于长字段支持前缀索引;</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		<strong>　　对表进行水平划分</strong></p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　 　如果一个表的记录数太多了，比如上千万条，而且需要经常检索，那么我们就有必要化整为零了。如果我拆成100个表，那么每个表只有10万条记录。当然这 需要数据在逻辑上可以划分。一个好的划分依据，有利于程序的简单实现，也可以充分利用水平分表的优势。比如系统界面上只提供按月查询的功能，那么把表按月 拆分成12个，每个查询只查询一个表就够了。如果非要按照地域来分，即使把表拆的再小，查询还是要联合所有表来查，还不如不拆了。所以一个好的拆分依据是 最重要的。</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　这里有个比较好的实例&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+	<div style="font-family: verdana; line-height: 22px; text-align: center;">
+		<img alt="" border="0" src="http://image3.it168.com//2009/5/26/4f050857-948a-499a-b1e8-019291ca4b97.jpg" style="border: 0px;" /></div>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　 　每个学生做过的题都记录在这个表里，包括对题和错题。每个题会对应一个或多个知识点，我们需要根据错题来分析学生在哪个知识点上掌握的不足。这个表很容 易达到千万级，迫切需要拆分，那么根据什么来拆呢?从需求上看，无论是老师还是学生，最终会把焦点落在一个学生的身上。学生会关心自己，老师会关心自己班 的学生。而且每个学科的知识点是不同的。所以我们很容易想到，联合学科和知识点两个字段来拆分这个表。这样拆下来，每个表大概2万条数据，检索效率非常 高。</p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>　对表进行垂直划分</strong></p>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　　有些表记录数并不多，可能也就2、3万条，但是字段却很长，表占用空间很大，检索表时需要执行大量I/O，严重降低了性能。这个时候需要把大的字段拆分到另一个表，并且该表与原表是一对一的关系。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+	<div style="font-family: verdana; line-height: 22px; text-align: center;">
+		<img alt="" border="0" src="http://image3.it168.com//2009/5/26/829648ab-d03f-40c7-8bde-bd0b231bcf23.jpg" style="border: 0px;" /></div>
+	<p style="margin: 5px auto; padding: 0px; font-family: verdana; line-height: 22px;">
+		　 　【试题内容】、【答案信息】两个表，最初是作为几个字段添加到【试题信息】里的，可以看到试题内容和答案这两个字段很长，在表里有3万记录时，表已经占 了1G的空间，在列试题列表时非常慢。经过分析，发现系统很多时候是根据【册】、【单元】、类型、类别、难易程度等查询条件，分页显示试题详细内容。而每 次检索都是这几个表做join，每次要扫描一遍1G的表，很郁闷啊。我们完全可以把内容和答案拆分成另一个表，只有显示详细内容的时候才读这个大表，由此 就产生了【试题内容】、【答案信息】两个表。</p>
+	<div class="w643" style="font-family: verdana; line-height: 22px;">
+		<br />
+		<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 选择适当的字段类型，特别是主键</strong>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　选择字段的一般原则是保小不保大，能用占用字节小的字段就不用大字段。比如主键， 我们强烈建议用自增类型，不用guid，为什么?省空间啊?空间是什么?空间就是效率!按4个字节和按32个字节定位一条记录，谁快谁慢太明显了。涉及到 几个表做join时，效果就更明显了。值得一提的是，datetime和timestamp，datetime占用8个字节，而timestamp占用4 个字节，只用了一半，而timestamp表示的范围是1970&mdash;2037，对于大多数应用，尤其是记录什么考试时间，登录时间这类信息，绰绰有余啊。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　　文件、图片等大文件用文件系统<a href="http://storage.it168.com/" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="存储">存储</a>，不用数据库</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　不用多说，铁律!!!数据库只存储路径。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　　外键表示清楚，方便建立索引</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　我们都知道，在powerdesigner里为两个实体建立关系，生成物理模型时会自动给外键建立索引。所以我们不要怕建立关系把线拉乱，建立个ShortCut就好了。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　　掌握表的写入时机</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　在库模式相同的情况下，如何使用数据库也对性能有着重要作用。同样是写入一个表，先写和后写对后续的操作会产生很大影响。例如在上面提到的适度冗余里的例子，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<div style="text-align: center;">
+			<span style="font-size: 12pt;"><img alt="" border="0" src="http://image3.it168.com//2009/5/26/f47cfcc0-bdb1-461b-bc3b-d492520f882b.jpg" style="border: 0px;" /></span></div>
+		<p style="margin: 5px auto; padding: 0px;">
+			　 　我们最初的目的是记录考生的总分，以达到提高检索效率的目的，也就是在录入成绩时写入这个表。在需求里有这样的要求：列出本次考试的所有学生成绩，没有 录入成绩的也显示该学生名称，只是总分显示为空。这个查询就需要用【学生信息】left outer join 【学生考试总分信息】，大家都知道outer join 的效率比join是要低的，为了避免这个问题，我们就在布置考试的时候写入这个表，把所有学生都插入进去，分数都是null，这样一来我们就可以用 join达到这个效果了。而且还有这样的好处：在某次考试中，安排了一个班所有学生考试，所有学生都录入了成绩。现在班里转来一个新生，那么在此时如果查 询学生成绩，就会列出这个新生，结果是未录入成绩，这显然是不对的。如果在安排的时候就写入，就可以记录下该次考试中实际的考生了，这个表的作用，也就不 知是冗余了。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　&nbsp;&nbsp; 宁可集中批量操作，避免频繁读写</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　系统里包含了积分部分，学生和老师通过系统做了操作都可以获得积分，而且积分规 则很复杂，限制每类操作获得积分不同，每人每天每类积分都有上限。比如登录，一次登录就可以获得1分，但是不管你登录多少次，一天只能累积一个登录积分。 这个还是简单的，有的积分很变态，比如老师积分中有一类是看老师判作业的情况，规则是：老师判了作业，发现学生有错的，学生改过了，老师再判，如果这时候 学生都对了，就给老师加分，如果学生还是错的，那就接着改，知道学生都改对了，老师都判完了，才能给老师加分。如果用程序来处理，很可能每个功能都会额外 的写一堆代码来处理这个鸡肋似的积分。不仅编程的同事干活找不到重点，还平白给数据库带来了很大的压力。经过和需求人员的讨论，确定积分没有必要实时累 积，于是我们采取后台脚本批量处理的方式。夜深人静的时候，让机器自己玩去吧。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　　选择合适的引擎</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　 　Mysql提供了很多种引擎，我们用的最多的是myisam，innodb，memory这三类。官方手册上说道myisqm比innodb的读速度要 快，大概是3倍。不过书不能尽信啊，《OreIlly.High.Performance.Mysql》这本书里提到了myisam和innodb的比 较，在测试中myisam的表现还不及innodb。至于memory，哈哈，还是比较好用的。在批处理种作临时表是个不错的选择(如果<a href="http://product.it168.com/list/b/0205_1.shtml" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="内存">内存</a>够大)。在我的一个批处理中，速度比近乎1：10。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;<strong>二、SQL语句优化</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　Sql语句优化工具</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　&middot;慢日志</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果发现系统慢了，又说不清楚是哪里慢，那么就该用这个工具了。只需要为mysql配置参数，mysql会自己记录下来慢的sql语句。配置很简单，参数文件里配置：</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　slow_query_log=d:/slow.txt</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　long_query_time = 2</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　就可以在d:/slow.txt里找到执行时间超过2秒的语句了，根据这个文件定位问题吧。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　&middot;mysqldumpslow.pl</p>
+		慢日志文件可能会很大，让人去看是很难受的事。这时候我们可以通过mysql自带的工具来分析。这个工具可以格式化慢日志文件，对于只是参数不同的语句 会归类类并，比如有两个语句select * from a where id=1 和select * from a where id=2，经过这个工具整理后就只剩下select * from a where id=N，这样读起来就舒服多了。而且这个工具可以实现简单的排序，让我们有的放矢。<br />
+		<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>　Explain</strong>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　现在我们已经知道是哪个语句慢了，那么它为什么慢呢?看看mysql是怎么执行的吧，用explain可以看到mysql执行计划，下面的用法来源于手册</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　EXPLAIN语法(获取SELECT相关信息)</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　EXPLAIN [EXTENDED] SELECT select_options</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　EXPLAIN语句可以用作DESCRIBE的一个同义词，或获得关于MySQL如何执行SELECT语句的信息：</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　&middot; EXPLAIN tbl_name是DESCRIBE tbl_name或SHOW COLUMNS FROM tbl_name的一个同义词。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　&middot; 如果在SELECT语句前放上关键词EXPLAIN，MySQL将解释它如何处理SELECT，提供有关表如何联接和联接的次序。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　该节解释EXPLAIN的第2个用法。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　借助于EXPLAIN，可以知道什么时候必须为表加入索引以得到一个使用索引来寻找记录的更快的SELECT。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果由于使用不正确的索引出现了问题，应运行ANALYZE TABLE更新表的统计(例如关键字集的势)，这样会影响优化器进行的选择。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　还可以知道优化器是否以一个最佳次序联接表。为了强制优化器让一个SELECT语句按照表命名顺序的联接次序，语句应以STRAIGHT_JOIN而不只是SELECT开头。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　 　EXPLAIN为用于SELECT语句中的每个表返回一行信息。表以它们在处理查询过程中将被MySQL读入的顺序被列出。MySQL用一遍扫描多次联 接(single-sweep multi-join)的方式解决所有联接。这意味着MySQL从第一个表中读一行，然后找到在第二个表中的一个匹配行，然后在第3个表中等等。当所有的 表处理完后，它输出选中的列并且返回表清单直到找到一个有更多的匹配行的表。从该表读入下一行并继续处理下一个表。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　当使用EXTENDED关键字时，EXPLAIN产生附加信息，可以用SHOW WARNINGS浏览。该信息显示优化器限定SELECT语句中的表和列名，重写并且执行优化规则后SELECT语句是什么样子，并且还可能包括优化过程的其它注解。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　&nbsp;&nbsp; 如果什么都做不了，试试全索引扫描</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果一个语句实在不能优化了，那么还有一个方法可以试试：索引覆盖。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果一个语句可以从索引上获取全部数据，就不需要通过索引再去读表，省了很多I/O。比如这样一个表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<div style="text-align: center;">
+			<span style="font-size: 12pt;"><img alt="" border="0" src="http://image3.it168.com//2009/5/26/fe387d07-6f2c-4e50-823e-0844b5da27cc.jpg" style="border: 0px;" /></span></div>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果我要统计每个学生每道题的得分情况，我们除了要给每个表的主键外键建立索引，还要对【得分情况】的实际得分字段索引，这样，整个查询就可以从索引得到数据了。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　三、数据库参数配置</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最重要的参数就是<a href="http://product.it168.com/list/b/0205_1.shtml" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="内存">内存</a>，我们主要用的innodb引擎，所以下面两个参数调的很大</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# Additional memory pool that is used by InnoDB to store metadata</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# information. If InnoDB requires more memory for this purpose it will</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# start to allocate it from the OS. As this is fast enough on most</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# recent operating systems, you normally do not need to change this</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# value. SHOW INNODB STATUS will display the current amount used.</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　innodb_additional_mem_pool_size = 64M</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# InnoDB, unlike MyISAM, uses a buffer pool to cache both indexes and</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# row data. The bigger you set this the less disk I/O is needed to</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# access data in tables. On a dedicated database server you may set this</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# parameter up to 80% of the machine physical memory size. Do not set it</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# too large, though, because competition of the physical memory may</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# cause paging in the operating system. Note that on 32bit systems you</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# might be limited to 2-3.5G of user level memory per process, so do not</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　# set it too high.</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　innodb_buffer_pool_size = 5G</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　对于myisam，需要调整key_buffer_size</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　当然调整参数还是要看状态，用show status语句可以看到当前状态，以决定改调整哪些参数</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　Cretated_tmp_disk_tables 增加tmp_table_size</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　Handler_read_key 高表示索引正确 Handler_read_rnd高表示索引不正确</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　Key_reads/Key_read_requests 应小于0.01 计算缓存损失率，增加Key_buffer_size</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　Opentables/Open_tables 增加table_cache</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　select_full_join 没有实用索引的链接的数量。如果不为0，应该检查索引。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　select_range_check 如果不为0，该检查表索引。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　sort_merge_passes 排序算法已经执行的合并的数量。如果该值较大，应增加sort_buffer_size</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　table_locks_waited 不能立即获得的表的锁的次数，如果该值较高，应优化查询</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　Threads_created 创建用来处理连接的线程数。如果Threads_created较大，要增加 thread_cache_size值。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　缓存访问率的计算方法Threads_created/Connections。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　&nbsp;</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 四、合理的硬件资源和<a href="http://product.it168.com/list/b/0501_1.shtml" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="操作系统">操作系统</a></strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果你的机器<a href="http://product.it168.com/list/b/0205_1.shtml" style="color: rgb(0, 0, 0); text-decoration: none;" target="_blank" title="内存">内存</a>超过4G，那么毋庸置疑应当采用64位操作系统和64位mysql</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<strong>　　读写分离</strong></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　如果数据库压力很大，一台机器支撑不了，那么可以用mysql复制实现多台机器同步，将数据库的压力分散。　　</p>
+		<div style="text-align: center;">
+			<span style="font-size: 12pt;"><img alt="" border="0" src="http://image3.it168.com//2009/5/26/5ce43307-420c-45b0-98ed-a98be3bfae61.jpg" style="border: 0px;" /></span></div>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="font-size: 12pt;">　　Master</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="font-size: 12pt;">　　Slave1</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="font-size: 12pt;">　　Slave2</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="font-size: 12pt;">　　Slave3</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　 主库master用来写入，slave1&mdash;slave3都用来做select，每个数据库分担的压力小了很多。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			　 　要实现这种方式，需要程序特别设计，写都操作master，读都操作slave，给程序开发带来了额外负担。当然目前已经有中间件来实现这个代理，对程 序来读写哪些数据库是透明的。官方有个mysql-proxy，但是还是alpha版本的。新浪有个amobe for mysql，也可达到这个目的，结构如下　　</p>
+		<div style="text-align: center;">
+			<span style="font-size: 12pt;"><img alt="" border="0" src="http://image3.it168.com//2009/5/26/77b40c6e-3739-4ec8-a586-a287f720b107.jpg" style="border: 0px;" /></span></div>
+		<p style="margin: 5px auto; padding: 0px;">
+			　　使用方法可以看amobe的手册。</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">小结：</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			&nbsp;</p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">1、合理设计表（表的大小、字段的大小）</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">2、海量数据库分库分表</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">3、数据库读写分离</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">4、关键字段建立索引。</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">5、使用存储过程，它使SQL变得更加灵活和高效。</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">6、备份数据库和清除垃圾数据。</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">7、SQL语句语法的优化。</span></p>
+		<p style="margin: 5px auto; padding: 0px;">
+			<span style="color: rgb(255, 0, 0);">8、清理删除日志。</span></p>
+		<div>
+			&nbsp;</div>
+	</div>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

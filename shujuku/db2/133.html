@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CentOS下DB2数据库安装过程详解</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="CentOS,下,DB2,数据库,安装,过程,详解,这篇,文" />
+  <meta name="description" content="这篇文章主要介绍了CentOS下DB2数据库安装过程详解,本文步骤详细,操作的命令也比较全,需要的朋友可以参考下 最近因为工作需要在学习DB2数据库，本教程讲解DB2数据库在inux下的安装步" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>CentOS下DB2数据库安装过程详解</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：未知 浏览：74次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="133" class="art_content"><p>
+	这篇文章主要介绍了CentOS下DB2数据库安装过程详解,本文步骤详细,操作的命令也比较全,需要的朋友可以参考下</p>
+<p>
+	最近因为工作需要在学习DB2数据库，本教程讲解DB2数据库在inux下的安装步骤。</p>
+<p>
+	安装前请查看DB2版本和许可证说明来增加了解，先弄明白改安装什么版本，这里我用的是最新的Express-C版本，这个版本是提供给个人学习用的版本。</p>
+<p>
+	管理客户端从v9.7版本之后就不再带有控制中心了，而是使用 Data Studio Client。</p>
+<p>
+	Linux版本：</p>
+<p>
+	Linux版本下的DB2数据库采用的官方免费版本，操作系统用的CentOS6.2。</p>
+<p>
+	安装过程：</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>1、下载：db2_v101_linuxia32_expc.tar.gz</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>2、解压，解压完成后会在当前目录下有一个 ./expc 文件夹</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="93923" id="copybut93923" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code93923" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost opt]# tar -zxvf db2_v101_linuxia32_expc.tar.gz</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>3、进入这个目录</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="85637" id="copybut85637" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code85637" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost opt]# cd expc/</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>4、执行安装</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="63611" id="copybut63611" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code63611" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost expc]# ./db2_install</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>5、添加组和用户：</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	组（用户名）<br />
+	db2iadm1(db2inst1)<br />
+	db2fadm1( db2fenc1）</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="3132" id="copybut3132" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code3132" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost expc]# groupadd -g 2000 db2iadm1<br />
+	[root@localhost expc]# groupadd -g 2001 db2fadm1<br />
+	[root@localhost expc]# useradd -m -g db2iadm1 -d /home/db2inst1 db2inst1<br />
+	[root@localhost expc]# useradd -m -g db2fadm1 -d /home/db2fenc1 db2fenc1<br />
+	[root@localhost expc]# passwd db2inst1<br />
+	[root@localhost expc]# passwd db2fenc1</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>6、安装 license（产品许可证） PS:如果是ExpressC版本就不用做</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="84569" id="copybut84569" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code84569" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost adm]# pwd<br />
+	/opt/ibm/db2/V10.1/adm<br />
+	[root@localhost adm]# chmod -R 775 *<br />
+	[db2inst1@localhost adm]$ ./db2licm -a /tmp/seagull/db2v10/license/db2ese_c.lic</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>7、创建实例和样本数据库</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="66815" id="copybut66815" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code66815" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost instance]# pwd<br />
+	/opt/ibm/db2/V10.1/instance<br />
+	[root@localhost instance]# chmod -R 775 *<br />
+	[root@localhost instance]# ./db2icrt -p 50000 -u db2fenc1 db2inst1<br />
+	[root@localhost instance]# su - db2inst1<br />
+	[db2inst1@localhost ~]$ db2sampl<br />
+	Creating database &quot;SAMPLE&quot;...<br />
+	Connecting to database &quot;SAMPLE&quot;...<br />
+	Creating tables and data in schema &quot;DB2INST1&quot;...<br />
+	Creating tables with XML columns and XML data in schema &quot;DB2INST1&quot;...<br />
+	&#39;db2sampl&#39; processing complete.<br />
+	[db2inst1@localhost ~]$ db2start<br />
+	SQL1026N The database manager is already active.<br />
+	[db2inst1@localhost ~]$ db2 connect to sample<br />
+	Database Connection Information<br />
+	Database server = DB2/LINUX 10.1.2<br />
+	SQL authorization ID = DB2INST1<br />
+	Local database alias = SAMPLE<br />
+	[db2inst1@localhost ~]$ db2 &quot;select * from staff&quot;</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>8、创建 das 管理服务器</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	为了远程客户端能够用控制中心来控制数据库服务器，需要在数据库服务器上安装 das,当然，如果只是远程连接而不是远程管理，可以不用装，这里我安装了一下。</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="93519" id="copybut93519" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code93519" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[root@localhost expc]# groupadd -g 2002 db2asgrp<br />
+	[root@localhost expc]# useradd -m -g db2asgrp -d /home/db2as db2as<br />
+	[root@localhost expc]# passwd db2as<br />
+	[db2as@localhost ~]$ su - db2as # 这里测试新建用户<br />
+	[db2as@localhost ~]$ su # 这里进入root权限<br />
+	[root@localhost ~]# cd /opt/ibm/db2/V10.1/instance/<br />
+	[root@localhost instance]# ./dascrt -u db2as<br />
+	DBI1070I Program dascrt completed successfully.<br />
+	[root@localhost instance]# su - db2as<br />
+	[db2as@localhost ~]$ db2admin start<br />
+	SQL4409W The DB2 Administration Server is already active.</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>9、设置端口号</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="13409" id="copybut13409" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code13409" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	vim /etc/services</div>
+<br style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);" />
+<span style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">在最后增加一行 # PS：VIM快捷键，在命令模式下输入&ldquo;G&rdquo;跳到最后一行。</span><br style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);" />
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="80296" id="copybut80296" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code80296" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	db2inst1 50000/tcp</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>10、db2 配置，要切换到用户 db2inst1</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="79633" id="copybut79633" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code79633" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	su &ndash; db2inst1<br />
+	db2set DB2_EXTENDED_OPTIMIZATION=ON<br />
+	db2set DB2_DISABLE_FLUSH_LOG=ON<br />
+	db2set AUTOSTART=YES<br />
+	db2set DB2_STRIPED_CONTAINERS=ON<br />
+	db2set DB2_HASH_JOIN=Y<br />
+	db2set DB2COMM=tcpip<br />
+	db2set DB2_PARALLEL_IO=*<br />
+	db2set DB2CODEPAGE=819 # PS:这个地方比较重要<br />
+	# db2 update database manager configuration using svcename db2inst1</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>11.将SVCENAME设置成/etc/services中的端口号或者服务名了吗？</strong></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="55066" id="copybut55066" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code55066" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[db2inst1@localhost ~]$ db2 get dbm cfg|grep SVCENAME<br />
+	TCP/IP Service name (SVCENAME) =<br />
+	SSL service name (SSL_SVCENAME) =</div>
+<br style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);" />
+<span style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">找到SVCENAME，如果当前值不是服务器端的端口号或者服务名，进行更新设置。</span><br style="color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; font-size: 14px; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);" />
+<div class="codetitle" style="border-left-color: rgb(0, 153, 204); border-left-width: 1px; border-left-style: solid; padding: 0px 3px; margin: 3px auto 0px; width: 640px; clear: both; font-size: 14px; border-top-color: rgb(0, 153, 204); border-top-width: 1px; border-top-style: solid; border-right-color: rgb(0, 153, 204); border-right-width: 1px; border-right-style: solid; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(242, 246, 251);">
+	<span style="float: right; line-height: 25.2000007629395px;"><a class="copybut" data="28767" id="copybut28767" style="color: rgb(51, 51, 51); cursor: pointer;"><u>复制代码</u></a></span>代码如下:</div>
+<div class="codebody" id="code28767" style="border: 1px solid rgb(0, 153, 204); padding: 0px 3px 0px 5px; margin: 0px auto 3px; width: 638px; clear: both; font-size: 14px; line-height: 25.2000007629395px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; background: rgb(221, 237, 251);">
+	<br />
+	[db2inst1@localhost ~]$ db2 update dbm cfg using SVCENAME db2inst1<br />
+	# db2 update dbm cfg using INDEXREC ACCESS<br />
+	[db2inst1@localhost ~]$ db2 get dbm cfg|grep SVCENAME<br />
+	TCP/IP Service name (SVCENAME) = 50000<br />
+	SSL service name (SSL_SVCENAME) =</div>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	# PS：svcename 在客户端连接时需要用到</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>12.在启动DB2之前需要先关闭防火墙</strong>，不然的话根本就不能连接（这个地方的疏忽纠结了好久），在root用户下执行：service iptables stop</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<strong>13.开启DB2</strong>，执行：db2start ，如果已经开启状态，那就先停止，执行：db2stop 。</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	设置查看：</p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	<img alt="" height="466" src="/uploads/allimg/150303/11014K306-0.jpg?201482610205" style="border: 1px solid rgb(204, 204, 204); padding: 3px; max-width: 620px; overflow: hidden;" title="在新窗口打开图片" width="620" /></p>
+<p style="margin: 0px; padding: 5px 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: Tahoma, Helvetica, Arial, 宋体, sans-serif; line-height: 25.2000007629395px; background-color: rgb(247, 252, 255);">
+	PS:重启机器后遇到了一个问题，就是关闭防火墙无反应，开启关闭数据库无反应，远程不能连接到数据库，解决办法是重启了服务器，然后按照顺序关闭了防火墙，然后重启了DB2数据库。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

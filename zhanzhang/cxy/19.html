@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>一个人的网站开发</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="一个人的网站开发" />
+  <meta name="description" content="一个人的网站开发" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>一个人的网站开发</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：26次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="19" class="art_content"><p>
+	一个正规的网站开发，理论上需要一个团队的配合，各自发挥自己的长处，网站需求分析、原型设计、效果图、切图、前台美工、后台代码、算法设计、数据库设计、服务器配置等等一系列的事情，而一个人想面面俱到这些，还是需要花些时间的。所以对一个初学者来说，我的建议是：别管他三七二十一，不是想开发一个网站吗，别管懂不懂，先开发出来一个再说，在开发的过程中，遇到了问题，再找解决方案的过程中，自己获得了学习，等完成了一个网站，乱七八糟的知识也学了一些，有了一个感性的认识，再去系统性的、深入的去学习也不晚。</p>
+<p>
+	这里提供一个我的开发思路和具体实现的方法：</p>
+<p>
+	开发一个网站，大概是这些东西：</p>
+<p>
+	1.有个整体的网站页面的样子，我们姑且称之为前端开发。</p>
+<p>
+	2.前端有了，点击里面的按钮、链接、新增信息、修改信息等等的操作，需要后台编码，姑且称之为后台开发。</p>
+<p>
+	3.前端有了，后台有了，数据放哪里啊，因此需要用到数据库了，姑且称之为数据库开发。</p>
+<p>
+	4.前面一通完成后，网站可以看了，接下来需要找服务器发布了，姑且称之为网站发布。</p>
+<p>
+	5.网站发布了，如果想让别人通过一个域名去访问，因此需要绑定域名了，姑且称之为域名绑定。</p>
+<p>
+	6.大功告成，回过头来消化一下吧。姑且称之为回味无穷。</p>
+<p>
+	接下来详细介绍。（建议先通读一下，别一上来就陷入某一个细节）</p>
+<h3>
+	<strong>一、前端开发</strong></h3>
+<p>
+	1.先拿笔找张纸，大概想想自己网站有哪些页面，每个页面是什么样子，如果没有灵感，就上网乱逛一阵，借鉴一下别人的做法。</p>
+<p>
+	2.网站大概样子心中有数了，接下来要开发了，别自己从头写代码了，可以用前端框架，各种前端框架我也不对比，也别让你挑的头疼，就用bootstrap吧，网址：http://getbootstrap.com/，twitter的工程师开发的，很多网站有用，开发一个凑合的网站不成问题。说白了，就是给你提供了css、javascript文件，对于一些页面布局、javascript效果，不用自己去写了，可以直接按照官方的说明去操作。具体的说明可以看官方网站，别嫌人家是英文的，其实没有几个单词你不认识，找找先练练，找找感觉。</p>
+<p>
+	3.什么？过程中遇到了html、css、javascript等等问题，不明白的话，建议上这个网站扫个盲：<a href="http://www.w3school.com.cn/">http://www.w3school.com.cn/</a>，自己再练练手，知识应该就够了。</p>
+<p>
+	经过前面三步，应该能够开发出来一个差不多的效果的网站了，大概用上一个星期去看吧，足够了。</p>
+<p>
+	注意：前端开发的过程中不用想着后端怎么实现？例如点击一个按钮怎么实现功能？专心开发前端页面就行了。前端和后端是独立分离的，只需要很小的整合就可以了。</p>
+<h3>
+	二、后台开发</h3>
+<p>
+	1.如果前端的页面都开发好了，接下来要实现页面上一些功能性的东西了，如果注册、登陆等等功能，就要后台开发了，这里我也建议用框架，后台开发框架也是海了去了，就用Thinkphp的吧，国产的框架，还行，套路还是比较明显的。网址：<a href="http://www.thinkphp.cn/">http://www.thinkphp.cn/</a>,是PHP的，什么？没有学过PHP，以前学的是C#？java？等等，别担心，学一下php也花不了多长时间，关键是一边学ThinkPHP，一边就把PHP给学了吧。如何学习ThinkPHP，可以看官方的文档就好，如果看不懂，可以看一下这个哥们的视频教程：http://www.thinkphp.cn/document/258.html，讲的还是不错的。</p>
+<p>
+	2.看完视频教程还是有些不解，什么乱七八糟MVC了等等概念，不用着急，继续前进吧，可能慢慢就能理解了，谁说不理解就不能前进的，是不？</p>
+<p>
+	注意：这个过程可能有点儿难，不过也还是可以接受的，学明白了，以后修改起来会比较灵活，至少感觉比wordpress灵活。</p>
+<h3>
+	三、数据库开发</h3>
+<p>
+	1.后台开发过程中，要存一下数据，难免要用到数据库，那么就安装一下mysql吧， 如果觉得不好管理，可以再安装一个可视化的工具：Navicat，需要用什么表，就建什么表吧，反正以后觉得不合适了还要修改。</p>
+<p>
+	2.如果数据库一点儿也不懂，那么网上随便搜搜相关知识，大概熟悉熟悉，会建表、增减数据就行了。有些数据库操作，用ThinkPHP的框架，非常简单的，不需要自己考虑太多东西。</p>
+<p>
+	注意：数据库开发是要配合着后台开发一起的。大概后台开发完了，数据库也差不多建好了。</p>
+<h3>
+	四、网站发布</h3>
+<p>
+	1.有很多托管代码的服务器，有收费的，有免费的，我就推荐一个吧，用新浪的SAE，速度还可以的，刚开始就先找一个尝试吧，等以后有时间了，可以再尝试尝试别家的。这里SAE是支持ThinkPHP的SAE版本。因此上传上去代码就能看效果了，发布后网址大概样子为：****.sinaapp.com</p>
+<p>
+	2.SAE是按访问流量收费的，弄一个实名认证，会送流量的，对于刚开始的网站，足够用了；如果不放心，可以申请一个中级开发者，每个月都会赠流量。之前是微博有加V就可以申请中级开发者，微博加V传一个自己的工作照就可以了。现在我的中级开发者，有需要推荐的，我也可以帮一下忙，反正我也不怎么用。</p>
+<p>
+	3.如果想本地查看，可以安装一个Apache，至于部署，也不难。</p>
+<p>
+	注意：能到发布这一步，我想应该就没有什么难的了吧。虽然曾经我与新浪各种死磕，今天还是无私的为他做了广告，我代表新浪，谢谢我自己了。（请别说我调皮）</p>
+<h3>
+	五、域名绑定</h3>
+<p>
+	1.网站建好了，如果感觉****.sinaapp.com不好看，想用自己的域名，也是可以的。</p>
+<p>
+	2.去godaddy申请吧，为啥是godaddy，别人都说好，我也就用了，反正我申请了两个域名，到现在都不怎么用，就当玩儿了。</p>
+<p>
+	3.有域名了，就可以登陆SAE后台，绑定域名了，操作步骤，会有很详细的说明。</p>
+<h3>
+	六、回味无穷</h3>
+<p>
+	1.经过前面一系列过程，一个你认为还可以的网站应该就可以诞生了。</p>
+<p>
+	2.过程中还有哪些想学的知识，可以去学习了。</p>
+<p>
+	3.开发完一个网站，这一套模板可以保存下来，再开发别的网站，自己也可以用了。</p>
+<p>
+	4.多年以后，你会觉得你的网站好low，不过又能如何，这也是一种人生体味而已。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

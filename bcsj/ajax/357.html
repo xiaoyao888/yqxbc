@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java中四种XML解析技术不完全测试</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java中四种XML解析技术不完" />
+  <meta name="description" content="测试环境： AMD毒龙1.4GOC1.5G、256MDDR333、Windows2000ServerSP4、SunJDK1.4.1+Eclipse2.1+Resin2.1.8，在Debug模式下测试。 XML文件格式如下： ?xmlversion=1.0encoding=GB2312?RESULT" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Java中四种XML解析技术不完全测试</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏电脑知识网 浏览：63次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="357" class="art_content"><h3>
+	测试环境：&nbsp;</h3>
+<br />
+　　AMD毒龙1.4G&nbsp;OC&nbsp;1.5G、256M&nbsp;DDR333、Windows2000&nbsp;Server&nbsp;SP4、Sun&nbsp;JDK&nbsp;1.4.1+Eclipse&nbsp;2.1+Resin&nbsp;2.1.8，在Debug模式下测试。&nbsp;<br />
+<br />
+　　XML文件格式如下：&nbsp;<br />
+<br />
+　　&lt;?xml&nbsp;version=&quot;1.0&quot;&nbsp;encoding=&quot;GB2312&quot;?&gt;&lt;RESULT&gt;&lt;VALUE&gt;&nbsp;<br />
+<br />
+　　&lt;NO&gt;A1234&lt;/NO&gt;&nbsp;<br />
+<br />
+　　&lt;ADDR&gt;四川省XX县XX镇XX路X段XX号&lt;/ADDR&gt;&lt;/VALUE&gt;&lt;VALUE&gt;&nbsp;<br />
+<br />
+　　&lt;NO&gt;B1234&lt;/NO&gt;&nbsp;<br />
+<br />
+　　&lt;ADDR&gt;四川省XX市XX乡XX村XX组&lt;/ADDR&gt;&lt;/VALUE&gt;&lt;/RESULT&gt;&nbsp;<br />
+<h3>
+	测试方法：&nbsp;</h3>
+<br />
+　　让每一种方案分别解析10K、100K、1000K、10000K的XML文件，计算其消耗时间(单位:毫秒)。&nbsp;<br />
+<br />
+　　JSP文件：&nbsp;<br />
+<br />
+　　&lt;%@&nbsp;page&nbsp;contentType=&quot;text/html;&nbsp;charset=gb2312&quot;&nbsp;%&gt;&lt;%@&nbsp;page&nbsp;import=&quot;com.test.*&quot;%&gt;&nbsp;<br />
+<br />
+　　&lt;html&gt;&lt;body&gt;&lt;%String&nbsp;args[]={&quot;&quot;};MyXMLReader.main(args);%&gt;&lt;/body&gt;&lt;/html&gt;&nbsp;<br />
+<br />
+　　测试&nbsp;<br />
+<br />
+　　首先出场的是DOM(JAXP&nbsp;Crimson解析器)&nbsp;<br />
+<br />
+　　DOM是用与平台和语言无关的方式表示XML文档的官方W3C标准。DOM是以层次结构组织的节点或信息片断的集合。这个层次结构允许开发人员在树中寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而DOM被认为是基于树或基于对象的。DOM以及广义的基于树的处理具有几个优点。首先，由于树在内存中是持久的，因此可以修改它以便应用程序能对数据和结构作出更改。它还可以在任何时候在树中上下导航，而不是像SAX那样是一次性的处理。DOM使用起来也要简单得多。&nbsp;<br />
+<br />
+　　另一方面，对于特别大的文档，解析和加载整个文档可能很慢且很耗资源，因此使用其他手段来处理这样的数据会更好。这些基于事件的模型，比如SAX。&nbsp;<br />
+<br />
+　　Bean文件：&nbsp;<br />
+<br />
+　　package&nbsp;com.test;&nbsp;<br />
+<br />
+　　import&nbsp;java.io.*;import&nbsp;java.util.*;import&nbsp;org.w3c.dom.*;import&nbsp;javax.xml.parsers.*;&nbsp;<br />
+<br />
+　　public&nbsp;class&nbsp;MyXMLReader{&nbsp;<br />
+<br />
+　　public&nbsp;static&nbsp;void&nbsp;main(String&nbsp;arge[]){&nbsp;<br />
+<br />
+　　long&nbsp;lasting&nbsp;=System.currentTimeMillis();&nbsp;<br />
+<br />
+　　try{&nbsp;<br />
+<br />
+　　　File&nbsp;f=new&nbsp;File(&quot;data_10k.xml&quot;);&nbsp;<br />
+<br />
+　　　DocumentBuilderFactory&nbsp;factory=DocumentBuilderFactory.newInstance();&nbsp;<br />
+<br />
+　　　DocumentBuilder&nbsp;builder=factory.newDocumentBuilder();&nbsp;<br />
+<br />
+　　　Document&nbsp;doc&nbsp;=&nbsp;builder.parse(f);&nbsp;<br />
+<br />
+　　　NodeList&nbsp;nl&nbsp;=&nbsp;doc.getElementsByTagName(&quot;VALUE&quot;);&nbsp;<br />
+<br />
+　　　for&nbsp;(int&nbsp;i=0;i&lt;nl.getLength();i++){&nbsp;<br />
+<br />
+　　　　System.out.print(&quot;车牌号码:&quot;&nbsp;+&nbsp;doc.getElementsByTagName(&quot;NO&quot;).item(i).getFirstChild().getNodeValue());&nbsp;<br />
+<br />
+　　　　System.out.println(&quot;车主地址:&quot;&nbsp;+&nbsp;doc.getElementsByTagName(&quot;ADDR&quot;).item(i).getFirstChild().getNodeValue());&nbsp;<br />
+<br />
+　　}&nbsp;<br />
+<br />
+　　}catch(Exception&nbsp;e){&nbsp;<br />
+<br />
+　　　e.printStackTrace();&nbsp;<br />
+<br />
+　　}&nbsp;<br />
+<br />
+　　System.out.println(&quot;运行时间：&quot;+(System.currentTimeMillis()&nbsp;-&nbsp;lasting)+&quot;毫秒&quot;);}}&nbsp;<br />
+<br />
+　　10k消耗时间：265&nbsp;203&nbsp;219&nbsp;172&nbsp;<br />
+<br />
+　　100k消耗时间：9172&nbsp;9016&nbsp;8891&nbsp;9000&nbsp;<br />
+<br />
+　　1000k消耗时间：691719&nbsp;675407&nbsp;708375&nbsp;739656&nbsp;<br />
+<br />
+　　10000k消耗时间：OutOfMemoryError&nbsp;<br />
+<br />
+　　接着是SAX&nbsp;<br />
+<br />
+　　这种处理的优点非常类似于流媒体的优点。分析能够立即开始，而不是等待所有的数据被处理。而且，由于应用程序只是在读取数据时检查数据，因此不需要将数据存储在内存中。这对于大型文档来说是个巨大的优点。事实上，应用程序甚至不必解析整个文档；它可以在某个条件得到满足时停止解析。一般来说，SAX还比它的替代者DOM快许多。&nbsp;<br />
+　　选择DOM还是选择SAX？&nbsp;<br />
+<br />
+　　对于需要自己编写代码来处理XML文档的开发人员来说，&nbsp;<br />
+<br />
+　　选择DOM还是SAX解析模型是一个非常重要的设计决策。&nbsp;<br />
+<br />
+　　DOM采用建立树形结构的方式访问XML文档，而SAX采用的事件模型。&nbsp;<br />
+<br />
+　　DOM解析器把XML文档转化为一个包含其内容的树，并可以对树进行遍历。用DOM解析模型的优点是编程容易，开发人员只需要调用建树的指令，然后利用navigation&nbsp;APIs访问所需的树节点来完成任务。可以很容易的添加和修改树中的元素。然而由于使用DOM解析器的时候需要处理整个XML文档，所以对性能和内存的要求比较高，尤其是遇到很大的XML文件的时候。由于它的遍历能力，DOM解析器常用于XML文档需要频繁的改变的服务中。&nbsp;<br />
+<br />
+　　SAX解析器采用了基于事件的模型，它在解析XML文档的时候可以触发一系列的事件，当发现给定的tag的时候，它可以激活一个回调方法，告诉该方法制定的标签已经找到。SAX对内存的要求通常会比较低，因为它让开发人员自己来决定所要处理的tag。特别是当开发人员只需要处理文档中所包含的部分数据时，SAX这种扩展能力得到了更好的体现。但用SAX解析器的时候编码工作会比较困难，而且很难同时访问同一个文档中的多处不同数据。&nbsp;<br />
+<br />
+　　Bean文件：&nbsp;<br />
+<br />
+　　package&nbsp;com.test;import&nbsp;org.xml.sax.*;import&nbsp;org.xml.sax.helpers.*;import&nbsp;javax.xml.parsers.*;&nbsp;<br />
+<br />
+　　public&nbsp;class&nbsp;MyXMLReader&nbsp;extends&nbsp;DefaultHandler&nbsp;{&nbsp;<br />
+<br />
+　　java.util.Stack&nbsp;tags&nbsp;=&nbsp;new&nbsp;java.util.Stack();&nbsp;<br />
+<br />
+　　public&nbsp;MyXMLReader()&nbsp;{&nbsp;<br />
+<br />
+　　super();}&nbsp;<br />
+<br />
+　　public&nbsp;static&nbsp;void&nbsp;main(String&nbsp;args[])&nbsp;{&nbsp;<br />
+<br />
+　　long&nbsp;lasting&nbsp;=&nbsp;System.currentTimeMillis();&nbsp;<br />
+<br />
+　　try&nbsp;{&nbsp;<br />
+<br />
+　　　SAXParserFactory&nbsp;sf&nbsp;=&nbsp;SAXParserFactory.newInstance();&nbsp;<br />
+<br />
+　　　SAXParser&nbsp;sp&nbsp;=&nbsp;sf.newSAXParser();&nbsp;<br />
+<br />
+　　　MyXMLReader&nbsp;reader&nbsp;=&nbsp;new&nbsp;MyXMLReader();&nbsp;<br />
+<br />
+　　　sp.parse(new&nbsp;InputSource(&quot;data_10k.xml&quot;),&nbsp;reader);&nbsp;<br />
+<br />
+　　}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{&nbsp;<br />
+<br />
+　　　e.printStackTrace();&nbsp;<br />
+<br />
+　　}&nbsp;<br />
+<br />
+　　System.out.println(&quot;运行时间：&quot;&nbsp;+&nbsp;(System.currentTimeMillis()&nbsp;-&nbsp;lasting)&nbsp;+&nbsp;&quot;毫秒&quot;);}&nbsp;<br />
+<br />
+　　public&nbsp;void&nbsp;characters(char&nbsp;ch[],&nbsp;int&nbsp;start,&nbsp;int&nbsp;length)&nbsp;throws&nbsp;SAXException&nbsp;{&nbsp;<br />
+<br />
+　　String&nbsp;tag&nbsp;=&nbsp;(String)&nbsp;tags.peek();&nbsp;<br />
+<br />
+　　if&nbsp;(tag.equals(&quot;NO&quot;))&nbsp;{&nbsp;<br />
+<br />
+　　　System.out.print(&quot;车牌号码：&quot;&nbsp;+&nbsp;new&nbsp;String(ch,&nbsp;start,&nbsp;length));}if&nbsp;(tag.equals(&quot;ADDR&quot;))&nbsp;{&nbsp;<br />
+<br />
+　　System.out.println(&quot;地址:&quot;&nbsp;+&nbsp;new&nbsp;String(ch,&nbsp;start,&nbsp;length));}}&nbsp;<br />
+<br />
+　　public&nbsp;void&nbsp;startElement(String&nbsp;uri,String&nbsp;localName,String&nbsp;qName,Attributes&nbsp;attrs)&nbsp;{&nbsp;<br />
+<br />
+　　tags.push(qName);}}&nbsp;<br />
+<br />
+　　10k消耗时间：110&nbsp;47&nbsp;109&nbsp;78&nbsp;<br />
+<br />
+　　100k消耗时间：344&nbsp;406&nbsp;375&nbsp;422&nbsp;<br />
+<br />
+　　1000k消耗时间：3234&nbsp;3281&nbsp;3688&nbsp;3312&nbsp;<br />
+<br />
+　　10000k消耗时间：32578&nbsp;34313&nbsp;31797&nbsp;31890&nbsp;30328&nbsp;<br />
+<br />
+　　然后是JDOM&nbsp;http://www.jdom.org/&nbsp;<br />
+<br />
+　　JDOM的目的是成为Java特定文档模型，它简化与XML的交互并且比使用DOM实现更快。由于是第一个Java特定模型，JDOM一直得到大力推广和促进。正在考虑通过&ldquo;Java规范请求JSR-102&rdquo;将它最终用作&ldquo;Java标准扩展&rdquo;。从2000年初就已经开始了JDOM开发。&nbsp;<br />
+<br />
+　　JDOM与DOM主要有两方面不同。首先，JDOM仅使用具体类而不使用接口。这在某些方面简化了API，但是也限制了灵活性。第二，API大量使用了Collections类，简化了那些已经熟悉这些类的Java开发者的使用。&nbsp;<br />
+<br />
+　　JDOM文档声明其目的是&ldquo;使用20%(或更少)的精力解决80%(或更多)Java/XML问题&rdquo;(根据学习曲线假定为20%)。JDOM对于大多数Java/XML应用程序来说当然是有用的，并且大多数开发者发现API比DOM容易理解得多。JDOM还包括对程序行为的相当广泛检查以防止用户做任何在XML中无意义的事。然而，它仍需要您充分理解XML以便做一些超出基本的工作(或者甚至理解某些情况下的错误)。这也许是比学习DOM或JDOM接口都更有意义的工作。&nbsp;<br />
+<br />
+　　JDOM自身不包含解析器。它通常使用SAX2解析器来解析和验证输入XML文档(尽管它还可以将以前构造的DOM表示作为输入)。它包含一些转换器以将JDOM表示输出成SAX2事件流、DOM模型或XML文本文档。JDOM是在Apache许可证变体下发布的开放源码。&nbsp;<br />
+<br />
+　　Bean文件：&nbsp;<br />
+<br />
+　　package&nbsp;com.test;&nbsp;<br />
+<br />
+　　import&nbsp;java.io.*;import&nbsp;java.util.*;import&nbsp;org.jdom.*;import&nbsp;org.jdom.input.*;&nbsp;<br />
+<br />
+　　public&nbsp;class&nbsp;MyXMLReader&nbsp;{&nbsp;<br />
+<br />
+　　public&nbsp;static&nbsp;void&nbsp;main(String&nbsp;arge[])&nbsp;{&nbsp;<br />
+<br />
+　　long&nbsp;lasting&nbsp;=&nbsp;System.currentTimeMillis();&nbsp;<br />
+<br />
+　　try&nbsp;{&nbsp;<br />
+<br />
+　　　SAXBuilder&nbsp;builder&nbsp;=&nbsp;new&nbsp;SAXBuilder();&nbsp;<br />
+<br />
+　　　Document&nbsp;doc&nbsp;=&nbsp;builder.build(new&nbsp;File(&quot;data_10k.xml&quot;));&nbsp;<br />
+<br />
+　　　Element&nbsp;foo&nbsp;=&nbsp;doc.getRootElement();&nbsp;<br />
+<br />
+　　　List&nbsp;allChildren&nbsp;=&nbsp;foo.getChildren();&nbsp;<br />
+<br />
+　　　for(int&nbsp;i=0;i&lt;allChildren.size();i++)&nbsp;{&nbsp;<br />
+<br />
+　　　　System.out.print(&quot;车牌号码:&quot;&nbsp;+&nbsp;((Element)allChildren.get(i)).getChild(&quot;NO&quot;).getText());&nbsp;<br />
+<br />
+　　　　System.out.println(&quot;车主地址:&quot;&nbsp;+&nbsp;((Element)allChildren.get(i)).getChild(&quot;ADDR&quot;).getText());&nbsp;<br />
+<br />
+　　　}&nbsp;<br />
+<br />
+　　}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{&nbsp;<br />
+<br />
+　　　e.printStackTrace();&nbsp;<br />
+<br />
+　　}&nbsp;<br />
+<br />
+　　System.out.println(&quot;运行时间：&quot;&nbsp;+&nbsp;(System.currentTimeMillis()&nbsp;-&nbsp;lasting)&nbsp;+&nbsp;&quot;毫秒&quot;);}}&nbsp;<br />
+<br />
+　　10k消耗时间：125&nbsp;62&nbsp;187&nbsp;94&nbsp;<br />
+<br />
+　　100k消耗时间：704&nbsp;625&nbsp;640&nbsp;766&nbsp;<br />
+<br />
+　　1000k消耗时间：27984&nbsp;30750&nbsp;27859&nbsp;30656&nbsp;<br />
+<br />
+　　10000k消耗时间：OutOfMemoryError&nbsp;<br />
+<br />
+　　最后是DOM4J&nbsp;http://dom4j.sourceforge.net/&nbsp;<br />
+<br />
+　　虽然DOM4J代表了完全独立的开发结果，但最初，它是JDOM的一种智能分支。它合并了许多超出基本XML文档表示的功能，包括集成的XPath支持、XML&nbsp;Schema支持以及用于大文档或流化文档的基于事件的处理。它还提供了构建文档表示的选项，它通过DOM4J&nbsp;API和标准DOM接口具有并行访问功能。从2000下半年开始，它就一直处于开发之中。&nbsp;<br />
+<br />
+　　为支持所有这些功能，DOM4J使用接口和抽象基本类方法。DOM4J大量使用了API中的Collections类，但是在许多情况下，它还提供一些替代方法以允许更好的性能或更直接的编码方法。直接好处是，虽然DOM4J付出了更复杂的API的代价，但是它提供了比JDOM大得多的灵活性。&nbsp;<br />
+<br />
+　　在添加灵活性、XPath集成和对大文档处理的目标时，DOM4J的目标与JDOM是一样的：针对Java开发者的易用性和直观操作。它还致力于成为比JDOM更完整的解决方案，实现在本质上处理所有Java/XML问题的目标。在完成该目标时，它比JDOM更少强调防止不正确的应用程序行为。&nbsp;<br />
+<br />
+　　DOM4J是一个非常非常优秀的Java&nbsp;XML&nbsp;API，具有性能优异、功能强大和极端易用使用的特点，同时它也是一个开放源代码的软件。如今你可以看到越来越多的Java软件都在使用DOM4J来读写XML，特别值得一提的是连Sun的JAXM也在用DOM4J。&nbsp;<br />
+<br />
+　　Bean文件：&nbsp;<br />
+<br />
+　　package&nbsp;com.test;&nbsp;<br />
+<br />
+　　import&nbsp;java.io.*;import&nbsp;java.util.*;import&nbsp;org.dom4j.*;import&nbsp;org.dom4j.io.*;&nbsp;<br />
+<br />
+　　public&nbsp;class&nbsp;MyXMLReader&nbsp;{&nbsp;<br />
+<br />
+　　public&nbsp;static&nbsp;void&nbsp;main(String&nbsp;arge[])&nbsp;{&nbsp;<br />
+<br />
+　　long&nbsp;lasting&nbsp;=&nbsp;System.currentTimeMillis();&nbsp;<br />
+<br />
+　　try&nbsp;{&nbsp;<br />
+<br />
+　　　File&nbsp;f&nbsp;=&nbsp;new&nbsp;File(&quot;data_10k.xml&quot;);&nbsp;<br />
+<br />
+　　　SAXReader&nbsp;reader&nbsp;=&nbsp;new&nbsp;SAXReader();&nbsp;<br />
+<br />
+　　　Document&nbsp;doc&nbsp;=&nbsp;reader.read(f);&nbsp;<br />
+<br />
+　　　Element&nbsp;root&nbsp;=&nbsp;doc.getRootElement();&nbsp;<br />
+<br />
+　　　Element&nbsp;foo;&nbsp;<br />
+<br />
+　　　for&nbsp;(Iterator&nbsp;i&nbsp;=&nbsp;root.elementIterator(&quot;VALUE&quot;);&nbsp;i.hasNext();)&nbsp;{&nbsp;<br />
+<br />
+　　　　foo&nbsp;=&nbsp;(Element)&nbsp;i.next();&nbsp;<br />
+<br />
+　　　　System.out.print(&quot;车牌号码:&quot;&nbsp;+&nbsp;foo.elementText(&quot;NO&quot;));&nbsp;<br />
+<br />
+　　　　System.out.println(&quot;车主地址:&quot;&nbsp;+&nbsp;foo.elementText(&quot;ADDR&quot;));&nbsp;<br />
+<br />
+　　　}&nbsp;<br />
+<br />
+　　}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{&nbsp;<br />
+<br />
+　　　e.printStackTrace();&nbsp;<br />
+<br />
+　　}&nbsp;<br />
+<br />
+　　System.out.println(&quot;运行时间：&quot;&nbsp;+&nbsp;(System.currentTimeMillis()&nbsp;-&nbsp;lasting)&nbsp;+&nbsp;&quot;毫秒&quot;);}}&nbsp;<br />
+<br />
+　　10k消耗时间：109&nbsp;78&nbsp;109&nbsp;31&nbsp;<br />
+<br />
+　　100k消耗时间：297&nbsp;359&nbsp;172&nbsp;312&nbsp;<br />
+<br />
+　　1000k消耗时间：2281&nbsp;2359&nbsp;2344&nbsp;2469&nbsp;<br />
+<br />
+　　10000k消耗时间：20938&nbsp;19922&nbsp;20031&nbsp;21078&nbsp;<br />
+<br />
+　　JDOM和DOM在性能测试时表现不佳，在测试10M文档时内存溢出。在小文档情况下还值得考虑使用DOM和JDOM。虽然JDOM的开发者已经说明他们期望在正式发行版前专注性能问题，但是从性能观点来看，它确实没有值得推荐之处。另外，DOM仍是一个非常好的选择。DOM实现广泛应用于多种编程语言。它还是许多其它与XML相关的标准的基础，因为它正式获得W3C推荐(与基于非标准的Java模型相对)，所以在某些类型的项目中可能也需要它(如在JavaScript中使用DOM)。&nbsp;<br />
+<br />
+　　SAX表现较好，这要依赖于它特定的解析方式。一个SAX检测即将到来的XML流，但并没有载入到内存(当然当XML流被读入时，会有部分文档暂时隐藏在内存中)。&nbsp;<br />
+<br />
+　　无疑，DOM4J是这场测试的获胜者，目前许多开源项目中大量采用DOM4J，例如大名鼎鼎的Hibernate也用DOM4J来读取XML配置文件。如果不考虑可移植性，那就采用DOM4J吧。</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>

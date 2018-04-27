@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML和CSS编写漂亮正规的网页代码</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="HTML,和,CSS,编写,漂亮,正规,的,网页,代码,养成" />
+  <meta name="description" content="养成文章分段的好习惯 建议用p标签给文章分段，代码如是：p文章正文/p。 值得一提的是很多网页都没有首行缩进的习惯，有的最多也是在编辑器下敲几个空格，这里给出用css的text-i" />
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:300px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <ol class="breadcrumb">
+      </ol>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>HTML和CSS编写漂亮正规的网页代码</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：未知 浏览：17次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1478" class="art_content"><p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>养成文章分段的好习惯</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	建议用p标签给文章分段，代码如是：&lt;p&gt;文章正文&lt;/p&gt;。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	值得一提的是很多网页都没有首行缩进的习惯，有的最多也是在编辑器下敲几个空格，这里给出用css的text-indent属性实现的首行缩进代码：&lt;p style=&quot;text-indent:2em;&quot;&gt;文章正文&lt;/p&gt;，缩进单位我用的2em，表示两个汉字，勿用百分比或者px，pt等其他单位长度，用em可以在页面字体和版式缩放的情况下保持两个汉字的缩进。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	对于一些喜欢在文章中挂上图片的网页中在这里我推荐用img标签的align属性设置为left或right就可以轻松实现图片的悬挂和正文的绕排。也可以用div标签的float属性来进行左右的悬挂实现文字环绕，更棒的是可以实现如Google Adsense广告的左右悬挂，代码：&lt;div style=&quot;height:100%;width:150px;float:right;&quot;&gt;这里可以放图片链接，或者像国外的网站那样放入google adsense代码&lt;/div&gt;。</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	用list进行列表，用line-height设置行高</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	用样式表list的&lt;ul&gt;&lt;ol&gt;&lt;li&gt;等标签进行一些子标题条目的罗列，代码：&lt;ul&gt;&lt;li&gt;问题一&lt;/li&gt;&lt;li&gt;问题二&lt;/li&gt;&lt;/ul&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	正文字体大小可按个人喜爱设置，一般用系统默认的(13pt, 宋体和courier new)，如果正文需要一段大字体时而你的文字出现过大而堆砌，可在段落的&lt;p&gt;上加上样式：line-height:120%;这表示行高是字体的1.2倍</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>超长正文的排版技巧</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	虽然我们在发表文章时都知道文章最好是短小精悍为佳，但也避免不了一些特殊性质的文章需要长篇幅，这个时候建议你用&lt;h1&gt;&lt;h2&gt;...&lt;h6&gt;等不同级别设置子标题，并且在文章顶部用&lt;dir&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;这四个定义列表标签，显示的效果就如同word中的目录/索引那种样式，这样可增加文章的阅读性和条理性，微软的MSDN里的很多文章都是这样进行编排。要想实现链接跳转功能可用&lt;a name=&quot;&quot;&gt;这个锚点标签修饰具体的子标题实现，代码：&lt;a name=&quot;list1&quot;&gt;&lt;h1&gt;标题一&lt;/h1&gt;&lt;/a&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>其他一些在网页中常用的html</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	引用他人文章的片段推荐用&lt;blockquote&gt;标签，这个标签可以自动实现页面左右两端的缩排，一般默认缩排40像素，例如：&lt;blockquote style=&quot;background-color:#f7f7f7;border:1px dotted #dedbde;padding:10px;&quot;&gt;这是一个引用样式的例子&lt;/blockquote&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	显示：</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>这是一个引用样式的例子</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	字体的html代码大家可能相对熟悉些，如加粗用&lt;b&gt;、斜体用&lt;i&gt;、下划线用&lt;u&gt;、字体颜色大小等用&lt;font&gt;，你也可以用&lt;span style=&quot;&quot;&gt;的方式或许更方便和更美观，代码：&lt;span style=&quot;font-weight:bold;font-style:italic;text-decoration:underline;font-color:blue;&quot;&gt;加粗、斜体、下划线、蓝色字体&lt;/span&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	想实现正文显示html代码的最简单的方法就是加入&lt;xmp&gt;标签，如：&lt;xmp&gt;&lt;a href=&quot;<a href="http://www.webjx.com/" style="color: rgb(30, 62, 116); text-decoration: none;">http://www.webjx.com/</a>&quot;&gt;网页教学网&lt;/a&gt;&lt;/xmp&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>正确使用a标签</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	超链接是制作网页中用的最多的html标签，它用来链接到其他的文章或者站点链接，建议大家用a标签时将下列属性都添加上：</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	href：设置链接的url地址或锚点</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<span style="text-indent: 2em;">target：设置鼠标点击链接后的目标窗口或框架页面，一般常用的是target=&quot;_blank&quot;，表示新开一个窗口打开链接，向在当前页面打开链接就不用加这个属性了。</span></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	title：设置鼠标移动到链接上时显示的提示信息</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	rel：这个是最近才开始流行的新属性。rel=&quot;nofollow&quot;表示禁止搜索引擎从这个站点链接过去而造成链接网址的pagerank值变化，常用来防止spam link；rel=&quot;tag&quot;这是为technorati设置让其以这个链接的文字作为该页面的tag标记</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	示例：&lt;a href=http://www.webjx.com/ target=&quot;_blank&quot; title=&quot;网页教学网&quot; rel=&quot;nofollow&quot;&gt;网页教学网&lt;/a&gt;</p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	<strong>显示：网页教学网</strong></p>
+<p style="margin: 0px 0px 15px; padding: 0px; color: rgb(37, 37, 37); line-height: 28px; text-indent: 2em; font-family: tahoma, arial, 宋体; font-size: 14px;">
+	文章中的链接不可过多，太多的链接会让读者阅读时有压抑感和紧张感，如果链接的颜色和文本颜色反差过大，也会让人看起来有眼花缭乱的感觉。最好的链接效果是淡淡的颜色反差或加上下划线，并填写title属性，标明这个链接的内容是什么或者为什么要链接。有时候也可以在文章末尾列表的方式附上本文相关的链接并加以注释。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/linux3' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/windows104' >Win10系统快速关机方法大全【图文演示】</a></li><li><a href='/zhanzhang/cxy19' >一个人的网站开发</a></li><li><a href='/zhanzhang/cxy20' >关于对大龄程序员的认识</a></li><li><a href='/zhanzhang/cxy21' >程序员究竟可以干多少年</a></li><li><a href='/zhanzhang/cxy22' >程序员：选择效率，还是选择质量？</a></li><li><a href='/zhanzhang/cxy24' >失败是成功之母，但这10个错误初创公司最好还是别犯</a></li><li><a href='/linux58' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/linux59' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/linux60' >linux kill 关闭进程命令</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+</body>
+</html>
