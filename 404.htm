@@ -24,7 +24,7 @@ color:#545454;
     <td align="center"><span id="tiao">3</span><a href="javascript:countDown"></a></td>
   </tr></table>
 <script language="javascript" >
-function countDown(secs){
+/*function countDown(secs){
   tiao.innerText=secs;
 if(secs==1){
 	window.location.href="http://www.flypeng.com";
@@ -34,7 +34,12 @@ if(secs==1){
 	}
   }
 
-  countDown(3);
+  countDown(3);*/
+  var search = window.location.search;
+  console.log(search);
+  var url = search.toLowerCase();
+  console.log(url);
+
 </script>
 </body>
 </html>
