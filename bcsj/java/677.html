@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="Java,Java执行sql语句并获取" />
   <meta name="description" content="当我们插入一条数据的时候，我们很多时候都想立刻获取当前插入的主键值返回以做它用。我们通常的做法有如下几种： 1、先 select max(id) +1 ，然后将+1后的值作为主键插入数据库； 2、" />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
   <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
   <link href="/templets/default/css/header.css" rel="stylesheet">
 </head>
@@ -304,6 +308,13 @@
 
     </div>
   </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
   <script type="text/javascript">
     document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
       var img = $(".art_content p").find("img")
@@ -317,8 +328,5 @@
     var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
     document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
   </script>
-  <script src="/templets/default/js/header.js"></script>
-  <script src="/templets/default/js/article.js"></script>
-  <script src="/templets/default/js/page-dir.js"></script>
 </body>
 </html>
