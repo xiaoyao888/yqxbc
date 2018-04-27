@@ -35,10 +35,9 @@ if(secs==1){
   }
 
   countDown(3);*/
-  var search = window.location.search;
-  console.log(search);
-  var url = search.toLowerCase();
-  console.log(url);
+  var pathname = window.location.pathname;  
+  var url = pathname.toLowerCase();
+  window.location.href="http://www.flypeng.com/"+pathname; 
 
 </script>
 </body>
