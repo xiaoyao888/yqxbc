@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spring boot中Redis的使用,如何Session共享</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Session共享,Redis" />
+  <meta name="description" content="spring boot对常用的数据库支持外，对nosql 数据库也进行了封装自动化。 redis介绍 Redis是目前业界使用最广泛的内存数据存储。相比memcached，Redis支持更丰富的数据结构，例如hashes, lists," />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring boot中Redis的使用,如何Session共享</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏编程网 浏览：9次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1628" class="art_content"><p>
+	spring boot对常用的数据库支持外，对nosql 数据库也进行了封装自动化。</p>
+<h2 id="redis介绍">
+	redis介绍</h2>
+<p>
+	Redis是目前业界使用最广泛的内存数据存储。相比memcached，Redis支持更丰富的数据结构，例如hashes, lists, sets等，同时支持数据持久化。除此之外，Redis还提供一些类数据库的特性，比如事务，HA，主从库。可以说Redis兼具了缓存系统和数据库的一些特性，因此有着丰富的应用场景。本文介绍Redis在Spring Boot中两个典型的应用场景。</p>
+<h2 id="如何使用">
+	如何使用</h2>
+<p>
+	1、引入 spring-boot-starter-redis</p>
+<div>
+	<pre>
+&lt;dependency&gt;  
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  
+    &lt;artifactId&gt;spring-boot-starter-redis&lt;/artifactId&gt;  
+&lt;/dependency&gt;  
+</pre>
+</div>
+<p>
+	2、添加配置文件</p>
+<div>
+	<pre>
+# REDIS (RedisProperties)
+# Redis数据库索引（默认为0）
+spring.redis.database=0  
+# Redis服务器地址
+spring.redis.host=192.168.0.58
+# Redis服务器连接端口
+spring.redis.port=6379  
+# Redis服务器连接密码（默认为空）
+spring.redis.password=  
+# 连接池最大连接数（使用负值表示没有限制）
+spring.redis.pool.max-active=8  
+# 连接池最大阻塞等待时间（使用负值表示没有限制）
+spring.redis.pool.max-wait=-1  
+# 连接池中的最大空闲连接
+spring.redis.pool.max-idle=8  
+# 连接池中的最小空闲连接
+spring.redis.pool.min-idle=0  
+# 连接超时时间（毫秒）
+spring.redis.timeout=0  
+</pre>
+</div>
+<p>
+	3、添加cache的配置类</p>
+<div>
+	<pre>
+@Configuration
+@EnableCaching
+public class RedisConfig extends CachingConfigurerSupport{
+	
+	@Bean
+	public KeyGenerator keyGenerator() {
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(target.getClass().getName());
+                sb.append(method.getName());
+                for (Object obj : params) {
+                    sb.append(obj.toString());
+                }
+                return sb.toString();
+            }
+        };
+    }
+
+    @SuppressWarnings(&quot;rawtypes&quot;)
+    @Bean
+    public CacheManager cacheManager(RedisTemplate redisTemplate) {
+        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
+        //设置缓存过期时间
+        //rcm.setDefaultExpiration(60);//秒
+        return rcm;
+    }
+    
+    @Bean
+    public RedisTemplate&lt;String, String&gt; redisTemplate(RedisConnectionFactory factory) {
+        StringRedisTemplate template = new StringRedisTemplate(factory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.afterPropertiesSet();
+        return template;
+    }
+
+}
+
+</pre>
+</div>
+<p>
+	3、好了，接下来就可以直接使用了</p>
+<div>
+	<pre>
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(Application.class)
+public class TestRedis {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+    @Test
+    public void test() throws Exception {
+        stringRedisTemplate.opsForValue().set(&quot;aaa&quot;, &quot;111&quot;);
+        Assert.assertEquals(&quot;111&quot;, stringRedisTemplate.opsForValue().get(&quot;aaa&quot;));
+    }
+    
+    @Test
+    public void testObj() throws Exception {
+        User user=new User(&quot;aa@126.com&quot;, &quot;aa&quot;, &quot;aa123456&quot;, &quot;aa&quot;,&quot;123&quot;);
+        ValueOperations&lt;String, User&gt; operations=redisTemplate.opsForValue();
+        operations.set(&quot;com.neox&quot;, user);
+        operations.set(&quot;com.neo.f&quot;, user,1,TimeUnit.SECONDS);
+        Thread.sleep(1000);
+        //redisTemplate.delete(&quot;com.neo.f&quot;);
+        boolean exists=redisTemplate.hasKey(&quot;com.neo.f&quot;);
+        if(exists){
+        	System.out.println(&quot;exists is true&quot;);
+        }else{
+        	System.out.println(&quot;exists is false&quot;);
+        }
+       // Assert.assertEquals(&quot;aa&quot;, operations.get(&quot;com.neo.f&quot;).getUserName());
+    }
+}
+
+</pre>
+</div>
+<p>
+	以上都是手动使用的方式，如何在查找数据库的时候自动使用缓存呢，看下面；</p>
+<p>
+	4、自动根据方法生成缓存</p>
+<div>
+	<pre>
+@RequestMapping(&quot;/getUser&quot;)
+@Cacheable(value=&quot;user-key&quot;)
+public User getUser() {
+    User user=userRepository.findByUserName(&quot;aa&quot;);
+    System.out.println(&quot;若下面没出现&ldquo;无缓存的时候调用&rdquo;字样且能打印出数据表示测试成功&quot;);  
+    return user;
+}
+</pre>
+</div>
+<p>
+	其中value的值就是缓存到redis中的key</p>
+<h2 id="共享session-spring-session-data-redis">
+	共享Session-spring-session-data-redis</h2>
+<p>
+	分布式系统中，sessiong共享有很多的解决方案，其中托管到缓存中应该是最常用的方案之一，</p>
+<h3 id="spring-session官方说明">
+	Spring Session官方说明</h3>
+<p>
+	Spring Session provides an API and implementations for managing a user&rsquo;s session information.</p>
+<h3 id="如何使用-1">
+	如何使用</h3>
+<p>
+	1、引入依赖</p>
+<div>
+	<pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.session&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-session-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</pre>
+</div>
+<p>
+	2、Session配置：</p>
+<div>
+	<pre>
+@Configuration
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400*30)
+public class SessionConfig {
+}
+</pre>
+</div>
+<blockquote>
+	<p>
+		maxInactiveIntervalInSeconds: 设置Session失效时间，使用Redis Session之后，原Boot的server.session.timeout属性不再生效</p>
+</blockquote>
+<p>
+	好了，这样就配置好了，我们来测试一下</p>
+<p>
+	3、测试</p>
+<p>
+	添加测试方法获取sessionid</p>
+<div>
+	<pre>
+@RequestMapping(&quot;/uid&quot;)
+    String uid(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute(&quot;uid&quot;);
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        session.setAttribute(&quot;uid&quot;, uid);
+        return session.getId();
+    }
+</pre>
+</div>
+<p>
+	登录redis 输入&nbsp;keys &#39;*sessions*&#39;</p>
+<div>
+	<pre>
+t&lt;spring:session:sessions:db031986-8ecc-48d6-b471-b137a3ed6bc4
+t(spring:session:expirations:1472976480000
+</pre>
+</div>
+<p>
+	其中 1472976480000为失效时间，意思是这个时间后session失效，db031986-8ecc-48d6-b471-b137a3ed6bc4&nbsp;为sessionId,登录http://localhost:8080/uid 发现会一致，就说明session 已经在redis里面进行有效的管理了。</p>
+<h3 id="如何在两台或者多台中共享session">
+	如何在两台或者多台中共享session</h3>
+<p>
+	其实就是按照上面的步骤在另一个项目中再次配置一次，启动后自动就进行了session共享。</p>
+<p>
+	<a href="https://github.com/ityouknow/spring-boot-examples">示例代码</a></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现 - CSDN博客</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li><li><a href='/dnzs/1650.html'>excel对号怎么打？excel对号输入3种方法</a></li><li><a href='/dnzs/1649.html'>笔记本内存条可以通用吗</a></li><li><a href='/dnzs/1648.html'>qqexternal.exe是什么进程?</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/czxt/linux/3.html' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/czxt/linux/58.html' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/czxt/linux/59.html' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/czxt/linux/60.html' >linux kill 关闭进程命令</a></li><li><a href='/czxt/linux/61.html' >linux下find命令的用法二</a></li><li><a href='/czxt/linux/62.html' >Linux中find常见用法示例用法一</a></li><li><a href='/czxt/linux/63.html' >linux下find查找命令用法(一)</a></li><li><a href='/czxt/linux/64.html' >linux系统查看硬件配置命令是什么</a></li><li><a href='/czxt/linux/65.html' >Linux系统 sort命令如何使用</a></li><li><a href='/czxt/linux/66.html' >Linux系统如何配置DHCP服务</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

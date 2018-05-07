@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linux（CentOS）下，下载安装Nginx并配置</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Linux,CentOS,下,下载,安装,Nginx,并,配" />
+  <meta name="description" content="1、准备工作 选首先安装这几个软件：GCC，PCRE（Perl Compatible Regular Expression），zlib，OpenSSL。 Nginx是C写的，需要用GCC编译；Nginx的Rewrite和HTTP模块会用到PCRE；Nginx中的Gzip用到zlib； 用命令" />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Linux（CentOS）下，下载安装Nginx并配置</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏编程网 浏览：62次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="917" class="art_content"><strong style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">1、准备工作</strong><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">选首先安装这几个软件：GCC，PCRE（Perl Compatible Regular Expression），zlib，OpenSSL。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">Nginx是C写的，需要用GCC编译；Nginx的Rewrite和HTTP模块会用到PCRE；Nginx中的Gzip用到zlib；</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">用命令&ldquo;# gcc&rdquo;，查看gcc是否安装；如果出现&ldquo;gcc: no input files&rdquo;信息，说明已经安装好了。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">否则，就需要用命令&ldquo;# yum install gcc&rdquo;，进行安装了！一路可能需要多次输入y，进行确认。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">安装好后，可以再用命令&ldquo;#gcc&rdquo;测试，或者用命令&ldquo;# gcc -v&rdquo;查看其版本号。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">同样方法，用如下命令安装PCRE，zlib，OpenSSL（其中devel，是develop开发包的意思）：</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_plain" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 936.53125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<br />
+			<div style="position: absolute; left: 481px; top: 651px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">#&nbsp;yum&nbsp;install&nbsp;-y&nbsp;pcre&nbsp;pcre-devel&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;yum&nbsp;install&nbsp;-y&nbsp;zlib&nbsp;zlib-devel&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;yum&nbsp;install&nbsp;-y&nbsp;openssl&nbsp;openssl-devel&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<strong style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">2、下载并安装</strong><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">创建目录（nginx-src）并进去；然后，从官方地址（http://nginx.org/）下载，解压，配置，编译，安装：</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_plain" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 936.53125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<br />
+			<div style="position: absolute; left: 481px; top: 852px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">#&nbsp;mkdir&nbsp;nginx-src&nbsp;&amp;&amp;&nbsp;cd&nbsp;nginx-src&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;wget&nbsp;http://nginx.org/download/nginx-1.7.3.tar.gz&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;tar&nbsp;xzf&nbsp;nginx-1.7.3.tar.gz&nbsp;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;cd&nbsp;nginx-1.7.3&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;./configure&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;make&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;make&nbsp;install&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;whereis&nbsp;nginx&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">nginx:&nbsp;/usr/local/nginx&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">默认的安装路径为：/usr/local/nginx；跳转到其目录下sbin路径下，便可以启动或停止它了。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_plain" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 936.53125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<br />
+			<div style="position: absolute; left: 481px; top: 1109px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">#&nbsp;./nginx&nbsp;-h&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">nginx&nbsp;version:&nbsp;nginx/1.7.3&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">Usage:&nbsp;nginx&nbsp;[-?hvVtq]&nbsp;[-s&nbsp;signal]&nbsp;[-c&nbsp;filename]&nbsp;[-p&nbsp;prefix]&nbsp;[-g&nbsp;directives]&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">Options:&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-?,-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;this&nbsp;help&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;show&nbsp;version&nbsp;and&nbsp;exit&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;show&nbsp;version&nbsp;and&nbsp;configure&nbsp;options&nbsp;then&nbsp;exit&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;test&nbsp;configuration&nbsp;and&nbsp;exit&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;suppress&nbsp;non-error&nbsp;messages&nbsp;during&nbsp;configuration&nbsp;testing&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-s&nbsp;signal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;send&nbsp;signal&nbsp;to&nbsp;a&nbsp;master&nbsp;process:&nbsp;stop,&nbsp;quit,&nbsp;reopen,&nbsp;reload&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-p&nbsp;prefix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;set&nbsp;prefix&nbsp;path&nbsp;(default:&nbsp;/usr/local/nginx/)&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-c&nbsp;filename&nbsp;&nbsp;&nbsp;:&nbsp;set&nbsp;configuration&nbsp;file&nbsp;(default:&nbsp;conf/nginx.conf)&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;-g&nbsp;directives&nbsp;:&nbsp;set&nbsp;global&nbsp;directives&nbsp;out&nbsp;of&nbsp;configuration&nbsp;file&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">启动：nginx</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">停止：nginx -s stop</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<strong style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">3、添加到系统服务</strong><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">使用命令&ldquo;# vi /etc/init.d/nginx&rdquo;，打开编辑器，输入如下内容：</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_plain" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 936.53125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<br />
+			<div style="position: absolute; left: 481px; top: 1542px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">#!/bin/sh&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;chkconfig:&nbsp;2345&nbsp;85&nbsp;15&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;Startup&nbsp;script&nbsp;for&nbsp;the&nbsp;nginx&nbsp;Web&nbsp;Server&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;description:&nbsp;nginx&nbsp;is&nbsp;a&nbsp;World&nbsp;Wide&nbsp;Web&nbsp;server.&nbsp;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;It&nbsp;is&nbsp;used&nbsp;to&nbsp;serve&nbsp;HTML&nbsp;files&nbsp;and&nbsp;CGI.&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;processname:&nbsp;nginx&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;pidfile:&nbsp;/usr/local/nginx/logs/nginx.pid&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;config:&nbsp;/usr/local/nginx/conf/nginx.conf&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">DESC=&quot;nginx&nbsp;deamon&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">NAME=nginx&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">DAEMON=/usr/local/nginx/sbin/$NAME&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">SCRIPTNAME=/etc/init.d/$NAME&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">test&nbsp;-x&nbsp;$DAEMON&nbsp;||&nbsp;exit&nbsp;0&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">d_start(){&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;$DAEMON&nbsp;||&nbsp;echo&nbsp;-n&nbsp;&quot;already&nbsp;running&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">}&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">d_stop(){&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;$DAEMON&nbsp;-s&nbsp;quit&nbsp;||&nbsp;echo&nbsp;-n&nbsp;&quot;not&nbsp;running&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">}&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">d_reload(){&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;$DAEMON&nbsp;-s&nbsp;reload&nbsp;||&nbsp;echo&nbsp;-n&nbsp;&quot;can&nbsp;not&nbsp;reload&quot;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">}&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">case&nbsp;&quot;$1&quot;&nbsp;in&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">start)&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;-n&nbsp;&quot;Starting&nbsp;$DESC:&nbsp;$NAME&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;d_start&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;&quot;.&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">;;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">stop)&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;-n&nbsp;&quot;Stopping&nbsp;$DESC:&nbsp;$NAME&quot;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;d_stop&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;&quot;.&quot;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">;;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">reload)&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;-n&nbsp;&quot;Reloading&nbsp;$DESC&nbsp;conf...&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;d_reload&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;&quot;reload&nbsp;.&quot;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">;;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">restart)&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;-n&nbsp;&quot;Restarting&nbsp;$DESC:&nbsp;$NAME&quot;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;d_stop&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;sleep&nbsp;2&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;d_start&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;&quot;.&quot;&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">;;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">*)&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;echo&nbsp;&quot;Usage:&nbsp;$ScRIPTNAME&nbsp;{start|stop|reload|restart}&quot;&nbsp;&gt;&amp;2&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;exit&nbsp;3&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">;;&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">esac&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">exit&nbsp;0&nbsp;&nbsp;</span></li>
+	</ol>
+</div>
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">保存退出后，再使用下面的命令，使其可执行；然后，添加配置并查看。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<span style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;">可用chkconfig修改其值，也可用ntsysv工具改变是否自启动。</span><br style="color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; line-height: 26px;" />
+<div class="dp-highlighter bg_plain" style="font-family: Consolas, 'Courier New', Courier, mono, serif; width: 936.53125px; overflow: auto; padding-top: 1px; color: rgb(0, 0, 0); line-height: 26px; margin: 18px 0px !important; background-color: rgb(231, 229, 220);">
+	<div class="bar" style="padding-left: 45px;">
+		<div class="tools" style="padding: 3px 8px 10px 10px; font-stretch: normal; font-size: 9px; line-height: normal; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: silver; border-left-width: 3px; border-left-style: solid; border-left-color: rgb(108, 226, 108); background-color: rgb(248, 248, 248);">
+			<br />
+			<div style="position: absolute; left: 481px; top: 2743px; width: 18px; height: 18px; z-index: 99;">
+				&nbsp;</div>
+		</div>
+	</div>
+	<ol start="1" style="padding-right: 0px; padding-left: 0px; border: none; color: rgb(92, 92, 92); margin: 0px 0px 1px 45px !important; background-color: rgb(255, 255, 255);">
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;"><span style="margin: 0px; padding: 0px; border: none; background-color: inherit;">#&nbsp;chmod&nbsp;+x&nbsp;/etc/init.d/nginx&nbsp;&nbsp;</span></span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;chkconfig&nbsp;--add&nbsp;nginx&nbsp;&nbsp;</span></li>
+		<li class="alt" style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; color: inherit; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important;">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;chkconfig&nbsp;nginx&nbsp;on/off&nbsp;&nbsp;</span></li>
+		<li style="border-style: none none none solid; border-left-width: 3px; border-left-color: rgb(108, 226, 108); list-style: decimal-leading-zero outside; line-height: 18px; margin: 0px !important; padding: 0px 3px 0px 10px !important; background-color: rgb(248, 248, 248);">
+			<span style="margin: 0px; padding: 0px; border: none; color: black; background-color: inherit;">#&nbsp;chkconfig&nbsp;--list&nbsp;nginx &nbsp;</span></li>
+	</ol>
+</div>
+<br />
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现 - CSDN博客</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li><li><a href='/dnzs/1650.html'>excel对号怎么打？excel对号输入3种方法</a></li><li><a href='/dnzs/1649.html'>笔记本内存条可以通用吗</a></li><li><a href='/dnzs/1648.html'>qqexternal.exe是什么进程?</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/czxt/linux/3.html' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/czxt/linux/58.html' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/czxt/linux/59.html' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/czxt/linux/60.html' >linux kill 关闭进程命令</a></li><li><a href='/czxt/linux/61.html' >linux下find命令的用法二</a></li><li><a href='/czxt/linux/62.html' >Linux中find常见用法示例用法一</a></li><li><a href='/czxt/linux/63.html' >linux下find查找命令用法(一)</a></li><li><a href='/czxt/linux/64.html' >linux系统查看硬件配置命令是什么</a></li><li><a href='/czxt/linux/65.html' >Linux系统 sort命令如何使用</a></li><li><a href='/czxt/linux/66.html' >Linux系统如何配置DHCP服务</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

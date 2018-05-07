@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>学习Linux expect的基本用法</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="学习,Linux,expect,的,基本,用法,expect" />
+  <meta name="description" content="expect是建立在tcl基础上的一个工具，它用来让一些需要交互的任务自动化地完成。 因为expect是基于tcl的，所以需要你的系统中安装有tcl 如何检查？ [root@dev ~]# whereis tcl tcl: /usr/lib/tcl8." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>学习Linux expect的基本用法</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：鹏鹏编程网 浏览：76次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="1473" class="art_content"><span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">expect是建立在tcl基础上的一个工具，它用来让一些需要交互的任务自动化地完成。</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">因为expect是基于tcl的，所以需要你的系统中安装有tcl</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">如何检查？</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">[root@dev ~]# whereis tcl</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">tcl: /usr/lib/tcl8.4 /usr/share/tcl8.4</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">如果看不到结果，请先安装tcl</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</p>
+<h1 style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; line-height: 35px;">
+	<a name="t0" style="color: rgb(12, 137, 207);"></a>安装</h1>
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">&gt; 安装tcl</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">解压tcl安装包后</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">cd tcl8.4.11/unix/</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">./configure --prefix=/usr/local/tcl/ --enable-shared</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">make &amp;&amp; make install</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">&gt; 安装expect</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">解压expect安装包后</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">cd expect-5.43</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">./configure --prefix=/usr/local/expect/ --with-tcl=/usr/local/tcl/lib/ --with-tclinclude=/opt/tcl8.4.11/generic/ --enable-shared</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">make &amp;&amp; make install</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">注意：指定的/opt/tcl8.4.11/generic/ 为我们上面解压的tcl目录</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">&gt; 创建连接符号</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">ln -s /usr/local/expect/bin/expect /usr/bin/expect</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">&gt; 查看连接符号</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">ls -l /usr/bin/expect</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">lrwxrwxrwx. 1 root root 28 9月 &nbsp; 8 11:21 /usr/bin/expect -&gt; /usr/local/expect/bin/expect</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">这个符号链接将在编写expect脚本文件时用到，例如在expect文件头部会指定用于执行该脚本的shell&nbsp;</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">#!/usr/bin/expect&nbsp;</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">&gt; 测试</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">[root@localhost opt]# expect</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">expect1.1&gt; exit</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<span style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">[root@localhost opt]#&nbsp;</span><br style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;" />
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	这样就可以开始运行expect脚本了。</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</p>
+<h1 style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; line-height: 35px;">
+	<a name="t1" style="color: rgb(12, 137, 207);"></a>用法</h1>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	1. ［#!/usr/bin/expect］&nbsp;<br />
+	这一行告诉操作系统脚本里的代码使用那一个shell来执行。这里的expect其实和linux下的bash、windows下的cmd是一类东西。&nbsp;<br />
+	注意：这一行需要在脚本的第一行。&nbsp;<br />
+	<br />
+	<br />
+	2. ［set timeout 30］&nbsp;<br />
+	基本上认识英文的都知道这是设置超时时间的，现在你只要记住他的计时单位是：秒。timeout -1 为永不超时，默认情况下，timeout是10秒；<br />
+	<br />
+	<br />
+	3. ［spawn ssh -l username 192.168.1.1］&nbsp;<br />
+	spawn是进入expect环境后才可以执行的expect内部命令，如果没有装expect或者直接在默认的SHELL下执行是找不到spawn命令的。所以不要用 &ldquo;which spawn&ldquo;之类的命令去找spawn命令。好比windows里的dir就是一个内部命令，这个命令由shell自带，你无法找到一个dir.com 或 dir.exe 的可执行文件。&nbsp;<br />
+	它主要的功能是给ssh运行进程加个壳，用来传递交互指令。&nbsp;<br />
+	spawn后面加上需要执行的shell命令，比如说spawn sudo touch testfile<br />
+	<br />
+	<br />
+	4. ［expect &quot;password:&quot;］&nbsp;<br />
+	这里的expect也是expect的一个内部命令，有点晕吧，expect的shell命令和内部命令是一样的，但不是一个功能，习惯就好了。这个命令的意思是判断上次输出结果里是否包含&ldquo;password:&rdquo;的字符串，如果有则立即返回，否则就等待一段时间后返回，这里等待时长就是前面设置的30秒&nbsp;<br />
+	<br />
+	<br />
+	5. ［send &quot;ispass\r&quot;］&nbsp;<br />
+	这里就是执行交互动作，与手工输入密码的动作等效。&nbsp;<br />
+	温馨提示： 命令字符串结尾别忘记加上&ldquo;\r&rdquo;，如果出现异常等待的状态可以核查一下。&nbsp;<br />
+	<br />
+	<br />
+	6. ［interact］&nbsp;<br />
+	执行完成后保持交互状态，把控制权交给控制台，这个时候就可以手工操作了。如果没有这一句登录完成后会退出，而不是留在远程终端上。如果你只是登录过去执行&nbsp;<br />
+	<br />
+	<br />
+	7. $argv 参数数组<br />
+	expect脚本可以接受从bash传递过来的参数.可以使用[lindex $argv n]获得，n从0开始，分别表示第一个,第二个,第三个....参数<br />
+	其中，$argc为命令行参数的个数，$argv0为脚本名字本身，$argv为命令行参数。[lrange $argv 0 0]表示第1个参数，[lrange $argv 0 4]为第一个到第五个参数。与c语言不一样的地方在于，$argv不包含脚本名字本身。<br />
+	<br />
+	<br />
+	8. send和send_user<br />
+	send会将expect脚本中需要的信息发送给spawn启动的那个进程，而send_user只是回显用户发出的信息，类似于shell中的echo而已。<br />
+	<br />
+	<br />
+	9. 如果你在第一行(#!那行)使用-d (debug参数)，可以在运行的时候输出一些很有用的信息<br />
+	比如你会看见<br />
+	argv[0] = /usr/bin/expect argv[1] = -d argv[2] = ./launch.exp argv[3] = 1 argv[4] = 2 argv[5] = 3<br />
+	使用这些也可以完成参数传递<br />
+	<br />
+	10. exp_continue的用法</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	expect {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Permission denied, please try again.&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send_user &quot;Error:Permission denied.\n&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Are you sure you want to continue connecting (yes/no)?&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;yes\r&quot;;exp_continue<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;assword:&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;$loginpass\r&quot;;exp_continue<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Connection refused&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; timeout {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; eof {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	}</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	使用exp_continue后，会重新从当前expect块的开始重新执行，可以简单理解问while循环的continue<br />
+	&nbsp;</p>
+<h1 style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; line-height: 35px;">
+	<a name="t2" style="color: rgb(12, 137, 207);"></a>例子</h1>
+<div style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	下面的脚本例子，实现了：登录一个Linux服务器，执行 df -h 等命令</div>
+<div style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</div>
+<div style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	vi expectExample.sh 后输入下面的脚本内容保存后，使用chmod +x expectExample.sh 命令为脚本赋予可执行权限。</div>
+<div style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</div>
+<div style="color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</div>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	#!/usr/bin/expect -f<br />
+	<br />
+	<br />
+	#-------------------------------------------- set the variable,you can modify the value<br />
+	set ipaddr [lrange $argv 0 0]<br />
+	set port [lrange $argv 1 1]<br />
+	set loginuser [lrange $argv 2 2]<br />
+	set loginpass [lrange $argv 3 3]<br />
+	set cmd_prompt &quot;]#|~]?&quot;<br />
+	<br />
+	# 超时时间，单位（秒）<br />
+	set timeout 3600<br />
+	<br />
+	<br />
+	#-------------------------------------------- login by ssh<br />
+	spawn ssh -p $port $loginuser@$ipaddr<br />
+	<br />
+	<br />
+	expect {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Permission denied, please try again.&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send_user &quot;Error:Permission denied.\n&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Connection refused&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send_user &quot;Error:Connection refused.\n&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; timeout {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; eof {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;Are you sure you want to continue connecting (yes/no)?&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;yes\r&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exp_continue<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re &quot;assword:&quot; {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;$loginpass\r&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exp_continue<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re $cmd_prompt {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;\r&quot;<br />
+	<br />
+	<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	}<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	#-------------------------------------------- now,we do some commands<br />
+	expect {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re $cmd_prompt {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;df -h\r&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	}<br />
+	<br />
+	<br />
+	expect {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re $cmd_prompt {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;free -m\r&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	}<br />
+	<br />
+	<br />
+	expect {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; -re $cmd_prompt {<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; send &quot;uptime\r&quot;<br />
+	&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+	}<br />
+	<br />
+	<br />
+	send &quot;cd /opt\r&quot;<br />
+	send &quot;mkdir shanhy123\r&quot;<br />
+	send &quot;cd shanhy123\r&quot;<br />
+	send &quot;echo 123 &gt; 123.txt\r&quot;<br />
+	<br />
+	<br />
+	send &quot;/opt/xs.sh\r&quot;<br />
+	<br />
+	<br />
+	send &quot;exit\r&quot;<br />
+	<br />
+	<br />
+	expect eof<br />
+	#interact</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	-------------------------------------------------</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	其中 xs.sh 为我写的一个测试的 shell 脚本，里面故意做了一个sleep 模拟耗时操作，代码如下：</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	#!/bin/bash<br />
+	sleep 10<br />
+	echo abc &gt; /opt/abc.txt</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	&nbsp;</p>
+<p style="margin: 0px; padding: 0px; color: rgb(85, 85, 85); font-family: 'microsoft yahei'; font-size: 15px; line-height: 35px;">
+	注意：expect脚本必须以interact或expect eof结束，执行自动化任务通常expect eof就够了。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现 - CSDN博客</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li><li><a href='/dnzs/1650.html'>excel对号怎么打？excel对号输入3种方法</a></li><li><a href='/dnzs/1649.html'>笔记本内存条可以通用吗</a></li><li><a href='/dnzs/1648.html'>qqexternal.exe是什么进程?</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/czxt/linux/3.html' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/czxt/linux/58.html' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/czxt/linux/59.html' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/czxt/linux/60.html' >linux kill 关闭进程命令</a></li><li><a href='/czxt/linux/61.html' >linux下find命令的用法二</a></li><li><a href='/czxt/linux/62.html' >Linux中find常见用法示例用法一</a></li><li><a href='/czxt/linux/63.html' >linux下find查找命令用法(一)</a></li><li><a href='/czxt/linux/64.html' >linux系统查看硬件配置命令是什么</a></li><li><a href='/czxt/linux/65.html' >Linux系统 sort命令如何使用</a></li><li><a href='/czxt/linux/66.html' >Linux系统如何配置DHCP服务</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

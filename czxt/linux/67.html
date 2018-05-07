@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linux系统一些常用的基本命令（二）</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Linux,系统,一些,常用的,常,用的,基本,命令,二," />
+  <meta name="description" content="history 历史记录 !55 执行第55个指令 stty 设置终端 stty -a fdisk /mbr 删除GRUB at 僅進行一次的工作排程 crontab 循环执行的例行性命令 [e]编辑,[l]显示,[r]删除任务 后台运行程序 tar -zxvf 123.tar.g" />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Linux系统一些常用的基本命令（二）</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏编程网 浏览：21次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="67" class="art_content">history 历史记录 !55 执行第55个指令<br />
+stty 设置终端 stty -a<br />
+fdisk /mbr 删除GRUB<br />
+at 僅進行一次的工作排程<br />
+crontab 循环执行的例行性命令 [e]编辑,[l]显示,[r]删除任务<br />
+&amp; 后台运行程序 tar -zxvf 123.tar.gz &amp; ---------&gt; 后台运行<br />
+jobs 观看后台暂停的程序 jobs -l<br />
+fg 将后台程序调到前台 fg n ------&gt; n是数字,可以指定进行那个程序<br />
+bg 让工作在后台运行<br />
+kill 结束进程 kill -9 PID [9]强制结束,[15]正常结束,[l]列出可用的kill信号<br />
+ps aux 查看后台程序<br />
+top 查看后台程序 top -d 2 每两秒更新一次 top -d 2 -p10604 观看某个PID<br />
+top -b -n 2 &gt; /tmp/top.txt -----&gt; 将top 的咨询运行 2 次，然后将結果输出到 /tmp/top.txt<br />
+pstree 以树状图显示程序 [A]以 ASCII 来连接, 列出PID, [p]列出帐号<br />
+killall 要刪除某个服务 killall -9 httpd<br />
+free 显示内存状态 free -m --------&gt; 以M为单位显示<br />
+uptime显示目前系统开机时间<br />
+netstat 显示网络状态 netstat -tulnp------&gt; 找出目前系統上已在监控的网络连接及其 PID<br />
+dmesg 显示开机信息 demsg | more<br />
+nice 设置优先权 nice -n -5 vi &amp; -----&gt; 用 root 給一各 nice值为 -5 ，用于执行 vi<br />
+renice 调整已存在优先权<br />
+runlevel 显示目前的runlevel<br />
+depmod 分析可载入模块的相依性<br />
+lsmod 显示已载入系统的模块<br />
+modinfo 显示kernel模块的信息<br />
+insmod 载入模块<br />
+modprobe 自动处理可载入模块<br />
+rmmod 删除模块<br />
+chkconfig 检查，设置系统的各种服务 chkconfig --list -----&gt; 列出各项服务状态<br />
+ntsysv 设置系统的各种服务 还有一个命令setup，用途是一样的<br />
+cpio 备份文件<br />
+linux目录架构<br />
+/ 根目录<br />
+/bin 常用的命令 binary file 的目录<br />
+/boot 存放系统启动时必须读取的档案，包括核心 (kernel) 在内<br />
+/boot/grub/menu.lst GRUB设置<br />
+/boot/vmlinuz 内核<br />
+/boot/initrd 核心解压缩所需 RAM Disk<br />
+/dev 系统周边设备<br />
+/etc 系统相关设定文件<br />
+/etc/DIR_COLORS 设定颜色<br />
+/etc/HOSTNAME 设定用户的节点名<br />
+/etc/NETWORKING 只有YES标明网络存在<br />
+/etc/host.conf 文件说明用户的系统如何查询节点名 我查看了一下自己机器上面的文件显示：【order hosts,bind】<br />
+/etc/hosts 设定用户自已的IP与名字的对应表<br />
+/etc/hosts.allow 设置允许使用inetd的机器使用<br />
+/etc/hosts.deny 设置不允许使用inetd的机器使用<br />
+/etc/hosts.equiv 设置远端机不用密码<br />
+/etc/inetd.conf 设定系统网络守护进程inetd的配置<br />
+/etc/gateways 设定路由器<br />
+/etc/protocols 设定系统支持的协议<br />
+/etc/named.boot 设定本机为名字服务器的配置文件<br />
+/etc/sysconfig/network-scripts/ifcfg-eth0 设置IP<br />
+/etc/resolv.conf 设置DNS<br />
+/etc/X11 X Window的配置文件,xorg.conf 或 XF86Config 这两个X Server 的设定档<br />
+/etc/fstab 记录开机要mount的文件系统<br />
+/etc/inittab 设定系统启动时init进程将把系统设置成什么样的runlevel<br />
+/etc/issue 记录用户登录前显示的信息<br />
+/etc/group 设定用户的组名与相关信息<br />
+/etc/passwd 帐号信息<br />
+/etc/shadow 密码信息<br />
+/etc/sudoers 可以sudo命令的配置文件<br />
+/etc/securetty 设定哪些终端可以让root登录<br />
+/etc/login.defs 所有用户登录时的缺省配置<br />
+/etc/exports 设定NFS系统用的<br />
+/etc/init.d/ 所有服務的预设顶顶 script 都是放在这里的，例如要启动或者关闭<br />
+<br />
+/etc/xinetd.d/ 這就是所谓的 super daemon 管理的各项服务的设定档目录<br />
+/etc/modprobe.conf 内核模块额外参数设定 【我的机器上面是<br />
+<br />
+alias eth0 e1000<br />
+alias scsi_hostadapter mptbase<br />
+alias scsi_hostadapter1 mptspi<br />
+alias scsi_hostadapter2 ata_piix】<br />
+/etc/syslog.conf 日志设置文件<br />
+/home 使用者家目录<br />
+/lib 系统会使用到的函数库<br />
+/lib/modules kernel 的相关模块<br />
+/var/lib/rpm rpm套件安装处<br />
+/lost+found 系統不正常产生错误时，会將一些遗失的片段放置于此目录下<br />
+/mnt 外设的挂载点<br />
+/media 与/mnt类似<br />
+/opt 主机额外安装的软件<br />
+/proc 虚拟目录，是内存的映射<br />
+/proc/version 内核版本 ，另外还有uname -a<br />
+/proc/sys/kernel 系统内核功能<br />
+/root 系统管理员的家目录<br />
+/sbin 系统管理员才能执行的指令<br />
+/srv 一些服務啟動之後，這些服務所需要取用的資料目錄<br />
+/tmp 一般使用者或者是正在執行的程序暂时放置档案的地方<br />
+/usr 最大的目录，存许应用程序和文件<br />
+/usr/X11R6： X-Window目录<br />
+/usr/src： Linux源代码<br />
+/usr/include：系统头文件<br />
+/usr/openwin 存放SUN的OpenWin<br />
+/usr/man 在线使用手册<br />
+/usr/bin 使用者可執行的 binary file 的目錄<br />
+/usr/local/bin 使用者可執行的 binary file 的目錄<br />
+/usr/lib 系统会使用到的函数库<br />
+/usr/local/lib 系统会使用到的函数库<br />
+/usr/sbin 系统管理员才能执行的指令<br />
+/usr/local/sbin 系统管理员才能执行的指令<br />
+/var 日志文件<br />
+/var/log/secure 记录登入系統存取资料的档案，例如 pop3, ssh, telnet, ftp 等都会记录在此档案中<br />
+/var/log/wtmp 记录登入者的讯息資料, last<br />
+/var/log/messages 幾乎系統发生的错误讯息<br />
+/var/log/boot.log 记录开机或者是一些服务启动的时候，所顯示的启动或关闭讯息<br />
+/var/log/maillog 记录邮件存取或往來( sendmail 与 pop3 )的使用者记录<br />
+/var/log/cron 记录crontab 这个例行性服务的內容<br />
+/var/log/httpd, /var/log/news, /var/log/mysqld.log, /var/log/samba, /var/log/procmail.log：<br />
+分別是幾個不同的網路服務的记录档</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现 - CSDN博客</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li><li><a href='/dnzs/1650.html'>excel对号怎么打？excel对号输入3种方法</a></li><li><a href='/dnzs/1649.html'>笔记本内存条可以通用吗</a></li><li><a href='/dnzs/1648.html'>qqexternal.exe是什么进程?</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/czxt/linux/3.html' >WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/czxt/linux/58.html' >Linux下如何修复Lubuntu中的Docky混合错误</a></li><li><a href='/czxt/linux/59.html' >Linux下RabbitMQ的安装与配置</a></li><li><a href='/czxt/linux/60.html' >linux kill 关闭进程命令</a></li><li><a href='/czxt/linux/61.html' >linux下find命令的用法二</a></li><li><a href='/czxt/linux/62.html' >Linux中find常见用法示例用法一</a></li><li><a href='/czxt/linux/63.html' >linux下find查找命令用法(一)</a></li><li><a href='/czxt/linux/64.html' >linux系统查看硬件配置命令是什么</a></li><li><a href='/czxt/linux/65.html' >Linux系统 sort命令如何使用</a></li><li><a href='/czxt/linux/66.html' >Linux系统如何配置DHCP服务</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>
