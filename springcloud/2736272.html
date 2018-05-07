@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MySQL数据库备份（二）</title>
+  <title>如何解决Eureka Server不剔除已关停的节点的问题？</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="MySQL数据库备份（二）,数" />
-  <meta name="description" content="1使用mysqldump备份和拷贝数据库 当你使用mysqldumo程序产生数据库备份文件时，缺省地，文件内容包含创建正在倾倒的表的CREATE语句和包含表中行数据的INSERT语句。换句话说，mysqldump产生的" />
+  <meta name="keywords" content="eureka" />
+  <meta name="description" content="背景：由于Eureka拥有自我保护机制，当其注册表里服务因为网络或其他原因出现故障而关停时，Eureka不会剔除服务注册，而是等待其修复。这是AP的一种实现。 
+为了让其有精准的    CP健康检查，可以采取让其剔除不健康节点。server端:
+eureka.server.enable-self-preservation//（设为false，关闭自我保护主要）
+eureka.server.evict" />
   <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
   <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
   <link href="/templets/default/css/theme.css" rel="stylesheet">
@@ -104,8 +107,8 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="art_title">
-            <div>MySQL数据库备份（二）</div>
-            <a href="/">flypeng</a>  发布时间：1970-01-17 来源：鹏鹏编程网 浏览：18次
+            <div>如何解决Eureka Server不剔除已关停的节点的问题？</div>
+            <a href="/">flypeng</a>  发布时间：1970-01-18 来源：0 浏览：0次
           </div>
           <div class="art_body">
             <div class="col-md-12 well bg-success" role="complementary">
@@ -114,132 +117,34 @@
             		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
             	</nav>
             </div>
-            <div id="414" class="art_content">&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;使用mysqldump备份和拷贝数据库&nbsp;<br />
-<br />
-　　当你使用mysqldumo程序产生数据库备份文件时，缺省地，文件内容包含创建正在倾倒的表的CREATE语句和包含表中行数据的INSERT语句。换句话说，mysqldump产生的输出可在以后用作mysql的输入来重建数据库。&nbsp;<br />
-<br />
-　　你可以将整个数据库倾倒进一个单独的文本文件中，如下：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqldump&nbsp;samp_db&nbsp;&gt;/usr/archives/mysql/samp_db.1999-10-02</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　输出文件的开头看起来象这样：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				#&nbsp;MySQL&nbsp;Dump&nbsp;6.0&nbsp;<br />
-				#&nbsp;<br />
-				#&nbsp;Host:&nbsp;localhost&nbsp;Database:&nbsp;samp_db&nbsp;<br />
-				#---------------------------------------&nbsp;<br />
-				#&nbsp;Server&nbsp;version&nbsp;3.23.2-alpha-log&nbsp;<br />
-				#&nbsp;<br />
-				#&nbsp;Table&nbsp;structure&nbsp;for&nbsp;table&nbsp;&#39;absence&#39;&nbsp;<br />
-				#&nbsp;<br />
-				CREATE&nbsp;TABLE&nbsp;absence(&nbsp;<br />
-				student_id&nbsp;int(10)&nbsp;unsigned&nbsp;DEFAULT&nbsp;&#39;0&#39;&nbsp;NOT&nbsp;NULL,&nbsp;<br />
-				date&nbsp;date&nbsp;DEFAULT&nbsp;&#39;0000-00-00&#39;&nbsp;NOT&nbsp;NULL,&nbsp;<br />
-				PRIMARY&nbsp;KEY&nbsp;(student_id,date)&nbsp;<br />
-				);&nbsp;<br />
-				#&nbsp;<br />
-				#&nbsp;Dumping&nbsp;data&nbsp;for&nbsp;table&nbsp;&#39;absence&#39;&nbsp;<br />
-				#&nbsp;<br />
-				INSERT&nbsp;INTO&nbsp;absence&nbsp;VALUES&nbsp;(3,&#39;1999-09-03&#39;);&nbsp;<br />
-				INSERT&nbsp;INTO&nbsp;absence&nbsp;VALUES&nbsp;(5,&#39;1999-09-03&#39;);&nbsp;<br />
-				INSERT&nbsp;INTO&nbsp;absence&nbsp;VALUES&nbsp;(10,&#39;1999-09-08&#39;);&nbsp;<br />
-				......</td>
-		</tr>
-	</tbody>
-</table>
-　&nbsp;<br />
-<br />
-　　文件剩下的部分有更多的INSERT和CREATE&nbsp;TABLE语句组成。&nbsp;<br />
-<br />
-　　如果你想压缩备份，使用类似如下的命令：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqldump&nbsp;samp_db&nbsp;|&nbsp;gzip&nbsp;&gt;/usr/archives/mysql/samp_db.1999-10-02.gz</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　如果你要一个庞大的数据库，输出文件也将很庞大，可能难于管理。如果你愿意，你可以在mysqldump命令行的数据库名后列出单独的表名来倾到它们的内容，这将倾倒文件分成较小、更易于管理的文件。下例显示如何将samp_db数据库的一些表倾到进分开的文件中：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqldump&nbsp;samp_db&nbsp;student&nbsp;score&nbsp;event&nbsp;absence&nbsp;&gt;grapbook.sql&nbsp;<br />
-				%mysqldump&nbsp;samp_db&nbsp;member&nbsp;president&nbsp;&gt;hist-league.sql</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　如果你生成准备用于定期刷新另一个数据库内容的备份文件，你可能想用--add-drop-table选项。这告诉服务器将DROP&nbsp;TABLE&nbsp;IF&nbsp;EXISTS语句写入备份文件，然后，当你取出备份文件并把它装载进第二个数据库时，如果表已经存在，你不会得到一个错误。&nbsp;<br />
-<br />
-　　如果你倒出一个数据库以便能把数据库转移到另一个服务器，你甚至不必创建备份文件。要保证数据库存在于另一台主机，然后用管道倾倒数据库，这样mysql能直接读取mysqldump的输出。例如：你想从主机pit-viper.snake.net拷贝数据库samp_db到boa.snake.net，可以这样很容易做到：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqladmin&nbsp;-h&nbsp;boa.snake.net&nbsp;create&nbsp;samp_db&nbsp;<br />
-				%mysqldump&nbsp;samp_db&nbsp;|&nbsp;mysql&nbsp;-h&nbsp;boa.snake.net&nbsp;samp_db</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　以后，如果你想再次刷新boa.snake.net上的数据库，跳过mysqladmin命令，但要对mysqldump加上--add-drop-table以避免的得到表已存在的错误：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqldump&nbsp;--add-drop-table&nbsp;samp_db&nbsp;|&nbsp;mysql&nbsp;-h&nbsp;boa.snake.net&nbsp;samp_db</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　mysqldump其它有用的选项包括：&nbsp;<br />
-<br />
-　　--flush-logs和--lock-tables组合将对你的数据库检查点有帮助。--lock-tables锁定你正在倾倒的所有表，而--flush-logs关闭并重新打开更新日志文件，新的更新日志将只包括从备份点起的修改数据库的查询。这将设置你的更新日志检查点位备份时间。（然而如果你有需要执行个更新的客户，锁定所有表对备份期间的客户访问不是件好事。）&nbsp;<br />
-<br />
-　　如果你使用--flush-logs设置检查点到备份时，有可能最好是倾倒整个数据库。如果你倾倒单独的文件，较难将更新日志检查点与备份文件同步。在恢复期间，你通常按数据库为基础提取更新日志内容，对单个表没有提取更新的选择，所以你必须自己提取它们。&nbsp;<br />
-<br />
-　　缺省地，mysqldump在写入前将一个表的整个内容读进内存。这通常确实不必要，并且实际上如果你有一个大表，几乎是失败的。你可用--quick选项告诉mysqldump只要它检索出一行就写出每一行。为了进一步优化倾倒过程，使用--opt而不是--quick。--opt选项打开其它选项，加速数据的倾倒和把它们读回。&nbsp;<br />
-<br />
-　　用--opt实施备份可能是最常用的方法，因为备份速度上的优势。然而，要警告你，--opt选项确实有代价，--opt优化的是你的备份过程，不是其他客户对数据库的访问。--opt选项通过一次锁定所有表阻止任何人更新你正在倾倒的任何表。你可在一般数据库访问上很容易看到其效果。当你的数据库一般非常频繁地使用，只是一天一次地调节备份。&nbsp;<br />
-<br />
-　　一个具有--opt的相反效果的选项是--dedayed。该选项使得mysqldump写出INSERT&nbsp;DELAYED语句而不是INSERT语句。如果你将数据文件装入另一个数据库并且你想是这个操作对可能出现在该数据库中的查询的影响最小，--delayed对此很有帮助。&nbsp;<br />
-<br />
-　　--compress选项在你拷贝数据库到另一台机器上时很有帮助，因为它减少网络传输字节的数量。下面有一个例子，注意到--compress对与远端主机上的服务器通信的程序才给出，而不是对与本地主机连接的程序：&nbsp;<br />
-<br />
-<table align="\&quot;center\&quot;" border="\&quot;0\&quot;" cellpadding="\&quot;0\&quot;" cellspacing="\&quot;0\&quot;">
-	<tbody>
-		<tr>
-			<td class="\&quot;code\&quot;" width="\&quot;560\&quot;">
-				%mysqldump&nbsp;--opt&nbsp;samp_db&nbsp;|&nbsp;mysql&nbsp;--compress&nbsp;-h&nbsp;boa.snake.net&nbsp;samp_db</td>
-		</tr>
-	</tbody>
-</table>
-&nbsp;<br />
-<br />
-　　mysqldump有很多选项，详见《MySQL参考手册》。</div>
+            <div id="2736272" class="art_content"><p>背景：由于Eureka拥有自我保护机制，当其注册表里服务因为网络或其他原因出现故障而关停时，Eureka不会剔除服务注册，而是等待其修复。这是AP的一种实现。<br />
+为了让其有精准的 CP健康检查，可以采取让其剔除不健康节点。</p>
+
+<pre>
+<code>server端:
+eureka.server.enable-self-preservation//（设为false，关闭自我保护主要）
+eureka.server.eviction-interval-timer-in-ms//清理间隔（单位毫秒，默认是60*1000）
+client端：
+eureka.client.healthcheck.enabled = true//开启健康检查（需要spring-boot-starter-actuator依赖）
+eureka.instance.lease-renewal-interval-in-seconds =10//租期更新时间间隔（默认30秒）
+eureka.instance.lease-expiration-duration-in-seconds =30//租期到期时间（默认90秒）</code></pre>
+
+<p><strong>示例：</strong></p>
+
+<pre>
+<code>server端配置：
+eureka:
+    server:
+        enableSelfPreservation: false
+        evictionIntervalTimerInMs: 4000
+client配置：
+eureka:
+    instance:
+        leaseRenewalIntervalInSeconds: 10
+        leaseExpirationDurationInSeconds: 30</code></pre>
+
+<p>注意：更改Eureka更新频率将打破服务器的自我保护功能</p>
+</div>
   		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
             <div class="art_like"><div class="bdlikebutton"></div></div>
           </div>
@@ -278,7 +183,7 @@
         <div class="panel-heading">相关文章>>></div>
         <div class="panel-body">
           <ul class="all_list">
-            <li><a href='/shujuku/mysql/214.html' >mysql清除binlog</a></li><li><a href='/shujuku/mysql/215.html' >linux下MySQL安装（rpm）</a></li><li><a href='/shujuku/mysql/216.html' >python之mysql连接 MySQLdb</a></li><li><a href='/shujuku/mysql/217.html' >MySQL错误：Can't connect to MySQL server (10060)</a></li><li><a href='/shujuku/mysql/218.html' >安装、设置与启动MySql绿色版的方法</a></li><li><a href='/shujuku/mysql/219.html' >MySQL数据库设置远程访问</a></li><li><a href='/shujuku/mysql/220.html' >mysqldump远程备份mysql数据库</a></li><li><a href='/shujuku/mysql/221.html' >最简便的MySQL数据库备份方法</a></li><li><a href='/shujuku/mysql/222.html' >mysql安装图解 mysql图文安装教程(详细说明)</a></li><li><a href='/shujuku/mysql/223.html' >mysql文件太大导入出错的解决方法</a></li>
+            <li><a href='/springcloud/1616.html' >Spring Cloud实践：降级、限流、滚动、灰度、AB、金丝雀的实现思路</a></li><li><a href='/springcloud/1622.html' >spring cloud-给Eureka Server加上安全的用户认证</a></li><li><a href='/springcloud/1623.html' >JAR(Spring Boot)应用的后台运行配置</a></li><li><a href='/springcloud/1624.html' >Spring Cloud中Eureka开启密码认证</a></li><li><a href='/springcloud/2736272.html' >如何解决Eureka Server不剔除已关停的节点的问题？</a></li><li><a href='/springcloud/58876504.html' >spring cloud:eureka服务发现</a></li><li><a href='/springcloud/62353556.html' >Spring Cloud Netflix Eureka: 多网卡环境下Eureka服务注册IP选择问题</a></li><li><a href='/springcloud/96524482.html' >Eureka常用配置以及常见问题总结</a></li>
           </ul>
           </ul>
         </div>
