@@ -1,489 +1,149 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <title>编程设计  /  CSS_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
-
+    <title>CSS_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="keywords" content="" />
-
-    <meta name="description" content="" />    
-
-    	<!-- Bootstrap core CSS -->
-	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Bootstrap theme -->
-	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
-	<link href="/templets/default/css/theme.css" rel="stylesheet">
-
-	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
-
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<script src="/templets/default/js/jquery-2.1.3.js"></script>
-	<script src="/templets/default/js/bootstrap.min.js"></script>
-	<script src="/templets/default/js/docs.min.js"></script>
-	<link href="/templets/default/css/main.css" rel="stylesheet">
-	<script src="/templets/default/js/main.js"></script>
-
-
+    <meta name="description" content="" />
     <style type="text/css">
-
       .pageSelect{height: 35px;}
-
     </style>
-
-<!-- flypeng.com Baidu tongji analytics -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-var hm = document.createElement("script");
-hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
-var s = document.getElementsByTagName("script")[0];
-s.parentNode.insertBefore(hm, s);
-})();
-</script>
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/templets/default/css/theme.css" rel="stylesheet">
+    <link href="/templets/default/css/main.css" rel="stylesheet">
+    <link href="/templets/default/css/animate.css" rel="stylesheet">
+    <link href="/templets/default/css/header.css" rel="stylesheet">
 </head>
-
 <body>
-
-<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
-<link href="/templets/default/css/header.css" rel="stylesheet">
 <header id="header" class="site-header">
-    <div class="container" style="margin-top:0px;">     
-      <div class="row" >
-        <div class="col-sm-12 col-md-12">
-	        <div class="site-header-banner" style="min-height:300px;">
-	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
-	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
-	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
-	        	<div class="title-site-article-count" id="title-site-article-count">
-	        		共收藏了990 篇技术文章
-	        	</div>
-	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
-		            <div class="input-group">		            	
-		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
-		                <span class="input-group-btn">
-		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
-		                </span>
-		            </div><!-- /input-group -->
-	            </form>
-	        </div>
+    <div class="container" style="margin-top:0px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="site-header-banner" style="min-height:170px;">
+                    <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+                    <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+                    <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
     <nav class="navbar navbar-default navbar-custom">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header navbar-header-custom">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">首页</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav nav-custom">
-            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
-            <li class="dropdown">
-              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              
-                 
-                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
-                 
-                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
-                 
-                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
-                 
-                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
-                 
-                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
-                 
-                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
-                 
-                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
-                 
-                  <li><a href="/storm/" title="Storm">Storm</a> </li>
-                 
-                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
-                 
-                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
-                 
-                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
-                 
-                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
-                 
-                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
-                 
-                  <li><a href="/Git/" title="Git">Git</a> </li>
-                 
-                  <li><a href="/maven/" title="Maven">Maven</a> </li>
-                 
-                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
-                
-              
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                
-                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
-                 
-                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
-                 
-                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
-                 
-                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
-                 
-                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
-                 
-                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
-                 
-                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
-                 
-                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
-                 
-                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
-                
-              </ul>
-            </li>     
-            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
-            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
-            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
-            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
-            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
-          </ul>          
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header navbar-header-custom">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">首页</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-custom">
+                    <li class="dropdown">
+                        <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                            <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                            <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                            <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                            <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                            <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                            <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                            <li><a href="/storm/" title="Storm">Storm</a> </li>
+                            <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                            <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                            <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                            <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                            <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                            <li><a href="/git/" title="Git">Git</a> </li>
+                            <li><a href="/maven/" title="Maven">Maven</a> </li>
+                            <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                            <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                            <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                            <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                            <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                            <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                            <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                            <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                            <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+                    <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+                    <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+                    <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
-</header><!-- /header --> 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-          <div class="modal-content">
-             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
-             </div>
-             <div class="modal-body">
-                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
-             </div>
-          </div><!-- /.modal-content -->
-       </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-<script type="text/javascript" src="/templets/default/js/header.js"></script>
+</header><!-- /header -->
 
 <div class="container">
-
-
-  <div class="col-sm-8  col-md-8">    
-
+  <div class="col-sm-8  col-md-8">
       <ol class="breadcrumb">
-
-        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/bcsj/'>编程设计</a> > <a href='/bcsj/css/'>CSS</a> > 
-
+        当前位置：首页>CSS
       </ol>
-      
-      <div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1162.html'>CSS实现文字竖排效果</a></h3>
-
-              <p> CSS实现文字竖排效果有两种方法，建议使用模拟方法实现。 一、使用writing-mode属性 语法：writing-mode:lr-tb或writing-mode:tb-rl 参数： 1、lr-tb：从左向右，从上往下 2、tb-rl：从上往下，从右...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1161.html'>使用div+css布局怎样避免浏览器兼容问题</a></h3>
-
-              <p> 很多新手在使用p+css布局的时候，遇到最大的问题不是记css的属性，而是为页面在各种浏览器下不同的表情而恼火，有没有一种通用的方法避免遭遇这个问题呢？答案是有的。 几点需要...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1160.html'>彻底弄懂css中单位px和em的区别</a></h3>
-
-              <p> 国内的设计师大都喜欢用px，而国外的网站大都喜欢用em，那么两者有什么区别，又各自有什么优劣呢？ 1、IE无法调整那些使用px作为单位的字体大小； 2、国外的大部分网站能够调整的...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1159.html'>深入理解display:inline-block属性</a></h3>
-
-              <p> 在使用CSS实现表现的时候，会经常接触到display:inline-block这一属性，无论是初接触Web标准还是接触标准已久的朋友，大都会对这一属性感觉很迷惑和模糊。 display:inline-block将对象呈递为...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1158.html'>div与li自动截断过长的文本</a></h3>
-
-              <p> 相信很多站长在网页设计过程中都需要用到这段CSS代码，代码和演示如下： ...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1157.html'>CSS控制网页背景</a></h3>
-
-              <p> 背景颜色background-color 我想这个我就不用多做介绍了，颜色代码我想大家都知道的，不是用英文来代替就是用指定的代码来表示的。这个的默认值是transparent（透明色）。 例： ...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1156.html'>IE6绝对定位的bug及其解决办法</a></h3>
-
-              <p> position:absolute定位在IE6下存在left和bottom的定位错误问题： 上面这段代码在IE6中定位错误。 解决办法有两种： 1、给父层设置zoom:1触发layout； 2、给父层设置宽度(width)。 下面的这段代码...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1155.html'>关于对background-position的理解</a></h3>
-
-              <p> 关于对“background-position:url(图片)水平(x)垂直(y)”的理解： 1、如果水平(x)为正数、垂直(y)为负数，表示以图片的右上角为坐标、移动各个位移，如“8-8”，表示以右上角为坐标、向右移...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1154.html'>CSS3与CSS1实现双线框方法的比较</a></h3>
-
-              <p> 初看标题，您可能还反应不过来什么是“双线框”。下面的图可以让您看到什么是所谓的“双线框”，这在网页设计中比较常见。 ...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1153.html'>解决pre标签里文本无法自动换行的方法</a></h3>
-
-              <p> 我们都知道标签可定义预格式化的文本，一个常见应用就是用来表示计算机的源代码。被包围在pre元素中的文本通常会保留空格和换行符，但不幸的是，当您在标签里面写代码的时候，...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1152.html'>DIV+CSS网页设计的三个“顶级”技巧</a></h3>
-
-              <p> 我们在进行DivCSS布局的时候，非常关注CSS技巧的学习，今天向大家推荐三个所谓的“顶级”CSS技巧！虽然没有什么新意，但对新手而言却非常重要！ 一、在一行内声明CSS 第一种：一行...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/bcsj/css/2015/0829/1151.html'>CSS Border使用分享：单像素三角形的实现</a></h3>
-
-              <p> 原理： css盒模型： ...</p>
-
-        </div>
-
-      </div>
-
+      <div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1162.html">CSS实现文字竖排效果</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：1</h4><p> CSS实现文字竖排效果有两种方法，建议使用模拟方法实现。 一、使用writing-mode属性 语法：writing-mode:lr-tb或writing-mode:tb-rl 参数： 1、lr-tb：从左向右，从上往下 2、tb-rl：从上往下，从右</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1161.html">使用div+css布局怎样避免浏览器兼容问题</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：3</h4><p> 很多新手在使用p+css布局的时候，遇到最大的问题不是记css的属性，而是为页面在各种浏览器下不同的表情而恼火，有没有一种通用的方法避免遭遇这个问题呢？答案是有的。 几点需要</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1160.html">彻底弄懂css中单位px和em的区别</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：2</h4><p> 国内的设计师大都喜欢用px，而国外的网站大都喜欢用em，那么两者有什么区别，又各自有什么优劣呢？ 1、IE无法调整那些使用px作为单位的字体大小； 2、国外的大部分网站能够调整的</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1159.html">深入理解display:inline-block属性</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：10</h4><p> 在使用CSS实现表现的时候，会经常接触到display:inline-block这一属性，无论是初接触Web标准还是接触标准已久的朋友，大都会对这一属性感觉很迷惑和模糊。 display:inline-block将对象呈递为</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1158.html">div与li自动截断过长的文本</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：4</h4><p> 相信很多站长在网页设计过程中都需要用到这段CSS代码，代码和演示如下： </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1157.html">CSS控制网页背景</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：13</h4><p> 背景颜色background-color 我想这个我就不用多做介绍了，颜色代码我想大家都知道的，不是用英文来代替就是用指定的代码来表示的。这个的默认值是transparent（透明色）。 例： </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1156.html">IE6绝对定位的bug及其解决办法</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：3</h4><p> position:absolute定位在IE6下存在left和bottom的定位错误问题： 上面这段代码在IE6中定位错误。 解决办法有两种： 1、给父层设置zoom:1触发layout； 2、给父层设置宽度(width)。 下面的这段代码</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1155.html">关于对background-position的理解</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：2</h4><p> 关于对“background-position:url(图片)水平(x)垂直(y)”的理解： 1、如果水平(x)为正数、垂直(y)为负数，表示以图片的右上角为坐标、移动各个位移，如“8-8”，表示以右上角为坐标、向右移</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1154.html">CSS3与CSS1实现双线框方法的比较</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：17</h4><p> 初看标题，您可能还反应不过来什么是“双线框”。下面的图可以让您看到什么是所谓的“双线框”，这在网页设计中比较常见。 </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1153.html">解决pre标签里文本无法自动换行的方法</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：3</h4><p> 我们都知道标签可定义预格式化的文本，一个常见应用就是用来表示计算机的源代码。被包围在pre元素中的文本通常会保留空格和换行符，但不幸的是，当您在标签里面写代码的时候，</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1152.html">DIV+CSS网页设计的三个“顶级”技巧</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：2</h4><p> 我们在进行DivCSS布局的时候，非常关注CSS技巧的学习，今天向大家推荐三个所谓的“顶级”CSS技巧！虽然没有什么新意，但对新手而言却非常重要！ 一、在一行内声明CSS 第一种：一行</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/bcsj/css1151.html">CSS Border使用分享：单像素三角形的实现</a></h3><h4>发布人：雨中漫步  发布日期：08-29  点击数：9</h4><p> 原理： css盒模型： </p></div></div>
     <nav>
-
 	  <ul class="pagination">
-
-	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-
-	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
-
-	    <li><a href='list_29_1.html'>首页</a></li>
-<li><a href='list_29_3.html'>上一页</a></li>
-<li><a href='list_29_1.html'>1</a></li>
-<li><a href='list_29_2.html'>2</a></li>
-<li><a href='list_29_3.html'>3</a></li>
-<li class="thisclass">4</li>
-<li><a href='list_29_5.html'>5</a></li>
-<li><a href='list_29_6.html'>6</a></li>
-<li><a href='list_29_7.html'>7</a></li>
-<li><a href='list_29_8.html'>8</a></li>
-<li><a href='list_29_5.html'>下一页</a></li>
-<li><a href='list_29_8.html'>末页</a></li>
-<li><select name='sldd' style='width:36px' onchange='location.href=this.options[this.selectedIndex].value;'>
-<option value='list_29_1.html'>1</option>
-<option value='list_29_2.html'>2</option>
-<option value='list_29_3.html'>3</option>
-<option value='list_29_4.html' selected>4</option>
-<option value='list_29_5.html'>5</option>
-<option value='list_29_6.html'>6</option>
-<option value='list_29_7.html'>7</option>
-<option value='list_29_8.html'>8</option>
-</select></li>
-
-
+	    <nav><ul class="pagination"><li><a href="list_29_1.html">首页</a></li><li><a href="list_29_3.html">上一页</a></li><li><a href="list_29_5.html">下一页</a></li><li><a href="list_29_7.html">末页</a></li></ul></nav>
 	  </ul>
-
 	</nav>    
 
   </div>
 
   <div class="col-sm-4 col-md-4">
     <div class="listsubname">
-    
-      <a href='/bcsj/css/' class="btn btn-default">CSS</a>
-    
-      <a href='/bcsj/Hadoop/' class="btn btn-default">Hadoop</a>
-    
-      <a href='/bcsj/Ajax/' class="btn btn-default">Ajax</a>
-    
-      <a href='/bcsj/js/' class="btn btn-default">Javascript</a>
-    
-      <a href='/bcsj/java/' class="btn btn-default">Java</a>
-    
-      <a href='/bcsj/Jetty/' class="btn btn-default">Jetty</a>
-    
-      <a href='/bcsj/Python/' class="btn btn-default">Python</a>
-    
-      <a href='/storm/' class="btn btn-default">Storm</a>
-    
-      <a href='/ElasticSearch/' class="btn btn-default">ElasticSearch</a>
-    
-      <a href='/SpringBoot/' class="btn btn-default">SpringBoot</a>
-    
-      <a href='/sublime/' class="btn btn-default">Sublime</a>
-    
-      <a href='/SpringCloud/' class="btn btn-default">SpringCloud</a>
-    
-      <a href='/ZooKeeper/' class="btn btn-default">ZooKeeper</a>
-    
-      <a href='/Git/' class="btn btn-default">Git</a>
-    
-      <a href='/maven/' class="btn btn-default">Maven</a>
-    
-      <a href='/Gradle/' class="btn btn-default">Gradle</a>
-    
+        
       <div class="clear"></div>
     </div>
-    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
-
       <div class="panel panel-custom panel-custom-right">
-
         <div class="panel-heading">最新文章>>></div>
-
         <div class="panel-body">
-
           <ul class="all_list">
-
-            <li><a href="/bcsj/css/2017/0817/1613.html" >CSS隐藏页面元素的五种方法</a><span>08.17</span></li>
-<li><a href="/bcsj/css/2017/0817/1612.html" >CSS如何把DIV永远置于页面的底部</a><span>08.17</span></li>
-<li><a href="/bcsj/css/2016/0428/1487.html" >纯 CSS 创建各种不同的图形形状</a><span>04.28</span></li>
-<li><a href="/bcsj/css/2016/0428/1486.html" >12款很棒的浏览器兼容性测试工具</a><span>04.28</span></li>
-<li><a href="/bcsj/css/2016/0111/1429.html" >CSS清除浮动常用方法小结</a><span>01.11</span></li>
-<li><a href="/bcsj/css/2015/0829/1199.html" >CSS自定义滚动条样式</a><span>08.29</span></li>
-<li><a href="/bcsj/css/2015/0829/1198.html" >如何用CSS制作广告投影，CSS实例:Google Adsense代码广告投影效果</a><span>08.29</span></li>
-<li><a href="/bcsj/css/2015/0829/1197.html" > ie下双倍margin的处理方法</a><span>08.29</span></li>
-<li><a href="/bcsj/css/2015/0829/1196.html" >overflow解决float浮动后高度自适应的问题</a><span>08.29</span></li>
-<li><a href="/bcsj/css/2015/0829/1195.html" >让IE6完美支持PNG图片透明的方法详解</a><span>08.29</span></li>
- 
-
+            <li><a href='/springcloud/96524482.html'>Eureka常用配置以及常见问题总结</a></li><li><a href='/springcloud/62353556.html'>Spring Cloud Netflix Eureka: 多网卡环境下Eureka服务注册IP选择问题</a></li><li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现</a></li><li><a href='/springcloud/2736272.html'>如何解决Eureka Server不剔除已关停的节点的问题？</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li>
           </ul>
-
         </div>
-
-      </div>  
-
-      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
-
-      <div id="scr_cont" class="panel panel-custom panel-custom-right">
-
-        <div class="panel-heading">相关热门>>></div>
-
-        <div class="panel-body">
-
-          <ul class="all_list">
-
-            <li><a href="/bcsj/css/2016/0111/1429.html" >CSS清除浮动常用方法小结</a><span>69</span></li>
-<li><a href="/bcsj/css/2016/0428/1486.html" >12款很棒的浏览器兼容性测试工具</a><span>66</span></li>
-<li><a href="/bcsj/css/2015/0829/1189.html" >css html 鼠标手型,鼠标形状,鼠标效</a><span>49</span></li>
-<li><a href="/bcsj/css/2015/0829/1194.html" >CSS边距属性定义：用margin还是pa</a><span>48</span></li>
-<li><a href="/bcsj/css/2015/0829/1196.html" >overflow解决float浮动后高度自适应</a><span>46</span></li>
-<li><a href="/bcsj/css/2016/0428/1487.html" >纯 CSS 创建各种不同的图形形状</a><span>41</span></li>
-<li><a href="/bcsj/css/2015/0829/1198.html" >如何用CSS制作广告投影，CSS实例</a><span>38</span></li>
-<li><a href="/bcsj/css/2015/0829/1193.html" >CSS为网站图片添加防盗链功能</a><span>37</span></li>
-<li><a href="/bcsj/css/2015/0829/1197.html" > ie下双倍margin的处理方法</a><span>37</span></li>
-<li><a href="/bcsj/css/2015/0829/1199.html" >CSS自定义滚动条样式</a><span>34</span></li>
- 
-
-          </ul>
-
-          </ul>
-
-        </div>
-
       </div>
-
-      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
-
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+              <li><a href='/bcsj/css/1429.html'>CSS清除浮动常用方法小结</a></li><li><a href='/bcsj/css/1486.html'>12款很棒的浏览器兼容性测试工具</a></li><li><a href='/bcsj/css/1194.html'>CSS边距属性定义：用margin还是padding？</a></li><li><a href='/bcsj/css/1189.html'>css html 鼠标手型,鼠标形状,鼠标效果,样式</a></li><li><a href='/bcsj/css/1196.html'>overflow解决float浮动后高度自适应的问题</a></li><li><a href='/bcsj/css/1193.html'>CSS为网站图片添加防盗链功能</a></li><li><a href='/bcsj/css/1487.html'>纯 CSS 创建各种不同的图形形状</a></li><li><a href='/bcsj/css/1198.html'>如何用CSS制作广告投影，CSS实例:Google Adsense代码广告投影效果</a></li><li><a href='/bcsj/css/1197.html'> ie下双倍margin的处理方法</a></li><li><a href='/bcsj/css/1199.html'>CSS自定义滚动条样式</a></li>
+          </ul>
+        </div>
+      </div>
   </div>
-
 </div>
-
-<div class="footer">
-	<div class="foot">
-<br/>
-              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
-             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
-            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
-            flypeng.com 版权所有 京ICP备11048740号<br/>
-			
-	</div>
-</div>
-
-
-
-
-
-
-
+<script src="/templets/default/js/jquery-2.1.3.js"></script>
+<script src="/templets/default/js/bootstrap.min.js"></script>
+<script src="/templets/default/js/docs.min.js"></script>
+<script src="/templets/default/js/main.js"></script>
+<script src="/templets/default/js/header.js"></script>
+<!-- flypeng.com Baidu tongji analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </body>
-
 </html>
 

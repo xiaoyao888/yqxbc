@@ -1,473 +1,149 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
     <title>电脑知识_为你而生的编程知识网站_鹏鹏编程网（原鹏鹏电脑知识网）</title>
-
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="keywords" content="" />
-
-    <meta name="description" content="" />    
-
-    	<!-- Bootstrap core CSS -->
-	<link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Bootstrap theme -->
-	<link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
-	<link href="/templets/default/css/theme.css" rel="stylesheet">
-
-	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-	<script src="/templets/default/js/ie-emulation-modes-warning.js"></script>
-
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/templets/default/js/ie10-viewport-bug-workaround.js"></script>
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<script src="/templets/default/js/jquery-2.1.3.js"></script>
-	<script src="/templets/default/js/bootstrap.min.js"></script>
-	<script src="/templets/default/js/docs.min.js"></script>
-	<link href="/templets/default/css/main.css" rel="stylesheet">
-	<script src="/templets/default/js/main.js"></script>
-
-
+    <meta name="description" content="" />
     <style type="text/css">
-
       .pageSelect{height: 35px;}
-
     </style>
-
-<!-- flypeng.com Baidu tongji analytics -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-var hm = document.createElement("script");
-hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
-var s = document.getElementsByTagName("script")[0];
-s.parentNode.insertBefore(hm, s);
-})();
-</script>
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/templets/default/css/theme.css" rel="stylesheet">
+    <link href="/templets/default/css/main.css" rel="stylesheet">
+    <link href="/templets/default/css/animate.css" rel="stylesheet">
+    <link href="/templets/default/css/header.css" rel="stylesheet">
 </head>
-
 <body>
-
-<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
-<link href="/templets/default/css/header.css" rel="stylesheet">
 <header id="header" class="site-header">
-    <div class="container" style="margin-top:0px;">     
-      <div class="row" >
-        <div class="col-sm-12 col-md-12">
-	        <div class="site-header-banner" style="min-height:300px;">
-	        	<h2 class="title-site-name" id="title-site-name">鹏鹏编程网</h2>
-	        	<div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
-	        	<div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
-	        	<div class="title-site-article-count" id="title-site-article-count">
-	        		共收藏了1008 篇技术文章
-	        	</div>
-	        	<form  method="post" id="searchFrm" class="searchFrm" role="search" action="/plus/search.php">
-		            <div class="input-group">		            	
-		                <input type="text" class="form-control input-group-lg" id="keyword" name="keyword" placeholder="Search">
-		                <span class="input-group-btn">
-		                    <button type="button" class="btn btn-default" onclick="searchKey()">搜索</button>
-		                </span>
-		            </div><!-- /input-group -->
-	            </form>
-	        </div>
+    <div class="container" style="margin-top:0px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="site-header-banner" style="min-height:170px;">
+                    <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+                    <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+                    <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
     <nav class="navbar navbar-default navbar-custom">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header navbar-header-custom">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">首页</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav nav-custom">
-            <li><a href="javascript:void(0);" title="SpringCloud">SpringCloud</a></li>
-            <li class="dropdown">
-              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              
-                 
-                  <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
-                 
-                  <li><a href="/bcsj/Hadoop/" title="Hadoop">Hadoop</a> </li>
-                 
-                  <li><a href="/bcsj/Ajax/" title="Ajax">Ajax</a> </li>
-                 
-                  <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
-                 
-                  <li><a href="/bcsj/java/" title="Java">Java</a> </li>
-                 
-                  <li><a href="/bcsj/Jetty/" title="Jetty">Jetty</a> </li>
-                 
-                  <li><a href="/bcsj/Python/" title="Python">Python</a> </li>
-                 
-                  <li><a href="/storm/" title="Storm">Storm</a> </li>
-                 
-                  <li><a href="/ElasticSearch/" title="ElasticSearch">ElasticSearch</a> </li>
-                 
-                  <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
-                 
-                  <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
-                 
-                  <li><a href="/SpringCloud/" title="SpringCloud">SpringCloud</a> </li>
-                 
-                  <li><a href="/ZooKeeper/" title="ZooKeeper">ZooKeeper</a> </li>
-                 
-                  <li><a href="/Git/" title="Git">Git</a> </li>
-                 
-                  <li><a href="/maven/" title="Maven">Maven</a> </li>
-                 
-                  <li><a href="/Gradle/" title="Gradle">Gradle</a> </li>
-                
-              
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                
-                  <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
-                 
-                  <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
-                 
-                  <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
-                 
-                  <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
-                 
-                  <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
-                 
-                  <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
-                 
-                  <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
-                 
-                  <li><a href="/shujuku/access/" title="Access">Access</a> </li>
-                 
-                  <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
-                
-              </ul>
-            </li>     
-            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
-            <li><a href="/wlzs" title="网络知识大全">网络知识</a></li>
-            <li><a href="http://www.win10os.com" title="windows10系统">windows10</a></li>      
-            <li><a href="/czxt/linux" title="linux系统">linux</a></li>
-            <li><a href='/erweima/' target="_blank" title="二维码生成">常用工具</a></li>
-          </ul>          
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header navbar-header-custom">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">首页</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-custom">
+                    <li class="dropdown">
+                        <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                            <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                            <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                            <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                            <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                            <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                            <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                            <li><a href="/storm/" title="Storm">Storm</a> </li>
+                            <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                            <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                            <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                            <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                            <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                            <li><a href="/git/" title="Git">Git</a> </li>
+                            <li><a href="/maven/" title="Maven">Maven</a> </li>
+                            <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                            <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                            <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                            <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                            <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                            <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                            <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                            <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                            <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+                    <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+                    <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+                    <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
-</header><!-- /header --> 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-          <div class="modal-content">
-             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">搜索提示</h4>
-             </div>
-             <div class="modal-body">
-                <div style="height:60px;line-height:60px;">关键字不能小于2个字！</div>
-             </div>
-          </div><!-- /.modal-content -->
-       </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-<script type="text/javascript" src="/templets/default/js/header.js"></script>
+</header><!-- /header -->
 
 <div class="container">
-
-
-  <div class="col-sm-8  col-md-8">    
-
+  <div class="col-sm-8  col-md-8">
       <ol class="breadcrumb">
-
-        当前位置：<a href='http://www.flypeng.com/'>首页</a> > <a href='/dnzs/'>电脑知识</a> > 
-
+        当前位置：首页>电脑知识
       </ol>
-      
-      <div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/827.html'>共享打印机脱机状态怎么办？</a></h3>
-
-              <p> 由于打印机脱机或打印后台服务程序处理失败而未能够打印的任务，会停留在打印任务列表中，导致打印队列堵塞无法正常打印，打印机状态显示为脱机。 首先要确认下是否共享的那台...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/826.html'>打印机不能打印:打印机无法打印的处理办法</a></h3>
-
-              <p> 打印机不能打印时的处理办法：造成打印机无法打印故障的原因有很多种，有打印机方面的，也有计算机方面的原因。在打印机无法打印时应该着重检查以下几个方面： 1.首先，先检查...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/825.html'>电脑桌面上的图标不见了怎么回事？</a></h3>
-
-              <p> 现在许多朋友可能会遇上电脑桌面上什么图标也没有的情况，包括我的电脑、回收站、我的文档等都没有的情况，那么这到底是怎么回事呢？就来给您讲一下怎么解决这个问题。 如果我...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/824.html'>pps缓冲慢怎么办？</a></h3>
-
-              <p> ...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/823.html'>Locallapstore使用教程：解决iOS游戏无法内购的破解插件</a></h3>
-
-              <p>Locallapstore怎么用？Locallapstore可以对一些游戏进行内购。不过有些游戏还是无法内购，下面鹏鹏电脑知识网为大家解决Locallapstore无法内购的问题。 提示：Locallapstore版本1.3，必须是1.3版！...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/822.html'>Win7无法安装cctvbox加速器怎么办？</a></h3>
-
-              <p> ...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/820.html'>Java 集合（Collections）总结</a></h3>
-
-              <p> 第一次系统的阅读理解Java Collections Framework的源码，已经粗略的学习完了，做个简单的总结。首先把资料放置在第一位，想系统学习的主要原因在工作之余想自学点东西，看了master24 的...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/818.html'>srt是什么文件 SRT文件怎么打开？</a></h3>
-
-              <p> 最近有网友问小编srt是什么文件，是否可以删除呢？其实SRT是DVDRIP文本格式字幕文件，与DVDRIP配套使用，不属于电脑系统文件，删除不会影响系通过。SRT文件属于一种文本格式，主要记...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/816.html'>Raw格式图片文件应该怎么打开</a></h3>
-
-              <p> 对一些朋友来说, 经常会看到一些不知道怎么打开的文件, 其中的图片文件中有一种就是RAW格式文件, RAW文件几乎是未经过处理而直接从CCD或CMOS上得到的信息，通过后期处理，摄影师能够...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/815.html'>桌面图标消失怎么办？桌面图标消失的解决办法</a></h3>
-
-              <p> 桌面图标消失怎么办？桌面图标消失的解决办法 经常听到有网友称自己电脑桌面上的图标消失了，对于桌面图标消失的问题是有很多的原因的，根据不同的原因是有不同的解决方法的，...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/814.html'>怎么把桌面图标变小啊？桌面图标如何变小解决方法</a></h3>
-
-              <p>怎么把桌面图标变小啊？桌面图标如何变小解决方法1、在桌面点右键2、弹出显示属性3、选择外观4、选择高级5、在项目里点下拉菜单6、选择图标，然后在右边选择合适的大小就可以了...</p>
-
-        </div>
-
-      </div><div class="panel">
-
-        <div class="panel-body">
-
-              <h3><a href='/dnzs/2015/0522/812.html'>windows7切换输入法的电脑知识</a></h3>
-
-              <p>在Windows7操作系统下，用户可以使用系统默认快捷键Ctrl 空格键，在中文和英文输入法之间切换，使用Ctri Shift组合键来切换输入法。选择中文输入法也可以通过单击任务栏上的【输入法】...</p>
-
-        </div>
-
-      </div>
-
+      <div class="panel"><div class="panel-body"><h3><a href="/dnzs833.html">java代码与编程题</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：4</h4><p> </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs831.html">照片常见标准尺寸大全</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：20</h4><p>1寸 2.5*3.5cm 413*295 身份证大头照 3.3*2.2 390*260 2寸 3.5*5.3cm 626*413 小2寸（护照） 4.8*3.3cm 567*390 5 寸 5x3.5 12.7*8.9 1200x840以上 100万像素 6 寸 6x4&n</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs830.html">如何修改IE默认主页</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：39</h4><p> IE首页被强行篡改、挟持，这是上网用户经常碰到的问题。其背后的罪魁祸首是电脑病毒和流氓软件。 IE是电脑用户最常使用的网页浏览器，但正因为普及率高，其也成为了最容易受到</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs828.html">电脑中毒360打不开怎么办？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：33</h4><p> 方法一：开机后狂按F8选择带网络的安全模式，打开360进行更新 全盘查杀木马 修补漏洞 之后清除恶意插件重新启动即可 ！ 小提示： 杀完木马后如果系统还存在故障，请修复一下系统</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs827.html">共享打印机脱机状态怎么办？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：532</h4><p> 由于打印机脱机或打印后台服务程序处理失败而未能够打印的任务，会停留在打印任务列表中，导致打印队列堵塞无法正常打印，打印机状态显示为脱机。 首先要确认下是否共享的那台</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs826.html">打印机不能打印:打印机无法打印的处理办法</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：43</h4><p> 打印机不能打印时的处理办法：造成打印机无法打印故障的原因有很多种，有打印机方面的，也有计算机方面的原因。在打印机无法打印时应该着重检查以下几个方面： 1.首先，先检查</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs825.html">电脑桌面上的图标不见了怎么回事？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：18</h4><p> 现在许多朋友可能会遇上电脑桌面上什么图标也没有的情况，包括我的电脑、回收站、我的文档等都没有的情况，那么这到底是怎么回事呢？就来给您讲一下怎么解决这个问题。 如果我</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs824.html">pps缓冲慢怎么办？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：17</h4><p> </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs823.html">Locallapstore使用教程：解决iOS游戏无法内购的破解插件</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：97</h4><p>Locallapstore怎么用？Locallapstore可以对一些游戏进行内购。不过有些游戏还是无法内购，下面鹏鹏电脑知识网为大家解决Locallapstore无法内购的问题。 提示：Locallapstore版本1.3，必须是1.3版！</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs822.html">Win7无法安装cctvbox加速器怎么办？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：27</h4><p> </p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs820.html">Java 集合（Collections）总结</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：6</h4><p> 第一次系统的阅读理解Java Collections Framework的源码，已经粗略的学习完了，做个简单的总结。首先把资料放置在第一位，想系统学习的主要原因在工作之余想自学点东西，看了master24 的</p></div></div><div class="panel"><div class="panel-body"><h3><a href="/dnzs818.html">srt是什么文件 SRT文件怎么打开？</a></h3><h4>发布人：雨中漫步  发布日期：05-22  点击数：70</h4><p> 最近有网友问小编srt是什么文件，是否可以删除呢？其实SRT是DVDRIP文本格式字幕文件，与DVDRIP配套使用，不属于电脑系统文件，删除不会影响系通过。SRT文件属于一种文本格式，主要记</p></div></div>
     <nav>
-
 	  <ul class="pagination">
-
-	    <!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-
-	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li> -->
-
-	    <li><a href='list_1_1.html'>首页</a></li>
-<li><a href='list_1_5.html'>上一页</a></li>
-<li><a href='list_1_1.html'>1</a></li>
-<li><a href='list_1_2.html'>2</a></li>
-<li><a href='list_1_3.html'>3</a></li>
-<li><a href='list_1_4.html'>4</a></li>
-<li><a href='list_1_5.html'>5</a></li>
-<li class="thisclass">6</li>
-<li><a href='list_1_7.html'>7</a></li>
-<li><a href='list_1_8.html'>8</a></li>
-<li><a href='list_1_9.html'>9</a></li>
-<li><a href='list_1_7.html'>下一页</a></li>
-<li><a href='list_1_9.html'>末页</a></li>
-<li><select name='sldd' style='width:36px' onchange='location.href=this.options[this.selectedIndex].value;'>
-<option value='list_1_1.html'>1</option>
-<option value='list_1_2.html'>2</option>
-<option value='list_1_3.html'>3</option>
-<option value='list_1_4.html'>4</option>
-<option value='list_1_5.html'>5</option>
-<option value='list_1_6.html' selected>6</option>
-<option value='list_1_7.html'>7</option>
-<option value='list_1_8.html'>8</option>
-<option value='list_1_9.html'>9</option>
-</select></li>
-
-
+	    <nav><ul class="pagination"><li><a href="list_1_1.html">首页</a></li><li><a href="list_1_5.html">上一页</a></li><li><a href="list_1_7.html">下一页</a></li><li><a href="list_1_8.html">末页</a></li></ul></nav>
 	  </ul>
-
 	</nav>    
 
   </div>
 
   <div class="col-sm-4 col-md-4">
     <div class="listsubname">
-    
+        
       <div class="clear"></div>
     </div>
-    <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
-
       <div class="panel panel-custom panel-custom-right">
-
         <div class="panel-heading">最新文章>>></div>
-
         <div class="panel-body">
-
           <ul class="all_list">
-
-            <li><a href="/dnzs/2017/1115/1653.html" >vbscript.dll文件下载，解决找不到vbscript.dll的问题</a><span>11.15</span></li>
-<li><a href="/dnzs/2017/1115/1652.html" >手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a><span>11.15</span></li>
-<li><a href="/dnzs/2017/1115/1651.html" >php中json_decode()和json_encode()的使用方法</a><span>11.15</span></li>
-<li><a href="/dnzs/2017/1115/1650.html" >excel对号怎么打？excel对号输入3种方法</a><span>11.15</span></li>
-<li><a href="/dnzs/2017/1115/1649.html" >笔记本内存条可以通用吗</a><span>11.15</span></li>
-<li><a href="/dnzs/2017/1114/1648.html" >qqexternal.exe是什么进程?</a><span>11.14</span></li>
-<li><a href="/dnzs/2017/1114/1647.html" >屏幕闪烁是什么原因 电脑屏幕闪烁的解决办法</a><span>11.14</span></li>
-<li><a href="/dnzs/2017/1114/1646.html" >怎么退出dfu模式 iPhone退出dfu模式详细教程</a><span>11.14</span></li>
-<li><a href="/dnzs/2017/1114/1645.html" >Alt键是什么意思 Alt键功能作用大全</a><span>11.14</span></li>
-<li><a href="/dnzs/2017/1114/1644.html" >显示器接口有几种 显示器各种接口知识扫盲</a><span>11.14</span></li>
- 
-
+            <li><a href='/springcloud/96524482.html'>Eureka常用配置以及常见问题总结</a></li><li><a href='/springcloud/62353556.html'>Spring Cloud Netflix Eureka: 多网卡环境下Eureka服务注册IP选择问题</a></li><li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现</a></li><li><a href='/springcloud/2736272.html'>如何解决Eureka Server不剔除已关停的节点的问题？</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li><li><a href='/dnzs/1652.html'>手机忘记密码怎么办 三种方法帮你找回忘记的手机密码</a></li><li><a href='/dnzs/1651.html'>php中json_decode()和json_encode()的使用方法</a></li>
           </ul>
-
         </div>
-
-      </div>  
-
-      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
-
-      <div id="scr_cont" class="panel panel-custom panel-custom-right">
-
-        <div class="panel-heading">相关热门>>></div>
-
-        <div class="panel-body">
-
-          <ul class="all_list">
-
-            <li><a href="/dnzs/2015/0530/876.html" >为什么安全证书会过期？安全证书</a><span>3507</span></li>
-<li><a href="/dnzs/2015/0522/865.html" >UAC是什么？如何关闭UAC</a><span>2714</span></li>
-<li><a href="/dnzs/2015/0923/1282.html" >找不到服务器怎么办 DNS错误的解</a><span>2002</span></li>
-<li><a href="/dnzs/2015/0307/189.html" >U盘装系统出现ntldr is missing</a><span>1651</span></li>
-<li><a href="/dnzs/2015/0401/433.html" >Win键是哪个 电脑上的Win键在哪？</a><span>1173</span></li>
-<li><a href="/dnzs/2015/0328/314.html" >如何利用ipconfig命令重新获取IP地</a><span>1141</span></li>
-<li><a href="/dnzs/2015/0421/854.html" >ARP攻击是什么意思 ARP断网攻击的</a><span>926</span></li>
-<li><a href="/dnzs/2015/0906/1266.html" >怎么设置本地连接ip 本地连接ip设</a><span>835</span></li>
-<li><a href="/dnzs/2015/0923/1281.html" >BIOS怎么设置 显卡bios怎么刷</a><span>782</span></li>
-<li><a href="/dnzs/2016/0119/1435.html" >VMWare虚拟机提示：锁定文件失败，</a><span>761</span></li>
- 
-
-          </ul>
-
-          </ul>
-
-        </div>
-
       </div>
-
-      <script src='/plus/ad_js.php?aid=15' language='javascript'></script>
-
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关热门>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+              <li><a href='/dnzs/876.html'>为什么安全证书会过期？安全证书过期怎么办？</a></li><li><a href='/dnzs/865.html'>UAC是什么？如何关闭UAC</a></li><li><a href='/dnzs/1282.html'>找不到服务器怎么办 DNS错误的解决办法！</a></li><li><a href='/dnzs/189.html'>U盘装系统出现ntldr is missing</a></li><li><a href='/dnzs/433.html'>Win键是哪个 电脑上的Win键在哪？</a></li><li><a href='/dnzs/314.html'>如何利用ipconfig命令重新获取IP地址</a></li><li><a href='/dnzs/854.html'>ARP攻击是什么意思 ARP断网攻击的解决办法</a></li><li><a href='/dnzs/1266.html'>怎么设置本地连接ip 本地连接ip设置方法</a></li><li><a href='/dnzs/1281.html'>BIOS怎么设置 显卡bios怎么刷</a></li><li><a href='/dnzs/1435.html'>VMWare虚拟机提示：锁定文件失败，打不开磁盘的解决办法</a></li>
+          </ul>
+        </div>
+      </div>
   </div>
-
 </div>
-
-<div class="footer">
-	<div class="foot">
-<br/>
-              鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br/>
-             <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br/>
-            Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br/>
-            flypeng.com 版权所有 京ICP备11048740号<br/>
-			
-	</div>
-</div>
+<script src="/templets/default/js/jquery-2.1.3.js"></script>
+<script src="/templets/default/js/bootstrap.min.js"></script>
+<script src="/templets/default/js/docs.min.js"></script>
+<script src="/templets/default/js/main.js"></script>
+<script src="/templets/default/js/header.js"></script>
+<!-- flypeng.com Baidu tongji analytics -->
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?01a1ff7b6ab0650920aa64bf8bfad7e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
 </script>
-
-
-
-
-
-
-
 </body>
-
 </html>
 
