@@ -38,10 +38,9 @@ if(secs==1){
 	var pathname = window.location.pathname;  
 	if(pathname.indexOf(".php?")!=-1){
 		window.location.href="http://www.flypeng.com"
-	}
-	if(/^[a-z]+$/.test(pathname) ){
+	}else if(/^[a-z]+$/.test(pathname) ){
 		window.location.href="http://www.flypeng.com"
-	}else{	
+	}else if(!/^[a-z]+$/.test(pathname)){	
 		var url = pathname.toLowerCase();
 		window.location.href="http://www.flypeng.com"+url; 
 	}
