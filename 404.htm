@@ -36,6 +36,9 @@ if(secs==1){
 
   countDown(3);*/
 	var pathname = window.location.pathname;  
+	if(pathname.indexOf(".php?")!=-1){
+		window.location.href="http://www.flypeng.com"
+	}
 	if(/^[a-z]+$/.test(pathname) ){
 		window.location.href="http://www.flypeng.com"
 	}else{	
