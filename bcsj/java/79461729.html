@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intellij IDEA神器居然还有这些小技巧</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="IDEA" />
+  <meta name="description" content="概述
+
+
+
+Intellij IDEA真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对Intellij IDEA的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的Intellij IDEA技巧分享给大家。本文是这个系列的第一篇，主要介绍一些你可能不知道的但是又实用的小技巧。
+
+
+
+
+
+我最爱的【演出模式】
+
+
+
+我们可以使用【Presentation Mode】，..." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Intellij IDEA神器居然还有这些小技巧</div>
+            <a href="/">flypeng</a>  发布时间：05-09 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="79461729" class="art_content"><h1>概述</h1>
+
+<hr />
+<p><code>Intellij IDEA</code>真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对<code>Intellij IDEA</code>的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的<code>Intellij IDEA</code>技巧分享给大家。本文是这个系列的第一篇，主要介绍一些你可能不知道的但是又实用的小技巧。</p>
+
+<hr />
+<h1>我最爱的【演出模式】</h1>
+
+<hr />
+<p>我们可以使用【Presentation Mode】，将<code>IDEA</code>弄到最大，可以让你只关注一个类里面的代码，进行毫无干扰的<code>coding</code>。</p>
+
+<p>可以使用<code>Alt+V</code>快捷键，弹出<code>View</code>视图，然后选择<code>Enter Presentation Mode</code>。效果如下：<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506101049248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>这个模式的好处就是，可以让你更加专注，因为你只能看到特定某个类的代码。可能读者会问，进入这个模式后，我想看其他类的代码怎么办？这个时候，就要考验你快捷键的熟练程度了。你可以使用<code>CTRL+E</code>弹出最近使用的文件。又或者使用<code>CTRL+N</code>和<code>CTRL+SHIFT+N</code>定位文件。</p>
+
+<p>如何退出这个模式呢？很简单，使用<code>ALT+V</code>弹出view视图，然后选择<code>Exit Presentation Mode</code> 即可。但是我强烈建议你不要这么做，因为你是可以在<code>Enter Presentation Mode</code>模式下在<code>IDEA</code>里面做任何事情的。当然前提是，你对<code>IDEA</code>足够熟练。</p>
+
+<hr />
+<h1>神奇的Inject language</h1>
+
+<hr />
+<p>如果你使用<code>IDEA</code>在编写<code>JSON</code>字符串的时候，然后要一个一个<code>\</code>去转义双引号的话，就实在太不应该了，又烦又容易出错。在<code>IDEA</code>可以使用<code>Inject language</code>帮我们自动转义双引号。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506102510207?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>先将焦点定位到双引号里面，使用<code>alt+enter</code>快捷键弹出<code>inject language</code>视图，并选中<br />
+<code>Inject language or reference</code>。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506103121907?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>选择后,切记，要直接按下<code>enter</code>回车键，才能弹出<code>inject language</code>列表。在列表中选择 <code>json</code>组件。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506103545731?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>选择完后。鼠标焦点自动会定位在双引号里面，这个时候你再次使用<code>alt+enter</code>就可以看到<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506104023832?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>选中<code>Edit JSON Fragment</code>并回车，就可以看到编辑<code>JSON</code>文件的视图了。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506104257350?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>可以看到<code>IDEA</code>确实帮我们自动转义双引号了。如果要退出编辑<code>JSON</code>信息的视图，只需要使用<code>ctrl+F4</code>快捷键即可。</p>
+
+<p><code>Inject language</code>可以支持的语言和操作多到你难以想象，读者可以自行研究。</p>
+
+<hr />
+<h1>使用快捷键移动分割线</h1>
+
+<hr />
+<p>假设有下面的场景，某个类的名字在<code>project</code>视图里被挡住了某一部分。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/2018050610490590?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>你想完整的看到类的名字，该怎么做。一般都是使用鼠标来移动分割线，但是这样子效率太低了。可以使用<code>alt+1</code>把鼠标焦点定位到<code>project</code>视图里，然后直接使用<code>ctrl+shift+左右箭头</code>来移动分割线。</p>
+
+<hr />
+<h1>ctrl+shift+enter不只是用来行尾加分号的</h1>
+
+<hr />
+<p><code>ctrl+shift+enter</code>其实是表示<code>为您收尾</code>的意思，不只是用来给代码加分号的。比如说：<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506105438146?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>这段代码，我们还需要为if语句加上大括号才能编译通过，这个时候你直接输入<code>ctrl+shift+enter</code>，<code>IDEA</code>会自动帮你收尾，加上大括号的。</p>
+
+<hr />
+<h1>不要动不动就使用IDEA的重构功能</h1>
+
+<hr />
+<p><code>IDEA</code>的重构功能非常强大，但是也有时候，在单个类里面，如果只是想批量修改某个文本，大可不必使用到重构的功能。比如说：<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506111208407?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>上面的代码中，有5个地方用到了rabbitTemplate文本，如何批量修改呢？<br />
+首先是使用<code>ctrl+w</code>选中<code>rabbitTemplate</code>这个文本,然后依次使用5次<code>alt+j</code>快捷键，逐个选中，这样五个文本就都被选中并且高亮起来了，这个时候就可以直接批量修改了。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506111615984?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<hr />
+<h1>去掉导航栏</h1>
+
+<hr />
+<p>去掉导航栏，因为平时用的不多。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506111913289?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>可以把红色的导航栏去掉，让<code>IDEA</code>显得更加干净整洁一些。使用<code>alt+v</code>，然后去掉<code>Navigation bar</code>即可。去掉这个导航栏后，如果你偶尔还是要用的，直接用<code>alt+home</code>就可以临时把导航栏显示出来。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506112253301?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>如果想让这个临时的导航栏消失的话，直接使用<code>esc</code>快捷键即可。</p>
+
+<hr />
+<h1>把鼠标定位到project视图里</h1>
+
+<hr />
+<p>当工程里的包和类非常多的时候，有时候我们想知道当前类在project视图里是处在哪个位置。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506112922875?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>上面图中的<code>DemoIDEA</code>里，你如何知道它是在<code>spring-cloud-config</code>工程里的哪个位置呢？<br />
+可以先使用<code>alt+F1</code>，弹出<code>Select in</code>视图，然后选择<code>Project View</code>中的<code>Project</code>，回车，就可以立刻定位到类的位置了。</p>
+
+<p><img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506113149744?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>那如何从<code>project</code>跳回代码里呢？可以直接使用<code>esc</code>退出<code>project</code>视图，或者直接使用<code>F4</code>,跳到代码里。</p>
+
+<hr />
+<h1>强大的symbol</h1>
+
+<hr />
+<p>如果你依稀记得某个方法名字几个字母，想在<code>IDEA</code>里面找出来，可以怎么做呢？<br />
+直接使用<code>ctrl+shift+alt+n</code>，使用<code>symbol</code>来查找即可。<br />
+比如说：<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506114420813?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>你想找到checkUser方法。直接输入<code>user</code>即可。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506114545585?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>如果你记得某个业务类里面有某个方法，那也可以使用首字母找到类,然后加个<code>.</code>，再输入方法名字也是可以的。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506114751563?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<hr />
+<h1>如何找目录</h1>
+
+<hr />
+<p>使用<code>ctrl+shift+n</code>后，使用<code>/</code>，然后输入目录名字即可.<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506115258400?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<hr />
+<h1>自动生成not null判断语句</h1>
+
+<hr />
+<p>自动生成not null这种if判断，在<code>IDEA</code>里有很多种办法，其中一种办法你可能没想到。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506121917448?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>当我们使用rabbitTemplate. 后，直接输入<code>notnull</code>并回车，<code>IDEA</code>就好自动生成if判断了。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506122137443?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<hr />
+<h1>按照模板找内容</h1>
+
+<hr />
+<p>这个也是我非常喜欢的一个功能，可以根据模板来找到与模板匹配的代码块。比如说：</p>
+
+<blockquote>
+<p>想在整个工程里面找到所有的try catch语句,但是catch语句里面没有做异常处理的。</p>
+</blockquote>
+
+<p>catch语句里没有处理异常，是极其危险的。我们可以<code>IDEA</code>里面方便找到所有这样的代码。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506130226135?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>首先使用<code>ctrl+shift+A</code>快捷键弹出action框，然后输入<code>Search Struct</code><br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506130444300?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>选择<code>Search Structurally</code>后，回车，跳转到模板视图。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506130624611?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>点击<code>Existing Templates</code>按钮，选择<code>try</code>模板。为了能找出catch里面没有处理异常的代码块，我们需要配置一下<code>CatchStatement</code>的<code>Maximum count</code>的值，将其设置为1。</p>
+
+<p>点击<code>Edit Variables</code>按钮，在界面修改<code>Maximum count</code>的值。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506131057131?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>最后点击<code>find</code>按钮，就可以找出catch里面没有处理异常的代码了。<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180506131239122?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+
+<p>如果文章还行，请帮忙点一下赞哈。如下图：<br />
+<img alt="这里写图片描述" src="https://img-blog.csdn.net/20180507124129636?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" /></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/springcloud/96524482.html'>Eureka常用配置以及常见问题总结</a></li><li><a href='/bcsj/js/88918988.html'>Jquery获取radio选中的值_jquery</a></li><li><a href='/bcsj/java/79461729.html'>Intellij IDEA神器居然还有这些小技巧</a></li><li><a href='/springcloud/62353556.html'>Spring Cloud Netflix Eureka: 多网卡环境下Eureka服务注册IP选择问题</a></li><li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现</a></li><li><a href='/springcloud/2736272.html'>如何解决Eureka Server不剔除已关停的节点的问题？</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li><li><a href='/bcsj/java/1655.html'>什么是SOA，以及SOA的优点特性原理</a></li><li><a href='/zookeeper/1654.html'>zookeeper常用命令</a></li><li><a href='/dnzs/1653.html'>vbscript.dll文件下载，解决找不到vbscript.dll的问题</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2016 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>
