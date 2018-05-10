@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>linux下tar.gz、tar、bz2、zip等解压缩、压缩命令小结_LINUX_操作系统</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="tar.gz,tar,bz2,zip" />
+  <meta name="description" content="本文介绍了linux下的压缩程式tar、gzip、gunzip、bzip2、bunzip2、compress 、uncompress、 zip、 unzip、rar、unrar等程式，以及如何使用它们对.tar、.gz 、.tar.gz、.tgz、.bz2、.tar.bz2、.Z、. tar.Z、.zip、.rar这10种压缩文件进行 
+操作" />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>linux下tar.gz、tar、bz2、zip等解压缩、压缩命令小结_LINUX_操作系统</div>
+            <a href="/">flypeng</a>  发布时间：05-09 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="33366976" class="art_content"><p>本文介绍了linux下的压缩程式tar、gzip、gunzip、bzip2、bunzip2、compress 、uncompress、 zip、 unzip、rar、unrar等程式，以及如何使用它们对.tar、.gz 、.tar.gz、.tgz、.bz2、.tar.bz2、.Z、. tar.Z、.zip、.rar这10种压缩文件进行操作</p>
+
+<p>Linux下最常用的打包程序就是tar了，使用tar程序打出来的包我们常称为tar包，tar包文件的命令通常都是以.tar结尾的。生成tar包后，就可以用其它的程序来进行压缩了，所以首先就来讲讲tar命令的基本用法：</p>
+
+<p>tar命令的选项有很多(用man tar可以查看到)，但常用的就那么几个选项，下面来举例说明一下：</p>
+
+<pre>
+# tar -cf all.tar *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包 ，-f指定包的文件名。</p>
+
+<pre>
+# tar -rf all.tar *.gif</pre>
+
+<p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
+
+<pre>
+# tar -uf all.tar logo.gif</pre>
+
+<p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
+
+<pre>
+# tar -tf all.tar</pre>
+
+<p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思</p>
+
+<pre>
+# tar -xf all.tar</pre>
+
+<p>这条命令是解出all.tar包中所有文件，-x是解开的意思</p>
+
+<p>以上就是tar的最基本的用法。为了方便用户在打包解包的同时可以压缩或解压文件，tar提供了一种特殊的功能。这就是tar可以在打包或解包的同时调用其它的压缩程序，比如调用gzip、bzip2等。</p>
+
+<p><strong>1) tar调用</strong></p>
+
+<p>gzip是GNU组织开发的一个压缩程序，.gz结尾的文件就是gzip压缩的结果。与gzip 相对的解压程序是gunzip。tar中使用-z这个参数来调用gzip。下面来举例说明一下：</p>
+
+<pre>
+# tar -czf all.tar.gz *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件打成一个tar包，并且将其用gzip压缩，生成一个gzip压缩过的包，包名为all.tar.gz</p>
+
+<pre>
+# tar -xzf all.tar.gz</pre>
+
+<p>这条命令是将上面产生的包解开。</p>
+
+<p><strong>2) tar调用bzip2 </strong></p>
+
+<p>bzip2是一个压缩能力更强的压缩程序，.bz2结尾的文件就是bzip2压缩的结果。</p>
+
+<p>与bzip2相对的解压程序是bunzip2。tar中使用-j这个参数来调用gzip。下面来举例说明一下：</p>
+
+<pre>
+# tar -cjf all.tar.bz2 *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件打成一个tar包，并且将其用bzip2压缩，生成一个bzip2压缩过的包，包名为all.tar.bz2</p>
+
+<pre>
+# tar -xjf all.tar.bz2</pre>
+
+<p>这条命令是将上面产生的包解开。</p>
+
+<p><strong>3)tar调用compress </strong></p>
+
+<p>compress也是一个压缩程序，但是好象使用compress的人不如gzip和bzip2的人多。.Z结尾的文件就是bzip2压缩的结果。与 compress相对的解压程序是uncompress。tar中使用-Z这个参数来调用compress。下面来举例说明一下：</p>
+
+<pre>
+# tar -cZf all.tar.Z *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件打成一个tar包，并且将其用compress压缩，生成一个uncompress压缩过的包，包名为all.tar.Z</p>
+
+<pre>
+# tar -xZf all.tar.Z</pre>
+
+<p>这条命令是将上面产生的包解开</p>
+
+<p><strong>有了上面的知识，你应该可以解开多种压缩文件了，下面对于tar系列的压缩文件作一个小结</strong>：</p>
+
+<p>1)对于.tar结尾的文件</p>
+
+<p>tar -xf all.tar</p>
+
+<p>2)对于.gz结尾的文件</p>
+
+<p>gzip -d all.gz</p>
+
+<p>gunzip all.gz</p>
+
+<p>3)对于.tgz或.tar.gz结尾的文件</p>
+
+<p>tar -xzf all.tar.gz</p>
+
+<p>tar -xzf all.tgz</p>
+
+<p>4)对于.bz2结尾的文件</p>
+
+<p>bzip2 -d all.bz2</p>
+
+<p>bunzip2 all.bz2</p>
+
+<p>5)对于tar.bz2结尾的文件</p>
+
+<p>tar -xjf all.tar.bz2</p>
+
+<p>6)对于.Z结尾的文件</p>
+
+<p>uncompress all.Z</p>
+
+<p>7)对于.tar.Z结尾的文件</p>
+
+<p>tar -xZf all.tar.z</p>
+
+<p>另外对于Window下的常见压缩文件.zip和.rar，Linux也有相应的方法来解压它们：</p>
+
+<p><strong>1)对于.zip </strong></p>
+
+<p>linux下提供了zip和unzip程序，zip是压缩程序，unzip是解压程序。它们的参数选项很多，这里只做简单介绍，依旧举例说明一下其用法：</p>
+
+<pre>
+# zip all.zip *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件压缩成一个zip包</p>
+
+<pre>
+# unzip all.zip</pre>
+
+<p>这条命令是将all.zip中的所有文件解压出来</p>
+
+<p>2)对于.rar</p>
+
+<p>要在linux下处理.rar文件，需要安装RAR for Linux，可以从网上下载，但要记住，RAR for Linux 不是免费的；可从http://www.rarsoft.com/download.htm下载RARfor Linux 3.2.<br />
+0，然后安装：</p>
+
+<pre>
+# tar -xzpvf rarlinux-3.2.0.tar.gz 
+# cd rar 
+# make
+</pre>
+
+<p>这样就安装好了，安装后就有了rar和unrar这两个程序，rar是压缩程序，unrar 是解压程序。它们的参数选项很多，这里只做简单介绍，依旧举例说明一下其用法：&nbsp;</p>
+
+<pre>
+# rar a all *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件压缩成一个rar包，名为all.rar，该程序会将.rar 扩展名将自动附加到包名后。</p>
+
+<pre>
+# unrar e all.rar</pre>
+
+<p>这条命令是将all.rar中的所有文件解压出来</p>
+
+<p>到此为至，我们已经介绍过linux下的tar、gzip、gunzip、bzip2、bunzip2、compress 、 uncompress、 zip、unzip、rar、unrar等程式，你应该已经能够使用它们对.tar 、.gz、.tar.gz、.tgz、.bz2、.tar.bz2、. Z、.tar.Z、.zip、.rar这10种压缩文<br />
+件进行解压了，以后应该不需要为下载了一个软件而不知道如何在Linux下解开而烦恼了。而且以上方法对于Unix也基本有效。</p>
+
+<p>本文介绍了linux下的压缩程式tar、gzip、gunzip、bzip2、bunzip2、compress 、uncompress、 zip、 unzip、rar、unrar等程式，以及如何使用它们对.tar、.gz 、.tar.gz、.tgz、.bz2、.tar.bz2、.Z、. tar.Z、.zip、.rar这10种压缩文件进行<br />
+操作。</p>
+
+<p><strong>以下补充 </strong></p>
+
+<p>tar<br />
+&nbsp;</p>
+
+<p>-c: 建立压缩档案<br />
+-x：解压<br />
+-t：查看内容<br />
+-r：向压缩归档文件末尾追加文件<br />
+-u：更新原压缩包中的文件</p>
+
+<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+
+<p>-z：有gzip属性的<br />
+-j：有bz2属性的<br />
+-Z：有compress属性的<br />
+-v：显示所有过程<br />
+-O：将文件解开到标准输出&nbsp;<br />
+&nbsp;</p>
+
+<p>下面的参数-f是必须的</p>
+
+<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。&nbsp;<br />
+&nbsp;</p>
+
+<pre>
+# tar -cf all.tar *.jpg这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。 
+# tar -rf all.tar *.gif </pre>
+
+<p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。&nbsp;<br />
+&nbsp;</p>
+
+<pre>
+# tar -uf all.tar logo.gif 
+</pre>
+
+<p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。&nbsp;<br />
+&nbsp;</p>
+
+<pre>
+# tar -tf all.tar </pre>
+
+<p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思&nbsp;<br />
+&nbsp;</p>
+
+<pre>
+# tar -xf all.tar </pre>
+
+<p>这条命令是解出all.tar包中所有文件，-x是解开的意思</p>
+
+<p><strong>压缩 </strong></p>
+
+<blockquote>
+<p>tar &ndash;cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg<br />
+tar &ndash;czf jpg.tar.gz *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz<br />
+tar &ndash;cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2<br />
+tar &ndash;cZf jpg.tar.Z *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z<br />
+rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux<br />
+zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux</p>
+</blockquote>
+
+<p><strong>解压</strong></p>
+
+<blockquote>
+<p>tar &ndash;xvf file.tar //解压 tar包<br />
+tar -xzvf file.tar.gz //解压tar.gz<br />
+tar -xjvf file.tar.bz2 //解压 tar.bz2<br />
+tar &ndash;xZvf file.tar.Z //解压tar.Z<br />
+unrar e file.rar //解压rar<br />
+unzip file.zip //解压zip<br />
+&nbsp;</p>
+</blockquote>
+
+<p><strong>总结</strong></p>
+
+<blockquote>
+<p>1、*.tar 用 tar &ndash;xvf 解压<br />
+2、*.gz 用 gzip -d或者gunzip 解压<br />
+3、*.tar.gz和*.tgz 用 tar &ndash;xzf 解压<br />
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压<br />
+5、*.tar.bz2用tar &ndash;xjf 解压<br />
+6、*.Z 用 uncompress 解压<br />
+7、*.tar.Z 用tar &ndash;xZf 解压<br />
+8、*.rar 用 unrar e解压<br />
+9、*.zip 用 unzip 解压</p>
+</blockquote>
+
+<p><strong>Linux下解压RAR软件下载和解压.zip和.rar文件</strong></p>
+
+<p>下载地址：http://www.rarsoft.com/download.htm（目前最新为RAR 3.71 for Linux）</p>
+
+<p>以最新的为准。</p>
+
+<p>对于Window下的常见压缩文件.zip和.rar，Linux也有相应的方法来解压它们：</p>
+
+<p><strong>1:对于.zip</strong></p>
+
+<p>linux下提供了zip和unzip程序，zip是压缩程序，unzip是解压程序。它们的参数选项很多，这里只做简单介绍，举例说明一下其用法：</p>
+
+<pre>
+# zip all.zip *.jpg(这条命令是将所有.jpg的文件压缩成一个zip包)
+# unzip all.zip(这条命令是将all.zip中的所有文件解压出来)</pre>
+
+<p><strong>2:对于.rar</strong></p>
+
+<p>要在linux下处理.rar文件，需要安装RAR for Linux，可以从网上下载，但要记住，RAR for Linux不是免费的；可从http://www.rarsoft.com/download.htm下载RAR 3。60 for Linux ，然后安装其安装操作如下:</p>
+
+<pre>
+# tar -xzpvf rarlinux-3.2.0.tar.gz
+# cd rar
+# make</pre>
+
+<p>这样就安装好了，安装后就有了rar和unrar这两个程序，rar是压缩程序，unrar是解压程序。它们的参数选项很多，举例说明一下其用法</p>
+
+<pre>
+# rar a all *.jpg</pre>
+
+<p>这条命令是将所有.jpg的文件压缩成一个rar包，名为all.rar，该程序会将.rar 扩展名将自动附加到包名后。</p>
+
+<pre>
+# unrar e all.rar</pre>
+
+<p>这条命令是将all.rar中的所有文件解压出来。</p>
+
+<p>xxxx.tar.gz文件使用tar带zxvf参数，可以一次解压开。XXXX为文件名。例如：<br />
+&nbsp;</p>
+
+<pre>
+$tar zxvf xxxx.tar.gz</pre>
+
+<p><strong>gzip -d</strong></p>
+
+<p>语 法：gzip [-acdfhlLnNqrtvV][-S &lt;压缩字尾字符串&gt;][-&lt;压缩效率&gt;][--best/fast][文件...] 或 gzip [-acdfhlLnNqrtvV][-S &lt;压缩字尾字符串&gt;][-&lt;压缩效率&gt;][--best/fast][目录]</p>
+
+<p>补充说明：gzip是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出&quot;.gz&quot;的扩展名。</p>
+
+<p>参 数：<br />
+&nbsp;</p>
+
+<p>-a或--ascii 使用ASCII文字模式。<br />
+-c或--stdout或--to-stdout 把压缩后的文件输出到标准输出设备，不去更动原始文件。<br />
+-d或--decompress或----uncompress 解开压缩文件。<br />
+-f或--force 强行压缩文件。不理会文件名称或硬连接是否存在以及该文件是否为符号连接。<br />
+-h或--help 在线帮助。<br />
+-l或--list 列出压缩文件的相关信息。<br />
+-L或--license 显示版本与版权信息。<br />
+-n或--no-name 压缩文件时，不保存原来的文件名称及时间戳记。<br />
+-N或--name 压缩文件时，保存原来的文件名称及时间戳记。<br />
+-q或--quiet 不显示警告信息。<br />
+-r或--recursive 递归处理，将指定目录下的所有文件及子目录一并处理。<br />
+-S&lt;压缩字尾字符串&gt;或----suffix&lt;压缩字尾字符串&gt; 更改压缩字尾字符串。<br />
+-t或--test 测试压缩文件是否正确无误。<br />
+-v或--verbose 显示指令执行过程。<br />
+-V或--version 显示版本信息。<br />
+-&lt;压缩效率&gt; 压缩效率是一个介于1－9的数值，预设值为&quot;6&quot;，指定愈大的数值，压缩效率就会愈高。<br />
+--best 此参数的效果和指定&quot;-9&quot;参数相同。<br />
+--fast 此参数的效果和指定&quot;-1&quot;参数相同。</p>
+
+<p>1、*.tar 用 tar &ndash;xvf 解压<br />
+2、*.gz 用 gzip -d或者gunzip 解压<br />
+3、*.tar.gz和*.tgz 用 tar &ndash;xzf 解压<br />
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压<br />
+5、*.tar.bz2用tar &ndash;xjf 解压<br />
+6、*.Z 用 uncompress 解压<br />
+7、*.tar.Z 用tar &ndash;xZf 解压<br />
+8、*.rar 用 unrar e解压<br />
+9、*.zip 用 unzip 解压</p>
+
+<p>Linux下*.tar.gz文件解压缩命令</p>
+
+<p><strong>1.压缩命令：</strong></p>
+
+<p>命令格式：tar -zcvf 压缩文件名.tar.gz 被压缩文件名</p>
+
+<p>可先切换到当前目录下。压缩文件名和被压缩文件名都可加入路径。</p>
+
+<p><strong>2.解压缩命令：</strong></p>
+
+<p>命令格式：tar -zxvf 压缩文件名.tar.gz</p>
+
+<p>解压缩后的文件只能放在当前的目录。</p>
+
+<p>你可以使用 zip 命令同时处理多个文件和目录，方法是将它们逐一列出，并用空格间隔：</p>
+
+<p>zip -r filename.zip file1 file2 file3 /usr/work/school&nbsp;<br />
+&nbsp;</p>
+
+<p>压缩单个目录命令zip -r filename.zip filename</p>
+
+<p>上面的命令把 file1、file2、 file3、以及 /usr/work/school 目录的内容（假设这个目录存在）压缩起来，然后放入 filename.zip 文件中。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/js/67171455.html'>JS中递归函数_javascript技巧</a></li><li><a href='/bcsj/java/19626116.html'>Java中常见的5种WEB服务器介绍_java</a></li><li><a href='/czxt/linux/33366976.html'>linux下tar.gz、tar、bz2、zip等解压缩、压缩命令小结_LINUX_操作系统</a></li><li><a href='/bcsj/java/79461729.html'>Intellij IDEA神器居然还有这些小技巧</a></li><li><a href='/bcsj/js/88918988.html'>Jquery获取radio选中的值_jquery</a></li><li><a href='/springcloud/2736272.html'>如何解决Eureka Server不剔除已关停的节点的问题？</a></li><li><a href='/springcloud/96524482.html'>Eureka常用配置以及常见问题总结</a></li><li><a href='/springcloud/58876504.html'>spring cloud:eureka服务发现</a></li><li><a href='/springcloud/62353556.html'>Spring Cloud Netflix Eureka: 多网卡环境下Eureka服务注册IP选择问题</a></li><li><a href='/bcsj/java/1656.html'>Intellij IDEA 快捷键大全</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/czxt/linux/910.html'>XShell连接不上虚拟机CentOS</a></li><li><a href='/czxt/linux/243.html'>Linux下实现Web数据同步的四种方式</a></li><li><a href='/czxt/linux/907.html'>CentOs 设置静态IP 方法</a></li><li><a href='/czxt/linux/3.html'>WIN7系统优化之页面文件pagefile.sys转移</a></li><li><a href='/czxt/linux/914.html'>Linux安装与配置JDK7</a></li><li><a href='/czxt/linux/200.html'>linux（centos）搭建SVN服务器</a></li><li><a href='/czxt/linux/1375.html'>Linux CentOS tar压缩解压缩命令详解</a></li><li><a href='/czxt/linux/1409.html'>linux下查看cpu物理个数、核数、逻辑cpu数</a></li><li><a href='/czxt/linux/1299.html'>CentOS下安装JDK1.7</a></li><li><a href='/czxt/linux/1396.html'>nginx 400 Bad request 错误的原因和解决办法</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>
