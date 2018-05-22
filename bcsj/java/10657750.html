@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>基于spring注解AOP的异常处理</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java中的异常" />
+  <meta name="description" content="基于spring注解AOP的异常处理" />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" title="网络知识大全" class="swing animated">网络知识</a></li>
+            <li><a href="http://www.win10os.com" title="windows10系统" class="">windows10</a></li>
+            <li><a href="/czxt/linux" title="linux系统" class="">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>基于spring注解AOP的异常处理</div>
+            <a href="/">flypeng</a>  发布时间：05-22 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="10657750" class="art_content"><p>&nbsp;</p>
+
+<h2>一、前言</h2>
+
+<p>　　项目刚刚开发的时候，并没有做好充足的准备。开发到一定程度的时候才会想到还有一些问题没有解决。就比如今天我要说的一个问题：异常的处理。写程序的时候一般都会通过try...catch...finally对异常进行处理，但是我们真的能在写程序的时候处理掉所有可能发生的异常吗？ 以及发生异常的时候执行什么逻辑，返回什么提示信息，跳转到什么页面，这些都是要考虑到的。</p>
+
+<h2>二、基于@ControllerAdvice（加强的控制器）的异常处理</h2>
+
+<p>　　参考文档：<a href="http://jinnianshilongnian.iteye.com/blog/1866350" target="_blank">http://jinnianshilongnian.iteye.com/blog/1866350</a></p>
+
+<p>　　@ControllerAdvice注解内部使用@ExceptionHandler、@InitBinder、@ModelAttribute注解的方法应用到所有的&nbsp;@RequestMapping注解的方法。本例子中使用ExceptionHandler应用到所有@RequestMapping注解的方法，处理发生的异常。</p>
+
+<p>　　示例代码：</p>
+
+<p>&nbsp;</p>
+
+<pre>
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hjz.exception.ServiceException;
+import com.hjz.exception.utils.ExceptionUtils;
+
+@ResponseBody
+public class ExceptionAdvice {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionAdvice.class);
+
+    /**
+     * 拦截web层异常，记录异常日志，并返回友好信息到前端
+     * 目前只拦截Exception，是否要拦截Error需再做考虑
+     *
+     * @param e 异常对象
+     * @return 异常提示
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;String&gt; handleException(Exception e) {
+        //不需要再记录ServiceException，因为在service异常切面中已经记录过
+        if (!(e instanceof ServiceException)) {
+            LOGGER.error(ExceptionUtils.getExcTrace(e));
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(&quot;Content-type&quot;, &quot;text/plain;charset=UTF-8&quot;);
+        headers.add(&quot;icop-content-type&quot;, &quot;exception&quot;);
+        String message = StringUtils.isEmpty(e.getMessage()) ? &quot;系统异常!!&quot; : e.getMessage();
+        return new ResponseEntity&lt;&gt;(message, headers, HttpStatus.OK);
+    }
+}</pre>
+
+<p>&nbsp;</p>
+
+<p>　　如果不起作用，请检查 spring-mvc的配置文件，是否有ControllerAdvice的如下配置</p>
+
+<pre>
+&lt;context:component-scan base-package=&quot;com.xxx.xx&quot; use-default-filters=&quot;false&quot;&gt;  
+       &lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;  
+       &lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.web.bind.annotation.ControllerAdvice&quot;/&gt;  
+   &lt;/context:component-scan&gt;  </pre>
+
+<p>&nbsp;　　附上：<strong><a href="http://blog.csdn.net/xiao__gui/article/details/45422649">Spring MVC的Controller统一异常处理：HandlerExceptionResolver</a></strong></p>
+
+<h2>三、基于AOP的异常处理</h2>
+
+<p>　　1.处理controller层的异常&nbsp;WebExceptionAspect.java</p>
+
+<p>&nbsp;</p>
+
+<pre>
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.hjz.exception.ServiceException;
+import com.hjz.exception.utils.ExceptionUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * web异常切面
+ * 默认spring aop不会拦截controller层，使用该类需要在spring公共配置文件中注入改bean，
+ * 另外需要配置&lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;
+ */
+@Aspect
+public class WebExceptionAspect {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebExceptionAspect.class);
+
+    @Pointcut(&quot;@annotation(org.springframework.web.bind.annotation.RequestMapping)&quot;)
+    private void webPointcut() {}
+
+    /**
+     * 拦截web层异常，记录异常日志，并返回友好信息到前端
+     * 目前只拦截Exception，是否要拦截Error需再做考虑
+     *
+     * @param e 异常对象
+     */
+    @AfterThrowing(pointcut = &quot;webPointcut()&quot;, throwing = &quot;e&quot;)
+    public void handleThrowing(Exception e) {
+        //不需要再记录ServiceException，因为在service异常切面中已经记录过
+        if (!(e instanceof ServiceException)) {
+            LOGGER.error(ExceptionUtils.getExcTrace(e));
+        }
+
+        String errorMsg = StringUtils.isEmpty(e.getMessage()) ? &quot;系统异常&quot; : e.getMessage();
+        writeContent(errorMsg);
+    }
+
+    /**
+     * 将内容输出到浏览器
+     *
+     * @param content 输出内容
+     */
+    private void writeContent(String content) {
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        response.reset();
+        response.setCharacterEncoding(&quot;UTF-8&quot;);
+        response.setHeader(&quot;Content-Type&quot;, &quot;text/plain;charset=UTF-8&quot;);
+        response.setHeader(&quot;icop-content-type&quot;, &quot;exception&quot;);
+        PrintWriter writer = null;
+        try {
+            writer = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer.print(content);
+        writer.flush();
+        writer.close();
+    }
+}</pre>
+
+<p>&nbsp;</p>
+
+<p>　　2.处理service层的异常ServiceExceptionAspect&nbsp;.java</p>
+
+<p>&nbsp;</p>
+
+<pre>
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import com.hjz.exception.ServiceException;
+import com.hjz.exception.utils.ExceptionUtils;
+
+@Aspect
+public class ServiceExceptionAspect {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceExceptionAspect.class);
+
+    /**
+     * @within(org.springframework.stereotype.Service)，拦截带有 @Service 注解的类的所有方法
+     * @annotation(org.springframework.web.bind.annotation.RequestMapping)，拦截带有@RquestMapping的注解方法
+     */
+    @Pointcut(&quot;@within(org.springframework.stereotype.Service) &amp;&amp; execution(public * *(..))&quot;)
+    private void servicePointcut() {}
+
+    /**
+     * 拦截service层异常，记录异常日志，并设置对应的异常信息
+     * 目前只拦截Exception，是否要拦截Error需再做考虑
+     *
+     * @param e 异常对象
+     */
+    @AfterThrowing(pointcut = &quot;servicePointcut()&quot;, throwing = &quot;e&quot;)
+    public void handle(JoinPoint point, Exception e) {
+        LOGGER.error(ExceptionUtils.getExcTrace(e));
+
+        String signature = point.getSignature().toString();
+        String errorMsg = getMessage(signature) == null ? (StringUtils.isEmpty(e.getMessage()) ? &quot;服务异常&quot; : e.getMessage()) : getMessage(signature);
+        throw new ServiceException(errorMsg, e);
+    }
+
+    /**
+     * 获取方法签名对应的提示消息
+     *
+     * @param signature 方法签名
+     * @return 提示消息
+     */
+    private String getMessage(String signature) {
+        return null;
+    }
+}</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;　　3.使用方式，在spring的公共配置文件中加入如下配置：</p>
+
+<pre>
+&lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot; /&gt;
+&lt;bean class=&quot;com.hjz.exception.aspect.ServiceExceptionAspect&quot; /&gt;
+&lt;bean class=&quot;com.hjz.exception.aspect.WebExceptionAspect&quot; /&gt;</pre>
+
+<p>　　或者&nbsp;自定义一个 注册类，ServiceExceptionAspect.java和WebExceptionAspect.java都加入@Component注解</p>
+
+<p>&nbsp;</p>
+
+<pre>
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+/**
+ * 异常相关bean注册类
+ */
+@Configuration
+@EnableAspectJAutoProxy
+@ComponentScan(&quot;com.hjz.exception.aspect&quot;)
+public class ExceptionConfig {
+
+}</pre>
+
+<p>&nbsp;</p>
+
+<p>　　注：spring 公共配置文件中的配置 改成&nbsp;&lt;bean class=&quot;com.hjz.exception.config.ExceptionConfig&quot;/&gt;，如果controller层的异常无法拦截，请将配置换到springmvc的配置文件中，原因请见（<a href="http://m.blog.csdn.net/article/details?id=47152827" target="_blank">SpringMVC关于AOP拦截controller的注意事项</a>）</p>
+
+<p>&nbsp;</p>
+
+<pre>
+@Aspect
+@Component
+public class WebExceptionAspect {
+   ..........  
+}
+
+
+@Aspect
+@Component
+public class ServiceExceptionAspect {
+   .........
+}</pre>
+
+<p>&nbsp;</p>
+
+<h2>四、疑惑</h2>
+
+<p>&nbsp;　　<strong>@within(org.springframework.stereotype.Service)，拦截带有 @Service&nbsp;注解的类的所有方法</strong><br />
+<strong>&nbsp;　　@annotation(org.springframework.web.bind.annotation.RequestMapping)，拦截带有@RquestMapping的注解方法</strong></p>
+
+<h2>五、测试</h2>
+
+<p>　　分别编写controller层和service层的异常测试类。这个很简单，在方法里简单的抛一下异常就可以了。最后验证一下，异常发生的时候有没有 执行&nbsp;@AfterThrowing对应的方法就好了。具体还是看我写的demo吧，嘿嘿嘿！！！</p>
+
+<p>　　完整项目下载地址：<a href="https://github.com/hjzgg/Spring-annotation-AOP-Exception_handling" target="_blank">https://github.com/hjzgg/Spring-annotation-AOP-Exception_handling</a></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/52040718.html'>JDK 5 ~ 10 新特性倾情整理</a></li><li><a href='/bcsj/java/85251406.html'>Java 中的异常和处理详解</a></li><li><a href='/bcsj/java/66819388.html'>JAVA中的异常处理机制</a></li><li><a href='/bcsj/java/21504022.html'>Spring Cloud 异常处理</a></li><li><a href='/bcsj/java/10657750.html'>基于spring注解AOP的异常处理</a></li><li><a href='/bcsj/java/67260621.html'>JS常见异常类型以及捕获异常</a></li><li><a href='/bcsj/java/76027298.html'>Java中的异常</a></li><li><a href='/bcsj/java/30170439.html'>java.util.NoSuchElementException解决办法</a></li><li><a href='/bcsj/java/39345304.html'>错误记录--java.util.NoSuchElementException</a></li><li><a href='/springboot/47399666.html'>Maven项目下java.lang.ClassNotFoundException常规解决办法</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>
