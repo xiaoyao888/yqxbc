@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="spring,springMVC" />
+  <meta name="description" content="分库分表 顾名思义就是根据查询条件动态的去获取数据所在的库和表的位置," />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" target="_blank" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com"target="_blank" title="windows10系统">windows10</a></li>
+            <li><a href="/czxt/linux" target="_blank" title="linux系统">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>Spring MVC +Spring + Mybatis 构建分库分表总结 SSM搭建以及分库分表的实现</div>
+            <a href="/">flypeng</a>  发布时间：08-08 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="74385984" class="art_content"><p>&nbsp;分库分表在小型公司很少能遇到也很少使用,毕竟数据量没有那么大,当数据量大,所有数据都压在一张表时,如果单从数据库的角度考虑是可以分库分表处理来存储数据。分库分表 顾名思义就是根据查询条件动态的去获取数据所在的库和表的位置.例如一个系统有唯一的标识userNum，所有路由规则都可以根据userNum做库表的定位工作.本文测试用3个库5个表做测试.</p>
+
+<pre>
+三个库book_00，book_01,book_02  每个库里的表 t_user_0000,t_user_0001,t_user_0002,t_user_0003,t_user_0004,
+根据userNum寻找匹配库的_00后缀，匹配表的_0000 后缀 即可定位到是几库几表.
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 本人会建立一个新的项目,一步一步讲解如果简单的搭建一个分库分表的系统并且用页面展示从库里查询出来的数据.</p>
+
+<p><strong>&nbsp;&nbsp; 1,首先需要创建一个新的maven的webApp项目</strong></p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20170309231614531?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVjaGVuZ2J1Z3Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>使用框架版本：</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;Spring&nbsp;4.0.2&nbsp;RELEASE</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;Spring&nbsp;MVC&nbsp;4.0.2&nbsp;RELEASE</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp;MyBatis&nbsp;3.2.6</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2，pom里引入jar包</strong></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-html">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.subdt&lt;/groupId&gt;
+    &lt;artifactId&gt;subDbTable&lt;/artifactId&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;subDbTable Maven Webapp&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;properties&gt;
+        &lt;!-- spring版本号 --&gt;
+        &lt;spring.version&gt;4.0.2.RELEASE&lt;/spring.version&gt;
+        &lt;!-- mybatis版本号 --&gt;
+        &lt;mybatis.version&gt;3.2.6&lt;/mybatis.version&gt;
+        &lt;!-- log4j日志文件管理包版本 --&gt;
+        &lt;slf4j.version&gt;1.7.7&lt;/slf4j.version&gt;
+        &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.11&lt;/version&gt;
+            &lt;!-- 表示开发的时候引入，发布的时候不会加载此包 --&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;!-- spring核心包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-oxm&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+                &lt;dependency&gt;
+                    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+                    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+                    &lt;version&gt;1.8.9&lt;/version&gt;
+                &lt;/dependency&gt;
+
+                &lt;dependency&gt;
+                    &lt;groupId&gt;commons-beanutils&lt;/groupId&gt;
+                    &lt;artifactId&gt;commons-beanutils&lt;/artifactId&gt;
+                    &lt;version&gt;1.8.3&lt;/version&gt;
+                &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-lang&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-lang&lt;/artifactId&gt;
+            &lt;version&gt;2.6&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- mybatis核心包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- mybatis/spring包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+            &lt;version&gt;1.2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 导入java ee jar 包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax&lt;/groupId&gt;
+            &lt;artifactId&gt;javaee-api&lt;/artifactId&gt;
+            &lt;version&gt;7.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 导入Mysql数据库链接jar包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.30&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+            &lt;version&gt;1.2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- JSTL标签类 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;jstl&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 日志文件管理包 --&gt;
+        &lt;!-- log start --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+            &lt;version&gt;${log4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;!-- 格式化对象，方便输出日志 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version&gt;1.1.41&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;version&gt;${slf4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;${slf4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- log end --&gt;
+        &lt;!-- 映入JSON --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.codehaus.jackson&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-mapper-asl&lt;/artifactId&gt;
+            &lt;version&gt;1.9.13&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 上传组件包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+            &lt;version&gt;1.3.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-io&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+            &lt;version&gt;2.4&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-codec&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;
+            &lt;version&gt;1.9&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
+            &lt;artifactId&gt;gson&lt;/artifactId&gt;
+            &lt;version&gt;1.7.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;finalName&gt;subDbTable&lt;/finalName&gt;
+        &lt;resources&gt;
+            &lt;!--编译之后包含xml--&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p><br />
+首先看下目录结构<br />
+<br />
+<img alt="" src="https://img-blog.csdn.net/20170310094124271?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVjaGVuZ2J1Z3Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" /></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>3，Spring与MyBatis的整合</h2>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>首先创建 jdbc.properties 配置数据库信息</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-html">driver=com.mysql.jdbc.Driver
+#定义初始连接数
+initialSize=0
+#定义最大连接数
+maxActive=20
+#定义最大空闲
+maxIdle=20
+#定义最小空闲
+minIdle=1
+#定义最长等待时间
+maxWait=60000
+
+jdbc.mysql.url0=jdbc:mysql://localhost:3306/book_02?createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;useUnicode=true
+jdbc.mysql.username0=root
+jdbc.mysql.password0=123456
+
+jdbc.mysql.url1=jdbc:mysql://localhost:3306/book_00?createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;useUnicode=true
+jdbc.mysql.username1=root
+jdbc.mysql.password1=123456
+
+jdbc.mysql.url2=jdbc:mysql://localhost:3306/book_01?createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;useUnicode=true
+jdbc.mysql.username2=root
+jdbc.mysql.password2=123456
+
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>创建Spring配置文件 spring-config.xml</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+       default-autowire="byName"&gt;
+    &lt;context:component-scan base-package="com.sub.dt"/&gt;
+    &lt;aop:aspectj-autoproxy/&gt;
+    &lt;!-- 属性文件读入 --&gt;
+    &lt;bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+        &lt;property name="locations"&gt;
+            &lt;list&gt;
+                &lt;value&gt;classpath:props/*.properties&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;import resource="classpath:spring/spring-*.xml"/&gt;
+
+&lt;/beans&gt;</code></pre>
+
+<p><br />
+创建spring与mybatis结合的整合配置文件. spring-config-datasource-dbcp.xml</p>
+
+<p>这个文件主要是多数据源配置,自动扫描mybatis的xml配置文件.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
+
+    &lt;!-- 引入配置文件 --&gt;
+    &lt;bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+        &lt;property name="location" value="classpath:props/jdbc.properties"/&gt;
+    &lt;/bean&gt;
+
+
+    &lt;bean id="dataSource0" class="org.apache.commons.dbcp.BasicDataSource"&gt;
+        &lt;property name="driverClassName" value="${driver}"/&gt;
+        &lt;property name="url" value="${jdbc.mysql.url0}"/&gt;
+        &lt;property name="username" value="${jdbc.mysql.username0}"/&gt;
+        &lt;property name="password" value="${jdbc.mysql.password0}"/&gt;
+        &lt;!-- 初始化连接大小 --&gt;
+        &lt;property name="initialSize" value="${initialSize}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大数量 --&gt;
+        &lt;property name="maxActive" value="${maxActive}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大空闲 --&gt;
+        &lt;property name="maxIdle" value="${maxIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最小空闲 --&gt;
+        &lt;property name="minIdle" value="${minIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 获取连接最大等待时间 --&gt;
+        &lt;property name="maxWait" value="${maxWait}"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+
+    &lt;bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource"&gt;
+        &lt;property name="driverClassName" value="${driver}"/&gt;
+        &lt;property name="url" value="${jdbc.mysql.url1}"/&gt;
+        &lt;property name="username" value="${jdbc.mysql.username1}"/&gt;
+        &lt;property name="password" value="${jdbc.mysql.password1}"/&gt;
+        &lt;!-- 初始化连接大小 --&gt;
+        &lt;property name="initialSize" value="${initialSize}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大数量 --&gt;
+        &lt;property name="maxActive" value="${maxActive}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大空闲 --&gt;
+        &lt;property name="maxIdle" value="${maxIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最小空闲 --&gt;
+        &lt;property name="minIdle" value="${minIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 获取连接最大等待时间 --&gt;
+        &lt;property name="maxWait" value="${maxWait}"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+
+    &lt;bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"&gt;
+        &lt;property name="driverClassName" value="${driver}"/&gt;
+        &lt;property name="url" value="${jdbc.mysql.url2}"/&gt;
+        &lt;property name="username" value="${jdbc.mysql.username2}"/&gt;
+        &lt;property name="password" value="${jdbc.mysql.password2}"/&gt;
+        &lt;!-- 初始化连接大小 --&gt;
+        &lt;property name="initialSize" value="${initialSize}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大数量 --&gt;
+        &lt;property name="maxActive" value="${maxActive}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最大空闲 --&gt;
+        &lt;property name="maxIdle" value="${maxIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 连接池最小空闲 --&gt;
+        &lt;property name="minIdle" value="${minIdle}"&gt;&lt;/property&gt;
+        &lt;!-- 获取连接最大等待时间 --&gt;
+        &lt;property name="maxWait" value="${maxWait}"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="mysqlDynamicDataSource" class="com.sub.dt.dbRouting.db.DynamicDataSource"&gt;
+        &lt;property name="targetDataSources"&gt;
+            &lt;!-- 标识符类型 --&gt;
+            &lt;map&gt;
+                &lt;entry key="db0" value-ref="dataSource0"/&gt;
+                &lt;entry key="db1" value-ref="dataSource1"/&gt;
+                &lt;entry key="db2" value-ref="dataSource2"/&gt;
+            &lt;/map&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="dbRuleSet" class="com.sub.dt.dbRouting.bean.RouterSet"&gt;
+        &lt;property name="routeFieldStart" value="0"&gt;&lt;/property&gt;
+        &lt;property name="routeFieldEnd" value="9200000000000000000"&gt;&lt;/property&gt;
+        &lt;property name="dbNumber" value="3"&gt;&lt;/property&gt;
+        &lt;property name="routeType" value="2"&gt;&lt;/property&gt;
+        &lt;property name="ruleType" value="3"&gt;&lt;/property&gt;
+        &lt;property name="tableNumber" value="5"&gt;&lt;/property&gt;
+        &lt;property name="dbKeyArray"&gt;
+            &lt;list&gt;
+                &lt;value&gt;db0&lt;/value&gt;
+                &lt;value&gt;db1&lt;/value&gt;
+                &lt;value&gt;db2&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="dBRouter" class="com.sub.dt.dbRouting.router.DBRouterImpl"&gt;
+        &lt;property name="routerSetList"&gt;
+            &lt;!-- 标识符类型 --&gt;
+            &lt;list&gt;
+                &lt;ref bean="dbRuleSet"/&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!--事务--&gt;
+    &lt;bean id="baiTiaoTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+        &lt;property name="dataSource" ref="mysqlDynamicDataSource"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="btTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"&gt;
+        &lt;property name="transactionManager" ref="baiTiaoTransactionManager"&gt;&lt;/property&gt;
+        &lt;property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 --&gt;
+    &lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+        &lt;property name="dataSource" ref="mysqlDynamicDataSource"/&gt;
+        &lt;!-- 自动扫描mapping.xml文件 --&gt;
+        &lt;property name="mapperLocations" value="classpath:com/sub/dt/mapping/*.xml"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- DAO接口所在包名，Spring会自动查找其下的类 --&gt;
+    &lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
+        &lt;property name="basePackage" value="com.sub.dt.dao"/&gt;
+        &lt;property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>程序使用spring aop切面+自定义注解的方式去在每个方法调用时根据userNum定位库表, 关键类已标红(代码会上传附件自行下载查看)</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20170310094302539?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVjaGVuZ2J1Z3Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" /></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>spring-config-datasource-dbcp.xml中配置的com.sub.dt.dbRouting.db.DynamicDataSource 继承 AbstractRoutingDataSource方法,单表配置mybatis是使用的是BasicDataSource</p>
+
+<p>BasicDataSourBasicDataSource</p>
+
+<p>BasicDataSource 自定义的AbstractRoutingDataSource与spring的BasicDataSource都是一个道理 管理数据源 实现了DataSource接口.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.dbRouting.db;
+
+
+import com.sub.dt.dbRouting.DbContextHolder;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+
+import java.util.logging.Logger;
+
+/**
+ * @Description SPring 的动态数据源的实现
+ * @Autohr supers【weChat:13031016567】
+ */
+public class DynamicDataSource extends AbstractRoutingDataSource {
+    public static final Logger logger = Logger.getLogger(DynamicDataSource.class.toString());
+    @Override
+    protected Object determineCurrentLookupKey() {
+    	return DbContextHolder.getDbKey();//获取当前数据源
+    }
+
+}
+
+</code></pre>
+
+<p>UserMapper.xml创建库表对应的xml文件</p>
+
+<pre>
+<code class="language-html">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;
+&lt;mapper namespace="com.sub.dt.dao.IUserDao"&gt;
+    &lt;resultMap id="BaseResultMap" type="com.sub.dt.pojo.User"&gt;
+        &lt;id column="id" property="id" jdbcType="INTEGER"/&gt;
+        &lt;result column="user_name" property="userName" jdbcType="VARCHAR"/&gt;
+        &lt;result column="password" property="password" jdbcType="VARCHAR"/&gt;
+        &lt;result column="age" property="age" jdbcType="INTEGER"/&gt;
+        &lt;result column="user_num" property="userNum" jdbcType="VARCHAR"/&gt;
+    &lt;/resultMap&gt;
+    &lt;sql id="Base_Column_List"&gt;
+    id,user_num, user_name, password, age
+  &lt;/sql&gt;
+
+    &lt;insert id="insertUser" parameterType="com.sub.dt.pojo.User"&gt;
+    insert into t_user${tableIndex} (id,user_num,user_name, password,age)
+    values (#{id,jdbcType=INTEGER},#{userNum,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{age,jdbcType=INTEGER})
+  &lt;/insert&gt;
+
+
+    &lt;insert id="deleteByuserNum" parameterType="com.sub.dt.pojo.User"&gt;
+    delete from t_user${tableIndex}
+    where user_num = #{userNum,jdbcType=VARCHAR}
+  &lt;/insert&gt;
+
+    &lt;update id="updateByUserNum" parameterType="com.sub.dt.pojo.User"&gt;
+        update t_user${tableIndex}
+        &lt;set&gt;
+            &lt;if test="userName != null"&gt;
+                user_name = #{userName,jdbcType=VARCHAR},
+            &lt;/if&gt;
+            &lt;if test="password != null"&gt;
+                password = #{password,jdbcType=VARCHAR},
+            &lt;/if&gt;
+            &lt;if test="age != null"&gt;
+                age = #{age,jdbcType=INTEGER},
+            &lt;/if&gt;
+        &lt;/set&gt;
+        where user_num = #{userNum,jdbcType=VARCHAR}
+    &lt;/update&gt;
+
+    &lt;select id="selectByUserNum" resultMap="BaseResultMap" parameterType="com.sub.dt.pojo.User"&gt;
+        select
+        &lt;include refid="Base_Column_List"/&gt;
+        from t_user${tableIndex}
+        where user_num = #{userNum,jdbcType=VARCHAR}
+    &lt;/select&gt;
+&lt;/mapper&gt;</code></pre>
+
+<p><br />
+IUserDao.java</p>
+
+<pre>
+<code class="language-java">package com.sub.dt.dao;
+
+import com.sub.dt.pojo.User;
+
+public interface IUserDao {
+
+    /**
+     * @Description
+     * @Autohr supers【weChat:13031016567】
+     */
+    int insertUser(User user);
+
+    /**
+     * @Description
+     * @Autohr supers【weChat:13031016567】
+     */
+    int deleteByuserNum(User user);
+
+    /**
+     * @Description
+     * @Autohr supers【weChat:13031016567】
+     */
+    int updateByUserNum(User user);
+
+    /**
+     * @Description
+     * @Autohr supers【weChat:13031016567】
+     */
+    User selectByUserNum(User user);
+}</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+IUserService.java
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.service;
+
+import com.sub.dt.pojo.User;
+
+/**
+ * @Description
+ * @Autohr supers【weChat:13031016567】
+ */
+public interface IUserService {
+
+	/**
+	 * @Description
+	 * @Autohr supers【weChat:13031016567】
+	 */
+	public int insertUser(User user);
+
+	/**
+	 * @Description
+	 * @Autohr supers【weChat:13031016567】
+	 */
+	public int deleteByuserNum(User user);
+
+	/**
+	 * @Description
+	 * @Autohr supers【weChat:13031016567】
+	 */
+	public int updateByUserNum(User user);
+
+	/**
+	 * @Description
+	 * @Autohr supers【weChat:13031016567】
+	 */
+	public User selectByUserNum(User user);
+
+
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+UserServiceImpl.java
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.service.impl;
+
+import com.sub.dt.dao.IUserDao;
+import com.sub.dt.dbRouting.annotation.Router;
+import com.sub.dt.pojo.User;
+import com.sub.dt.service.IUserService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+/**
+ * @Description
+ * @Autohr supers【weChat:13031016567】
+ */
+@Service("userService")
+public class UserServiceImpl implements IUserService {
+
+    @Resource
+    private IUserDao userDao;
+
+    @Router
+    public int insertUser(User user) {
+        return this.userDao.insertUser(user);
+    }
+
+    @Router
+    public int deleteByuserNum(User user) {
+        return this.userDao.deleteByuserNum(user);
+    }
+
+    @Router
+    public int updateByUserNum(User user) {
+        return this.userDao.updateByUserNum(user);
+    }
+
+    @Router
+    public User selectByUserNum(User user) {
+        return this.userDao.selectByUserNum(user);
+    }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+UserController.java
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.controller;
+
+import com.sub.dt.pojo.User;
+import com.sub.dt.service.IUserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+	@Resource
+	private IUserService userService;
+	
+	@RequestMapping("/queryUser")
+	public String toIndex(HttpServletRequest request,Model model,User user){
+		User userDb = this.userService.selectByUserNum(user);
+		model.addAttribute("user", userDb);
+		return "queryUser";
+	}
+}
+</code></pre>
+
+<p><br />
+<strong>4，核心分库分表包都在dbRouting文件夹下 </strong></p>
+
+<pre>
+Router.java  自定义注解,此注解作用是当做一个切点,在方法上添加此注解,执行方法前会执行DBRouterInterceptor的doRoute方法.详情可参考:<a href="http://blog.csdn.net/buchengbugui/article/details/60875401">http://blog.csdn.net/buchengbugui/article/details/60875401</a>
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.dbRouting.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * @Description
+ * @Autohr supers【weChat:13031016567】
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Router {
+
+    String routerField() default RouterConstants.ROUTER_FIELD_DEFAULT;
+
+    String tableStyle() default RouterConstants.ROUTER_TABLE_SUFFIX_DEFAULT;
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+DBRouterInterceptor.java 定义切点为方法上使用,@Router注解的方法,执行注解方法前前执行doRoute方法,根据参数中的userNum设置是几库几表
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.dbRouting;
+
+import com.sub.dt.dbRouting.annotation.Router;
+import com.sub.dt.dbRouting.annotation.RouterConstants;
+import com.sub.dt.dbRouting.router.RouterUtils;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+
+/**
+ * @Description 切面切点 在Router注解的方法执行前执行 切点织入
+ * @Autohr supers【weChat:13031016567】
+ */
+@Aspect
+@Component
+public class DBRouterInterceptor {
+
+    private static final Logger log = LoggerFactory.getLogger(DBRouterInterceptor.class);
+
+    private DBRouter dBRouter;
+
+    @Pointcut("@annotation( com.sub.dt.dbRouting.annotation.Router)")
+    public void aopPoint() {
+    }
+
+    @Before("aopPoint()")
+    public Object doRoute(JoinPoint jp) throws Throwable {
+        long t1 = System.currentTimeMillis();
+        boolean result = true;
+        Method method = getMethod(jp);
+        Router router = method.getAnnotation(Router.class);
+        String routeField = router.routerField();
+        Object[] args = jp.getArgs();
+        if (args != null &amp;&amp; args.length &gt; 0) {
+            for (int i = 0; i &lt; args.length; i++) {
+                long t2 = System.currentTimeMillis();
+                String routeFieldValue = BeanUtils.getProperty(args[i],
+                        routeField);
+                log.debug("routeFieldValue{}" + (System.currentTimeMillis() - t2));
+                if (StringUtils.isNotEmpty(routeFieldValue)) {
+                    if (RouterConstants.ROUTER_FIELD_DEFAULT.equals(routeField)) {
+                        dBRouter.doRouteByResource("" + RouterUtils.getResourceCode(routeFieldValue));
+                        break;
+                    } else {
+                        this.searchParamCheck(routeFieldValue);
+                        String resource = routeFieldValue.substring(routeFieldValue.length() - 4);
+                        dBRouter.doRouteByResource(resource);
+                        break;
+                    }
+                }
+            }
+        }
+        log.debug("doRouteTime{}" + (System.currentTimeMillis() - t1));
+        return result;
+    }
+
+    private Method getMethod(JoinPoint jp) throws NoSuchMethodException {
+        Signature sig = jp.getSignature();
+        MethodSignature msig = (MethodSignature) sig;
+        return getClass(jp).getMethod(msig.getName(), msig.getParameterTypes());
+    }
+
+    private Class&lt;? extends Object&gt; getClass(JoinPoint jp)
+            throws NoSuchMethodException {
+        return jp.getTarget().getClass();
+    }
+
+
+    /**
+     * 查询支付结构参数检查
+     *
+     * @param payId
+     */
+    private void searchParamCheck(String payId) {
+        if (payId.trim().equals("")) {
+            throw new IllegalArgumentException("payId is empty");
+        }
+    }
+
+    public DBRouter getdBRouter() {
+        return dBRouter;
+    }
+
+    public void setdBRouter(DBRouter dBRouter) {
+        this.dBRouter = dBRouter;
+    }
+
+}
+</code></pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+RouterSet.java  主要是 配置在spring-config-datasource-dbcp.xml中 存储库的数量,表的数量,库表相关信息
+
+</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.dbRouting.bean;
+
+import java.util.List;
+
+/**
+ * @Description
+ * @Autohr supers【weChat:13031016567】
+ */
+public class RouterSet {
+
+    /**根据字符串*/
+    public final static int RULE_TYPE_STR=3;
+
+    public final static int ROUTER_TYPE_DB=0;
+
+    public final static int ROUTER_TYPE_TABLE =1;
+
+    public final static int ROUTER_TYPE_DBANDTABLE=2;
+
+    /**数据库表的逻辑KEY,与数据源MAP配置中的key一致*/
+    private List&lt;String&gt; dbKeyArray;
+
+    /**数据库数量*/
+    private int dbNumber;
+    /**数据表数量*/
+    private int tableNumber;
+    /**数据表index样式*/
+    private String tableIndexStyle;
+    /**Id开始*/
+    private String routeFieldStart;
+    /**Id结束*/
+    private String routeFieldEnd;
+    /**规则类型*/
+    private int ruleType;
+    /**路由类型类型*/
+    private int routeType;
+
+    public static int getRULE_TYPE_STR() {
+        return RULE_TYPE_STR;
+    }
+
+    public static int getROUTER_TYPE_DB() {
+        return ROUTER_TYPE_DB;
+    }
+
+    public static int getROUTER_TYPE_TABLE() {
+        return ROUTER_TYPE_TABLE;
+    }
+
+    public static int getROUTER_TYPE_DBANDTABLE() {
+        return ROUTER_TYPE_DBANDTABLE;
+    }
+
+    public List&lt;String&gt; getDbKeyArray() {
+        return dbKeyArray;
+    }
+
+    public void setDbKeyArray(List&lt;String&gt; dbKeyArray) {
+        this.dbKeyArray = dbKeyArray;
+    }
+
+    public int getDbNumber() {
+        return dbNumber;
+    }
+
+    public void setDbNumber(int dbNumber) {
+        this.dbNumber = dbNumber;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String getTableIndexStyle() {
+        return tableIndexStyle;
+    }
+
+    public void setTableIndexStyle(String tableIndexStyle) {
+        this.tableIndexStyle = tableIndexStyle;
+    }
+
+    public String getRouteFieldStart() {
+        return routeFieldStart;
+    }
+
+    public void setRouteFieldStart(String routeFieldStart) {
+        this.routeFieldStart = routeFieldStart;
+    }
+
+    public String getRouteFieldEnd() {
+        return routeFieldEnd;
+    }
+
+    public void setRouteFieldEnd(String routeFieldEnd) {
+        this.routeFieldEnd = routeFieldEnd;
+    }
+
+    public int getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(int ruleType) {
+        this.ruleType = ruleType;
+    }
+
+    public int getRouteType() {
+        return routeType;
+    }
+
+    public void setRouteType(int routeType) {
+        this.routeType = routeType;
+    }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+DBRouterImpl.java  getDbKey方法根据userNum定位库表算法
+</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.dbRouting.router;
+
+import com.sub.dt.dbRouting.DBRouter;
+import com.sub.dt.dbRouting.DbContextHolder;
+import com.sub.dt.dbRouting.annotation.RouterConstants;
+import com.sub.dt.dbRouting.bean.RouterSet;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.DecimalFormat;
+import java.util.List;
+
+/**
+ * @Description 根据指定变量动态切 库和表
+ * @Autohr supers【weChat:13031016567】
+ */
+public class DBRouterImpl implements DBRouter {
+
+    private static final Logger log = LoggerFactory.getLogger(DBRouterImpl.class);
+
+    /**
+     * 配置列表
+     */
+    private List&lt;RouterSet&gt; routerSetList;
+
+    @Override
+    public String doRoute(String fieldId) {
+        if (StringUtils.isEmpty(fieldId)) {
+            throw new IllegalArgumentException("dbsCount and tablesCount must be both positive!");
+        }
+        int routeFieldInt = RouterUtils.getResourceCode(fieldId);
+        String dbKey = getDbKey(routerSetList, routeFieldInt);
+        return dbKey;
+    }
+
+    @Override
+    public String doRouteByResource(String resourceCode) {
+        if (StringUtils.isEmpty(resourceCode)) {
+            throw new IllegalArgumentException("dbsCount and tablesCount must be both positive!");
+        }
+        int routeFieldInt = Integer.valueOf(resourceCode);
+        String dbKey = getDbKey(routerSetList, routeFieldInt);
+        return dbKey;
+    }
+
+
+    /**
+     * @Description 根据数据字段来判断属于哪个段的规则,获得数据库key
+     * @Autohr supers【weChat:13031016567】
+     */
+    private String getDbKey(List&lt;RouterSet&gt; routerSets, int routeFieldInt) {
+        RouterSet routerSet = null;
+        if (routerSets == null || routerSets.size() &lt;= 0) {
+            throw new IllegalArgumentException("dbsCount and tablesCount must be both positive!");
+        }
+        String dbKey = null;
+        for (RouterSet item : routerSets) {
+            if (item.getRuleType() == routerSet.RULE_TYPE_STR) {
+                routerSet = item;
+                if (routerSet.getDbKeyArray() != null &amp;&amp; routerSet.getDbNumber() != 0) {
+                    long dbIndex = 0;
+                    long tbIndex = 0;
+                    //默认按照分库进行计算
+                    long mode = routerSet.getDbNumber();
+                    //如果是按照分库分表的话，计算
+                    if (item.getRouteType() == RouterSet.ROUTER_TYPE_DBANDTABLE &amp;&amp; item.getTableNumber() != 0) {
+                        mode = routerSet.getDbNumber() * item.getTableNumber();
+                        dbIndex = routeFieldInt % mode / item.getTableNumber();
+                        tbIndex = routeFieldInt % item.getTableNumber();
+                        String tableIndex = getFormateTableIndex(item.getTableIndexStyle(), tbIndex);
+                        DbContextHolder.setTableIndex(tableIndex);
+                    } else if (item.getRouteType() == RouterSet.ROUTER_TYPE_DB) {
+                        mode = routerSet.getDbNumber();
+                        dbIndex = routeFieldInt % mode;
+                    } else if (item.getRouteType() == RouterSet.ROUTER_TYPE_TABLE) {
+                        tbIndex = routeFieldInt % item.getTableNumber();
+                        String tableIndex = getFormateTableIndex(item.getTableIndexStyle(), tbIndex);
+                        DbContextHolder.setTableIndex(tableIndex);
+                    }
+                    dbKey = routerSet.getDbKeyArray().get(Long.valueOf(dbIndex).intValue());
+                    log.debug("getDbKey resource:{}-------&gt;dbkey:{},tableIndex:{},", new Object[]{routeFieldInt, dbKey, tbIndex});
+                    DbContextHolder.setDbKey(dbKey);
+                }
+                break;
+            }
+        }
+        return dbKey;
+    }
+
+
+    /**
+     * @Description 此方法是将例如+++0000根式的字符串替换成传参数字例如44 变成+++0044
+     * @Autohr supers【weChat:13031016567】
+     */
+    private static String getFormateTableIndex(String style, long tbIndex) {
+        String tableIndex = null;
+        DecimalFormat df = new DecimalFormat();
+        if (StringUtils.isEmpty(style)) {
+            style = RouterConstants.ROUTER_TABLE_SUFFIX_DEFAULT;//在格式后添加诸如单位等字符
+        }
+        df.applyPattern(style);
+        tableIndex = df.format(tbIndex);
+        return tableIndex;
+    }
+
+    public List&lt;RouterSet&gt; getRouterSetList() {
+        return routerSetList;
+    }
+
+    public void setRouterSetList(List&lt;RouterSet&gt; routerSetList) {
+        this.routerSetList = routerSetList;
+    }
+}
+</code></pre>
+
+<p><br />
+spring-mvc.xml这个很简单了 就是前段与后端controller层的结合,不多说.</p>
+
+<pre>
+<code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd"&gt;
+    &lt;!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 --&gt;
+    &lt;context:component-scan base-package="com.sub.dt.controller"/&gt;
+    &lt;!--避免IE执行AJAX时，返回JSON出现下载文件 --&gt;
+    &lt;bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"&gt;
+        &lt;property name="supportedMediaTypes"&gt;
+            &lt;list&gt;
+                &lt;value&gt;text/html;charset=UTF-8&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 --&gt;
+    &lt;bean
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"&gt;
+        &lt;property name="messageConverters"&gt;
+            &lt;list&gt;
+                &lt;ref bean="mappingJacksonHttpMessageConverter"/&gt;
+                &lt;!-- JSON转换器 --&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;!-- 定义跳转的文件的前后缀 ，视图模式配置--&gt;
+    &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 --&gt;
+        &lt;property name="prefix" value="/WEB-INF/jsp/"/&gt;
+        &lt;property name="suffix" value=".jsp"/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 --&gt;
+    &lt;bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"&gt;
+        &lt;!-- 默认编码 --&gt;
+        &lt;property name="defaultEncoding" value="utf-8"/&gt;
+        &lt;!-- 文件大小最大值 --&gt;
+        &lt;property name="maxUploadSize" value="10485760000"/&gt;
+        &lt;!-- 内存中的最大值 --&gt;
+        &lt;property name="maxInMemorySize" value="40960"/&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;</code></pre>
+
+<p><br />
+web.xml配置</p>
+
+<pre>
+<code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0"&gt;
+    &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
+    &lt;!-- Spring和mybatis的配置文件 --&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:spring-config.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;!-- 编码过滤器 --&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;async-supported&gt;true&lt;/async-supported&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+    &lt;!-- Spring监听器 --&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+    &lt;!-- 防止Spring内存溢出监听器 --&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.util.IntrospectorCleanupListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;!-- Spring MVC servlet --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:spring-mvc.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+        &lt;async-supported&gt;true&lt;/async-supported&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+        &lt;!-- 此处可以可以配置成*.do，对应struts的后缀习惯 --&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;/index.jsp&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;
+
+&lt;/web-app&gt;  </code></pre>
+
+<p><br />
+奉上 mysql创建表的sql语句,首先自行创建三个库book_00，book_01,book_02 每个库都执行以下sql即可<br />
+<br />
+<img alt="" src="https://img-blog.csdn.net/20170310095322125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVjaGVuZ2J1Z3Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" /></p>
+
+<pre>
+<code class="language-sql">/*
+Navicat MySQL Data Transfer
+
+Source Server         : local
+Source Server Version : 50173
+Source Host           : localhost:3306
+Source Database       : book_00
+
+Target Server Type    : MYSQL
+Target Server Version : 50173
+File Encoding         : 65001
+
+Date: 2017-03-10 09:48:12
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `t_user_0000`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_0000`;
+CREATE TABLE `t_user_0000` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` varchar(64) NOT NULL,
+  `user_name` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `age` int(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_num` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_0000
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_user_0001`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_0001`;
+CREATE TABLE `t_user_0001` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` varchar(64) NOT NULL,
+  `user_name` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `age` int(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_num` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_0001
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_user_0002`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_0002`;
+CREATE TABLE `t_user_0002` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` varchar(64) NOT NULL,
+  `user_name` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `age` int(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_num` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_0002
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_user_0003`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_0003`;
+CREATE TABLE `t_user_0003` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` varchar(64) NOT NULL,
+  `user_name` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `age` int(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_num` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_0003
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_user_0004`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_0004`;
+CREATE TABLE `t_user_0004` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` varchar(64) NOT NULL,
+  `user_name` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `age` int(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_num` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_0004
+</code></pre>
+
+<p><br />
+所有代码创建完毕<br />
+<br />
+测试类 TestUserService.java</p>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<code class="language-java">package com.sub.dt.service;
+
+import com.sub.common.GsonUtils;
+import com.sub.dt.dbRouting.DbContextHolder;
+import com.sub.dt.pojo.User;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+/**
+ * Created by supers on 2017/3/9.
+ */
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/spring-config.xml")
+public class TestUserService {
+
+    @Autowired
+    private IUserService userService;
+
+    /**
+     * @Description 测试分库分表插入
+     * @Autohr supers【weChat:13031016567】
+     */
+    @Test
+    public void testInsertUser(){
+        User user = new User();
+        user.setUserNum("wergsgdf3243");
+        user.setUserName("admin");
+        user.setAge(23);
+        user.setPassword("adf23");
+        int re = userService.insertUser(user);
+        System.out.println(DbContextHolder.getDbKey()+"库 "+DbContextHolder.getTableIndex()+"表 的插入结果:"+GsonUtils.toJson(re));
+    }
+
+    /**
+     * @Description 测试分库分表删除
+     * @Autohr supers【weChat:13031016567】
+     */
+    @Test
+    public void testDeleteByuserNum(){
+        User user = new User();
+        user.setUserNum("wergsgdf3243");
+        int re = userService.deleteByuserNum(user);
+        System.out.println(DbContextHolder.getDbKey()+"库 "+DbContextHolder.getTableIndex()+"表 的删除结果:"+GsonUtils.toJson(re));
+    }
+
+
+    /**
+     * @Description 测试分库分表修改
+     * @Autohr supers【weChat:13031016567】
+     */
+    @Test
+    public void testupdateByUserNum(){
+        User user = new User();
+        user.setUserNum("wergsgdf3243");
+        user.setAge(34);
+        int re = userService.updateByUserNum(user);
+        System.out.println(DbContextHolder.getDbKey()+"库 "+DbContextHolder.getTableIndex()+"表 的更新结果:"+GsonUtils.toJson(re));
+    }
+
+    /**
+     * @Description 测试分库分表查询
+     * @Autohr supers【weChat:13031016567】
+     */
+    @Test
+    public void testQueryUserByNum(){
+        User user = new User();
+        user.setId(1);
+        user.setUserNum("wergsgdf3243");
+        User userDb = userService.selectByUserNum(user);
+        System.out.println(DbContextHolder.getDbKey()+"库 "+DbContextHolder.getTableIndex()+"表 的查询结果:"+GsonUtils.toJson(userDb));
+    }
+}
+</code></pre>
+
+<p><br />
+<br />
+最后奉上 log4j.properties配置</p>
+
+<pre>
+<code class="language-java">#定义LOG输出级别
+log4j.rootLogger=DEBUG,Console,File
+#定义日志输出目的地为控制台
+log4j.appender.Console=org.apache.log4j.ConsoleAppender
+log4j.appender.Console.Target=System.out
+#可以灵活地指定日志输出格式，下面一行是指定具体的格式
+log4j.appender.Console.layout = org.apache.log4j.PatternLayout
+log4j.appender.Console.layout.ConversionPattern=[%c] - %m%n
+
+#文件大小到达指定尺寸的时候产生一个新的文件
+log4j.appender.File = org.apache.log4j.RollingFileAppender
+#指定输出目录
+log4j.appender.File.File = logs/ssm.log
+#定义文件最大大小
+log4j.appender.File.MaxFileSize = 10MB
+# 输出所以日志，如果换成DEBUG表示输出DEBUG以上级别日志
+log4j.appender.File.Threshold = ALL
+log4j.appender.File.layout = org.apache.log4j.PatternLayout
+log4j.appender.File.layout.ConversionPattern =[%p] [%d{yyyy-MM-dd HH\:mm\:ss}][%c]%m%n
+
+</code></pre>
+
+<p>至此，SSM三大框架的整合以及分库分表策略完毕，在此基础上可再添加其他功能,进行开发。本文讲解略显粗糙,本人语言表达水平有限,尽力了.<br />
+可以下载源码直接运行.<br />
+源码下载地址：<a href="http://download.csdn.net/detail/buchengbugui/9776164">分库分表源码下载链接</a><br />
+<a href="http://download.csdn.net/detail/buchengbugui/9776164">http://download.csdn.net/detail/buchengbugui/9776164</a></p>
+
+<p>&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/42949670.html'>《RocketMq》七、Broker中心节点</a></li><li><a href='/bcsj/java/59451787.html'>《RocketMq》六、Client－Consumer消费者详解</a></li><li><a href='/bcsj/java/93478184.html'>《RocketMq》五、Client－Producer生产者详解</a></li><li><a href='/bcsj/java/16882015.html'>《RocketMq》四、Client Producer/Consumer总览</a></li><li><a href='/bcsj/java/66636302.html'>《RocketMq》三、NameServer</a></li><li><a href='/bcsj/java/91963739.html'>《RocketMq》二、存储篇</a></li><li><a href='/bcsj/java/36422446.html'>《RocketMq》一、网络传输篇</a></li><li><a href='/bcsj/java/69287988.html'>linux jar包启动脚本</a></li><li><a href='/bcsj/java/89472738.html'>nginx 反向代理oss</a></li><li><a href='/bcsj/java/43423861.html'>细粒度 自定义注解 权限控制具体实现</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

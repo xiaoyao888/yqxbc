@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>《RocketMq》三、NameServer</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="" />
+  <meta name="description" content="RocketMQ-nameSrv用于管理所有broker的信息，以便于Producer和Consumer能够获取到正确的Broker信息，进行业务处理；可以看到NameSrv的主要管理内容如下：1. 接收Broker的注册，注销请求；2. Producer获取topic下的所有BrokerQueue，put消息3. Consumer获取topic下所有的BrokerQueue，get消息所以可以看..." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" target="_blank" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com"target="_blank" title="windows10系统">windows10</a></li>
+            <li><a href="/czxt/linux" target="_blank" title="linux系统">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>《RocketMq》三、NameServer</div>
+            <a href="/">flypeng</a>  发布时间：08-08 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="66636302" class="art_content"><p>RocketMQ-nameSrv用于管理所有broker的信息，以便于Producer和Consumer能够获取到正确的Broker信息，进行业务处理；</p>
+
+<p>可以看到NameSrv的主要管理内容如下：</p>
+
+<p>1. 接收Broker的注册，注销请求；</p>
+
+<p>2. Producer获取topic下的所有BrokerQueue，put消息</p>
+
+<p>3. Consumer获取topic下所有的BrokerQueue，get消息</p>
+
+<p>所以可以看到NameSrv主要是维护了Broker相关的内容，进行存取；</p>
+
+<p>&nbsp;</p>
+
+<p>问题:</p>
+
+<p>1. 如果readQueue和writeQueue数目不一样怎么办？比如readQueue&lt;writeQueue，这不就意味着有的writeQueue没有办法被均分到，读到数据？</p>
+
+<p>&nbsp;</p>
+
+<p>2. haServer，masterServer，slave的区别？</p>
+
+<p>haServer：master用来监听slave复制数据的端口</p>
+
+<p>masterServer：主Broker</p>
+
+<p>slave：从Broker，会不断从master复制数据</p>
+
+<p>&nbsp;</p>
+
+<p>3. master和slave的brokerId？</p>
+
+<p>master是0</p>
+
+<p>&nbsp;</p>
+
+<p>总结：从NameSrv可以看出，rocketmq与kafka的最大区别就是不再采用zookeeper，因为rq的broker的matser和slave是物理概念，而不是选举出来的master。同时，我们在设计系统的时候，有一些全局使用的公用信息，可以单独独立一个模块进行专门的管理；只需要各个子模块定时向该模块更新信息即可，这样既可以有一个全局概览，也使模块轻量级，不会有太大压力</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>一、总体结构</h2>
+
+<p>&nbsp;</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151218174117887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<h2>二、数据结构</h2>
+
+<p><strong>2.1 QueueData：</strong>保存了某个broker的read，write的Queue的数目，Consumer和Producer会分别往read/write里面取存消息</p>
+
+<pre>
+<code class="language-java">private String brokerName;//broker名字
+private int readQueueNums;//读queue数目
+private int writeQueueNums;//写queue数目
+private int perm;
+private int topicSynFlag;
+</code></pre>
+
+<p><br />
+<strong>2.2 BrokerData：</strong>保存了Broker的Id和地址信息</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String brokerName;
+private HashMap&lt;Long/* brokerId */, String/* broker address */&gt; brokerAddrs;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2.3 BrokerLiveInfo：</strong>保存了Broker的心跳信息</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private long lastUpdateTimestamp;
+private DataVersion dataVersion;
+private Channel channel;
+private String haServerAddr;//master的复制server端口
+</code></pre>
+
+<p><br />
+2.4&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">//保存topic-queue信息
+HashMap&lt;String/* topic */, List&lt;QueueData&gt;&gt; topicQueueTable;
+//保存broker地址信息
+HashMap&lt;String/* brokerName */, BrokerData&gt; brokerAddrTable;////brokerAddrTable(brokerName, brokerData); brokerData(brokerId, brokerAddr);
+//保存broker-cluster信息
+HashMap&lt;String/* clusterName */, Set&lt;String/* brokerName */&gt;&gt; clusterAddrTable;
+//保存心跳信息
+HashMap&lt;String/* brokerAddr */, BrokerLiveInfo&gt; brokerLiveTable;
+HashMap&lt;String/* brokerAddr */, List&lt;String&gt;/* Filter Server */&gt; filterServerTable
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>三、心跳处理</h2>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主要有3个部分：</p>
+
+<pre>
+<strong>BrokerHousekeepingService：</strong>这个接口会监听网络层的请求，如果有close等关闭请求，直接从brokerLiveTable中移除该数据</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<strong>routeInfoManager.scanNotActiveBroker：</strong>遍历所有的BrokerLiveInfo节点，如果上次访问时间距离现在超过2mins，那么就超时移除连接；Broker会定时向NameSrv发送registerBroker，每次注册都会更新BrokeLiveInfo，相当于心跳</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<strong>registerBrokerWithFilterServer：</strong>broker会不定时的发送RequestCode= REGISTER_BROKER的消息注册自己，这个消息还有一个附带作用就是充当心跳包</pre>
+
+<p>&nbsp;</p>
+
+<h2>四、主要模块</h2>
+
+<pre>
+<strong>4.1 注册broker(RequestCode= <em>REGISTER_BROKER</em>)</strong></pre>
+
+<p>其中请求的头部RegisterBrokerRequestHeader</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String brokerName;
+private String brokerAddr;
+private String clusterName;
+private String haServerAddr;
+private Long brokerId;
+</code></pre>
+
+<p><br />
+请求的报文体则是 topic 的相关信息</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private TopicConfigSerializeWrapper topicConfigSerializeWrapper = new TopicConfigSerializeWrapper();
+private List&lt;String&gt; filterServerList = new ArrayList&lt;String&gt;();
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+不断的遍历第三节中的各个表，将数据注册进去，master的brokerId是0</pre>
+
+<pre>
+如果不是master，是slave节点，会返回master和HAServer的地址</pre>
+
+<pre>
+<strong>&nbsp;</strong></pre>
+
+<pre>
+<strong>4.2 存放消息</strong></pre>
+
+<pre>
+Producer在存放消息时，首先会使用GET_ROUTEINTO_BY_TOPIC获取route信息TopicRouteData</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+<strong>4.3 读取消息</strong></pre>
+
+<p>&nbsp;</p>
+
+<p>Consumer在读取消息时，也会先使用GET_ROUTEINTO_BY_TOPIC获取route信息TopicRouteData</p>
+
+<p>&nbsp;</p>
+
+<p><strong>4.4 后台模块</strong></p>
+
+<p><em>1. 心跳</em></p>
+
+<p><em>2. 不断打印注册的kv信息</em></p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/42949670.html'>《RocketMq》七、Broker中心节点</a></li><li><a href='/bcsj/java/59451787.html'>《RocketMq》六、Client－Consumer消费者详解</a></li><li><a href='/bcsj/java/93478184.html'>《RocketMq》五、Client－Producer生产者详解</a></li><li><a href='/bcsj/java/16882015.html'>《RocketMq》四、Client Producer/Consumer总览</a></li><li><a href='/bcsj/java/66636302.html'>《RocketMq》三、NameServer</a></li><li><a href='/bcsj/java/91963739.html'>《RocketMq》二、存储篇</a></li><li><a href='/bcsj/java/36422446.html'>《RocketMq》一、网络传输篇</a></li><li><a href='/bcsj/java/69287988.html'>linux jar包启动脚本</a></li><li><a href='/bcsj/java/89472738.html'>nginx 反向代理oss</a></li><li><a href='/bcsj/java/43423861.html'>细粒度 自定义注解 权限控制具体实现</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

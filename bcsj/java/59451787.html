@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>《RocketMq》六、Client－Consumer消费者详解</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="RocketMQ" />
+  <meta name="description" content="Consumer-集群Push模式-简介：0、背景介绍         Consumer主要用于向Broker请求Producer产生的消息，对其进行消费；对于RocketMQ，我们一定很好奇，如何实现分布式的Consumer消费，如何保证Consumer的顺序性，不重复性呢？ 存在的问题：1. 如果在集群模式中新增/减少 组(group) 消费者，可能会导致重复消费；原因是：假设新增消费者前，C..." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" target="_blank" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com"target="_blank" title="windows10系统">windows10</a></li>
+            <li><a href="/czxt/linux" target="_blank" title="linux系统">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>《RocketMq》六、Client－Consumer消费者详解</div>
+            <a href="/">flypeng</a>  发布时间：08-08 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="59451787" class="art_content"><p>Consumer-集群Push模式-简介：</p>
+
+<h1>0、背景介绍</h1>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Consumer主要用于向Broker请求Producer产生的消息，对其进行消费；对于RocketMQ，我们一定很好奇，如何实现分布式的Consumer消费，如何保证Consumer的顺序性，不重复性呢？</p>
+
+<p>&nbsp;</p>
+
+<p>存在的问题：</p>
+
+<p>1. 如果在集群模式中新增/减少 组(group) 消费者，可能会导致重复消费；原因是：</p>
+
+<p>假设新增消费者前，ConsumerA正在消费MessageQueue-M，消费到第3个offset，</p>
+
+<p>这个时候新增了ConsumerB，那么根据集群模式的AllocateMessageQueue的策略，可能MessageQueue-M被分配给了ConsumerB，这个时候ConsumerA由于消费的offset没有实时更新回去，会导致ConsumerB和ConsumerA之前的消费有重叠；</p>
+
+<p>2. 消费失败怎么办？</p>
+
+<p>3. 异常处理</p>
+
+<p>4. 线程，Auto变量的使用</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h1>一、术语介绍</h1>
+
+<p>topic: 最细粒度的订阅单位，一个group可以订阅多个topic的消息</p>
+
+<p>group: 组，一个组可以订阅多个topic</p>
+
+<p>clientId: 一个服务(IP/机器)的标识，一个机器可以有多个group；同时，多个相同group的clientId组成一个集群，一起消费消息</p>
+
+<p>messageQueue:消息队列，一个broker的一个topic有多个messageQueue</p>
+
+<p>offset: 每一个消息队列里面还有偏移(commitOffset, offset)的区别，为什么有2个offset呢??</p>
+
+<p>集群消费：</p>
+
+<p>广播消费：</p>
+
+<p>立即消费：</p>
+
+<p>顺序消费：</p>
+
+<p>消费位置：</p>
+
+<p>&nbsp;</p>
+
+<p>offsetStore---------commitOffset：消费到的offset</p>
+
+<p>PullRequest ------ offset的区别：拉取的位置</p>
+
+<p>&nbsp;</p>
+
+<h1>二、总体框架</h1>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151223230917475?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>&nbsp;</p>
+
+<h1>三、数据结构</h1>
+
+<p>数据结构主要分为2个部分来讲解：</p>
+
+<p>一部分是在MQClientInstance中进行统一管理的，不管是Consumer还是Producer，能够统一管理的部分都放在了这个区域；</p>
+
+<p>还有一部分是在Consumer或Producer中区分管理的，比如各自订阅的MessageQueue，下面对这两个部分分别介绍；</p>
+
+<p>&nbsp;</p>
+
+<p>-----------------------------------------------PartI：MQClientInstance---------------------------</p>
+
+<p>1. TopicRouteData：</p>
+
+<p>用于保存了所有的Queue信息，不管是consumer还是producer的</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String orderTopicConf;//brokerName:num count
+private List&lt;QueueData&gt; queueDatas;
+private List&lt;BrokerData&gt; brokerDatas;
+private HashMap&lt;String/* brokerAddr */, List&lt;String&gt;/* Filter Server */&gt; filterServerTable;
+</code></pre>
+
+<p><br />
+2.QueueData：内部通过wirte或者read来区分queue属于Consumer(read)/Producer(write)</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String brokerName;
+private int readQueueNums;
+private int writeQueueNums;
+private int perm;
+private int topicSynFlag;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>3.BrokerData：Broker的地址信息</p>
+
+<pre>
+<code class="language-java">private String brokerName;
+private HashMap&lt;Long/* brokerId */, String/* broker address */&gt; brokerAddrs;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>4.&nbsp;PullRequest：拉取的请求信息，包括所属组信息，要拉取的offset信息，Queue信息，消费进度信息</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String consumerGroup;
+private MessageQueue messageQueue;
+private ProcessQueue processQueue;
+private long nextOffset;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>5.&nbsp;PullMessageService：拉取信息的服务，会不断遍历每一个PullRequest进行信息的拉取</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private final LinkedBlockingQueue&lt;PullRequest&gt; pullRequestQueue = new LinkedBlockingQueue&lt;PullRequest&gt;();
+private final MQClientInstance mQClientFactory;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>------------------------------------------------------------------Part II：区分consumer --------------------------------------------------------</p>
+
+<p>1. TopicPublishInfo：这个是Producer使用的保存MessageQueue的数据结构</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private boolean orderTopic = false;
+private boolean haveTopicRouterInfo = false;
+private List&lt;MessageQueue&gt; messageQueueList = new ArrayList&lt;MessageQueue&gt;();
+private AtomicInteger sendWhichQueue = new AtomicInteger(0);
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>2. SubscriptionData：包装consumer的消费信息，比如topic，订阅的tags</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">public final static String SUB_ALL = "*";
+private boolean classFilterMode = false;
+private String topic;
+private String subString;
+private Set&lt;String&gt; tagsSet = new HashSet&lt;String&gt;();
+private Set&lt;Integer&gt; codeSet = new HashSet&lt;Integer&gt;();
+private long subVersion = System.currentTimeMillis();
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>3.RebalanceImpl</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">ConcurrentHashMap&lt;String/* topic */, Set&lt;MessageQueue&gt;&gt; topicSubscribeInfoTable
+ConcurrentHashMap&lt;String /* topic */, SubscriptionData&gt; subscriptionInner
+&lt;MessageQueue, ProcessQueue&gt; processQueueTable
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>4.MessageQueue</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private String topic;
+private String brokerName;
+private int queueId;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>5. ProcessQueue</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private final TreeMap&lt;Long, MessageExt&gt; msgTreeMap = new TreeMap&lt;Long, MessageExt&gt;();
+private volatile long queueOffsetMax = 0L;
+private final AtomicLong msgCount = new AtomicLong();
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>6.RemoteBrokerOffsetStore</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private final MQClientInstance mQClientFactory;
+private final String groupName;
+private final AtomicLong storeTimesTotal = new AtomicLong(0);
+private ConcurrentHashMap&lt;MessageQueue, AtomicLong&gt; offsetTable =
+        new ConcurrentHashMap&lt;MessageQueue, AtomicLong&gt;();
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h1>四、主要类管理(group, instance, topic)</h1>
+
+<p>4.1 DefaultMQPushConsumer(group)：用于设置主要的参数，包括：组名，消费模式，消费offset，线程数目，批量拉去大小</p>
+
+<p>4.2 DefaultMQPushConsumerImpl(group)：包括RebalanceImpl，OffsetStore，AllocateStrategy</p>
+
+<p>4.3 OffsetStore(group)：有2种模式，集群模式和广播模式不同；第一种是：RemoteBrokerOffsetStore，第二种是LocalFileOffsetStore，它将会记录我们消费到的offset位置</p>
+
+<p>4.4 RebalanceImpl(group)：有2种模式，RebalancePushImpl，RebalancePullImpl，分别对应推拉2种模式的处理，它用于将所有的MessageQueue进行一个平均分配，然后进行消费；对于推的模式，会根据不同位置拉取；对于拉的模式，它的拉取位置永远是第0个；</p>
+
+<p>4.5 PullMessageService：循环所有的PullRequest，不断调用pullMessage进行MessageQueue的拉取</p>
+
+<p>4.6 RebalanceService：循环所有的Consumer，对所有的consumer调用doRebalance</p>
+
+<p>4.7 AllocateMessageQueueStrategy：分配消息的策略，将所有的MessageQueue均分到各个instance上面</p>
+
+<p>4.8 PullAPIWrapper</p>
+
+<pre>
+4.9 ConsumeMessageService：有2种模式，ConsumeMessageConcurrentlyService和ConsumeMessageOrderlyService，用于调用MessageListener进行具体消费</pre>
+
+<p>4.10 MessageListener：客户端实现的接口，用于业务逻辑处理</p>
+
+<p>4.11 MQClientAPIImpl：用于网络连接处理</p>
+
+<pre>
+
+&nbsp;</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<p>&nbsp;</p>
+
+<h1>五、总体模块</h1>
+
+<p>Consumer主要分为以下几个模块：</p>
+
+<p><strong>1. Rebalance模块：</strong></p>
+
+<p>主要包含以下几个部分：</p>
+
+<p>RebalanceImpl</p>
+
+<p>AllocateMessageQueueStrategy</p>
+
+<p>RebalanceService</p>
+
+<p>新增PullRequest</p>
+
+<p>&nbsp;</p>
+
+<p>1.1 平均分配法：如果采用AllocateMessageQueueAveragely，则主要工作如下：</p>
+
+<p>用于将某个topic的mqSet按策略分配到各个消费者cidSet，解释一下各个术语：</p>
+
+<p>mqSet：是可以消费的所有Queue，可以理解成一块大蛋糕；</p>
+
+<p>cidSet：可以理解成该topic的所有消费者，吃这块蛋糕的人。</p>
+
+<p>&nbsp;</p>
+
+<p>这里采用的策略是遍历每一个consumer，再遍历每一个consumer的topic，对每个topic调用rebalanceByTopic；这里的Average均分策略是获得所有的midSet和cidSet，然后将他们进行均分，按图说话：</p>
+
+<p>&nbsp;</p>
+
+<p>A. midSet&lt;cidSet</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151223231709540?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>B.midSet &gt; cidSet, 且midSet%cidSet!=0</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151223231723031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>C.midSet &gt;= cidSet, 且midSet%cidSet=0</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151223231732270?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>1.2 如果采用AllocateMessageQueueConsistentHash，一致性hash算法，那么分配策略如下：</p>
+
+<p>主要与网上的一致性hash算法一致，这里主要涉及几个参数，一个是queue，一个是consumer，其实是要将queue分配到consumer上面消费。每一个consumer都有第一个cid，其实就是启动的时候设定的instanceName，如果没有设定这个值，那么他将是ip@pid，这也就是环上面的物理节点了；而其实这里使用的都是虚拟节点，虚拟节点的cid是什么呢？其实是物理节点的ip@pid-index（其中的index，是这个物理界点上的虚拟节点的个数）。然后将cid进行md5得到其在环上的id。</p>
+
+<p>这里顺便说一下扩容和减少节点的时候会发生什么，这个时候，rebalance模块其实会发现到有节点新增或者减少，那么他就会重新调用allocate策略进行重新分配。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2. PullMessage模块:</strong></p>
+
+<p>主要包含以下几个部分：</p>
+
+<p>PullMessageService</p>
+
+<p>pullAPIWrapper</p>
+
+<p>PullCallback</p>
+
+<p>ConsumeMessageConcurrentlyService.processConsumeResult</p>
+
+<p>ConsumeMessageConcurrentlyService.ConsumeRequest</p>
+
+<p>&nbsp;</p>
+
+<p>主要工作如下：</p>
+
+<p>遍历PullMessageService的pullRequestQueue，take每一个PullRequest，然后调用pullMessage进行消息的拉取.，拉取后调用PullCallback进行回调处理</p>
+
+<p>&nbsp;</p>
+
+<p><strong>3. RemoteBrokerOffsetStore模块</strong></p>
+
+<p>在offsetTable中维护了一个offset变量，对这个offset的操作有2种，第一种是操作RemoteBrokerOffsetStore里面的offsetTable来维护其本地offset；还有一种是persist，将这些变量固化到远程的broker中</p>
+
+<p>&nbsp;</p>
+
+<p>3.1 updateConsumeOffsetToBroker</p>
+
+<p>设置UpdateConsumerOffsetRequestHeader为头部，然后调用updateConsumerOffsetOneway，以UPDATE_CONSUMER_OFFSET为请求码，向broker服务器发送信息</p>
+
+<p>3.2 设置removeOffset，将它从offsetTable里面移除</p>
+
+<pre>
+3.3 查询消费者序列long offset，queryConsumerOffset，<strong><em>QUERY_CONSUMER_OFFSET</em></strong></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><strong>4. Consumer模块:</strong></p>
+
+<p>这里和上面的PullMessage融合在一起处理，当pullMessage结束后，将会回调PullCallback。这里将调用consumeMessageService的submitConsumeRequest进行处理，而后更新offsetStore的消费位置等信息</p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>5. update模块：</strong></p>
+
+<p>更新namesrv</p>
+
+<p>更新topicRouteInfoFromServer：这里涉及到新增Subscribe</p>
+
+<p>更新sendHeartbeat：注册consumer</p>
+
+<p>更新persistAllConsumerSetInterval：更新offsetStore</p>
+
+<p>更新线程池</p>
+
+<p><strong>6. 网络传输模块</strong></p>
+
+<pre>
+MQClientAPIImpl</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h1>六、主要流程（Push+集群模式）</h1>
+
+<p><strong>粗略篇：</strong></p>
+
+<p>1. DefaultMQPushConsumer创建组&quot;CID_001&quot;</p>
+
+<p>2. 调用subscribe，将会向rebalanceImpl中注册&lt;topic,SubscriptionData&gt;，用于后续的消息过滤</p>
+
+<p>3. DefaultMQPushConsumerImpl.start()</p>
+
+<p>3.1 copySubscription(): 将DefaultMQPushConsumer的subscribe信息复制到DefaultMQPushConsumerImpl里面</p>
+
+<p>3.2 获取MQClientInstance</p>
+
+<p>3.3 设置RebalanceImpl的信息</p>
+
+<p>3.4 创建PullAIPWrapper</p>
+
+<p>3.5 创建offsetStore，(BROADCATING)LocalFileOffsetStore,(CLUSTERING) RemoteBrokerOffsetStore</p>
+
+<p>&nbsp;</p>
+
+<p><strong>细致篇：</strong></p>
+
+<p>对应于，一个topic，对应了一个SubscriptionData，对应了很多的MessageQueue；</p>
+
+<p>而每一个MessageQueue，又对应了ProcessQueue，ProcessQueue对应了每一个队列的消费进度</p>
+
+<p>1.1 主要函数：lock, unlock，向函数给出的addr发出锁定，或者解锁mq的操作，以便于后续的消费</p>
+
+<p>1.2 主要函数：doRebalance；遍历&lt;String,SubscriptionData&gt; subscriptionInner结构的每一个topic，调用rebalanceByTopic；</p>
+
+<p>rebalanceByTopic：</p>
+
+<p>1.2.1 如果是广播模式</p>
+
+<p>1.2.2 如果是集群模式</p>
+
+<p>1.2.2.1 首先得到topic对应的所有MessageQueue，mqAll，这个是消息队列</p>
+
+<p>1.2.2.2 得到对应group下面所有的cidAll，这个是消费者队列</p>
+
+<p>1.2.2.3 调用strategy.allocate得到该consumer要消费的Set&lt;MessageQueue&gt;allocateResultSet</p>
+
+<p>1.2.2.4 调用updateProcessQueueTableRebalance(topic,allocateResultSet)来更新processQueueTable，</p>
+
+<p>A.首先，遍历processQueueTable，找到其有，而allocateResultSet没有的，调用removeUnnecessaryMessageQueue将其删除；</p>
+
+<p>B.其次，如果二者都有，但是在Push模式下，达到了pullExpired时间的，调用processQueueTable；</p>
+
+<p>C. 遍历allocateResultSet，找到processQueueTable中没有的记录，将其加入到List&lt;PullRequest&gt;pullRequestList，同时将processQueueTable.put(mq, pullRequest.getProcessQueue())</p>
+
+<p>D. 将上述新增的List&lt;PullRequest&gt;作为参数，调用dispatchPullRequest(pullRequestList);</p>
+
+<p>未完待续，上述2个函数</p>
+
+<p>removeUnnecessaryMessageQueue</p>
+
+<p>dispatchPullRequest(pullRequestList);</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h1>七、一些实践阅读心得</h1>
+
+<pre>
+1. HeartBeat：心跳需要进行加锁，因为心跳相当于注册，而unregister的时候相当于注销，加锁是防止在注销后，再进行注册，导致出问题，这里的临界变量是consumerTable</pre>
+
+<p>2. volatile：多线程操作某个变量时，使用该关键字可以防止由于编译器优化，导致从寄存器中读，而不是实时从内存读取</p>
+
+<p>3. ConcurrentHashMap：分段加锁，保证线程安全</p>
+
+<p>4. AtomicInteger：原子自增自减</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/42949670.html'>《RocketMq》七、Broker中心节点</a></li><li><a href='/bcsj/java/59451787.html'>《RocketMq》六、Client－Consumer消费者详解</a></li><li><a href='/bcsj/java/93478184.html'>《RocketMq》五、Client－Producer生产者详解</a></li><li><a href='/bcsj/java/16882015.html'>《RocketMq》四、Client Producer/Consumer总览</a></li><li><a href='/bcsj/java/66636302.html'>《RocketMq》三、NameServer</a></li><li><a href='/bcsj/java/91963739.html'>《RocketMq》二、存储篇</a></li><li><a href='/bcsj/java/36422446.html'>《RocketMq》一、网络传输篇</a></li><li><a href='/bcsj/java/69287988.html'>linux jar包启动脚本</a></li><li><a href='/bcsj/java/89472738.html'>nginx 反向代理oss</a></li><li><a href='/bcsj/java/43423861.html'>细粒度 自定义注解 权限控制具体实现</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

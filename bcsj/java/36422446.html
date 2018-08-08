@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>《RocketMq》一、网络传输篇</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="RocketMQ,java" />
+  <meta name="description" content="你是否想知道一个分布式系统的网络传输解决方案，那你可以学习下RocketMQ的网络传输原理，从RocketMQ的Remoting网络处理部分，可以学习到如何进行高效的网络传输，这些思想可以应用到不同的业务中。 一、要解决的问题         其实大部分应用的网络处理都要解决如下图所示的问题：那么就以RocketMQ的源码入手，看看它是如何架构如上的结构的。 二、RocketMQ-remoting..." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" target="_blank" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com"target="_blank" title="windows10系统">windows10</a></li>
+            <li><a href="/czxt/linux" target="_blank" title="linux系统">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>《RocketMq》一、网络传输篇</div>
+            <a href="/">flypeng</a>  发布时间：08-08 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="36422446" class="art_content"><p>你是否想知道一个分布式系统的网络传输解决方案，那你可以学习下RocketMQ的网络传输原理，从RocketMQ的Remoting网络处理部分，可以学习到如何进行高效的网络传输，这些思想可以应用到不同的业务中。</p>
+
+<p>&nbsp;</p>
+
+<h1>一、要解决的问题</h1>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 其实大部分应用的网络处理都要解决如下图所示的问题：</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151212223129886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>那么就以RocketMQ的源码入手，看看它是如何架构如上的结构的。</p>
+
+<p>&nbsp;</p>
+
+<h1>二、RocketMQ-remoting详解</h1>
+
+<h2>2.1首先给出其整体的结构图</h2>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151212223335071?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>&nbsp;</p>
+
+<p>2.2 编码解码</p>
+
+<p>在RocketMQ中，所有的通讯都是使用RemotingCommand这个结构，这个结构的内容如下：</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-java">private static final int RPC_TYPE = 0; // 0, REQUEST_COMMAND
+// 1, RESPONSE_COMMAND
+
+private static final int RPC_ONEWAY = 1; // 0, RPC
+// 1, Oneway
+
+/**
+ * Header 部分
+ */
+private int code; // 用于标示请求类型，参见RequestCode，ResponseCode
+private LanguageCode language = LanguageCode.JAVA;
+private int version = 0;
+private int opaque = RequestId.getAndIncrement(); // 每个消息的唯一标志，request和response通过该字段匹配
+private int flag = 0;
+private String remark;
+private HashMap&lt;String, String&gt; extFields; // 传输时使用，CommandCustomHeader转为该结构&lt;key,value&gt;后，再统一转为json传输。因此</code></pre>
+
+<pre>
+<code class="language-java">CommandCustomHeader只能是String,Int,Long等基础数据结构，不能是复合数据结构</code></pre>
+
+<p>private transient CommandCustomHeader customHeader; // 业务逻辑中使用该结构，传输时，使用 extFields<br />
+/** * Body 部分 */private transient byte[] body;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>2.2.1 RemotingCommand转为网络传输数据</p>
+
+<p>在MQ中，所有数据传输都使用该数据结构进行数据传输，当把数据转为网络传输时，会将customHeader转为HashMap的extFields，再转为json串</p>
+
+<p>&nbsp;</p>
+
+<p>2.2.2 传输格式：</p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="vertical-align:top">
+			<p>Length</p>
+			</td>
+			<td style="vertical-align:top">
+			<p>Header length</p>
+			</td>
+			<td style="vertical-align:top">
+			<p>Header data</p>
+			</td>
+			<td style="vertical-align:top">
+			<p>Body</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>2.2.3 编码过程（重点函数：makeCustomHeaderToNet）</p>
+
+<p>A. 将业务上的CustomHeader转为extFields;</p>
+
+<p>B. 然后调用RemotingSerializable的encode，将RemotingCommand的Header部分转为byte类型</p>
+
+<p>C. 在按照传输格式，将数据转为最终的header+body结构进行传输</p>
+
+<p>&nbsp;</p>
+
+<p>2.2.4 解码过程（重点函数：decodeCommandCustomHeader）</p>
+
+<p>A. 首先将获取的byteBuffer，按照传输格式进行解包，得到其headerData和bodyData</p>
+
+<p>B. 将HeaderData部分进行decode，解包为RemotingCommand</p>
+
+<p>C. 业务层调用decodeCommandCustomHeader(m.class)将头部解析为对应的m类</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>备注：</p>
+
+<p>transient：当序列化类时，有该属性的变量不进行序列化</p>
+
+<p>&nbsp;</p>
+
+<h3>2.3 通信层处理</h3>
+
+<p>Netty在处理通信层的事件时，将其NettyEventExecuter的eventQueue中，再起一个线程，不断地处理存入消息。</p>
+
+<p><strong>2.3.1 Put消息</strong></p>
+
+<pre>
+	在Netty的注册部分，handler在addLast的时候，将NettyConnetManageHandler注册进去；这里面对应了connect、disconnect、close、channelRegistered等等事件，对于这些事件，将会调用NettyEventExecuter.putNettyEvent将消息放入Queue中；</pre>
+
+<pre>
+<strong>2.3.2 Get处理消息</strong></pre>
+
+<pre>
+	 NettyEventExecuter处理线程会不断从queue中读取消息进行处理，调用注册的ChannelEventListener进行处理；</pre>
+
+<pre>
+
+&nbsp;</pre>
+
+<h3>2.4 业务层处理</h3>
+
+<p><strong>2.4.1 NettyRemotingAbstract</strong>：它是作为NettyRemotingServer和NettyRemotingClient的基类，对发送和接收的公共部分进行了处理</p>
+
+<p><strong>A. 数据结构和基础函数</strong></p>
+
+<p>A.1 首先保存了RPC处理器：HashMap&lt;Integer/*request code */, Pair&lt;NettyRequestProcessor, ExecutorService&gt;&gt; processorTable</p>
+
+<p>A.2 其次保存了所有对外请求ConcurrentHashMap&lt;Integer/* opaque */, ResponseFuture&gt; responseTable =<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new ConcurrentHashMap&lt;Integer,ResponseFuture&gt;(256);</p>
+
+<p>A.3 &nbsp;scanResponseTable:扫描responseTable，将超时的ResponseFuture直接移除</p>
+
+<p>&nbsp;</p>
+
+<p><strong>B. 发送部分</strong></p>
+
+<p>B.1 invokeSyncImpl: 同步发送，发送时，生成ResponseFuture，放入responseTable中；然后发送后等待设置的timeout(3s)时间，如果对应的ResponseFuture为空，则报错；否则返回RemoteCommand进行业务逻辑处理；</p>
+
+<p>B.2 invokeAsyncImpl：异步发送，发送时，生成ResponseFuture，放入responseTable中；如果超过scanResponseTable的timeout (30s)，则报错；否则调用注册的invokeCallback进行回调处理；</p>
+
+<p>B.3 invokeOnewayImpl：单向发送，不将消息写入responseTable中，直接返回；</p>
+
+<p>&nbsp;</p>
+
+<p><strong>C. 接收消息部分</strong></p>
+
+<p>C.1 processRequestCommand：接收消息，作为Server端，接收的消息是请求，那么调用processTable对应的事件进行处理</p>
+
+<p>C.2 processResponseCommand：接收消息，作为Client端，接收的消息是回复，即接收到Server端的回复，那么从responseTable中，首先获取opaque对应的ResponseFuture，如果这个response是异步回调，则有InvokeCallback，那么调用invokeBack函数，然后将Response塞入ResponseFuture后返回；</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2.4.2 NettyRemotingServer</strong></p>
+
+<p>处理过程如下：</p>
+
+<p>首先所有的入口都在start函数：</p>
+
+<p>如果是input方向，那么会先调用<strong>NettyDecoder-&gt;NettyConnectManageHandler-&gt;NettyServerHandler</strong></p>
+
+<p><strong>NettyDecoder(底层编码)：</strong>会将数据包从byte转为RemotingCommand</p>
+
+<p><strong>NettyConnectManageHandler(通信层事件)：</strong>会将请求转入channelRegistered、channelUnregistered、channelActive、channelInactive、userEventTriggered、exceptionCaught，对应的调用<strong>NettyRemotingAbstract.putNettyEvent将事件放入Queue中</strong>，等待NettyEventExecuter进行处理</p>
+
+<p><strong>NettyServerHandler(业务层事件)：</strong>调用注册的&lt;Integer/*request code */, Pair&lt;NettyRequestProcessor, ExecutorService&gt;&gt; processorTable,进行业务逻辑处理，当processRequestCommand接收到消息时，进行对应的处理</p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>2.4.3 NettyRemotingClient</strong></p>
+
+<p>首先所有的入口都在start函数：</p>
+
+<p>如果是input方向，那么会先调用<strong>NettyDecoder-&gt;NettyConnectManageHandler-&gt;NettyClientHandler</strong></p>
+
+<p><strong>NettyDecoder：</strong>会将数据包从byte转为RemotingCommand</p>
+
+<p><strong>NettyConnectManageHandler：</strong>会将请求转入channelRegistered、channelUnregistered、channelActive、channelInactive、userEventTriggered、exceptionCaught，对应的调用<strong>NettyRemotingAbstract.putNettyEvent将事件放入Queue中</strong>，等待NettyEventExecuter进行处理</p>
+
+<p><strong>NettyClientHandler：</strong>调用注册的&lt;Integer/* request code */,Pair&lt;NettyRequestProcessor, ExecutorService&gt;&gt; processorTable, 进行业务逻辑处理</p>
+
+<p>ConcurrentMap&lt;String /* addr */, ChannelWrapper&gt; channelTables = new ConcurrentHashMap&lt;String, ChannelWrapper&gt;()：一个remotingClient会管理很多个channel</p>
+
+<p>最后，是client端的超时时间处理，如果连接超过120s没有接收到发送和请求，那么将会断开连接，否则将会是长连接的一个保持。</p>
+
+<p>一个实例：在producer，consumer的连接保持中，虽然有120s的超时时间，但是他们基本都是长连接的一个保持，因为会通过心跳来保持所有的连接。</p>
+
+<p><strong>2.5 后台服务：</strong></p>
+
+<p><strong>1. NettyEventExecutor和ChannelEventListener：主要负责处理connect，disconnect，close等消息。</strong></p>
+
+<p><strong>2. scanResonseTable : 主要负责清理过期超时的response。</strong></p>
+
+<p><strong>3. 异步回调：不算是标准的后台服务，当采用async的发送方式或sync的回调模式时，会在后台线程中执行。</strong></p>
+
+<p>&nbsp;</p>
+
+<h1><strong>三. 一些总结与想法</strong></h1>
+
+<p><strong>在整个网络传输部分，有如下值得思考借鉴的地方：</strong></p>
+
+<p><strong>3.1 编解码：编码要节省资源，常常使用bit，位为单位进行编码，最终转为json或xml传输（当然还可以选择probuf等）</strong></p>
+
+<p><strong>3.2 限流的使用，这里采用semaphore来进行限流处理</strong></p>
+
+<p><strong>3.3 rpchook的设计，发送前，接受后的hook设计</strong></p>
+
+<p><strong>3.4 发送与接收</strong></p>
+
+<p><strong>发送：invokeAsyncImpl, invokeOnewayImpl, invokeSyncImpl</strong></p>
+
+<p><strong>接收：processReceiveMessage, processRequestMessage, processResponseMessage</strong></p>
+
+<p><strong>发送与接收使用opaque和</strong>responseFuture进行交互（即ConcurrentMap&lt;Integer /* opaque */, ResponseFuture&gt; responseTable），其中，opaque用于标示发送/接收对，responseFuture的countDownLatch字段用于通知客户端接收到消息，并控制超时时间。</p>
+
+<p>3.5 后台服务的设计</p>
+
+<p><strong>有很多服务不需要是实时的，需要在一致性和可用性之间找到一个平衡，因此，很多非实时任务可以采用一个全局的单线程来维护，参考上面2.5的描述。</strong></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/42949670.html'>《RocketMq》七、Broker中心节点</a></li><li><a href='/bcsj/java/59451787.html'>《RocketMq》六、Client－Consumer消费者详解</a></li><li><a href='/bcsj/java/93478184.html'>《RocketMq》五、Client－Producer生产者详解</a></li><li><a href='/bcsj/java/16882015.html'>《RocketMq》四、Client Producer/Consumer总览</a></li><li><a href='/bcsj/java/66636302.html'>《RocketMq》三、NameServer</a></li><li><a href='/bcsj/java/91963739.html'>《RocketMq》二、存储篇</a></li><li><a href='/bcsj/java/36422446.html'>《RocketMq》一、网络传输篇</a></li><li><a href='/bcsj/java/69287988.html'>linux jar包启动脚本</a></li><li><a href='/bcsj/java/89472738.html'>nginx 反向代理oss</a></li><li><a href='/bcsj/java/43423861.html'>细粒度 自定义注解 权限控制具体实现</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>

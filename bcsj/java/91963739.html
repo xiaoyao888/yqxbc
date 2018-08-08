@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>《RocketMq》二、存储篇</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="" />
+  <meta name="description" content="RocketMQ的数据存储部分也是一个重头戏，他主要用于存储Producer生产的消息，Consume的逻辑队列，索引，以及主从复制，这里也是一个非常好的范例，我们可以看到如何处理数据存储，如何提高IO效率。东西太多信息量略大有点乱，之后再整理吧......一、总体结构CommitLog：实时执行，真正的I/O写入磁盘操作, 要求是实时的（当然，有时候只是写入内存，定时刷盘）；ConsumeQue..." />
+  <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templets/default/css/theme.css" rel="stylesheet">
+  <link href="/templets/default/css/main.css" rel="stylesheet">
+  <link href="/templets/default/css/animate.css" rel="stylesheet">
+  <link href="/templets/default/css/header.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header" class="site-header">
+    <div class="container" style="margin-top:0px;">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="site-header-banner" style="min-height:170px;">
+            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
+            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-custom">
+            <li class="dropdown">
+              <a href="/bcsj" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程设计<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bcsj/css/" title="CSS">CSS</a> </li>
+                <li><a href="/bcsj/hadoop/" title="Hadoop">Hadoop</a> </li>
+                <li><a href="/bcsj/ajax/" title="Ajax">Ajax</a> </li>
+                <li><a href="/bcsj/js/" title="Javascript">Javascript</a> </li>
+                <li><a href="/bcsj/java/" title="Java">Java</a> </li>
+                <li><a href="/bcsj/jetty/" title="Jetty">Jetty</a> </li>
+                <li><a href="/bcsj/python/" title="Python">Python</a> </li>
+                <li><a href="/storm/" title="Storm">Storm</a> </li>
+                <li><a href="/elasticsearch/" title="ElasticSearch">ElasticSearch</a> </li>
+                <li><a href="/SpringBoot/" title="SpringBoot">SpringBoot</a> </li>
+                <li><a href="/sublime/" title="Sublime">Sublime</a> </li>
+                <li><a href="/springcloud/" title="SpringCloud">SpringCloud</a> </li>
+                <li><a href="/zookeeper/" title="ZooKeeper">ZooKeeper</a> </li>
+                <li><a href="/git/" title="Git">Git</a> </li>
+                <li><a href="/maven/" title="Maven">Maven</a> </li>
+                <li><a href="/gradle/" title="Gradle">Gradle</a> </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="/shujuku" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据库 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/shujuku/redis/" title="redis">redis</a> </li>
+                <li><a href="/shujuku/sqlserver/" title="SQL Server">SQL Server</a> </li>
+                <li><a href="/shujuku/memcache/" title="Memcache">Memcache</a> </li>
+                <li><a href="/shujuku/mysql/" title="MySql">MySql</a> </li>
+                <li><a href="/shujuku/oracle/" title="Oracle">Oracle</a> </li>
+                <li><a href="/shujuku/mangodb/" title="MangoDB">MangoDB</a> </li>
+                <li><a href="/shujuku/hbase/" title="Hbase">Hbase</a> </li>
+                <li><a href="/shujuku/access/" title="Access">Access</a> </li>
+                <li><a href="/shujuku/db2/" title="DB2">DB2</a> </li>
+              </ul>
+            </li>
+            <li><a href="/dnzs" target="_blank" title="电脑基础知识学习，计算机技术学习网站，计算机基础知识,电脑学习">电脑知识 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/wlzs" target="_blank" title="网络知识大全">网络知识</a></li>
+            <li><a href="http://www.win10os.com"target="_blank" title="windows10系统">windows10</a></li>
+            <li><a href="/czxt/linux" target="_blank" title="linux系统">linux</a></li>
+            <li><a href="/erweima/" target="_blank" title="二维码生成">常用工具</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header><!-- /header -->
+
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	   <div class="modal-dialog">
+		  <div class="modal-content">
+			 <div class="modal-body">
+				<div id="modal_img" ></div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+  <div class="container" style="padding-left:0px;padding-right:0px">
+    
+    <div class="col-sm-8  col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="art_title">
+            <div>《RocketMq》二、存储篇</div>
+            <a href="/">flypeng</a>  发布时间：08-08 来源：0 浏览：0次
+          </div>
+          <div class="art_body">
+            <div class="col-md-12 well bg-success" role="complementary">
+              <h3>文章目录</h3>
+            	<nav>
+            		<ul id="rootul" class="nav bs-docs-sidenav"></ul>		
+            	</nav>
+            </div>
+            <div id="91963739" class="art_content"><p>RocketMQ的数据存储部分也是一个重头戏，他主要用于存储Producer生产的消息，Consume的逻辑队列，索引，以及主从复制，这里也是一个非常好的范例，我们可以看到如何处理数据存储，如何提高IO效率。</p>
+
+<p>东西太多信息量略大有点乱，之后再整理吧......</p>
+
+<p>&nbsp;</p>
+
+<h1>一、总体结构</h1>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151216212200813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>CommitLog：实时执行，真正的I/O写入磁盘操作, 要求是实时的（当然，有时候只是写入内存，定时刷盘）；</p>
+
+<p>ConsumeQueue：后台非实时执行，根据CommitLog，生成ConsumeQueue的信息，其记录了每个queue的物理commitOffset和逻辑logicOffset的信息；</p>
+
+<p>IndexService：后台非实时执行，如果发送消息的propety字段里面有keys字段，那么会将他以空格为分隔符，生成key和对应的index信息；</p>
+
+<p>HAService：后台非实时执行，处理和slave之间的信息备份。</p>
+
+<p>&nbsp;</p>
+
+<p>队列逻辑结构：</p>
+
+<p>逻辑上来看，每一个Topic有很多queue，他们各自处于自己的ConsumeQueue进行处理</p>
+
+<p><img alt="" src="https://img-blog.csdn.net/20151216212223583?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+
+<p>&nbsp;</p>
+
+<h1>二、基础数据结构</h1>
+
+<p>&nbsp;</p>
+
+<p><strong>MapedFileQueue：</strong>包含了很多MapedFile，以及每个MapedFile的真实大小；</p>
+
+<p><strong>MapedFile：</strong>包含了具体的文件信息，包括文件路径，文件名，文件起始偏移，写位移，读位移等等信息，同时使用了虚拟内存映射来提高IO效率；</p>
+
+<p>这两个数据结构是真实的保存了存放在物理机器上的文件信息，后续的很多模块如果涉及到文件存储，都会使用到这两个数据结构。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2.1. MapedFileQueue：</strong></p>
+
+<pre>
+<code class="language-java">// 每次触发删除文件，最多删除多少个文件
+private static final int DeleteFilesBatchMax = 10;
+// 文件存储位置
+private final String storePath;
+// 每个文件的大小
+private final int mapedFileSize;
+// 各个文件
+private final List&lt;MapedFile&gt; mapedFiles = new ArrayList&lt;MapedFile&gt;();
+// 读写锁（针对mapedFiles）
+private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+// 预分配MapedFile对象服务
+private final AllocateMapedFileService allocateMapedFileService;
+// 刷盘刷到哪里
+private long committedWhere = 0;
+// 最后一条消息存储时间
+private volatile long storeTimestamp = 0;
+</code></pre>
+
+<p><br />
+2.2. MapedFile：保存了文件的详细信息，包括：</p>
+
+<pre>
+<code class="language-java">TotalMapedVitualMemory：JVM中映射的虚拟内存总大小
+TotalMapedFiles：JVM中mmap的数量
+fileName：文件名
+fileFromOffset：文件的起始偏移量
+fileSize：文件大小
+file：文件句柄
+mappedByteBuffer：映射的内存对象
+wrotePostion：当前文件的写位置
+committedPosition：当前文件Flush到的位置
+fileChannel：映射的FileChannel对象
+storeTimestamp：最后一条消息保存时间
+firstCreateInQueue：是不是刚刚创建的Map
+</code></pre>
+
+<p>2.3. AllocateMappedFileService：用于异步创建MappedFile，其实这里和通讯的I/O操作是一样的，<strong>也是采用异步创建文件的方式，</strong>超时会报错，其中的细节与通讯的ResponseFuture类似，通过AllocateRequest里面的countdown来判断是否创建成功。</p>
+
+<p>2.4. 写入文件的优化策略：</p>
+
+<p>由于每次都写入磁盘，其实是非常慢的，因此对于写盘操作有2种优化方式：</p>
+
+<p>第一种方式是写入filechannel map的缓存：mappedByteBuffer =&nbsp;this.fileChannel.map(MapMode.READ_WRITE, 0, fileSize);,这里主要使用2个pos，一个是writeposition，表示写入map的位置；一个是flushposition，表示真正刷入磁盘的位置；同时还将启动一个定时任务，flushCommitLogService，用于刷新到磁盘当中。</p>
+
+<p>第二种方式是写入自定义的缓存，这种方式只有在ASYNC_FLUSH刷盘模式，且transientStorePoolEnable模式开启的时候，才会启用：this.writeBuffer = transientStorePool.borrowBuffer();这里主要使用3个pos，一个是commitposition，表示写入真正的filechannel的位置；一个是writeposition，表示写入自定义buffer的位置；一个是flushposition，表示真正刷入磁盘的位置；同时会启用2个service服务，一个是commitLogService，用于启动定时任务刷新缓存到filechannel，一个是flushCommitLogService，用于刷新到磁盘当中。</p>
+
+<p>2.5 刷盘策略：</p>
+
+<p>1. GroupCommitService：如果是同步刷盘，flushCommitLogService使用该策略；要注意如果是同步刷盘，是不会启用自定义buffer优化模式的，所以不用担心自定义刷盘模式的commit没有被调用导致刷盘失败。这里的刷盘策略和之前的map文件写入以及通讯io操作相同，都是使用request的方式，将其放入到GroupCommitRequest的请求当中，等待这个request的countDownLatch唤起，否则这个操作将会超时，返回客户端失败。</p>
+
+<p>2. CommitRealtimeService：其中的commitLogService使用该策略；这里是每隔200ms会进行一次commit到filechannel的操作；</p>
+
+<p>3.&nbsp;FlushRealTimeService：如果是异步刷盘，flushCommitLogService使用该策略；这里每隔2s会进行一次真正的刷盘操作。</p>
+
+<h1>&nbsp;</h1>
+
+<h1>三、主要模块介绍</h1>
+
+<h2>3.1 CommitLog(物理队列)：</h2>
+
+<pre>
+CommitLog是用于存储真实的物理消息的结构，ConsumeQueue是逻辑队列，仅仅存储了CommitLog的位移而已，真实的存储都在本结构中。</pre>
+
+<pre>
+1. 首先这里会使用CommitLog.<strong>this</strong>.<strong>topicQueueTable</strong>.put(key, queueOffset)，其中的key是 topic-queueId, queueOffset是当前这个key中的消息数，每增加一个消息增加一(不会自减)；</pre>
+
+<pre>
+这里queueOffset的用途如下：每次用户请求putMessage的时候，将queueOffset返回给客户端使用，这里的queueoffset表示逻辑上的队列偏移。</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2. 其次就是将消息写入真正的MapedFile，MapedFile中，每条消息的格式如下：</p>
+
+<p>&nbsp;</p>
+
+<p><strong><img alt="" src="https://img-blog.csdn.net/20151216212657075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></strong></p>
+
+<p>&nbsp;</p>
+
+<pre>
+MagicCode：<strong><em>MessageMagicCode </em></strong>= 0xAABBCCDD ^ 1880681586 + 8</pre>
+
+<pre>
+BodyCRC：对Body的校验码</pre>
+
+<pre>
+queueId：队列Id</pre>
+
+<p>&nbsp;</p>
+
+<p>queueOffset：topic-queueId对应的队列数目</p>
+
+<p>physicalOffset：真实的地址偏移，包括所有文件的总偏移</p>
+
+<p>&nbsp;</p>
+
+<p>3. putMessage所做操作</p>
+
+<p>3.1 将数据写入mapedFile，并将topic-queueId,queueOffset写入topicQueueTable</p>
+
+<p>3.2 创建DispatchRequest，将消息放入DispatchMessageService的List中，进行后续处理</p>
+
+<p>3.3 进行同步刷盘，或者异步刷盘</p>
+
+<p>FlushCommitLogService：刷盘基类；</p>
+
+<p>GroupCommitService：同步刷盘；每次写入消息时，调用swapRequests进行数据交换，然后将所有的请求进行刷盘</p>
+
+<p>FlushRealTimeService：异步刷盘；调用mappedByteBuffer.force()进行刷盘操作</p>
+
+<p>CommitRealTimeService：异步刷盘模式，如果启用了transientStorePoolEnable，那么会启动该service进行刷盘到filechannel</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>3.2 ConsumeQueue（逻辑队列）：</h2>
+
+<p>&nbsp;</p>
+
+<p><strong>1.ConsumeQueue的结构</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 该结构对应于消费者逻辑队列，为什么要将一个topic抽象出很多的queue呢？这样的话，对集群模式更有好处，可以使多个消费者共同消费，而不用上锁；</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对应于consumeQueueTable &lt;topic, &lt;queueId,ConsumeQueue&gt;&gt;，其中每一个ConsumeQueue的结构如下：</p>
+
+<p><strong><img alt="" src="https://img-blog.csdn.net/20151216212806684?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></strong></p>
+
+<p>&nbsp;</p>
+
+<p>offset: CommitLog中的物理位移</p>
+
+<p>size: CommitLog中的日志大小</p>
+
+<p>tagsCode：和storeTimestamp相关</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2. ConsumeQueue创建过程：</strong></p>
+
+<p>1. 首先会创建CommitLog，在将数据写入CommitLog之后，会创建DispatchRequest，调用defaultMessageStore.putDispatchRequest</p>
+
+<p>2. DispatchMessageService调用putMessagePostionInfo将数据写入ConsumeQueue</p>
+
+<h2>3.3 IndexService（索引）</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IndexService用于创建索引文件集合，当用户想要查询某个topic下某个key的消息时，能够快速响应，这里的key是发送消息时，在其propety字段中的keys值，以空格分割的每个关键字都会产生一个索引；同时，如果propety字段中包含UNIQ_KEY时，也会为他创建一个索引。这里注意不要与上述的ConsumeQueue混合，ConsumeQueue只是为了抽象出多个queue，方便并发情况下，用户put/get消息，而这个是为了通过关键字快速定位消息。</p>
+
+<p>&nbsp; &nbsp; 服务的启动参见</p>
+
+<p>&nbsp;</p>
+
+<p>IndexService由一系列的IndexFile文件组成：</p>
+
+<p>// 索引文件集合<br />
+private final ArrayList&lt;IndexFile&gt; indexFileList</p>
+
+<p>&nbsp;</p>
+
+<p><strong>1. IndexFile的结构：</strong></p>
+
+<p>IndexFile的格式如下所示：</p>
+
+<p><strong><img alt="" src="https://img-blog.csdn.net/20151216212843914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></strong></p>
+
+<p>其中的hashslot字段如果对应是0，则表示到尾部。</p>
+
+<p>&nbsp;</p>
+
+<p>其中：</p>
+
+<p>A. IndexHeader的结构如下</p>
+
+<pre>
+<code class="language-java">beginTimestamp = new AtomicLong(0);
+endTimestamp = new AtomicLong(0);
+beginPhyOffset = new AtomicLong(0);
+endPhyOffset = new AtomicLong(0);
+hashSlotCount = new AtomicInteger(0); // 已经使用的hashslot的个数
+indexCount = new AtomicInteger(1);</code></pre>
+
+<p>B. HashSlot里面的每一项保存了这个topic-key计算出的hash的Index，所有的链表，所以他的每个大小是4字节，一共有500W项</p>
+
+<p>&nbsp;</p>
+
+<p>C.Index的结构如下：</p>
+
+<p><strong><img alt="" src="https://img-blog.csdn.net/20151216212954492?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></strong></p>
+
+<p>&nbsp;</p>
+
+<p>keyHash:topic-key(key是消息的key)的hashCode组成</p>
+
+<p>phyOffset:commitLog真实的物理位移</p>
+
+<p>timeOffset：时间位移</p>
+
+<p>slotValue：下一个记录的slot位置</p>
+
+<p>&nbsp;</p>
+
+<p><strong>2. IndexFile的创建过程：</strong></p>
+
+<p>1. 首先在DispatchMessageService写入ConsumeQueue后，会再调用indexService.putRequest，创建索引请求</p>
+
+<p>2. 调用IndexService的buildIndex创建索引</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h2>3.4 HAService(主从复制模块)</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 他的启动有3个部分:</p>
+
+<p><strong>3.4.1AcceptSocketService：作为HAServer进行监听</strong></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; beginAccept，start；主要就是在socketAddressListen监听Slave的请求服务，如果有请求进入，新建HAConnection，并start；同时将其加入到HAService的connectionList中</p>
+
+<p>&nbsp;</p>
+
+<p><strong>3.4.2HAConnection：用于管理Master接收的连接，readSocketService和writeSocketService分别启动；</strong></p>
+
+<p><strong>有slaveRequestOffset和slaveAckOffset两个变量：</strong></p>
+
+<p><strong>slaveRequestOffset：它只使用一次，即第一次slave发送给master时，表示slave请求的起始offset；</strong></p>
+
+<p><strong>slaveAckOffset：由slave上传到master，表示其确认接收到的offset</strong></p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>A. ReadSocketService：接收处理slave的请求</strong></p>
+
+<p><strong>首先接收到slave的请求后，slave的请求是一个8字节的Long：</strong></p>
+
+<p><strong>先判断slaveRequestOffset是否小于0，小于0则表示第一次请求，将slaveRequestOffset置为此值，需要从这个位置进行commitLog拉取；</strong></p>
+
+<p><strong>否则将slaveAckOffset置为slave请求的offset，表示确认接收到该请求；</strong></p>
+
+<p><strong>再调用notifyTransferSome(slaveAckOffset)</strong></p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>B. WriteSocketService：发送给slave物理数据CommitLog</strong></p>
+
+<p><strong>A. 初始化：如果nextTransferFromWhere=-1，则表示是第一次传输；slaveRequestOffset如果也为0，表示slave上面没有数据，直接从master的最后一个文件开始上传，将nextTransferFromWhere置为最后一个文件的位移；如果slaveRequestOffset不为0，则从slave请求的位置开始传输；</strong></p>
+
+<p><strong>B. 心跳包：如果本次传输距离上次的时间超过了5S的心跳时间，那么发送心跳包：8(下次传输的位置)+4(固定值0)</strong></p>
+
+<p><strong>C. 数据包：获取从nextTransferFromWhere开始的SelectMapedBufferResult(MapFile,size, startOffset)；如果size大于传输的BatchSize，则设置size为BatchSize；接下来：</strong></p>
+
+<p><strong>设置nextTranserFromWhere；</strong></p>
+
+<p><strong>设置byteBufferHeader设置头部：8(传输的offset)+4(内容长度)</strong></p>
+
+<p><strong>调用transferData()传输数据：首先传输头部，再根据selectMapedBufferResult传输body部分；</strong></p>
+
+<p><strong>如果没有数据，则</strong></p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>WaitNotifyObject：感觉用于多个线程之间的同步</strong></p>
+
+<p><strong>&nbsp;</strong></p>
+
+<p><strong>notifyTransferSome(slaveAckOffset)</strong></p>
+
+<p>如果客户端ack的值比当前push2SlaveMaxOffset的值大，那么将push2SLaveMaxOffset的值设置为ack，然后调用groupTranserServer唤起线程</p>
+
+<p>&nbsp;</p>
+
+<p><strong>groupTransferService：</strong>它用于同步slave-master的模式，当master收到commitLog，同时又是同步复制的情况，就会将Requets放入，随后进行复制</p>
+
+<p>push2SlaveMaxOffset的值为<strong>slaveAckOffset</strong></p>
+
+<p>&nbsp;</p>
+
+<p><strong>3.4.3HaClient</strong></p>
+
+<p>1. 首先连接到master，同时获取到最大的offset，到currentReportedOffset</p>
+
+<p>&nbsp;</p>
+
+<p>2. 向master发送心跳</p>
+
+<p>3. 不断向master发送当前的offset，同时读取master的答复，将master的答复写入commitLog中；如果master的答复不满足我们slave的offset，则关闭与master之间的连接</p>
+
+<p>&nbsp;</p>
+
+<h2>3.5 上述三个模块的启动</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当store模块启动时，会启动一个后台服务ReputMessageService，这个服务会定时调用根据commitLog产生的数据，发送DispatchRequest到CommitLogDispatcherBuildConsumeQueue，CommitLogDispatcherBuildIndex，CommitLogDispatcherCalcBitMap这三个模块中，这三个模块分别产生上述描述的数据写到磁盘中。</p>
+
+<h1>四、后台非实时模块</h1>
+
+<p>&nbsp;</p>
+
+<p>4.1 FlushConsumeQueueService：用于将ConsumeQueue的File文件写入入里磁盘；</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 首先判断是否到达了刷盘时间，如果到达了，那么全盘通刷；</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 否则，遍历所有的ConsumeQueue，调用cq.commit(flushConsumeQueueLeastPages)进行刷盘，flushConsumeQueueLeastPages是目前文件的未刷盘大小达到flushConsumeQueueLeastPages*OS_PAGE_SIZE(1024*4)个，才进行刷盘</p>
+
+<p>&nbsp;</p>
+
+<p>4.2 CleanCommitLogService：用于定期删除CommitLog的物理文件；</p>
+
+<p>如果到达删除时间或者磁盘大小达到阈值：</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 文件保存时长：72小时</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除文件间隔时间：100ms</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 强制删除文件间隔时间：1000* 120ms</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 一次最多删除文件数：10个</p>
+
+<p>&nbsp;</p>
+
+<p>4.3 CleanConsumeQueueService</p>
+
+<p>获取commitLog的最小offset，遍历所有的consumeQueue，将小于offset的consumeQueue删除；</p>
+
+<p>同时遍历IndexFile，将offset小于commitLog的索引删除</p>
+
+<p>4.4 DispatchMessageService：这个服务主要是处理DispatchRequest，当写入CommitLog后，会将Dispatch请求写入Queue，然后该服务进行ConsumeQueue和IndexService的写入</p>
+
+<p>4.5 AllocateMapedFileService：包含在MapedFileQueue中，主要用于每次getLastMapedFile(startOffset)时，如果最后一个文件满了，那么调用allocateMapedFileService.putRequestAndReturnMapedFile，将文件创建请求放入allocateMapedFileService的requestTable和requestQueue中，后续会进行文件创建，如果超过5S还没创建，则报错；</p>
+
+<p>4.6 ReputMessageService：这个用于Slave中，当Slave模式时，会启动这个模块，然后首先设置reputFormOffset为初始值0；不断遍历commitLog，得到其SelectMapedBufferResult，然后对每一个Message创建DispatchRequest，创建对应的ConsumeQueue和IndexFile，相关的类如下：CommitLogDispatcherBuildConsumeQueue，CommitLogDispatcherBuildIndex，CommitLogDispatcherCalcBitMap</p>
+
+<p>4.7 ScheduleMessageService：如果设置发送的消息设置了延时多久消费，那么这个任务会将延时到期的任务正式写到mq中</p>
+
+<p>4.8 StoreStatsService：不断统计当前的数据储存状况</p>
+
+<p>4.9 StoreCheckpoint</p>
+
+<p>4.10 BrokerStatsManager：统计broker的使用状况</p>
+
+<p>&nbsp;</p>
+
+<p>附：</p>
+
+<p>&nbsp;</p>
+
+<p>A.</p>
+
+<p>同步请求的处理方式和异步请求的处理方式统一：</p>
+
+<p>同步请求和异步请求都是将Request放入Queue中，然后再起一个线程进行处理</p>
+
+<p>B. 双缓冲</p>
+
+<p>可以起2个队列，一个读，一个写，这两个队列不断交换；这样可以解决一个问题，写和读不会出现并发问题，不需要上锁，能提高效率，但是仅仅适用于对put顺序没有要求的情况</p>
+
+<p>C. 为什么要逻辑队列：可以使写效率更高</p>
+
+<p>D. I/O通用的设计：</p>
+
+<p>在通讯的io模块，创建map文件的模块，以及这里的刷盘模块，无一不使用了放入后台线程queue中执行的方式，并使用countdown来获取异步执行的结果。这样设计的好处是，io操作的时间始终是不可控的，这种方式在一致性和可用性中取得了平衡。</p>
+</div>
+  		  <!-- 将此标记放在您希望显示like按钮的位置 -->          
+            <div class="art_like"><div class="bdlikebutton"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pnum">
+        <div class="pages mypagelist">
+          <div></div>
+        </div>
+      </div>
+      <div class="pre_next">
+        <nav>
+          <ul class="pager">
+            <li class="previous"></li>
+            <li class="next"></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="well"> 
+    		如果你有好的<a href="http://www.win10os.com/win10zixun" title="win10资讯">win10资讯</a>或者<a href="http://www.win10os.com/win10jiqiao" title="win10教程">win10教程</a>，以及<a href="http://www.win10os.com/win10xitong" title="win10">win10</a>相关的问题想要获得<a href="http://www.win10os.com/win10xiazai" title="win10系统下载">win10系统下载</a>的关注与报道。<br/>欢迎加入发送邮件到657025171#qq.com(#替换为@)。期待你的好消息！
+    	</div>
+    </div>
+    <!--右侧部分-->
+    <div class="col-sm-4 col-md-4">
+      <script src='/plus/ad_js.php?aid=12' language='javascript'></script>
+      <div class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">最新文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/42949670.html'>《RocketMq》七、Broker中心节点</a></li><li><a href='/bcsj/java/59451787.html'>《RocketMq》六、Client－Consumer消费者详解</a></li><li><a href='/bcsj/java/93478184.html'>《RocketMq》五、Client－Producer生产者详解</a></li><li><a href='/bcsj/java/16882015.html'>《RocketMq》四、Client Producer/Consumer总览</a></li><li><a href='/bcsj/java/66636302.html'>《RocketMq》三、NameServer</a></li><li><a href='/bcsj/java/91963739.html'>《RocketMq》二、存储篇</a></li><li><a href='/bcsj/java/36422446.html'>《RocketMq》一、网络传输篇</a></li><li><a href='/bcsj/java/69287988.html'>linux jar包启动脚本</a></li><li><a href='/bcsj/java/89472738.html'>nginx 反向代理oss</a></li><li><a href='/bcsj/java/43423861.html'>细粒度 自定义注解 权限控制具体实现</a></li>
+          </ul>
+        </div>
+      </div>  
+      <script src='/plus/ad_js.php?aid=14' language='javascript'></script>
+      <div id="scr_cont" class="panel panel-custom panel-custom-right">
+        <div class="panel-heading">相关文章>>></div>
+        <div class="panel-body">
+          <ul class="all_list">
+            <li><a href='/bcsj/java/1459.html'>maven国内快速镜像中央仓库地址,Aliyun镜像,OSChina镜像</a></li><li><a href='/bcsj/java/1439.html'>SpringMVC+JSP企业支付宝账号开发接口教程</a></li><li><a href='/bcsj/java/452.html'>在MyEclipse中搭建Spring MVC开发环境</a></li><li><a href='/bcsj/java/1365.html'>Java虚拟机(JVM)以及跨平台原理</a></li><li><a href='/bcsj/java/128.html'>错误整理：No plugin found for prefix 'jetty' in the current proje</a></li><li><a href='/bcsj/java/152.html'>HTTP大文件上传断点续传控件发布-Xproer.HttpUploader5</a></li><li><a href='/bcsj/java/1548.html'>Spring使用支付宝扫码支付</a></li><li><a href='/bcsj/java/1440.html'>JAVA环境变量JAVA_HOME、CLASSPATH、PATH设置详解</a></li><li><a href='/bcsj/java/728.html'>Java开发工具</a></li><li><a href='/bcsj/java/1362.html'>web service对外发布一个hello world接口</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="ad"></div>
+    </div>
+    
+  </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom-custom">
+    <div class="container">
+      <span class="pull-right navbar-text" id="font_smaller" onclick="changeFont('smaller')">A-</span>&nbsp;&nbsp;<span class="pull-right navbar-text" id="font_bigger" onclick="changeFont('bigger')">A+</span>
+    </div>
+  </nav>
+  <div class="footer">
+    <div class="foot">
+      <br>
+      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
+      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
+      flypeng.com 版权所有 京ICP备11048740号<br>
+
+    </div>
+  </div>
+  <script src="/templets/default/js/jquery-2.1.3.js"></script>
+  <script src="/templets/default/js/bootstrap.min.js"></script>
+  <script src="/templets/default/js/docs.min.js"></script>
+  <script src="/templets/default/js/main.js"></script>
+  <script src="/templets/default/js/header.js"></script>
+  <script src="/templets/default/js/article.js"></script>
+  <script src="/templets/default/js/page-dir.js"></script>
+  <script type="text/javascript">
+    document.getElementById('count').innerHTML = document.getElementById('count_data').innerHTML;
+      var img = $(".art_content p").find("img")
+      $.each(img,function(index,el){
+        el.style.width='100%';
+      });
+  </script>
+  <!-- 将此代码放在适当的位置，建议在body结束前 -->
+  <script id="bdlike_shell"></script>
+  <script>
+    var bdShare_config = {"type":"large","color":"blue","likeText":"内容很精彩","likedText":"您已顶过，谢谢！"};
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+  </script>
+</body>
+</html>
