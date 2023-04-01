@@ -20,8 +20,8 @@
       <div class="row">
         <div class="col-sm-12 col-md-12">
           <div class="site-header-banner" style="min-height:170px;">
-            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
-            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <h2 class="title-site-name swing animated" id="title-site-name">一起学编程</h2>
+            <div class="title-site-domain" id="title-site-domain">www.yqxbc.com</div>
             <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
           </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="panel-body">
           <div class="art_title">
             <div>Gradle构建脚本详细介绍</div>
-            <a href="/">flypeng</a>  发布时间：11-06 来源：鹏鹏编程网 浏览：22次
+            <a href="/">yqxbc</a>  发布时间：11-06 来源：一起学编程 浏览：22次
           </div>
           <div class="art_body">
             <div class="col-md-12 well bg-success" role="complementary">
@@ -126,18 +126,18 @@
 <h3 id="h3--build-gradle-">
 	创建build.gradle文件</h3>
 <p>
-	看看下面的例子演示一个小脚本，它将打印 &ldquo;Flypeng gradle qick start&ldquo;。复制并保存以下脚本到文件：D:workspflypeng.comgradle-3.1studyscriptbuild.gradle。脚本中定义一个任务名称helloword，这是用来打印&rdquo;Flypeng gradle qick start&ldquo; 字符串。</p>
+	看看下面的例子演示一个小脚本，它将打印 &ldquo;yqxbc gradle qick start&ldquo;。复制并保存以下脚本到文件：D:workspyqxbc.comgradle-3.1studyscriptbuild.gradle。脚本中定义一个任务名称helloword，这是用来打印&rdquo;yqxbc gradle qick start&ldquo; 字符串。</p>
 <p>
 	在命令提示符下，进入存储&nbsp;build.gradle&nbsp;文件的目录并执行以下命令，得到结果如下所示 -</p>
 <pre>
-D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q helloword
-Flypeng gradle qick start
+D:workspyqxbc.comgradle-3.1studyscript&gt;gradle -q helloword
+yqxbc gradle qick start
 </pre>
 <p>
 	可以通过指定一个快捷键（&lt;&lt;符号表示）到 doLast 语句来简化&nbsp;helloword&nbsp;任务。 如果将快捷方式添加到上述&nbsp;helloword&nbsp;任务，它看起来如下面脚本。</p>
 <pre>
 task helloword &lt;&lt; {
-   println &#39;Flypeng gradle qick start&#39;
+   println &#39;yqxbc gradle qick start&#39;
 }
 </pre>
 <p>
@@ -149,16 +149,16 @@ task helloword &lt;&lt; {
 	复制并保存下面的代码到&nbsp;build.gradle&nbsp;文件。</p>
 <pre>
 task upper &lt;&lt; {
-   String expString = &#39;Flypeng gradle tutorials&#39;
+   String expString = &#39;yqxbc gradle tutorials&#39;
    println &quot;Original: &quot; + expString
    println &quot;Upper case: &quot; + expString.toUpperCase()}
 </pre>
 <p>
 	使用&nbsp;gradle &ndash;q upper&nbsp;执行上面的代码，如果命令执行成功，会得到下面的输出。</p>
 <pre>
-D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q upper
-Original: Flypeng gradle tutorials
-Upper case: FLYPENGGRADLE TUTORIALS
+D:workspyqxbc.comgradle-3.1studyscript&gt;gradle -q upper
+Original: yqxbc gradle tutorials
+Upper case: yqxbcGRADLE TUTORIALS
 </pre>
 <p>
 	下面的例子 4 次打印隐式参数 ($it) 的值。复制并保存下面的代码到&nbsp;build.gradle&nbsp;文件。</p>
@@ -172,7 +172,7 @@ task count &lt;&lt; {
 <p>
 	使用&nbsp;gradle &ndash;q count&nbsp;执行上面的代码，如果命令执行成功，会得到下面的输出。</p>
 <pre>
-D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q count
+D:workspyqxbc.comgradle-3.1studyscript&gt;gradle -q count
 0 1 2 3
 </pre>
 <h2 id="h2-groovy-jdk-">
@@ -183,7 +183,7 @@ D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q count
 	复制并保存下面的代码到&nbsp;build.gradle&nbsp;文件。</p>
 <pre>
 task groovyJDKMethod &lt;&lt; {
-   String myName = &quot;Flypeng&quot;;
+   String myName = &quot;yqxbc&quot;;
    myName.each() { 
       println &quot;${it}&quot; 
    };
@@ -192,7 +192,7 @@ task groovyJDKMethod &lt;&lt; {
 <p>
 	使用&nbsp;gradle &ndash;q groovyJDKMethod&nbsp;执行上面的代码，如果命令执行成功，会得到下面的输出。</p>
 <pre>
-D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q groovyJDKMethod
+D:workspyqxbc.comgradle-3.1studyscript&gt;gradle -q groovyJDKMethod
 
 </pre>
 <br />
@@ -254,10 +254,10 @@ D:workspflypeng.comgradle-3.1studyscript&gt;gradle -q groovyJDKMethod
   <div class="footer">
     <div class="foot">
       <br>
-      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      一起学编程(原一起学编程网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，一起学编程(原一起学编程网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
       <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
-      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
-      flypeng.com 版权所有 京ICP备11048740号<br>
+      Copyright ◎ 2011 - 2018 yqxbc.com All Rights Reserved.<br>
+      yqxbc.com 版权所有 京ICP备11048740号<br>
 
     </div>
   </div>

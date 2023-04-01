@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="linux,kill,关闭,进程,命令,鹏鹏,电脑知识,网," />
-  <meta name="description" content="鹏鹏电脑知识网( www.flypeng.com ) ：linux kill 关闭进程命令 杀死进程最安全的方法是单纯使用kill命令，不加修饰符，不带标志。 首先使用ps -ef命令确定要杀死进程的PID，然后输入以下命令" />
+  <meta name="keywords" content="linux,kill,关闭,进程,命令,电脑知识,网," />
+  <meta name="description" content="一起学编程网( www.yqxbc.com ) ：linux kill 关闭进程命令 杀死进程最安全的方法是单纯使用kill命令，不加修饰符，不带标志。 首先使用ps -ef命令确定要杀死进程的PID，然后输入以下命令" />
   <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
   <link href="/templets/default/css/bootstrap-theme.min.css" rel="stylesheet">
   <link href="/templets/default/css/theme.css" rel="stylesheet">
@@ -20,8 +20,8 @@
       <div class="row">
         <div class="col-sm-12 col-md-12">
           <div class="site-header-banner" style="min-height:170px;">
-            <h2 class="title-site-name swing animated" id="title-site-name">鹏鹏编程网</h2>
-            <div class="title-site-domain" id="title-site-domain">www.flypeng.com</div>
+            <h2 class="title-site-name swing animated" id="title-site-name">一起学编程</h2>
+            <div class="title-site-domain" id="title-site-domain">www.yqxbc.com</div>
             <div class="title-site-memo" id="title-site-memo">常用技术，开发中遇到的坑，你想要的或许这里有。</div>
           </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="panel-body">
           <div class="art_title">
             <div>linux kill 关闭进程命令</div>
-            <a href="/">flypeng</a>  发布时间：02-08 来源：鹏鹏编程网 浏览：67次
+            <a href="/">yqxbc</a>  发布时间：02-08 来源：一起学编程 浏览：67次
           </div>
           <div class="art_body">
             <div class="col-md-12 well bg-success" role="complementary">
@@ -114,7 +114,7 @@
             	</nav>
             </div>
             <div id="60" class="art_content"><p>
-	鹏鹏电脑知识网(<a href="http://www.flypeng.com/">www.flypeng.com</a>) ：linux kill 关闭进程命令</p>
+	一起学编程网(<a href="http://www.yqxbc.com/">www.yqxbc.com</a>) ：linux kill 关闭进程命令</p>
 <p>
 	杀死进程最安全的方法是单纯使用kill命令，不加修饰符，不带标志。</p>
 <p>
@@ -128,7 +128,7 @@
 <p>
 	# ps -ef | grep httpd</p>
 <p>
-	以优雅的方式结束进程鹏鹏电脑知识网</p>
+	以优雅的方式结束进程一起学编程网</p>
 <p>
 	# kill -l PID</p>
 <p>
@@ -136,17 +136,17 @@
 <p>
 	TERM信号</p>
 <p>
-	给父进程发送一个TERM信号，试图杀死它和它的子进程。鹏鹏电脑知识网</p>
+	给父进程发送一个TERM信号，试图杀死它和它的子进程。一起学编程网</p>
 <p>
 	# kill -TERM PPID</p>
 <p>
 	killall命令</p>
 <p>
-	killall命令杀死同一进程组内的所有进程。其允许指定要终止的进程的名称，而非PID。鹏鹏电脑知识网</p>
+	killall命令杀死同一进程组内的所有进程。其允许指定要终止的进程的名称，而非PID。一起学编程网</p>
 <p>
 	# killall httpd</p>
 <p>
-	停止和重启进程鹏鹏电脑知识网</p>
+	停止和重启进程一起学编程网</p>
 <p>
 	有时候只想简单的停止和重启进程。如下：</p>
 <p>
@@ -158,9 +158,9 @@
 <p>
 	同意的 kill -s SIGKILL</p>
 <p>
-	这个强大和危险的命令迫使进程在运行时突然终止，进程在结束后不能自我清理。危害是导致系统资源无法正常释放，一般不推荐使用，除非其他办法都无效。鹏鹏电脑知识网</p>
+	这个强大和危险的命令迫使进程在运行时突然终止，进程在结束后不能自我清理。危害是导致系统资源无法正常释放，一般不推荐使用，除非其他办法都无效。一起学编程网</p>
 <p>
-	当使用此命令时，一定要通过ps -ef确认没有剩下任何僵尸进程。只能通过终止父进程来消除僵尸进程。如果僵尸进程被init收养，问题就比较严重了。杀死init进程意味着关闭系统。鹏鹏电脑知识网</p>
+	当使用此命令时，一定要通过ps -ef确认没有剩下任何僵尸进程。只能通过终止父进程来消除僵尸进程。如果僵尸进程被init收养，问题就比较严重了。杀死init进程意味着关闭系统。一起学编程网</p>
 <p>
 	如果系统中有僵尸进程，并且其父进程是init，而且僵尸进程占用了大量的系统资源，那么就需要在某个时候重启机器以清除进程表了。</p>
 </div>
@@ -219,10 +219,10 @@
   <div class="footer">
     <div class="foot">
       <br>
-      鹏鹏编程网(原鹏鹏电脑知识网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，鹏鹏编程网(原鹏鹏电脑知识网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
+      一起学编程(原一起学编程网)是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，一起学编程(原一起学编程网)所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171<br>
       <a href="/aboutus.html">关于我们</a> | <a href="/dashiji.html">大事记</a> | <a href="/jiazhiguan.html">网站价值观</a> | <a href="/contactus.html">联系我们</a> | <a href="/sitemap.xml">网站地图</a> | <a href="/copyright.html">版权声明</a><br>
-      Copyright ◎ 2011 - 2018 flypeng.com All Rights Reserved.<br>
-      flypeng.com 版权所有 京ICP备11048740号<br>
+      Copyright ◎ 2011 - 2018 yqxbc.com All Rights Reserved.<br>
+      yqxbc.com 版权所有 京ICP备11048740号<br>
 
     </div>
   </div>
