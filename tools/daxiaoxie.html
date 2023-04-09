@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="icon" type="image/png" href="/Public/img/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/Public/img/app-icon72x72@2x.png">
+    <title>在线英文字母大小写转换器工具</title>
+    <meta name="keywords" content="大小写转换,大小写转换器,英文大小写转换,英文字母大小写转换,在线大小写转换">
+    <meta name="description" content="在线英文字母大小写转换器工具，能很方便的将英文字母全部转换为大写或者小写，或者将英文句子转换成首字母大写。">
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/tools/css/global.min.css">
+</head>
+<body inmaintabuse="1">
+<div id="app" v-cloak>
+    <tools-header></tools-header>
+    <div class="container container-custom" style="margin-top:20px;">
+        <h1 style="font-size:18px;text-align:center;">英文字母大小写转换</h1>
+        <form class="tool-form">
+            <div class="form-field">
+                <textarea cols="90" rows="10" maxlength="5000" class="form-textarea form-block" id="tool-res"
+                          placeholder="请把你需要转换的内容粘贴在这里"></textarea>
+                    <div class="word-count"><span id="total">0</span> / 5000</div>
+            </div>
+            <div class="form-btn">
+                <input class="btn btn-success" onclick="letter_convert(&#39;upper_case&#39;);" type="button"
+                       value="全大写">
+                <input class="btn btn-success" onclick="letter_convert(&#39;lower_case&#39;);" type="button"
+                       value="全小写">
+                <input class="btn btn-success" onclick="letter_convert(&#39;capitalize_words&#39;);" type="button"
+                       value="单词首字母大写">
+                <input class="btn btn-success" onclick="letter_convert(&#39;capitalize_sentence&#39;);"
+                       type="button"
+                       value="句首字母大写">
+                <input class="btn btn-success" onclick="letter_convert(&#39;title_case&#39;);" type="button"
+                       value="标题大小写">
+                <input class="btn btn-success" onclick="letter_convert(&#39;blank2unline&#39;);" type="button"
+                       value="空格→下划线">
+                <input class="btn btn-success" onclick="letter_convert(&#39;blank2camel&#39;);" type="button"
+                       value="下划线&amp;空格→驼峰">
+                <input class="btn btn-success" onclick="letter_convert(&#39;camel2unline&#39;);" type="button"
+                       value="驼峰→下划线">
+                <input class="btn btn-success" onclick="letter_convert(&#39;unline2midline&#39;);" type="button"
+                       value="下划线→中横线">
+                <input class="btn btn-success" onclick="letter_convert(&#39;midline2unline&#39;);" type="button"
+                       value="中横线→下划线">
+                <input class="btn btn-success" onclick="letter_convert(&#39;unline2blank&#39;);" type="button"
+                       value="下划线→空格">
+                <input class="btn btn-success" onclick="letter_convert(&#39;unline2dot&#39;);" type="button"
+                       value="下划线→小数点">
+                <input class="btn btn-success" onclick="letter_convert(&#39;dot2unline&#39;);" type="button"
+                       value="小数点→下划线">
+                <input class="btn btn-success" onclick="letter_convert(&#39;del_blank&#39;);" type="button"
+                       value="清除空格">
+                <input class="btn btn-success" onclick="letter_convert(&#39;del_punctuation&#39;);" type="button"
+                       value="清除符号">
+                <input class="btn btn-warning btn-copy" type="button" value="复制" data-clipboard-target="#tool-res">
+                <input class="btn btn-info btn-cut" type="button" value="剪切" data-clipboard-action="cut"
+                       data-clipboard-target="#tool-res">
+                <input class="btn btn-error" type="reset" value="清空">
+            </div>
+            <div id="tool-tips"></div>
+            <p class="tips"> 提示：首字母转大写仅在英文单词前有空格的情况下才有效；每句首字母大写仅在符号“.!?:”后的第一个单词有效；
+            </p>
+
+        </form>
+
+        <div class="tool-info">
+            <h5>相关知识</h5>
+            <p>英文字母，即英文<code>English</code>所基于的字母，共26个。<br>英文字母渊源于拉丁字母，拉丁字母渊源于希腊字母，而希腊字母则是由腓尼基字母演变而来的。</p>
+
+            <h5>英文标题大小写格式</h5>
+            <p><code>Title case</code> 或 <code>Headline case</code> 是一种大写风格，用于以英文呈现已出版作品或艺术作品的标题。
+                标题大写格式：所有单词都要是首字母大写，除了不是标题第一个或最后一个单词的次要单词（通常是冠词、短介词和一些连词），本工具次要单词包含 <code>a, an, the, and, but, or,
+                    for,
+                    nor, on, at, to, from, by, in, out, of, up, over, with, as</code>。</p>
+
+            <h5>程序上的字母大小写转换</h5>
+            <p>骆驼式命名法 <code>Camel Case</code> 是指混合使用大小写字母来构成变量和函数的名字，为了代码能更容易阅读，而采取统一的可读性比较好的命名方式。</p>
+            <p>
+                PHP：<code>strtolower()</code> 字符串转换为小写，<code>strtoupper()</code> 字符串转换为大写；<code>ucfirst()</code>
+                将第一个字符转换为大写，<code>ucwords()</code> 将每个单词的首字母转换为大写。<br>
+                JavaScript：<code>toLowerCase()</code>返回一个字符串，其中所有的字母字符都被转换为小写；<code>toUpperCase()</code>返回一个字符串，其中所有的字母字符都被转换为大写。<br>
+                Python：<code>capitalize()</code>将字符串的第一个字母变成大写,其他字母变小写；<code>upper()</code>
+                方法将字符串中的小写字母转为大写字母；<code>lower()</code>
+                方法转换字符串中所有大写字符为小写；<code>title() </code>方法返回"标题化"的字符串,就是说所有单词都是以大写开始，其余字母均为小写。
+            </p>
+        </div>
+    </div>
+    <tools-footer></tools-footer>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<script src="js/daxiaoxie.min.js"></script>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/http-vue-loader"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: function () {
+            return {
+            };
+        },
+        components: {
+            'tools-header': httpVueLoader('./components/toolsHeader.vue'),
+            'tools-footer': httpVueLoader('./components/toolsFooter.vue'),
+        },
+        methods: {
+
+        },
+    });
+</script>
+<style >
+    .form-btn input{
+        margin-right:10px;
+        margin-bottom:10px;
+    }
+    .nav-custom-hover{
+        background-color: #E1E1E1!important;
+    }
+</style>
+</body>
+</html>

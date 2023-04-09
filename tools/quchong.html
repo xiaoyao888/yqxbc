@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="icon" type="image/png" href="/Public/img/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/Public/img/app-icon72x72@2x.png">
+    <title>在线文本去重复分隔工具_一起学编程</title>
+    <meta name="keywords" content="文本去重复工具,文本去重工具,在线文本去重工具,关键词去重,分隔符和替换">
+    <meta name="description" content="在线文本去重工具，能根据不同的分隔符号把重复的文本去重复，保留一条记录。可用于文本去重复、数组去重复、关键词去重等，欢迎使用。">
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/tools/css/global.min.css">
+</head>
+<body>
+<div id="app">
+    <tools-header></tools-header>
+    <div class="container container-custom" style="margin-top:20px;">
+        <h1 style="font-size:18px;text-align:center;">文本去重分隔工具</h1>
+        <form class="tool-form">
+            <div class="form-field">
+                <textarea class="form-textarea form-block" id="tool-text" tabindex="1" rows="10"
+                          placeholder="请输入要去重的文本"></textarea></div>
+            <div class="form-btn" style="display: flex;flex-direction: row;">
+                <label for="split_format" style="margin-bottom: 0;line-height:35px;margin-right:10px;">去重前分隔符 </label>
+                <select name="split_format" id="split_format" class="form-control" style="width:100px">
+                    <option value="0" selected="selected">换行[↵]</option>
+                    <option value="1">空格[ ]</option>
+                    <option value="2">逗号[,]</option>
+                    <option value="3">逗号[，]</option>
+                    <option value="4">斜杠[/]</option>
+                </select>
+                <label for="split_format" style="margin-bottom: 0;line-height:35px;margin-right:10px;">去重后分隔符</label>
+                <select name="split_format_after" id="split_format_after" class="form-control" style="width:100px">
+                    <option value="0" selected="selected">换行[↵]</option>
+                    <option value="1">空格[ ]</option>
+                    <option value="2">逗号[,]</option>
+                    <option value="3">逗号[，]</option>
+                    <option value="4">斜杠[/]</option>
+                    <option value="5">无</option>
+                    <option value="6">'项目',</option>
+                </select>
+                <input class="btn btn-success" id="btn-quchong" type="button" value="文本去重">
+                <input class="btn btn-warning btn-copy" type="button" value="复制结果" data-clipboard-target="#tool-result">
+                <input class="btn btn-error" type="reset" value="清空">
+            </div>
+            <div id="tool-tips"></div>
+            <div class="form-field"><textarea class="form-textarea form-block" id="tool-result" rows="10"></textarea>
+            </div>
+            <p class="tips">提示：请根据需要选择去重前前分隔字符和去重后的分隔字符，去重前分隔字符必须选择正确。英文逗号[,]分隔符可用于网站SEO关键词keywords去重。</p>
+
+        </form>
+        <div class="tool-info">
+            <h5>相关知识</h5>
+            <p>本工具支持根据以下符号换行[↵]、空格[ ]、逗号[,]、逗号[，]、斜杠[/]，进行重新排列并去重。</p>
+            <p>去重后分隔符选择 <code>'项目',</code>，可以用以生成数组。如输入 <code>aa bb cc dd</code>，可生成 <code>'aa','bb','cc','dd'</code>。
+            </p>
+        </div>
+    </div>
+    <tools-footer></tools-footer>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/http-vue-loader"></script>
+<script src="js/global.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: function () {
+            return {};
+        },
+        components: {
+            'tools-header': httpVueLoader('./components/toolsHeader.vue'),
+            'tools-footer': httpVueLoader('./components/toolsFooter.vue'),
+        },
+        methods: {},
+    });
+</script>
+<script>
+    function unique_text(r) {
+        for (var t, e = 0, n = "_" + +new Date + Math.random(), a = [], i = {
+            string: {},
+            boolean: {},
+            number: {}
+        }, o = r.length, l = []; e < o; e++)
+            if (null != (t = r[e]))
+                if (tp = typeof t,
+                tp in i)
+                    t in i[tp] || (i[tp][t] = 1,
+                        l.push(t));
+                else {
+                    if (t[n])
+                        continue;
+                    t[n] = 1,
+                        a.push(t),
+                        l.push(t)
+                }
+        for (e = 0,
+                 o = a.length; e < o; e++)
+            (t = a[e])[n] = void 0,
+                delete t[n];
+        return l
+    }
+
+    $(function () {
+        $("#btn-quchong").click(function () {
+            $("#success-tips").hide();
+            var r = $("#tool-text").val();
+            if (r.length <= 0)
+                return msgError("请输入要去重的文本！"),
+                    $("#tool-text").focus(),
+                    !1;
+            var t = $("#split_format").val()
+                , e = $("#split_format_after").val();
+            if (0 == t ? re = /[\r\n]/g : 1 == t ? re = /[^\S\r\n]/g : 2 == t ? re = "," : 3 == t ? re = "，" : 4 == t && (re = /[\/]/g),
+                0 == e ? rb = "\n" : 1 == e ? rb = " " : 2 == e ? rb = "," : 3 == e ? rb = "，" : 4 == e ? rb = "/" : 5 == e ? rb = "none" : 6 == e && (rb = "arr"),
+
+                arr = r.split(re),
+                arr_l = arr.length,
+            1 == arr_l)
+                return msgError("文本过短或分隔字符选择错误！请检查。"),
+                    $("#tool-text").focus(),
+                    !1;
+            for (key in arr = $.map(arr, function (r, t) {
+                return r.trim()
+            }),
+                r_arr = unique_text(arr),
+                r_arr_l = r_arr.length,
+                temp = "",
+                r_arr)
+                "none" == rb ? temp += r_arr[key] : "arr" == rb ? temp += "'" + r_arr[key] + "'," : temp += r_arr[key] + rb;
+            tips_clear(),
+            "none" != rb && (temp = temp.substr(0, temp.length - 1)),
+                $("#tool-result").val(temp),
+                tips_text = "去重前共<b>" + arr_l + "</b>段文本，去重后共<b>" + r_arr_l + "</b>段文本，已清除<b>" + (arr_l - r_arr_l) + "</b>段重复文本。(蛙蛙工具制作)",
+                msgSuccess(tips_text)
+        })
+    }),
+        String.prototype.trim = function () {
+            return this.replace(/(^\s*)|(\s*$)/g, "")
+        }
+    ;
+
+</script>
+<style>
+    .form-btn input,select{
+        margin-right:10px;
+        margin-bottom:10px;
+    }
+</style>
+</body>
+</html>

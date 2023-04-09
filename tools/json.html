@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="os-windows screen-desktop-wide device-desktop">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0,maximum-scale=1.0">
+    <title>在线JSON校验格式化工具（Be JSON）</title>
+    <meta name="keywords" content="在线,JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具,json解析">
+    <meta name="description" content="在线,JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具">
+
+    <link rel="stylesheet" type="text/css" href="css/indexCodeMirror.min.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.10.4/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/global.min.css">
+</head>
+
+<body class="load-indicator" data-siteid="2" style="" inmaintabuse="1">
+<div id="app" v-cloak>
+    <tools-header></tools-header>
+</div>
+    <div class="container container-custom" style="min-height:600px;margin-top:20px;padding-bottom: 17px;">
+        <h1 style="font-size:18px;text-align:center;">JSON格式化校验</h1>
+        <!--  start 各个模块代码 -->
+        <form name="main" onsubmit="return false">
+            <div class="editor-box1">
+                <div>
+                    <!-- json编辑器 -->
+                    <div id="editor">
+                        <textarea id="code" name="code" style="display: none;"></textarea>
+                        <div id="resize" class="">
+                            <i class="bi-justify" style="font-size:16px;font-weight:bold"></i>
+                        </div>
+                    </div>
+                    <!-- 功能 -->
+                    <div class="t-huge-margin">
+                        <div class="btn-group">
+                            <button class="copy hide display-none"></button>
+                            <input type="submit" class="btn btn-success" name="validate" data-ga="validate" id="validate"
+                                   value="格式化校验">
+                            <button type="button" class="btn" id="compressZipJson" data-html="index">压缩</button>
+                            <button type="button" class="btn" id="escapeJson" data-html="index">转义</button>
+                            <button type="button" class="btn" id="restoreJson" data-html="index">去除转义</button>
+                            <button type="button" class="btn" id="ch2unicode" data-html="index">中文转Unicode</button>
+                            <button type="button" class="btn" id="unicode2ch" data-html="index">Unicode转中文</button>
+                            <button type="button" class="btn" id="json2get" data-html="index">转GET参数</button>
+                            <button type="button" class="btn" id="copyJson" data-html="index">复制</button>
+                            <button type="button" class="btn" id="clearCode" data-html="index">清空</button>
+                        </div>
+                        <div class="checkbox-primary">
+                            <input type="checkbox" id="loadChecked" checked="checked">
+                            <label for="loadChecked">记忆</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- 校验结果 -->
+        <div class="with-icon display-none" id="jsonlintBox">
+            <i class="bi-check-lg" id="jsonlintIcon"></i>
+            <pre class="content" id="jsonlintResult">请贴入要格式化的JSON代码</pre>
+        </div>
+    </div>
+    <tools-footer></tools-footer>
+<script src="js/global.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 编辑器组件 -->
+<script src="js/indexCodeMirror.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 判断json正确与否组件 -->
+<script>
+    //根据DOM元素的id构造出一个编辑器================================================================================================================================================================================================
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: 'application/json', //设置json模式
+        lineNumbers: true, //是否显示左边换行术字
+        lineWrapping: false, //是否折叠
+        foldGutter: true,
+        indentUnit: 4,
+        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+    });
+</script>
+<script src="js/jsonlint.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bejson_index20200722.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- js压缩组件 -->
+<script src="js/lz-string-1.4.4.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //监听codemirror输入，买按一下键盘，存储一次编辑器内容
+    document.onkeyup = function () {
+        $.zui.store.set('lastJsonData', editor.getValue());
+    };
+
+    //初始化loadChecked
+    var lastChecked = $.zui.store.get('lastLoadChecked');
+    if (lastChecked && lastChecked === 'no') {
+        $('#loadChecked').attr('checked', false);
+    } else {
+        $('#loadChecked').attr('checked', 'checked');
+    }
+
+    //初始化上一次json数据
+    var lastJson = $.zui.store.get('lastJsonData');
+    if (lastJson && (!lastChecked || lastChecked === 'yes')) {
+        if (typeof lastJson == 'object') {
+            editor.setValue(JSON.stringify(lastJson));
+        } else {
+            editor.setValue(lastJson.toString());
+        }
+    }
+</script>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/http-vue-loader"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: function () {
+            return {
+            };
+        },
+        components: {
+            'tools-header': httpVueLoader('./components/toolsHeader.vue'),
+            'tools-footer': httpVueLoader('./components/toolsFooter.vue'),
+        },
+        methods: {
+
+        },
+    });
+</script>
+
+<style >
+
+</style>
+</body>
+</html>

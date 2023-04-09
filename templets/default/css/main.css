@@ -46,7 +46,7 @@ body{font-family: "Microsoft YaHei";background:#E1E1E1}
 
 .art_spec_list{}
 
-.art_spec_list li{height:25pxline-height:25px;}
+.art_spec_list li{height:25px;line-height:25px;}
 
 .art_spec_list a{font-size:16px;}
 
@@ -89,7 +89,7 @@ body{font-family: "Microsoft YaHei";background:#E1E1E1}
 
 .thumbnail-custom{text-align: center;}
 
-.dmry_ad_a img{width:100%};
+.dmry_ad_a img{width:100%}
 .container{padding-right:0px;padding-left:0px}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-weight:900}
 h3{font-size:20px;}
