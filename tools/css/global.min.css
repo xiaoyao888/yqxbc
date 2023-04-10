@@ -3387,7 +3387,7 @@ textarea.form-condensed .form-control {
 .checkbox-primary > label:before, .radio-primary > label:before {
     top: 3px;
     z-index: 2;
-    font-family: ZenIcon;
+    font-family: "Microsoft YaHei";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -10005,7 +10005,7 @@ li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
     height: 100%;
     z-index: 9;
     background-color: #f6f6f6;
-    font-family: ZenIcon;
+    font-family: "Microsoft YaHei";
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
@@ -12270,7 +12270,7 @@ li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
     top: 10px;
     right: 10px;
     display: block;
-    font-family: ZenIcon;
+    font-family: "Microsoft YaHei";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -12418,7 +12418,7 @@ li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
     right: 8px;
     bottom: 8px;
     display: block;
-    font-family: ZenIcon;
+    font-family: "Microsoft YaHei";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
