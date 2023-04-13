@@ -12656,3 +12656,18 @@ li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
 .foot a{color:#FFFFFF;text-decoration: none;text-align:center;}
 
 .foot a:hover{color:#ff3300;}
+.nav-custom-hover {
+    background-color: #E1E1E1 !important;
+}
+
+.nav-content {
+    min-height: 60px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nav-content a {
+    margin-right: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
