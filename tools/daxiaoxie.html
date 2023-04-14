@@ -13,7 +13,8 @@
     <meta name="keywords" content="大小写转换,大小写转换器,英文大小写转换,英文字母大小写转换,在线大小写转换">
     <meta name="description" content="在线英文字母大小写转换器工具，能很方便的将英文字母全部转换为大写或者小写，或者将英文句子转换成首字母大写。">
     <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/tools/css/global.min.css">
+<!--    <link rel="stylesheet" type="text/css" href="/tools/css/global.min.css">-->
+    <link href="css/common.css" rel="stylesheet"/>
 </head>
 <body inmaintabuse="1">
 <div id="app" v-cloak>
@@ -30,31 +31,31 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav nav-custom">
-                        <li :class="navActive===1?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(1)" title="文本工具">文本工具</a>
                         </li>
-                        <li :class="navActive===2?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(2)" title="语言工具">语言工具</a>
                         </li>
-                        <li :class="navActive===3?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(3)" title="财务工具">财务工具</a>
                         </li>
-                        <li :class="navActive===4?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(4)" title="日期时间">日期时间</a>
                         </li>
-                        <li :class="navActive===5?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(5)" title="转换工具">转换工具</a>
                         </li>
-                        <li :class="navActive===6?'nav-custom-hover':''">
+                        <li >
                             <a href="#" onmouseenter="navActive(6)" title="便民查询">便民查询</a>
                         </li>
-                        <li :class="navActive===7?'nav-custom-hover':''">
+                        <li >
                             <a href="#" onmouseenter="navActive(7)" title="开发工具">开发工具</a>
                         </li>
-                        <li :class="navActive===8?'nav-custom-hover':''">
+                        <li >
                             <a href="#" onmouseenter="navActive(8)" title="编码加密">编码加密</a>
                         </li>
-                        <li :class="navActive===9?'nav-custom-hover':''">
+                        <li>
                             <a href="#" onmouseenter="navActive(9)" title="网络工具">网络工具</a>
                         </li>
                     </ul>
@@ -99,7 +100,7 @@
         </div>
 
         <div id="nav-content4" class="nav-content" style="display: none;">
-            <a href="/nongli.html">农历公历转换器</a>
+            <a href="shijianchuo.html">Unix时间戳转换工具</a>
             <a href="/huangli.html">农历老黄历查询</a>
             <a href="/riqi.html">日期时间计算器</a>
             <a href="/workingday.html">工作日计算器</a>
@@ -109,7 +110,7 @@
             <a href="/expirationdate.html">保质期计算器</a>
         </div>
         <div id="nav-content5" class="nav-content" style="display: none;">
-            <a href="/qrcode.html">二维码生成器</a>
+            <a href="erweima/qrcode.html">二维码生成器</a>
             <a href="/qrcodereader.html">二维码解码器</a>
             <a href="/barcode.html">条形码生成器</a>
             <a href="/jinzhi.html">进制转换器</a>

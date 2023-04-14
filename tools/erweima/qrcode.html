@@ -1,0 +1,658 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>在线二维码图片生成器</title>
+    <meta name="description"
+          content="在线二维码生成器提供免费的在线二维码生成服务，可以把电子名片、文本、wifi网络、电子邮件、短信、电话号码、网址等信息生成对应的二维码图片。二维码手机扫描软件下载。"/>
+    <meta name="keywords"
+          content="二维码,二维码生成器,二维码图片,二维码是什么,手机二维码,二维码生成,二维码扫描软件,二维码识别软件,手机二维码识别软件,二维码解码器,二维码软件,手机二维码软件,二维码开放平台,二维码接口,二维码API"/>
+    <link href="css/index.css" type="text/css" rel="stylesheet"/>
+    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<header id="header" class="">
+    <nav class="navbar navbar-default navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header navbar-header-custom">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">首页</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-custom">
+                    <li>
+                        <a href="#" onmouseenter="navActive(1)" title="文本工具">文本工具</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(2)" title="语言工具">语言工具</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(3)" title="财务工具">财务工具</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(4)" title="日期时间">日期时间</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(5)" title="转换工具">转换工具</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(6)" title="便民查询">便民查询</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(7)" title="开发工具">开发工具</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(8)" title="编码加密">编码加密</a>
+                    </li>
+                    <li>
+                        <a href="#" onmouseenter="navActive(9)" title="网络工具">网络工具</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
+<div class="container container-custom">
+    <div id="nav-content1" class="nav-content" style="display: none;">
+        <a href="../daxiaoxie.html">英文字母大小写转换</a>
+        <a href="../quchong.html">文本去重分隔工具</a>
+        <a href="../textreplace.html">文本替换工具</a>
+        <a href="../reversetext.html">文本反转排序工具</a>
+        <a href="../xuhao.html">文本增加序号工具</a>
+        <a href="../ocr.html">OCR图片识别文字工具</a>
+        <a href="../fuhao.html">特殊符号大全</a>
+        <a href="../fontchanger.html">花体英文转换器</a>
+        <a href="../zishu.html">字数统计工具</a>
+    </div>
+    <div id="nav-content2" class="nav-content" style="display: none;">
+        <a href="../jianfanti.html">中文简繁体转换工具</a>
+        <a href="../pinyin.html">汉语拼音转换工具</a>
+        <a href="../yuepin.html">粤语拼音转换工具</a>
+        <a href="../chengyu.html">成语查询工具</a>
+        <a href="../fanyi.html">在线翻译工具</a>
+        <a href="../wubi.html">五笔编码查询</a>
+        <a href="../shouzimu.html">拼音首字母缩写</a>
+        <a href="../shici.html">一句诗词</a>
+        <a href="../lizhi.html">励志句子</a>
+        <a href="../dujitang.html">毒鸡汤</a>
+    </div>
+    <div id="nav-content3" class="nav-content" style="display: none;">
+        <a href="../renminbi.html">人民币大写转换器</a>
+        <a href="../riqidaxie.html">支票日期大写转换器</a>
+        <a href="../yingwendaxie.html"> 英文金额大写转换器</a>
+        <a href="../tax.html">税金计算工具</a>
+        <a href="../geshui.html">个人所得税计算器</a>
+        <a href="../huilv.html">货币汇率换算工具</a>
+        <a href="../huobi.html">世界各国地区货币</a>
+    </div>
+
+    <div id="nav-content4" class="nav-content" style="display: none;">
+        <a href="../shijianchuo.html">Unix时间戳转换工具</a>
+        <a href="../huangli.html">农历老黄历查询</a>
+        <a href="../riqi.html">日期时间计算器</a>
+        <a href="../workingday.html">工作日计算器</a>
+        <a href="../holiday.html">2023年放假安排</a>
+        <a href="../timezone.html">世界时间转换器</a>
+        <a href="../dateformat.html">英文日期格式转换</a>
+        <a href="../expirationdate.html">保质期计算器</a>
+    </div>
+    <div id="nav-content5" class="nav-content" style="display: none;">
+        <a href="erweima/qrcode.html">二维码生成器</a>
+        <a href="../qrcodereader.html">二维码解码器</a>
+        <a href="../barcode.html">条形码生成器</a>
+        <a href="../jinzhi.html">进制转换器</a>
+        <a href="../changdu.html">长度单位换算器</a>
+        <a href="../zhongliang.html">重量单位换算器</a>
+    </div>
+    <div id="nav-content6" class="nav-content" style="display: none;">
+        <a href="../shouji.html">手机号码归属地查询</a>
+        <a href="../dianhua.html">常用电话列表</a>
+        <a href="../quhao.html">区号邮编查询工具</a>
+        <a href="../shenfenzheng.html">身份证所在地查询</a>
+        <a href="../daxue.html">全国高校信息查询</a>
+        <a href="../shoudu.html">各国首都列表</a>
+        <a href="../shicha.html">各国区号代码及时差</a>
+        <a href="../xuexing.html">子女血型遗传查询</a>
+        <a href="../fanying.html">反应速度测试工具</a>
+    </div>
+    <div id="nav-content7" class="nav-content" style="display: none;">
+        <a href="../json.html">JSON代码格式化工具</a>
+        <a href="../namingconverter.html">命名转换器</a>
+        <a href="../cssformat.html">CSS在线格式化工具</a>
+        <a href="../javascript.html">JavaScript代码格式化</a>
+        <a href="../htmlformat.html">HTML格式化工具</a>
+        <a href="../sqlformatter.html">SQL格式化压缩工具</a>
+        <a href="../regexp.html">正则表达式测试工具</a>
+        <a href="../timestamp.html">时间戳转换工具</a>
+        <a href="../crontab.html">crontab执行时间计算</a>
+        <a href="../color.html">颜色值转换工具</a>
+        <a href="../text2html.html">文本转HTML工具</a>
+    </div>
+    <div id="nav-content8" class="nav-content" style="display: none;">
+        <a href="../base64.html">Base64编码解码工具</a>
+        <a href="../md5.html">MD5加密工具</a>
+        <a href="../jiami.html">SHA1在线加密工具</a>
+        <a href="../randompassword.html">随机密码生成工具</a>
+        <a href="../guid.html">GUID生成工具</a>
+        <a href="../unicode.html">Ascii与Native编码转换</a>
+        <a href="../quanjiaobanjiao.html">全角半角转换工具</a>
+        <a href="../urldecode.html">URL解码编码</a>
+        <a href="../randomnumber.html">随机数生成器</a>
+        <a href="../morse.html">摩斯电码编码解码</a>
+    </div>
+    <div id="nav-content9" class="nav-content" style="display: none;">
+        <a href="../ip.html">IP地址查询工具</a>
+        <a href="../whois.html">域名whois查询</a>
+        <a href="../beian.html">域名备案查询</a>
+        <a href="../weixincheck.html">微信域名拦截检测</a>
+        <a href="../imgalt.html">ALT标签替换工具</a>
+        <a href="../ua.html">User Agent信息查看</a>
+        <a href="../getmobile.html">手机号码提取工具</a>
+    </div>
+</div>
+<div class="container container-custom" style="margin-top: 20px;">
+    <div class="block">
+        <div class="left">
+            <div class="row">
+                <ul class="rowleft" id="fntab">
+                    <li class="active" rel="text"><a href="javascript:" class="a1" title="文本"><span>文本</span></a></li>
+                    <li rel="card"><a href="javascript:" class="a2" title="名片"><span>名片</span></a></li>
+                    <li rel="url"><a href="javascript:" class="a3" title="网址"><span>网址</span></a></li>
+                    <li rel="sms"><a href="javascript:" class="a4" title="短信"><span>短信</span></a></li>
+                    <li rel="wifi"><a href="javascript:" class="a5" title="WiFi"><span>WiFi</span></a></li>
+                    <li rel="telephone"><a href="javascript:" class="a6" title="电话"><span>电话</span></a></li>
+                    <li rel="mail"><a href="javascript:" class="a7" title="邮箱"><span>邮箱</span></a></li>
+                </ul>
+                <div class="rowright">
+
+                    <div class="fnbox" id="fnbox">
+                        <!--文本-->
+                        <div class="sub show">
+                            <div class="tit"><span>即时输入即时生成!</span>输入文字</div>
+                            <textarea class="text" id="text_text" autocomplete="off">支持文本、网址和电子邮箱</textarea>
+                            <div class="size">已输入字数：<span id="text_size">0</span>/300</div>
+                            <div class="merchant"><img src="images/merchant.jpg" alt="二维码生成器网站" width="392"
+                                                       height="100"/></div>
+                        </div>
+
+                        <!--名片-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入联系人信息</div>
+                            <form>
+                                <div class="form-group">
+                                    <label>姓名</label>
+                                    <input type="text" id="card_n" class="form-control" maxlength="50"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_tel">电话</label>
+                                    <input type="text" id="card_tel" class="form-control short" maxlength="30"/>
+                                </div>
+                                <div class="form-group" id="litel">
+                                    <label for="card_phone">手机</label>
+                                    <input type="text" id="card_phone" class="form-control short" maxlength="30"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="car_note">QQ</label>
+                                    <input type="text" id="car_note" class="form-control" maxlength="30"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_mail">电子邮箱</label>
+                                    <input type="text" id="card_mail" class="form-control" maxlength="80"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_org">单位</label>
+                                    <input type="text" id="card_org" class="form-control" maxlength="100"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_til">职位</label>
+                                    <input type="text" id="card_til" class="form-control" maxlength="30"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_url">网址</label>
+                                    <input type="text" value="http://" id="card_url" class="form-control"
+                                           maxlength="255"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card_adr">地址</label>
+                                    <input type="text" id="card_adr" class="form-control" maxlength="255"/>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--网址-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入URL网址</div>
+                            <div class="urltype">
+                                <p><span>专用链接</span><input type="checkbox" id="urloptions"/></p>
+                                <ul id="urlset">
+                                    <!--<li class="weixin"><input type="radio" name="url" rel="weixin" id="wpublic"/>公共<span><input type="radio" name="url" rel="weixin" id="wpersonal"/>个人</span></li>-->
+                                    <li class="sina"><input type="radio" name="url" rel="sina1" id="spersonal"/>个人<span><input
+                                            type="radio" name="url" rel="sina2" id="sofficial"/>官微</span></li>
+                                    <li class="taobao"><input type="radio" name="url" rel="item"
+                                                              id="titem"/>商品<span><input type="radio" name="url"
+                                                                                         rel="shop"
+                                                                                         id="tshop"/>店铺</span></li>
+                                </ul>
+                            </div>
+                            <div class="urlbox">
+                                <input type="text" class="form-control" id="url_url" value="http://" maxlength="255"/>
+                                <div class="size" id="msg">输入网址</div>
+                            </div>
+                        </div>
+
+                        <!--短信-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入短信内容</div>
+                            <textarea class="sms_text" id="sms_sms"></textarea>
+                            <div class="size">已输入数字：<span id="sms_len">0</span>/300</div>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="sms_tel">手机号码</label>
+                                    <input type="text" id="sms_tel" class="form-control" maxlength="30"/>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--WIFI-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入WiFi帐号信息</div>
+                            <form>
+                                <div class="form-group">
+                                    <label for="wifi_ssid">网络账号</label>
+                                    <input type="text" id="wifi_ssid" class="form-control" maxlength="30"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="wifi_p">密码</label>
+                                    <input type="text" id="wifi_p" class="form-control" maxlength="50"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="wifi_t">加密类型</label>
+                                    <select class="form-control" id="wifi_t">
+                                        <option value="WPA">WPA/WPA2</option>
+                                        <option value="WEP">WEP</option>
+                                        <option value="nopass">无加密</option>
+                                    </select>
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <!--电话-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入电话号码</div>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="telephone_tel">手机号码</label>
+                                    <input type="text" id="telephone_tel" class="form-control" maxlength="30"/>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--邮箱-->
+                        <div class="sub">
+                            <div class="tit"><span>即时输入即时生成!</span>输入电邮地址</div>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="mail_mail">电子邮箱</label>
+                                    <input type="text" id="mail_mail" class="form-control" maxlength="80"/>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="prompt">建议内容不超过150个汉字，如果二维码不显示请清除设置。</div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="canvas-wrap">
+                <div class="canvas">
+                    <canvas height="300" width="300" id="canvas">
+                        <a id="pic" target="_blank" href="/" shorturl="/" rel="nofollow">
+                            <img id="qrcodeimg" src="/templets/default/images/logo.png"/>
+                        </a>
+                    </canvas>
+                </div>
+            </div>
+            <div id="diy_div" class="diy_div">
+                <div class="diy_scroll">
+                    <div id="diy_dot" class="diy_dot"></div>
+                </div>
+                <div class="diy_statue">
+                    <a id="resetRound1" href="javascript:">液态</a>
+                    <a id="resetRound" href="javascript:">直角</a>
+                    <a id="resetRound2" href="javascript:">圆角</a>
+                </div>
+            </div>
+
+            <div class="fnrow">
+                <div class="tab" id="tabset">
+                    <a href="javascript:" class="tabelem active">颜色设置</a>
+                    <a href="javascript:" class="tabelem">嵌入Logo</a>
+                    <a href="javascript:" class="tabelem">嵌入文字</a>
+                    <a href="javascript:" class="tabelem">图案样式</a>
+                    <a href="javascript:" class="tabelem">其它设置</a>
+                </div>
+                <div class="fnblock" id="fnblock">
+                    <div class="fnsubv show">
+                        <ul class="colors">
+                            <li class="li1">
+                                <label>前景色</label>
+                                <div class="color">
+                                    <input id="fgcolor" name="mycolor" type="text" value="#000000"
+                                           class="iColorPicker"/>
+                                </div>
+                            </li>
+                            <li class="li2">
+                                <label>渐变颜色</label>
+                                <div class="color">
+                                    <input id="gccolor" name="mycolor" type="text" value="#000000"
+                                           class="iColorPicker"/>
+                                </div>
+                                <a href="javascript:" class="close" id="resetGcColor"><img src="images/close.gif"/></a>
+                            </li>
+                            <li class="li3">
+                                <label>定位点(外框)</label>
+                                <div class="color">
+                                    <input id="ptcolor" name="mycolor" type="text" value="#000000"
+                                           class="iColorPicker"/>
+                                </div>
+                                <a href="javascript:" class="close" id="resetPtColor"><img src="images/close.gif"/></a>
+                            </li>
+
+                            <li class="li4">
+                                <label>背景色</label>
+                                <div class="color">
+                                    <input id="bgcolor" name="mycolor" type="text" value="#ffffff"
+                                           class="iColorPicker"/>
+                                </div>
+                            </li>
+                            <li class="li5">
+                                <label>渐变方式</label>
+                                <select id="gradientWay">
+                                    <option value="0">无</option>
+                                    <option value="circular">圆形</option>
+                                    <option value="backslash" selected="selected">反斜线</option>
+                                    <option value="slash">斜线</option>
+                                    <option value="horizontal">水平</option>
+                                    <option value="vertical">垂直</option>
+                                </select>
+                            </li>
+                            <li class="li6">
+                                <label>定位点(内点)</label>
+                                <div class="color">
+                                    <input id="inptcolor" name="mycolor" type="text" value="#000000"
+                                           class="iColorPicker"/>
+                                </div>
+                                <a href="javascript:" class="close" id="resetInPtColor"><img
+                                        src="/tools/images/close.gif"/></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fnsubv">
+                        <div class="logotypes" id="logotypes">
+                            <label>圆角<input type="radio" name="logotype" value="icon"/></label>
+                            <label>白底<input type="radio" name="logotype" value="border"/></label>
+                            <label>描边<input type="radio" name="logotype" value="stroke"/></label>
+                            <label>原图<input type="radio" name="logotype" value="default" checked="checked"/></label>
+                        </div>
+                        <div class="pic">
+                                        <span class="picbtn">
+                                            <div class="addpic">
+                                                <form action="/upload.php" method="post" target="oniframe" id="logoform"
+                                                      enctype="multipart/form-data">
+                                                    <input type="file" id="logoimg" class="addlogo" name="logo"/>
+                                                </form>
+                                                <iframe name="oniframe" class="iframe" id="iframe" height="0" width="0"
+                                                        frameborder="0"></iframe>
+                                            </div>
+                                        </span>
+                            <div class="picelem" id="picelem"><span></span><a href="javascript:" class="del" title="删除"
+                                                                              id="resetLogoimg"></a></div>
+                        </div>
+                        <div class="format" id="format">（支持jpg、gif、png、bmp格式图片，不超过20M）</div>
+                        <div class="turn" id="turn"><span class="turn1" title="逆时针旋转"></span><span class="turn2"
+                                                                                                   title="顺时针旋转"></span>
+                        </div>
+                    </div>
+
+                    <div class="fnsubv">
+                        <div class='content'>
+                            <input class="ctext" id="ctext" type="text" value="输入文本"/>
+                            <input class="cbutton" id="cbutton" type="button" value="确定"/>
+                            <a href="javascript:" class="del" title="删除" id="resetContent"></a>
+                        </div>
+                        <ul class="fontset">
+                            <li>
+                                <label>效果</label>
+                                <select id="fonteffect">
+                                    <option selected="selected" value="default">描边</option>
+                                    <option value="in">内融合</option>
+                                    <option value="out">外融合</option>
+                                    <option value="stretch">拉伸</option>
+                                    <option value="3d">3D效果</option>
+                                    <option value="light">发光</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>字号</label>
+                                <select id="fontsize">
+                                    <option value="24">24</option>
+                                    <option value="26">26</option>
+                                    <option selected="selected" value="28">28</option>
+                                    <option value="30">30</option>
+                                    <option value="32">32</option>
+                                    <option value="34">34</option>
+                                    <option value="36">36</option>
+                                    <option value="38">38</option>
+                                </select>
+                            </li>
+                            <li class="i3">
+                                <label>文字颜色</label>
+                                <div class="color">
+                                    <input id="ftcolor" name="mycolor" type="text" value="#000000" class="iColorPicker"
+                                           style="background-color: rgb(0, 0, 0);">
+                                </div>
+                                <a href="javascript:" class="close" id="resetFtColor" style="display: none;"><img
+                                        src="images/close.gif"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fnsubv">
+                        <div class="pin">
+                            <div class="pin-trigger" id="pin-trigger">定位点样式</div>
+                        </div>
+                    </div>
+
+                    <div class="fnsubv">
+                        <ul class="baseset">
+                            <li>
+                                <label>外边距</label>
+                                <select id="margin">
+                                    <option>0px</option>
+                                    <option>5px</option>
+                                    <option selected="selected">10px</option>
+                                    <option>15px</option>
+                                    <option>20px</option>
+                                    <option>25px</option>
+                                    <option>30px</option>
+                                    <option>35px</option>
+                                    <option>40px</option>
+                                    <option>45px</option>
+                                    <option>50px</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>纠错等级</label>
+                                <select id="level">
+                                    <option value="L">最低</option>
+                                    <option value="M">低</option>
+                                    <option value="Q">中等</option>
+                                    <option value="H">高</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>旋转角度</label>
+                                <select id="rotate">
+                                    <option value="0" selected="selected">0&deg;</option>
+                                    <option value="1">90&deg;</option>
+                                    <option value="2">180&deg;</option>
+                                    <option value="3">270&deg;</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>图片大小</label>
+                                <select id="size">
+                                    <option value="200">200px</option>
+                                    <option value="300" selected="selected">300px</option>
+                                    <option value="500">500px</option>
+                                    <option value="600">600px</option>
+                                    <option value="800">800px</option>
+                                    <option value="1000">1000px</option>
+                                    <option value="1500">1500px</option>
+                                    <option value="2000">2000px</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="other">
+                <div class="reset-all" id="resetAll"><a href="javascript:" class="btn btn-primary">清除设置</a></div>
+                <div class="copy" id="copy">
+                    <a href="javascript:">复制图片链接</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="foot">
+        <br> 一起学编程是一家纯计算机技术学习、电脑学习、IT技术学习交流型网站，一起学编程所载文章来源于网络，如果不慎侵犯了您的权益，请联系我们删除！站长QQ：657025171
+        <br>
+        <a href="/aboutus.html">关于我们</a> |
+        <a href="/dashiji.html">大事记</a> |
+        <a href="/jiazhiguan.html">网站价值观</a> |
+        <a href="/contactus.html">联系我们</a> |
+        <a href="/sitemap.xml">网站地图</a> |
+        <a href="/copyright.html">版权声明</a>
+        <br> Copyright ◎ 2011 - 2023 yqxbc.com All Rights Reserved.<br/>yqxbc.com 版权所有 <a
+            href="https://beian.miit.gov.cn/" target="_blank">京ICP备11048740号</a>
+        <br>
+    </div>
+</div>
+
+<div id="apiUrl" class="hide"></div>
+<div id="apiText" class="hide"></div>
+<div class="pin-panel" id="pin-panel">
+    <span></span>
+    <ul>
+        <li class="i1 active"></li>
+        <li class="i2"></li>
+        <li class="i3"></li>
+        <li class="i4"></li>
+        <li class="i5"></li>
+        <li class="i6"></li>
+        <li class="i7"></li>
+        <li class="i8"></li>
+        <li class="i9"></li>
+        <li class="i10"></li>
+        <li class="i11"></li>
+        <li class="i12"></li>
+        <li class="i13"></li>
+        <li class="i14"></li>
+        <li class="i15"></li>
+        <li class="i16"></li>
+        <li class="i17"></li>
+        <li class="i18"></li>
+        <li class="i19"></li>
+        <li class="i20"></li>
+        <li class="i21"></li>
+        <li class="i22"></li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/sdk.js"></script>
+<script type="text/javascript" src="js/iColorPicker.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/basefn.js"></script>
+<script type="text/javascript" src="js/qrcode.js"></script>
+<script type="text/javascript" src="js/canvas.js"></script>
+<script type="text/javascript" src="/templets/default/js/bootstrap.min.js"></script>
+<script type="text/javascript">var _speedMark = new Date();</script>
+<script type="text/javascript" src="js/html5.js"></script>
+<script type="text/javascript" src="js/ie.js"></script>
+<script type="text/javascript">
+    defalutText($('#text_text'), '支持文本、网址和电子邮箱');
+    changeWifi();
+    tabfn($('#fntab li'), $('#fnbox .sub'));
+    fixtaba($('#fntab a'), $('#fntab li'));
+    tabfn($('#tabset .tabelem'), $('#fnblock .fnsubv'));
+    elemfocus($('#fnbox .form-control,#url_url,#text_text,#sms_sms'));
+    elemSwitch($('#addelem'), $('#litel'));
+    openmore($('#urloptions'), $('#urlset'));
+    addpic($('#logoimg'), $('#picelem'), $('#turn'), $('#format'));
+    hideelem($('#hidetel'), $('#litel'), $('#addelem'), function () {
+        $('#card_phone').val('');
+    });
+    urlselect();
+    $(document).ready(function () {
+        resetAll();
+    });
+    function navActive(item){
+        for(let i = 1;i<=9;i++){
+            document.getElementById("nav-content"+i).style.display="none";
+            if(i === item){
+                document.getElementById("nav-content"+item).style.display="block";
+            }
+
+        }
+    }
+</script>
+
+<style>
+    body {
+        background:#E1E1E1;
+        margin: 0;
+    }
+    .footer{width:100%;clear:both;background:#2186D3;margin:0px;padding:0px;margin-top:20px;}
+
+    .foot{margin:0px auto;padding-top:10px;min-height:150px;}
+
+    .foot{line-height:20px;text-align:center;font-size:12px;color:#FFFFFF;}
+
+    .foot a{color:#FFFFFF;text-decoration: none;text-align:center;}
+
+    .foot a:hover{color:#ff3300;}
+    .nav-custom-hover {
+        background-color: #E1E1E1 !important;
+    }
+
+    .nav-content {
+        min-height: 60px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .nav-content a {
+        margin-right: 30px;
+        line-height: 30px;
+        display: inline-block;
+    }
+</style>
+
+</body>
+</html>

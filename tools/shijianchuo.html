@@ -9,10 +9,10 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <link rel="icon" type="image/png" href="/Public/img/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/Public/img/app-icon72x72@2x.png">
-    <title>在线文本去重复分隔工具_一起学编程</title>
-    <meta name="keywords" content="文本去重复工具,文本去重工具,在线文本去重工具,关键词去重,分隔符和替换">
-    <meta name="description" content="在线文本去重工具，能根据不同的分隔符号把重复的文本去重复，保留一条记录。可用于文本去重复、数组去重复、关键词去重等，欢迎使用。">
-    <link href="/templets/default/css/bootstrap.min.css" rel="stylesheet">
+    <title>Unix时间戳(Unix timestamp)转换工具 -  一起学编程</title>
+    <meta name="keywords" content="Unix时间戳转换,时间戳转换工具"/>
+    <meta name="description" content="Unix时间戳转换可以把Unix时间转成北京时间。"/>
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 <!--    <link rel="stylesheet" type="text/css" href="/tools/css/global.min.css">-->
     <link href="css/common.css" rel="stylesheet"/>
 </head>
@@ -164,45 +164,39 @@
         </div>
     </div>
     <div class="container container-custom" style="margin-top:20px;">
-        <h1 style="font-size:18px;text-align:center;">文本去重分隔工具</h1>
-        <form class="tool-form">
-            <div class="form-field">
-                <textarea class="form-textarea form-block" id="tool-text" tabindex="1" rows="10"
-                          placeholder="请输入要去重的文本"></textarea></div>
-            <div class="form-btn" style="display: flex;flex-direction: row;">
-                <label for="split_format" style="margin-bottom: 0;line-height:35px;margin-right:10px;">去重前分隔符 </label>
-                <select name="split_format" id="split_format" class="form-control" style="width:100px">
-                    <option value="0" selected="selected">换行[↵]</option>
-                    <option value="1">空格[ ]</option>
-                    <option value="2">逗号[,]</option>
-                    <option value="3">逗号[，]</option>
-                    <option value="4">斜杠[/]</option>
-                </select>
-                <label for="split_format" style="margin-bottom: 0;line-height:35px;margin-right:10px;">去重后分隔符</label>
-                <select name="split_format_after" id="split_format_after" class="form-control" style="width:100px">
-                    <option value="0" selected="selected">换行[↵]</option>
-                    <option value="1">空格[ ]</option>
-                    <option value="2">逗号[,]</option>
-                    <option value="3">逗号[，]</option>
-                    <option value="4">斜杠[/]</option>
-                    <option value="5">无</option>
-                    <option value="6">'项目',</option>
-                </select>
-                <input class="btn btn-success" id="btn-quchong" type="button" value="文本去重">
-                <input class="btn btn-warning btn-copy" type="button" value="复制结果" data-clipboard-target="#tool-result">
-                <input class="btn btn-error" type="reset" value="清空">
+        <h1 style="font-size:18px;text-align:center;">Unix时间戳转换工具（Unix timestamp）</h1>
+        <div style="text-align: center;margin-top:20px;">
+            <div class="font-16 line-h-1-6">现在的Unix时间戳(Unix timestamp)</div>
+            【<span style="font-size:14px;font-weight: bold;" id="currentunixtime"></span>】
+            <div>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">10位
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>13位
             </div>
-            <div id="tool-tips"></div>
-            <div class="form-field"><textarea class="form-textarea form-block" id="tool-result" rows="10"></textarea>
+            <div style="margin-top: 10px;">
+                <input type="button" value="启动" tabindex="2" onclick="start()" class="btn btn-primary" />
+                <input type="button" value="停止" tabindex="2" onclick="stop()" class="btn"/>
             </div>
-            <p class="tips">提示：请根据需要选择去重前前分隔字符和去重后的分隔字符，去重前分隔字符必须选择正确。英文逗号[,]分隔符可用于网站SEO关键词keywords去重。</p>
-
-        </form>
+        </div>
+        <div style="text-align: center;margin-top:50px;">
+            <h3>Unix时间戳 转 日期</h3>
+        </div>
+        <div style="margin-top:20px;display:flex;flex-direction: row;flex-wrap: nowrap">
+            <input type="text" id="timestamp" tabindex="1" class="form-control form-control-lg" size="30"/>
+            <input type="button" value="转换" tabindex="2" class="btn btn-primary" onclick="timestampToDate()"/>
+            <input type="text" id="date" size="30" class="form-control form-control-lg" readonly/>
+        </div>
+        <div style="text-align: center">
+            <h3>日期 转 时间戳</h3>
+        </div>
+        <div style="margin-top:20px;display:flex;flex-direction: row;flex-wrap: nowrap">
+            <input type="text" id="date1" tabindex="1" class="form-control form-control-lg" size="30"/>
+            <input type="button" value="转换"  tabindex="2" class="btn btn-primary" onclick="dateToTimestamp()"/>
+            <input type="text" id="timestamp1" size="30" class="form-control form-control-lg" readonly/>
+        </div>
         <div class="tool-info">
             <h5>相关知识</h5>
-            <p>本工具支持根据以下符号换行[↵]、空格[ ]、逗号[,]、逗号[，]、斜杠[/]，进行重新排列并去重。</p>
-            <p>去重后分隔符选择 <code>'项目',</code>，可以用以生成数组。如输入 <code>aa bb cc dd</code>，可生成 <code>'aa','bb','cc','dd'</code>。
-            </p>
+            <p>什么是Unix时间戳(Unix timestamp)： Unix时间戳(Unix timestamp)，或称Unix时间(Unix time)、POSIX时间(POSIX time)，是一种时间表示方式，定义为从格林威治时间1970年01月01日00时00分00秒起至现在的总秒数。Unix时间戳不仅被使用在Unix系统、类Unix系统中，也在许多其他操作系统中被广泛采用。</p>
+        </div>
         </div>
     </div>
     <div class="footer">
@@ -221,78 +215,63 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
 <script src="js/global.min.js"></script>
 <script>
-    function unique_text(r) {
-        for (var t, e = 0, n = "_" + +new Date + Math.random(), a = [], i = {
-            string: {},
-            boolean: {},
-            number: {}
-        }, o = r.length, l = []; e < o; e++)
-            if (null != (t = r[e]))
-                if (tp = typeof t,
-                tp in i)
-                    t in i[tp] || (i[tp][t] = 1,
-                        l.push(t));
-                else {
-                    if (t[n])
-                        continue;
-                    t[n] = 1,
-                        a.push(t),
-                        l.push(t)
-                }
-        for (e = 0,
-                 o = a.length; e < o; e++)
-            (t = a[e])[n] = void 0,
-                delete t[n];
-        return l
-    }
-
-    $(function () {
-        $("#btn-quchong").click(function () {
-            $("#success-tips").hide();
-            var r = $("#tool-text").val();
-            if (r.length <= 0)
-                return msgError("请输入要去重的文本！"),
-                    $("#tool-text").focus(),
-                    !1;
-            var t = $("#split_format").val()
-                , e = $("#split_format_after").val();
-            if (0 == t ? re = /[\r\n]/g : 1 == t ? re = /[^\S\r\n]/g : 2 == t ? re = "," : 3 == t ? re = "，" : 4 == t && (re = /[\/]/g),
-                0 == e ? rb = "\n" : 1 == e ? rb = " " : 2 == e ? rb = "," : 3 == e ? rb = "，" : 4 == e ? rb = "/" : 5 == e ? rb = "none" : 6 == e && (rb = "arr"),
-
-                arr = r.split(re),
-                arr_l = arr.length,
-            1 == arr_l)
-                return msgError("文本过短或分隔字符选择错误！请检查。"),
-                    $("#tool-text").focus(),
-                    !1;
-            for (key in arr = $.map(arr, function (r, t) {
-                return r.trim()
-            }),
-                r_arr = unique_text(arr),
-                r_arr_l = r_arr.length,
-                temp = "",
-                r_arr)
-                "none" == rb ? temp += r_arr[key] : "arr" == rb ? temp += "'" + r_arr[key] + "'," : temp += r_arr[key] + rb;
-            tips_clear(),
-            "none" != rb && (temp = temp.substr(0, temp.length - 1)),
-                $("#tool-result").val(temp),
-                tips_text = "去重前共<b>" + arr_l + "</b>段文本，去重后共<b>" + r_arr_l + "</b>段文本，已清除<b>" + (arr_l - r_arr_l) + "</b>段重复文本。(蛙蛙工具制作)",
-                msgSuccess(tips_text)
-        })
-    }),
-        String.prototype.trim = function () {
-            return this.replace(/(^\s*)|(\s*$)/g, "")
+    var state = 1;
+    function func(){
+        let radioArr = document.getElementsByName("flexRadioDefault");
+        if(radioArr[0].checked){
+            document.getElementById("currentunixtime").innerText=Math.floor(Date.now()/1000);
+        }else{
+            document.getElementById("currentunixtime").innerText=Date.now();
         }
-    ;
-
+    }
+    let timer = setInterval(func,1000);
+    function start(){
+        if(state===1){
+            msgError("已经启动了！")
+            return;
+        }
+        state = 1;
+        timer = setInterval(func,1000);
+    }
+    function stop() {
+        state = 2;
+        clearInterval(timer);
+    }
+    function timestampToDate(){
+        let timestamp = document.getElementById("timestamp").value;
+        if(timestamp.length!==10 && timestamp.length!==13){
+            msgError("请输入正确的时间戳！")
+            return;
+        }
+        if(timestamp.length===10){
+            timestamp = timestamp * 1000;
+        }
+        // 时间戳为10位需*1000，时间戳为13位不需乘1000
+        var date = new Date(Number(timestamp));
+        var Y = date.getFullYear() + "-";
+        var M =
+            (date.getMonth() + 1 < 10
+                ? "0" + (date.getMonth() + 1)
+                : date.getMonth() + 1) + "-";
+        var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " ";
+        var h = (date.getHours()<10?"0"+date.getHours():date.getHours()) + ":";
+        var m = (date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes()) + ":";
+        var s = (date.getSeconds()<10?"0"+date.getSeconds():date.getSeconds());
+        document.getElementById("date").value = Y + M + D + h + m + s;
+    }
+    function dateToTimestamp(){
+        let d = document.getElementById("date1").value;
+        try{
+            var date = new Date(d);
+            document.getElementById("timestamp1").value = date.getTime();
+        }catch (e){
+            msgError("请输入正确的日期！")
+        }
+    }
 </script>
 <style>
-    .form-textarea{
-        width:100%
-    }
     .form-btn input,select{
         margin-right:10px;
         margin-bottom:10px;
