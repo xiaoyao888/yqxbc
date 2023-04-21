@@ -32,6 +32,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav nav-custom">
                         <li>
+                            <a href="index.html" title="工具首页">工具首页</a>
+                        </li>
+                        <li>
                             <a href="#" onmouseenter="navActive(1)" title="文本工具">文本工具</a>
                         </li>
                         <li>
@@ -136,8 +139,8 @@
             <a href="/htmlformat.html">HTML格式化工具</a>
             <a href="/sqlformatter.html">SQL格式化压缩工具</a>
             <a href="/regexp.html">正则表达式测试工具</a>
-            <a href="/timestamp.html">时间戳转换工具</a>
-            <a href="/crontab.html">crontab执行时间计算</a>
+
+            <a href="crongen.html">在线Cron表达式生成器</a>
             <a href="/color.html">颜色值转换工具</a>
             <a href="/text2html.html">文本转HTML工具</a>
         </div>
@@ -2012,6 +2015,7 @@
 </div>
 <script src="js/global.min.js"></script>
 <script>
+    navActive(1);
     new ClipboardJS(".symbol-list li span", {
         text: function (t) {
             var e = t.innerText;

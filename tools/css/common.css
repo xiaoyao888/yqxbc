@@ -177,3 +177,10 @@ body {
     line-height: 30px;
     display: inline-block;
 }
+.knowledge-title{
+    font-weight:bold;
+    font-size:20px;
+}
+button{
+    outline: none!important;
+}
