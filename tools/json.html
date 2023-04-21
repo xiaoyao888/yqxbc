@@ -33,31 +33,31 @@
                             <a href="index.html" title="工具首页">工具首页</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(1)" title="文本工具">文本工具</a>
+                            <a href="#" onmouseenter="navActive(1)" onclick="navActive(1)" title="文本工具">文本工具</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(2)" title="语言工具">语言工具</a>
+                            <a href="#" onmouseenter="navActive(2)" onclick="navActive(2)" title="语言工具">语言工具</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(3)" title="财务工具">财务工具</a>
+                            <a href="#" onmouseenter="navActive(3)" onclick="navActive(3)" title="财务工具">财务工具</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(4)" title="日期时间">日期时间</a>
+                            <a href="#" onmouseenter="navActive(4)" onclick="navActive(4)" title="日期时间">日期时间</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(5)" title="转换工具">转换工具</a>
+                            <a href="#" onmouseenter="navActive(5)" onclick="navActive(5)" title="转换工具">转换工具</a>
                         </li>
                         <li >
-                            <a href="#" onmouseenter="navActive(6)" title="便民查询">便民查询</a>
+                            <a href="#" onmouseenter="navActive(6)" onclick="navActive(6)" title="便民查询">便民查询</a>
                         </li>
                         <li >
-                            <a href="#" onmouseenter="navActive(7)" title="开发工具">开发工具</a>
+                            <a href="#" onmouseenter="navActive(7)" onclick="navActive(7)" title="开发工具">开发工具</a>
                         </li>
                         <li >
-                            <a href="#" onmouseenter="navActive(8)" title="编码加密">编码加密</a>
+                            <a href="#" onmouseenter="navActive(8)" onclick="navActive(8)" title="编码加密">编码加密</a>
                         </li>
                         <li>
-                            <a href="#" onmouseenter="navActive(9)" title="网络工具">网络工具</a>
+                            <a href="#" onmouseenter="navActive(9)" onclick="navActive(9)" title="网络工具">网络工具</a>
                         </li>
                     </ul>
                 </div>
@@ -178,10 +178,10 @@
                         </div>
                     </div>
                     <!-- 功能 -->
-                    <div class="t-huge-margin">
+                    <div class="t-huge-margin json-btn">
                         <div>
                             <button class="copy hide display-none"></button>
-                            <input type="submit" class="btn btn-primary" name="validate" data-ga="validate" id="validate" value="格式化校验">
+                            <input type="submit" class="btn btn-primary" style="outline: none;" name="validate" data-ga="validate" id="validate" value="格式化校验">
                             <button type="button" class="btn btn-primary" id="compressZipJson" data-html="index">压缩</button>
                             <button type="button" class="btn btn-primary" id="escapeJson" data-html="index">转义</button>
                             <button type="button" class="btn btn-primary" id="restoreJson" data-html="index">去除转义</button>
@@ -265,5 +265,15 @@
         }
     }
 </script>
+<style>
+    .json-btn button{
+        margin:0 5px 5px 0;
+        outline: none;
+    }
+    .json-btn input{
+        margin:0 5px 5px 0;
+        outline: none;
+    }
+</style>
 </body>
 </html>
